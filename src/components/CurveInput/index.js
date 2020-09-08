@@ -5,7 +5,7 @@ import NumericInput from '../NumericInput';
 import SelectInput from '../SelectInput';
 import BooleanInput from '../BooleanInput';
 import Canvas from '../../pcui/element/element-canvas';
-import * as class from '../../pcui/element-class';
+import * as pcuiClass from '../../pcui/element-class';
 import utils from '../../pcui/helpers/utils';
 import { localStorageSet, localStorageGet } from '../../pcui/helpers/localStorage';
 import {
@@ -197,7 +197,7 @@ class CurveInput extends Container {
         this.dom.addEventListener('blur', this._domEventBlur);
 
         this.on('click', () => {
-            if (!this.enabled || this.readOnly || this.class.contains(class.MULTIPLE_VALUES)) return;
+            if (!this.enabled || this.readOnly || this.class.contains(pcuiClass.MULTIPLE_VALUES)) return;
             this._openCurvePicker();
         });
 
@@ -1542,7 +1542,7 @@ class CurveInput extends Container {
         }
 
         // enter opens the gradient picker
-        if (evt.keyCode !== 13 || !this.enabled || this.readOnly || this.class.contains(class.MULTIPLE_VALUES)) {
+        if (evt.keyCode !== 13 || !this.enabled || this.readOnly || this.class.contains(pcuiClass.MULTIPLE_VALUES)) {
             return;
         }
 
@@ -1831,7 +1831,7 @@ class CurveInput extends Container {
         // the picker it's not worth the effort
         this._value = Array.isArray(value) ? utils.deepCopy(value) : [utils.deepCopy(value)];
 
-        this.class.remove(class.MULTIPLE_VALUES);
+        this.class.remove(pcuiClass.MULTIPLE_VALUES);
 
         this.emit('change', value);
 
@@ -1874,7 +1874,7 @@ class CurveInput extends Container {
         // we do not support multiple values so just
         // add the multiple values class which essentially disables
         // the input
-        this.class.add(class.MULTIPLE_VALUES);
+        this.class.add(pcuiClass.MULTIPLE_VALUES);
         this._renderCurves();
     }
 }

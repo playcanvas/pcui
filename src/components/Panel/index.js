@@ -157,7 +157,8 @@ class Panel extends Container {
             grid: args.grid,
             flex: args.flex,
             flexDirection: args.flexDirection,
-            scrollable: args.scrollable
+            scrollable: args.scrollable,
+            dom: args.container
         });
 
         this.append(this._containerContent);

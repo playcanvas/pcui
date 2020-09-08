@@ -13,11 +13,12 @@ class ElementComponent extends React.Component {
             this.link = props.link;
         }
     }
-    attachElement = (nodeElement) => {
+    attachElement = (nodeElement, containerElement) => {
         if (!nodeElement) return;
         this.element = new this.elementClass({
             ...this.props,
             dom: nodeElement,
+            container: containerElement,
             parent: undefined
         });
         if (this.onClick) {

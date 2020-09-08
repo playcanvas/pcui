@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Component from './component';
+import Label from '../Label/component';
 import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybook/utils/docscript'
 
 var name = 'Panel';
@@ -21,5 +22,7 @@ export default {
     argTypes: config.args
 };
 
-export const Main = (args) => <Component {...args} />;
+export const Main = (args) => <Component headerText='FooBar' collapsible {...args}>
+    <Label text='Hello World' />
+</Component>;
 

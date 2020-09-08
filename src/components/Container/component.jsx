@@ -7,7 +7,6 @@ class Container extends ElementComponent {
     constructor(props) {
         super(props);
         this.elementClass = Element;
-        this._elementClass = Element;
     }
     render() {
         let elements = React.Children.toArray(this.props.children);

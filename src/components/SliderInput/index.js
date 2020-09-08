@@ -59,6 +59,8 @@ class SliderInput extends Element {
 
         super(args.dom ? args.dom : document.createElement('div'), args);
 
+        if (args.pre) this.precision = args.pre;
+
         this.class.add(CLASS_SLIDER);
 
         this._combineHistory = false;
