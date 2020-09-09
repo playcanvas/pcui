@@ -42,7 +42,7 @@ export const Main = (props) => {
     history.on('undo', (name) => setHistoryLabel(`undo: ${name}`));
     history.on('redo', (name) => setHistoryLabel(`redo: ${name}`));
     return (
-        <Container {...props}>
+        <Container onResize={() => console.log('here!')} {...props}>
             <Label text="This is a quick showcase of an example container" />
             <Progress binding={new BindingTwoWay({ history })} link={{observer: observers[observerId], path: 'progress'}}/>
             <Container {...props}>

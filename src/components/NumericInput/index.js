@@ -15,6 +15,7 @@ const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CON
  * @property {Number} max Gets / sets the maximum value this field can take.
  * @property {Number} precision=2 Gets / sets the maximum number of decimals a value can take.
  * @property {Number} step Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
+ * @property {Boolean} hideSlider Hide the input mouse drag slider.
  * @extends pcui.TextInput
  */
 class NumericInput extends TextInput {
@@ -58,41 +59,43 @@ class NumericInput extends TextInput {
 
         this.renderChanges = renderChanges;
 
-        this._sliderControl = new Element();
-        this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
-        this._dom.append(this._sliderControl._dom);
+        if (!args.hideSlider) {
+            this._sliderControl = new Element();
+            this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
+            this._dom.append(this._sliderControl._dom);
 
-        this._sliderControl._dom.addEventListener('mousedown', () => {
-            this._sliderControl._dom.requestPointerLock();
-            this._sliderPrevValue = this.value;
-        });
+            this._sliderControl._dom.addEventListener('mousedown', () => {
+                this._sliderControl._dom.requestPointerLock();
+                this._sliderPrevValue = this.value;
+            });
 
-        this._sliderControl._dom.addEventListener('mouseup', () => {
-            document.exitPointerLock();
-            if (this._binding) {
-                const undoValue = this._sliderPrevValue;
-                const redoValue = this.value;
-                const undo = () => {
-                    var history = this._binding._bindingElementToObservers._history;
-                    this._binding._bindingElementToObservers._history = null;
-                    this.value = undoValue;
-                    this._binding._bindingElementToObservers._history = history;
-                };
-                const redo = () => {
-                    var history = this._binding._bindingElementToObservers._history;
-                    this._binding._bindingElementToObservers._history = null;
-                    this.value = redoValue;
-                    this._binding._bindingElementToObservers._history = history;
-                };
+            this._sliderControl._dom.addEventListener('mouseup', () => {
+                document.exitPointerLock();
+                if (this._binding) {
+                    const undoValue = this._sliderPrevValue;
+                    const redoValue = this.value;
+                    const undo = () => {
+                        var history = this._binding._bindingElementToObservers._history;
+                        this._binding._bindingElementToObservers._history = null;
+                        this.value = undoValue;
+                        this._binding._bindingElementToObservers._history = history;
+                    };
+                    const redo = () => {
+                        var history = this._binding._bindingElementToObservers._history;
+                        this._binding._bindingElementToObservers._history = null;
+                        this.value = redoValue;
+                        this._binding._bindingElementToObservers._history = history;
+                    };
 
-                this._binding._bindingElementToObservers._history.add({
-                    name: this._binding.paths[0],
-                    undo,
-                    redo
-                });
-                redo();
-            }
-        });
+                    this._binding._bindingElementToObservers._history.add({
+                        name: this._binding.paths[0],
+                        undo,
+                        redo
+                    });
+                    redo();
+                }
+            });
+        }
         this._updatePosition = this._updatePosition.bind(this);
 
         document.addEventListener('pointerlockchange', this._pointerLockChangeAlert.bind(this), false);

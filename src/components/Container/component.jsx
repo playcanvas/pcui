@@ -8,6 +8,11 @@ class Container extends ElementComponent {
         super(props);
         this.elementClass = Element;
     }
+    componentDidMount() {
+        if (this.props.onResize) {
+            this.element.on('resize', this.props.onResize);
+        }
+    }
     render() {
         let elements = React.Children.toArray(this.props.children);
 

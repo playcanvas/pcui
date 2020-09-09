@@ -1,4 +1,5 @@
 import Events from './events';
+import { useState } from 'react';
 
 function Observer(data, options) {
     Events.call(this);
@@ -929,5 +930,12 @@ Object.defineProperty(Observer.prototype, 'latestFn', {
         this._latestFn = value;
     }
 });
+
+export const useObserverState = (observer, path, json) => {
+    const parseFunc = (observerValue) => json ? JSON.parse(observerValue) : observerValue;
+    const [value, setValue] = useState(parseFunc(observer.get(path)));
+    observer.on(`${path}:set`, (value) => setValue(parseFunc(value)));
+    return value;
+};
 
 export default Observer;

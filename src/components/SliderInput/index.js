@@ -65,7 +65,7 @@ class SliderInput extends Element {
 
         this._combineHistory = false;
 
-        this._numericInput = new NumericInput(inputArgs);
+        this._numericInput = new NumericInput({...inputArgs, hideSlider: true });
 
         // propagate change event
         this._numericInput.on('change', this._onValueChange.bind(this));
