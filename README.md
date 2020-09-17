@@ -24,13 +24,13 @@ npm run build
 
 This will build the entire library to the output path `dist`. The various parts of the library will be available to import from that path:
 
-- ES6 Elements: `dist/index.js`
-- React Elements: `dist/components.js`
+- ES6 Components: `dist/es6.js`
+- React Components: `dist/react.js`
 - Data Binding: `dist/binding.js`
 
-You can then import the ES6 elements into your own `.js` files and use them as follows:
+You can then import the ES6 components into your own `.js` files and use them as follows:
 ```javascript
-import { Label } from 'dist/index.js';
+import { Label } from 'dist/es6.js';
 
 const helloWorldLabel = new Label({
     text: 'Hello World'
@@ -39,7 +39,7 @@ const helloWorldLabel = new Label({
 
 If you are more familar with react, you can import react elements into your own `.jsx` files and use them as follows:
 ```jsx
-import { Label } from 'dist/components.js';
+import { Label } from 'dist/react.js';
 
 const helloWorldLabel = () => <Label text="Hello World" />;
 ```
