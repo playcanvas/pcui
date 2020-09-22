@@ -11,7 +11,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
         library: process.env.LIBRARY_NAME? `${process.env.LIBRARY_NAME}_[name]` : 'pcui_[name]',
-        libraryTarget: 'umd',
+        libraryTarget: 'umd'
     },
     module: {
         rules: [
@@ -35,11 +35,11 @@ module.exports = {
                 use: ['style-loader', 'css-loader', {
                     loader: 'sass-loader',
                     options: {
-                        additionalData: `@import '${__dirname}/src/scss/pcui.scss';`,
+                        additionalData: "@import './src/scss/pcui.scss';"
                     }
-                }],
-            },
-        ],
+                }]
+            }
+        ]
     },
     resolve: {
         modules: [
@@ -47,5 +47,5 @@ module.exports = {
             'node_modules'
         ],
         extensions: ['.jsx', '.js']
-    },
+    }
 };

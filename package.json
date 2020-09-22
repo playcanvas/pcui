@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "storybook": "jsdoc -X ./src/components/**/ > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public"
+    "storybook": "jsdoc -r -X src/components > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
