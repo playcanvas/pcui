@@ -35,7 +35,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader', {
                     loader: 'sass-loader',
                     options: {
-                        additionalData: "@import './src/scss/pcui.scss';"
+                        additionalData: process.env.EXCLUDE_FONT ? "@import './src/scss/pcui-exclude-font.scss';" : "@import './src/scss/pcui.scss';"
                     }
                 }]
             }
