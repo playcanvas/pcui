@@ -65,7 +65,6 @@
 .pcui-boolean-input.pcui-multiple-values {
     &:after {
         position: absolute;
-        @extend .font-regular;
         font-size: 17px;
         font-weight: bold;
         color: $text-secondary;

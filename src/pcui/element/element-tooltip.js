@@ -52,7 +52,7 @@
             this._toggleTimeout = null;
 
             this._labelTitle = new Label({
-                class: CLASS_TITLE
+                class: [CLASS_TITLE, 'font-bold']
             });
             this.append(this._labelTitle);
 

@@ -178,6 +178,7 @@ class Element extends Events {
 
         // add element class
         this._dom.classList.add(CLASS_ELEMENT);
+        this._dom.classList.add('font-regular');
 
         // add user classes
         if (args.class) {

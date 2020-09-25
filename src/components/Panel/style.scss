@@ -5,7 +5,6 @@
 
 // header of panel
 .pcui-panel-header {
-    @extend .font-bold;
     @extend .font-smooth;
     background-color: $bcg-darker;
     color: $text-primary;
@@ -20,7 +19,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     flex: 1;
-    @extend .font-bold;
     @extend .font-smooth;
     color: inherit;
     font-size: inherit;
