@@ -22,7 +22,6 @@ class Spinner extends Element {
     /**
      * Creates a new spinner.
      * @param {Object} [args] The arguments
-     * @param {String} [args.type=small-thick] The spinner type. Can be one of: 'small-thick' 
      * @param {Number} [args.size=12] The pixel size of the spinner 
      */
     constructor(args) {

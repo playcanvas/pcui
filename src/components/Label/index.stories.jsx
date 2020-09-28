@@ -5,7 +5,7 @@ import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybo
 
 var name = 'Label';
 var config = {
-    title: `Form/${name}`,
+    title: `Text/${name}`,
     description: getDescriptionForClass(name),
     args: getPropertiesForClass(name),
 };

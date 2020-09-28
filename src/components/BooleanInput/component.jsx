@@ -8,8 +8,4 @@ class BooleanInput extends ElementComponent {
     }
 }
 
-BooleanInput.propTypes = {};
-
-BooleanInput.defaultProps = {};
-
 export default BooleanInput;

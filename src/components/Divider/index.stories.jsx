@@ -5,7 +5,7 @@ import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybo
 
 var name = 'Divider';
 var config = {
-    title: `Misc/${name}`,
+    title: `Layout/${name}`,
     description: getDescriptionForClass(name),
     args: getPropertiesForClass(name),
 };

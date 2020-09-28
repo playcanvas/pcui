@@ -5,7 +5,7 @@ import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybo
 
 var name = 'Code';
 var config = {
-    title: `Misc/${name}`,
+    title: `Text/${name}`,
     description: getDescriptionForClass(name),
     args: getPropertiesForClass(name),
 };

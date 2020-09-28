@@ -6,9 +6,9 @@ const CLASS_BUTTON = 'pcui-button';
 /**
  * @name pcui.Button
  * @classdesc Represents a button.
- * @property {String} text Gets / sets the text of the button
+ * @property {String} [text=Click Me] Gets / sets the text of the button
  * @property {String} size Gets / sets the 'size' type of the button. Can be null or 'small'.
- * @property {String} icon The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
+ * @property {String} [icon=E401] The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
  * @mixes pcui.IFocusable
  */
 class Button extends Element {

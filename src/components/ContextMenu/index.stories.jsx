@@ -8,7 +8,7 @@ import { action } from '@storybook/addon-actions';
 
 var name = 'ContextMenu';
 var config = {
-    title: `Misc/${name}`,
+    title: `Input/${name}`,
     description: getDescriptionForClass(name),
     args: getPropertiesForClass(name),
 };

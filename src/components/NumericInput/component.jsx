@@ -1,5 +1,4 @@
 import Element from './index';
-import PropTypes from 'prop-types';
 import ElementComponent from '../Element/component';
 
 class NumericInput extends ElementComponent {
@@ -8,9 +7,5 @@ class NumericInput extends ElementComponent {
         this.elementClass = Element;
     }
 }
-
-NumericInput.propTypes = {};
-
-NumericInput.defaultProps = {};
 
 export default NumericInput;

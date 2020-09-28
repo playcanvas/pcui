@@ -1,7 +1,6 @@
 import React from 'react';
 import TreeViewElement from './index';
 import TreeViewItemElement from '../TreeViewItem/index';
-import PropTypes from 'prop-types';
 import ElementComponent from '../Element/component';
 
 class TreeView extends ElementComponent {

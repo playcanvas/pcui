@@ -49,14 +49,14 @@ export function getPropertiesForClass(name) {
                 default:
                     break;
             }
-            if (prop.defaultvalue) defaultValue = prop.defaultvalue;
+            if (prop.defaultvalue !== undefined && prop.defaultvalue !== null) defaultValue = prop.defaultvalue;
             var name = prop.name.replace('args.', '');
             if (name === 'args') return undefined;
             return {
                 [name]: {
                     description: prop.description,
                     control: {
-                        type: controlType
+                        type: name === 'renderChanges' ? null : controlType
                     },
                     table: {
                         type: { detail: prop.type.names[0], summary: prop.type.names[0] },

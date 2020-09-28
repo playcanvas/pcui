@@ -6,7 +6,7 @@ import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybo
 
 var name = 'TreeView';
 var config = {
-    title: `Misc/${name}`,
+    title: `Layout/${name}`,
     description: getDescriptionForClass(name),
     args: getPropertiesForClass(name),
 };

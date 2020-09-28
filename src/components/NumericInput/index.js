@@ -11,11 +11,11 @@ const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CON
 /**
  * @name pcui.NumericInput
  * @classdesc The NumericInput represents an input element that holds numbers.
- * @property {Number} min Gets / sets the minimum value this field can take.
- * @property {Number} max Gets / sets the maximum value this field can take.
- * @property {Number} precision=2 Gets / sets the maximum number of decimals a value can take.
- * @property {Number} step Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
- * @property {Boolean} hideSlider Hide the input mouse drag slider.
+ * @property {Number} [min=0] Gets / sets the minimum value this field can take.
+ * @property {Number} [max=1] Gets / sets the maximum value this field can take.
+ * @property {Number} [precision=2] Gets / sets the maximum number of decimals a value can take.
+ * @property {Number} [step=0.01] Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
+ * @property {Boolean} [hideSlider=true] Hide the input mouse drag slider.
  * @extends pcui.TextInput
  */
 class NumericInput extends TextInput {
