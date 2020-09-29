@@ -434,6 +434,7 @@ Observer.prototype.set = function (path, value, silent, remote, force) {
         }
         return false;
     }
+
     var data;
     if (! node.hasOwnProperty('_data') && node.hasOwnProperty(key)) {
         data = node;
