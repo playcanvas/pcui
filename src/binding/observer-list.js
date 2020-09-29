@@ -25,8 +25,8 @@ ObserverList.prototype.get = function (index) {
     if (this.index) {
         return this._indexed[index] || null;
     }
-    return this.data[index] || null;
 
+    return this.data[index] || null;
 };
 
 
@@ -44,9 +44,9 @@ ObserverList.prototype.indexOf = function (item) {
         var index = (item instanceof Observer && item.get(this.index)) || item[this.index];
         return (this._indexed[index] && index) || null;
     }
+
     var ind = this.data.indexOf(item);
     return ind !== -1 ? ind : null;
-
 };
 
 
@@ -121,8 +121,8 @@ ObserverList.prototype.has = function (item) {
         var index = (item instanceof Observer && item.get(this.index)) || item[this.index];
         return !! this._indexed[index];
     }
-    return this.data.indexOf(item) !== -1;
 
+    return this.data.indexOf(item) !== -1;
 };
 
 
