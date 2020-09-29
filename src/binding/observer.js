@@ -524,12 +524,13 @@ Observer.prototype._equals = function (a, b) {
 
 
 Observer.prototype.unset = function (path, silent, remote) {
+    var i;
     var keys = Observer._splitPath(path);
     var key = keys[keys.length - 1];
     var node = this;
     var obj = this;
 
-    for (var i = 0; i < keys.length - 1; i++) {
+    for (i = 0; i < keys.length - 1; i++) {
         if (node instanceof Array) {
             node = node[keys[i]];
             if (node instanceof Observer) {
@@ -552,7 +553,7 @@ Observer.prototype.unset = function (path, silent, remote) {
     if (node._data[key] && node._data[key]._data) {
         // do this in reverse order because node._data[key]._keys gets
         // modified as we loop
-        for (var i = node._data[key]._keys.length - 1; i >= 0; i--) {
+        for (i = node._data[key]._keys.length - 1; i >= 0; i--) {
             obj.unset(path + '.' + node._data[key]._keys[i], true);
         }
     }
@@ -815,10 +816,12 @@ Observer.prototype.move = function (path, indOld, indNew, silent, remote) {
 
 
 Observer.prototype.patch = function (data, removeMIssingKeys) {
+    var key;
+
     if (typeof(data) !== 'object')
         return;
 
-    for (var key in data) {
+    for (key in data) {
         if (typeof(data[key]) === 'object' && ! this._data.hasOwnProperty(key)) {
             this._prepare(this, key, data[key]);
         } else if (this._data[key] !== data[key]) {
@@ -827,7 +830,7 @@ Observer.prototype.patch = function (data, removeMIssingKeys) {
     }
 
     if (removeMIssingKeys) {
-        for (var key in this._data) {
+        for (key in this._data) {
             if (!data.hasOwnProperty(key)) {
                 this.unset(key);
             }

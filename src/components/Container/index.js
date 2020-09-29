@@ -570,23 +570,24 @@ class Container extends Element {
      * @param {Array} dom - An array of child pcui elements to append to this container.
      *
      * @example
-     *
-     *     buildDom([
-     *          {
-     *              child1: pcui.Label()
-     *          },
-     *          {
-     *              root: {
-     *                  container1: pcui.Container()
-     *              },
-     *              children: {
-     *                  [
-     *                      {child2: pcui.Label()},
-     *                      {child3: pcui.Label()}
-     *                  ]
-     *              }
-     *          }
-     *     ]);
+     * buildDom([
+     *     {
+     *         child1: pcui.Label()
+     *     },
+     *     {
+     *         root: {
+     *             container1: pcui.Container()
+     *         },
+     *         children: [
+     *             {
+     *                 child2: pcui.Label()
+     *             },
+     *             {
+     *                 child3: pcui.Label()
+     *             }
+     *         ]
+     *     }
+     * ]);
      */
     buildDom(dom) {
         dom.forEach(node => {

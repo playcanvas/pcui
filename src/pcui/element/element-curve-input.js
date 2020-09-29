@@ -5,7 +5,6 @@ import NumericInput from './element-numeric-input';
 import SelectInput from './element-select-input';
 import BooleanInput from './element-boolean-input';
 import Canvas from './element-canvas';
-import * as pcui from '../pcui';
 import utils from 'helpers/utils';
 import { Curve } from '../../engine/math/curve';
 

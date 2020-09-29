@@ -1016,7 +1016,7 @@ class CurveInput extends Container {
 
         if (!this.suspendEvents) {
             for (var index in changedCurves) {
-                var curve = this.curves[parseInt(index)];
+                var curve = this.curves[parseInt(index, 10)];
                 if (curve) {
                     var val = this._serializeCurveKeys(curve);
                     paths.push(this._getKeysPath(curve));
@@ -1178,7 +1178,6 @@ class CurveInput extends Container {
             anchor: null
         };
 
-        var x, y;
         var hoveredTime = this._calculateAnchorTime(coords);
 
         // go through all the curves from front to back
@@ -1192,10 +1191,6 @@ class CurveInput extends Container {
 
                 // convert hoveredTime, value to coords
                 var curvePointCoords = this._calculateAnchorCoords([hoveredTime, value]);
-
-                // check coords are close to a radius
-                x = coords[0] - curvePointCoords[0];
-                y = coords[1] - curvePointCoords[1];
 
                 if (this._areCoordsClose(coords, curvePointCoords, this.curveHoverRadius)) {
                     result.curve = curve;
@@ -1223,6 +1218,8 @@ class CurveInput extends Container {
             // when we enable a curve make it the selected one
             this._setSelected(curve, null);
         } else {
+            var otherCurve;
+
             // remove the curve from the enabledCurves array
             var index = this.enabledCurves.indexOf(curve);
             if (index >= 0) {
@@ -1231,7 +1228,7 @@ class CurveInput extends Container {
 
             // remove its matching curve too
             if (this.betweenCurves) {
-                var otherCurve = this._getOtherCurve(curve);
+                otherCurve = this._getOtherCurve(curve);
                 if (otherCurve) {
                     index = this.enabledCurves.indexOf(otherCurve);
                     if (index >= 0) {

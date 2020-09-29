@@ -163,6 +163,8 @@ const _searchItems = function (items, search, args) {
 // ]
 //
 export const searchItems = function (items, search, args) {
+    let i;
+
     search = (search || '').toLowerCase().trim();
 
     if (! search)
@@ -176,10 +178,9 @@ export const searchItems = function (items, search, args) {
     args.containsCharsTolerance = args.containsCharsTolerance || 0.5;
     args.editsDistanceTolerance = args.editsDistanceTolerance || 0.5;
 
-    var result = [];
     var records = [];
 
-    for (var i = 0; i < items.length; i++) {
+    for (i = 0; i < items.length; i++) {
         var subInd = items[i][0].toLowerCase().trim().indexOf(search);
 
         records.push({
@@ -193,11 +194,11 @@ export const searchItems = function (items, search, args) {
     }
 
     // search each token
-    for (var i = 0; i < searchTokens.length; i++)
+    for (i = 0; i < searchTokens.length; i++)
         records = _searchItems(records, searchTokens[i], args);
 
     // sort result first by substring? then by edits number
-    records.sort(function (a, b) {
+    records.sort((a, b) => {
         if (a.subFull !== b.subFull) {
             return a.subFull - b.subFull;
         } else if (a.sub !== b.sub) {
@@ -206,11 +207,10 @@ export const searchItems = function (items, search, args) {
             return a.edits - b.edits;
         }
         return a.name.length - b.name.length;
-
     });
 
     // return only items without match information
-    for (var i = 0; i < records.length; i++)
+    for (i = 0; i < records.length; i++)
         records[i] = records[i].item;
 
     // limit number of results

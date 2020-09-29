@@ -17,7 +17,7 @@ const DRAG_AREA_AFTER = 'after';
 /**
  * @event
  * @name TreeView#dragstart
- * @param {TreeViewItem[]} The - dragged items
+ * @param {TreeViewItem[]} items - The dragged items
  * @description Fired when we start dragging a TreeViewItem
  */
 
@@ -31,29 +31,29 @@ const DRAG_AREA_AFTER = 'after';
  * @event
  * @name TreeView#reparent
  * @description Fired when we reparent TreeViewItems
- * @param {object[]} An - array of items we reparented. Each array element contains an object like so: {item, newParent, oldParent}.
+ * @param {object[]} items - An array of items we reparented. Each array element contains an object like so: {item, newParent, oldParent}.
  */
 
 /**
  * @event
  * @name TreeView#select
  * @description Fired when we select a TreeViewItem
- * @param {TreeViewItem} The - item
+ * @param {TreeViewItem} item - The item
  */
 
 /**
  * @event
  * @name TreeView#deselect
  * @description Fired when we deselect a TreeViewItem
- * @param {TreeViewItem} The - item
+ * @param {TreeViewItem} item - The item
  */
 
 /**
  * @event
  * @name TreeView#rename
  * @description Fired when we rename a TreeViewItem
- * @param {TreeViewItem} The - item
- * @param {string} The - new name
+ * @param {TreeViewItem} item - The item
+ * @param {string} name - The new name
  */
 
 /**

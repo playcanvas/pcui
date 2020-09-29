@@ -51,18 +51,6 @@ class Graph extends Element {
         super(document.createElement('div'), args);
         var graph = new joint.dia.Graph();
 
-        var paper = new joint.dia.Paper({
-            el: this.dom,
-            model: graph,
-            width: 600,
-            height: 300,
-            gridSize: 10,
-            drawGrid: true,
-            background: {
-                color: 'rgba(0, 255, 0, 0.3)'
-            }
-        });
-
         var rect = new joint.shapes.standard.Rectangle();
         rect.position(100, 30);
         rect.resize(100, 40);
@@ -251,27 +239,21 @@ class Graph extends Element {
                     'type': 'path',
                     'stroke': 'none',
                     'fill': '#3498DB',
-                    'd': 'M 20 -10 0 0 20 10 Z \
-                        M 40 -10 20 0 40 10 Z'
+                    'd': 'M 20 -10 0 0 20 10 Z ' +
+                         'M 40 -10 20 0 40 10 Z'
                 },
                 targetMarker: {
                     'type': 'path',
                     'stroke': 'none',
                     'fill': '#3498DB',
-                    'd': 'M 7.5 -10 2.5 -10 2.5 10 7.5 10 Z \
-                        M 17.5 -10 12.5 -10 12.5 10 17.5 10 Z \
-                        M 40 -10 20 0 40 10 Z'
+                    'd': 'M 7.5 -10 2.5 -10 2.5 10 7.5 10 Z ' +
+                         'M 17.5 -10 12.5 -10 12.5 10 17.5 10 Z ' +
+                         'M 40 -10 20 0 40 10 Z'
                 }
             }
         });
         link4.addTo(graph);
-
-
     }
-
 }
 
-export {
-    Graph
-};
 export default Graph;

@@ -55,7 +55,7 @@ utils.implements = function (targetClass, sourceClass) {
  * @param {object} targetClass - The target class
  * @param {string} memberName - The name of the member of the target class that properties will be proxied to.
  * @param {string[]} properties - A list of properties to be proxied.
- * @example 
+ * @example
  * utils.proxy(pcui.SliderInput, '_numericInput', ['max', 'min', 'placeholder']);
  */
 utils.proxy = function (targetClass, memberName, properties) {
@@ -123,7 +123,6 @@ if (! String.prototype.appendQuery) {
     /* global DOMTokenList */
     var dummy  = document.createElement('div'),
         dtp    = DOMTokenList.prototype,
-        toggle = dtp.toggle,
         add    = dtp.add,
         rem    = dtp.remove;
 
