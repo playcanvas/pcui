@@ -586,7 +586,7 @@ class Container extends Element {
      *                  ]
      *              }
      *          }
-     *     ])
+     *     ]);
      */
     buildDom(dom) {
         dom.forEach(node => {

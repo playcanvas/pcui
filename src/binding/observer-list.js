@@ -188,8 +188,10 @@ ObserverList.prototype.remove = function (item) {
 
 
 ObserverList.prototype.removeByKey = function (index) {
+    var item;
+
     if (this.index) {
-        var item = this._indexed[index];
+        item = this._indexed[index];
 
         if (! item)
             return;
@@ -204,7 +206,7 @@ ObserverList.prototype.removeByKey = function (index) {
         if (this.data.length < index)
             return;
 
-        var item = this.data[index];
+        item = this.data[index];
 
         this.data.splice(index, 1);
 

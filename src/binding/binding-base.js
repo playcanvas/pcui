@@ -23,8 +23,8 @@ class BindingBase extends Events {
      * If none is provided then no history will be recorded.
      * @param {string} [args.historyPrefix] - A prefix that will be used for the name of every history action.
      * @param {string} [args.historyPostfix] - A postfix that will be used for the name of every history action.
-     * @param {string} [args.historyName] The name of each history action.
-     * @param {Boolean} [args.historyCombine] Whether to combine history actions.
+     * @param {string} [args.historyName] - The name of each history action.
+     * @param {boolean} [args.historyCombine] - Whether to combine history actions.
      */
     constructor(args) {
         super();
@@ -95,7 +95,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#setValue
      * @description Sets a value to the linked observers at the linked paths.
-     * @param {Any} value - The value
+     * @param {*} value - The value
      */
     setValue(value) {
     }
@@ -103,7 +103,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#setValues
      * @description Sets an array of values to the linked observers at the linked paths.
-     * @param {Any[]} values - The values
+     * @param {*[]} values - The values
      */
     setValues(values) {
     }
@@ -111,7 +111,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#addValue
      * @description Adds (inserts) a value to the linked observers at the linked paths.
-     * @param {Any} value - The value
+     * @param {*} value - The value
      */
     addValue(value) {
     }
@@ -119,7 +119,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#addValues
      * @description Adds (inserts) multiple values to the linked observers at the linked paths.
-     * @param {Any[]} values - The values
+     * @param {*[]} values - The values
      */
     addValues(values) {
     }
@@ -127,7 +127,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#removeValue
      * @description Removes a value from the linked observers at the linked paths.
-     * @param {Any} value - The value
+     * @param {*} value - The value
      */
     removeValue(value) {
     }
@@ -135,7 +135,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#removeValues
      * @description Removes multiple values from the linked observers from the linked paths.
-     * @param {Any[]} values - The values
+     * @param {*[]} values - The values
      */
     removeValues(values) {
     }

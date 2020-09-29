@@ -51,8 +51,8 @@ class SelectInput extends Element {
      * @param {boolean} [args.allowInput] - If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
      * @param {boolean} [args.allowCreate] - If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.
      * @param {Function} [args.createFn] - A function to be executed when the user selects to create a new value. The function takes the new value as a parameter.
-     * @param {String} [args.createLabelText] The placeholder text to show when creating a new value. Used when allowInput and allowCreate are both true.
-     * @param {String} [args.type] The type of each value. Can be one of 'string', 'number' or 'boolean'.
+     * @param {string} [args.createLabelText] - The placeholder text to show when creating a new value. Used when allowInput and allowCreate are both true.
+     * @param {string} [args.type] - The type of each value. Can be one of 'string', 'number' or 'boolean'.
      */
     constructor(args) {
         if (!args) args = {};

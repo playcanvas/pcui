@@ -30,132 +30,132 @@ const curvePickerDom = (parent) => [{
         })
     },
     children: [{
+        root: {
+            header: new Container({
+                class: CLASS_CURVE_PICKER_HEADER
+            })
+        },
+        children: [{
+            typeLabel: new Label({
+                text: 'Type'
+            })
+        },
+        {
+            typeSelect: new SelectInput({
+                type: 'number',
+                options: [{
+                    v: 0,
+                    t: 'Linear'
+                }, {
+                    v: 1,
+                    t: 'Smooth Step'
+                }, {
+                    v: 2,
+                    t: 'Legacy Spline'
+                }, {
+                    v: 4,
+                    t: 'Spline'
+                }, {
+                    v: 5,
+                    t: 'Step'
+                }]
+            })
+        },
+        {
+            randomizeLabel: new Label({
+                text: 'Randomize'
+            })
+        },
+        {
+            randomizeToggle: new BooleanInput({
+                type: 'toggle'
+            })
+        },
+        {
             root: {
-                header: new Container({
-                    class: CLASS_CURVE_PICKER_HEADER
+                curveToggles: new Container({
+                    class: CLASS_CURVE_PICKER_TOGGLES
                 })
             },
-            children: [{
-                    typeLabel: new Label({
-                        text: 'Type'
-                    })
-                },
-                {
-                    typeSelect: new SelectInput({
-                        type: 'number',
-                        options: [{
-                            v: 0,
-                            t: 'Linear'
-                        }, {
-                            v: 1,
-                            t: 'Smooth Step'
-                        }, {
-                            v: 2,
-                            t: 'Legacy Spline'
-                        }, {
-                            v: 4,
-                            t: 'Spline'
-                        }, {
-                            v: 5,
-                            t: 'Step'
-                        }]
-                    })
-                },
-                {
-                    randomizeLabel: new Label({
-                        text: 'Randomize'
-                    })
-                },
-                {
-                    randomizeToggle: new BooleanInput({
-                        type: 'toggle'
-                    })
-                },
-                {
-                    root: {
-                        curveToggles: new Container({
-                            class: CLASS_CURVE_PICKER_TOGGLES
-                        })
-                    },
-                    children: parent.curveToggles.map((toggle, i) => ({
-                        [`toggle${i}`]: new Button({
-                            text: toggle,
-                            class: [CLASS_CURVE_PICKER_TOGGLE, CLASS_CURVE_PICKER_TOGGLE_ACTIVE, `toggle-${i}`]
-                        })
-                    }))
-                }
-            ]
+            children: parent.curveToggles.map((toggle, i) => ({
+                [`toggle${i}`]: new Button({
+                    text: toggle,
+                    class: [CLASS_CURVE_PICKER_TOGGLE, CLASS_CURVE_PICKER_TOGGLE_ACTIVE, `toggle-${i}`]
+                })
+            }))
+        }]
+    },
+    {
+        pickerCanvas: new Canvas({
+            class: CLASS_CURVE_PICKER_CANVAS,
+            useDevicePixelRatio: true,
+            canvasWidth: 470,
+            canvasHeight: 200
+        })
+    },
+    {
+        root: {
+            footer: new Container({
+                class: CLASS_CURVE_PICKER_FOOTER
+            })
+        },
+        children: [{
+            timeInput: new NumericInput({
+                precision: 2,
+                placeholder: 'Time'
+            })
         },
         {
-            pickerCanvas: new Canvas({
-                class: CLASS_CURVE_PICKER_CANVAS,
-                useDevicePixelRatio: true,
-                canvasWidth: 470,
-                canvasHeight: 200
-            }),
+            valueInput: new NumericInput({
+                precision: 2,
+                step: 0.1,
+                placeholder: 'Value'
+            })
         },
         {
-            root: {
-                footer: new Container({
-                    class: CLASS_CURVE_PICKER_FOOTER
-                }),
-            },
-            children: [{
-                    timeInput: new NumericInput({
-                        precision: 2,
-                        placeholder: 'Time'
-                    })
-                },
-                {
-                    valueInput: new NumericInput({
-                        precision: 2,
-                        step: 0.1,
-                        placeholder: 'Value'
-                    })
-                },
-                {
-                    resetZoomButton: new Button({
-                        icon: 'E308'
-                    })
-                },
-                {
-                    resetCurveButton: new Button({
-                        icon: 'E150'
-                    })
-                },
-                {
-                    copyButton: new Button({
-                        icon: 'E351'
-                    })
-                },
-                {
-                    pasteButton: new Button({
-                        icon: 'E348'
-                    })
-                }
-            ]
-        }
-    ]
+            resetZoomButton: new Button({
+                icon: 'E308'
+            })
+        },
+        {
+            resetCurveButton: new Button({
+                icon: 'E150'
+            })
+        },
+        {
+            copyButton: new Button({
+                icon: 'E351'
+            })
+        },
+        {
+            pasteButton: new Button({
+                icon: 'E348'
+            })
+        }]
+    }]
 }];
 
 /**
  * @name CurveInput
  * @classdesc Shows a curve or curveset
- * @property {Boolean} renderChanges If true the input will flash when changed.
- * @extends pcui.Element
+ * @property {boolean} renderChanges If true the input will flash when changed.
+ * @augments pcui.Element
  */
 class CurveInput extends Container {
     /**
      * Creates a new pcui.CurveInput.
-     * @param {Object} args The arguments.
-     * @param {Number} [args.lineWidth] The width of the rendered lines in pixels.
-     * @param {String[]} [args.curves] The names of the curves that the curve input controls.
-     * @param {Number} [args.min] The minimum value that curves can take.
-     * @param {Number} [args.max] The maximum value that curves can take.
-     * @param {Number} [args.verticalValue] The default maximum and minimum values to show if min and max are undefined.
-     * @param {Boolean} [args.hideRandomize] Whether to hide the randomize button in the curve picker.
+     *
+     * @param {object} args - The arguments.
+     * @param {number} [args.lineWidth] - The width of the rendered lines in pixels.
+     * @param {string[]} [args.curves] - The names of the curves that the curve input controls.
+     * @param {number} [args.min] - The minimum value that curves can take.
+     * @param {number} [args.max] - The maximum value that curves can take.
+     * @param {number} [args.verticalValue] - The default maximum and minimum values to show if min and max are undefined.
+     * @param {boolean} [args.hideRandomize] - Whether to hide the randomize button in the curve picker.
      */
     constructor(args) {
+        let i;
+
         args = Object.assign({
             tabIndex: 0
         }, args);
@@ -165,7 +165,7 @@ class CurveInput extends Container {
         this.class.add(CLASS_CURVE);
 
         this._canvas = new Canvas({
-            useDevicePixelRatio: true 
+            useDevicePixelRatio: true
         });
         this._canvas.width = 470;
         this._canvas.height = 22;
@@ -266,8 +266,6 @@ class CurveInput extends Container {
         this.anchorHoverRadius = 8;
         this.textSize = 10;
 
-        // testCurve.type = 1;
-        // testCurve2.type = 1;
         // input related variables
         this.curves = []; // holds all the curves
         this.enabledCurves = []; // holds the rendered order of the curves
@@ -293,18 +291,6 @@ class CurveInput extends Container {
 
         this.swizzle = [0, 1, 2, 3];
 
-        // const checkerboardCanvas = new Canvas();
-        // checkerboardCanvas.width = 16;
-        // checkerboardCanvas.height = 16;
-        // const pctx = checkerboardCanvas.element.getContext('2d');
-        // pctx.fillStyle = "#949a9c";
-        // pctx.fillRect(0,0,8,8);
-        // pctx.fillRect(8,8,8,8);
-        // pctx.fillStyle = "#657375";
-        // pctx.fillRect(8,0,8,8);
-        // pctx.fillRect(0,8,8,8);
-        // const checkerboardPattern = this._pickerCanvas.element.getContext('2d').createPattern(checkerboardCanvas.element, 'repeat');
-
         this._pickerCanvas.width = 470;
         this._pickerCanvas.height = 200;
 
@@ -324,8 +310,8 @@ class CurveInput extends Container {
                         type: 1,
                         keys: [0, 0],
                         betweenCurves: false
-                    },
-                ]
+                    }
+                ];
             })
             .flat();
 
@@ -352,7 +338,7 @@ class CurveInput extends Container {
             }
 
             if (!this.betweenCurves) {
-                for (var i = 0; i < this.numCurves; i++) {
+                for (i = 0; i < this.numCurves; i++) {
                     if (!this.curves[i + this.numCurves]) continue;
 
                     // disable the secondary graph
@@ -365,7 +351,7 @@ class CurveInput extends Container {
                 }
             } else {
                 // enable the secondary graphs if their respective primary graphs are enabled
-                for (var i = 0; i < this.numCurves; i++) {
+                for (i = 0; i < this.numCurves; i++) {
                     if (!this.curves[i + this.numCurves]) continue;
 
                     if (!this.suspendEvents) {
@@ -383,7 +369,7 @@ class CurveInput extends Container {
             if (!this.suspendEvents)
                 // this._onPickerChange(paths, values);
 
-            this._renderPicker();
+                this._renderPicker();
         });
         this._timeInput.on('change', (newValue) => {
             if (this.selectedAnchor) {
@@ -405,45 +391,45 @@ class CurveInput extends Container {
                 betweenCurves: this.betweenCurves,
                 curveType: this.curveType
             };
-    
-            for (var i = 0; i < this.numCurves; i++) {
+
+            for (i = 0; i < this.numCurves; i++) {
                 data.primaryKeys.push(this._serializeCurveKeys(this.curves[i]));
             }
-    
-            for (var i = 0; i < this.numCurves; i++) {
+
+            for (i = 0; i < this.numCurves; i++) {
                 if (! this.curves[this.numCurves + i]) continue;
-    
+
                 if (this.betweenCurves) {
                     data.secondaryKeys.push(this._serializeCurveKeys(this.curves[this.numCurves + i]));
                 } else {
                     data.secondaryKeys.push(this._serializeCurveKeys(this.curves[i]));
                 }
             }
-    
+
             localStorageSet('playcanvas_editor_clipboard_curves', data);
         });
 
         this._pasteButton.on('click', () => {
             var data = localStorageGet('playcanvas_editor_clipboard_curves');
             if (! data) return;
-    
+
             var paths = [];
             var values = [];
-    
+
             this.curveType = data.curveType;
             this.betweenCurves = data.betweenCurves && !this._randomizeToggle.hidden;
-    
+
             var copyKeys = (i, data) => {
                 if (data && this.curves[i]) {
                     var keys = data;
-    
+
                     // clamp keys to min max values
                     if (this.minVertical != null || this.maxVertical != null) {
                         keys = [];
                         for (var j = 0, len = data.length; j < len; j += 2) {
                             keys.push(data[j]);
-    
-                            var value = data[j+1];
+
+                            var value = data[j + 1];
                             if (this.minVertical != null && value < this.minVertical)
                                 keys.push(this.minVertical);
                             else if (this.maxVertical != null && value > this.maxVertical)
@@ -452,63 +438,63 @@ class CurveInput extends Container {
                                 keys.push(value);
                         }
                     }
-    
+
                     this.curves[i] = new Curve(keys);
                     this.curves[i].type = this.curveType;
-    
+
                     paths.push(this._getKeysPath(this.curves[i]));
                     values.push(keys);
-    
+
                     if (this._typeSelect.value !== this.curveType) {
                         paths.push(i.toString() + '.type');
                         values.push(this.curveType);
                     }
                 }
             };
-    
-            for (var i = 0; i < this.numCurves; i++) {
+
+            for (i = 0; i < this.numCurves; i++) {
                 copyKeys(i, data.primaryKeys[i]);
             }
-    
-            for (var i = 0; i < this.numCurves; i++) {
+
+            for (i = 0; i < this.numCurves; i++) {
                 copyKeys(i + this.numCurves, data.secondaryKeys[i]);
             }
-    
+
             this.enabledCurves.length = 0;
-            for (var i = 0; i < this.numCurves; i++)  {
+            for (i = 0; i < this.numCurves; i++)  {
                 if (this[`_toggle${i}`].class.contains(CLASS_CURVE_PICKER_TOGGLE_ACTIVE)) {
                     this.enabledCurves.push(this.curves[i]);
                     if (this.betweenCurves) {
-                        this.enabledCurves.push(this.curves[i+this.numCurves]);
+                        this.enabledCurves.push(this.curves[i + this.numCurves]);
                     }
                 }
             }
-    
+
             this._setHovered(null, null);
             this._setSelected(this.enabledCurves[0], null);
-    
+
             var suspend = this.suspendEvents;
             this.suspendEvents = true;
-    
+
             if (this._randomizeToggle.value !== this.betweenCurves) {
                 this._randomizeToggle.value = this.betweenCurves;
                 paths.push('0.betweenCurves');
                 values.push(this.betweenCurves);
             }
-    
+
             if (this._typeSelect.value !== this.curveType) {
                 this._typeSelect.value = this.curveType;
             }
-    
+
             this.suspendEvents = suspend;
 
             if (!this.suspendEvents) {
                 // this._onPickerChange(paths, values);
             }
-    
+
             if (this._shouldResetZoom())
                 this._resetZoom();
-    
+
             this._renderPicker();
         });
 
@@ -516,28 +502,28 @@ class CurveInput extends Container {
             title: 'Reset Zoom'
         });
         resetZoomTooltip.attach({
-            target: this._resetZoomButton,
+            target: this._resetZoomButton
         });
-        
+
         var resetCurveTooltip = new Tooltip({
             title: 'Reset Curve'
         });
         resetCurveTooltip.attach({
-            target: this._resetCurveButton,
+            target: this._resetCurveButton
         });
-        
+
         var copyTooltip = new Tooltip({
             title: 'Copy'
         });
         copyTooltip.attach({
-            target: this._copyButton,
+            target: this._copyButton
         });
-        
+
         var pasteTooltip = new Tooltip({
             title: 'Paste'
         });
         pasteTooltip.attach({
-            target: this._pasteButton,
+            target: this._pasteButton
         });
 
         this._pickerCanvas.element.addEventListener('mousedown', this._onMouseDown.bind(this), { passive: false });
@@ -562,7 +548,7 @@ class CurveInput extends Container {
                     curveToggle.class.add(CLASS_CURVE_PICKER_TOGGLE_ACTIVE);
                 }
                 this._toggleCurve(this.curves[i], !isActive);
-            })
+            });
         });
 
         window.curveInput = this;
@@ -687,9 +673,9 @@ class CurveInput extends Container {
         var ind = this.curves.indexOf(curve);
         if (ind < this.numCurves) {
             return this.curves[this.numCurves + ind];
-        } else {
-            return this.curves[ind - this.numCurves];
         }
+        return this.curves[ind - this.numCurves];
+
     }
 
     // Draws a pair of this.curves with their in-between filling. If the second
@@ -771,7 +757,8 @@ class CurveInput extends Container {
         this._pickerCanvasContext.stroke();
         this._pickerCanvasContext.lineWidth = lineWidth;
     }
-    o // renders a quad in the same color as the bg color
+
+    // renders a quad in the same color as the bg color
     // to hide the portion of the curves that is outside the grid
     _renderMask() {
         this._pickerCanvasContext.fillStyle = this.colors.bg;
@@ -1099,9 +1086,9 @@ class CurveInput extends Container {
         var curveIndex = this.curves.indexOf(curve);
         if (this.numCurves > 1) {
             return curveIndex >= this.numCurves ? '1.keys.' + (curveIndex - this.numCurves) : '0.keys.' + curveIndex;
-        } else {
-            return curveIndex === 0 ? '0.keys' : '1.keys';
         }
+        return curveIndex === 0 ? '0.keys' : '1.keys';
+
     }
 
     _serializeCurveKeys(curve) {
@@ -1468,7 +1455,7 @@ class CurveInput extends Container {
                 this._renderPicker();
             }
         }
-    };
+    }
 
 
     // Handle mouse wheel
@@ -1480,9 +1467,9 @@ class CurveInput extends Container {
             this._adjustZoom(0.3);
         }
         return false;
-    };
+    }
 
-    _resetCurve (curve) {
+    _resetCurve(curve) {
         if (!curve) {
             return;
         }
@@ -1819,7 +1806,7 @@ class CurveInput extends Container {
 
         super.destroy();
     }
-    
+
 
     get value() {
         return this._value;

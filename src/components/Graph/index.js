@@ -21,8 +21,8 @@ joint.V.matrixToTransformString = function (matrix) {
 joint.V.prototype.transform = function (matrix, opt) {
     var node = this.node;
     if (joint.V.isUndefined(matrix)) {
-        return (node.parentNode)            ?
-            this.getTransformToElement(node.parentNode)            :
+        return node.parentNode ?
+            this.getTransformToElement(node.parentNode) :
             node.getScreenCTM();
     }
     if (opt && opt.absolute) {

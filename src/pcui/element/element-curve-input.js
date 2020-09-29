@@ -149,8 +149,8 @@ class CurveInput extends Container {
      * @param {number} [args.lineWidth] - The width of the rendered lines in pixels.
      * @param {number} [args.min] - The minimum value that curves can take.
      * @param {number} [args.max] - The maximum value that curves can take.
-     * @param {number} [args.verticalValue] The default maximum and minimum values to show if min and max are undefined.
-     * @param {Boolean} [args.hideRandomize] Whether to hide the randomize button in the curve picker.
+     * @param {number} [args.verticalValue] - The default maximum and minimum values to show if min and max are undefined.
+     * @param {boolean} [args.hideRandomize] - Whether to hide the randomize button in the curve picker.
      */
     constructor(args) {
         args = Object.assign({
