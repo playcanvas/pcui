@@ -30,4 +30,4 @@ export {
     FLASH,
     NOT_FLEXIBLE,
     DEFAULT_MOUSEDOWN
-}
+};

@@ -5,17 +5,18 @@ import Element from '../Element';
 const CLASS_INFOBOX = 'pcui-infobox';
 
 /**
- * @name pcui.InfoBox
+ * @name InfoBox
  * @classdesc Represents an information box.
- * @property {String} icon The CSS code for an icon for the info box. e.g. E401 (notice we omit the '\' character).
- * @property {String} title Gets / sets the 'title' of the info box
- * @property {String} text Gets / sets the 'text' of the info box
+ * @property {string} icon The CSS code for an icon for the info box. e.g. E401 (notice we omit the '\' character).
+ * @property {string} title Gets / sets the 'title' of the info box
+ * @property {string} text Gets / sets the 'text' of the info box
  */
 class InfoBox extends Container {
     /**
      * Creates a new InfoBox.
-     * @param {Object} args The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
-     * @param {Boolean} [args.unsafe] If true then the innerHTML property will be used to set the title/text. Otherwise textContent will be used instead.
+     *
+     * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+     * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the title/text. Otherwise textContent will be used instead.
      */
     constructor(args) {
         if (!args) args = {};

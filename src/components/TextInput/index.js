@@ -1,28 +1,29 @@
 import './style.scss';
-import Element from '../Element'; 
+import Element from '../Element';
 import * as pcuiClass from '../../class';
 
 const CLASS_TEXT_INPUT = 'pcui-text-input';
 
 /**
- * @name pcui.TextInput
+ * @name TextInput
  * @classdesc The TextInput is an input element of type text.
- * @extends pcui.Element
+ * @augments Element
  * @mixes pcui.IBindable
  * @mixes pcui.IFocusable
- * @property {String} placeholder Gets / sets the placeholder label that appears on the right of the input.
+ * @property {string} placeholder Gets / sets the placeholder label that appears on the right of the input.
  * @property {HTMLElement} input Gets the HTML input element.
- * @property {Boolean} renderChanges If true then the TextInput will flash when its text changes.
- * @property {Boolean} blurOnEnter Gets / sets whether pressing Enter will blur (unfocus) the field. Defaults to true.
- * @property {Boolean} blurOnEscape Gets / sets whether pressing Escape will blur (unfocus) the field. Defaults to true.
- * @property {Boolean} keyChange Gets / sets whether any key up event will cause a change event to be fired.} args
+ * @property {boolean} renderChanges If true then the TextInput will flash when its text changes.
+ * @property {boolean} blurOnEnter Gets / sets whether pressing Enter will blur (unfocus) the field. Defaults to true.
+ * @property {boolean} blurOnEscape Gets / sets whether pressing Escape will blur (unfocus) the field. Defaults to true.
+ * @property {boolean} keyChange Gets / sets whether any key up event will cause a change event to be fired.} args
  * @property {Function} onValidate A function that validates the value that is entered into the input and returns true if it is valid or false otherwise.
  * If false then the input will be set in an error state and the value will not propagate to the binding.
  */
 class TextInput extends Element {
     /**
      * Creates a new TextInput.
-     * @param {Object} args The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+     *
+     * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
         if (!args) args = {};
@@ -168,9 +169,9 @@ class TextInput extends Element {
     }
 
     /**
-     * @name pcui.TextInput#focus
+     * @name TextInput#focus
      * @description Focuses the Element.
-     * @param {Boolean} select If true then this will also select the text after focusing.
+     * @param {boolean} select - If true then this will also select the text after focusing.
      */
     focus(select) {
         this._domInput.focus();
@@ -180,7 +181,7 @@ class TextInput extends Element {
     }
 
     /**
-     * @name pcui.TextInput#blur
+     * @name TextInput#blur
      * @description Blurs (unfocuses) the Element.
      */
     blur() {

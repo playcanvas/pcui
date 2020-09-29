@@ -13,56 +13,57 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
 
 /**
  * @event
- * @name pcui.TreeViewItem#select
+ * @name TreeViewItem#select
  * @description Fired when we select the TreeViewItem.
- * @param {pcui.TreeViewItem} The item
+ * @param {TreeViewItem} item - The item
  */
 
 /**
  * @event
- * @name pcui.TreeViewItem#deselect
+ * @name TreeViewItem#deselect
  * @description Fired when we deselect the TreeViewItem.
- * @param {pcui.TreeViewItem} The item
+ * @param {TreeViewItem} item - The item
  */
 
 /**
  * @event
- * @name pcui.TreeViewItem#open
+ * @name TreeViewItem#open
  * @description Fired when we open a TreeViewItem
- * @param {pcui.TreeViewItem} The item
+ * @param {TreeViewItem} item - The item
  */
 
 /**
  * @event
- * @name pcui.TreeViewItem#close
+ * @name TreeViewItem#close
  * @description Fired when we close the TreeViewItem.
- * @param {pcui.TreeViewItem} The item
+ * @param {TreeViewItem} item - The item
  */
 
 /**
- * @name pcui.TreeViewItem
+ * @name TreeViewItem
  * @classdesc Represents a Tree View Item to be added to a pcui.TreeView.
  * @mixes pcui.IFocusable
- * @property {Boolean} selected Whether the item is selected.
- * @property {Boolean} allowSelect Whether the item can be selected.
- * @property {Boolean} open Whether the item is open meaning showing its children.
- * @property {Boolean} parentsOpen Whether the parents of the item are open or closed.
- * @property {Boolean} allowDrag Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
- * @property {Boolean} allowDrop Whether dropping is allowed on the tree item.
- * @property {String} text The text shown by the TreeViewItem.
- * @property {Number} The number of direct children.
- * @property {pcui.Label} textLabel Gets the internal label that shows the text.
- * @property {pcui.Label} iconLabel Gets the internal label that shows the icon.
- * @property {pcui.TreeView} treeView Gets / sets the parent TreeView.
- * @property {pcui.TreeViewItem} firstChild Gets the first child item.
- * @property {pcui.TreeViewItem} lastChild Gets the last child item.
- * @property {pcui.TreeViewItem} nextSibling Gets the first sibling item.
- * @property {pcui.TreeViewItem} previousSibling Gets the last sibling item.
+ * @property {boolean} selected Whether the item is selected.
+ * @property {boolean} allowSelect Whether the item can be selected.
+ * @property {boolean} open Whether the item is open meaning showing its children.
+ * @property {boolean} parentsOpen Whether the parents of the item are open or closed.
+ * @property {boolean} allowDrag Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
+ * @property {boolean} allowDrop Whether dropping is allowed on the tree item.
+ * @property {string} text The text shown by the TreeViewItem.
+ * @property {number} The number of direct children.
+ * @property {Label} textLabel Gets the internal label that shows the text.
+ * @property {Label} iconLabel Gets the internal label that shows the icon.
+ * @property {TreeView} treeView Gets / sets the parent TreeView.
+ * @property {TreeViewItem} firstChild Gets the first child item.
+ * @property {TreeViewItem} lastChild Gets the last child item.
+ * @property {TreeViewItem} nextSibling Gets the first sibling item.
+ * @property {TreeViewItem} previousSibling Gets the last sibling item.
  */
 class TreeViewItem extends Container {
     /**
      * Creates a new TreeViewItem.
-     * @param {Object} [args] The arguments.
+     *
+     * @param {object} [args] - The arguments.
      */
     constructor(args) {
         if (!args) {

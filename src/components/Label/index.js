@@ -1,25 +1,26 @@
 import './style.scss';
 import * as pcuiClass from '../../class';
-import Element from '../Element'; 
+import Element from '../Element';
 
 const CLASS_LABEL = 'pcui-label';
 
 /**
- * @name pcui.Label
+ * @name Label
  * @classdesc The Label is a simple span element that displays some text.
- * @property {String} placeholder Gets / sets the placeholder label that appears on the right of the label.
- * @property {String} text Gets / sets the text of the Label.
- * @property {Boolean} renderChanges If true then the Label will flash when its text changes.
- * @extends pcui.Element
+ * @property {string} placeholder Gets / sets the placeholder label that appears on the right of the label.
+ * @property {string} text Gets / sets the text of the Label.
+ * @property {boolean} renderChanges If true then the Label will flash when its text changes.
+ * @augments Element
  * @mixes pcui.IBindable
  */
 class Label extends Element {
     /**
      * Creates a new Label.
-     * @param {Object} args The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
-     * @param {Boolean} [args.unsafe] If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
-     * @param {Boolean} [args.nativeTooltip] If true then use the text of the label as the native HTML tooltip.
-     * @param {Boolean} [args.allowTextSelection] If true then the label can be clicked to select text.
+     *
+     * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+     * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
+     * @param {boolean} [args.nativeTooltip] - If true then use the text of the label as the native HTML tooltip.
+     * @param {boolean} [args.allowTextSelection] - If true then the label can be clicked to select text.
      */
     constructor(args) {
         if (!args) args = {};

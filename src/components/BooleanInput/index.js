@@ -1,5 +1,5 @@
 import './style.scss';
-import Element from '../Element'; 
+import Element from '../Element';
 import * as pcuiClass from '../../class';
 
 const CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
@@ -7,16 +7,17 @@ const CLASS_BOOLEAN_INPUT_TICKED = CLASS_BOOLEAN_INPUT + '-ticked';
 const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
 
 /**
- * @name pcui.BooleanInput
+ * @name BooleanInput
  * @classdesc A checkbox element.
- * @property {Boolean} renderChanges If true the input will flash when changed.
- * @extends pcui.Element
+ * @property {boolean} renderChanges If true the input will flash when changed.
+ * @augments Element
  */
 class BooleanInput extends Element {
     /**
      * Creates a new pcui.BooleanInput.
-     * @param {Object} args The arguments.
-     * @param {String} [args.type] The type of checkbox currently can be null or 'toggle'.
+     *
+     * @param {object} args - The arguments.
+     * @param {string} [args.type] - The type of checkbox currently can be null or 'toggle'.
      */
     constructor(args) {
         args = Object.assign({

@@ -1,24 +1,24 @@
 import Events from './events';
 
 /**
- * @name pcui.HistoryAction
+ * @name HistoryAction
  * @classdesc A history action
- * @property {String} name The name of the action
+ * @property {string} name The name of the action
  * @property {Function} undo The undo function
  * @property {Function} redo The redo function
- * @property {Boolean} combine Whether to combine with the previous action with the same name.
+ * @property {boolean} combine Whether to combine with the previous action with the same name.
  * The effect of combining is merely changing the redo function to be the redo function of this action.
  * The original undo function is not modified.
  */
 
 /**
- * @name pcui.History
+ * @name History
  * @classdesc Manages history actions for undo / redo operations.
- * @property {pcui.HistoryAction} currentAction Returns the current history action
- * @property {pcui.HistoryAction} lastAction Returns the last history action
- * @property {Boolean} canUndo Whether we can undo at this time.
- * @property {Boolean} canRedo Whether we can redo at this time.
- * @extends Events
+ * @property {HistoryAction} currentAction Returns the current history action
+ * @property {HistoryAction} lastAction Returns the last history action
+ * @property {boolean} canUndo Whether we can undo at this time.
+ * @property {boolean} canRedo Whether we can redo at this time.
+ * @augments Events
  */
 class History extends Events {
     /**
@@ -33,9 +33,9 @@ class History extends Events {
     }
 
     /**
-     * @name pcui.History#add
+     * @name History#add
      * @description Adds a new history action
-     * @param {pcui.HistoryAction} action The action
+     * @param {HistoryAction} action - The action
      */
     add(action) {
         if (!action.name) {
@@ -77,7 +77,7 @@ class History extends Events {
     }
 
     /**
-     * @name pcui.History#undo
+     * @name History#undo
      * @description Undo the last history action
      */
     undo() {
@@ -105,7 +105,7 @@ class History extends Events {
     }
 
     /**
-     * @name pcui.History#redo
+     * @name History#redo
      * @description Redo the current history action
      */
     redo() {
@@ -131,7 +131,7 @@ class History extends Events {
     }
 
     /**
-     * @name pcui.History#clear
+     * @name History#clear
      * @description Clears all history actions.
      */
     clear() {

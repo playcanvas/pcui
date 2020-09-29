@@ -13,15 +13,19 @@ function Events() {
     this._suspendEvents = false;
 
     Object.defineProperty(this, 'suspendEvents', {
-        get: function () {return this._suspendEvents;},
-        set: function (value) {this._suspendEvents = !!value;}
+        get: function () {
+            return this._suspendEvents;
+        },
+        set: function (value) {
+            this._suspendEvents = !!value;
+        }
     });
 }
 
-Events.prototype.on = function(name, fn) {
+Events.prototype.on = function (name, fn) {
     var events = this._events[name];
     if (events === undefined) {
-        this._events[name] = [ fn ];
+        this._events[name] = [fn];
     } else {
         if (events.indexOf(fn) === -1)
             events.push(fn);
@@ -29,16 +33,16 @@ Events.prototype.on = function(name, fn) {
     return new EventHandle(this, name, fn);
 };
 
-Events.prototype.once = function(name, fn) {
+Events.prototype.once = function (name, fn) {
     var self = this;
-    var evt = this.on(name, function(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
+    var evt = this.on(name, function (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
         fn.call(self, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
         evt.unbind();
     });
     return evt;
 };
 
-Events.prototype.emit = function(name, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
+Events.prototype.emit = function (name, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
     if (this._suspendEvents) return;
 
     var events = this._events[name];
@@ -47,13 +51,13 @@ Events.prototype.emit = function(name, arg0, arg1, arg2, arg3, arg4, arg5, arg6,
 
     events = events.slice(0);
 
-    for(var i = 0; i < events.length; i++) {
+    for (var i = 0; i < events.length; i++) {
         if (! events[i])
             continue;
 
         try {
             events[i].call(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-        } catch(ex) {
+        } catch (ex) {
             console.info('%c%s %c(event error)', 'color: #06f', name, 'color: #f00');
             console.log(ex.stack);
         }
@@ -62,7 +66,7 @@ Events.prototype.emit = function(name, arg0, arg1, arg2, arg3, arg4, arg5, arg6,
     return this;
 };
 
-Events.prototype.unbind = function(name, fn) {
+Events.prototype.unbind = function (name, fn) {
     if (name) {
         var events = this._events[name];
         if (! events)
@@ -92,9 +96,9 @@ function EventHandle(owner, name, fn) {
     this.owner = owner;
     this.name = name;
     this.fn = fn;
-};
+}
 
-EventHandle.prototype.unbind = function() {
+EventHandle.prototype.unbind = function () {
     if (! this.owner)
         return;
 
@@ -105,14 +109,14 @@ EventHandle.prototype.unbind = function() {
     this.fn = null;
 };
 
-EventHandle.prototype.call = function() {
+EventHandle.prototype.call = function () {
     if (! this.fn)
         return;
 
     this.fn.call(this.owner, arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7]);
 };
 
-EventHandle.prototype.on = function(name, fn) {
+EventHandle.prototype.on = function (name, fn) {
     return this.owner.on(name, fn);
 };
 

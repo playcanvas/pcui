@@ -21,10 +21,8 @@ joint.V.matrixToTransformString = function (matrix) {
 joint.V.prototype.transform = function (matrix, opt) {
     var node = this.node;
     if (joint.V.isUndefined(matrix)) {
-        return (node.parentNode)
-            ?
-            this.getTransformToElement(node.parentNode)
-            :
+        return (node.parentNode)            ?
+            this.getTransformToElement(node.parentNode)            :
             node.getScreenCTM();
     }
     if (opt && opt.absolute) {
@@ -36,21 +34,22 @@ joint.V.prototype.transform = function (matrix, opt) {
 };
 
 /**
- * @name pcui.Graph
+ * @name Graph
  * @classdesc Represents a graph.
  * @mixes pcui.IFocusable
  */
 class Graph extends Element {
     /**
      * Creates a new Graph.
-     * @param {Object} args The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
-     * @param {Boolean} [args.unsafe] If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
+     *
+     * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+     * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
      */
     constructor(args) {
         if (!args) args = {};
 
         super(document.createElement('div'), args);
-        var graph = new joint.dia.Graph;
+        var graph = new joint.dia.Graph();
 
         var paper = new joint.dia.Paper({
             el: this.dom,
@@ -268,7 +267,6 @@ class Graph extends Element {
         link4.addTo(graph);
 
 
-        
     }
 
 }

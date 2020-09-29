@@ -1,4 +1,3 @@
-
 export const localStorageGet = function (key) {
     var value = localStorage.getItem(key);
     if (value) {

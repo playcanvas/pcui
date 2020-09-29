@@ -1,13 +1,13 @@
 import './style.scss';
-import Element from '../Element'; 
-import Container from '../Container'; 
+import Element from '../Element';
+import Container from '../Container';
 
 const CLASS_ROOT = 'pcui-progress';
 const CLASS_INNER = CLASS_ROOT + '-inner';
 /**
- * @name pcui.Progress
+ * @name Progress
  * @classdesc Represents a bar that can highlight progress of an activty.
- * @property {Number} value Gets / sets the value of the progress bar (between 0 and 100). 
+ * @property {number} value Gets / sets the value of the progress bar (between 0 and 100).
  */
 class Progress extends Container {
     constructor(args) {

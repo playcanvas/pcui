@@ -1,5 +1,5 @@
 import './style.scss';
-import Element from '../Element'; 
+import Element from '../Element';
 import * as pcuiClass from '../../class';
 
 const RESIZE_HANDLE_SIZE = 4;
@@ -21,43 +21,43 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
 
 /**
  * @event
- * @name pcui.Container#append
+ * @name Container#append
  * @description Fired when a child Element gets added to the Container
- * @param {pcui.Element} element The element that was added
+ * @param {Element} element - The element that was added
  */
 
 /**
  * @event
- * @name pcui.Container#remove
+ * @name Container#remove
  * @description Fired when a child Element gets removed from the Container
- * @param {pcui.Element} element The element that was removed
+ * @param {Element} element - The element that was removed
  */
 
 /**
  * @event
- * @name pcui.Container#scroll
+ * @name Container#scroll
  * @description Fired when the container is scrolled.
- * @param {Event} evt The native scroll event.
+ * @param {Event} evt - The native scroll event.
  */
 
 /**
  * @event
- * @name pcui.Container#resize
+ * @name Container#resize
  * @description Fired when the container gets resized using the resize handle.
  */
 
 /**
- * @name pcui.Container
+ * @name Container
  * @classdesc A container is the basic building block for Elements that are grouped together.
  * A container can contain any other element including other containers.
- * @property {Boolean} flex Gets / sets whether the container supports the flex layout. Cannot coexist with grid.
- * @property {Boolean} grid Gets / sets whether the container supports the grid layout. Cannot coexist with flex.
- * @property {Number} resizeMin Gets / sets the minimum size the Container can take when resized in pixels.
- * @property {Number} resizeMax Gets / sets the maximum size the Container can take when resized in pixels.
- * @property {Boolean} scrollable Gets / sets whether the container should be scrollable. Defaults to false.
- * @property {String} resizable Gets / sets whether the Container is resizable and where the resize handle is located. Can
+ * @property {boolean} flex Gets / sets whether the container supports the flex layout. Cannot coexist with grid.
+ * @property {boolean} grid Gets / sets whether the container supports the grid layout. Cannot coexist with flex.
+ * @property {number} resizeMin Gets / sets the minimum size the Container can take when resized in pixels.
+ * @property {number} resizeMax Gets / sets the maximum size the Container can take when resized in pixels.
+ * @property {boolean} scrollable Gets / sets whether the container should be scrollable. Defaults to false.
+ * @property {string} resizable Gets / sets whether the Container is resizable and where the resize handle is located. Can
  * be one of 'top', 'bottom', 'right', 'left'. Set to null to disable resizing.
- * @extends pcui.Element
+ * @augments Element
  * @mixes pcui.IContainer
  * @mixes pcui.IFlex
  * @mixes pcui.IGrid
@@ -67,8 +67,9 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
 class Container extends Element {
     /**
      * Creates a new Container.
-     * @param {Object} args The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
-     * @param {HTMLElement} [args.dom] The DOM element to use for the container. If unspecified a new element will be created.
+     *
+     * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+     * @param {HTMLElement} [args.dom] - The DOM element to use for the container. If unspecified a new element will be created.
      */
     constructor(args) {
         if (!args) args = {};
@@ -125,9 +126,9 @@ class Container extends Element {
     }
 
     /**
-     * @name pcui.Container#append
+     * @name Container#append
      * @description Appends an element to the container.
-     * @param {pcui.Element} element The element to append.
+     * @param {Element} element - The element to append.
      * @fires 'append'
      */
     append(element) {
@@ -137,10 +138,10 @@ class Container extends Element {
     }
 
     /**
-     * @name pcui.Container#appendBefore
+     * @name Container#appendBefore
      * @description Appends an element to the container before the specified reference element.
-     * @param {pcui.Element} element The element to append.
-     * @param {pcui.Element} referenceElement The element before which the element will be appended.
+     * @param {Element} element - The element to append.
+     * @param {Element} referenceElement - The element before which the element will be appended.
      * @fires 'append'
      */
     appendBefore(element, referenceElement) {
@@ -154,10 +155,10 @@ class Container extends Element {
     }
 
     /**
-     * @name pcui.Container#appendAfter
+     * @name Container#appendAfter
      * @description Appends an element to the container just after the specified reference element.
-     * @param {pcui.Element} element The element to append.
-     * @param {pcui.Element} referenceElement The element after which the element will be appended.
+     * @param {Element} element - The element to append.
+     * @param {Element} referenceElement - The element after which the element will be appended.
      * @fires 'append'
      */
     appendAfter(element, referenceElement) {
@@ -175,9 +176,9 @@ class Container extends Element {
     }
 
     /**
-     * @name pcui.Container#prepend
+     * @name Container#prepend
      * @description Inserts an element in the beginning of the container.
-     * @param {pcui.Element} element The element to prepend.
+     * @param {Element} element - The element to prepend.
      * @fires 'append'
      */
     prepend(element) {
@@ -193,9 +194,9 @@ class Container extends Element {
     }
 
     /**
-     * @name pcui.Container#remove
+     * @name Container#remove
      * @description Removes the specified child element from the container.
-     * @param {pcui.Element} element The element to remove.
+     * @param {Element} element - The element to remove.
      * @fires 'remove'
      */
     remove(element) {
@@ -208,10 +209,10 @@ class Container extends Element {
     }
 
     /**
-     * @name pcui.Container#move
+     * @name Container#move
      * @description Moves the specified child at the specified index.
-     * @param {pcui.Element} element The element to move.
-     * @param {Number} index The index
+     * @param {Element} element - The element to move.
+     * @param {number} index - The index
      */
     move(element, index) {
         let idx = -1;
@@ -235,7 +236,7 @@ class Container extends Element {
     }
 
     /**
-     * @name pcui.Container#clear
+     * @name Container#clear
      * @description Clears all children from the container.
      * @fires 'remove' for each child element.
      */
@@ -418,8 +419,9 @@ class Container extends Element {
 
     /**
      * Resize the container
-     * @param {Number} x The amount of pixels to resize the width
-     * @param {Number} y The amount of pixels to resize the height
+     *
+     * @param {number} x - The amount of pixels to resize the width
+     * @param {number} y - The amount of pixels to resize the height
      */
     resize(x, y) {
         x = x || 0;
@@ -536,7 +538,7 @@ class Container extends Element {
      * and return it. Otherwise return the current node. Also add each child to the parent
      * under its keyed name.
      *
-     * @param {Object} node - The current element in the dom structure which must be recursively
+     * @param {object} node - The current element in the dom structure which must be recursively
      * traversed and appended to it's parent
      *
      * @returns {pcui.Element} - The recursively appended element node
@@ -565,7 +567,7 @@ class Container extends Element {
      * appends them to this container. These child elements are traversed recursively using
      * _buildDomNode.
      *
-     * @param {array} dom - An array of child pcui elements to append to this container.
+     * @param {Array} dom - An array of child pcui elements to append to this container.
      *
      * @example
      *

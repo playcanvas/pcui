@@ -1,28 +1,29 @@
 import './style.scss';
-import Element from '../Element'; 
-import TextInput from '../TextInput'; 
+import Element from '../Element';
+import TextInput from '../TextInput';
 import * as pcuiClass from '../../class';
 
 const CLASS_NUMERIC_INPUT = 'pcui-numeric-input';
-const CLASS_NUMERIC_INPUT_SLIDER_CONTROL = CLASS_NUMERIC_INPUT + '-slider-control'; 
-const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-active'; 
-const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-hidden'; 
+const CLASS_NUMERIC_INPUT_SLIDER_CONTROL = CLASS_NUMERIC_INPUT + '-slider-control';
+const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-active';
+const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-hidden';
 
 /**
- * @name pcui.NumericInput
+ * @name NumericInput
  * @classdesc The NumericInput represents an input element that holds numbers.
- * @property {Number} [min=0] Gets / sets the minimum value this field can take.
- * @property {Number} [max=1] Gets / sets the maximum value this field can take.
- * @property {Number} [precision=2] Gets / sets the maximum number of decimals a value can take.
- * @property {Number} [step=0.01] Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
- * @property {Boolean} [hideSlider=true] Hide the input mouse drag slider.
- * @extends pcui.TextInput
+ * @property {number} [min=0] Gets / sets the minimum value this field can take.
+ * @property {number} [max=1] Gets / sets the maximum value this field can take.
+ * @property {number} [precision=2] Gets / sets the maximum number of decimals a value can take.
+ * @property {number} [step=0.01] Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
+ * @property {boolean} [hideSlider=true] Hide the input mouse drag slider.
+ * @augments TextInput
  */
 class NumericInput extends TextInput {
     /**
      * Creates a new NumericInput.
-     * @param {Object} args The arguments. Extends the pcui.TextInput constructor arguments.
-     * @param {Boolean} [args.allowNull] Gets / sets whether the value can be null. If not then it will be 0 instead of null.
+     *
+     * @param {object} args - The arguments. Extends the pcui.TextInput constructor arguments.
+     * @param {boolean} [args.allowNull] - Gets / sets whether the value can be null. If not then it will be 0 instead of null.
      */
     constructor(args) {
         // make copy of args
@@ -102,7 +103,7 @@ class NumericInput extends TextInput {
         document.addEventListener('mozpointerlockchange', this._pointerLockChangeAlert.bind(this), false);
     }
 
-    _updatePosition (evt) {
+    _updatePosition(evt) {
         let movement = 0;
         if (evt.constructor === WheelEvent) {
             movement = evt.deltaY;
@@ -111,7 +112,7 @@ class NumericInput extends TextInput {
         }
         // move one step every 100 pixels
         movement = movement / 100 * this._step;
-        this.value = this.value + movement;
+        this.value += movement;
     }
 
     _onInputChange(evt) {
@@ -126,14 +127,14 @@ class NumericInput extends TextInput {
         // increase / decrease value with arrow keys
         if (evt.keyCode === 38 || evt.keyCode === 40) {
             const inc = (evt.shiftKey ? 10 : 1) * (evt.keyCode === 40 ? -1 : 1);
-            this.value = this.value + this.step * inc;
+            this.value += this.step * inc;
             return;
         }
 
         super._onInputKeyDown(evt);
     }
 
-    _isScrolling () {
+    _isScrolling() {
         if (!this._sliderControl) return false;
         return (document.pointerLockElement === this._sliderControl._dom ||
             document.mozPointerLockElement === this._sliderControl._dom);
@@ -160,7 +161,7 @@ class NumericInput extends TextInput {
                     value = Function('"use strict";return (' + value[0] + ')')();
                 }
             }
-        } catch(error) {
+        } catch (error) {
             value = null;
         }
 

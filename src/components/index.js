@@ -36,4 +36,4 @@ export {
     TextAreaInput,
     TextInput,
     VectorInput
-}
+};

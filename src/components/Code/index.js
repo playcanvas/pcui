@@ -1,20 +1,21 @@
 import './style.scss';
-import Container from '../Container'; 
+import Container from '../Container';
 import Label from '../Label';
 
 const CLASS_ROOT = 'pcui-code';
 const CLASS_INNER = CLASS_ROOT + '-inner';
 
 /**
- * @name pcui.Code
- * @extends pcui.Container
+ * @name Code
+ * @augments Container
  * @classdesc Represents a code block.
  */
 class Code extends Container {
     /**
      * Creates a new spinner.
-     * @param {Object} [args] The arguments
-     * @param {String} [args.text] The text to display in the code block;
+     *
+     * @param {object} [args] - The arguments
+     * @param {string} [args.text] - The text to display in the code block;
      */
     constructor(args) {
         if (!args) args = {};

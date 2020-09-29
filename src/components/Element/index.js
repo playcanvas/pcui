@@ -37,117 +37,118 @@ const ELEMENT_REGISTRY = {};
 
 /**
  * @event
- * @name pcui.Element#enable
+ * @name Element#enable
  * @description Fired when the Element gets enabled
  */
 
 /**
  * @event
- * @name pcui.Element#disable
+ * @name Element#disable
  * @description Fired when the Element gets disabled
  */
 
 /**
  * @event
- * @name pcui.Element#hide
+ * @name Element#hide
  * @description Fired when the Element gets hidden
  */
 
 /**
  * @event
- * @name pcui.Element#hideToRoot
+ * @name Element#hideToRoot
  * @description Fired when the Element or any of its parent get hidden
  */
 
 /**
  * @event
- * @name pcui.Element#show
+ * @name Element#show
  * @description Fired when the Element stops being hidden
  */
 
 /**
  * @event
- * @name pcui.Element#showToRoot
+ * @name Element#showToRoot
  * @description Fired when the Element and all of its parents become visible
  */
 
 /**
  * @event
- * @name pcui.Element#readOnly
- * @param {Boolean} readOnly Whether the Element is now read only
+ * @name Element#readOnly
+ * @param {boolean} readOnly - Whether the Element is now read only
  * @description Fired when the readOnly property of an Element changes
  */
 
 /**
  * @event
- * @name pcui.Element#parent
+ * @name Element#parent
  * @description Fired when the Element's parent gets set
- * @param {pcui.Element} parent The new parent
+ * @param {Element} parent - The new parent
  */
 
 /**
  * @event
- * @name pcui.Element#click
+ * @name Element#click
  * @description Fired when the mouse is clicked on the Element but only if the Element is enabled.
- * @param {Event} evt The native mouse event.
+ * @param {Event} evt - The native mouse event.
  */
 
 /**
  * @event
- * @name pcui.Element#hover
+ * @name Element#hover
  * @description Fired when the mouse starts hovering on the Element
- * @param {Event} evt The native mouse event.
+ * @param {Event} evt - The native mouse event.
  */
 
 /**
  * @event
- * @name pcui.Element#hoverend
+ * @name Element#hoverend
  * @description Fired when the mouse stops hovering on the Element
- * @param {Event} evt The native mouse event.
+ * @param {Event} evt - The native mouse event.
  */
 
 /**
  * @event
- * @name pcui.Element#destroy
+ * @name Element#destroy
  * @description Fired after the element has been destroyed.
- * @param {HTMLElement} dom The DOM element
- * @param {pcui.Element} element The element
+ * @param {HTMLElement} dom - The DOM element
+ * @param {Element} element - The element
  */
 
 /**
  * @event
- * @name pcui.Element#hoverend
+ * @name Element#hoverend
  * @description Fired when the mouse stops hovering on the Element
- * @param {Event} evt The native mouse event.
+ * @param {Event} evt - The native mouse event.
  */
 
 /**
- * @name pcui.Element
+ * @name Element
  * @classdesc The base class for all UI elements.
- * @extends Events
- * @property {Boolean} enabled Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
+ * @augments Events
+ * @property {boolean} enabled Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
  * @property {HTMLElement} dom Gets the root DOM node for this Element.
- * @property {pcui.Element} parent Gets the parent Element.
- * @property {Boolean} hidden Gets / sets whether the Element is hidden.
- * @property {Boolean} hiddenToRoot Gets whether the Element is hidden all the way up to the root. If the Element itself or any of its parents are hidden then this is true.
- * @property {Boolean} readOnly Gets / sets whether the Element is read only.
- * @property {Boolean} ignoreParent Gets / sets whether the Element will ignore parent events & variable states.
- * @property {Number} width Gets / sets the width of the Element in pixels. Can also be an empty string to remove it.
- * @property {Number} height Gets / sets the height of the Element in pixels. Can also be an empty string to remove it.
- * @property {Number} tabIndex Gets / sets the tabIndex of the Element.
- * @property {Boolean} error Gets / sets whether the Element is in an error state.
- * @property {pcui.BindingBase} binding Gets / sets the Binding object for the element.
+ * @property {Element} parent Gets the parent Element.
+ * @property {boolean} hidden Gets / sets whether the Element is hidden.
+ * @property {boolean} hiddenToRoot Gets whether the Element is hidden all the way up to the root. If the Element itself or any of its parents are hidden then this is true.
+ * @property {boolean} readOnly Gets / sets whether the Element is read only.
+ * @property {boolean} ignoreParent Gets / sets whether the Element will ignore parent events & variable states.
+ * @property {number} width Gets / sets the width of the Element in pixels. Can also be an empty string to remove it.
+ * @property {number} height Gets / sets the height of the Element in pixels. Can also be an empty string to remove it.
+ * @property {number} tabIndex Gets / sets the tabIndex of the Element.
+ * @property {boolean} error Gets / sets whether the Element is in an error state.
+ * @property {BindingBase} binding Gets / sets the Binding object for the element.
  * @property {CSSStyleDeclaration} style Shortcut to pcui.Element.dom.style.
  * @property {DOMTokenList} class Shortcut to pcui.Element.dom.classList.
  */
 class Element extends Events {
     /**
      * Creates a new Element.
-     * @param {HTMLElement} dom The DOM element that this pcui.Element wraps.
-     * @param {Object} args The arguments. All settable properties can also be set through the constructor.
-     * @param {String} [args.id] The desired id for the Element HTML node.
-     * @param {String|String[]} [args.class] The CSS class or classes we want to add to the element.
-     * @param {Boolean} [args.isRoot] If true then this is the root element. Set this to true for the topmost Element in your page.
+     *
+     * @param {HTMLElement} dom - The DOM element that this pcui.Element wraps.
+     * @param {object} args - The arguments. All settable properties can also be set through the constructor.
+     * @param {string} [args.id] - The desired id for the Element HTML node.
+     * @param {string|string[]} [args.class] - The CSS class or classes we want to add to the element.
+     * @param {boolean} [args.isRoot] - If true then this is the root element. Set this to true for the topmost Element in your page.
      */
     constructor(dom, args) {
         super();
@@ -224,10 +225,10 @@ class Element extends Events {
     }
 
     /**
-     * @name pcui.Element#link
+     * @name Element#link
      * @description Links the specified observers and paths to the Element's data binding.
-     * @param {Observer|Observer[]} observers An array of observers or a single observer.
-     * @param {String|String[]} paths A path for the observer(s) or an array of paths that maps to each separate observer.
+     * @param {Observer|Observer[]} observers - An array of observers or a single observer.
+     * @param {string|string[]} paths - A path for the observer(s) or an array of paths that maps to each separate observer.
      */
     link(observers, paths) {
         if (this._binding) {
@@ -237,7 +238,7 @@ class Element extends Events {
 
 
     /**
-     * @name pcui.Element#unlink
+     * @name Element#unlink
      * @description Unlinks the Element from its observers
      */
     unlink() {
@@ -247,7 +248,7 @@ class Element extends Events {
     }
 
     /**
-     * @name pcui.Element#flash
+     * @name Element#flash
      * @description Triggers a flash animation on the Element.
      */
     flash() {
@@ -351,9 +352,9 @@ class Element extends Events {
     }
 
     /**
-     * @name pcui.Element#classAdd
+     * @name Element#classAdd
      * @description Adds the specified class to the DOM element but checks if the classList contains it first.
-     * @param {String} cls The class to add
+     * @param {string} cls - The class to add
      */
     classAdd(cls) {
         var classList = this._dom.classList;
@@ -363,9 +364,9 @@ class Element extends Events {
     }
 
     /**
-     * @name pcui.Element#classRemove
+     * @name Element#classRemove
      * @description Removes the specified class from the DOM element but checks if the classList contains it first.
-     * @param {String} cls The class to remove
+     * @param {string} cls - The class to remove
      */
     classRemove(cls) {
         var classList = this._dom.classList;
@@ -375,7 +376,7 @@ class Element extends Events {
     }
 
     /**
-     * @name pcui.Element#destroy
+     * @name Element#destroy
      * @description Destroys the Element and its events.
      */
     destroy() {
@@ -446,10 +447,9 @@ class Element extends Events {
 
     /**
      * @static
-     * Registers a new Element type
-     * @param {String} type The type we want to reference this Element by
-     * @param {Object} cls The actual class of the Element
-     * @param {Object} [defaultArguments] Default arguments when creating this type
+     * @param {string} type - The type we want to reference this Element by
+     * @param {object} cls - The actual class of the Element
+     * @param {object} [defaultArguments] - Default arguments when creating this type
      */
     static register(type, cls, defaultArguments) {
         ELEMENT_REGISTRY[type] = { cls, defaultArguments };
@@ -457,8 +457,7 @@ class Element extends Events {
 
     /**
      * @static
-     * Unregisters the specified Element type
-     * @param {String} type The type we want to unregister
+     * @param {string} type - The type we want to unregister
      */
     static unregister(type) {
         delete ELEMENT_REGISTRY[type];
@@ -466,9 +465,8 @@ class Element extends Events {
 
     /**
      * @static
-     * Creates a new Element by type
-     * @param {String} type The type of the Element (registered by pcui.Element#register)
-     * @param {Object} args Arguments for the Element
+     * @param {string} type - The type of the Element (registered by pcui.Element#register)
+     * @param {object} args - Arguments for the Element
      * @returns {pcui.Element} A new pcui.Element of the desired type
      */
     static create(type, args) {

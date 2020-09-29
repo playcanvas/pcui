@@ -8,16 +8,17 @@ const CLASS_OVERLAY_TRANSPARENT = CLASS_OVERLAY + '-transparent';
 const CLASS_OVERLAY_CONTENT = CLASS_OVERLAY + '-content';
 
 /**
- * @name pcui.Overlay
+ * @name Overlay
  * @classdesc An overlay element.
- * @property {Boolean} clickable Whether the overlay can be hidden by clicking on it.
- * @property {Boolean} transparent Whether the overlay is transparent.
- * @extends pcui.Container
+ * @property {boolean} clickable Whether the overlay can be hidden by clicking on it.
+ * @property {boolean} transparent Whether the overlay is transparent.
+ * @augments Container
  */
 class Overlay extends Container {
     /**
      * Creates a new pcui.Overlay.
-     * @param {Object} args The arguments.
+     *
+     * @param {object} args - The arguments.
      */
     constructor(args) {
         if (!args) args = {};
@@ -57,10 +58,10 @@ class Overlay extends Container {
     }
 
     /**
-     * @name pcui.Overlay#position
+     * @name Overlay#position
      * @description Position the overlay at specific x, y coordinates.
-     * @param {Number} x The x coordinate
-     * @param {Number} y The y coordinate
+     * @param {number} x - The x coordinate
+     * @param {number} y - The y coordinate
      */
     position(x, y) {
         const area = this._domClickableOverlay.getBoundingClientRect();
