@@ -19,19 +19,6 @@ const SIMPLE_CSS_PROPERTIES = [
     'justifySelf'
 ];
 
-// utility function to expose a CSS property
-// via an Element.prototype property
-function exposeCssProperty(name) {
-    Object.defineProperty(Element.prototype, name, {
-        get: function () {
-            return this.style[name];
-        },
-        set: function (value) {
-            this.style[name] = value;
-        }
-    });
-}
-
 // Stores Element types by name and default arguments
 const ELEMENT_REGISTRY = {};
 
@@ -723,6 +710,19 @@ class Element extends Events {
     set innerElement(value) {
         this.domContent = value;
     }
+}
+
+// utility function to expose a CSS property
+// via an Element.prototype property
+function exposeCssProperty(name) {
+    Object.defineProperty(Element.prototype, name, {
+        get: function () {
+            return this.style[name];
+        },
+        set: function (value) {
+            this.style[name] = value;
+        }
+    });
 }
 
 // expose rest of CSS properties

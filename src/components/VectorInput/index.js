@@ -187,7 +187,9 @@ class VectorInput extends Element {
         // create an array for each dimension (e.g. one array for x one for y one for z)
         values = this._inputs.map((_, i) => values.map(arr => arr[i]));
 
-        this._inputs.forEach((input, i) => input.values = values[i]);
+        this._inputs.forEach((input, i) => {
+            input.values = values[i];
+        });
     }
 
     // override binding setter to set a binding clone to

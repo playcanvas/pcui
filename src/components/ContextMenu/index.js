@@ -1,6 +1,5 @@
 import './style.scss';
 import Label from '../Label';
-import Element from '../Element';
 import Container from '../Container';
 
 const CLASS_ContextMenu = 'pcui-contextmenu';
