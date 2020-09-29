@@ -135,7 +135,7 @@ class TreeView extends Container {
      * Finds the next tree item that is not currently hidden
      *
      * @param {TreeViewItem} currentItem - The current tree item
-     * @returns {pcui.TreeViewItem} The next tree item.
+     * @returns {TreeViewItem} The next tree item.
      */
     _findNextVisibleTreeItem(currentItem) {
         if (currentItem.numChildren > 0 && currentItem.open) {
@@ -165,7 +165,7 @@ class TreeView extends Container {
      * Finds the last visible child tree item of the specified tree item.
      *
      * @param {TreeViewItem} currentItem - The current item.
-     * @returns {pcui.TreeViewItem} The last child item.
+     * @returns {TreeViewItem} The last child item.
      */
     _findLastVisibleChildTreeItem(currentItem) {
         if (!currentItem.numChildren || !currentItem.open) return null;
@@ -182,7 +182,7 @@ class TreeView extends Container {
      * Finds the previous visible tree item of the specified tree item.
      *
      * @param {TreeViewItem} currentItem - The current tree item.
-     * @returns {pcui.TreeViewItem} The previous item.
+     * @returns {TreeViewItem} The previous item.
      */
     _findPreviousVisibleTreeItem(currentItem) {
         const sibling = currentItem.previousSibling;
@@ -205,7 +205,7 @@ class TreeView extends Container {
      *
      * @param {TreeViewItem} startChild - The start tree item.
      * @param {TreeViewItem} endChild - The end tree item.
-     * @returns {pcui.TreeViewItem[]} The tree items.
+     * @returns {TreeViewItem[]} The tree items.
      */
     _getChildrenRange(startChild, endChild) {
         const rectStart = startChild.dom.getBoundingClientRect();

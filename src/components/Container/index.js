@@ -541,7 +541,7 @@ class Container extends Element {
      * @param {object} node - The current element in the dom structure which must be recursively
      * traversed and appended to it's parent
      *
-     * @returns {pcui.Element} - The recursively appended element node
+     * @returns {Element} - The recursively appended element node
      *
      */
     _buildDomNode(node) {

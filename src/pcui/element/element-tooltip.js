@@ -17,7 +17,6 @@ const TOOLTIP_DELAY_HIDE = 300;
  * @property {string} title The tooltip title
  * @property {string} subTitle The tooltip sub title
  * @property {string} description The tooltip description
- * @property {string} title The tooltip title
  * @property {string} align The tooltip alignment. Can be one of 'top', 'bottom', 'right', 'left'. E.g. if 'right' then the target element will appear on the right side of the tooltip.
  */
 class Tooltip extends Container {

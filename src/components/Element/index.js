@@ -467,7 +467,7 @@ class Element extends Events {
      * @static
      * @param {string} type - The type of the Element (registered by pcui.Element#register)
      * @param {object} args - Arguments for the Element
-     * @returns {pcui.Element} A new pcui.Element of the desired type
+     * @returns {Element} A new pcui.Element of the desired type
      */
     static create(type, args) {
         const entry = ELEMENT_REGISTRY[type];
