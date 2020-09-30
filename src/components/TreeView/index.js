@@ -16,64 +16,65 @@ const DRAG_AREA_AFTER = 'after';
 
 /**
  * @event
- * @name pcui.TreeView#dragstart
- * @param {pcui.TreeViewItem[]} The dragged items
+ * @name TreeView#dragstart
+ * @param {TreeViewItem[]} items - The dragged items
  * @description Fired when we start dragging a TreeViewItem
  */
 
 /**
  * @event
- * @name pcui.TreeView#dragend
+ * @name TreeView#dragend
  * @description Fired when we stop dragging a TreeViewItem
  */
 
 /**
  * @event
- * @name pcui.TreeView#reparent
+ * @name TreeView#reparent
  * @description Fired when we reparent TreeViewItems
- * @param {Object[]} An array of items we reparented. Each array element contains an object like so: {item, newParent, oldParent}.
+ * @param {object[]} items - An array of items we reparented. Each array element contains an object like so: {item, newParent, oldParent}.
  */
 
 /**
  * @event
- * @name pcui.TreeView#select
+ * @name TreeView#select
  * @description Fired when we select a TreeViewItem
- * @param {pcui.TreeViewItem} The item
+ * @param {TreeViewItem} item - The item
  */
 
 /**
  * @event
- * @name pcui.TreeView#deselect
+ * @name TreeView#deselect
  * @description Fired when we deselect a TreeViewItem
- * @param {pcui.TreeViewItem} The item
+ * @param {TreeViewItem} item - The item
  */
 
 /**
  * @event
- * @name pcui.TreeView#rename
+ * @name TreeView#rename
  * @description Fired when we rename a TreeViewItem
- * @param {pcui.TreeViewItem} The item
- * @param {String} The new name
+ * @param {TreeViewItem} item - The item
+ * @param {string} name - The new name
  */
 
 /**
- * @name pcui.TreeView
+ * @name TreeView
  * @classdesc A container that can show a treeview like a hierarchy. The treeview contains
  * pcui.TreeViewItems.
- * @extends pcui.Container
- * @property {Boolean} allowDrag Whether dragging a TreeViewItem is allowed.
- * @property {Boolean} allowReordering Whether reordering TreeViewItems is allowed.
- * @property {Boolean} allowRenaming Whether renaming TreeViewItems is allowed by double clicking on them.
- * @property {Boolean} isDragging Whether we are currently dragging a TreeViewItem.
- * @property {String} filter Gets / sets a filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
- * @property {pcui.TreeViewItem[]} selected Gets the selected TreeViewItems.
+ * @augments Container
+ * @property {boolean} allowDrag Whether dragging a TreeViewItem is allowed.
+ * @property {boolean} allowReordering Whether reordering TreeViewItems is allowed.
+ * @property {boolean} allowRenaming Whether renaming TreeViewItems is allowed by double clicking on them.
+ * @property {boolean} isDragging Whether we are currently dragging a TreeViewItem.
+ * @property {string} filter Gets / sets a filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
+ * @property {TreeViewItem[]} selected Gets the selected TreeViewItems.
  */
 class TreeView extends Container {
     /**
      * Creates a new TreeView.
-     * @param {Object} [args] The arguments. All properties can be set through the arguments as well.
-     * @param {Function} [args.onContextMenu] A function to be called when we right click on a TreeViewItem.
-     * @param {Function} [args.onReparent] A function to be called when we try to reparent tree items. If a function is provided then the
+     *
+     * @param {object} [args] - The arguments. All properties can be set through the arguments as well.
+     * @param {Function} [args.onContextMenu] - A function to be called when we right click on a TreeViewItem.
+     * @param {Function} [args.onReparent] - A function to be called when we try to reparent tree items. If a function is provided then the
      * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
      */
     constructor(args) {
@@ -132,8 +133,9 @@ class TreeView extends Container {
 
     /**
      * Finds the next tree item that is not currently hidden
-     * @param {pcui.TreeViewItem} currentItem The current tree item
-     * @returns {pcui.TreeViewItem} The next tree item.
+     *
+     * @param {TreeViewItem} currentItem - The current tree item
+     * @returns {TreeViewItem} The next tree item.
      */
     _findNextVisibleTreeItem(currentItem) {
         if (currentItem.numChildren > 0 && currentItem.open) {
@@ -161,8 +163,9 @@ class TreeView extends Container {
 
     /**
      * Finds the last visible child tree item of the specified tree item.
-     * @param {pcui.TreeViewItem} currentItem The current item.
-     * @returns {pcui.TreeViewItem} The last child item.
+     *
+     * @param {TreeViewItem} currentItem - The current item.
+     * @returns {TreeViewItem} The last child item.
      */
     _findLastVisibleChildTreeItem(currentItem) {
         if (!currentItem.numChildren || !currentItem.open) return null;
@@ -177,8 +180,9 @@ class TreeView extends Container {
 
     /**
      * Finds the previous visible tree item of the specified tree item.
-     * @param {pcui.TreeViewItem} currentItem The current tree item.
-     * @returns {pcui.TreeViewItem} The previous item.
+     *
+     * @param {TreeViewItem} currentItem - The current tree item.
+     * @returns {TreeViewItem} The previous item.
      */
     _findPreviousVisibleTreeItem(currentItem) {
         const sibling = currentItem.previousSibling;
@@ -198,9 +202,10 @@ class TreeView extends Container {
 
     /**
      * Gets the visible tree items between the specified start and end tree items.
-     * @param {pcui.TreeViewItem} startChild The start tree item.
-     * @param {pcui.TreeViewItem} endChild The end tree item.
-     * @returns {pcui.TreeViewItem[]} The tree items.
+     *
+     * @param {TreeViewItem} startChild - The start tree item.
+     * @param {TreeViewItem} endChild - The end tree item.
+     * @returns {TreeViewItem[]} The tree items.
      */
     _getChildrenRange(startChild, endChild) {
         const rectStart = startChild.dom.getBoundingClientRect();
@@ -274,9 +279,7 @@ class TreeView extends Container {
         });
     }
 
-    /**
-     * Called when a key is down on a child TreeViewItem.
-     */
+    // Called when a key is down on a child TreeViewItem.
     _onChildKeyDown(evt, element) {
         if ([9, 37, 38, 39, 40].indexOf(evt.keyCode) === -1) return;
 
@@ -322,9 +325,7 @@ class TreeView extends Container {
         }
     }
 
-    /**
-     * Called when we click on a child TreeViewItem
-     */
+    // Called when we click on a child TreeViewItem
     _onChildClick(evt, element) {
         if (evt.button !== 0) return;
         if (!element.allowSelect) return;
@@ -357,7 +358,8 @@ class TreeView extends Container {
 
     /**
      * Call specified function on every child TreeViewItem by traversing the hierarchy depth first.
-     * @param {Function} fn The function to call. The function takes the TreeViewItem as an argument.
+     *
+     * @param {Function} fn - The function to call. The function takes the TreeViewItem as an argument.
      */
     _traverseDepthFirst(fn) {
         function traverse(item) {
@@ -391,9 +393,7 @@ class TreeView extends Container {
         });
     }
 
-    /**
-     * Called when we start dragging a TreeViewItem.
-     */
+    // Called when we start dragging a TreeViewItem.
     _onChildDragStart(evt, element) {
         if (!this.allowDrag || this._dragging) return;
 
@@ -453,9 +453,7 @@ class TreeView extends Container {
         }
     }
 
-    /**
-     * Called when we stop dragging a TreeViewItem.
-     */
+    // Called when we stop dragging a TreeViewItem.
     _onChildDragEnd(evt, element) {
         if (!this.allowDrag || !this._dragging) return;
 
@@ -532,9 +530,7 @@ class TreeView extends Container {
         this.emit('dragend');
     }
 
-    /**
-     * Called when we drag over a TreeViewItem.
-     */
+    // Called when we drag over a TreeViewItem.
     _onChildDragOver(evt, element) {
         if (!this._allowDrag || !this._dragging) return;
 
@@ -548,10 +544,7 @@ class TreeView extends Container {
         this._onDragMove(evt);
     }
 
-
-    /**
-     * Called when the mouse cursor leaves the tree view.
-     */
+    // Called when the mouse cursor leaves the tree view.
     _onMouseLeave(evt) {
         if (!this._allowDrag || !this._dragging) return;
 
@@ -559,9 +552,7 @@ class TreeView extends Container {
         this._updateDragHandle();
     }
 
-    /**
-     * Called when the mouse moves while dragging
-     */
+    // Called when the mouse moves while dragging
     _onMouseMove(evt) {
         if (!this._dragging) return;
 
@@ -575,9 +566,7 @@ class TreeView extends Container {
         }
     }
 
-    /**
-     * Scroll treeview if we are dragging towards the edges
-     */
+    // Scroll treeview if we are dragging towards the edges
     _scrollWhileDragging() {
         if (!this._dragging) return;
         if (this._dragScroll === 0) return;
@@ -587,9 +576,7 @@ class TreeView extends Container {
         this._updateDragHandle();
     }
 
-    /**
-     * Called while we drag the drag handle
-     */
+    // Called while we drag the drag handle
     _onDragMove(evt) {
         evt.preventDefault();
         evt.stopPropagation();
@@ -634,7 +621,7 @@ class TreeView extends Container {
             } else {
                 let parent = false;
                 if (this._allowReordering && this._dragOverItem.open) {
-                    for(var i = 0; i < this._dragItems.length; i++) {
+                    for (var i = 0; i < this._dragItems.length; i++) {
                         if (this._dragItems[i].parent === this._dragOverItem) {
                             parent = true;
                             this._dragArea = DRAG_AREA_BEFORE;
@@ -652,9 +639,7 @@ class TreeView extends Container {
         }
     }
 
-    /**
-     * Updates the drag handle position and size
-     */
+    // Updates the drag handle position and size
     _updateDragHandle(dragOverItem, force) {
         if (!force && (!this._allowDrag || !this._dragging)) return;
 
@@ -688,7 +673,8 @@ class TreeView extends Container {
 
     /**
      * Opens all the parents of the specified item
-     * @param {pcui.TreeViewItem} endItem The end tree view item
+     *
+     * @param {TreeViewItem} endItem - The end tree view item
      */
     _openHierarchy(endItem) {
         endItem.parentsOpen = true;
@@ -696,7 +682,8 @@ class TreeView extends Container {
 
     /**
      * Selects a tree view item
-     * @param {pcui.TreeViewItem} item The tree view item
+     *
+     * @param {TreeViewItem} item - The tree view item
      */
     _selectSingleItem(item) {
         let i = this._selectedItems.length;
@@ -717,7 +704,8 @@ class TreeView extends Container {
 
     /**
      * Called when a child tree view item is selected.
-     * @param {pcui.TreeViewItem} item The tree view item.
+     *
+     * @param {TreeViewItem} item - The tree view item.
      */
     _onChildSelected(item) {
         this._selectedItems.push(item);
@@ -727,7 +715,9 @@ class TreeView extends Container {
 
     /**
      * Called when a child tree view item is deselected.
-     * @param {pcui.TreeViewItem} item The tree view item.
+     *
+     * @param {TreeViewItem} item - The tree view item.
+     * @param {Element} element - The element.
      */
     _onChildDeselected(element) {
         const index = this._selectedItems.indexOf(element);
@@ -739,7 +729,9 @@ class TreeView extends Container {
 
     /**
      * Called when a child tree view item is renamed.
-     * @param {pcui.TreeViewItem} item The tree view item.
+     *
+     * @param {TreeViewItem} item - The tree view item.
+     * @param {string} newName - The new name.
      */
     _onChildRename(item, newName) {
         if (this._filter) {
@@ -769,7 +761,8 @@ class TreeView extends Container {
 
     /**
      * Searches treeview
-     * @param {String} filter The search filter
+     *
+     * @param {string} filter - The search filter
      */
     _applyFilter(filter) {
         this._clearFilter();
@@ -807,7 +800,7 @@ class TreeView extends Container {
     }
 
     /**
-     * @name pcui.TreeView#deselect
+     * @name TreeView#deselect
      * @description Deselects all selected tree view items.
      */
     deselect() {
@@ -820,7 +813,7 @@ class TreeView extends Container {
     }
 
     /**
-     * @name pcui.TreeView#clearTreeItems
+     * @name TreeView#clearTreeItems
      * @description Removes all child tree view items
      */
     clearTreeItems() {

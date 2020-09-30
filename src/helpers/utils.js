@@ -7,23 +7,24 @@ utils.deepCopy = function deepCopy(data) {
         return data;
 
     if (data instanceof Array) {
-        var arr = [ ];
-        for(var i = 0; i < data.length; i++) {
+        var arr = [];
+        for (var i = 0; i < data.length; i++) {
             arr[i] = deepCopy(data[i]);
         }
         return arr;
-    } else {
-        var obj = { };
-        for(var key in data) {
-            if (data.hasOwnProperty(key))
-                obj[key] = deepCopy(data[key]);
-        }
-        return obj;
     }
+
+    var obj = { };
+    for (var key in data) {
+        if (data.hasOwnProperty(key))
+            obj[key] = deepCopy(data[key]);
+    }
+    return obj;
+
 };
 
-utils.isMobile = function() {
-  return /Android/i.test(navigator.userAgent) ||
+utils.isMobile = function () {
+    return /Android/i.test(navigator.userAgent) ||
       /iPhone|iPad|iPod/i.test(navigator.userAgent);
 };
 
@@ -32,8 +33,8 @@ utils.isMobile = function() {
  * @description Adds properties and methods from the sourceClass
  * to the targetClass but only if properties with the same name do not
  * already exist in the targetClass.
- * @param {Object} targetClass The target class.
- * @param {Object} sourceClass The source class.
+ * @param {object} targetClass - The target class.
+ * @param {object} sourceClass - The source class.
  * @example utils.implements(pcui.Container, pcui.IContainer);
  */
 utils.implements = function (targetClass, sourceClass) {
@@ -51,10 +52,11 @@ utils.implements = function (targetClass, sourceClass) {
  * @name utils.proxy
  * @description Creates new properties on the target class that get / set
  * the properties of the member.
- * @param {Object} targetClass The target class
- * @param {String} memberName The name of the member of the target class that properties will be proxied to.
- * @param {String[]} properties A list of properties to be proxied.
- * @example utils.proxy(pcui.SliderInput, '_numericInput', ['max', 'min', 'placeholder'])
+ * @param {object} targetClass - The target class
+ * @param {string} memberName - The name of the member of the target class that properties will be proxied to.
+ * @param {string[]} properties - A list of properties to be proxied.
+ * @example
+ * utils.proxy(pcui.SliderInput, '_numericInput', ['max', 'min', 'placeholder']);
  */
 utils.proxy = function (targetClass, memberName, properties) {
     properties.forEach(property => {
@@ -75,11 +77,11 @@ if (! String.prototype.startsWith) {
         enumerable: false,
         configurable: false,
         writable: false,
-        value: function(str) {
+        value: function (str) {
             var that = this;
             var ceil = str.length;
-            for(var i = 0; i < ceil; i++)
-                if(that[i] !== str[i]) return false;
+            for (var i = 0; i < ceil; i++)
+                if (that[i] !== str[i]) return false;
             return true;
         }
     });
@@ -91,9 +93,9 @@ if (! String.prototype.endsWith) {
         enumerable: false,
         configurable: false,
         writable: false,
-        value: function(str) {
+        value: function (str) {
             var that = this;
-            for(var i = 0, ceil = str.length; i < ceil; i++)
+            for (var i = 0, ceil = str.length; i < ceil; i++)
                 if (that[i + that.length - ceil] !== str[i])
                     return false;
             return true;
@@ -118,10 +120,8 @@ if (! String.prototype.appendQuery) {
 
 // element.classList.add polyfill
 (function () {
-    /*global DOMTokenList */
     var dummy  = document.createElement('div'),
         dtp    = DOMTokenList.prototype,
-        toggle = dtp.toggle,
         add    = dtp.add,
         rem    = dtp.remove;
 
@@ -139,7 +139,7 @@ if (! String.prototype.appendQuery) {
     }
 })();
 
-export const bytesToHuman = function(bytes) {
+export const bytesToHuman = function (bytes) {
     if (isNaN(bytes) || bytes === 0) return '0 B';
     var k = 1000;
     var sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
@@ -154,7 +154,7 @@ export const bytesToHuman = function(bytes) {
 // return the new path
 // oldExtension and newExtension should have leading period
 export const swapExtension = function (path, oldExtension, newExtension) {
-    while(path.indexOf(oldExtension) >= 0) {
+    while (path.indexOf(oldExtension) >= 0) {
         path = path.replace(oldExtension, newExtension);
     }
     return path;

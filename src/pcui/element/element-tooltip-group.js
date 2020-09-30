@@ -1,37 +1,30 @@
-// Object.assign(pcui, (function () {
-//     'use strict';
+import Tooltip from './element-tooltip';
 
-    import Tooltip from './element-tooltip';
+const CLASS_ROOT = 'pcui-tooltip-group';
 
-    const CLASS_ROOT = 'pcui-tooltip-group';
-
+/**
+ * @name TooltipGroup
+ * @classdesc A tooltip group contains other tooltips (or tooltip groups). By default
+ * the tooltip group aligns each child tooltip horizontally.
+ * @augments Tooltip
+ */
+class TooltipGroup extends Tooltip {
     /**
-     * @name pcui.TooltipGroup
-     * @classdesc A tooltip group contains other tooltips (or tooltip groups). By default
-     * the tooltip group aligns each child tooltip horizontally.
-     * @extends pcui.Tooltip
+     * Creates new TooltipGroup.
+     *
+     * @param {object} args - The arguments.
      */
-    class TooltipGroup extends Tooltip {
-        /**
-         * Creates new TooltipGroup.
-         * @param {Object} args The arguments.
-         */
-        constructor(args) {
-            args = Object.assign({}, args);
+    constructor(args) {
+        args = Object.assign({}, args);
 
-            delete args.title;
-            delete args.subTitle;
-            delete args.description;
+        delete args.title;
+        delete args.subTitle;
+        delete args.description;
 
-            super(args);
+        super(args);
 
-            this.class.add(CLASS_ROOT);
-        }
+        this.class.add(CLASS_ROOT);
     }
+}
 
-    export default TooltipGroup;
-
-//     return {
-//         TooltipGroup: TooltipGroup
-//     };
-// })());
+export default TooltipGroup;

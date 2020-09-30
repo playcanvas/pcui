@@ -3,15 +3,16 @@ import BindingElementToObservers from './binding-element-observers';
 import BindingObserversToElement from './binding-observers-element';
 
 /**
- * @name pcui.BindingTwoWay
+ * @name BindingTwoWay
  * @classdesc Provides two way data binding between Observers and IBindable elements. This means
  * that when the value of the Observers changes the IBindable will be updated and vice versa.
- * @extends pcui.BindingBase
+ * @augments BindingBase
  */
 class BindingTwoWay extends BindingBase {
     /**
      * Creates a new BindingTwoWay instance.
-     * @param {Object} args The arguments.
+     *
+     * @param {object} args - The arguments.
      */
     constructor(args) {
         if (!args) args = {};

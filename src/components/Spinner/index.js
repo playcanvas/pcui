@@ -1,5 +1,5 @@
 import './style.scss';
-import Element from '../Element'; 
+import Element from '../Element';
 
 const CLASS_ROOT = 'pcui-spinner';
 
@@ -14,15 +14,16 @@ function createSmallThick(size, dom) {
     return spinner;
 }
 /**
- * @name pcui.Spinner
- * @extends pcui.Element
+ * @name Spinner
+ * @augments Element
  * @classdesc Represents a spinning icon
  */
 class Spinner extends Element {
     /**
      * Creates a new spinner.
-     * @param {Object} [args] The arguments
-     * @param {Number} [args.size=12] The pixel size of the spinner 
+     *
+     * @param {object} [args] - The arguments
+     * @param {number} [args.size=12] - The pixel size of the spinner
      */
     constructor(args) {
         args = Object.assign({

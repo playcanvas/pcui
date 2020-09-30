@@ -5,7 +5,7 @@ function ObserverList(options) {
     Events.call(this);
     options = options || { };
 
-    this.data = [ ];
+    this.data = [];
     this._indexed = { };
     this.sorted = options.sorted || null;
     this.index = options.index || null;
@@ -15,22 +15,22 @@ ObserverList.prototype = Object.create(Events.prototype);
 
 
 Object.defineProperty(ObserverList.prototype, 'length', {
-    get: function() {
+    get: function () {
         return this.data.length;
     }
 });
 
 
-ObserverList.prototype.get = function(index) {
+ObserverList.prototype.get = function (index) {
     if (this.index) {
         return this._indexed[index] || null;
-    } else {
-        return this.data[index] || null;
     }
+
+    return this.data[index] || null;
 };
 
 
-ObserverList.prototype.set = function(index, value) {
+ObserverList.prototype.set = function (index, value) {
     if (this.index) {
         this._indexed[index] = value;
     } else {
@@ -39,18 +39,18 @@ ObserverList.prototype.set = function(index, value) {
 };
 
 
-ObserverList.prototype.indexOf = function(item) {
+ObserverList.prototype.indexOf = function (item) {
     if (this.index) {
-        var index = (item instanceof Observer && item.get(this.index)) || item[this.index]
+        var index = (item instanceof Observer && item.get(this.index)) || item[this.index];
         return (this._indexed[index] && index) || null;
-    } else {
-        var ind = this.data.indexOf(item);
-        return ind !== -1 ? ind : null;
     }
+
+    var ind = this.data.indexOf(item);
+    return ind !== -1 ? ind : null;
 };
 
 
-ObserverList.prototype.position = function(b, fn) {
+ObserverList.prototype.position = function (b, fn) {
     var l = this.data;
     var min = 0;
     var max = l.length - 1;
@@ -77,7 +77,7 @@ ObserverList.prototype.position = function(b, fn) {
 };
 
 
-ObserverList.prototype.positionNextClosest = function(b, fn) {
+ObserverList.prototype.positionNextClosest = function (b, fn) {
     var l = this.data;
     var min = 0;
     var max = l.length - 1;
@@ -116,17 +116,17 @@ ObserverList.prototype.positionNextClosest = function(b, fn) {
 };
 
 
-ObserverList.prototype.has = function(item) {
+ObserverList.prototype.has = function (item) {
     if (this.index) {
-        var index = (item instanceof Observer && item.get(this.index)) || item[this.index]
+        var index = (item instanceof Observer && item.get(this.index)) || item[this.index];
         return !! this._indexed[index];
-    } else {
-        return this.data.indexOf(item) !== -1;
     }
+
+    return this.data.indexOf(item) !== -1;
 };
 
 
-ObserverList.prototype.add = function(item) {
+ObserverList.prototype.add = function (item) {
     if (this.has(item))
         return null;
 
@@ -156,7 +156,7 @@ ObserverList.prototype.add = function(item) {
 };
 
 
-ObserverList.prototype.move = function(item, pos) {
+ObserverList.prototype.move = function (item, pos) {
     var ind = this.data.indexOf(item);
     this.data.splice(ind, 1);
     if (pos === -1) {
@@ -169,7 +169,7 @@ ObserverList.prototype.move = function(item, pos) {
 };
 
 
-ObserverList.prototype.remove = function(item) {
+ObserverList.prototype.remove = function (item) {
     if (! this.has(item))
         return;
 
@@ -187,9 +187,11 @@ ObserverList.prototype.remove = function(item) {
 };
 
 
-ObserverList.prototype.removeByKey = function(index) {
+ObserverList.prototype.removeByKey = function (index) {
+    var item;
+
     if (this.index) {
-        var item = this._indexed[index];
+        item = this._indexed[index];
 
         if (! item)
             return;
@@ -204,7 +206,7 @@ ObserverList.prototype.removeByKey = function(index) {
         if (this.data.length < index)
             return;
 
-        var item = this.data[index];
+        item = this.data[index];
 
         this.data.splice(index, 1);
 
@@ -213,9 +215,9 @@ ObserverList.prototype.removeByKey = function(index) {
 };
 
 
-ObserverList.prototype.removeBy = function(fn) {
+ObserverList.prototype.removeBy = function (fn) {
     var i = this.data.length;
-    while(i--) {
+    while (i--) {
         if (! fn(this.data[i]))
             continue;
 
@@ -229,29 +231,29 @@ ObserverList.prototype.removeBy = function(fn) {
 };
 
 
-ObserverList.prototype.clear = function() {
+ObserverList.prototype.clear = function () {
     var items = this.data.slice(0);
 
-    this.data = [ ];
+    this.data = [];
     this._indexed = { };
 
     var i = items.length;
-    while(i--) {
+    while (i--) {
         this.emit('remove', items[i], i);
     }
 };
 
 
-ObserverList.prototype.forEach = function(fn) {
-    for(var i = 0; i < this.data.length; i++) {
+ObserverList.prototype.forEach = function (fn) {
+    for (var i = 0; i < this.data.length; i++) {
         fn(this.data[i], (this.index && this.data[i][this.index]) || i);
     }
 };
 
 
-ObserverList.prototype.find = function(fn) {
-    var items = [ ];
-    for(var i = 0; i < this.data.length; i++) {
+ObserverList.prototype.find = function (fn) {
+    var items = [];
+    for (var i = 0; i < this.data.length; i++) {
         if (! fn(this.data[i]))
             continue;
 
@@ -259,14 +261,14 @@ ObserverList.prototype.find = function(fn) {
         if (this.index)
             index = this.data[i][this.index];
 
-        items.push([ index, this.data[i] ]);
+        items.push([index, this.data[i]]);
     }
     return items;
 };
 
 
-ObserverList.prototype.findOne = function(fn) {
-    for(var i = 0; i < this.data.length; i++) {
+ObserverList.prototype.findOne = function (fn) {
+    for (var i = 0; i < this.data.length; i++) {
         if (! fn(this.data[i]))
             continue;
 
@@ -274,30 +276,30 @@ ObserverList.prototype.findOne = function(fn) {
         if (this.index)
             index = this.data[i][this.index];
 
-        return [ index, this.data[i] ];
+        return [index, this.data[i]];
     }
     return null;
 };
 
 
-ObserverList.prototype.map = function(fn) {
+ObserverList.prototype.map = function (fn) {
     return this.data.map(fn);
 };
 
 
-ObserverList.prototype.sort = function(fn) {
+ObserverList.prototype.sort = function (fn) {
     this.data.sort(fn);
 };
 
 
-ObserverList.prototype.array = function() {
+ObserverList.prototype.array = function () {
     return this.data.slice(0);
 };
 
 
-ObserverList.prototype.json = function() {
+ObserverList.prototype.json = function () {
     var items = this.array();
-    for(var i = 0; i < items.length; i++) {
+    for (var i = 0; i < items.length; i++) {
         if (items[i] instanceof Observer) {
             items[i] = items[i].json();
         }

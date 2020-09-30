@@ -1,11 +1,11 @@
 import './style.scss';
-import Element from '../Element'; 
+import Element from '../Element';
 
 const CLASS_ROOT = 'pcui-divider';
 
 /**
- * @name pcui.Divider
- * @extends pcui.Element
+ * @name Divider
+ * @augments Element
  * @classdesc Represents a vertical division between two elements
  */
 class Divider extends Element {

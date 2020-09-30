@@ -1,6 +1,6 @@
 import './style.scss';
-import Element from '../Element'; 
-import NumericInput from '../NumericInput'; 
+import Element from '../Element';
+import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
 
 const CLASS_SLIDER = 'pcui-slider';
@@ -22,24 +22,25 @@ const PROXY_FIELDS = [
 ];
 
 /**
- * @name pcui.SliderInput
+ * @name SliderInput
  * @classdesc The SliderInput shows a pcui.NumericInput and a slider widget next to it. It acts as a proxy
  * of the NumericInput.
- * @property {Number} min Gets / sets the minimum value that the numeric input field can take.
- * @property {Number} max Gets / sets the maximum value that the numeric input field can take.
- * @property {Number} sliderMin Gets / sets the minimum value that the slider field can take.
- * @property {Number} sliderMax Gets / sets the maximum value that the slider field can take.
- * @property {Number} pre Gets / sets the maximum number of decimals a value can take.
- * @property {Number} step Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
- * @property {Boolean} allowNull Gets / sets whether the value can be null. If not then it will be 0 instead of null.
- * @extends pcui.Element
- * @mixes pcui.IBindable
- * @mixes pcui.IFocusable
+ * @property {number} min Gets / sets the minimum value that the numeric input field can take.
+ * @property {number} max Gets / sets the maximum value that the numeric input field can take.
+ * @property {number} sliderMin Gets / sets the minimum value that the slider field can take.
+ * @property {number} sliderMax Gets / sets the maximum value that the slider field can take.
+ * @property {number} pre Gets / sets the maximum number of decimals a value can take.
+ * @property {number} step Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
+ * @property {boolean} allowNull Gets / sets whether the value can be null. If not then it will be 0 instead of null.
+ * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
  */
 class SliderInput extends Element {
     /**
      * Creates a new SliderInput.
-     * @param {Object} args The arguments. Extends the pcui.NumericInput constructor arguments.
+     *
+     * @param {object} args - The arguments. Extends the pcui.NumericInput constructor arguments.
      */
     constructor(args) {
         args = Object.assign({}, args);
@@ -65,7 +66,7 @@ class SliderInput extends Element {
 
         this._combineHistory = false;
 
-        this._numericInput = new NumericInput({...inputArgs, hideSlider: true });
+        this._numericInput = new NumericInput({ ...inputArgs, hideSlider: true });
 
         // propagate change event
         this._numericInput.on('change', this._onValueChange.bind(this));

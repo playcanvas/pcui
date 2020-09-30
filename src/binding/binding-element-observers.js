@@ -1,10 +1,10 @@
 import BindingBase from './binding-base';
 
 /**
- * @name pcui.BindingElementToObservers
+ * @name BindingElementToObservers
  * @classdesc Provides one way binding between an IBindable element and Observers. Any changes from the element
  * will be propagated to the observers.
- * @extends pcui.BindingBase
+ * @augments BindingBase
  */
 class BindingElementToObservers extends BindingBase {
 

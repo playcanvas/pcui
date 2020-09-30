@@ -16,32 +16,32 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
 
 /**
  * @event
- * @name pcui.Panel#collapse
+ * @name Panel#collapse
  * @description Fired when the panel gets collapsed
  */
 
 /**
  * @event
- * @name pcui.Panel#expand
+ * @name Panel#expand
  * @description Fired when the panel gets expanded
  */
 
 /**
- * @name pcui.Panel
+ * @name Panel
  * @classdesc The Panel is a pcui.Container that itself contains a header container and a content container. The
  * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
- * @property {Boolean} flex Gets / sets whether the container supports flex layout. Defaults to false. Cannot co-exist with grid.
- * @property {Boolean} grid Gets / sets whether the container supports grid layout. Defaults to false. Cannot co-exist with flex.
- * @property {Boolean} collapsible Gets / sets whether the panel can be collapsed by clicking on its header or by setting collapsed to true. Defaults to false.
- * @property {Boolean} sortable Gets / sets whether the panel can be reordered
- * @property {Boolean} collapsed Gets / sets whether the panel is collapsed or expanded. Defaults to false.
- * @property {Boolean} collapseHorizontally Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
- * @property {Boolean} removable Gets / sets whether the panel can be removed
- * @property {Number} headerSize The height of the header in pixels. Defaults to 32.
- * @property {String} headerText The header text of the panel. Defaults to the empty string.
- * @property {pcui.Container} header Gets the header conttainer.
- * @property {pcui.Container} content Gets the content conttainer.
- * @extends pcui.Container
+ * @property {boolean} flex Gets / sets whether the container supports flex layout. Defaults to false. Cannot co-exist with grid.
+ * @property {boolean} grid Gets / sets whether the container supports grid layout. Defaults to false. Cannot co-exist with flex.
+ * @property {boolean} collapsible Gets / sets whether the panel can be collapsed by clicking on its header or by setting collapsed to true. Defaults to false.
+ * @property {boolean} sortable Gets / sets whether the panel can be reordered
+ * @property {boolean} collapsed Gets / sets whether the panel is collapsed or expanded. Defaults to false.
+ * @property {boolean} collapseHorizontally Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
+ * @property {boolean} removable Gets / sets whether the panel can be removed
+ * @property {number} headerSize The height of the header in pixels. Defaults to 32.
+ * @property {string} headerText The header text of the panel. Defaults to the empty string.
+ * @property {Container} header Gets the header conttainer.
+ * @property {Container} content Gets the content conttainer.
+ * @augments Container
  * @mixes pcui.IContainer
  * @mixes pcui.IFlex
  * @mixes pcui.IGrid
@@ -51,7 +51,8 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
 class Panel extends Container {
     /**
      * Creates a new Panel.
-     * @param {Object} args The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+     *
+     * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
         if (!args) args = {};
@@ -268,7 +269,6 @@ class Panel extends Container {
             this.parent._onChildDragEnd(evt, this);
         }
     }
-
 
 
     destroy() {

@@ -1,17 +1,18 @@
 import './style.scss';
-import TextInput from '../TextInput'; 
+import TextInput from '../TextInput';
 
 const CLASS_TEXT_AREA_INPUT = 'pcui-text-area-input';
 
 /**
- * @name pcui.TextAreaInput
+ * @name TextAreaInput
  * @classdesc The TextAreaInput wraps a textarea element. It has the same interface as pcui.TextInput.
- * @extends pcui.TextInput
+ * @augments TextInput
  */
 class TextAreaInput extends TextInput {
     /**
      * Creates a new TextAreaInput.
-     * @param {Object} args The arguments. Extends the pcui.TextInput constructor arguments.
+     *
+     * @param {object} args - The arguments. Extends the pcui.TextInput constructor arguments.
      */
     constructor(args) {
         args = Object.assign({

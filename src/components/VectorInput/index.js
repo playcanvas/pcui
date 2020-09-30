@@ -1,26 +1,27 @@
 import './style.scss';
-import Element from '../Element'; 
-import NumericInput from '../NumericInput'; 
+import Element from '../Element';
+import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
 
 const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 
 /**
- * @name pcui.VectorInput
+ * @name VectorInput
  * @classdesc A vector input
- * @extends pcui.Element
+ * @augments Element
  */
 class VectorInput extends Element {
     /**
      * Creates a new pcui.VectorInput.
-     * @param {Object} args The arguments.
-     * @param {Number} [args.dimensions=3] The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
-     * @param {Number} [args.min] The minimum value for each vector element.
-     * @param {Number} [args.max] The maximum value for each vector element.
-     * @param {Number} [args.precision] The decimal precision for each vector element.
-     * @param {Number} [args.step] The incremental step when using arrow keys for each vector element.
-     * @param {Boolean} [args.renderChanges] If true each vector element will flash on changes.
-     * @param {String[]|String} [args.placeholder] The placeholder string for each vector element.
+     *
+     * @param {object} args - The arguments.
+     * @param {number} [args.dimensions=3] - The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
+     * @param {number} [args.min] - The minimum value for each vector element.
+     * @param {number} [args.max] - The maximum value for each vector element.
+     * @param {number} [args.precision] - The decimal precision for each vector element.
+     * @param {number} [args.step] - The incremental step when using arrow keys for each vector element.
+     * @param {boolean} [args.renderChanges] - If true each vector element will flash on changes.
+     * @param {string[]|string} [args.placeholder] - The placeholder string for each vector element.
      */
     constructor(args) {
         args = Object.assign({}, args);
@@ -186,7 +187,9 @@ class VectorInput extends Element {
         // create an array for each dimension (e.g. one array for x one for y one for z)
         values = this._inputs.map((_, i) => values.map(arr => arr[i]));
 
-        this._inputs.forEach((input, i) => input.values = values[i]);
+        this._inputs.forEach((input, i) => {
+            input.values = values[i];
+        });
     }
 
     // override binding setter to set a binding clone to

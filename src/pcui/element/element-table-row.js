@@ -1,136 +1,125 @@
-// Object.assign(pcui, (function () {
-//     'use strict';
-    import Container from './element-container';
+import Container from './element-container';
 
-    const CLASS_ROW = 'pcui-table-row';
-    const CLASS_SELECTED_ROW = CLASS_ROW + '-selected';
+const CLASS_ROW = 'pcui-table-row';
+const CLASS_SELECTED_ROW = CLASS_ROW + '-selected';
 
+/**
+ * @name TableRow
+ * @classdesc Represents the row of a pcui.Table
+ * @augments Container
+ * @mixes pcui.IFocusable
+ * @property {boolean} selected Whether the row is selected
+ * @property {TableRow} previousSibling Returns the previous visible sibling row
+ * @property {TableRow} nextSibling Returns the next visible sibling row
+ */
+class TableRow extends Container {
     /**
-     * @name pcui.TableRow
-     * @classdesc Represents the row of a pcui.Table
-     * @extends pcui.Container
-     * @mixes pcui.IFocusable
-     * @property {Boolean} selected Whether the row is selected
-     * @property {pcui.TableRow} previousSibling Returns the previous visible sibling row
-     * @property {pcui.TableRow} nextSibling Returns the next visible sibling row
+     * Creates new TableRow.
+     *
+     * @param {object} [args] - The arguments
+     * @param {boolean} [args.header] - If true then this is a header row
      */
-    class TableRow extends Container {
-        /**
-         * Creates new TableRow.
-         * @param {Object} [args] The arguments
-         * @param {Boolean} [args.header] If true then this is a header row
-         */
-        constructor(args) {
-            args = Object.assign({
-                tabIndex: args && args.header ? -1 : 0,
-                dom: document.createElement('tr')
-            }, args);
+    constructor(args) {
+        args = Object.assign({
+            tabIndex: args && args.header ? -1 : 0,
+            dom: document.createElement('tr')
+        }, args);
 
-            super(args);
+        super(args);
 
-            this.class.add(CLASS_ROW);
+        this.class.add(CLASS_ROW);
 
-            if (args.header) {
-                this._header = true;
-            }
-
-            this._selected = false;
-
-            if (!this._header) {
-                this._domEvtFocus = this._onFocus.bind(this);
-                this._domEvtBlur = this._onBlur.bind(this);
-
-                this.dom.addEventListener('focus', this._domEvtFocus);
-                this.dom.addEventListener('blur', this._domEvtBlur);
-            }
+        if (args.header) {
+            this._header = true;
         }
 
-        _onFocus() {
-            this.emit('focus', this);
-        }
+        this._selected = false;
 
-        _onBlur() {
-            this.emit('blur', this);
-        }
+        if (!this._header) {
+            this._domEvtFocus = this._onFocus.bind(this);
+            this._domEvtBlur = this._onBlur.bind(this);
 
-        focus() {
-            if (this._header) return;
-            this.dom.focus();
-        }
-
-        blur() {
-            if (this._header) return;
-            this.dom.blur();
-        }
-
-        destroy() {
-            if (this._destroyed) return;
-
-            this.dom.removeEventListener('focus', this._domEvtFocus);
-            this.dom.removeEventListener('blur', this._domEvtBlur);
-
-            super.destroy();
-        }
-
-        get selected() {
-            return this._selected;
-        }
-
-        set selected(value) {
-            if (this._header) return;
-
-            if (value) {
-                this.focus();
-            }
-
-            if (this.selected === value) return;
-
-            this._selected = value;
-
-            if (value) {
-                this.classAdd(CLASS_SELECTED_ROW);
-                this.emit('select', this);
-            } else {
-                this.classRemove(CLASS_SELECTED_ROW);
-                this.emit('deselect', this);
-            }
-        }
-
-        get nextSibling() {
-            let next = this.dom.nextSibling;
-            while (next) {
-                if (next.ui instanceof TableRow && !next.ui.hidden) {
-                    return next.ui;
-                }
-
-                next = next.nextSibling;
-            }
-
-            return null;
-        }
-
-        get previousSibling() {
-            let prev = this.dom.previousSibling;
-            while (prev) {
-                if (prev.ui instanceof TableRow && !prev.ui.hidden) {
-                    return prev.ui;
-                }
-
-                prev = prev.previousSibling;
-            }
-
-            return null;
+            this.dom.addEventListener('focus', this._domEvtFocus);
+            this.dom.addEventListener('blur', this._domEvtBlur);
         }
     }
 
-    export default TableRow;
+    _onFocus() {
+        this.emit('focus', this);
+    }
 
+    _onBlur() {
+        this.emit('blur', this);
+    }
 
+    focus() {
+        if (this._header) return;
+        this.dom.focus();
+    }
 
-//     utils.implements(TableRow, pcui.IFocusable);
+    blur() {
+        if (this._header) return;
+        this.dom.blur();
+    }
 
-//     return {
-//         TableRow: TableRow
-//     };
+    destroy() {
+        if (this._destroyed) return;
 
-// })());
+        this.dom.removeEventListener('focus', this._domEvtFocus);
+        this.dom.removeEventListener('blur', this._domEvtBlur);
+
+        super.destroy();
+    }
+
+    get selected() {
+        return this._selected;
+    }
+
+    set selected(value) {
+        if (this._header) return;
+
+        if (value) {
+            this.focus();
+        }
+
+        if (this.selected === value) return;
+
+        this._selected = value;
+
+        if (value) {
+            this.classAdd(CLASS_SELECTED_ROW);
+            this.emit('select', this);
+        } else {
+            this.classRemove(CLASS_SELECTED_ROW);
+            this.emit('deselect', this);
+        }
+    }
+
+    get nextSibling() {
+        let next = this.dom.nextSibling;
+        while (next) {
+            if (next.ui instanceof TableRow && !next.ui.hidden) {
+                return next.ui;
+            }
+
+            next = next.nextSibling;
+        }
+
+        return null;
+    }
+
+    get previousSibling() {
+        let prev = this.dom.previousSibling;
+        while (prev) {
+            if (prev.ui instanceof TableRow && !prev.ui.hidden) {
+                return prev.ui;
+            }
+
+            prev = prev.previousSibling;
+        }
+
+        return null;
+    }
+}
+
+export default TableRow;

@@ -1,21 +1,22 @@
 import './style.scss';
-import Element from '../Element'; 
+import Element from '../Element';
 
 const CLASS_BUTTON = 'pcui-button';
 
 /**
- * @name pcui.Button
+ * @name Button
  * @classdesc Represents a button.
- * @property {String} [text=Click Me] Gets / sets the text of the button
- * @property {String} size Gets / sets the 'size' type of the button. Can be null or 'small'.
- * @property {String} [icon=E401] The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
+ * @property {string} [text=Click Me] Gets / sets the text of the button
+ * @property {string} size Gets / sets the 'size' type of the button. Can be null or 'small'.
+ * @property {string} [icon=E401] The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
  * @mixes pcui.IFocusable
  */
 class Button extends Element {
     /**
      * Creates a new Button.
-     * @param {Object} args The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
-     * @param {Boolean} [args.unsafe] If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
+     *
+     * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+     * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
      */
     constructor(args) {
         if (!args) args = {};
