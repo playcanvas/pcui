@@ -37,10 +37,10 @@ const DEFAULT_BOTTOM_OFFSET = 25;
  * @property {string} placeholder The placeholder text to show next to the current value.
  * @property {boolean} multiSelect If true then the input value becomes an array allowing the selection of multiple options. Defaults to false.
  * @property {object[]} options The dropdown options of the input. Contains an array of objects with the following format {v: Any, t: String} where v is the value and t is the text of the option.
- * @property {*[]} invalidOptions An array of values against which new values are checked before they are created. If a value is in the array it will not be created.
+ * @property {Array} invalidOptions An array of values against which new values are checked before they are created. If a value is in the array it will not be created.
  * @augments Element
- * @mixes pcui.IBindable
- * @mixes pcui.IFocusable
+ * @mixes IBindable
+ * @mixes IFocusable
  */
 class SelectInput extends Element {
     /**

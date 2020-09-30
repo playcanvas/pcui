@@ -4,12 +4,14 @@ import BindingBase from './binding-base';
  * @name BindingObserversToElement
  * @classdesc Provides one way binding between Observers and an IBindable element and Observers. Any changes from the observers
  * will be propagated to the element.
- * @extends pcui.BindingBase
+ * @augments BindingBase
  */
 class BindingObserversToElement extends BindingBase {
     /**
      * Creates a new BindingObserversToElement instance.
-     * @param {Object} args The arguments.
+     *
+     * @param {Function} customUpdate - Custom update function.
+     * @param {object} args - The arguments.
      */
     constructor({ customUpdate, ...args } = {}) {
         super(args);

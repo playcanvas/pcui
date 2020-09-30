@@ -264,7 +264,7 @@ class NumericInput extends TextInput {
 
         // reset value
         if (this._min !== null) {
-            this.value = this.value;
+            this.value = this.value; // eslint-disable-line no-self-assign
         }
     }
 
@@ -278,7 +278,7 @@ class NumericInput extends TextInput {
 
         // reset value
         if (this._max !== null) {
-            this.value = this.value;
+            this.value = this.value; // eslint-disable-line no-self-assign
         }
     }
 
@@ -292,7 +292,7 @@ class NumericInput extends TextInput {
 
         // reset value
         if (this._precision !== null) {
-            this.value = this.value;
+            this.value = this.value; // eslint-disable-line no-self-assign
         }
     }
 

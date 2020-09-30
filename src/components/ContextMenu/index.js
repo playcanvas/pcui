@@ -28,24 +28,27 @@ class ContextMenu {
             this._menu.class.remove(CLASS_ContextMenu_active);
             document.removeEventListener('click', removeMenu);
         };
-        args.dom && args.dom.parentElement.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            this._menu.class.add(CLASS_ContextMenu_active);
-            var maxMenuHeight = args.items.length * 27.0;
-            var maxMenuWidth = 150.0;
-            var left = e.clientX;
-            var top = e.clientY;
-            if (maxMenuHeight + top > window.innerHeight) {
-                var topDiff = (maxMenuHeight + top) - window.innerHeight;
-                top -= topDiff;
-            }
-            if (maxMenuWidth + left > window.innerWidth) {
-                var leftDiff = (maxMenuWidth + left) - window.innerWidth;
-                left -= leftDiff;
-            }
-            args.dom.setAttribute("style", `left: ${left}px; top: ${top}px`);
-            document.addEventListener('click', removeMenu);
-        });
+
+        if (args.dom) {
+            args.dom.parentElement.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                this._menu.class.add(CLASS_ContextMenu_active);
+                var maxMenuHeight = args.items.length * 27.0;
+                var maxMenuWidth = 150.0;
+                var left = e.clientX;
+                var top = e.clientY;
+                if (maxMenuHeight + top > window.innerHeight) {
+                    var topDiff = (maxMenuHeight + top) - window.innerHeight;
+                    top -= topDiff;
+                }
+                if (maxMenuWidth + left > window.innerWidth) {
+                    var leftDiff = (maxMenuWidth + left) - window.innerWidth;
+                    left -= leftDiff;
+                }
+                args.dom.setAttribute("style", `left: ${left}px; top: ${top}px`);
+                document.addEventListener('click', removeMenu);
+            });
+        }
 
         if (!args.items) return;
 

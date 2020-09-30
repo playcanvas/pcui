@@ -120,7 +120,6 @@ if (! String.prototype.appendQuery) {
 
 // element.classList.add polyfill
 (function () {
-    /* global DOMTokenList */
     var dummy  = document.createElement('div'),
         dtp    = DOMTokenList.prototype,
         add    = dtp.add,

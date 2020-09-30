@@ -2,6 +2,9 @@ import './style.scss';
 import * as pcuiClass from '../../class';
 import Events from '../../binding/events';
 
+/* global BindingBase */
+/* global Observer */
+
 const CLASS_ELEMENT = 'pcui-element';
 
 // these are properties that are

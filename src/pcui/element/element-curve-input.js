@@ -318,12 +318,13 @@ class CurveInput extends Container {
 
             this.betweenCurves = value;
 
-            let paths, values;
 
-            if (! this.suspendEvents) {
-                paths = ['0.betweenCurves'];
-                values = [this.betweenCurves];
-            }
+            // let paths, values;
+
+            // if (! this.suspendEvents) {
+            //     paths = ['0.betweenCurves'];
+            //     values = [this.betweenCurves];
+            // }
 
             if (!this.betweenCurves) {
                 for (i = 0; i < this.numCurves; i++) {

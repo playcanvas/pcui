@@ -1,5 +1,8 @@
 import Events from './events';
 
+/* global IBindable */
+/* global Observer */
+
 /**
  * @name BindingBase
  * @classdesc Base class for data binding between IBindable Elements and Observers.

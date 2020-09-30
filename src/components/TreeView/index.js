@@ -279,12 +279,7 @@ class TreeView extends Container {
         });
     }
 
-    /**
-     * Called when a key is down on a child TreeViewItem.
-     *
-     * @param evt
-     * @param element
-     */
+    // Called when a key is down on a child TreeViewItem.
     _onChildKeyDown(evt, element) {
         if ([9, 37, 38, 39, 40].indexOf(evt.keyCode) === -1) return;
 
@@ -330,12 +325,7 @@ class TreeView extends Container {
         }
     }
 
-    /**
-     * Called when we click on a child TreeViewItem
-     *
-     * @param evt
-     * @param element
-     */
+    // Called when we click on a child TreeViewItem
     _onChildClick(evt, element) {
         if (evt.button !== 0) return;
         if (!element.allowSelect) return;
@@ -403,12 +393,7 @@ class TreeView extends Container {
         });
     }
 
-    /**
-     * Called when we start dragging a TreeViewItem.
-     *
-     * @param evt
-     * @param element
-     */
+    // Called when we start dragging a TreeViewItem.
     _onChildDragStart(evt, element) {
         if (!this.allowDrag || this._dragging) return;
 
@@ -468,12 +453,7 @@ class TreeView extends Container {
         }
     }
 
-    /**
-     * Called when we stop dragging a TreeViewItem.
-     *
-     * @param evt
-     * @param element
-     */
+    // Called when we stop dragging a TreeViewItem.
     _onChildDragEnd(evt, element) {
         if (!this.allowDrag || !this._dragging) return;
 
@@ -550,12 +530,7 @@ class TreeView extends Container {
         this.emit('dragend');
     }
 
-    /**
-     * Called when we drag over a TreeViewItem.
-     *
-     * @param evt
-     * @param element
-     */
+    // Called when we drag over a TreeViewItem.
     _onChildDragOver(evt, element) {
         if (!this._allowDrag || !this._dragging) return;
 
@@ -569,12 +544,7 @@ class TreeView extends Container {
         this._onDragMove(evt);
     }
 
-
-    /**
-     * Called when the mouse cursor leaves the tree view.
-     *
-     * @param evt
-     */
+    // Called when the mouse cursor leaves the tree view.
     _onMouseLeave(evt) {
         if (!this._allowDrag || !this._dragging) return;
 
@@ -582,11 +552,7 @@ class TreeView extends Container {
         this._updateDragHandle();
     }
 
-    /**
-     * Called when the mouse moves while dragging
-     *
-     * @param evt
-     */
+    // Called when the mouse moves while dragging
     _onMouseMove(evt) {
         if (!this._dragging) return;
 
@@ -600,9 +566,7 @@ class TreeView extends Container {
         }
     }
 
-    /**
-     * Scroll treeview if we are dragging towards the edges
-     */
+    // Scroll treeview if we are dragging towards the edges
     _scrollWhileDragging() {
         if (!this._dragging) return;
         if (this._dragScroll === 0) return;
@@ -612,11 +576,7 @@ class TreeView extends Container {
         this._updateDragHandle();
     }
 
-    /**
-     * Called while we drag the drag handle
-     *
-     * @param evt
-     */
+    // Called while we drag the drag handle
     _onDragMove(evt) {
         evt.preventDefault();
         evt.stopPropagation();
@@ -679,12 +639,7 @@ class TreeView extends Container {
         }
     }
 
-    /**
-     * Updates the drag handle position and size
-     *
-     * @param dragOverItem
-     * @param force
-     */
+    // Updates the drag handle position and size
     _updateDragHandle(dragOverItem, force) {
         if (!force && (!this._allowDrag || !this._dragging)) return;
 
@@ -762,7 +717,7 @@ class TreeView extends Container {
      * Called when a child tree view item is deselected.
      *
      * @param {TreeViewItem} item - The tree view item.
-     * @param element
+     * @param {Element} element - The element.
      */
     _onChildDeselected(element) {
         const index = this._selectedItems.indexOf(element);
@@ -776,7 +731,7 @@ class TreeView extends Container {
      * Called when a child tree view item is renamed.
      *
      * @param {TreeViewItem} item - The tree view item.
-     * @param newName
+     * @param {string} newName - The new name.
      */
     _onChildRename(item, newName) {
         if (this._filter) {

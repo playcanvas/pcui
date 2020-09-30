@@ -31,7 +31,11 @@
     ]
   },
   "eslintConfig": {
-    "extends": "@playcanvas/eslint-config"
+    "extends": "@playcanvas/eslint-config",
+    "parserOptions": {
+      "ecmaVersion": 9,
+      "sourceType": "module"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",

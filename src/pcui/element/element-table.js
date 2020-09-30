@@ -4,6 +4,8 @@ import TableCell from './element-table-cell';
 import Label from './element-label';
 import Element from './element';
 
+/* global Observer */
+
 const CLASS_TABLE = 'pcui-table';
 
 const CLASS_CELL = 'pcui-table-cell';

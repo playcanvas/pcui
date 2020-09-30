@@ -658,7 +658,7 @@ Observer.prototype.removeValue = function (path, value, silent, remote) {
     if (arr.length < ind)
         return;
 
-    var value = arr[ind];
+    value = arr[ind];
     if (value instanceof Observer) {
         value._parent = null;
     } else {
@@ -840,6 +840,7 @@ Observer.prototype.patch = function (data, removeMIssingKeys) {
 
 
 Observer.prototype.json = function (target) {
+    var key, n;
     var obj = { };
     var node = target === undefined ? this : target;
     var len, nlen;
@@ -847,7 +848,7 @@ Observer.prototype.json = function (target) {
     if (node instanceof Object && node._keys) {
         len = node._keys.length;
         for (var i = 0; i < len; i++) {
-            var key = node._keys[i];
+            key = node._keys[i];
             var value = node._data[key];
             var type = typeof(value);
 
@@ -855,7 +856,7 @@ Observer.prototype.json = function (target) {
                 obj[key] = value.slice(0);
 
                 nlen = obj[key].length;
-                for (var n = 0; n < nlen; n++) {
+                for (n = 0; n < nlen; n++) {
                     if (typeof(obj[key][n]) === 'object')
                         obj[key][n] = this.json(obj[key][n]);
                 }
@@ -872,11 +873,11 @@ Observer.prototype.json = function (target) {
             obj = node.slice(0);
 
             len = obj.length;
-            for (var n = 0; n < len; n++) {
+            for (n = 0; n < len; n++) {
                 obj[n] = this.json(obj[n]);
             }
         } else if (typeof(node) === 'object') {
-            for (var key in node) {
+            for (key in node) {
                 if (node.hasOwnProperty(key))
                     obj[key] = node[key];
             }
