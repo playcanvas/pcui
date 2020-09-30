@@ -158,6 +158,7 @@ class NumericInput extends TextInput {
                 // sanitize input to only allow short mathmatical expressions to be evaluated
                 value = value.match(/^[*/+\-0-9().]+$/);
                 if (value !== null && value[0].length < 20) {
+                    // eslint-disable-next-line
                     value = Function('"use strict";return (' + value[0] + ')')();
                 }
             }
@@ -230,6 +231,7 @@ class NumericInput extends TextInput {
         }
     }
 
+    /* eslint accessor-pairs: 0 */
     set values(values) {
         let different = false;
         const value = this._normalizeValue(values[0]);

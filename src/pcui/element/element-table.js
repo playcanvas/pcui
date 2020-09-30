@@ -456,7 +456,7 @@ class Table extends Container {
             if (evt.button !== 0) return;
             if (this._draggedColumn === null) return;
 
-            cleanUp();
+            this.cleanUp();
         };
 
         const onMouseMove = (evt) => {
@@ -498,30 +498,30 @@ class Table extends Container {
             window.addEventListener('mousemove', onMouseMove, true);
         };
 
-        const cleanUp = () => {
-            this.class.remove(CLASS_RESIZING);
-            this._forEachColumnCell(this._containerHead, colIndex, cell => {
-                cell.class.remove(CLASS_CELL_ACTIVE);
-            });
-
-            requestAnimationFrame(() => {
-                this._draggedColumn = null;
-            });
-
-            this._restoreRowsOutOfView();
-
-            this.dom.removeEventListener('wheel', this._domEvtWheel);
-
-            window.removeEventListener('mouseup', onMouseUp, true);
-            window.removeEventListener('mousemove', onMouseMove, true);
-        };
-
         handle.dom.addEventListener('mousedown', onMouseDown, true);
 
         handle.on('destroy', dom => {
             dom.removeEventListener('mousedown', onMouseDown, true);
-            cleanUp();
+            this.cleanUp();
         });
+    }
+
+    _cleanUp() {
+        this.class.remove(CLASS_RESIZING);
+        this._forEachColumnCell(this._containerHead, colIndex, cell => {
+            cell.class.remove(CLASS_CELL_ACTIVE);
+        });
+
+        requestAnimationFrame(() => {
+            this._draggedColumn = null;
+        });
+
+        this._restoreRowsOutOfView();
+
+        this.dom.removeEventListener('wheel', this._domEvtWheel);
+
+        window.removeEventListener('mouseup', onMouseUp, true);
+        window.removeEventListener('mousemove', onMouseMove, true);
     }
 
     _sortObservers() {

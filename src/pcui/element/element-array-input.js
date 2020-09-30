@@ -385,6 +385,7 @@ class ArrayInput extends Element {
         this._updateValues(new Array(this._values.length || 1).fill(value), true);
     }
 
+    /* eslint accessor-pairs: 0 */
     set values(values) {
         if (this._values.equals(values)) return;
         // update values but do not update binding

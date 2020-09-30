@@ -969,6 +969,7 @@ class SelectInput extends Element {
         }
     }
 
+    /* eslint accessor-pairs: 0 */
     set values(values) {
         values = values.map(this._convertValue.bind(this));
 
