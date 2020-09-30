@@ -320,6 +320,7 @@ class SliderInput extends Element {
         }
     }
 
+    /* eslint accessor-pairs: 0 */
     set values(values) {
         this._numericInput.values = values;
         if (this._numericInput.class.contains(pcuiClass.MULTIPLE_VALUES)) {

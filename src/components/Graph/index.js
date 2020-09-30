@@ -7,6 +7,7 @@ window.joint = require('jointjs');
 var joint = window.joint;
 
 joint.V.matrixToTransformString = function (matrix) {
+    // eslint-disable-next-line
     matrix || (matrix = true);
     return 'matrix(' + [
         matrix.a || 1,

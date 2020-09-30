@@ -748,8 +748,8 @@ class TreeView extends Container {
         this.emit('rename', item, newName);
     }
 
-    _searchItems(searchItems, filter) {
-        const results = searchItems(searchItems, filter);
+    _searchItems(searchArr, filter) {
+        const results = searchItems(searchArr, filter);
         if (!results.length) return;
 
         results.forEach(item => {

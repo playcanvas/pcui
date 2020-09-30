@@ -135,6 +135,7 @@ class BooleanInput extends Element {
         }
     }
 
+    /* eslint accessor-pairs: 0 */
     set values(values) {
         let different = false;
         const value = values[0];

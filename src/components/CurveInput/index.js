@@ -1854,6 +1854,7 @@ class CurveInput extends Container {
         this._renderCurves();
     }
 
+    /* eslint accessor-pairs: 0 */
     set values(values) {
         // we do not support multiple values so just
         // add the multiple values class which essentially disables
