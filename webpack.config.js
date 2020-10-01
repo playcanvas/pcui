@@ -10,7 +10,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
-        library: process.env.LIBRARY_NAME? `${process.env.LIBRARY_NAME}_[name]` : 'pcui_[name]',
+        library: process.env.LIBRARY_NAME ? `${process.env.LIBRARY_NAME}_[name]` : 'pcui_[name]',
         libraryTarget: 'umd'
     },
     module: {
