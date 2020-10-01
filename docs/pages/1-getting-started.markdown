@@ -33,5 +33,5 @@ document.body.appendChild(helloWorldButton.dom);
 This will result in your first component being appended to your document body!
 
 <div class="highlighter-rouge">
-    <iframe src="/pcui/storybook/iframe.html?id=input-button--default&viewMode=story" style="border: none;" height="72px"></iframe>
+    <iframe src="/pcui/storybook/iframe.html?id=input-button--main&viewMode=story" style="border: none;" height="72px"></iframe>
 </div>

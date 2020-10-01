@@ -20,6 +20,6 @@ export default {
     argTypes: config.args
 };
 
-export const Default = (args) => { 
+export const Main = (args) => { 
     return <ButtonComponent icon="E401" onClick={action('button-click')} {...args} />;
 };

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Storybook 
-permalink: /pcui/storybook-docs/
+permalink: /storybook-docs/
 nav_order: 6
 ---
 
