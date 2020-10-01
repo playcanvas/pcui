@@ -18,7 +18,7 @@
     "storybook": "jsdoc -r -X src/components > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
     "docs:local": "cd docs && jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "docs:build": "cd docs && jekyll build && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
-    "pcui:publish": "npm run build && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && npm publish dist --dry-run"
+    "pcui:publish": "npm run build && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && npm publish dist"
   },
   "browserslist": {
     "production": [
