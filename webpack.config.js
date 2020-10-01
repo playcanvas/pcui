@@ -3,14 +3,14 @@ const path = require('path');
 module.exports = {
     mode: 'production',
     entry: {
-        'es6': './src/index.js',
-        'react': './src/components/index.js',
-        'binding': './src/binding/index.js'
+        'pcui': './src/index.js',
+        'pcui-react': './src/components/index.js',
+        'pcui-binding': './src/binding/index.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
-        library: process.env.LIBRARY_NAME ? `${process.env.LIBRARY_NAME}_[name]` : 'pcui_[name]',
+        library: process.env.LIBRARY_NAME ? `${process.env.LIBRARY_NAME}_[name]` : '[name]',
         libraryTarget: 'umd'
     },
     module: {
