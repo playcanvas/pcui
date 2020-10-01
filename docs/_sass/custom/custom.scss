@@ -1,0 +1,14 @@
+html, body, .main, .main-content, .component-iframe {
+    height: 100% !important;
+}
+
+.component-iframe {
+    width: 100%;
+    border: none;
+    margin-left: -20px;
+    opacity: 0;
+}
+
+.main-content-wrap {
+    height: calc(100% - 60px) !important;
+}
