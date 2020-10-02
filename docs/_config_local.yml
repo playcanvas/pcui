@@ -29,6 +29,7 @@ github_username:  playcanvas
 
 # Build settings
 theme: "just-the-docs"
+color_scheme: pcui
 plugins:
   - jekyll-feed
 

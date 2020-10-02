@@ -10,7 +10,7 @@ nav_order: 1
 
 A simple use case is shown below.
 
-<div class="highlighter-rouge">
+<div class="highlighter-rouge example-background">
     <iframe src="/pcui/storybook/iframe.html?id=examples-observer--main&viewMode=story" style="width: 100%; border: none; height: 68px;"></iframe>
 </div>
 
