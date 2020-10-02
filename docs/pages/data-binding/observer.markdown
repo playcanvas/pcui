@@ -26,7 +26,7 @@ import {
     BindingObserverToElement,
     BindingElementToObserver,
     Observer 
-} from '@playcanvas/pcui/binding.js';
+} from '@playcanvas/pcui/pcui-binding.js';
 ```
 
 Create a new observer for an object which contains a text string.
