@@ -15,13 +15,13 @@ npm install --save-dev @playcanvas/pcui
 
 This will include the entire pcui library in your project. The various parts of the library will be available to import from that package at the following locations:
 
-- ES6 Components: `@playcanvas/pcui/es6.js`
-- React Components: `@playcanvas/pcui/react.js`
-- Data Binding: `@playcanvas/pcui/binding.js`
+- ES6 Components: `@playcanvas/pcui/pcui.js`
+- React Components: `@playcanvas/pcui/pcui-react.js`
+- Data Binding: `@playcanvas/pcui/pcui-binding.js`
 
 You can then import the ES6 components into your own `.js` files and use them as follows:
 ```javascript
-import { Button } from '@playcanvas/pcui/es6.js';
+import { Button } from '@playcanvas/pcui/pcui.js';
 
 const helloWorldButton = new Button({
     text: 'Click Me'

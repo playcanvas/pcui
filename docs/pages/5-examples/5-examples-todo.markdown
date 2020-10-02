@@ -20,8 +20,8 @@ The todo list below allows you to add items to the list, toggle their 'done' sta
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Container, TextInput, BooleanInput, Label, SelectInput, Button }from '@playcanvas/pcui/react.js';
-import { Observer, BindingTwoWay } from '@playcanvas/pcui/binding.js';
+import { Container, TextInput, BooleanInput, Label, SelectInput, Button }from '@playcanvas/pcui/pcui-react.js';
+import { Observer, BindingTwoWay } from '@playcanvas/pcui/pcui-binding.js';
 
 const observer = new Observer({ input: '', items: {} });
 
