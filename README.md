@@ -2,6 +2,8 @@
 
 This library enables the creation of reliable and visually pleasing user interfaces by providing fully styled components that you can use directly on your site. The components are useful in a wide range of use cases, from creating simple forms to building graphical user interfaces for complex web tools.
 
+A full guide to using the PCUI library can be found [here](https://playcanvas.github.io/pcui).
+
 ## Storybook
 
 If you wish to view which components are available in this library, you can run Storybook. It allows you to browse the entire collection of components. Each component page also includes component documentation and allows you to test each component in all of it's configuration states.
