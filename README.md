@@ -1,5 +1,7 @@
 # PCUI - User interface component library for the web
 
+![PCUI Banner](https://forum-files-playcanvas-com.s3.dualstack.eu-west-1.amazonaws.com/optimized/2X/4/494f62125d7fec9e49c7e134c51b97ac51f55705_2_1380x690.jpeg)
+
 This library enables the creation of reliable and visually pleasing user interfaces by providing fully styled components that you can use directly on your site. The components are useful in a wide range of use cases, from creating simple forms to building graphical user interfaces for complex web tools.
 
 A full guide to using the PCUI library can be found [here](https://playcanvas.github.io/pcui).
@@ -23,7 +25,6 @@ To build the component library, run the following in the projects directory:
 npm install
 npm run build
 ```
-
 This will build the entire library to the output path `dist`. The various parts of the library will be available to import from that path:
 
 - ES6 Components: `dist/pcui.js`
