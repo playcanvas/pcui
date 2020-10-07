@@ -22,4 +22,4 @@ Which will render a single text input to the documents body element.
     <iframe src="/pcui/storybook/iframe.html?id=input-textinput--main&viewMode=story" style="border: none;" height="72px"></iframe>
 </div>
 
-For more extensive examples, see the [UI examples](/examples/) section.
+For more extensive examples, see the [UI examples](/pcui/examples/) section.
