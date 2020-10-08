@@ -33,6 +33,10 @@ color_scheme: pcui
 plugins:
   - jekyll-feed
 
+aux_links:
+  "PCUI on GitHub":
+    - "//github.com/playcanvas/pcui"
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
