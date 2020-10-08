@@ -22,7 +22,7 @@ module.exports = {
           use: ['style-loader', 'css-loader', {
               loader: 'sass-loader',
               options: {
-                  additionalData: `@import '${__dirname}/../src/scss/pcui.scss';`,
+                  additionalData: `@import '${__dirname}/../src/scss/pcui-storybook.scss';`,
               }
           }],
       }

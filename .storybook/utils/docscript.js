@@ -30,19 +30,19 @@ export function getPropertiesForClass(name) {
             var defaultValue = null;
             var controlType = null;
             switch (prop.type.names[0]) {
-                case 'Array.<String>':
+                case 'Array.<string>':
                     defaultValue = [];
                     controlType = 'array';
                     break;
-                case 'Number':
+                case 'number':
                     defaultValue = 0;
                     controlType = 'number';
                     break;
-                case 'String':
+                case 'string':
                     defaultValue = '';
                     controlType = 'text';
                     break;
-                case 'Boolean':
+                case 'boolean':
                     defaultValue = false;
                     controlType = 'boolean';
                     break;
