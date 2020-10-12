@@ -43,3 +43,9 @@
         display: none;
     }
 }
+
+.pcui-numeric-input.pcui-disabled, .pcui-numeric-input.pcui-readonly {
+    .pcui-numeric-input-slider-control {
+        display: none;
+    }
+}
