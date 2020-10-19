@@ -11,6 +11,10 @@
     user-select: none;
 }
 
+.pcui-label.pcui-default-mousedown {
+    user-select: initial;
+}
+
 .pcui-label.pcui-multiple-values {
     position: relative;
     color: transparent;
