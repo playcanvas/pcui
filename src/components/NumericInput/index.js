@@ -60,17 +60,22 @@ class NumericInput extends TextInput {
 
         this.renderChanges = renderChanges;
 
+        this._domEvtPointerLock = null;
+        this._domEvtSliderMouseDown = null;
+        this._domEvtSliderMouseUp = null;
+        this._domEvtMouseWheel = null;
+
         if (!args.hideSlider) {
             this._sliderControl = new Element();
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
-            this._dom.append(this._sliderControl._dom);
+            this.dom.append(this._sliderControl.dom);
 
-            this._sliderControl._dom.addEventListener('mousedown', () => {
-                this._sliderControl._dom.requestPointerLock();
+            this._domEvtSliderMouseDown = () => {
+                this._sliderControl.dom.requestPointerLock();
                 this._sliderPrevValue = this.value;
-            });
+            };
 
-            this._sliderControl._dom.addEventListener('mouseup', () => {
+            this._domEvtSliderMouseUp = () => {
                 document.exitPointerLock();
                 if (this._binding) {
                     const undoValue = this._sliderPrevValue;
@@ -95,12 +100,18 @@ class NumericInput extends TextInput {
                     });
                     redo();
                 }
-            });
-        }
-        this._updatePosition = this._updatePosition.bind(this);
+            };
 
-        document.addEventListener('pointerlockchange', this._pointerLockChangeAlert.bind(this), false);
-        document.addEventListener('mozpointerlockchange', this._pointerLockChangeAlert.bind(this), false);
+            this._domEvtPointerLock = this._pointerLockChangeAlert.bind(this);
+
+            this._domEvtMouseWheel = this._updatePosition.bind(this);
+
+            this._sliderControl.dom.addEventListener('mousedown', this._domEvtSliderMouseDown);
+            this._sliderControl.dom.addEventListener('mouseup', this._domEvtSliderMouseUp);
+
+            document.addEventListener('pointerlockchange', this._domEvtPointerLock, false);
+            document.addEventListener('mozpointerlockchange', this._domEvtPointerLock, false);
+        }
     }
 
     _updatePosition(evt) {
@@ -136,18 +147,18 @@ class NumericInput extends TextInput {
 
     _isScrolling() {
         if (!this._sliderControl) return false;
-        return (document.pointerLockElement === this._sliderControl._dom ||
-            document.mozPointerLockElement === this._sliderControl._dom);
+        return (document.pointerLockElement === this._sliderControl.dom ||
+            document.mozPointerLockElement === this._sliderControl.dom);
     }
 
     _pointerLockChangeAlert() {
         if (this._isScrolling()) {
-            this._sliderControl._dom.addEventListener("mousemove", this._updatePosition, false);
-            this._sliderControl._dom.addEventListener("wheel", this._updatePosition, false);
+            this._sliderControl.dom.addEventListener("mousemove", this._domEvtMouseWheel, false);
+            this._sliderControl.dom.addEventListener("wheel", this._domEvtMouseWheel, false);
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
         } else {
-            this._sliderControl._dom.removeEventListener("mousemove", this._updatePosition, false);
-            this._sliderControl._dom.removeEventListener("wheel", this._updatePosition, false);
+            this._sliderControl.dom.removeEventListener("mousemove", this._domEvtMouseWheel, false);
+            this._sliderControl.dom.removeEventListener("wheel", this._domEvtMouseWheel, false);
             this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
         }
     }
@@ -307,10 +318,24 @@ class NumericInput extends TextInput {
     }
 
     destroy() {
-        super.destroy();
-        document.removeEventListener('pointerlockchange', this._pointerLockChangeAlert, false);
-        document.removeEventListener('mozpointerlockchange', this._pointerLockChangeAlert, false);
+        if (this.destroyed) return;
 
+        if (this._domEvtSliderMouseDown) {
+            this._sliderControl.dom.removeEventListener('mousedown', this._domEvtSliderMouseDown);
+            this._sliderControl.dom.removeEventListener('mouseup', this._domEvtSliderMouseUp);
+        }
+
+        if (this._domEvtMouseWheel) {
+            this._sliderControl.dom.removeEventListener("mousemove", this._domEvtMouseWheel, false);
+            this._sliderControl.dom.removeEventListener("wheel", this._domEvtMouseWheel, false);
+        }
+
+        if (this._domEvtPointerLock) {
+            document.removeEventListener('pointerlockchange', this._domEvtPointerLock, false);
+            document.removeEventListener('mozpointerlockchange', this._domEvtPointerLock, false);
+        }
+
+        super.destroy();
     }
 }
 
