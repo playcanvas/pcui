@@ -8,6 +8,8 @@ const CLASS_NUMERIC_INPUT_SLIDER_CONTROL = CLASS_NUMERIC_INPUT + '-slider-contro
 const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-active';
 const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-hidden';
 
+const REGEX_COMMA = /,/g;
+
 /**
  * @name NumericInput
  * @classdesc The NumericInput represents an input element that holds numbers.
@@ -166,6 +168,9 @@ class NumericInput extends TextInput {
     _normalizeValue(value) {
         try {
             if (typeof value === 'string') {
+                // replace commas with dots (for some international keyboards)
+                value = value.replace(REGEX_COMMA, '.');
+
                 // sanitize input to only allow short mathmatical expressions to be evaluated
                 value = value.match(/^[*/+\-0-9().]+$/);
                 if (value !== null && value[0].length < 20) {
