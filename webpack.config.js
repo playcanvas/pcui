@@ -1,4 +1,6 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssnanoPlugin = require('cssnano-webpack-plugin');
 
 module.exports = {
     mode: 'production',
@@ -32,7 +34,7 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: ['style-loader', 'css-loader', {
+                use: [MiniCssExtractPlugin.loader, 'css-loader', {
                     loader: 'sass-loader',
                     options: {
                         additionalData: process.env.EXCLUDE_FONT ? "@import './src/scss/pcui-exclude-font.scss';" : "@import './src/scss/pcui.scss';"
@@ -47,5 +49,20 @@ module.exports = {
             'node_modules'
         ],
         extensions: ['.jsx', '.js']
-    }
+    },
+    optimization: {
+        minimizer: [
+            new CssnanoPlugin({
+                cssnanoOptions: {
+                    preset: ['default', {
+                        discardDuplicates: true,
+                        discardComments: { removeAll: true }
+                    }]
+                }
+            })
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin()
+    ]
 };
