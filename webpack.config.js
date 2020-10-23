@@ -34,7 +34,7 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', {
+                use: [process.env.EXTRACT_CSS ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', {
                     loader: 'sass-loader',
                     options: {
                         additionalData: process.env.EXCLUDE_FONT ? "@import './src/scss/pcui-exclude-font.scss';" : "@import './src/scss/pcui.scss';"
@@ -62,7 +62,5 @@ module.exports = {
             })
         ]
     },
-    plugins: [
-        new MiniCssExtractPlugin()
-    ]
+    plugins: process.env.EXTRACT_CSS ? [new MiniCssExtractPlugin()] : []
 };
