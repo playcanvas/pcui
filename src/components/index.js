@@ -2,6 +2,7 @@ import BooleanInput from './BooleanInput/component';
 import Button from './Button/component';
 import Code from './Code/component';
 import Container from './Container/component';
+import ContextMenu from './ContextMenu/component';
 import Divider from './Divider/component';
 import Element from './Element/component';
 import InfoBox from './InfoBox/component';
@@ -22,6 +23,7 @@ export {
     Button,
     Code,
     Container,
+    ContextMenu,
     Divider,
     Element,
     InfoBox,
