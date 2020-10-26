@@ -1,9 +1,0 @@
-src/
-.storybook/
-docs/
-.gitignore
-.git/
-webpack.config.js
-LICENSE
-package.json
-README.md

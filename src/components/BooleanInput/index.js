@@ -1,4 +1,5 @@
 import './style.scss';
+import './toggle-style.scss';
 import Element from '../Element';
 import * as pcuiClass from '../../class';
 

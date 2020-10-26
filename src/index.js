@@ -18,6 +18,9 @@ import TextAreaInput from './components/TextAreaInput';
 import TextInput from './components/TextInput';
 import VectorInput from './components/VectorInput';
 
+// import pcui-hidden last
+import './scss/_pcui-hidden.scss';
+
 export {
     BooleanInput,
     Button,
