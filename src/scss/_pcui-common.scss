@@ -7,4 +7,24 @@
     user-select: none;
 }
 
+// flex container
+.pcui-flex {
+    &:not(.pcui-hidden) {
+        display: -webkit-flex;
+        display: flex;
+    }
+    flex-direction: column;
+}
+
+// grid container
+.pcui-grid {
+    display: -ms-grid;
+    display: grid;
+}
+
+// scrollable element
+.pcui-scrollable {
+    // show scrollbars automatically
+    overflow: auto;
+}
 
