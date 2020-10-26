@@ -37,7 +37,7 @@ module.exports = {
                 use: [process.env.EXTRACT_CSS ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', {
                     loader: 'sass-loader',
                     options: {
-                        additionalData: process.env.EXCLUDE_FONT ? "@import './src/scss/pcui-exclude-font.scss';" : "@import './src/scss/pcui.scss';"
+                        additionalData: "@import './src/scss/pcui.scss';"
                     }
                 }]
             }
