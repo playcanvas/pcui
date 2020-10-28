@@ -15,7 +15,7 @@ const REGEX_COMMA = /,/g;
  * @classdesc The NumericInput represents an input element that holds numbers.
  * @property {number} [min=0] Gets / sets the minimum value this field can take.
  * @property {number} [max=1] Gets / sets the maximum value this field can take.
- * @property {number} [precision=2] Gets / sets the maximum number of decimals a value can take.
+ * @property {number} [precision=7] Gets / sets the maximum number of decimals a value can take.
  * @property {number} [step=0.01] Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
  * @property {boolean} [hideSlider=true] Hide the input mouse drag slider.
  * @augments TextInput
@@ -44,7 +44,7 @@ class NumericInput extends TextInput {
         this._min = args.min !== undefined ? args.min : null;
         this._max = args.max !== undefined ? args.max : null;
         this._allowNull = args.allowNull || false;
-        this._precision = args.precision !== undefined ? args.precision : 2;
+        this._precision = args.precision !== undefined ? args.precision : 7;
 
         if (args.step !== undefined) {
             this._step = args.step;
