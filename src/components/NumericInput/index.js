@@ -170,11 +170,23 @@ class NumericInput extends TextInput {
                 // replace commas with dots (for some international keyboards)
                 value = value.replace(REGEX_COMMA, '.');
 
+                // remove spaces
+                value = value.replace(/\s/g, '');
+
                 // sanitize input to only allow short mathmatical expressions to be evaluated
                 value = value.match(/^[*/+\-0-9().]+$/);
                 if (value !== null && value[0].length < 20) {
+                    var expression = value[0];
+                    var operators = ['+', '-', '/', '*'];
+                    operators.forEach(operator => {
+                        var expressionArr = expression.split(operator);
+                        expressionArr.forEach((_, i) => {
+                            expressionArr[i] = expressionArr[i].replace(/^0+/, '');
+                        });
+                        expression = expressionArr.join(operator);
+                    });
                     // eslint-disable-next-line
-                    value = Function('"use strict";return (' + value[0] + ')')();
+                    value = Function('"use strict";return (' + expression + ')')();
                 }
             }
         } catch (error) {
