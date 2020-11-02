@@ -44,16 +44,14 @@ class NumericInput extends TextInput {
         this._min = args.min !== undefined ? args.min : null;
         this._max = args.max !== undefined ? args.max : null;
         this._allowNull = args.allowNull || false;
-        this._precision = args.precision !== undefined ? args.precision : 7;
+        this._precision = Number.isFinite(args.precision) ? args.precision : 7;
 
-        if (args.step !== undefined) {
+        if (Number.isFinite(args.step)) {
             this._step = args.step;
+        } else if (Number.isFinite(args.precision)) {
+            this._step = 1 / Math.pow(10, args.precision);
         } else {
-            if (this._precision !== null) {
-                this._step = 1 / Math.pow(10, this._precision);
-            } else {
-                this._step  = 1;
-            }
+            this._step  = 1;
         }
 
         this._oldValue = undefined;
@@ -75,13 +73,14 @@ class NumericInput extends TextInput {
             this._domEvtSliderMouseDown = () => {
                 this._sliderControl.dom.requestPointerLock();
                 this._sliderPrevValue = this.value;
+                this._sliderMovement = 0.0;
             };
 
             this._domEvtSliderMouseUp = () => {
                 document.exitPointerLock();
                 if (this._binding) {
                     const undoValue = this._sliderPrevValue;
-                    const redoValue = this.value;
+                    const redoValue = this._sliderPrevValue + this._sliderMovement;
                     const undo = () => {
                         var history = this._binding._bindingElementToObservers._history;
                         this._binding._bindingElementToObservers._history = null;
@@ -124,8 +123,8 @@ class NumericInput extends TextInput {
             movement = evt.movementX;
         }
         // move one step every 100 pixels
-        movement = movement / 100 * this._step;
-        this.value += movement;
+        this._sliderMovement += movement / 100 * this._step;
+        this.value = this._sliderPrevValue + this._sliderMovement;
     }
 
     _onInputChange(evt) {
