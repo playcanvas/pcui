@@ -173,7 +173,7 @@ class NumericInput extends TextInput {
                 // remove spaces
                 value = value.replace(/\s/g, '');
 
-                // sanitize input to only allow short mathmatical expressions to be evaluated
+                // sanitize input to only allow short mathematical expressions to be evaluated
                 value = value.match(/^[*/+\-0-9().]+$/);
                 if (value !== null && value[0].length < 20) {
                     var expression = value[0];
