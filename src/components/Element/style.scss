@@ -17,6 +17,8 @@
 }
 
 .pcui-element {
+    @extend .font-regular;
+
     border: 0 solid $border-primary;
 
     &.flash {
