@@ -40,6 +40,7 @@ class ArrayInput extends Element {
      * @param {string} [args.type] - The type of values that the array can hold.
      * Can be one of 'boolean', 'number', 'string', 'asset', 'entity', 'rgb',
      * 'vec2', 'vec3', 'vec4', 'curveset'.
+     * @param {boolean} [args.fixedSize] - If true then editing the number of elements that the array has will not be allowed.
      * @param {object} [args.elementArgs] - Arguments for each array Element.
      */
     constructor(args) {
@@ -63,7 +64,8 @@ class ArrayInput extends Element {
         this._sizeInput = new NumericInput({
             class: [CLASS_ARRAY_SIZE],
             placeholder: 'Array Size',
-            value: 0
+            value: 0,
+            readOnly: !!args.fixedSize
         });
         this._sizeInput.on('change', this._onSizeChange.bind(this));
         this._sizeInput.on('focus', this._onFocus.bind(this));
