@@ -53,11 +53,6 @@
     font-smoothing: antialiased;
 }
 
-.font-icon {
-    font-family: 'pc-icon';
-    @extend .font-smooth;
-}
-
 .font-thin {
     font-family: 'Montserrat Thin', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: 100;
@@ -80,6 +75,11 @@
     font-family: 'Montserrat Bold', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-style: normal;
+}
+
+.font-icon {
+    font-family: 'pc-icon';
+    @extend .font-smooth;
 }
 
 .fixedFont {
