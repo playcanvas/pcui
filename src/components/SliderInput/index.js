@@ -113,6 +113,16 @@ class SliderInput extends Element {
         this._domBar.addEventListener('mousedown', this._domMouseDown);
         this._domBar.addEventListener('touchstart', this._domTouchStart, { passive: true });
         this._domHandle.addEventListener('keydown', this._domKeyDown);
+
+        if (args.value !== undefined) {
+            this.value = args.value;
+            // numeric input defaults to 0
+            // so we need to update the handle
+            // manually in this case
+            if (args.value === 0) {
+                this._updateHandle(0);
+            }
+        }
     }
 
     _onMouseDown(evt) {
