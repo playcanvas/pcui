@@ -116,12 +116,12 @@ class SliderInput extends Element {
 
         if (args.value !== undefined) {
             this.value = args.value;
-            // numeric input defaults to 0
-            // so we need to update the handle
-            // manually in this case
-            if (args.value === 0) {
-                this._updateHandle(0);
-            }
+        }
+
+        // update the handle in case a 0 value has been
+        // passed through the constructor
+        if (this.value === 0) {
+            this._updateHandle(0);
         }
     }
 
