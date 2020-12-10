@@ -14,10 +14,7 @@ class BaseComponent extends React.Component {
         }
     }
     attachElement = (nodeElement, containerElement) => {
-        if (!nodeElement) {
-            nodeElement = document.createElement('div');
-        }
-
+        if (!nodeElement) return;
         this.element = new this.elementClass({
             ...this.props,
             dom: nodeElement,

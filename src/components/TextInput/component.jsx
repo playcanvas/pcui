@@ -6,6 +6,10 @@ class TextInput extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 TextInput.propTypes = {};

@@ -1,5 +1,5 @@
 import React from 'react';
-import ElementComponent from './component';
+import Element from './component';
 import { action } from '@storybook/addon-actions';
 import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybook/utils/docscript';
 var name = 'Element';
@@ -11,7 +11,7 @@ var config = {
 
 export default {
     title: config.title,
-    component: ElementComponent,
+    component: Element,
     parameters: {
         docs: {
             storyDescription: config.description
@@ -21,5 +21,5 @@ export default {
 };
 
 export const Main = (args) => {
-    return <ElementComponent {...args} />;
+    return <Element {...args} />;
 };

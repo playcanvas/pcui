@@ -8,6 +8,7 @@ class Spinner extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+
     render() {
         return <svg ref={this.attachElement} />
     }
@@ -18,7 +19,7 @@ Spinner.propTypes = {
 };
 
 Spinner.defaultProps = {
-    size: 12 
+    size: 12
 };
 
 export default Spinner;

@@ -6,6 +6,10 @@ class Overlay extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 Overlay.propTypes = {};

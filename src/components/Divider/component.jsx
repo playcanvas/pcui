@@ -6,6 +6,10 @@ class Divider extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 Divider.propTypes = {};

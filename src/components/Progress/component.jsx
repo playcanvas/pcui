@@ -6,6 +6,10 @@ class Progress extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 Progress.propTypes = {};

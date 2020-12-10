@@ -6,6 +6,10 @@ class ButtonComponent extends BaseComponent {
         super(props);
         this.element = new Element(props);
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 ButtonComponent.propTypes = {};

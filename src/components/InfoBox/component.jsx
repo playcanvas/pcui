@@ -6,6 +6,9 @@ class InfoBox extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+    render() {
+        return <span ref={this.attachElement} />
+    }
 }
 
 InfoBox.propTypes = {};

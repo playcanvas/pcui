@@ -6,6 +6,10 @@ class SelectInput extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 SelectInput.propTypes = {};
@@ -19,7 +23,7 @@ SelectInput.defaultProps = {
         {
             v: 'Bar',
             t: 'Bar'
-        },
+        }
     ]
 };
 

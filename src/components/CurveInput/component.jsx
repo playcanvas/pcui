@@ -7,6 +7,10 @@ class Component extends BaseComponent {
         super(props);
         this.element = new Element(props);
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 Component.propTypes = {

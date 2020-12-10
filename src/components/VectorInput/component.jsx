@@ -6,6 +6,10 @@ class VectorInput extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 VectorInput.propTypes = {};

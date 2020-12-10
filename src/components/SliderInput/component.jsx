@@ -6,6 +6,10 @@ class SliderInput extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 SliderInput.propTypes = {};

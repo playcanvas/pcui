@@ -6,6 +6,10 @@ class NumericInput extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 export default NumericInput;

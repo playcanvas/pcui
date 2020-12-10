@@ -6,6 +6,10 @@ class Code extends BaseComponent {
         super(props);
         this.elementClass = Element;
     }
+
+    render() {
+        return super.render();
+    }
 }
 
 Code.propTypes = {};

@@ -1,17 +1,14 @@
 import React from 'react';
-import Element from './index';
+import ElementCls from './index';
 import BaseComponent from '../base-component';
 
-class ElementComponent extends BaseComponent {
+class Element extends BaseComponent {
     constructor(props) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = ElementCls;
     }
     attachElement = (nodeElement, containerElement) => {
-        if (!nodeElement) {
-            nodeElement = document.createElement('div');
-        }
-
+        if (!nodeElement) return;
         this.element = new this.elementClass(
             nodeElement,
             {
@@ -29,6 +26,9 @@ class ElementComponent extends BaseComponent {
             this.element.parent = this.props.parent;
         }
     }
+    render() {
+        return super.render();
+    }
 }
 
-export default ElementComponent;
+export default Element;
