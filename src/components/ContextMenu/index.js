@@ -36,25 +36,27 @@ class ContextMenu {
         };
 
         var triggerElement = args.triggerElement || args.dom.parentElement;
-        triggerElement.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            menu.class.add(CLASS_ContextMenu_active);
-            var maxMenuHeight = args.items.length * 27.0;
-            var maxMenuWidth = 150.0;
-            var left = e.clientX;
-            var top = e.clientY;
-            if (maxMenuHeight + top > window.innerHeight) {
-                var topDiff = (maxMenuHeight + top) - window.innerHeight;
-                top -= topDiff;
-            }
-            if (maxMenuWidth + left > window.innerWidth) {
-                var leftDiff = (maxMenuWidth + left) - window.innerWidth;
-                left -= leftDiff;
-            }
-            menu.dom.setAttribute("style", `left: ${left}px; top: ${top}px`);
-            document.addEventListener('click', removeMenu);
-        });
+        if (triggerElement) {
+            triggerElement.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                menu.class.add(CLASS_ContextMenu_active);
+                var maxMenuHeight = args.items.length * 27.0;
+                var maxMenuWidth = 150.0;
+                var left = e.clientX;
+                var top = e.clientY;
+                if (maxMenuHeight + top > window.innerHeight) {
+                    var topDiff = (maxMenuHeight + top) - window.innerHeight;
+                    top -= topDiff;
+                }
+                if (maxMenuWidth + left > window.innerWidth) {
+                    var leftDiff = (maxMenuWidth + left) - window.innerWidth;
+                    left -= leftDiff;
+                }
+                menu.dom.setAttribute("style", `left: ${left}px; top: ${top}px`);
+                document.addEventListener('click', removeMenu);
+            });
+        }
 
         if (!args.items) return;
 
