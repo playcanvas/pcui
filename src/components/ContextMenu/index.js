@@ -17,6 +17,9 @@ class ContextMenu {
      * Creates a new ContextMenu.
      *
      * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+     * @param {object[]} [args.items] - The array of items used to populate the array. Example item: { 'text': 'Hello World', 'onClick': () => console.log('Hello World') }.
+     * @param {object} [args.dom] - The dom element to attach this context menu to.
+     * @param {object} [args.triggerElement] - The dom element that will trigger the context menu to open when right clicked. If undefined args.dom will be used.
      */
     constructor(args) {
         if (!args) args = {};
