@@ -53,20 +53,20 @@ The pcui library offers a data binding layer that can be used to synchonise data
 
 In this example the created label will start with `Hello World` as it's text value. When a user enters a value into the text input, the label will be updated with the new value. 
 ```javascript
-import { BindingObserverToElement, BindingElementToObserver, Observer } from 'dist/pcui-binding.js';
+import { BindingObserversToElement, BindingElementToObservers, Observer } from 'dist/pcui-binding.js';
 import { Label, TextInput } from 'dist/pcui.js';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
 // create a label which will listen to updates from the observer
 const label = new Label({
-    binding: new BindingObserverToElement()
+    binding: new BindingObserversToElement()
 });
 // link the observer to the label, telling it to use the text variable as its value
 label.link(observer, 'text');
 // create a text input which will send updates to the observer
 const textInput = new TextInput({
-    binding: new BindingElementToObserver()
+    binding: new BindingElementToObservers()
 });
 // link the observer to the label, telling it to set the text variable on change
 textInput.link(observer, 'text');
