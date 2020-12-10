@@ -139,7 +139,9 @@ const curvePickerDom = (parent) => [{
  * @name CurveInput
  * @classdesc Shows a curve or curveset
  * @property {boolean} renderChanges If true the input will flash when changed.
- * @augments pcui.Element
+ * @augments Container
+ * @mixes IFocusable
+ * @mixes IBindable
  */
 class CurveInput extends Container {
     /**

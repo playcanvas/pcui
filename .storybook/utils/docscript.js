@@ -1,8 +1,5 @@
 import docs from './jsdoc-ast.json';
 
-
-
-
 export function getDescriptionForClass(name) {
     var doc = docs.filter(doc => !!doc.classdesc && doc.name === name);
     if (doc.length !== 0)
@@ -31,7 +28,13 @@ function getPropsForClass(cls, title, result) {
 
         if (doc[i].augments) {
             doc[i].augments.forEach(superCls => {
-                getPropsForClass(superCls, superCls + ' [inherited]', result);
+                getPropsForClass(superCls, 'inherits: ' + superCls, result);
+            });
+        }
+
+        if (doc[i].mixes) {
+            doc[i].mixes.forEach(interfaceCls => {
+                getPropsForClass(interfaceCls, 'implements: ' + interfaceCls, result);
             });
         }
     }

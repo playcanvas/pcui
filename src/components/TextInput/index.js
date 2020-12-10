@@ -8,8 +8,8 @@ const CLASS_TEXT_INPUT = 'pcui-text-input';
  * @name TextInput
  * @classdesc The TextInput is an input element of type text.
  * @augments Element
- * @mixes pcui.IBindable
- * @mixes pcui.IFocusable
+ * @mixes IBindable
+ * @mixes IFocusable
  * @property {string} placeholder Gets / sets the placeholder label that appears on the right of the input.
  * @property {HTMLElement} input Gets the HTML input element.
  * @property {boolean} renderChanges If true then the TextInput will flash when its text changes.

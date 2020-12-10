@@ -12,6 +12,8 @@ const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
  * @classdesc A checkbox element.
  * @property {boolean} renderChanges If true the input will flash when changed.
  * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
  */
 class BooleanInput extends Element {
     /**
