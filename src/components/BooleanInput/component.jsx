@@ -1,7 +1,7 @@
 import Element from './index';
-import ElementComponent from '../Element/component';
+import BaseComponent from '../base-component';
 
-class BooleanInput extends ElementComponent {
+class BooleanInput extends BaseComponent {
     constructor(props) {
         super(props);
         this.elementClass = Element;

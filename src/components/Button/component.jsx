@@ -1,8 +1,8 @@
 import React from 'react';
 import Element from './index';
-import ElementComponent from '../Element/component';
+import BaseComponent from '../base-component';
 
-class Button extends ElementComponent {
+class Button extends BaseComponent {
     constructor(props) {
         super(props);
         this.elementClass = Element;

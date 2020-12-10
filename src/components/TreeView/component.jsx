@@ -1,9 +1,9 @@
 import React from 'react';
 import TreeViewElement from './index';
 import TreeViewItemElement from '../TreeViewItem/index';
-import ElementComponent from '../Element/component';
+import BaseComponent from '../base-component';
 
-class TreeView extends ElementComponent {
+class TreeView extends BaseComponent {
     constructor(props) {
         super(props);
         this.element = new TreeViewElement({...props});

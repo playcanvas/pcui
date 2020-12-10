@@ -1,9 +1,9 @@
 import React from 'react';
 import Element from './index';
 import PropTypes from 'prop-types';
-import ElementComponent from '../Element/component';
+import BaseComponent from '../base-component';
 
-class Spinner extends ElementComponent {
+class Spinner extends BaseComponent {
     constructor(props) {
         super(props);
         this.elementClass = Element;
