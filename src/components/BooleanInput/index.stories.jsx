@@ -8,7 +8,7 @@ var name = 'BooleanInput';
 var config = {
     title: `Input/${name}`,
     description: getDescriptionForClass(name),
-    args: getPropertiesForClass(name),
+    args: getPropertiesForClass(name)
 };
 
 export default {

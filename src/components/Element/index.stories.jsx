@@ -6,6 +6,7 @@ var name = 'Element';
 var config = {
     title: `${name}`,
     description: getDescriptionForClass(name),
+    args: getPropertiesForClass(name)
 };
 
 export default {
