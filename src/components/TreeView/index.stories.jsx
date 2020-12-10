@@ -19,6 +19,7 @@ export default {
             storyDescription: config.description
         }
     },
+    argTypes: config.args
 };
 
 export const Main = (args) => (

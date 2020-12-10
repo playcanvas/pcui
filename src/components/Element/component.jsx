@@ -1,4 +1,5 @@
 import React from 'react';
+import Element from './index';
 
 class ElementComponent extends React.Component {
     constructor(props) {
@@ -12,9 +13,16 @@ class ElementComponent extends React.Component {
         if (props.link) {
             this.link = props.link;
         }
+
+        if (!this.elementClass) {
+            this.elementClass = Element;
+        }
     }
     attachElement = (nodeElement, containerElement) => {
-        if (!nodeElement) return;
+        if (!nodeElement) {
+            nodeElement = document.createElement('div');
+        }
+
         this.element = new this.elementClass({
             ...this.props,
             dom: nodeElement,

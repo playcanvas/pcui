@@ -1,17 +1,16 @@
 import React from 'react';
-import ButtonComponent from './component';
+import ElementComponent from './component';
 import { action } from '@storybook/addon-actions';
 import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybook/utils/docscript';
-var name = 'Button';
+var name = 'Element';
 var config = {
-    title: `Input/${name}`,
+    title: `${name}`,
     description: getDescriptionForClass(name),
-    args: getPropertiesForClass(name),
 };
 
 export default {
     title: config.title,
-    component: ButtonComponent,
+    component: ElementComponent,
     parameters: {
         docs: {
             storyDescription: config.description
@@ -21,5 +20,5 @@ export default {
 };
 
 export const Main = (args) => {
-    return <ButtonComponent icon="E401" onClick={action('button-click')} {...args} />;
+    return <ElementComponent {...args} />;
 };

@@ -1,5 +1,8 @@
 import docs from './jsdoc-ast.json';
 
+
+
+
 export function getDescriptionForClass(name) {
     var doc = docs.filter(doc => !!doc.classdesc && doc.name === name);
     if (doc.length !== 0)
@@ -7,13 +10,17 @@ export function getDescriptionForClass(name) {
     return 'NO DESCRIPTION FOUND';
 }
 
+function getPropsForClass(cls, title, result) {
+    if (result[title]) return;
+    result[title] = [];
 
-export function getPropertiesForClass(name) {
-    var doc = docs.filter(doc => doc.name === name && (!!doc.properties || !!doc.params));
+    var doc = docs.filter(doc => doc.name === cls);// && (!!doc.properties || !!doc.params));
     if (doc.length === 0) {
-        return {};
+        return;
     }
+
     var props = [];
+
     for (var i = 0; i < doc.length; i++) {
         if (doc[i].params && doc[i].params.length > 0) {
             props = [...props, ...doc[i].params];
@@ -21,12 +28,24 @@ export function getPropertiesForClass(name) {
         if (doc[i].properties && doc[i].properties.length > 0) {
             props = [...props, ...doc[i].properties];
         }
+
+        if (doc[i].augments) {
+            doc[i].augments.forEach(superCls => {
+                getPropsForClass(superCls, superCls + ' [inherited]', result);
+            });
+        }
     }
 
-    if (props.length === 0) return props;
+    result[title] = props;
+}
 
-    return props
-        .map(prop => {
+export function getPropertiesForClass(name) {
+    var props = {};
+    getPropsForClass(name, name, props);
+
+    const result = {};
+    for (const title in props) {
+        const list = props[title].map(prop => {
             var defaultValue = null;
             var controlType = null;
             switch (prop.type.names[0]) {
@@ -50,21 +69,30 @@ export function getPropertiesForClass(name) {
                     break;
             }
             if (prop.defaultvalue !== undefined && prop.defaultvalue !== null) defaultValue = prop.defaultvalue;
-            var name = prop.name.replace('args.', '');
-            if (name === 'args') return undefined;
+            var propName = prop.name.replace('args.', '');
+            if (propName === 'args') return undefined;
             return {
-                [name]: {
+                [propName]: {
                     description: prop.description,
                     control: {
-                        type: name === 'renderChanges' ? null : controlType
+                        type: propName === 'renderChanges' ? null : controlType
                     },
                     table: {
                         type: { detail: prop.type.names[0], summary: prop.type.names[0] },
-                        defaultValue: { summary: defaultValue }
+                        defaultValue: { summary: defaultValue },
+                        category: title
                     },
                     defaultValue
                 }
             };
-        })
-        .reduce((accumulator, currentValue) => ({ ...accumulator, ...currentValue}));
+        });
+
+        list.forEach(item => {
+            for (const key in item) {
+                result[key] = item[key];
+            }
+        });
+    }
+
+    return result;
 }
