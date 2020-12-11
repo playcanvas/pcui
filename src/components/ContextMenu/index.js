@@ -65,7 +65,7 @@ class ContextMenu {
             menuItemElement.dom.setAttribute("style", `top: ${i * 27.0}px`);
             if (menuItem.onClick) {
                 menuItemElement.on('click', (e) => {
-                    e.stopPropagation(); removeMenu(); menuItem.onClick();
+                    e.stopPropagation(); removeMenu(); menuItem.onClick(e);
                 });
             }
             var menuItemLabel = new Label({ text: menuItem.text });
