@@ -412,5 +412,4 @@ class Panel extends Container {
     }
 }
 
-export { Panel };
 export default Panel;

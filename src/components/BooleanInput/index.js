@@ -158,5 +158,4 @@ class BooleanInput extends Element {
     }
 }
 
-export { BooleanInput };
 export default BooleanInput;

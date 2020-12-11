@@ -730,5 +730,4 @@ function exposeCssProperty(name) {
 // expose rest of CSS properties
 SIMPLE_CSS_PROPERTIES.forEach(exposeCssProperty);
 
-export { Element };
 export default Element;

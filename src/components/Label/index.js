@@ -124,5 +124,4 @@ class Label extends Element {
     }
 }
 
-export { Label };
 export default Label;

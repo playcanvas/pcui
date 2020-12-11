@@ -740,5 +740,4 @@ class Container extends Element {
     }
 }
 
-export { Container };
 export default Container;

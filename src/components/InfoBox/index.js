@@ -80,7 +80,4 @@ class InfoBox extends Container {
     }
 }
 
-export {
-    InfoBox
-};
 export default InfoBox;
