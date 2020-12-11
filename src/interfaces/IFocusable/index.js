@@ -28,7 +28,6 @@ class IFocusable {
  * @event
  * @name IFocusable#blur
  * @description Fired when the element is blurred (unfocused)
-*/
+ */
 
-export { IFocusable };
 export default IFocusable;

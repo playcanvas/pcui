@@ -1,5 +1,6 @@
 import Events from './events';
 import Observer from '../binding/observer';
+import IBindable from '../interfaces/IBindable';
 
 /**
  * @name BindingBase
@@ -96,7 +97,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#setValue
      * @description Sets a value to the linked observers at the linked paths.
-     * @param {Any} value - The value
+     * @param {*} value - The value
      */
     setValue(value) {
     }
@@ -104,7 +105,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#setValues
      * @description Sets an array of values to the linked observers at the linked paths.
-     * @param {Any[]} values - The values
+     * @param {Array<*>} values - The values
      */
     setValues(values) {
     }
@@ -112,7 +113,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#addValue
      * @description Adds (inserts) a value to the linked observers at the linked paths.
-     * @param {Any} value - The value
+     * @param {*} value - The value
      */
     addValue(value) {
     }
@@ -120,7 +121,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#addValues
      * @description Adds (inserts) multiple values to the linked observers at the linked paths.
-     * @param {Any[]} values - The values
+     * @param {Array<*>} values - The values
      */
     addValues(values) {
     }
@@ -128,7 +129,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#removeValue
      * @description Removes a value from the linked observers at the linked paths.
-     * @param {Any} value - The value
+     * @param {*} value - The value
      */
     removeValue(value) {
     }
@@ -136,7 +137,7 @@ class BindingBase extends Events {
     /**
      * @name BindingBase#removeValues
      * @description Removes multiple values from the linked observers from the linked paths.
-     * @param {Any[]} values - The values
+     * @param {Array<*>} values - The values
      */
     removeValues(values) {
     }

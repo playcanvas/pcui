@@ -6,4 +6,3 @@
 class IFlex {}
 
 export default IFlex;
-
