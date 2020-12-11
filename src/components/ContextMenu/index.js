@@ -37,7 +37,7 @@ class ContextMenu {
 
         var triggerElement = args.triggerElement || args.dom.parentElement;
         if (triggerElement) {
-            triggerElement.addEventListener('contextmenu', (e) => {
+            this._contextMenuEvent = triggerElement.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 menu.class.add(CLASS_ContextMenu_active);
