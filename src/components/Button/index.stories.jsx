@@ -1,12 +1,12 @@
 import React from 'react';
 import ButtonComponent from './component';
 import { action } from '@storybook/addon-actions';
-import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybook/utils/docscript';
+import { getDocsForClass, getStoryBookDocs } from '../../../.storybook/utils/docscript'
+
 var name = 'Button';
 var config = {
     title: `Input/${name}`,
-    description: getDescriptionForClass(name),
-    args: getPropertiesForClass(name),
+    docs: getDocsForClass(name)
 };
 
 export default {
@@ -14,10 +14,12 @@ export default {
     component: ButtonComponent,
     parameters: {
         docs: {
-            storyDescription: config.description
+            description: {
+                component: config.docs.description
+            }
         }
     },
-    argTypes: config.args
+    argTypes: getStoryBookDocs(config.docs)
 };
 
 export const Main = (args) => {

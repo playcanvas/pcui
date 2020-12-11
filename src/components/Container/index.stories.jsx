@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 
 import Container from './component';
 import Label from '../Label/component';
-import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStoryBookDocs } from '../../../.storybook/utils/docscript'
 
 var name = 'Container';
 var config = {
     title: `Layout/${name}`,
-    description: getDescriptionForClass(name),
-    args: getPropertiesForClass(name),
+    docs: getDocsForClass(name)
 };
 
 export default {
@@ -16,10 +15,12 @@ export default {
     component: Container,
     parameters: {
         docs: {
-            storyDescription: config.description
+            description: {
+                component: config.docs.description
+            }
         }
     },
-    argTypes: config.args
+    argTypes: getStoryBookDocs(config.docs)
 };
 
 export const Main = (props) => {

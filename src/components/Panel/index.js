@@ -35,7 +35,7 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
  * @property {boolean} sortable Gets / sets whether the panel can be reordered
  * @property {boolean} collapseHorizontally Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
  * @property {boolean} removable Gets / sets whether the panel can be removed
- * @property {number} headerSize The height of the header in pixels. Defaults to 32.
+ * @property {number} headerSize=32 The height of the header in pixels. Defaults to 32.
  * @property {string} headerText The header text of the panel. Defaults to the empty string.
  * @property {Container} header Gets the header container.
  * @property {Container} content Gets the content conttainer.

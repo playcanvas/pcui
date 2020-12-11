@@ -115,7 +115,7 @@ const ELEMENT_REGISTRY = {};
  * @name Element
  * @classdesc The base class for all UI elements.
  * @augments Events
- * @property {boolean} enabled Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
+ * @property {boolean} enabled=true Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
  * @property {HTMLElement} dom Gets the root DOM node for this Element.
  * @property {Element} parent Gets the parent Element.
  * @property {boolean} hidden Gets / sets whether the Element is hidden.

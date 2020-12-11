@@ -1,13 +1,12 @@
 import React from 'react';
 
 import Component from './component';
-import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStoryBookDocs } from '../../../.storybook/utils/docscript'
 
 var name = 'Divider';
 var config = {
     title: `Layout/${name}`,
-    description: getDescriptionForClass(name),
-    args: getPropertiesForClass(name),
+    docs: getDocsForClass(name)
 };
 
 export default {
@@ -15,10 +14,10 @@ export default {
     component: Component,
     parameters: {
         docs: {
-            storyDescription: config.description
+            storyDescription: config.docs.description
         }
     },
-    argTypes: config.args
+    argTypes: getStoryBookDocs(config.docs)
 };
 
 export const Main = (args) => <Component {...args} />;
