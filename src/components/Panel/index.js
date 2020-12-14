@@ -38,7 +38,7 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
  * @property {number} headerSize=32 The height of the header in pixels. Defaults to 32.
  * @property {string} headerText The header text of the panel. Defaults to the empty string.
  * @property {Container} header Gets the header container.
- * @property {Container} content Gets the content conttainer.
+ * @property {Container} content Gets the content container.
  * @augments Container
  * @mixes IContainer
  * @mixes IFlex
