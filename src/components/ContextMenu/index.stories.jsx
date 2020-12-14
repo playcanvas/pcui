@@ -3,14 +3,13 @@ import React from 'react';
 import Component from './component';
 import Container from '../Container/component';
 import Label from '../Label/component';
-import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 import { action } from '@storybook/addon-actions';
 
 var name = 'ContextMenu';
 var config = {
     title: `Input/${name}`,
-    description: getDescriptionForClass(name),
-    args: getPropertiesForClass(name),
+    docs: getDocsForClass(name)
 };
 
 export default {
@@ -18,10 +17,12 @@ export default {
     component: Component,
     parameters: {
         docs: {
-            storyDescription: config.description
+            description: {
+                component: config.docs.description
+            }
         }
     },
-    argTypes: config.args
+    argTypes: getStorybookDocs(config.docs)
 };
 
 export const Main = (args) => <Container>

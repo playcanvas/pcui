@@ -343,5 +343,4 @@ class SliderInput extends Element {
 
 SliderInput.PROXY_FIELDS = PROXY_FIELDS;
 
-export { SliderInput };
 export default SliderInput;

@@ -32,21 +32,20 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
  * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
  * @property {boolean} flex Gets / sets whether the container supports flex layout. Defaults to false. Cannot co-exist with grid.
  * @property {boolean} grid Gets / sets whether the container supports grid layout. Defaults to false. Cannot co-exist with flex.
- * @property {boolean} collapsible Gets / sets whether the panel can be collapsed by clicking on its header or by setting collapsed to true. Defaults to false.
  * @property {boolean} sortable Gets / sets whether the panel can be reordered
- * @property {boolean} collapsed Gets / sets whether the panel is collapsed or expanded. Defaults to false.
  * @property {boolean} collapseHorizontally Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
  * @property {boolean} removable Gets / sets whether the panel can be removed
- * @property {number} headerSize The height of the header in pixels. Defaults to 32.
+ * @property {number} headerSize=32 The height of the header in pixels. Defaults to 32.
  * @property {string} headerText The header text of the panel. Defaults to the empty string.
- * @property {Container} header Gets the header conttainer.
- * @property {Container} content Gets the content conttainer.
+ * @property {Container} header Gets the header container.
+ * @property {Container} content Gets the content container.
  * @augments Container
- * @mixes pcui.IContainer
- * @mixes pcui.IFlex
- * @mixes pcui.IGrid
- * @mixes pcui.IScrollable
- * @mixes pcui.IResizable
+ * @mixes IContainer
+ * @mixes IFlex
+ * @mixes IGrid
+ * @mixes ICollapsible
+ * @mixes IScrollable
+ * @mixes IResizable
  */
 class Panel extends Container {
     /**
@@ -413,5 +412,4 @@ class Panel extends Container {
     }
 }
 
-export { Panel };
 export default Panel;

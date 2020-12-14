@@ -8,7 +8,7 @@ const CLASS_TEXT = CLASS_ROOT + '-text';
 /**
  * @name GridViewItem
  * @augments Container
- * @mixes pcui.IFocusable
+ * @mixes IFocusable
  * @classdesc Represents a grid view item used in pcui.GridView.
  * @property {boolean} allowSelect If true allow selecting the item. Defaults to true.
  * @property {boolean} selected Whether the item is selected.

@@ -11,7 +11,7 @@ const CLASS_LABEL = 'pcui-label';
  * @property {string} text Gets / sets the text of the Label.
  * @property {boolean} renderChanges If true then the Label will flash when its text changes.
  * @augments Element
- * @mixes pcui.IBindable
+ * @mixes IBindable
  */
 class Label extends Element {
     /**
@@ -124,5 +124,4 @@ class Label extends Element {
     }
 }
 
-export { Label };
 export default Label;

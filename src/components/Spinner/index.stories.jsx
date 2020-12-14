@@ -1,14 +1,13 @@
 import React from 'react';
 
 import SpinnerComponent from './component';
-import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybook/utils/docscript';
+import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 
 var name = 'Spinner';
 
 var config = {
     title: `Misc/${name}`,
-    description: getDescriptionForClass(name),
-    args: getPropertiesForClass(name)
+    docs: getDocsForClass(name)
 };
 
 export default {
@@ -16,10 +15,12 @@ export default {
     component: SpinnerComponent,
     parameters: {
         docs: {
-            storyDescription: config.description
+            description: {
+                component: config.docs.description
+            }
         }
     },
-    argTypes: config.args
+    argTypes: getStorybookDocs(config.docs)
 };
 
 export const Main = (args) => <SpinnerComponent {...args} />;

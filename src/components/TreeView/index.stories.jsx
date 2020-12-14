@@ -2,13 +2,12 @@ import React from 'react';
 
 import TreeView from './component';
 import TreeViewItem from '../TreeViewItem/component';
-import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 
 var name = 'TreeView';
 var config = {
     title: `Layout/${name}`,
-    description: getDescriptionForClass(name),
-    args: getPropertiesForClass(name),
+    docs: getDocsForClass(name)
 };
 
 export default {
@@ -16,9 +15,12 @@ export default {
     component: TreeView,
     parameters: {
         docs: {
-            storyDescription: config.description
+            description: {
+                component: config.docs.description
+            }
         }
     },
+    argTypes: getStorybookDocs(config.docs)
 };
 
 export const Main = (args) => (

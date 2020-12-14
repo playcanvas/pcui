@@ -1017,5 +1017,4 @@ class SelectInput extends Element {
     }
 }
 
-export { SelectInput };
 export default SelectInput;

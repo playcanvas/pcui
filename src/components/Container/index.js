@@ -50,19 +50,12 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
  * @name Container
  * @classdesc A container is the basic building block for Elements that are grouped together.
  * A container can contain any other element including other containers.
- * @property {boolean} flex Gets / sets whether the container supports the flex layout. Cannot coexist with grid.
- * @property {boolean} grid Gets / sets whether the container supports the grid layout. Cannot coexist with flex.
- * @property {number} resizeMin Gets / sets the minimum size the Container can take when resized in pixels.
- * @property {number} resizeMax Gets / sets the maximum size the Container can take when resized in pixels.
- * @property {boolean} scrollable Gets / sets whether the container should be scrollable. Defaults to false.
- * @property {string} resizable Gets / sets whether the Container is resizable and where the resize handle is located. Can
- * be one of 'top', 'bottom', 'right', 'left'. Set to null to disable resizing.
  * @augments Element
- * @mixes pcui.IContainer
- * @mixes pcui.IFlex
- * @mixes pcui.IGrid
- * @mixes pcui.IScrollable
- * @mixes pcui.IResizable
+ * @mixes IContainer
+ * @mixes IFlex
+ * @mixes IGrid
+ * @mixes IScrollable
+ * @mixes IResizable
  */
 class Container extends Element {
     /**
@@ -747,5 +740,4 @@ class Container extends Element {
     }
 }
 
-export { Container };
 export default Container;

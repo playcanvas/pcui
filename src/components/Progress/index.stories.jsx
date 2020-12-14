@@ -1,13 +1,12 @@
 import React from 'react';
 
 import Component from './component';
-import { getDescriptionForClass, getPropertiesForClass } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 
 var name = 'Progress';
 var config = {
     title: `Misc/${name}`,
-    description: getDescriptionForClass(name),
-    args: getPropertiesForClass(name),
+    docs: getDocsForClass(name)
 };
 
 export default {
@@ -15,10 +14,12 @@ export default {
     component: Component,
     parameters: {
         docs: {
-            storyDescription: config.description
+            description: {
+                component: config.docs.description
+            }
         }
     },
-    argTypes: config.args
+    argTypes: getStorybookDocs(config.docs)
 };
 
 export const Main = (args) => <Component {...args} />;

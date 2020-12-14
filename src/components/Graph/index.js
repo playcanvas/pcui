@@ -37,7 +37,7 @@ joint.V.prototype.transform = function (matrix, opt) {
 /**
  * @name Graph
  * @classdesc Represents a graph.
- * @mixes pcui.IFocusable
+ * @mixes IFocusable
  */
 class Graph extends Element {
     /**

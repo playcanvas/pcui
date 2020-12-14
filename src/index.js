@@ -1,3 +1,11 @@
+import IBindable from './interfaces';
+import IFocusable from './interfaces';
+import ICollapsible from './interfaces';
+import IFlex from './interfaces';
+import IGrid from './interfaces';
+import IScrollable from './interfaces';
+import IResizable from './interfaces';
+
 import BooleanInput from './components/BooleanInput';
 import Button from './components/Button';
 import Code from './components/Code';
@@ -22,6 +30,13 @@ import VectorInput from './components/VectorInput';
 import './scss/_pcui-hidden.scss';
 
 export {
+    IBindable,
+    IFocusable,
+    ICollapsible,
+    IScrollable,
+    IResizable,
+    IFlex,
+    IGrid,
     BooleanInput,
     Button,
     Code,

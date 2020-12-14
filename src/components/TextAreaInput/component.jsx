@@ -1,10 +1,14 @@
 import Element from './index';
-import ElementComponent from '../Element/component';
+import BaseComponent from '../base-component';
 
-class TextAreaInput extends ElementComponent {
+class TextAreaInput extends BaseComponent {
     constructor(props) {
         super(props);
         this.elementClass = Element;
+    }
+
+    render() {
+        return super.render();
     }
 }
 
