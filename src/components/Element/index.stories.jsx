@@ -1,5 +1,5 @@
 import Element from './component';
-import { getDocsForClass, getStoryBookDocs } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 
 var name = 'Element';
 var config = {
@@ -17,7 +17,7 @@ export default {
             }
         }
     },
-    argTypes: getStoryBookDocs(config.docs)
+    argTypes: getStorybookDocs(config.docs)
 };
 
 export const Main = (args) => {

@@ -3,7 +3,7 @@ import React from 'react';
 import Component from './component';
 import Container from '../Container/component';
 import Label from '../Label/component';
-import { getDocsForClass, getStoryBookDocs } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 import { action } from '@storybook/addon-actions';
 
 var name = 'ContextMenu';
@@ -22,7 +22,7 @@ export default {
             }
         }
     },
-    argTypes: getStoryBookDocs(config.docs)
+    argTypes: getStorybookDocs(config.docs)
 };
 
 export const Main = (args) => <Container>

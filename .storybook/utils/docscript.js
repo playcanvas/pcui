@@ -125,7 +125,7 @@ export function getDocsForClass(cls) {
     return entry;
 }
 
-export function getStoryBookDocs(data) {
+export function getStorybookDocs(data) {
     var result = {};
 
     // first get parent class properties
@@ -133,7 +133,7 @@ export function getStoryBookDocs(data) {
         data.parentClasses.forEach(cls => {
             var parentDocs = getDocsForClass(cls);
             if (parentDocs) {
-                parentDocs = getStoryBookDocs(parentDocs);
+                parentDocs = getStorybookDocs(parentDocs);
                 result = Object.assign(result, parentDocs);
             }
         });
@@ -144,7 +144,7 @@ export function getStoryBookDocs(data) {
         data.interfaces.forEach(cls => {
             var parentDocs = getDocsForClass(cls);
             if (parentDocs) {
-                parentDocs = getStoryBookDocs(parentDocs);
+                parentDocs = getStorybookDocs(parentDocs);
                 result = Object.assign(result, parentDocs);
             }
         });

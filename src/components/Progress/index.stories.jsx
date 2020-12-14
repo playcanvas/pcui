@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Component from './component';
-import { getDocsForClass, getStoryBookDocs } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 
 var name = 'Progress';
 var config = {
@@ -19,7 +19,7 @@ export default {
             }
         }
     },
-    argTypes: getStoryBookDocs(config.docs)
+    argTypes: getStorybookDocs(config.docs)
 };
 
 export const Main = (args) => <Component {...args} />;

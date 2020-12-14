@@ -2,7 +2,7 @@ import React from 'react';
 
 import Component from './component';
 import { action } from '@storybook/addon-actions';
-import { getDocsForClass, getStoryBookDocs } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 
 var name = 'TextInput';
 var config = {
@@ -20,7 +20,7 @@ export default {
             }
         }
     },
-    argTypes: getStoryBookDocs(config.docs)
+    argTypes: getStorybookDocs(config.docs)
 };
 
 export const Main = (args) => <Component onChange={action('value-change')} {...args} />;

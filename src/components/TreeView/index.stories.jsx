@@ -2,7 +2,7 @@ import React from 'react';
 
 import TreeView from './component';
 import TreeViewItem from '../TreeViewItem/component';
-import { getDocsForClass, getStoryBookDocs } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 
 var name = 'TreeView';
 var config = {
@@ -20,7 +20,7 @@ export default {
             }
         }
     },
-    argTypes: getStoryBookDocs(config.docs)
+    argTypes: getStorybookDocs(config.docs)
 };
 
 export const Main = (args) => (

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SpinnerComponent from './component';
-import { getDocsForClass, getStoryBookDocs } from '../../../.storybook/utils/docscript'
+import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 
 var name = 'Spinner';
 
@@ -20,7 +20,7 @@ export default {
             }
         }
     },
-    argTypes: getStoryBookDocs(config.docs)
+    argTypes: getStorybookDocs(config.docs)
 };
 
 export const Main = (args) => <SpinnerComponent {...args} />;
