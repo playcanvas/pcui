@@ -81,6 +81,8 @@ class SliderInput extends Element {
 
         this._sliderMin = (args.sliderMin !== undefined ? args.sliderMin : this.min || 0);
         this._sliderMax = (args.sliderMax !== undefined ? args.sliderMax : this.max || 1);
+        this._accumValue = 0;
+        this._lastTouchX = 0;
 
         this.dom.appendChild(this._numericInput.dom);
         this._numericInput.parent = this;
@@ -133,13 +135,14 @@ class SliderInput extends Element {
     _onMouseMove(evt) {
         evt.stopPropagation();
         evt.preventDefault();
-        this._onSlideMove(evt.pageX);
+        this._accumValue += evt.movementX;
+        this._onSlideMove();
     }
 
     _onMouseUp(evt) {
         evt.stopPropagation();
         evt.preventDefault();
-        this._onSlideEnd(evt.pageX);
+        this._onSlideEnd();
     }
 
     _onTouchStart(evt) {
@@ -166,7 +169,15 @@ class SliderInput extends Element {
             evt.stopPropagation();
             evt.preventDefault();
 
-            this._onSlideMove(touch.pageX);
+            let delta = 0;
+            if (Math.abs(this._lastTouchX) > 0) {
+                delta = touch.pageX - this._lastTouchX;
+            }
+            this._lastTouchX = touch.pageX;
+            this._accumValue += delta;
+
+            this._onSlideMove();
+
             break;
         }
     }
@@ -210,7 +221,9 @@ class SliderInput extends Element {
 
     _updateHandle(value) {
         const left = Math.max(0, Math.min(1, ((value || 0) - this._sliderMin) / (this._sliderMax - this._sliderMin))) * 100;
-        this._domHandle.style.left = left + '%';
+        const rect = this._domHandle.getBoundingClientRect();
+        const margin = rect.width / 2;  // use the middle of a handle
+        this._domHandle.style.left = left + margin + '%';
     }
 
     _onValueChange(value) {
@@ -234,7 +247,7 @@ class SliderInput extends Element {
 
         this.class.add(CLASS_SLIDER_ACTIVE);
 
-        this._onSlideMove(pageX);
+        this._jumpHandle(pageX);
 
         if (this.binding) {
             this._combineHistory = this.binding.historyCombine;
@@ -242,19 +255,42 @@ class SliderInput extends Element {
         }
     }
 
-    _onSlideMove(pageX) {
+    _jumpHandle(pageX) {
         const rect = this._domSlider.getBoundingClientRect();
-        const x = Math.max(0, Math.min(1, (pageX - rect.left) / rect.width));
+        const handle = this._domHandle.getBoundingClientRect();
+        const isInside = pageX > handle.left && pageX < handle.right;
+        const maxValue = rect.right - rect.left;
+
+        if (this._accumValue < 0) {
+            this._accumValue = 0;
+        } else if (this._accumValue > maxValue) {
+            this._accumValue = maxValue;
+        }
+
+        if (!isInside) {
+            const x = Math.max(0, Math.min(1, (pageX - rect.left) / rect.width));
+            const range = this._sliderMax - this._sliderMin;
+            let value = (x * range) + this._sliderMin;
+            value = parseFloat(value.toFixed(this.precision), 10);
+            this.value = value;
+            this._accumValue = pageX - rect.left;
+        } else {
+            this._onSlideMove();
+        }
+    }
+
+    _onSlideMove() {
+        const rect = this._domSlider.getBoundingClientRect();
+        const x = Math.max(0, Math.min(1, this._accumValue / rect.width));
 
         const range = this._sliderMax - this._sliderMin;
         let value = (x * range) + this._sliderMin;
         value = parseFloat(value.toFixed(this.precision), 10);
-
         this.value = value;
     }
 
-    _onSlideEnd(pageX) {
-        this._onSlideMove(pageX);
+    _onSlideEnd() {
+        this._onSlideMove();
 
         this.class.remove(CLASS_SLIDER_ACTIVE);
 
@@ -270,6 +306,7 @@ class SliderInput extends Element {
             this.binding.historyCombine = this._combineHistory;
         }
 
+        this._lastTouchX = 0;
     }
 
     focus() {
