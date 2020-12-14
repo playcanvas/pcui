@@ -17,22 +17,30 @@ class ContextMenu {
      * Creates a new ContextMenu.
      *
      * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+     * @param {object[]} [args.items] - The array of items used to populate the array. Example item: { 'text': 'Hello World', 'onClick': () => console.log('Hello World') }.
+     * @param {object} [args.dom] - The dom element to attach this context menu to.
+     * @param {object} [args.triggerElement] - The dom element that will trigger the context menu to open when right clicked. If undefined args.dom will be used.
      */
     constructor(args) {
         if (!args) args = {};
 
         this._menu = new Container({ dom: args.dom });
+        this._menu.contextMenu = this;
+        this.args = args;
         this._menu.class.add(CLASS_ContextMenu);
+        var menu = this._menu;
 
         var removeMenu = () => {
             this._menu.class.remove(CLASS_ContextMenu_active);
             document.removeEventListener('click', removeMenu);
         };
 
-        if (args.dom) {
-            args.dom.parentElement.addEventListener('contextmenu', (e) => {
+        var triggerElement = args.triggerElement || args.dom.parentElement;
+        if (triggerElement) {
+            this._contextMenuEvent = triggerElement.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
-                this._menu.class.add(CLASS_ContextMenu_active);
+                e.stopPropagation();
+                menu.class.add(CLASS_ContextMenu_active);
                 var maxMenuHeight = args.items.length * 27.0;
                 var maxMenuWidth = 150.0;
                 var left = e.clientX;
@@ -45,7 +53,7 @@ class ContextMenu {
                     var leftDiff = (maxMenuWidth + left) - window.innerWidth;
                     left -= leftDiff;
                 }
-                args.dom.setAttribute("style", `left: ${left}px; top: ${top}px`);
+                menu.dom.setAttribute("style", `left: ${left}px; top: ${top}px`);
                 document.addEventListener('click', removeMenu);
             });
         }
@@ -57,7 +65,7 @@ class ContextMenu {
             menuItemElement.dom.setAttribute("style", `top: ${i * 27.0}px`);
             if (menuItem.onClick) {
                 menuItemElement.on('click', (e) => {
-                    e.stopPropagation(); removeMenu(); menuItem.onClick();
+                    e.stopPropagation(); removeMenu(); menuItem.onClick(e);
                 });
             }
             var menuItemLabel = new Label({ text: menuItem.text });
