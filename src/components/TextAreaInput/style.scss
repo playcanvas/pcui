@@ -1,5 +1,5 @@
 .pcui-text-area-input {
-    height: 48px;
+    min-height: 48px;
 
     > textarea {
         resize: none;
@@ -14,5 +14,10 @@
         box-shadow: none;
         @extend .fixedFont;
     }
+}
 
+.pcui-text-area-input.pcui-text-area-input-resizable {
+    > textarea {
+        resize: both;
+    }
 }

@@ -2,11 +2,13 @@ import './style.scss';
 import TextInput from '../TextInput';
 
 const CLASS_TEXT_AREA_INPUT = 'pcui-text-area-input';
+const CLASS_TEXT_AREA_INPUT_RESIZABLE = CLASS_TEXT_AREA_INPUT + '-resizable';
 
 /**
  * @name TextAreaInput
  * @classdesc The TextAreaInput wraps a textarea element. It has the same interface as pcui.TextInput.
  * @augments TextInput
+ * @property {boolean} [resizable=false] Sets whether the size of the text area input can be modified by the user.
  */
 class TextAreaInput extends TextInput {
     /**
@@ -22,6 +24,9 @@ class TextAreaInput extends TextInput {
         super(args);
 
         this.class.add(CLASS_TEXT_AREA_INPUT);
+        if (args.resizable) {
+            this.class.add(CLASS_TEXT_AREA_INPUT_RESIZABLE);
+        }
     }
 
     _onInputKeyDown(evt) {
