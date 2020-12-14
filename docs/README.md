@@ -15,7 +15,7 @@ Commit any changes to the pcui repo.
 
 ### Testing docs locally
 
-If you haven't cloned the (playcanvas.github.io)[https://github.com/playcanvas/playcanvas.github.io] repo, install it locally to a projects folder which will now be referenced as `<projects_folder>`.
+If you haven't cloned the [playcanvas.github.io](https://github.com/playcanvas/playcanvas.github.io) repo, install it locally to a projects folder which will now be referenced as `<projects_folder>`.
 
 In the puci directory run:
 
@@ -29,7 +29,7 @@ In the puci directory run:
 
 `python -m SimpleHTTPServer 4000`
 
-Visit [localhost:4000/pcui]
+Visit http://localhost:4000/pcui
 
 ### Publishing docs
 
@@ -43,6 +43,6 @@ In the puci main directory run:
 
 `cd ~/<projects_folder>/playcanvas.github.io`
 
-Commit changes to the (playcanvas.github.io)[https://github.com/playcanvas/playcanvas.github.io] repo & create a PR
+Commit changes to the [playcanvas.github.io](https://github.com/playcanvas/playcanvas.github.io) repo & create a PR
 
 Upon the PR merging into the master branch of the repo, http://playcanvas.github.io/pcui will be updated.
