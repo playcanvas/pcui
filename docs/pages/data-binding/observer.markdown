@@ -23,8 +23,8 @@ First import the components and binding classes.
 ```javascript
 import { Label, TextInput } from '@playcanvas/pcui/pcui.js';
 import {
-    BindingObserverToElement,
-    BindingElementToObserver,
+    BindingObserversToElement,
+    BindingElementToObservers,
     Observer 
 } from '@playcanvas/pcui/pcui-binding.js';
 ```
@@ -39,7 +39,7 @@ Create a label which will listen to updates from the observer.
 
 ```javascript
 const label = new Label({
-    binding: new BindingObserverToElement()
+    binding: new BindingObserversToElement()
 });
 ```
 
@@ -53,7 +53,7 @@ Create a text input which will send updates to the observer.
 
 ```javascript
 const textInput = new TextInput({
-    binding: new BindingElementToObserver()
+    binding: new BindingElementToObservers()
 });
 ```
 
