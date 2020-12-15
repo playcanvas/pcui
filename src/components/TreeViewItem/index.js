@@ -138,7 +138,7 @@ class TreeViewItem extends Container {
         if (!(element instanceof TreeViewItem)) return;
 
         this._numChildren++;
-        this.classRemove(CLASS_EMPTY);
+        if (this._parent !== this._treeView) this.classRemove(CLASS_EMPTY);
 
         if (this._treeView) {
             this._treeView._onAppendTreeViewItem(element);
@@ -375,7 +375,6 @@ class TreeViewItem extends Container {
 
     set open(value) {
         if (this.open === value) return;
-
         if (value) {
             if (!this.numChildren) return;
 

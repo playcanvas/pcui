@@ -27,14 +27,14 @@ export const Main = (args) => (
     <TreeView {...args}>
         <TreeViewItem text='Item 1'>
             <TreeViewItem text='Item 11' />
-        </TreeViewItem>
-        <TreeViewItem text='Item 2' />
-        <TreeViewItem text='Item 3'>
-            <TreeViewItem text='Item 31'>
-                <TreeViewItem text='Item 311' />
-                <TreeViewItem text='Item 321' />
+            <TreeViewItem text='Item 12' />
+            <TreeViewItem text='Item 13'>
+                <TreeViewItem text='Item 131'>
+                    <TreeViewItem text='Item 1311' />
+                    <TreeViewItem text='Item 1321' />
+                </TreeViewItem>
+                <TreeViewItem text='Item 132' />
             </TreeViewItem>
-            <TreeViewItem text='Item 32' />
         </TreeViewItem>
     </TreeView>
 );
