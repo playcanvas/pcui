@@ -19,5 +19,7 @@
 .pcui-text-area-input.pcui-text-area-input-resizable {
     > textarea {
         resize: both;
+        min-height: 44px;
+        min-width: 172px;
     }
 }
