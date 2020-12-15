@@ -1,3 +1,4 @@
+import ArrayInput from './ArrayInput/component';
 import BooleanInput from './BooleanInput/component';
 import Button from './Button/component';
 import Code from './Code/component';
@@ -22,6 +23,7 @@ import VectorInput from './VectorInput/component';
 import '../scss/_pcui-hidden.scss';
 
 export {
+    ArrayInput,
     BooleanInput,
     Button,
     Code,
