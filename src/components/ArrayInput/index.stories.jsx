@@ -27,14 +27,14 @@ export default {
     argTypes: getStorybookDocs(config.docs)
 };
 
-export const String = (args) => <Component inputClass={TextInput} onChange={action('value-change')} {...args} />;
+export const String = (args) => <Component inputClass={TextInput} type='string' onChange={action('value-change')} {...args} />;
 
 export const Number = (args) => <Component onChange={action('value-change')} {...args} />;
 
-export const Boolean = (args) => <Component inputClass={BooleanInput} onChange={action('value-change')} {...args} />;
+export const Boolean = (args) => <Component inputClass={BooleanInput} type='boolean' onChange={action('value-change')} {...args} />;
 
-export const Vec2 = (args) => <Component inputClass={VectorInput} elementArgs={{ dimensions: 2 }} onChange={action('value-change')} {...args} />;
+export const Vec2 = (args) => <Component inputClass={VectorInput} type='vec2' elementArgs={{ dimensions: 2 }} onChange={action('value-change')} {...args} />;
 
-export const Vec3 = (args) => <Component inputClass={VectorInput} elementArgs={{ dimensions: 3 }} onChange={action('value-change')} {...args} />;
+export const Vec3 = (args) => <Component inputClass={VectorInput} type='vec3' elementArgs={{ dimensions: 3 }} onChange={action('value-change')} {...args} />;
 
-export const Vec4 = (args) => <Component inputClass={VectorInput} elementArgs={{ dimensions: 4 }} onChange={action('value-change')} {...args} />;
+export const Vec4 = (args) => <Component inputClass={VectorInput} type='vec4' elementArgs={{ dimensions: 4 }} onChange={action('value-change')} {...args} />;

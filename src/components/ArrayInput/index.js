@@ -17,14 +17,9 @@ var DEFAULTS = {
     boolean: false,
     number: 0,
     string: '',
-    asset: null,
-    entity: null,
-    rgb: [1, 1, 1],
-    rgba: [1, 1, 1, 1],
     vec2: [0, 0],
     vec3: [0, 0, 0],
-    vec4: [0, 0, 0, 0],
-    curveset: { keys: [0, 0], type: 2 }
+    vec4: [0, 0, 0, 0]
 };
 
 /**
@@ -91,7 +86,7 @@ class ArrayInput extends Element {
 
         let valueType = args.elementArgs && args.elementArgs.type || args.type;
         if (!DEFAULTS.hasOwnProperty(valueType)) {
-            valueType = 'string';
+            valueType = 'number';
         }
 
         this._valueType = valueType;
