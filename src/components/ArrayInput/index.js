@@ -23,6 +23,23 @@ var DEFAULTS = {
 };
 
 /**
+ * @event
+ * @name ArrayInput#linkElement
+ * @param {Element} element The array element
+ * @param {Number} index The index of the array element
+ * @param {String} path The path linked
+ * @description Fired when an array element is linked to observers
+ */
+
+/**
+ * @event
+ * @name ArrayInput#unlinkElement
+ * @param {Element} element The array element
+ * @param {Number} index The index of the array element
+ * @description Fired when an array element is unlinked from observers
+ */
+
+/**
  * @name ArrayInput
  * @classdesc Element that allows editing an array of values.
  * @property {boolean} renderChanges If true the input will flash when changed.
@@ -57,12 +74,17 @@ class ArrayInput extends Element {
 
         this.class.add(CLASS_ARRAY_INPUT, CLASS_ARRAY_EMPTY);
 
+        this._usePanels = args.usePanels || false;
+
         this._sizeInput = new NumericInput({
             class: [CLASS_ARRAY_SIZE],
             placeholder: 'Array Size',
             value: 0,
             readOnly: !!args.fixedSize,
-            hideSlider: true
+            hideSlider: true,
+            step: 1,
+            precision: 0,
+            min: 0
         });
         this._sizeInput.on('change', this._onSizeChange.bind(this));
         this._sizeInput.on('focus', this._onFocus.bind(this));
@@ -83,6 +105,8 @@ class ArrayInput extends Element {
         this._container.append(this._containerArray);
         this._suspendArrayElementEvts = false;
         this._arrayElementChangeTimeout = null;
+
+        this._getDefaultFn = args.getDefaultFn || null;
 
         let valueType = args.elementArgs && args.elementArgs.type || args.type;
         if (!DEFAULTS.hasOwnProperty(valueType)) {
@@ -120,16 +144,46 @@ class ArrayInput extends Element {
         if (size === null) return;
         if (this._suspendSizeChangeEvt) return;
 
+        // initialize default value for each new array element
+        let defaultValue;
+        const initDefaultValue = () => {
+            if (this._getDefaultFn) {
+                defaultValue = this._getDefaultFn();
+            } else {
+                defaultValue = DEFAULTS[this._valueType];
+                if (this._valueType === 'curveset') {
+                    defaultValue = utils.deepCopy(defaultValue);
+                    if (Array.isArray(this._elementArgs.curves)) {
+                        for (let i = 0; i < this._elementArgs.curves.length; i++) {
+                            defaultValue.keys.push([0, 0]);
+                        }
+                    }
+                } else if (this._valueType === 'gradient') {
+                    defaultValue = utils.deepCopy(defaultValue);
+                    if (this._elementArgs.channels) {
+                        for (let i = 0; i < this._elementArgs.channels; i++) {
+                            defaultValue.keys.push([0, 1]);
+                        }
+                    }
+                }
+            }
+        };
+
+        // resize array
         const values = this._values.map(array => {
             if (!array) {
                 array = new Array(size);
                 for (let i = 0; i < size; i++) {
                     array[i] = utils.deepCopy(DEFAULTS[this._valueType]);
+                    if (defaultValue === undefined) initDefaultValue();
+                    array[i] = utils.deepCopy(defaultValue);
                 }
             } else if (array.length < size) {
                 const newArray = new Array(size - array.length);
                 for (let i = 0; i < newArray.length; i++) {
                     newArray[i] = utils.deepCopy(DEFAULTS[this._valueType]);
+                    if (defaultValue === undefined) initDefaultValue();
+                    newArray[i] = utils.deepCopy(defaultValue);
                 }
                 array = array.concat(newArray);
             } else {
@@ -147,6 +201,8 @@ class ArrayInput extends Element {
             const array = new Array(size);
             for (let i = 0; i < size; i++) {
                 array[i] = utils.deepCopy(DEFAULTS[this._valueType]);
+                if (defaultValue === undefined) initDefaultValue();
+                array[i] = utils.deepCopy(defaultValue);
             }
             values.push(array);
         }
@@ -163,20 +219,48 @@ class ArrayInput extends Element {
     }
 
     _createArrayElement() {
-        const args = Object.assign({
-            binding: this._binding && this._binding.clone()
-        }, this._elementArgs);
+
+        const args = Object.assign({}, this._elementArgs);
+        if (args.binding) {
+            args.binding = args.binding.clone();
+        } else if (this._binding) {
+            args.binding = this._binding.clone();
+        }
 
         // set renderChanges after value is set
         // to prevent flashing on initial value set
         args.renderChanges = false;
 
-        const container = new Container({
-            flex: true,
-            flexDirection: 'row',
-            alignItems: 'center',
-            class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
-        });
+        let container;
+        if (this._usePanels) {
+            container = new pcui.Panel({
+                headerText: `[${this._arrayElements.length}]`,
+                removable: true,
+                collapsible: true,
+                class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
+            });
+        } else {
+            container = new pcui.Container({
+                flex: true,
+                flexDirection: 'row',
+                alignItems: 'center',
+                class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
+            });
+        }
+
+        if (this._elementType === 'json' && args.attributes) {
+            args.attributes = args.attributes.map(attr => {
+                if (!attr.path) return attr;
+
+                // fix paths to include array element index
+                attr = Object.assign({}, attr);
+                const parts = attr.path.split('.');
+                parts.splice(parts.length - 1, 0, this._arrayElements.length);
+                attr.path = parts.join('.');
+
+                return attr;
+            });
+        }
 
         const element = this._args.inputClass ? new this._args.inputClass(args) : new NumericInput(args);
         container.append(element);
@@ -190,17 +274,22 @@ class ArrayInput extends Element {
 
         this._arrayElements.push(entry);
 
-        const btnDelete = new Button({
-            icon: 'E289',
-            size: 'small',
-            class: CLASS_ARRAY_DELETE,
-            tabIndex: -1 // skip buttons on tab
-        });
-        btnDelete.on('click', () => {
-            this._removeArrayElement(entry);
-        });
-
-        container.append(btnDelete);
+        if (!this._usePanels) {
+            const btnDelete = new pcui.Button({
+                icon: 'E289',
+                size: 'small',
+                class: CLASS_ARRAY_DELETE,
+                tabIndex: -1 // skip buttons on tab
+            });
+            btnDelete.on('click', () => {
+                this._removeArrayElement(entry);
+            });
+            container.append(btnDelete);
+        } else {
+            container.on('click:remove', () => {
+                this._removeArrayElement(entry);
+            });
+        }
 
         element.on('change', (value) => {
             this._onArrayElementChange(entry, value);
@@ -258,11 +347,12 @@ class ArrayInput extends Element {
         element.unlink();
         element.value = null;
 
-        if (useSinglePath) {
-            element.link(observers, paths[0] + `.${index}`);
-        } else {
-            element.link(observers, paths.map(path => `${path}.${index}`));
-        }
+        this.emit('unlinkElement', element, index);
+
+        const path = (useSinglePath ? paths[0] + `.${index}` : paths.map(path => `${path}.${index}`));
+        element.link(observers, path);
+
+        this.emit('linkElement', element, index, path);
     }
 
     _updateValues(values, applyToBinding) {
@@ -377,6 +467,10 @@ class ArrayInput extends Element {
     }
 
     set value(value) {
+        if (!Array.isArray(value)) {
+            value = [null];
+        }
+
         const current = this.value || [];
         if (current.equals(value)) return;
 
