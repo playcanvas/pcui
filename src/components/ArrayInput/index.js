@@ -48,6 +48,8 @@ var DEFAULTS = {
  * @property {object} elementArgs Arguments for each array Element.
  * @property {object} inputClass The class that should be used as the input for each array element. Can be one of: TextInput, BooleanInput, AssetInput, VectorInput
  * @augments Element
+ * @mixes IBindable
+ * @mixes IFocusable
  */
 class ArrayInput extends Element {
     /**
