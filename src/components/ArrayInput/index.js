@@ -26,17 +26,17 @@ var DEFAULTS = {
 /**
  * @event
  * @name ArrayInput#linkElement
- * @param {Element} element The array element
- * @param {Number} index The index of the array element
- * @param {String} path The path linked
+ * @property {Element} element The array element
+ * @property {number} index The index of the array element
+ * @property {string} path The path linked
  * @description Fired when an array element is linked to observers
  */
 
 /**
  * @event
  * @name ArrayInput#unlinkElement
- * @param {Element} element The array element
- * @param {Number} index The index of the array element
+ * @property {Element} element The array element
+ * @property {number} index The index of the array element
  * @description Fired when an array element is unlinked from observers
  */
 
