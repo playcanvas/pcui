@@ -14,15 +14,6 @@ const CLASS_ARRAY_CONTAINER = CLASS_ARRAY_INPUT + '-items';
 const CLASS_ARRAY_ELEMENT = CLASS_ARRAY_INPUT + '-item';
 const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
 
-var DEFAULTS = {
-    boolean: false,
-    number: 0,
-    string: '',
-    vec2: [0, 0],
-    vec3: [0, 0, 0],
-    vec4: [0, 0, 0, 0]
-};
-
 /**
  * @event
  * @name ArrayInput#linkElement
@@ -112,7 +103,7 @@ class ArrayInput extends Element {
         this._getDefaultFn = args.getDefaultFn || null;
 
         let valueType = args.elementArgs && args.elementArgs.type || args.type;
-        if (!DEFAULTS.hasOwnProperty(valueType)) {
+        if (!ArrayInput.DEFAULTS.hasOwnProperty(valueType)) {
             valueType = 'number';
         }
 
@@ -153,7 +144,7 @@ class ArrayInput extends Element {
             if (this._getDefaultFn) {
                 defaultValue = this._getDefaultFn();
             } else {
-                defaultValue = DEFAULTS[this._valueType];
+                defaultValue = ArrayInput.DEFAULTS[this._valueType];
                 if (this._valueType === 'curveset') {
                     defaultValue = utils.deepCopy(defaultValue);
                     if (Array.isArray(this._elementArgs.curves)) {
@@ -177,14 +168,14 @@ class ArrayInput extends Element {
             if (!array) {
                 array = new Array(size);
                 for (let i = 0; i < size; i++) {
-                    array[i] = utils.deepCopy(DEFAULTS[this._valueType]);
+                    array[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType]);
                     if (defaultValue === undefined) initDefaultValue();
                     array[i] = utils.deepCopy(defaultValue);
                 }
             } else if (array.length < size) {
                 const newArray = new Array(size - array.length);
                 for (let i = 0; i < newArray.length; i++) {
-                    newArray[i] = utils.deepCopy(DEFAULTS[this._valueType]);
+                    newArray[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType]);
                     if (defaultValue === undefined) initDefaultValue();
                     newArray[i] = utils.deepCopy(defaultValue);
                 }
@@ -203,7 +194,7 @@ class ArrayInput extends Element {
         if (!values.length) {
             const array = new Array(size);
             for (let i = 0; i < size; i++) {
-                array[i] = utils.deepCopy(DEFAULTS[this._valueType]);
+                array[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType]);
                 if (defaultValue === undefined) initDefaultValue();
                 array[i] = utils.deepCopy(defaultValue);
             }
@@ -499,5 +490,14 @@ class ArrayInput extends Element {
         });
     }
 }
+
+ArrayInput.DEFAULTS = {
+    boolean: false,
+    number: 0,
+    string: '',
+    vec2: [0, 0],
+    vec3: [0, 0, 0],
+    vec4: [0, 0, 0, 0]
+};
 
 export default ArrayInput;
