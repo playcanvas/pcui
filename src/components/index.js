@@ -16,6 +16,8 @@ import SliderInput from './SliderInput/component';
 import Spinner from './Spinner/component';
 import TextAreaInput from './TextAreaInput/component';
 import TextInput from './TextInput/component';
+import TreeView from './TreeView/component';
+import TreeViewItem from './TreeViewItem/component';
 import VectorInput from './VectorInput/component';
 
 // import pcui-hidden last
@@ -40,5 +42,7 @@ export {
     Spinner,
     TextAreaInput,
     TextInput,
+    TreeView,
+    TreeViewItem,
     VectorInput
 };
