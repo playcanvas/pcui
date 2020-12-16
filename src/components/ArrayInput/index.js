@@ -494,7 +494,7 @@ class ArrayInput extends Element {
 ArrayInput.DEFAULTS = {
     boolean: false,
     number: 0,
-    string: 'tester',
+    string: '',
     vec2: [0, 0],
     vec3: [0, 0, 0],
     vec4: [0, 0, 0, 0]
