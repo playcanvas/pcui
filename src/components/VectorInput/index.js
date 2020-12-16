@@ -99,7 +99,7 @@ class VectorInput extends Element {
     _updateValue(value) {
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
 
-        if (this.value.equals(value)) return false;
+        if (JSON.stringify(this.value) === JSON.stringify(value)) return false;
 
         this._applyingChange = true;
 

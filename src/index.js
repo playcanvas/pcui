@@ -6,6 +6,7 @@ import IGrid from './interfaces';
 import IScrollable from './interfaces';
 import IResizable from './interfaces';
 
+import ArrayInput from './components/ArrayInput';
 import BooleanInput from './components/BooleanInput';
 import Button from './components/Button';
 import Code from './components/Code';
@@ -39,6 +40,7 @@ export {
     IResizable,
     IFlex,
     IGrid,
+    ArrayInput,
     BooleanInput,
     Button,
     Code,
