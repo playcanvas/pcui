@@ -59,6 +59,7 @@ export {
     Spinner,
     TextAreaInput,
     TextInput,
+    TreeView,
     TreeViewItem,
     VectorInput
 };
