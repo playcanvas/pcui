@@ -265,7 +265,7 @@ class ArrayInput extends Element {
             });
         }
 
-        const element = this._args.inputClass ? new this._args.inputClass(args) : new NumericInput(args);
+        const element = this._args.inputClass ? new this._args.inputClass(args) : Element.create(this._elementType, args);
         container.append(element);
 
         element.renderChanges = this.renderChanges;
