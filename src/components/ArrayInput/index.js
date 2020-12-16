@@ -3,6 +3,7 @@ import './style.scss';
 
 import Element from '../Element';
 import Container from '../Container';
+import Panel from '../Panel';
 import NumericInput from '../NumericInput';
 import Button from '../Button';
 
@@ -50,7 +51,7 @@ var DEFAULTS = {
  */
 class ArrayInput extends Element {
     /**
-     * Creates a new pcui.ArrayInput.
+     * Creates a new ArrayInput.
      *
      * @param {object} args - The arguments.
      */
@@ -233,14 +234,14 @@ class ArrayInput extends Element {
 
         let container;
         if (this._usePanels) {
-            container = new pcui.Panel({
+            container = new Panel({
                 headerText: `[${this._arrayElements.length}]`,
                 removable: true,
                 collapsible: true,
                 class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
             });
         } else {
-            container = new pcui.Container({
+            container = new Container({
                 flex: true,
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -275,7 +276,7 @@ class ArrayInput extends Element {
         this._arrayElements.push(entry);
 
         if (!this._usePanels) {
-            const btnDelete = new pcui.Button({
+            const btnDelete = new Button({
                 icon: 'E289',
                 size: 'small',
                 class: CLASS_ARRAY_DELETE,
