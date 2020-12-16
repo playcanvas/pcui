@@ -1,5 +1,5 @@
 .pcui-text-area-input {
-    height: 48px;
+    min-height: 48px;
 
     > textarea {
         resize: none;
@@ -13,6 +13,31 @@
         outline: none;
         box-shadow: none;
         @extend .fixedFont;
+        min-height: 44px;
+        min-width: 172px;
     }
+}
 
+.pcui-text-area-input.pcui-text-area-input-resizable-none {
+    > textarea {
+        resize: none;
+    }
+}
+
+.pcui-text-area-input.pcui-text-area-input-resizable-both {
+    > textarea {
+        resize: both;
+    }
+}
+
+.pcui-text-area-input.pcui-text-area-input-resizable-horizontal {
+    > textarea {
+        resize: horizontal;
+    }
+}
+
+.pcui-text-area-input.pcui-text-area-input-resizable-vertical {
+    > textarea {
+        resize: vertical;
+    }
 }

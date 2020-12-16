@@ -4,7 +4,7 @@
     border-radius: 2px;
     box-sizing: border-box;
     margin: $element-margin;
-    height: 24px;
+    min-height: 24px;
     background-color: $bcg-dark;
     vertical-align: top;
     transition: color 100ms, background-color 100ms, box-shadow 100ms;
