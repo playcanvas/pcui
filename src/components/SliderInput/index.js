@@ -255,8 +255,12 @@ class SliderInput extends Element {
         }
     }
 
+    _getDomSliderBarRect() {
+        return this._domSlider.children[0].getBoundingClientRect();
+    }
+
     _jumpHandle(pageX) {
-        const rect = this._domSlider.getBoundingClientRect();
+        const rect = this._getDomSliderBarRect();
         const handle = this._domHandle.getBoundingClientRect();
         const isInside = pageX > handle.left && pageX < handle.right;
         const maxValue = rect.right - rect.left;
@@ -280,7 +284,7 @@ class SliderInput extends Element {
     }
 
     _onSlideMove() {
-        const rect = this._domSlider.getBoundingClientRect();
+        const rect = this._getDomSliderBarRect();
         const x = Math.max(0, Math.min(1, this._accumValue / rect.width));
 
         const range = this._sliderMax - this._sliderMin;
