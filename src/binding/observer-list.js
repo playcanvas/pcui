@@ -306,3 +306,5 @@ ObserverList.prototype.json = function () {
     }
     return items;
 };
+
+export default ObserverList;
