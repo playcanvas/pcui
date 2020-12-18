@@ -77,12 +77,17 @@ class Container extends Element {
         this.domContent = this._dom;
 
         // scroll
-        this.scrollable = args.scrollable !== undefined ? args.scrollable : false;
+        this._scrollable = false;
+        if (args.scrollable) {
+            this.scrollable = true;
+        }
 
         // flex
+        this._flex = false;
         this.flex = !!args.flex;
 
         // grid
+        this._grid = false;
         let grid = !!args.grid;
         if (grid) {
             if (this.flex) {
