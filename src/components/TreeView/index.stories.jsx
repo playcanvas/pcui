@@ -31,7 +31,7 @@ export const Main = (args) => (
             <TreeViewItem text='Item 13'>
                 <TreeViewItem text='Item 131'>
                     <TreeViewItem text='Item 1311' />
-                    <TreeViewItem text='Item 1321' />
+                    <TreeViewItem text='Item 1312' />
                 </TreeViewItem>
                 <TreeViewItem text='Item 132' />
             </TreeViewItem>
