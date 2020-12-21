@@ -24,7 +24,8 @@
     // as specifically not flexible
     > *:first-child {
         &:not(.pcui-not-flexible) {
-            flex: 1;
+            flex-grow: 1;
+            flex-shrink: 0;
         }
     }
 
