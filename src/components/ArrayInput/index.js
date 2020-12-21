@@ -56,6 +56,7 @@ class ArrayInput extends Element {
         delete args.binding;
 
         const container = new Container({
+            dom: args.dom,
             flex: true
         });
 
@@ -106,6 +107,8 @@ class ArrayInput extends Element {
         if (!ArrayInput.DEFAULTS.hasOwnProperty(valueType)) {
             valueType = 'string';
         }
+
+        delete args.dom;
 
         this._valueType = valueType;
         this._elementType = args.type;

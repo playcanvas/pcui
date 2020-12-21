@@ -4,10 +4,6 @@ import Component from './component';
 import { action } from '@storybook/addon-actions';
 import { getDocsForClass, getStorybookDocs } from '../../../.storybook/utils/docscript'
 
-import TextInput from '../TextInput';
-import BooleanInput from '../BooleanInput';
-import VectorInput from '../VectorInput';
-
 var name = 'ArrayInput';
 var config = {
     title: `Input/${name}`,
