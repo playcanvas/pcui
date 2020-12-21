@@ -1,4 +1,5 @@
 import './style.scss';
+import Element from '../Element';
 import Container from '../Container';
 
 const CLASS_OVERLAY = 'pcui-overlay';
@@ -105,5 +106,7 @@ class Overlay extends Container {
         }
     }
 }
+
+Element.register('overlay', Overlay);
 
 export default Overlay;

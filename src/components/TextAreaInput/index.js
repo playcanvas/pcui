@@ -1,4 +1,5 @@
 import './style.scss';
+import Element from '../Element';
 import TextInput from '../TextInput';
 
 const CLASS_TEXT_AREA_INPUT = 'pcui-text-area-input';
@@ -53,5 +54,7 @@ class TextAreaInput extends TextInput {
         this.emit('keydown', evt);
     }
 }
+
+Element.register('text', TextAreaInput, { renderChanges: true });
 
 export default TextAreaInput;

@@ -124,4 +124,6 @@ class Label extends Element {
     }
 }
 
+Element.register('label', Label);
+
 export default Label;

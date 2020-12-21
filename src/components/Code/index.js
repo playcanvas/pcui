@@ -1,4 +1,5 @@
 import './style.scss';
+import Element from '../Element';
 import Container from '../Container';
 import Label from '../Label';
 
@@ -40,5 +41,7 @@ class Code extends Container {
         return this._text;
     }
 }
+
+Element.register('code', Code);
 
 export default Code;

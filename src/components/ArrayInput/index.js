@@ -17,27 +17,24 @@ const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
 /**
  * @event
  * @name ArrayInput#linkElement
- * @property {Element} element The array element
- * @property {number} index The index of the array element
- * @property {string} path The path linked
+ * @param {Element} element - The array element
+ * @param {number} index - The index of the array element
+ * @param {string} path - The path linked
  * @description Fired when an array element is linked to observers
  */
 
 /**
  * @event
  * @name ArrayInput#unlinkElement
- * @property {Element} element The array element
- * @property {number} index The index of the array element
+ * @param {Element} element - The array element
+ * @param {number} index - The index of the array element
  * @description Fired when an array element is unlinked from observers
  */
 
 /**
  * @name ArrayInput
  * @classdesc Element that allows editing an array of values.
- * @property {boolean} renderChanges If true the input will flash when changed.
- * @property {boolean} fixedSize If true then editing the number of elements that the array has will not be allowed.
- * @property {object} elementArgs Arguments for each array Element.
- * @property {object} inputClass The class that should be used as the input for each array element. Can be one of: TextInput, BooleanInput, AssetInput, VectorInput
+ * @property {boolean} renderChanges - If true the input will flash when changed.
  * @augments Element
  * @mixes IBindable
  * @mixes IFocusable
@@ -47,6 +44,9 @@ class ArrayInput extends Element {
      * Creates a new ArrayInput.
      *
      * @param {object} args - The arguments.
+     * @param {string} [args.type] - The type of values that the array can hold.
+     * @param {boolean} [args.fixedSize] - If true then editing the number of elements that the array has will not be allowed.
+     * @param {object} [args.elementArgs] - Arguments for each array Element.
      */
     constructor(args) {
         args = Object.assign({}, args);
@@ -59,32 +59,32 @@ class ArrayInput extends Element {
             flex: true
         });
 
-        super(args.dom ? args.dom : document.createElement('div'), args);
+        super(container.dom, args);
 
-        this._args = args;
         this._container = container;
-        this.dom.appendChild(this._container.dom);
         this._container.parent = this;
 
         this.class.add(CLASS_ARRAY_INPUT, CLASS_ARRAY_EMPTY);
 
         this._usePanels = args.usePanels || false;
 
-        this._sizeInput = new NumericInput({
+        this._fixedSize = !!args.fixedSize;
+
+        this._inputSize = new NumericInput({
             class: [CLASS_ARRAY_SIZE],
             placeholder: 'Array Size',
             value: 0,
-            readOnly: !!args.fixedSize,
             hideSlider: true,
             step: 1,
             precision: 0,
-            min: 0
+            min: 0,
+            readOnly: this._fixedSize
         });
-        this._sizeInput.on('change', this._onSizeChange.bind(this));
-        this._sizeInput.on('focus', this._onFocus.bind(this));
-        this._sizeInput.on('blur', this._onBlur.bind(this));
+        this._inputSize.on('change', this._onSizeChange.bind(this));
+        this._inputSize.on('focus', this._onFocus.bind(this));
+        this._inputSize.on('blur', this._onBlur.bind(this));
         this._suspendSizeChangeEvt = false;
-        this._container.append(this._sizeInput);
+        this._container.append(this._inputSize);
 
         this._containerArray = new Container({
             class: CLASS_ARRAY_CONTAINER,
@@ -104,12 +104,12 @@ class ArrayInput extends Element {
 
         let valueType = args.elementArgs && args.elementArgs.type || args.type;
         if (!ArrayInput.DEFAULTS.hasOwnProperty(valueType)) {
-            valueType = 'number';
+            valueType = 'string';
         }
 
         this._valueType = valueType;
         this._elementType = args.type;
-        this._elementArgs = args.elementArgs || {};
+        this._elementArgs = args.elementArgs || args;
 
         this._arrayElements = [];
 
@@ -213,7 +213,6 @@ class ArrayInput extends Element {
     }
 
     _createArrayElement() {
-
         const args = Object.assign({}, this._elementArgs);
         if (args.binding) {
             args.binding = args.binding.clone();
@@ -229,7 +228,7 @@ class ArrayInput extends Element {
         if (this._usePanels) {
             container = new Panel({
                 headerText: `[${this._arrayElements.length}]`,
-                removable: true,
+                removable: !this._fixedSize,
                 collapsible: true,
                 class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
             });
@@ -256,7 +255,7 @@ class ArrayInput extends Element {
             });
         }
 
-        const element = this._args.inputClass ? new this._args.inputClass(args) : Element.create(this._elementType, args);
+        const element = Element.create(this._elementType, args);
         container.append(element);
 
         element.renderChanges = this.renderChanges;
@@ -269,16 +268,19 @@ class ArrayInput extends Element {
         this._arrayElements.push(entry);
 
         if (!this._usePanels) {
-            const btnDelete = new Button({
-                icon: 'E289',
-                size: 'small',
-                class: CLASS_ARRAY_DELETE,
-                tabIndex: -1 // skip buttons on tab
-            });
-            btnDelete.on('click', () => {
-                this._removeArrayElement(entry);
-            });
-            container.append(btnDelete);
+            if (!this._fixedSize) {
+                const btnDelete = new Button({
+                    icon: 'E289',
+                    size: 'small',
+                    class: CLASS_ARRAY_DELETE,
+                    tabIndex: -1 // skip buttons on tab
+                });
+                btnDelete.on('click', () => {
+                    this._removeArrayElement(entry);
+                });
+
+                container.append(btnDelete);
+            }
         } else {
             container.on('click:remove', () => {
                 this._removeArrayElement(entry);
@@ -414,7 +416,7 @@ class ArrayInput extends Element {
         }
 
 
-        this._sizeInput.values = arrayLengths;
+        this._inputSize.values = arrayLengths;
 
         this._suspendSizeChangeEvt = false;
         this._suspendArrayElementEvts = false;
@@ -428,11 +430,23 @@ class ArrayInput extends Element {
     }
 
     focus() {
-        this._sizeInput.focus();
+        this._inputSize.focus();
     }
 
     blur() {
-        this._sizeInput.blur();
+        this._inputSize.blur();
+    }
+
+    /**
+     * @name ArrayInput#forEachArrayElement
+     * @description Executes the specified function for each array element.
+     * @param {Function} fn - The function with signature (element, index) => bool to execute. If the function returns
+     * false then the iteration will early out.
+     */
+    forEachArrayElement(fn) {
+        this._containerArray.forEachChild((container, i) => {
+            return fn(container.dom.firstChild.ui, i);
+        });
     }
 
     destroy() {
@@ -466,7 +480,7 @@ class ArrayInput extends Element {
         }
 
         const current = this.value || [];
-        if (current.equals(value)) return;
+        if (utils.arrayEquals(current, value)) return;
 
         // update values and binding
         this._updateValues(new Array(this._values.length || 1).fill(value), true);
@@ -474,7 +488,7 @@ class ArrayInput extends Element {
 
     /* eslint accessor-pairs: 0 */
     set values(values) {
-        if (this._values.equals(values)) return;
+        if (utils.arrayEquals(this._values, values)) return;
         // update values but do not update binding
         this._updateValues(values, false);
     }
@@ -499,5 +513,10 @@ ArrayInput.DEFAULTS = {
     vec3: [0, 0, 0],
     vec4: [0, 0, 0, 0]
 };
+
+for (const type in ArrayInput.DEFAULTS) {
+    Element.register(`array:${type}`, ArrayInput, { type: type, renderChanges: true });
+}
+Element.register('array:select', ArrayInput, { type: 'select', renderChanges: true });
 
 export default ArrayInput;

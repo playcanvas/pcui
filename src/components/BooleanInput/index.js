@@ -158,4 +158,6 @@ class BooleanInput extends Element {
     }
 }
 
+Element.register('boolean', BooleanInput, { renderChanges: true });
+
 export default BooleanInput;

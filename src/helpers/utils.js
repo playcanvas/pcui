@@ -118,6 +118,27 @@ if (! String.prototype.appendQuery) {
     });
 }
 
+utils.arrayEquals = function (lhs, rhs) {
+    if (! lhs)
+        return false;
+
+    if (! rhs)
+        return false;
+
+    if (lhs.length !== rhs.length)
+        return false;
+
+    for (var i = 0, l = lhs.length; i < l; i++) {
+        if (this[i] instanceof Array && rhs[i] instanceof Array) {
+            if (! this[i].equals(rhs[i]))
+                return false;
+        } else if (this[i] !== rhs[i]) {
+            return false;
+        }
+    }
+    return true;
+};
+
 // element.classList.add polyfill
 (function () {
     var dummy  = document.createElement('div'),

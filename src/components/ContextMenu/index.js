@@ -1,4 +1,5 @@
 import './style.scss';
+import Element from '../Element';
 import Label from '../Label';
 import Container from '../Container';
 
@@ -104,5 +105,7 @@ class ContextMenu {
         });
     }
 }
+
+Element.register('contextmenu', ContextMenu);
 
 export default ContextMenu;

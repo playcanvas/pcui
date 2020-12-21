@@ -38,4 +38,6 @@ class Progress extends Container {
     }
 }
 
+Element.register('progress', Progress);
+
 export default Progress;

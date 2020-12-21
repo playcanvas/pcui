@@ -745,4 +745,6 @@ class Container extends Element {
     }
 }
 
+Element.register('container', Container);
+
 export default Container;

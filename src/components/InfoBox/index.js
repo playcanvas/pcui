@@ -80,4 +80,6 @@ class InfoBox extends Container {
     }
 }
 
+Element.register('infobox', InfoBox);
+
 export default InfoBox;

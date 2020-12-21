@@ -277,4 +277,6 @@ class TextInput extends Element {
     }
 }
 
+Element.register('string', TextInput, { renderChanges: true });
+
 export default TextInput;
