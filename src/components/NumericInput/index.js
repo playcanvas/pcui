@@ -355,4 +355,6 @@ class NumericInput extends TextInput {
     }
 }
 
+Element.register('number', NumericInput, { renderChanges: true });
+
 export default NumericInput;

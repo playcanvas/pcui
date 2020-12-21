@@ -46,11 +46,11 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
  * @classdesc Represents a Tree View Item to be added to a pcui.TreeView.
  * @mixes IFocusable
  * @property {boolean} selected Whether the item is selected.
- * @property {boolean} allowSelect Whether the item can be selected.
+ * @property {boolean} allowSelect=true Whether the item can be selected.
  * @property {boolean} open Whether the item is open meaning showing its children.
  * @property {boolean} parentsOpen Whether the parents of the item are open or closed.
- * @property {boolean} allowDrag Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
- * @property {boolean} allowDrop Whether dropping is allowed on the tree item.
+ * @property {boolean} allowDrag=true Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
+ * @property {boolean} allowDrop=true Whether dropping is allowed on the tree item.
  * @property {string} text The text shown by the TreeViewItem.
  * @property {number} The number of direct children.
  * @property {Label} textLabel Gets the internal label that shows the text.

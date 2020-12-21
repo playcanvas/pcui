@@ -17,4 +17,6 @@ class Divider extends Element {
     }
 }
 
+Element.register('divider', Divider);
+
 export default Divider;

@@ -116,4 +116,6 @@ class Button extends Element {
     }
 }
 
+Element.register('button', Button);
+
 export default Button;

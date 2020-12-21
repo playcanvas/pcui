@@ -1,5 +1,6 @@
 import './style.scss';
 import * as pcuiClass from '../../class';
+import Element from '../Element';
 import Container from '../Container';
 import Label from '../Label';
 import Button from '../Button';
@@ -411,5 +412,7 @@ class Panel extends Container {
         this._reflow();
     }
 }
+
+Element.register('panel', Panel);
 
 export default Panel;

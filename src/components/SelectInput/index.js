@@ -1017,4 +1017,8 @@ class SelectInput extends Element {
     }
 }
 
+Element.register('select', SelectInput, { renderChanges: true });
+Element.register('multiselect', SelectInput, { multiSelect: true, renderChanges: true });
+Element.register('tags', SelectInput, { allowInput: true, allowCreate: true, multiSelect: true, renderChanges: true });
+
 export default SelectInput;

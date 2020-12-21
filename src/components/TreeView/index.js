@@ -61,8 +61,8 @@ const DRAG_AREA_AFTER = 'after';
  * @classdesc A container that can show a treeview like a hierarchy. The treeview contains
  * pcui.TreeViewItems.
  * @augments Container
- * @property {boolean} allowDrag Whether dragging a TreeViewItem is allowed.
- * @property {boolean} allowReordering Whether reordering TreeViewItems is allowed.
+ * @property {boolean} allowDrag=true Whether dragging a TreeViewItem is allowed.
+ * @property {boolean} allowReordering=true Whether reordering TreeViewItems is allowed.
  * @property {boolean} allowRenaming Whether renaming TreeViewItems is allowed by double clicking on them.
  * @property {boolean} isDragging Whether we are currently dragging a TreeViewItem.
  * @property {string} filter Gets / sets a filter that searches TreeViewItems and only shows the ones that are relevant to the filter.

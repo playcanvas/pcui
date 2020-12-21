@@ -245,4 +245,8 @@ class VectorInput extends Element {
     });
 });
 
+Element.register('vec2', VectorInput, { dimensions: 2, renderChanges: true });
+Element.register('vec3', VectorInput, { dimensions: 3, renderChanges: true });
+Element.register('vec4', VectorInput, { dimensions: 4, renderChanges: true });
+
 export default VectorInput;

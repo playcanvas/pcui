@@ -1,4 +1,5 @@
 import './style.scss';
+import utils from '../../helpers/utils';
 import Element from '../Element';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
@@ -382,6 +383,8 @@ class SliderInput extends Element {
     }
 }
 
-SliderInput.PROXY_FIELDS = PROXY_FIELDS;
+utils.proxy(SliderInput, '_numericInput', PROXY_FIELDS);
+
+Element.register('slider', SliderInput, { renderChanges: true });
 
 export default SliderInput;

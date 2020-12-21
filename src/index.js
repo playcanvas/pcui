@@ -1,10 +1,10 @@
-import IBindable from './interfaces';
-import IFocusable from './interfaces';
-import ICollapsible from './interfaces';
-import IFlex from './interfaces';
-import IGrid from './interfaces';
-import IScrollable from './interfaces';
-import IResizable from './interfaces';
+import IBindable from './interfaces/IBindable';
+import IFocusable from './interfaces/IFocusable';
+import ICollapsible from './interfaces/ICollapsible';
+import IFlex from './interfaces/IFocusable';
+import IGrid from './interfaces/IGrid';
+import IScrollable from './interfaces/IScrollable';
+import IResizable from './interfaces/IResizable';
 
 import ArrayInput from './components/ArrayInput';
 import BooleanInput from './components/BooleanInput';
