@@ -14,7 +14,6 @@ var components = [
     ['layout', 'divider'],
     ['layout', 'overlay'],
     ['layout', 'panel'],
-    ['layout', 'tree-view'],
     ['misc', 'progress'],
     ['misc', 'spinner'],
     ['input', 'context-menu']
