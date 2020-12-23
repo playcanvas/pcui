@@ -1,14 +1,17 @@
 import './style.scss';
-import utils from '../../helpers/utils';
 import Element from '../Element';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
+import utils from '../../helpers/utils';
+
 
 const CLASS_SLIDER = 'pcui-slider';
 const CLASS_SLIDER_CONTAINER = CLASS_SLIDER + '-container';
 const CLASS_SLIDER_BAR = CLASS_SLIDER + '-bar';
 const CLASS_SLIDER_HANDLE = CLASS_SLIDER + '-handle';
 const CLASS_SLIDER_ACTIVE = CLASS_SLIDER + '-active';
+
+const IS_CHROME = /Chrome\//.test(navigator.userAgent);
 
 // fields that are proxied between the slider and the numeric input
 const PROXY_FIELDS = [
@@ -83,8 +86,6 @@ class SliderInput extends Element {
 
         this._sliderMin = (args.sliderMin !== undefined ? args.sliderMin : this.min || 0);
         this._sliderMax = (args.sliderMax !== undefined ? args.sliderMax : this.max || 1);
-        this._accumValue = 0;
-        this._lastTouchX = 0;
 
         this.dom.appendChild(this._numericInput.dom);
         this._numericInput.parent = this;
@@ -103,6 +104,7 @@ class SliderInput extends Element {
         this._domHandle.tabIndex = 0;
         this._domHandle.classList.add(CLASS_SLIDER_HANDLE);
         this._domBar.appendChild(this._domHandle);
+        this._cursorHandleOffset = 0;
 
         this._domMouseDown = this._onMouseDown.bind(this);
         this._domMouseMove = this._onMouseMove.bind(this);
@@ -114,8 +116,8 @@ class SliderInput extends Element {
 
         this._touchId = null;
 
-        this._domBar.addEventListener('mousedown', this._domMouseDown);
-        this._domBar.addEventListener('touchstart', this._domTouchStart, { passive: true });
+        this._domSlider.addEventListener('mousedown', this._domMouseDown);
+        this._domSlider.addEventListener('touchstart', this._domTouchStart, { passive: true });
         this._domHandle.addEventListener('keydown', this._domKeyDown);
 
         if (args.value !== undefined) {
@@ -137,14 +139,13 @@ class SliderInput extends Element {
     _onMouseMove(evt) {
         evt.stopPropagation();
         evt.preventDefault();
-        this._accumValue += evt.movementX;
-        this._onSlideMove();
+        this._onSlideMove(evt.pageX);
     }
 
     _onMouseUp(evt) {
         evt.stopPropagation();
         evt.preventDefault();
-        this._onSlideEnd();
+        this._onSlideEnd(evt.pageX);
     }
 
     _onTouchStart(evt) {
@@ -171,15 +172,7 @@ class SliderInput extends Element {
             evt.stopPropagation();
             evt.preventDefault();
 
-            let delta = 0;
-            if (Math.abs(this._lastTouchX) > 0) {
-                delta = touch.pageX - this._lastTouchX;
-            }
-            this._lastTouchX = touch.pageX;
-            this._accumValue += delta;
-
-            this._onSlideMove();
-
+            this._onSlideMove(touch.pageX);
             break;
         }
     }
@@ -223,9 +216,8 @@ class SliderInput extends Element {
 
     _updateHandle(value) {
         const left = Math.max(0, Math.min(1, ((value || 0) - this._sliderMin) / (this._sliderMax - this._sliderMin))) * 100;
-        const rect = this._domHandle.getBoundingClientRect();
-        const margin = rect.width / 2;  // use the middle of a handle
-        this._domHandle.style.left = left + margin + '%';
+        const handleWidth = this._domHandle.getBoundingClientRect().width;
+        this._domHandle.style.left = `calc(${left}% + ${handleWidth / 2}px)`;
     }
 
     _onValueChange(value) {
@@ -235,6 +227,25 @@ class SliderInput extends Element {
         if (this._binding) {
             this._binding.setValue(value);
         }
+    }
+
+    // Calculates the distance in pixels between
+    // the cursor x and the middle of the handle.
+    // If the cursor is not on the handle sets the offset to 0
+    _calculateCursorHandleOffset(pageX) {
+        // not sure why but the left side needs a margin of a couple of pixels
+        // to properly determine if the cursor is on the handle (in Chrome)
+        const margin = IS_CHROME ? 2 : 0;
+        const rect = this._domHandle.getBoundingClientRect();
+        const left = rect.left - margin;
+        const right = rect.right;
+        if (pageX >= left && pageX <= right) {
+            this._cursorHandleOffset = pageX - (left + (right - left) / 2);
+        } else {
+            this._cursorHandleOffset = 0;
+        }
+
+        return this._cursorHandleOffset;
     }
 
     _onSlideStart(pageX) {
@@ -249,7 +260,12 @@ class SliderInput extends Element {
 
         this.class.add(CLASS_SLIDER_ACTIVE);
 
-        this._jumpHandle(pageX);
+        // calculate the cursor - handle offset. If there is
+        // an offset that means the cursor is on the handle so
+        // do not move the handle until the cursor moves.
+        if (!this._calculateCursorHandleOffset(pageX)) {
+            this._onSlideMove(pageX);
+        }
 
         if (this.binding) {
             this._historyCombine = this.binding.historyCombine;
@@ -260,46 +276,25 @@ class SliderInput extends Element {
         }
     }
 
-    _getDomSliderBarRect() {
-        return this._domSlider.children[0].getBoundingClientRect();
-    }
-
-    _jumpHandle(pageX) {
-        const rect = this._getDomSliderBarRect();
-        const handle = this._domHandle.getBoundingClientRect();
-        const isInside = pageX > handle.left && pageX < handle.right;
-        const maxValue = rect.right - rect.left;
-
-        if (this._accumValue < 0) {
-            this._accumValue = 0;
-        } else if (this._accumValue > maxValue) {
-            this._accumValue = maxValue;
-        }
-
-        if (!isInside) {
-            const x = Math.max(0, Math.min(1, (pageX - rect.left) / rect.width));
-            const range = this._sliderMax - this._sliderMin;
-            let value = (x * range) + this._sliderMin;
-            value = parseFloat(value.toFixed(this.precision), 10);
-            this.value = value;
-            this._accumValue = pageX - rect.left;
-        } else {
-            this._onSlideMove();
-        }
-    }
-
-    _onSlideMove() {
-        const rect = this._getDomSliderBarRect();
-        const x = Math.max(0, Math.min(1, this._accumValue / rect.width));
+    _onSlideMove(pageX) {
+        const rect = this._domBar.getBoundingClientRect();
+        // reduce pageX by the initial cursor - handle offset
+        pageX -= this._cursorHandleOffset;
+        const x = Math.max(0, Math.min(1, (pageX - rect.left) / rect.width));
 
         const range = this._sliderMax - this._sliderMin;
         let value = (x * range) + this._sliderMin;
         value = parseFloat(value.toFixed(this.precision), 10);
+
         this.value = value;
     }
 
-    _onSlideEnd() {
-        this._onSlideMove();
+    _onSlideEnd(pageX) {
+        // when slide ends only move the handle if the cursor is no longer
+        // on the handle
+        if (!this._calculateCursorHandleOffset(pageX)) {
+            this._onSlideMove(pageX);
+        }
 
         this.class.remove(CLASS_SLIDER_ACTIVE);
 
@@ -319,7 +314,6 @@ class SliderInput extends Element {
             this._historyPostfix = null;
         }
 
-        this._lastTouchX = 0;
     }
 
     focus() {
@@ -333,8 +327,8 @@ class SliderInput extends Element {
 
     destroy() {
         if (this._destroyed) return;
-        this._domBar.removeEventListener('mousedown', this._domMouseDown);
-        this._domBar.removeEventListener('touchstart', this._domTouchStart);
+        this._domSlider.removeEventListener('mousedown', this._domMouseDown);
+        this._domSlider.removeEventListener('touchstart', this._domTouchStart);
 
         this._domHandle.removeEventListener('keydown', this._domKeyDown);
 
