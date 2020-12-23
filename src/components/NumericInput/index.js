@@ -56,7 +56,10 @@ class NumericInput extends TextInput {
 
         this._oldValue = undefined;
         this.value = value;
-        this._sliderPrevValue = value;
+
+        this._historyCombine = false;
+        this._historyPostfix = null;
+        this._sliderPrevValue = 0;
 
         this.renderChanges = renderChanges;
 
@@ -72,34 +75,27 @@ class NumericInput extends TextInput {
 
             this._domEvtSliderMouseDown = () => {
                 this._sliderControl.dom.requestPointerLock();
-                this._sliderPrevValue = this.value;
                 this._sliderMovement = 0.0;
+                this._sliderPrevValue = this.value;
+                if (this.binding) {
+                    this._historyCombine = this.binding.historyCombine;
+                    this._historyPostfix = this.binding.historyPostfix;
+
+                    this.binding.historyCombine = true;
+                    this.binding.historyPostfix = `(${Date.now()})`;
+                }
             };
 
             this._domEvtSliderMouseUp = () => {
                 document.exitPointerLock();
-                if (this._binding) {
-                    const undoValue = this._sliderPrevValue;
-                    const redoValue = this._sliderPrevValue + this._sliderMovement;
-                    const undo = () => {
-                        var history = this._binding._bindingElementToObservers._history;
-                        this._binding._bindingElementToObservers._history = null;
-                        this.value = undoValue;
-                        this._binding._bindingElementToObservers._history = history;
-                    };
-                    const redo = () => {
-                        var history = this._binding._bindingElementToObservers._history;
-                        this._binding._bindingElementToObservers._history = null;
-                        this.value = redoValue;
-                        this._binding._bindingElementToObservers._history = history;
-                    };
+                this.value = this._sliderPrevValue + this._sliderMovement;
 
-                    this._binding._bindingElementToObservers._history.add({
-                        name: this._binding.paths[0],
-                        undo,
-                        redo
-                    });
-                    redo();
+                if (this.binding) {
+                    this.binding.historyCombine = this._historyCombine;
+                    this.binding.historyPostfix = this._historyPostfix;
+
+                    this._historyCombine = false;
+                    this._historyPostfix = null;
                 }
             };
 
@@ -245,13 +241,8 @@ class NumericInput extends TextInput {
         const forceUpdate = this.class.contains(pcuiClass.MULTIPLE_VALUES) && value === null && this._allowNull;
         const changed = this._updateValue(value, forceUpdate);
 
-        if (changed && this._binding) {
-            var history = this._binding._bindingElementToObservers._history;
-            if (this._isScrolling()) {
-                this._binding._bindingElementToObservers._history = null;
-            }
-            this._binding.setValue(value);
-            this._binding._bindingElementToObservers._history = history;
+        if (changed && this.binding) {
+            this.binding.setValue(value);
         }
         if (this._sliderControl) {
             this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);

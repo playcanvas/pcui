@@ -65,7 +65,8 @@ class SliderInput extends Element {
 
         this.class.add(CLASS_SLIDER);
 
-        this._combineHistory = false;
+        this._historyCombine = false;
+        this._historyPostfix = null;
 
         this._numericInput = new NumericInput({ ...inputArgs, hideSlider: true });
 
@@ -251,8 +252,11 @@ class SliderInput extends Element {
         this._jumpHandle(pageX);
 
         if (this.binding) {
-            this._combineHistory = this.binding.historyCombine;
+            this._historyCombine = this.binding.historyCombine;
+            this._historyPostfix = this.binding.historyPostfix;
+
             this.binding.historyCombine = true;
+            this.binding.historyPostfix = `(${Date.now()})`;
         }
     }
 
@@ -308,7 +312,11 @@ class SliderInput extends Element {
         }
 
         if (this.binding) {
-            this.binding.historyCombine = this._combineHistory;
+            this.binding.historyCombine = this._historyCombine;
+            this.binding.historyPostfix = this._historyPostfix;
+
+            this._historyCombine = false;
+            this._historyPostfix = null;
         }
 
         this._lastTouchX = 0;
