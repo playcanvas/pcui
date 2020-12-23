@@ -11,6 +11,8 @@ const CLASS_SLIDER_BAR = CLASS_SLIDER + '-bar';
 const CLASS_SLIDER_HANDLE = CLASS_SLIDER + '-handle';
 const CLASS_SLIDER_ACTIVE = CLASS_SLIDER + '-active';
 
+const IS_CHROME = /Chrome\//.test(navigator.userAgent);
+
 // fields that are proxied between the slider and the numeric input
 const PROXY_FIELDS = [
     'allowNull',
@@ -101,6 +103,7 @@ class SliderInput extends Element {
         this._domHandle.tabIndex = 0;
         this._domHandle.classList.add(CLASS_SLIDER_HANDLE);
         this._domBar.appendChild(this._domHandle);
+        this._cursorHandleOffset = 0;
 
         this._domMouseDown = this._onMouseDown.bind(this);
         this._domMouseMove = this._onMouseMove.bind(this);
@@ -225,6 +228,25 @@ class SliderInput extends Element {
         }
     }
 
+    // Calculates the distance in pixels between
+    // the cursor x and the middle of the handle.
+    // If the cursor is not on the handle sets the offset to 0
+    _calculateCursorHandleOffset(pageX) {
+        // not sure why but the left side needs a margin of a couple of pixels
+        // to properly determine if the cursor is on the handle (in Chrome)
+        const margin = IS_CHROME ? 2 : 0;
+        const rect = this._domHandle.getBoundingClientRect();
+        const left = rect.left - margin;
+        const right = rect.right;
+        if (pageX >= left && pageX <= right) {
+            this._cursorHandleOffset = pageX - (left + (right - left) / 2);
+        } else {
+            this._cursorHandleOffset = 0;
+        }
+
+        return this._cursorHandleOffset;
+    }
+
     _onSlideStart(pageX) {
         this._domHandle.focus();
         if (this._touchId === null) {
@@ -237,7 +259,12 @@ class SliderInput extends Element {
 
         this.class.add(CLASS_SLIDER_ACTIVE);
 
-        this._onSlideMove(pageX);
+        // calculate the cursor - handle offset. If there is
+        // an offset that means the cursor is on the handle so
+        // do not move the handle until the cursor moves.
+        if (!this._calculateCursorHandleOffset(pageX)) {
+            this._onSlideMove(pageX);
+        }
 
         if (this.binding) {
             this._combineHistory = this.binding.historyCombine;
@@ -247,6 +274,8 @@ class SliderInput extends Element {
 
     _onSlideMove(pageX) {
         const rect = this._domBar.getBoundingClientRect();
+        // reduce pageX by the initial cursor - handle offset
+        pageX -= this._cursorHandleOffset;
         const x = Math.max(0, Math.min(1, (pageX - rect.left) / rect.width));
 
         const range = this._sliderMax - this._sliderMin;
@@ -257,7 +286,11 @@ class SliderInput extends Element {
     }
 
     _onSlideEnd(pageX) {
-        this._onSlideMove(pageX);
+        // when slide ends only move the handle if the cursor is no longer
+        // on the handle
+        if (!this._calculateCursorHandleOffset(pageX)) {
+            this._onSlideMove(pageX);
+        }
 
         this.class.remove(CLASS_SLIDER_ACTIVE);
 
