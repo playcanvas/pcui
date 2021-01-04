@@ -13,6 +13,8 @@ var ERROR = 'pcui-error';
 var FLASH = 'flash';
 var NOT_FLEXIBLE = 'pcui-not-flexible';
 var DEFAULT_MOUSEDOWN = 'pcui-default-mousedown';
+var FONT_REGULAR = 'font-regular';
+var FONT_BOLD = 'font-bold';
 
 export {
     FLEX,
@@ -29,5 +31,7 @@ export {
     ERROR,
     FLASH,
     NOT_FLEXIBLE,
-    DEFAULT_MOUSEDOWN
+    DEFAULT_MOUSEDOWN,
+    FONT_REGULAR,
+    FONT_BOLD
 };

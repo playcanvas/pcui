@@ -47,6 +47,16 @@ import { Label } from 'dist/pcui-react.js';
 const helloWorldLabel = () => <Label text="Hello World" />;
 ```
 
+## Including your own font
+
+PCUI uses four css classes to add styled fonts to the various components. These are `.font-regular`, `.font-bold`, `.font-thin` and `.font-light`. You can use your own font with PCUI by adding `font-family` css rules to these classes on your webpage. For example: 
+```css
+.font-regular, .font-bold, .font-thin, .font-light {
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+```
+
 ## Data Binding
 
 The pcui library offers a data binding layer that can be used to synchonise data across multiple components. It offers two way binding to a given observer object, so updates made in a component are reflected in the observers data and distributed out to all other subscribed components. A simple use case is shown below:

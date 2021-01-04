@@ -227,7 +227,7 @@
             background-color: transparent;
 
             > input {
-                @extend .font-regular;
+                font-family: inherit;
                 font-size: 14px;
                 padding: 0;
             }

@@ -1,6 +1,7 @@
 import Label from '../Label';
 import Container from '../Container';
 import TextInput from '../TextInput';
+import * as pcuiClass from '../../class';
 
 /* global TreeView */
 
@@ -264,7 +265,8 @@ class TreeViewItem extends Container {
         // show text input to enter new text
         const textInput = new TextInput({
             renderChanges: false,
-            value: this.text
+            value: this.text,
+            class: pcuiClass.FONT_REGULAR
         });
 
         textInput.on('blur', () => {

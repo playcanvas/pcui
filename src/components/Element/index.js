@@ -170,6 +170,9 @@ class Element extends Events {
         // add element class
         this._dom.classList.add(CLASS_ELEMENT);
 
+        // add font regular class
+        this._dom.classList.add(pcuiClass.FONT_REGULAR);
+
         // add user classes
         if (args.class) {
             if (Array.isArray(args.class)) {

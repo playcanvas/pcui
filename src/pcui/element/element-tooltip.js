@@ -1,5 +1,6 @@
 import Container from '../../components/Container';
 import Label from '../../components/Label';
+import * as pcuiClass from '../../class';
 
 const CLASS_ROOT = 'pcui-tooltip';
 const CLASS_TITLE = CLASS_ROOT + '-title';
@@ -48,7 +49,7 @@ class Tooltip extends Container {
         this._toggleTimeout = null;
 
         this._labelTitle = new Label({
-            class: [CLASS_TITLE, 'font-bold']
+            class: [CLASS_TITLE, pcuiClass.FONT_BOLD]
         });
         this.append(this._labelTitle);
 
