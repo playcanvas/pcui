@@ -11,42 +11,6 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'Montserrat Thin';
-    font-style: normal;
-    font-weight: 100;
-    font-display: swap;
-    src: local('Montserrat Thin'), local('Montserrat-Thin'), url(https://fonts.gstatic.com/s/montserrat/v15/JTUQjIg1_i6t8kCHKm45_QpRyS7m0dR9pA.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
-
-@font-face {
-    font-family: 'Montserrat Light';
-    font-style: normal;
-    font-weight: 300;
-    font-display: swap;
-    src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_cJD3gnD_vx3rCs.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
-
-@font-face {
-    font-family: 'Montserrat Regular';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
-
-@font-face {
-    font-family: 'Montserrat Bold';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_dJE3gnD_vx3rCs.woff2) format('woff2');
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
-
 .font-smooth {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -54,25 +18,21 @@
 }
 
 .font-thin {
-    font-family: 'Montserrat Thin', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: 100;
     font-style: normal;
 }
 
 .font-light {
-    font-family: 'Montserrat Light', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: 200;
     font-style: normal;
 }
 
 .font-regular {
-    font-family: 'Montserrat Regular', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: normal;
     font-style: normal;
 }
 
 .font-bold {
-    font-family: 'Montserrat Bold', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-style: normal;
 }
