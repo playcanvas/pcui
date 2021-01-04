@@ -1,11 +1,7 @@
 @import './variables.scss';
-@import './fonts.scss';
+@import './fonts-storybook.scss';
 @import 'pcui-common.scss';
 @import 'pcui-hidden.scss'; // this should be last
-
-.font-regular, .font-bold, .font-thin, .font-light {
-    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-}
 
 .css-kdwx3d {
     background-color: #374346;
