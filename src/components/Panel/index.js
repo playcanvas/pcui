@@ -118,13 +118,13 @@ class Panel extends Container {
         this._containerHeader = new Container({
             flex: true,
             flexDirection: 'row',
-            class: [CLASS_PANEL_HEADER, 'font-bold']
+            class: [CLASS_PANEL_HEADER, pcuiClass.FONT_BOLD]
         });
 
         // header title
         this._labelTitle = new Label({
             text: args.headerText,
-            class: [CLASS_PANEL_HEADER_TITLE, 'font-bold']
+            class: [CLASS_PANEL_HEADER_TITLE, pcuiClass.FONT_BOLD]
         });
         this._containerHeader.append(this._labelTitle);
 
