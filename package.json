@@ -26,6 +26,7 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
+    "build:es6": "rollup -c",
     "lint": "eslint --ext .js src",
     "storybook": "jsdoc -r -X src > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
     "docs:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
@@ -53,10 +54,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
+    "@babel/helper-regex": "^7.10.5",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "@playcanvas/eslint-config": "^1.0.6",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-commonjs": "^17.0.0",
     "@storybook/addon-actions": "^6.0.3",
     "@storybook/addon-backgrounds": "^6.0.3",
     "@storybook/addon-controls": "^6.0.0-beta.15",
@@ -75,6 +79,9 @@
     "react-app-rewire-alias": "^0.1.9",
     "react-app-rewired": "^2.1.6",
     "react-is": "^16.13.1",
+    "rollup": "^2.36.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-scss": "^2.6.1",
     "webpack-cli": "^3.3.12"
   },
   "directories": {
