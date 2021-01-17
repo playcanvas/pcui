@@ -4,6 +4,7 @@ import { version } from './package.json';
 import scss from 'rollup-plugin-scss';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
 
 import { statSync } from 'fs';
 import path from 'path';
@@ -136,7 +137,10 @@ const target_pcui_react_es6 = {
         nodeResolve({
             browser: true,
         }),
-        commonjs()
+        commonjs(),
+        replace({
+          'process.env.NODE_ENV': JSON.stringify('production'),
+        })
     ]
 };
 
@@ -156,7 +160,10 @@ const target_pcui_binding_es6 = {
         nodeResolve({
             browser: true,
         }),
-        commonjs()
+        commonjs(),
+        replace({
+          'process.env.NODE_ENV': JSON.stringify('production'),
+        })
     ]
 };
 
