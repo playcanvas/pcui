@@ -114,7 +114,9 @@ const target_pcui_es6 = {
         babel(moduleOptions),
         spacesToTabs(),
         resolveDirsAndJSX(),
-        scss(),
+        scss({
+            prefix: `@import "./src/scss/pcui.scss";`,
+        }),
         nodeResolve({
             browser: true,
         })
