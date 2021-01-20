@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <style>
+            body {
+                background-color: #374347;
+            }
+        </style>
+		<!--
+			Run `npm run build:es6` to create `pcui.js` and `pcui.es6.css`
+		-->
+        <link rel="stylesheet" href="../dist/pcui.es6.css">
+    </head>
+    <body>
+        <script type="module">
+            import {
+                Label,
+                ArrayInput,
+                TreeView,
+                TreeViewItem
+            } from "../dist/pcui.es6.js";
+            import * as pcui from "../dist/pcui.es6.js";
+
+            // Test: Label
+            const helloWorldLabel = new Label({
+                text: 'Hello World!'
+            });
+            const helloUniverseLabel = new Label({
+                text: 'Hello Universe!'
+            });
+            const helloMultiverseLabel = new Label({
+                text: 'Hello Multiverse!'
+            });
+            
+            // Test: ArrayInput
+            const arrayInput = new ArrayInput({
+                enabled: true,
+                type: "string",
+                onChange: function(e) {console.log("e", e);}
+            });
+            
+            // Test: TreeView/TreeViewItem
+            const treeView = new TreeView({
+                allowDrag: true,
+                allowRenaming: true,
+                allowReordering: true,
+                enabled: true
+            });
+            const item1 = new TreeViewItem({text: "Item 1"});
+            const item2 = new TreeViewItem({text: "Item 2"});
+            const item3 = new TreeViewItem({text: "Item 3"});
+            treeView.append(item1);
+            treeView.append(item2);
+            treeView.append(item3);
+            
+            // Devtools debugging
+            Object.assign(window, {
+                pcui,
+                helloWorldLabel,
+                helloUniverseLabel,
+                helloMultiverseLabel,
+                arrayInput,
+                treeView,
+                item1,
+                item2,
+                item3
+            });
+			
+            function main() {
+                document.body.appendChild(helloWorldLabel.dom);
+                document.body.appendChild(helloUniverseLabel.dom);
+                document.body.appendChild(helloMultiverseLabel.dom);
+                document.body.appendChild(arrayInput.dom);
+                document.body.appendChild(treeView.dom);
+            }
+            window.onload = main;
+        </script>
+    </body>
+</html>
