@@ -135,7 +135,9 @@ const target_pcui_react_es6 = {
         babel(moduleOptions),
         spacesToTabs(),
         resolveDirsAndJSX(),
-        scss(),
+        scss({
+            prefix: `@import "./src/scss/pcui.scss";`,
+        }),
         nodeResolve({
             browser: true,
         }),
@@ -158,7 +160,9 @@ const target_pcui_binding_es6 = {
         babel(moduleOptions),
         spacesToTabs(),
         resolveDirsAndJSX(),
-        scss(),
+        scss({
+            prefix: `@import "./src/scss/pcui.scss";`,
+        }),
         nodeResolve({
             browser: true,
         }),
