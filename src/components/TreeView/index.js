@@ -31,7 +31,7 @@ const DRAG_AREA_AFTER = 'after';
  * @event
  * @name TreeView#reparent
  * @description Fired when we reparent TreeViewItems
- * @param {object[]} items - An array of items we reparented. Each array element contains an object like so: {item, newParent, oldParent}.
+ * @param {object[]} items - An array of items we reparented. Each array element contains an object like so: {item, newParent, newChildIndex, oldParent}.
  */
 
 /**
