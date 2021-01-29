@@ -424,6 +424,10 @@ class TreeView extends Container {
         });
     }
 
+    _getChildIndex(item, parent) {
+        return Array.prototype.indexOf.call(parent.dom.childNodes, item.dom) - 1;
+    }
+
     // Called when we start dragging a TreeViewItem.
     _onChildDragStart(evt, element) {
         if (!this.allowDrag || this._dragging) return;
@@ -511,6 +515,8 @@ class TreeView extends Container {
 
                         const oldParent = item.parent;
                         let newParent = null;
+                        let oldChildIndex = this._getChildIndex(item, oldParent);
+                        let newChildIndex = 0;
 
                         if (!this._onReparentFn) {
                             item.parent.remove(item);
@@ -521,6 +527,14 @@ class TreeView extends Container {
                             newParent = this._dragOverItem.parent;
                             if (!this._onReparentFn) {
                                 this._dragOverItem.parent.appendBefore(item, this._dragOverItem);
+                                newChildIndex = this._getChildIndex(item, newParent);
+                            } else {
+                                newChildIndex = this._getChildIndex(this._dragOverItem, newParent);
+                                if (newParent === oldParent && oldChildIndex < newChildIndex) {
+                                    // subtract one if old index is before new index because
+                                    // in this case the item hasn't been removed from its parent
+                                    newChildIndex--;
+                                }
                             }
                         } else if (this._dragArea === DRAG_AREA_INSIDE) {
                             // If dragged inside a TreeViewItem...
@@ -528,18 +542,27 @@ class TreeView extends Container {
                             if (!this._onReparentFn) {
                                 this._dragOverItem.append(item);
                                 this._dragOverItem.open = true;
+                                newChildIndex = this._getChildIndex(item, newParent);
+                            } else {
+                                newChildIndex = newParent.dom.childNodes.length - 1;
                             }
                         } else if (this._dragArea === DRAG_AREA_AFTER) {
                             // If dragged after a TreeViewItem...
                             newParent = this._dragOverItem.parent;
                             if (!this._onReparentFn) {
                                 this._dragOverItem.parent.appendAfter(item, lastDraggedItem);
+                                newChildIndex = this._getChildIndex(item, newParent);
+                            } else {
+                                newChildIndex = this._getChildIndex(lastDraggedItem, newParent);
+                                if (newParent !== oldParent || oldChildIndex > newChildIndex) {
+                                    newChildIndex++;
+                                }
                             }
                             lastDraggedItem = item;
                         }
 
                         reparented.push({
-                            item, newParent, oldParent
+                            item, newParent, newChildIndex, oldParent
                         });
                     }
                 });
