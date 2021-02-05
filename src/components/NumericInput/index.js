@@ -77,6 +77,7 @@ class NumericInput extends TextInput {
                 this._sliderControl.dom.requestPointerLock();
                 this._sliderMovement = 0.0;
                 this._sliderPrevValue = this.value;
+                this._sliderUsed = true;
                 if (this.binding) {
                     this._historyCombine = this.binding.historyCombine;
                     this._historyPostfix = this.binding.historyPostfix;
@@ -88,6 +89,8 @@ class NumericInput extends TextInput {
 
             this._domEvtSliderMouseUp = () => {
                 document.exitPointerLock();
+                if (!this._sliderUsed) return;
+                this._sliderUsed = false;
                 this.value = this._sliderPrevValue + this._sliderMovement;
 
                 if (this.binding) {
