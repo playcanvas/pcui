@@ -1,6 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssnanoPlugin = require('cssnano-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
     mode: 'production',
@@ -52,14 +52,7 @@ module.exports = {
     },
     optimization: {
         minimizer: [
-            new CssnanoPlugin({
-                cssnanoOptions: {
-                    preset: ['default', {
-                        discardDuplicates: true,
-                        discardComments: { removeAll: true }
-                    }]
-                }
-            })
+            new CssMinimizerPlugin()
         ]
     },
     plugins: process.env.EXTRACT_CSS ? [new MiniCssExtractPlugin()] : []
