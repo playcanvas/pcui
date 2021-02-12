@@ -28,6 +28,8 @@ import TextAreaInput from './components/TextAreaInput';
 import TextInput from './components/TextInput';
 import TreeView from './components/TreeView';
 import TreeViewItem from './components/TreeViewItem';
+import GridView from './components/GridView';
+import GridViewItem from './components/GridViewItem';
 import VectorInput from './components/VectorInput';
 
 // import pcui-hidden last
@@ -63,5 +65,7 @@ export {
     TextInput,
     TreeView,
     TreeViewItem,
+    GridView,
+    GridViewItem,
     VectorInput
 };
