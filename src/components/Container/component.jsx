@@ -32,7 +32,7 @@ class Container extends BaseComponent {
 }
 
 Container.propTypes = {};
-
+Container.ctor = Element;
 Container.defaultProps = {};
 
 export default Container;

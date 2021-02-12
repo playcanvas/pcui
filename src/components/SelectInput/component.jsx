@@ -13,7 +13,7 @@ class SelectInput extends BaseComponent {
 }
 
 SelectInput.propTypes = {};
-
+SelectInput.ctor = Element;
 SelectInput.defaultProps = {
     options: [
         {

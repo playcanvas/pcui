@@ -13,7 +13,7 @@ class Progress extends BaseComponent {
 }
 
 Progress.propTypes = {};
-
+Progress.ctor = Element;
 Progress.defaultProps = {};
 
 export default Progress;

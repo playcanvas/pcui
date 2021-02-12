@@ -13,7 +13,7 @@ class Divider extends BaseComponent {
 }
 
 Divider.propTypes = {};
-
+Divider.ctor = Element;
 Divider.defaultProps = {};
 
 export default Divider;

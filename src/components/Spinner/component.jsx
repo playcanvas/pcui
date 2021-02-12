@@ -17,7 +17,7 @@ class Spinner extends BaseComponent {
 Spinner.propTypes = {
     size: PropTypes.number
 };
-
+Spinner.ctor = Element;
 Spinner.defaultProps = {
     size: 12
 };

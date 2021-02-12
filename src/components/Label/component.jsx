@@ -13,7 +13,7 @@ class Label extends BaseComponent {
 }
 
 Label.propTypes = {};
-
+Label.ctor = Element;
 Label.defaultProps = {
     text: 'Hello World'
 };

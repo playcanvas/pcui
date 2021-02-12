@@ -12,4 +12,6 @@ class Button extends BaseComponent {
     }
 }
 
+Button.ctor = Element;
+
 export default Button;

@@ -28,7 +28,7 @@ class Panel extends BaseComponent {
 }
 
 Panel.propTypes = {};
-
+Panel.ctor = Element;
 Panel.defaultProps = {};
 
 export default Panel;

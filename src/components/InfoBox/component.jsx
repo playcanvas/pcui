@@ -12,7 +12,7 @@ class InfoBox extends BaseComponent {
 }
 
 InfoBox.propTypes = {};
-
+InfoBox.ctor = Element;
 InfoBox.defaultProps = {
     icon: 'E401',
     title: 'Hello World',

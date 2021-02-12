@@ -13,7 +13,7 @@ class ArrayInput extends BaseComponent {
 }
 
 ArrayInput.propTypes = {};
-
+ArrayInput.ctor = Element;
 ArrayInput.defaultProps = {};
 
 export default ArrayInput;
