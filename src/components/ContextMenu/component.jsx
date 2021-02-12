@@ -20,7 +20,7 @@ class ContextMenu extends BaseComponent {
 }
 
 ContextMenu.propTypes = {};
-
+ContextMenu.ctor = Element;
 ContextMenu.defaultProps = {};
 
 export default ContextMenu;

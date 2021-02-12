@@ -13,7 +13,7 @@ class SliderInput extends BaseComponent {
 }
 
 SliderInput.propTypes = {};
-
+SliderInput.ctor = Element;
 SliderInput.defaultProps = {};
 
 export default SliderInput;

@@ -16,7 +16,7 @@ class Component extends BaseComponent {
 Component.propTypes = {
     curves: PropTypes.arrayOf(PropTypes.string)
 };
-
+Component.ctor = Element;
 Component.defaultProps = {
 };
 

@@ -13,7 +13,7 @@ class TreeViewItem extends BaseComponent {
 }
 
 TreeViewItem.propTypes = {};
-
+TreeViewItem.ctor = Element;
 TreeViewItem.defaultProps = {};
 
 export default TreeViewItem;

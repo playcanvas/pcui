@@ -13,7 +13,7 @@ class Overlay extends BaseComponent {
 }
 
 Overlay.propTypes = {};
-
+Overlay.ctor = Element;
 Overlay.defaultProps = {};
 
 export default Overlay;

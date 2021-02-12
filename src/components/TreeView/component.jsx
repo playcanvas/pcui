@@ -26,7 +26,7 @@ class TreeView extends BaseComponent {
 }
 
 TreeView.propTypes = {};
-
+TreeView.ctor = TreeViewElement;
 TreeView.defaultProps = {};
 
 export default TreeView;

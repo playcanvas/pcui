@@ -12,4 +12,6 @@ class BooleanInput extends BaseComponent {
     }
 }
 
+BooleanInput.ctor = Element;
+
 export default BooleanInput;

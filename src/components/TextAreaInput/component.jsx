@@ -13,7 +13,7 @@ class TextAreaInput extends BaseComponent {
 }
 
 TextAreaInput.propTypes = {};
-
+TextAreaInput.ctor = Element;
 TextAreaInput.defaultProps = {
 };
 

@@ -13,7 +13,7 @@ class Code extends BaseComponent {
 }
 
 Code.propTypes = {};
-
+Code.ctor = Element;
 Code.defaultProps = {
     text: 'console.log("hello world");'
 };

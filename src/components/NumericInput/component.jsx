@@ -12,4 +12,6 @@ class NumericInput extends BaseComponent {
     }
 }
 
+NumericInput.ctor = Element;
+
 export default NumericInput;

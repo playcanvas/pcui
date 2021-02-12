@@ -13,7 +13,7 @@ class VectorInput extends BaseComponent {
 }
 
 VectorInput.propTypes = {};
-
+VectorInput.ctor = Element;
 VectorInput.defaultProps = {};
 
 export default VectorInput;
