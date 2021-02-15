@@ -1,3 +1,4 @@
+import Element from '../Element';
 import Label from '../Label';
 import Container from '../Container';
 import './style.scss';
@@ -7,18 +8,18 @@ const CLASS_LABEL_TOP = CLASS_LABEL_GROUP + '-align-top';
 
 /**
  * @name LabelGroup
- * @classdesc Represents a group of a pcui.Label and a pcui.Element. Useful for rows of labeled fields.
+ * @classdesc Represents a group of a Label and a Element. Useful for rows of labeled fields.
  * @augments Container
- * @property {string} text Gets / sets the label text.
- * @property {Element} field Gets the field. This can only be set through the constructor by passing it in the arguments.
- * @property {Element} label Gets the label element.
- * @property {boolean} labelAlignTop Whether to align the label at the top of the group. Defaults to false which aligns it at the center.
+ * @property {string} text - Gets / sets the label text.
+ * @property {Element} field - Gets the field. This can only be set through the constructor by passing it in the arguments.
+ * @property {Element} label - Gets the label element.
+ * @property {boolean} labelAlignTop - Whether to align the label at the top of the group. Defaults to false which aligns it at the center.
  */
 class LabelGroup extends Container {
     /**
      * Creates a new LabelGroup.
      *
-     * @param {object} args - The arguments. Extends the pcui.Element arguments. Any settable property can also be set through the constructor.
+     * @param {object} args - The arguments. Extends the Element arguments. Any settable property can also be set through the constructor.
      * @param {boolean} [args.nativeTooltip] - If true then use the text as the HTML tooltip of the label.
      */
     constructor(args) {
@@ -70,5 +71,7 @@ class LabelGroup extends Container {
         }
     }
 }
+
+Element.register('labelgroup', LabelGroup);
 
 export default LabelGroup;

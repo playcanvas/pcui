@@ -1,5 +1,7 @@
-import Container from './element-container';
-import Label from './element-label';
+import Container from '../Container';
+import Label from '../Label';
+import { BindingObserversToElement } from '../../binding';
+import './style.scss';
 
 const CLASS_ROOT = 'pcui-gridview-item';
 const CLASS_SELECTED = CLASS_ROOT + '-selected';
@@ -9,12 +11,12 @@ const CLASS_TEXT = CLASS_ROOT + '-text';
  * @name GridViewItem
  * @augments Container
  * @mixes IFocusable
- * @classdesc Represents a grid view item used in pcui.GridView.
- * @property {boolean} allowSelect If true allow selecting the item. Defaults to true.
- * @property {boolean} selected Whether the item is selected.
- * @property {string} text The text of the item.
- * @property {GridViewItem} previousSibling Returns the previous visible sibling grid view item.
- * @property {GridViewItem} nextSibling Returns the next visible sibling grid view item.
+ * @classdesc Represents a grid view item used in GridView.
+ * @property {boolean} allowSelect - If true allow selecting the item. Defaults to true.
+ * @property {boolean} selected - Whether the item is selected.
+ * @property {string} text - The text of the item.
+ * @property {GridViewItem} previousSibling - Returns the previous visible sibling grid view item.
+ * @property {GridViewItem} nextSibling - Returns the next visible sibling grid view item.
  */
 class GridViewItem extends Container {
     constructor(args) {
@@ -30,7 +32,8 @@ class GridViewItem extends Container {
         this._selected = false;
 
         this._labelText = new Label({
-            class: CLASS_TEXT
+            class: CLASS_TEXT,
+            binding: new BindingObserversToElement()
         });
         this.append(this._labelText);
 

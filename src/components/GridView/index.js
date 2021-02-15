@@ -1,5 +1,6 @@
-import Container from './element-container';
-import GridViewItem from './element-grid-view-item';
+import Container from '../Container';
+import GridViewItem from '../GridViewItem';
+import './style.scss';
 
 const CLASS_ROOT = 'pcui-gridview';
 
@@ -7,7 +8,7 @@ const CLASS_ROOT = 'pcui-gridview';
  * @name GridView
  * @augments Container
  * @classdesc Represents a container that shows a flexible wrappable
- * list of items that looks like a grid. Contains pcui.GridViewItem's.
+ * list of items that looks like a grid. Contains GridViewItem's.
  * @property {GridViewItem[]} selected Gets the selected grid view items.
  */
 class GridView extends Container {
@@ -15,7 +16,7 @@ class GridView extends Container {
      * Creates new GridView.
      *
      * @param {object} [args] - The arguments
-     * @param {Function} [args.filterFn] - A filter function to filter gridview items with signature (pcui.GridViewItem) => Boolean.
+     * @param {Function} [args.filterFn] - A filter function to filter gridview items with signature (GridViewItem) => boolean.
      */
     constructor(args) {
         if (!args) args = {};
