@@ -242,12 +242,22 @@ class Container extends Element {
         let i = this._domContent.childNodes.length;
         while (i--) {
             const node = this._domContent.childNodes[i];
-            if (node.ui) {
+            if (node.ui && node.ui !== this) {
                 node.ui.destroy();
             }
         }
 
+        if (this._domResizeHandle) {
+            this._domResizeHandle.removeEventListener('mousedown', this._domEventResizeStart);
+            this._domResizeHandle.removeEventListener('touchstart', this._domEventResizeTouchStart, { passive: false });
+        }
+
         this._domContent.innerHTML = '';
+
+        if (this.resizable) {
+            this._createResizeHandle();
+            this._dom.appendChild(this._domResizeHandle);
+        }
     }
 
     // Used for backwards compatibility with the legacy ui framework
