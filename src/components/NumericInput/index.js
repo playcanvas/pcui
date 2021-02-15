@@ -10,6 +10,8 @@ const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CON
 
 const REGEX_COMMA = /,/g;
 
+let sliderUsed = false;
+
 /**
  * @name NumericInput
  * @classdesc The NumericInput represents an input element that holds numbers.
@@ -77,7 +79,7 @@ class NumericInput extends TextInput {
                 this._sliderControl.dom.requestPointerLock();
                 this._sliderMovement = 0.0;
                 this._sliderPrevValue = this.value;
-                this._sliderUsed = true;
+                sliderUsed = true;
                 if (this.binding) {
                     this._historyCombine = this.binding.historyCombine;
                     this._historyPostfix = this.binding.historyPostfix;
@@ -89,8 +91,8 @@ class NumericInput extends TextInput {
 
             this._domEvtSliderMouseUp = () => {
                 document.exitPointerLock();
-                if (!this._sliderUsed) return;
-                this._sliderUsed = false;
+                if (!sliderUsed) return;
+                sliderUsed = false;
                 this.value = this._sliderPrevValue + this._sliderMovement;
 
                 if (this.binding) {
