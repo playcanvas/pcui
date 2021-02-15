@@ -51,7 +51,7 @@ class NumericInput extends TextInput {
         } else if (Number.isFinite(args.precision)) {
             this._step = 1 / Math.pow(10, args.precision);
         } else {
-            this._step  = 1;
+            this._step = 1;
         }
 
         this._oldValue = undefined;
@@ -72,7 +72,7 @@ class NumericInput extends TextInput {
             this._sliderControl = new Element();
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
             this.dom.append(this._sliderControl.dom);
-            
+
             let sliderUsed = false;
             this._domEvtSliderMouseDown = () => {
                 this._sliderControl.dom.requestPointerLock();
