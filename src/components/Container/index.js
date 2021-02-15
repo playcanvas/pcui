@@ -250,6 +250,7 @@ class Container extends Element {
         if (this._domResizeHandle) {
             this._domResizeHandle.removeEventListener('mousedown', this._domEventResizeStart);
             this._domResizeHandle.removeEventListener('touchstart', this._domEventResizeTouchStart, { passive: false });
+            this._domResizeHandle = null;
         }
 
         this._domContent.innerHTML = '';
