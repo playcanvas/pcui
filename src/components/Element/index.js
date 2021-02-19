@@ -405,7 +405,7 @@ class Element extends Events {
             // didn't work because of an override or other condition
             this._parent = null;
 
-            if (this._dom && this._dom.parentElement) {
+            if (!parent._destroyed && this._dom && this._dom.parentElement) {
                 this._dom.parentElement.removeChild(this._dom);
             }
 
