@@ -405,6 +405,10 @@ class Element extends Events {
             // didn't work because of an override or other condition
             this._parent = null;
 
+            // Do not manually call removeChild for elements whose parent has already been destroyed.
+            // For example when we destroy a TreeViewItem that has many child nodes, that will trigger every child Element to call dom.parentElement.removeChild(dom).
+            // But we don't need to remove all these DOM elements from their parents since the root DOM element is destroyed anyway.
+            // This has a big impact on destroy speed in certain cases.
             if (!parent._destroyed && this._dom && this._dom.parentElement) {
                 this._dom.parentElement.removeChild(this._dom);
             }
