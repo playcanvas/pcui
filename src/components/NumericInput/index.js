@@ -271,7 +271,7 @@ class NumericInput extends TextInput {
                 this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
             }
         } else {
-            this._updateValue(values[0]);
+            this._updateValue(this._normalizeValue(values[0]));
             if (this._sliderControl) {
                 this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
             }
