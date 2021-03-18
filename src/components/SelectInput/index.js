@@ -249,6 +249,8 @@ class SelectInput extends Element {
         container.append(labelCreateText);
 
         this._containerOptions.append(container);
+
+        return container;
     }
 
     _convertSingleValue(value) {
@@ -508,26 +510,37 @@ class SelectInput extends Element {
     }
 
     _filterOptions(filter) {
-        const searchIndex = {};
+        // first remove all options
+        // then search the options for best matches
+        // and add them back in best match order
+        const containerDom = this._containerOptions.dom;
+        while (containerDom.firstChild) {
+            containerDom.removeChild(containerDom.lastChild);
+        }
 
         if (filter) {
             const searchOptions = this.options.map(option => {
                 return [option.t, option.v];
             });
             const searchResults = searchItems(searchOptions, filter);
-            searchResults.forEach(result => {
-                searchIndex[result] = true;
+            searchResults.forEach(value => {
+                containerDom.appendChild(this._labelsIndex[value].dom);
+            });
+
+        } else {
+            this.options.forEach(option => {
+                containerDom.appendChild(this._labelsIndex[option.v].dom);
             });
         }
 
-        let highlighted = false;
-        this._containerOptions.forEachChild(label => {
-            label.hidden = !!filter && !searchIndex[label._optionValue] && !label.class.contains(CLASS_CREATE_NEW);
-            if (!highlighted && !label.hidden) {
-                this._highlightLabel(label);
-                highlighted = true;
-            }
-        });
+        // append create label in the end
+        if (this._createLabelContainer) {
+            containerDom.appendChild(this._createLabelContainer.dom);
+        }
+
+        if (containerDom.firstChild) {
+            this._highlightLabel(containerDom.firstChild.ui);
+        }
 
         this._resizeShadow();
     }
@@ -804,7 +817,10 @@ class SelectInput extends Element {
 
         this._suspendInputChange = true;
         this._input.value = '';
-        this._lastInputValue = '';
+        if (this._lastInputValue) {
+            this._lastInputValue = '';
+            this._filterOptions(null);
+        }
         this._suspendInputChange = false;
 
         if (this._containerOptions.hidden) return;
@@ -896,8 +912,9 @@ class SelectInput extends Element {
             this._containerOptions.append(label);
         });
 
+        this._createLabelContainer = null;
         if (this._createLabelText) {
-            this._initializeCreateLabel();
+            this._createLabelContainer = this._initializeCreateLabel();
         }
 
         if (this.multiSelect && this._values) {
@@ -943,7 +960,10 @@ class SelectInput extends Element {
 
         this._suspendInputChange = true;
         this._input.value = '';
-        this._lastInputValue = '';
+        if (this._lastInputValue) {
+            this._lastInputValue = '';
+            this._filterOptions(null);
+        }
         this._suspendInputChange = false;
 
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
