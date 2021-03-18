@@ -52,27 +52,36 @@ export const searchCharsContains = function (a, b) {
 };
 
 
-// tokenize string into array of tokens
+// *****************************************************
+// Comment out this code for now as it seems to generate
+// less relevant search results towards the top.
+// *****************************************************
+// // tokenize string into array of tokens
+// export const searchStringTokenize = function (name) {
+//     var tokens = [];
+
+//     // camelCase
+//     // upperCASE123
+//     var string = name.replace(/([^A-Z])([A-Z][^A-Z])/g, '$1 $2').replace(/([A-Z0-9]{2,})/g, ' $1');
+
+//     // space notation
+//     // dash-notation
+//     // underscore_notation
+//     var parts = string.split(/(\s|\-|_)/g);
+
+//     // filter valid tokens
+//     for (var i = 0; i < parts.length; i++) {
+//         parts[i] = parts[i].toLowerCase().trim();
+//         if (parts[i] && parts[i] !== '-' && parts[i] !== '_')
+//             tokens.push(parts[i]);
+//     }
+
+//     return tokens;
+// };
+
+// Use this function instead of the above commented out one
 export const searchStringTokenize = function (name) {
-    var tokens = [];
-
-    // camelCase
-    // upperCASE123
-    var string = name.replace(/([^A-Z])([A-Z][^A-Z])/g, '$1 $2').replace(/([A-Z0-9]{2,})/g, ' $1');
-
-    // space notation
-    // dash-notation
-    // underscore_notation
-    var parts = string.split(/(\s|\-|_)/g);
-
-    // filter valid tokens
-    for (var i = 0; i < parts.length; i++) {
-        parts[i] = parts[i].toLowerCase().trim();
-        if (parts[i] && parts[i] !== '-' && parts[i] !== '_')
-            tokens.push(parts[i]);
-    }
-
-    return tokens;
+    return [name];
 };
 
 
