@@ -20,8 +20,19 @@ class TreeView extends BaseComponent {
             this.loadChildren(child.props.children, childElement);
         });
     }
+    componentDidUpdate(props) {
+        this.parentElement.removeChild(this.element.dom);
+        this.element = new TreeViewElement({...props});
+        this.loadChildren(props.children, this.element);
+        this.parentElement.appendChild(this.element.dom);
+    }
+    parentElementRendered(element) {
+        if (!element) return;
+        this.parentElement = element;
+        this.parentElement.appendChild(this.element.dom);
+    }
     render() {
-        return <div ref={(nodeElement) => {nodeElement && nodeElement.appendChild(this.element.dom)}} />
+        return <div ref={this.parentElementRendered.bind(this)} />
     }
 }
 
