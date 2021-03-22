@@ -15,7 +15,7 @@ class Label extends BaseComponent {
 Label.propTypes = {};
 Label.ctor = Element;
 Label.defaultProps = {
-    text: 'Hello World'
+    text: ''
 };
 
 export default Label;
