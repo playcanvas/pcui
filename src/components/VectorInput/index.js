@@ -183,7 +183,7 @@ class VectorInput extends Element {
             }
             // if the string could be converted to an array but some of it's values aren't numbers
             // then use a default array
-            if (Array.isArray(value) && value.some(i => !Number.isInteger(i))) {
+            if (Array.isArray(value) && value.some(i => !Number.isFinite(i))) {
                 value = [];
             }
         }
