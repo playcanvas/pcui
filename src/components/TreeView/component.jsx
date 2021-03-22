@@ -16,6 +16,9 @@ class TreeView extends BaseComponent {
         }
         children.forEach((child) => {
             var childElement = new TreeViewItemElement({ text: child.props.text, open: false });
+            if (child.props.onSelected) {
+                childElement.on('select', child.props.onSelected);
+            }
             element.append(childElement);
             this.loadChildren(child.props.children, childElement);
         });
