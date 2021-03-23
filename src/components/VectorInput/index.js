@@ -174,6 +174,20 @@ class VectorInput extends Element {
     }
 
     set value(value) {
+        if (typeof value === 'string') {
+            try {
+                // try to parse the string
+                value = JSON.parse(value);
+                // if the string could be converted to an array but some of it's values aren't numbers
+                // then use a default array also
+                if (Array.isArray(value) && value.some(i => !Number.isFinite(i))) {
+                    throw new Error('VectorInput value set to string which doesn\'t contain an array of numbers');
+                }
+            } catch (e) {
+                console.error(e);
+                value = [];
+            }
+        }
         if (!Array.isArray(value)) {
             value = [];
         }
