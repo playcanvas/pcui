@@ -5,6 +5,7 @@ const CLASS_CELL = 'pcui-table-cell';
 /**
  * @name TableCell
  * @augments Container
+ * @class
  * @classdesc Represents a table cell inside a pcui.TableRow
  */
 class TableCell extends Container {

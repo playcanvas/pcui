@@ -36,6 +36,7 @@ joint.V.prototype.transform = function (matrix, opt) {
 
 /**
  * @name Graph
+ * @class
  * @classdesc Represents a graph.
  * @mixes IFocusable
  */

@@ -6,6 +6,7 @@ const CLASS_INFOBOX = 'pcui-infobox';
 
 /**
  * @name InfoBox
+ * @class
  * @classdesc Represents an information box.
  * @augments Container
  * @property {string} icon The CSS code for an icon for the info box. e.g. E401 (notice we omit the '\' character).

@@ -1,5 +1,6 @@
 /**
  * @name IFocusable
+ * @class
  * @classdesc Provides an interface for focusing / unfocusing an Element.
  */
 class IFocusable {

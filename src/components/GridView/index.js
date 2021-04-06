@@ -7,6 +7,7 @@ const CLASS_ROOT = 'pcui-gridview';
 /**
  * @name GridView
  * @augments Container
+ * @class
  * @classdesc Represents a container that shows a flexible wrappable
  * list of items that looks like a grid. Contains GridViewItem's.
  * @property {GridViewItem[]} selected Gets the selected grid view items.

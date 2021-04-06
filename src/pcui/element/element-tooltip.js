@@ -13,6 +13,7 @@ const TOOLTIP_DELAY_HIDE = 300;
 
 /**
  * @name Tooltip
+ * @class
  * @classdesc A floating tooltip that can be attached to a target element.
  * @augments Container
  * @property {string} title The tooltip title

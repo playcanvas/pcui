@@ -16,6 +16,7 @@ function createSmallThick(size, dom) {
 /**
  * @name Spinner
  * @augments Element
+ * @class
  * @classdesc Represents a spinning icon
  */
 class Spinner extends Element {

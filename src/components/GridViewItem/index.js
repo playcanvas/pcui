@@ -11,6 +11,7 @@ const CLASS_TEXT = CLASS_ROOT + '-text';
  * @name GridViewItem
  * @augments Container
  * @mixes IFocusable
+ * @class
  * @classdesc Represents a grid view item used in GridView.
  * @property {boolean} allowSelect - If true allow selecting the item. Defaults to true.
  * @property {boolean} selected - Whether the item is selected.

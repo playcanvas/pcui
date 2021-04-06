@@ -6,6 +6,7 @@ const CLASS_TEXT_INPUT = 'pcui-text-input';
 
 /**
  * @name TextInput
+ * @class
  * @classdesc The TextInput is an input element of type text.
  * @augments Element
  * @mixes IBindable

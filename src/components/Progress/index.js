@@ -6,6 +6,7 @@ const CLASS_ROOT = 'pcui-progress';
 const CLASS_INNER = CLASS_ROOT + '-inner';
 /**
  * @name Progress
+ * @class
  * @classdesc Represents a bar that can highlight progress of an activity.
  * @augments Container
  * @property {number} value Gets / sets the value of the progress bar (between 0 and 100).

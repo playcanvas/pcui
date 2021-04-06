@@ -2,6 +2,7 @@ import Events from './events';
 
 /**
  * @name HistoryAction
+ * @class
  * @classdesc A history action
  * @property {string} name The name of the action
  * @property {Function} undo The undo function
@@ -13,6 +14,7 @@ import Events from './events';
 
 /**
  * @name History
+ * @class
  * @classdesc Manages history actions for undo / redo operations.
  * @property {HistoryAction} currentAction Returns the current history action
  * @property {HistoryAction} lastAction Returns the last history action

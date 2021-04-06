@@ -44,6 +44,7 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
 
 /**
  * @name TreeViewItem
+ * @class
  * @classdesc Represents a Tree View Item to be added to a pcui.TreeView.
  * @mixes IFocusable
  * @property {boolean} selected Whether the item is selected.

@@ -10,6 +10,7 @@ const CLASS_OVERLAY_CONTENT = CLASS_OVERLAY + '-content';
 
 /**
  * @name Overlay
+ * @class
  * @classdesc An overlay element.
  * @property {boolean} clickable Whether the overlay can be hidden by clicking on it.
  * @property {boolean} transparent Whether the overlay is transparent.

@@ -4,6 +4,7 @@ import IBindable from '../interfaces/IBindable';
 
 /**
  * @name BindingBase
+ * @class
  * @classdesc Base class for data binding between IBindable Elements and Observers.
  * @property {Element} element The element
  * @property {Observer[]} observers The linked observers

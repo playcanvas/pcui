@@ -8,6 +8,7 @@ const CLASS_LABEL_TOP = CLASS_LABEL_GROUP + '-align-top';
 
 /**
  * @name LabelGroup
+ * @class
  * @classdesc Represents a group of a Label and a Element. Useful for rows of labeled fields.
  * @augments Container
  * @property {string} text - Gets / sets the label text.

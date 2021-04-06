@@ -7,6 +7,7 @@ const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 
 /**
  * @name VectorInput
+ * @class
  * @classdesc A vector input
  * @augments Element
  * @mixes IBindable

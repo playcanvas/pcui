@@ -5,6 +5,7 @@ const CLASS_SELECTED_ROW = CLASS_ROW + '-selected';
 
 /**
  * @name TableRow
+ * @class
  * @classdesc Represents the row of a pcui.Table
  * @augments Container
  * @mixes IFocusable

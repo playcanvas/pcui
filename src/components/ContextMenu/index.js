@@ -11,6 +11,7 @@ const CLASS_ContextMenu_parent_active = CLASS_ContextMenu_parent + '-active';
 
 /**
  * @name ContextMenu
+ * @class
  * @classdesc Represents a context menu.
  */
 class ContextMenu {

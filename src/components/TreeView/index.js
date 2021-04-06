@@ -58,6 +58,7 @@ const DRAG_AREA_AFTER = 'after';
 
 /**
  * @name TreeView
+ * @class
  * @classdesc A container that can show a treeview like a hierarchy. The treeview contains
  * pcui.TreeViewItems.
  * @augments Container

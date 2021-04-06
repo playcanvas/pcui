@@ -29,6 +29,7 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
 
 /**
  * @name Panel
+ * @class
  * @classdesc The Panel is a pcui.Container that itself contains a header container and a content container. The
  * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
  * @property {boolean} flex Gets / sets whether the container supports flex layout. Defaults to false. Cannot co-exist with grid.

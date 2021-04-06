@@ -1,3 +1,7 @@
+/**
+ * @constructor
+ */
+
 function Events() {
     // _world
     Object.defineProperty(
@@ -22,6 +26,12 @@ function Events() {
     });
 }
 
+/**
+ * @param {string} name 
+ * @param {callbacks.HandleEvent} fn 
+ * @returns {EventHandle}
+ */
+
 Events.prototype.on = function (name, fn) {
     var events = this._events[name];
     if (events === undefined) {
@@ -33,6 +43,12 @@ Events.prototype.on = function (name, fn) {
     return new EventHandle(this, name, fn);
 };
 
+/**
+ * @param {string} name 
+ * @param {callbacks.HandleEvent} fn 
+ * @returns {EventHandle}
+ */
+
 Events.prototype.once = function (name, fn) {
     var self = this;
     var evt = this.on(name, function (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
@@ -41,6 +57,20 @@ Events.prototype.once = function (name, fn) {
     });
     return evt;
 };
+
+/**
+ * 
+ * @param {string} name 
+ * @param {any} arg0 
+ * @param {any} arg1 
+ * @param {any} arg2 
+ * @param {any} arg3 
+ * @param {any} arg4 
+ * @param {any} arg5 
+ * @param {any} arg6 
+ * @param {any} arg7 
+ * @returns {this}
+ */
 
 Events.prototype.emit = function (name, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
     if (this._suspendEvents) return;
@@ -65,6 +95,13 @@ Events.prototype.emit = function (name, arg0, arg1, arg2, arg3, arg4, arg5, arg6
 
     return this;
 };
+
+/**
+ * 
+ * @param {string} name 
+ * @param {callbacks.HandleEvent} fn 
+ * @returns {this}
+ */
 
 Events.prototype.unbind = function (name, fn) {
     if (name) {
@@ -91,12 +128,22 @@ Events.prototype.unbind = function (name, fn) {
     return this;
 };
 
+/**
+ * @constructor
+ * @param {Events} owner
+ * @param {string} name 
+ * @param {callbacks.HandleEvent} fn 
+ */
 
 function EventHandle(owner, name, fn) {
     this.owner = owner;
     this.name = name;
     this.fn = fn;
 }
+
+/**
+ * @returns {void}
+ */
 
 EventHandle.prototype.unbind = function () {
     if (! this.owner)
@@ -109,12 +156,22 @@ EventHandle.prototype.unbind = function () {
     this.fn = null;
 };
 
+/**
+ * @returns {void}
+ */
+
 EventHandle.prototype.call = function () {
     if (! this.fn)
         return;
 
     this.fn.call(this.owner, arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7]);
 };
+
+/**
+ * @param {string} name 
+ * @param {callbacks.HandleEvent} fn 
+ * @returns {EventHandle}
+ */
 
 EventHandle.prototype.on = function (name, fn) {
     return this.owner.on(name, fn);

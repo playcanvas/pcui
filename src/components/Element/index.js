@@ -113,6 +113,7 @@ const ELEMENT_REGISTRY = {};
 
 /**
  * @name Element
+ * @class
  * @classdesc The base class for all UI elements.
  * @augments Events
  * @property {boolean} enabled=true Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
