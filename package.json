@@ -20,7 +20,8 @@
     "storybook": "jsdoc -r -X src > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
     "docs:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "docs:build": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
-    "pcui:publish": "npm run build && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && npm publish dist"
+    "pcui:publish": "npm run build && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && npm publish dist",
+    "tsd": "jsdoc -c conf-tsd.json && node tsd.js"
   },
   "browserslist": {
     "production": [
@@ -75,6 +76,7 @@
     "react-scripts": "3.4.1",
     "sass": "^1.32.7",
     "sass-loader": "^9.0.2",
+    "tsd-jsdoc": "^2.5.0",
     "webpack-cli": "^4.5.0"
   },
   "directories": {
