@@ -2,11 +2,11 @@ import Events from './events';
 import { useState } from 'react';
 
 /**
- * @constructor
- * @param {*} data 
- * @param {*} options 
+ * @class
+ * @name Observer
+ * @param {any} data - Data
+ * @param {any} options - Options
  */
-
 function Observer(data, options) {
     Events.call(this);
     options = options || { };

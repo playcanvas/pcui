@@ -2,10 +2,10 @@ import Events from './events';
 import Observer from './observer';
 
 /**
- * @constructor
- * @param {*} args 
+ * @class
+ * @name ObserverHistory
+ * @param {any} args - Arguments
  */
-
 function ObserverHistory(args) {
     Events.call(this);
 
