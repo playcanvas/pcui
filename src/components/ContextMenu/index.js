@@ -57,6 +57,19 @@ class ContextMenu {
                 menu.dom.setAttribute("style", `left: ${left}px; top: ${top}px`);
                 document.addEventListener('click', removeMenu);
             });
+
+            var mouseLeaveTimeout;
+            menu.dom.addEventListener('mouseleave', () => {
+                mouseLeaveTimeout = setTimeout(() => {
+                    removeMenu();
+                }, 500);
+            });
+            menu.dom.addEventListener('mouseenter', () => {
+                if (mouseLeaveTimeout) {
+                    clearTimeout(mouseLeaveTimeout);
+
+                }
+            });
         }
 
         if (!args.items) return;
