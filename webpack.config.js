@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
-    mode: 'production',
+    mode: process.env.ENVIRONMENT === 'development' ? 'development' : 'production',
     entry: {
         'pcui': './src/index.js',
         'pcui-react': './src/components/index.js',
