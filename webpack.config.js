@@ -11,10 +11,13 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        library: process.env.LIBRARY_NAME ? `${process.env.LIBRARY_NAME}_[name]` : '[name]',
-        libraryTarget: 'umd'
+        filename: process.env.MODULE ? '[name].mjs' : '[name].js',
+        library: process.env.MODULE ? undefined : (process.env.LIBRARY_NAME ? `${process.env.LIBRARY_NAME}_[name]` : '[name]'),
+        libraryTarget: process.env.MODULE ? 'module' : 'umd'
     },
+    experiments: process.env.MODULE ? {
+        outputModule: true
+    } : undefined,
     module: {
         rules: [
             {
