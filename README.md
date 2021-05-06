@@ -33,7 +33,7 @@ This will build the entire library to the output path `dist`. The various parts 
 
 You can then import the ES6 components into your own `.js` files and use them as follows:
 ```javascript
-import { Label } from 'dist/pcui.js';
+import { Label } from 'dist/pcui.mjs';
 
 const helloWorldLabel = new Label({
     text: 'Hello World'
@@ -42,7 +42,7 @@ const helloWorldLabel = new Label({
 
 If you are more familar with react, you can import react elements into your own `.jsx` files and use them as follows:
 ```jsx
-import { Label } from 'dist/pcui-react.js';
+import { Label } from 'dist/pcui-react.mjs';
 
 const helloWorldLabel = () => <Label text="Hello World" />;
 ```
@@ -63,8 +63,8 @@ The pcui library offers a data binding layer that can be used to synchonise data
 
 In this example the created label will start with `Hello World` as it's text value. When a user enters a value into the text input, the label will be updated with the new value. 
 ```javascript
-import { BindingObserversToElement, BindingElementToObservers, Observer } from 'dist/pcui-binding.js';
-import { Label, TextInput } from 'dist/pcui.js';
+import { BindingObserversToElement, BindingElementToObservers, Observer } from 'dist/pcui-binding.mjs';
+import { Label, TextInput } from 'dist/pcui.mjs';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
@@ -84,8 +84,8 @@ textInput.link(observer, 'text');
 
 Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in react to showcase binding with react components:
 ```jsx
-import { BindingTwoWay, Observer } from 'dist/pcui-binding.js';
-import { TextInput } from 'dist/pcui-react.js';
+import { BindingTwoWay, Observer } from 'dist/pcui-binding.mjs';
+import { TextInput } from 'dist/pcui-react.mjs';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});

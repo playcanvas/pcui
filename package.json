@@ -13,9 +13,8 @@
     "type": "git",
     "url": "git+https://github.com/playcanvas/pcui.git"
   },
-  "dependencies": {},
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js && MODULE=true webpack --config webpack.config.js",
     "watch": "ENVIRONMENT=development webpack --config webpack.config.js --watch",
     "lint": "eslint --ext .js src",
     "storybook": "jsdoc -r -X src > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
@@ -78,7 +77,8 @@
     "sass": "^1.32.7",
     "sass-loader": "^9.0.2",
     "tsd-jsdoc": "^2.5.0",
-    "webpack-cli": "^4.5.0"
+    "webpack": "~5.36.1",
+    "webpack-cli": "~4.6.0"
   },
   "directories": {
     "doc": "docs"
