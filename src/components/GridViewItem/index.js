@@ -142,7 +142,6 @@ class GridViewItem extends Container {
 
         return null;
     }
-
 }
 
 export default GridViewItem;

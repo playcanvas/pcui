@@ -532,7 +532,7 @@ class CurveInput extends Container {
         window.addEventListener('mouseup', this._onMouseUp.bind(this), { passive: false });
         window.addEventListener('mousemove', this._onMouseMove.bind(this), { passive: false });
         this._pickerCanvas.element.addEventListener('wheel', this._onMouseWheel.bind(this), { passive: false });
-        this._pickerCanvas.element.addEventListener('contextmenu', e => e.preventDefault(), { passive: false });
+        this._pickerCanvas.element.addEventListener('contextmenu', (e) => e.preventDefault(), { passive: false });
 
         this._resetCurveButton.on('click', () => {
             this._resetCurve(this.selectedCurve);
@@ -1648,11 +1648,11 @@ class CurveInput extends Container {
                 value = [value];
             }
 
-            value.forEach(value => {
+            value.forEach((value) => {
                 if (!value || !value.keys || !value.keys.length) return;
 
                 if (Array.isArray(value.keys[0])) {
-                    value.keys.forEach(data => {
+                    value.keys.forEach((data) => {
                         for (let i = 1; i < data.length; i += 2) {
                             if (data[i] > maxValue) {
                                 maxValue = data[i];
@@ -1711,7 +1711,7 @@ class CurveInput extends Container {
         if (!value || !value.keys || !value.keys.length) return null;
 
         if (value.keys[0].length !== undefined) {
-            return value.keys.map(data => {
+            return value.keys.map((data) => {
                 const curve = new Curve(data);
                 curve.type = value.type;
                 return curve;
@@ -1745,11 +1745,11 @@ class CurveInput extends Container {
         if (!value || !value[0]) return;
 
         // draw curves
-        const primaryCurves = value.slice(0, this.numCurves).map(curve => this._convertValueToCurves(curve)).flat();
+        const primaryCurves = value.slice(0, this.numCurves).map((curve) => this._convertValueToCurves(curve)).flat();
 
         if (!primaryCurves) return;
 
-        const secondaryCurves = value.slice(this.numCurves, this.numCurves * 2).map(curve => this._convertValueToCurves(curve)).flat();
+        const secondaryCurves = value.slice(this.numCurves, this.numCurves * 2).map((curve) => this._convertValueToCurves(curve)).flat();
 
         const minValue = minMax[0];
         const maxValue = minMax[1];

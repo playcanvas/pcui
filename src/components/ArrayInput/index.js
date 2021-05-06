@@ -167,7 +167,7 @@ class ArrayInput extends Element {
         };
 
         // resize array
-        const values = this._values.map(array => {
+        const values = this._values.map((array) => {
             if (!array) {
                 array = new Array(size);
                 for (let i = 0; i < size; i++) {
@@ -245,7 +245,7 @@ class ArrayInput extends Element {
         }
 
         if (this._elementType === 'json' && args.attributes) {
-            args.attributes = args.attributes.map(attr => {
+            args.attributes = args.attributes.map((attr) => {
                 if (!attr.path) return attr;
 
                 // fix paths to include array element index
@@ -304,7 +304,7 @@ class ArrayInput extends Element {
         if (index === -1) return;
 
         // remove row from every array in values
-        const values = this._values.map(array => {
+        const values = this._values.map((array) => {
             if (!array) return null;
             array.splice(index, 1);
             return array;
@@ -320,7 +320,7 @@ class ArrayInput extends Element {
         if (index === -1) return;
 
         // Set the value to the same row of every array in values.
-        this._values.forEach(array => {
+        this._values.forEach((array) => {
             if (array && array.length > index) {
                 array[index] = value;
             }
@@ -348,7 +348,7 @@ class ArrayInput extends Element {
 
         this.emit('unlinkElement', element, index);
 
-        const path = (useSinglePath ? paths[0] + `.${index}` : paths.map(path => `${path}.${index}`));
+        const path = (useSinglePath ? paths[0] + `.${index}` : paths.map((path) => `${path}.${index}`));
         element.link(observers, path);
 
         this.emit('linkElement', element, index, path);
@@ -371,7 +371,7 @@ class ArrayInput extends Element {
         // holds the length of each array
         const arrayLengths = [];
 
-        values.forEach(array => {
+        values.forEach((array) => {
             if (!array) return;
 
             arrayLengths.push(array.length);
@@ -467,14 +467,14 @@ class ArrayInput extends Element {
     set binding(value) {
         super.binding = value;
 
-        this._arrayElements.forEach(entry => {
+        this._arrayElements.forEach((entry) => {
             entry.element.binding = value ? value.clone() : null;
         });
     }
 
     get value() {
         // construct value from values of array elements
-        return this._arrayElements.map(entry => entry.element.value);
+        return this._arrayElements.map((entry) => entry.element.value);
     }
 
     set value(value) {
@@ -502,7 +502,7 @@ class ArrayInput extends Element {
 
     set renderChanges(value) {
         this._renderChanges = value;
-        this._arrayElements.forEach(entry => {
+        this._arrayElements.forEach((entry) => {
             entry.element.renderChanges = value;
         });
     }

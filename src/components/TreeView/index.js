@@ -121,7 +121,7 @@ class TreeView extends Container {
         this.dom.addEventListener('mouseleave', this._domEvtMouseLeave);
 
         this._dragHandle.dom.addEventListener('mousemove', this._domEvtDragMove);
-        this._dragHandle.on('destroy', dom => {
+        this._dragHandle.on('destroy', (dom) => {
             dom.removeEventListener('mousemove', this._domEvtDragMove);
         });
     }
@@ -208,7 +208,7 @@ class TreeView extends Container {
      * @returns {TreeViewItem[]} The tree items.
      */
     _getChildrenRange(startChild, endChild) {
-        let result = [];
+        const result = [];
 
         // select search results if we are currently filtering tree view items
         if (this._filterResults.length) {
@@ -292,7 +292,7 @@ class TreeView extends Container {
         }
 
         // do the same for all children of the element
-        element.forEachChild(child => {
+        element.forEachChild((child) => {
             if (child instanceof TreeViewItem) {
                 this._onAppendTreeViewItem(child);
             }
@@ -303,7 +303,7 @@ class TreeView extends Container {
         element.selected = false;
 
         // do the same for all children of the element
-        element.forEachChild(child => {
+        element.forEachChild((child) => {
             if (child instanceof TreeViewItem) {
                 this._onRemoveTreeViewItem(child);
             }
@@ -375,7 +375,7 @@ class TreeView extends Container {
             this._openHierarchy(selected);
 
             const children = this._getChildrenRange(selected, element);
-            children.forEach(child => {
+            children.forEach((child) => {
                 if (child.allowSelect) {
                     child.selected = true;
                 }
@@ -419,7 +419,7 @@ class TreeView extends Container {
     _updateTreeOrder() {
         let order = 0;
 
-        this._traverseDepthFirst(item => {
+        this._traverseDepthFirst((item) => {
             item._treeOrder = order++;
         });
     }
@@ -478,7 +478,7 @@ class TreeView extends Container {
         }
 
         if (this._dragItems.length) {
-            this._dragItems.forEach(item => {
+            this._dragItems.forEach((item) => {
                 item.class.add(CLASS_DRAGGED_ITEM);
             });
 
@@ -492,7 +492,7 @@ class TreeView extends Container {
     _onChildDragEnd(evt, element) {
         if (!this.allowDrag || !this._dragging) return;
 
-        this._dragItems.forEach(item => item.class.remove(CLASS_DRAGGED_ITEM));
+        this._dragItems.forEach((item) => item.class.remove(CLASS_DRAGGED_ITEM));
 
         if (this._dragOverItem) {
             if (this._dragItems.length > 1) {
@@ -510,12 +510,12 @@ class TreeView extends Container {
                 const reparented = [];
                 let lastDraggedItem = this._dragOverItem;
 
-                this._dragItems.forEach(item => {
+                this._dragItems.forEach((item) => {
                     if (item.parent !== this._dragOverItem || this._dragArea !== DRAG_AREA_INSIDE) {
 
                         const oldParent = item.parent;
                         let newParent = null;
-                        let oldChildIndex = this._getChildIndex(item, oldParent);
+                        const oldChildIndex = this._getChildIndex(item, oldParent);
                         let newChildIndex = 0;
 
                         if (!this._onReparentFn) {
@@ -710,7 +710,7 @@ class TreeView extends Container {
             this._dragHandle.class.remove(DRAG_AREA_AFTER, DRAG_AREA_BEFORE, DRAG_AREA_INSIDE);
             this._dragHandle.class.add(this._dragArea);
 
-            let top = rect.top;
+            const top = rect.top;
             let left = rect.left;
             let width = rect.width;
             if (this.dom.parentElement) {
@@ -806,7 +806,7 @@ class TreeView extends Container {
         const results = searchItems(searchArr, filter);
         if (!results.length) return;
 
-        results.forEach(item => {
+        results.forEach((item) => {
             this._filterResults.push(item);
             item.class.add(CLASS_FILTER_RESULT);
         });
@@ -827,7 +827,7 @@ class TreeView extends Container {
         this.class.add(CLASS_FILTERING);
 
         const search = [];
-        this._traverseDepthFirst(item => {
+        this._traverseDepthFirst((item) => {
             search.push([item.text, item]);
         });
 
@@ -838,7 +838,7 @@ class TreeView extends Container {
      * Clears search filter.
      */
     _clearFilter() {
-        this._filterResults.forEach(item => {
+        this._filterResults.forEach((item) => {
             if (item.destroyed) return;
             item.class.remove(CLASS_FILTER_RESULT);
         });

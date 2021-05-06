@@ -100,7 +100,7 @@ class ContextMenu {
             }
             menuItemElement.dom.addEventListener('mouseover', (e) => {
                 // if (!e.fromElement.classList.contains('pcui-contextmenu-parent')) return;
-                this._menu.forEachChild(node => node.class.remove(CLASS_ContextMenu_parent_active));
+                this._menu.forEachChild((node) => node.class.remove(CLASS_ContextMenu_parent_active));
                 menuItemElement.class.add(CLASS_ContextMenu_parent_active);
 
                 var maxMenuHeight = menuItem.items ? menuItem.items.length * 27.0 : 0.0;

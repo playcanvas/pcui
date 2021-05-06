@@ -178,7 +178,7 @@ class NumericInput extends TextInput {
                 if (value !== null && value[0].length < 20) {
                     var expression = value[0];
                     var operators = ['+', '-', '/', '*'];
-                    operators.forEach(operator => {
+                    operators.forEach((operator) => {
                         var expressionArr = expression.split(operator);
                         expressionArr.forEach((_, i) => {
                             expressionArr[i] = expressionArr[i].replace(/^0+/, '');

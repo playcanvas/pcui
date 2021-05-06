@@ -50,7 +50,7 @@ class SliderInput extends Element {
         args = Object.assign({}, args);
 
         const inputArgs = {};
-        PROXY_FIELDS.forEach(field => {
+        PROXY_FIELDS.forEach((field) => {
             inputArgs[field] = args[field];
         });
 

@@ -7,7 +7,6 @@ import BindingBase from './binding-base';
  * @augments BindingBase
  */
 class BindingElementToObservers extends BindingBase {
-
     clone() {
         return new BindingElementToObservers({
             history: this._history,
@@ -42,7 +41,7 @@ class BindingElementToObservers extends BindingBase {
         if (this._history) {
             let previousValues = [];
             if (observers.length === 1 && paths.length > 1) {
-                previousValues = paths.map(path => {
+                previousValues = paths.map((path) => {
                     return observers[0].has(path) ? observers[0].get(path) : undefined;
                 });
             } else {
@@ -137,7 +136,7 @@ class BindingElementToObservers extends BindingBase {
             const path = this._pathAt(paths, i);
             const observer = observers[i];
 
-            values.forEach(value => {
+            values.forEach((value) => {
                 if (observer.get(path).indexOf(value) === -1)  {
                     records.push({
                         observer: observer,
@@ -218,7 +217,7 @@ class BindingElementToObservers extends BindingBase {
             const path = this._pathAt(paths, i);
             const observer = observers[i];
 
-            values.forEach(value => {
+            values.forEach((value) => {
                 const ind = observer.get(path).indexOf(value);
                 if (ind !== -1)  {
                     records.push({
@@ -293,7 +292,9 @@ class BindingElementToObservers extends BindingBase {
 
     setValues(values) {
         // make sure we deep copy arrays because they will not be cloned when set to the observers
-        values = values.slice().map(val => Array.isArray(val) ? val.slice() : val);
+        values = values.slice().map((val) => {
+            return Array.isArray(val) ? val.slice() : val;
+        });
         this._setValue(values, true);
     }
 

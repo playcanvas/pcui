@@ -278,7 +278,7 @@ class TreeViewItem extends Container {
             this.focus();
         });
 
-        textInput.on('change', value => {
+        textInput.on('change', (value) => {
             value = value.trim();
             if (value) {
                 this.text = value;

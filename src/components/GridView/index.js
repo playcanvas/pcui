@@ -143,7 +143,7 @@ class GridView extends Container {
      * @description Filters grid view items with the filter function provided in the constructor.
      */
     filter() {
-        this.forEachChild(child => {
+        this.forEachChild((child) => {
             if (child instanceof GridViewItem) {
                 child.hidden = this._filterFn && !this._filterFn(child);
             }
