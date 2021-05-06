@@ -77,7 +77,7 @@
     "sass": "^1.32.12",
     "sass-loader": "^9.0.2",
     "tsd-jsdoc": "^2.5.0",
-    "webpack": "^5.36.2",
+    "webpack": "~5.36.2",
     "webpack-cli": "~4.6.0"
   },
   "directories": {
