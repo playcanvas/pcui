@@ -74,7 +74,7 @@ const curvePickerDom = (parent) => [
                                 class: CLASS_CURVE_PICKER_TOGGLES
                             })
                         },
-                        children: parent.curveToggles.map(toggle => ({
+                        children: parent.curveToggles.map((toggle) => ({
                             [`toggle-${toggle}`]: new Button({
                                 text: toggle
                             })
@@ -704,11 +704,11 @@ class CurveInput extends Container {
                 value = [value];
             }
 
-            value.forEach(value => {
+            value.forEach((value) => {
                 if (!value || !value.keys || !value.keys.length) return;
 
                 if (Array.isArray(value.keys[0])) {
-                    value.keys.forEach(data => {
+                    value.keys.forEach((data) => {
                         for (let i = 1; i < data.length; i += 2) {
                             if (data[i] > maxValue) {
                                 maxValue = data[i];
@@ -767,7 +767,7 @@ class CurveInput extends Container {
         if (!value || !value.keys || !value.keys.length) return null;
 
         if (value.keys[0].length !== undefined) {
-            return value.keys.map(data => {
+            return value.keys.map((data) => {
                 const curve = new Curve(data);
                 curve.type = value.type;
                 return curve;

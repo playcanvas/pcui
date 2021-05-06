@@ -558,7 +558,7 @@ class Container extends Element {
         let rootNode;
         if (keys.includes('root')) {
             rootNode = this._buildDomNode(node.root);
-            node.children.forEach(childNode => {
+            node.children.forEach((childNode) => {
                 const childNodeElement = this._buildDomNode(childNode);
                 if (childNodeElement !== null) {
                     rootNode.append(childNodeElement);
@@ -599,7 +599,7 @@ class Container extends Element {
      * ]);
      */
     buildDom(dom) {
-        dom.forEach(node => {
+        dom.forEach((node) => {
             const builtNode = this._buildDomNode(node);
             this.append(builtNode);
         });

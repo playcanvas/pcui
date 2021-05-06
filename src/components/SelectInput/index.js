@@ -205,7 +205,7 @@ class SelectInput extends Element {
         });
         container.append(label);
 
-        let evtChange = this._input.on('change', value => {
+        let evtChange = this._input.on('change', (value) => {
             // check if label is destroyed
             // during change event
             if (label.destroyed) return;
@@ -281,7 +281,7 @@ class SelectInput extends Element {
         if (this.multiSelect) {
             if (!Array.isArray(value)) return value;
 
-            return value.map(val => this._convertSingleValue(val));
+            return value.map((val) => this._convertSingleValue(val));
         }
 
         return this._convertSingleValue(value);
@@ -305,7 +305,7 @@ class SelectInput extends Element {
 
         if (this._values) {
             let dirty = false;
-            this._values.forEach(arr => {
+            this._values.forEach((arr) => {
                 if (!arr) {
                     arr = [value];
                     dirty = true;
@@ -387,7 +387,7 @@ class SelectInput extends Element {
             this._containerTags.class.add(CLASS_TAGS_EMPTY);
 
             if (value && Array.isArray(value)) {
-                value.forEach(val => {
+                value.forEach((val) => {
                     this._addTag(val);
                     if (this._labelsIndex[val]) {
                         this._labelsIndex[val].class.add(CLASS_SELECTED);
@@ -412,9 +412,9 @@ class SelectInput extends Element {
 
         const tags = {};
         const valueCounts = {};
-        values.forEach(arr => {
+        values.forEach((arr) => {
             if (!arr) return;
-            arr.forEach(val => {
+            arr.forEach((val) => {
                 if (!tags[val]) {
                     tags[val] = this._addTag(val);
                     valueCounts[val] = 1;
@@ -476,7 +476,7 @@ class SelectInput extends Element {
         }
 
         if (this._values) {
-            this._values.forEach(arr => {
+            this._values.forEach((arr) => {
                 if (!arr) return;
                 const idx = arr.indexOf(value);
                 if (idx !== -1) {
@@ -519,16 +519,16 @@ class SelectInput extends Element {
         }
 
         if (filter) {
-            const searchOptions = this.options.map(option => {
+            const searchOptions = this.options.map((option) => {
                 return [option.t, option.v];
             });
             const searchResults = searchItems(searchOptions, filter);
-            searchResults.forEach(value => {
+            searchResults.forEach((value) => {
                 containerDom.appendChild(this._labelsIndex[value].dom);
             });
 
         } else {
-            this.options.forEach(option => {
+            this.options.forEach((option) => {
                 containerDom.appendChild(this._labelsIndex[option.v].dom);
             });
         }
@@ -761,7 +761,7 @@ class SelectInput extends Element {
         if (this._containerOptions.dom.childNodes.length === 0) return;
 
         // highlight label that displays current value
-        this._containerOptions.forEachChild(label => {
+        this._containerOptions.forEachChild((label) => {
             label.hidden = false;
             if (label._optionValue === this.value) {
                 this._highlightLabel(label);
@@ -889,7 +889,7 @@ class SelectInput extends Element {
         this._options = value;
 
         // store each option value -> title pair in the optionsIndex
-        this._options.forEach(option => {
+        this._options.forEach((option) => {
             this._optionsIndex[option.v] = option.t;
             if (option.v === '') return;
 
@@ -948,7 +948,7 @@ class SelectInput extends Element {
         // if multi-select then construct an array
         // value from the tags that are currently visible
         const result = [];
-        this._containerTags.dom.childNodes.forEach(dom => {
+        this._containerTags.dom.childNodes.forEach((dom) => {
             result.push(dom.ui.value);
         });
 

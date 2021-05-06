@@ -141,7 +141,7 @@ class VectorInput extends Element {
         } else {
             for (let i = 0; i < this._inputs.length; i++) {
                 // link observers to paths[i].i for each dimension
-                this._inputs[i].link(observers, paths.map(path => `${path}.${i}`));
+                this._inputs[i].link(observers, paths.map((path) => `${path}.${i}`));
             }
 
         }
@@ -180,7 +180,7 @@ class VectorInput extends Element {
                 value = JSON.parse(value);
                 // if the string could be converted to an array but some of it's values aren't numbers
                 // then use a default array also
-                if (Array.isArray(value) && value.some(i => !Number.isFinite(i))) {
+                if (Array.isArray(value) && value.some((i) => !Number.isFinite(i))) {
                     throw new Error('VectorInput value set to string which doesn\'t contain an array of numbers');
                 }
             } catch (e) {
@@ -202,7 +202,7 @@ class VectorInput extends Element {
     /* eslint accessor-pairs: 0 */
     set values(values) {
         // create an array for each dimension (e.g. one array for x one for y one for z)
-        values = this._inputs.map((_, i) => values.map(arr => arr[i]));
+        values = this._inputs.map((_, i) => values.map((arr) => arr[i]));
 
         this._inputs.forEach((input, i) => {
             input.values = values[i];
@@ -225,7 +225,7 @@ class VectorInput extends Element {
     }
 
     get placeholder() {
-        return this._inputs.map(input => input.placeholder);
+        return this._inputs.map((input) => input.placeholder);
     }
 
     set placeholder(value) {
@@ -246,7 +246,7 @@ class VectorInput extends Element {
     'precision',
     'step',
     'renderChanges'
-].forEach(property => {
+].forEach((property) => {
     Object.defineProperty(VectorInput.prototype, property, {
         get: function () {
             return this._inputs[0][property];

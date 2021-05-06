@@ -59,7 +59,7 @@ utils.implements = function (targetClass, sourceClass) {
  * utils.proxy(pcui.SliderInput, '_numericInput', ['max', 'min', 'placeholder']);
  */
 utils.proxy = function (targetClass, memberName, properties) {
-    properties.forEach(property => {
+    properties.forEach((property) => {
         Object.defineProperty(targetClass.prototype, property, {
             get: function () {
                 return this[memberName][property];
@@ -73,6 +73,7 @@ utils.proxy = function (targetClass, memberName, properties) {
 
 // String.startsWith
 if (! String.prototype.startsWith) {
+    // eslint-disable-next-line
     Object.defineProperty(String.prototype, 'startsWith', {
         enumerable: false,
         configurable: false,
@@ -89,6 +90,7 @@ if (! String.prototype.startsWith) {
 
 // String.endsWith polyfill
 if (! String.prototype.endsWith) {
+    // eslint-disable-next-line
     Object.defineProperty(String.prototype, 'endsWith', {
         enumerable: false,
         configurable: false,
@@ -107,6 +109,7 @@ if (! String.prototype.endsWith) {
 // automatically figuring out if the separator should be ? or &.
 // Example: url.appendQuery('t=123').appendQuery('q=345');
 if (! String.prototype.appendQuery) {
+    // eslint-disable-next-line
     Object.defineProperty(String.prototype, 'appendQuery', {
         enumerable: false,
         configurable: false,

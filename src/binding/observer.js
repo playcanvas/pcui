@@ -324,7 +324,7 @@ Observer.prototype.set = function (path, value, silent, remote, force) {
             obj.silenceRestore(state);
         } else {
             node._data[key] = [];
-            value.forEach(val => {
+            value.forEach((val) => {
                 this._doInsert(node, key, val);
             });
 
@@ -937,7 +937,9 @@ Object.defineProperty(Observer.prototype, 'latestFn', {
 });
 
 export const useObserverState = (observer, path, json) => {
-    const parseFunc = (observerValue) => json ? JSON.parse(observerValue) : observerValue;
+    const parseFunc = (observerValue) => {
+        return json ? JSON.parse(observerValue) : observerValue;
+    };
     const [value, setValue] = useState(parseFunc(observer.get(path)));
     observer.on(`${path}:set`, (value) => setValue(parseFunc(value)));
     return value;

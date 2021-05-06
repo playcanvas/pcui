@@ -151,7 +151,9 @@ class TextInput extends Element {
                     }
                 }
 
-                value = isObject ? '[Not available]' : value.map(val => val === null ? 'null' : val).join(',');
+                value = isObject ? '[Not available]' : value.map((val) => {
+                    return val === null ? 'null' : val;
+                }).join(',');
             } else {
                 value = '[Not available]';
             }

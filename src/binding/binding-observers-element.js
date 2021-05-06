@@ -51,7 +51,7 @@ class BindingObserversToElement extends BindingBase {
             if (this._paths.length > 1) {
                 // if using multiple paths for the single observer (e.g. curves)
                 // then return an array of values for each path
-                this._element.value = this._paths.map(path => {
+                this._element.value = this._paths.map((path) => {
                     return this._observers[0].has(path) ? this._observers[0].get(path) : undefined;
                 });
             } else {
