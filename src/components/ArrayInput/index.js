@@ -479,7 +479,7 @@ class ArrayInput extends Element {
 
     set value(value) {
         if (!Array.isArray(value)) {
-            value = [null];
+            value = [];
         }
 
         const current = this.value || [];
