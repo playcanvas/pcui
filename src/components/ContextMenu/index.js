@@ -90,7 +90,7 @@ class ContextMenu {
                     var childMenuItemElement = new Container({ class: CLASS_ContextMenu_child });
                     childMenuItemElement.dom.setAttribute("style", `top: ${j * 27.0}px; left: 150px;`);
                     childMenuItemElement.on('click', (e) => {
-                        e.stopPropagation(); removeMenu(); childItem.onClick();
+                        e.stopPropagation(); removeMenu(); childItem.onClick(e);
                     });
                     var childMenuItemLabel = new Label({ text: childItem.text });
                     childMenuItemElement.append(childMenuItemLabel);
