@@ -8,6 +8,7 @@ import Divider from './Divider/component';
 import Element from './Element/component';
 import InfoBox from './InfoBox/component';
 import Label from './Label/component';
+import LabelGroup from './LabelGroup/component';
 import NumericInput from './NumericInput/component';
 import Overlay from './Overlay/component';
 import Panel from './Panel/component';
@@ -35,6 +36,7 @@ export {
     Element,
     InfoBox,
     Label,
+    LabelGroup,
     NumericInput,
     Overlay,
     Panel,

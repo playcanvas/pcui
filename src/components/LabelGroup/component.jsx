@@ -7,8 +7,17 @@ class LabelGroup extends BaseComponent {
     constructor(props) {
         super(props);
         const child = props.children;
-        const created = new child.type.ctor(child.props);
-        this.element = new Element({...props, field: created});
+        this.childElement = new child.type.ctor(child.props);
+        this.element = new Element({...props, field: this.childElement});
+        if (child.props.link) {
+            this.childLink = child.props.link;
+        }
+    }
+
+    componentDidMount() {
+        if (this.childLink) {
+            this.childElement.link(this.childLink.observer, this.childLink.path);
+        }
     }
     
     render() {
