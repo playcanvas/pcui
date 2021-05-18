@@ -27,6 +27,7 @@ const PROXY_FIELDS = [
 
 /**
  * @name SliderInput
+ * @class
  * @classdesc The SliderInput shows a pcui.NumericInput and a slider widget next to it. It acts as a proxy
  * of the NumericInput.
  * @property {number} min Gets / sets the minimum value that the numeric input field can take.

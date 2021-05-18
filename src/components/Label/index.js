@@ -6,6 +6,7 @@ const CLASS_LABEL = 'pcui-label';
 
 /**
  * @name Label
+ * @class
  * @classdesc The Label is a simple span element that displays some text.
  * @property {string} placeholder Gets / sets the placeholder label that appears on the right of the label.
  * @property {string} text Gets / sets the text of the Label.

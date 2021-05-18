@@ -10,6 +10,7 @@ const CLASS_INNER = CLASS_ROOT + '-inner';
  * @name Code
  * @augments Container
  * @property {string} text The Text to display in the code block
+ * @class
  * @classdesc Represents a code block.
  */
 class Code extends Container {

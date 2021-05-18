@@ -1,3 +1,20 @@
+/**
+ * @callback HandleEvent
+ * @description Callback used by {@link Events} and {@link EventHandle} functions. Note the callback is limited to 8 arguments.
+ * @param {*} [arg1] - First argument that is passed from caller.
+ * @param {*} [arg2] - Second argument that is passed from caller.
+ * @param {*} [arg3] - Third argument that is passed from caller.
+ * @param {*} [arg4] - Fourth argument that is passed from caller.
+ * @param {*} [arg5] - Fifth argument that is passed from caller.
+ * @param {*} [arg6] - Sixth argument that is passed from caller.
+ * @param {*} [arg7] - Seventh argument that is passed from caller.
+ * @param {*} [arg8] - Eighth argument that is passed from caller.
+ */
+
+/**
+ * @class
+ * @name Events
+ */
 function Events() {
     // _world
     Object.defineProperty(
@@ -22,6 +39,12 @@ function Events() {
     });
 }
 
+/**
+ * @name Events#on
+ * @param {string} name - Name
+ * @param {HandleEvent} fn - Callback function
+ * @returns {EventHandle} EventHandle
+ */
 Events.prototype.on = function (name, fn) {
     var events = this._events[name];
     if (events === undefined) {
@@ -33,6 +56,12 @@ Events.prototype.on = function (name, fn) {
     return new EventHandle(this, name, fn);
 };
 
+/**
+ * @name Events#once
+ * @param {string} name - Name
+ * @param {HandleEvent} fn - Callback function
+ * @returns {EventHandle} EventHandle
+ */
 Events.prototype.once = function (name, fn) {
     var self = this;
     var evt = this.on(name, function (arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
@@ -42,6 +71,19 @@ Events.prototype.once = function (name, fn) {
     return evt;
 };
 
+/**
+ * @name Events#emit
+ * @param {string} name - Name
+ * @param {any} arg0 - First argument
+ * @param {any} arg1 - Second argument
+ * @param {any} arg2 - Third argument
+ * @param {any} arg3 - Fourth argument
+ * @param {any} arg4 - Fifth argument
+ * @param {any} arg5 - Sixth argument
+ * @param {any} arg6 - Seventh argument
+ * @param {any} arg7 - Eights argument
+ * @returns {Events} Self for chaining.
+ */
 Events.prototype.emit = function (name, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
     if (this._suspendEvents) return;
 
@@ -66,6 +108,12 @@ Events.prototype.emit = function (name, arg0, arg1, arg2, arg3, arg4, arg5, arg6
     return this;
 };
 
+/**
+ * @name Events#unbind
+ * @param {string} name - Name
+ * @param {HandleEvent} fn - Callback function
+ * @returns {Events} - This
+ */
 Events.prototype.unbind = function (name, fn) {
     if (name) {
         var events = this._events[name];
@@ -91,13 +139,22 @@ Events.prototype.unbind = function (name, fn) {
     return this;
 };
 
-
+/**
+ * @class
+ * @name EventHandle
+ * @param {Events} owner - Owner
+ * @param {string} name - Name
+ * @param {HandleEvent} fn - Callback function
+ */
 function EventHandle(owner, name, fn) {
     this.owner = owner;
     this.name = name;
     this.fn = fn;
 }
 
+/**
+ * @name EventHandle#unbind
+ */
 EventHandle.prototype.unbind = function () {
     if (! this.owner)
         return;
@@ -109,6 +166,9 @@ EventHandle.prototype.unbind = function () {
     this.fn = null;
 };
 
+/**
+ * @name EventHandle#call
+ */
 EventHandle.prototype.call = function () {
     if (! this.fn)
         return;
@@ -116,6 +176,12 @@ EventHandle.prototype.call = function () {
     this.fn.call(this.owner, arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7]);
 };
 
+/**
+ * @name EventHandle#on
+ * @param {string} name - Name
+ * @param {HandleEvent} fn - Callback function
+ * @returns {EventHandle} - EventHandle
+ */
 EventHandle.prototype.on = function (name, fn) {
     return this.owner.on(name, fn);
 };

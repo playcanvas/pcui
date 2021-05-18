@@ -11,6 +11,7 @@ const CLASS_TEXT_AREA_INPUT_RESIZABLE_VERTICAL = CLASS_TEXT_AREA_INPUT_RESIZABLE
 
 /**
  * @name TextAreaInput
+ * @class
  * @classdesc The TextAreaInput wraps a textarea element. It has the same interface as pcui.TextInput.
  * @augments TextInput
  * @property {string} [resizable=none] Sets whether the size of the text area input can be modified by the user. Can be one of 'none', 'both', 'horizontal' or 'vertical'.

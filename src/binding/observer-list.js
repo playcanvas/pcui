@@ -1,6 +1,11 @@
 import Events from './events';
 import Observer from './observer';
 
+/**
+ * @class
+ * @name ObserverList
+ * @param {any} options - Options
+ */
 function ObserverList(options) {
     Events.call(this);
     options = options || { };

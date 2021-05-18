@@ -1,5 +1,6 @@
 /**
  * @name IScrollable
+ * @class
  * @classdesc Provides an interface for allowing scrolling on an Element.
  * @property {boolean} scrollable - Gets / sets whether the Element should be scrollable.
  */

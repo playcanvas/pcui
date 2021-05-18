@@ -1,6 +1,11 @@
 import Events from './events';
 import Observer from './observer';
 
+/**
+ * @class
+ * @name ObserverHistory
+ * @param {any} args - Arguments
+ */
 function ObserverHistory(args) {
     Events.call(this);
 

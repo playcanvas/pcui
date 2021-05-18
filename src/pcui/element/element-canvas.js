@@ -4,6 +4,7 @@ const CLASS_CANVAS = 'pcui-canvas';
 
 /**
  * @name Canvas
+ * @class
  * @classdesc A canvas element.
  * @property {number} canvasWidth The width of the HTML canvas
  * @property {number} canvasHeight The height of the HTML canvas

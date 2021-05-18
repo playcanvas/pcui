@@ -5,6 +5,7 @@ const CLASS_BUTTON = 'pcui-button';
 
 /**
  * @name Button
+ * @class
  * @classdesc Represents a button.
  * @augments Element
  * @property {string} [text=Click Me] Gets / sets the text of the button

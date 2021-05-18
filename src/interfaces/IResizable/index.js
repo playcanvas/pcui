@@ -1,5 +1,6 @@
 /**
  * @name IResizable
+ * @class
  * @classdesc Provides an interface for enabling resizing support for an Element
  * @property {number} resizeMin - Gets / sets the minimum size the Element can take when resized in pixels.
  * @property {number} resizeMax - Gets / sets the maximum size the Element can take when resized in pixels.

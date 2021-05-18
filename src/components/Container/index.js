@@ -48,6 +48,7 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
 
 /**
  * @name Container
+ * @class
  * @classdesc A container is the basic building block for Elements that are grouped together.
  * A container can contain any other element including other containers.
  * @augments Element

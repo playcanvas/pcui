@@ -32,6 +32,7 @@ const DEFAULT_BOTTOM_OFFSET = 25;
 
 /**
  * @name SelectInput
+ * @class
  * @classdesc An input that allows selecting from a dropdown or entering tags.
  * @property {boolean} renderChanges If true then the input will flash when its value changes.
  * @property {string} placeholder The placeholder text to show next to the current value.

@@ -10,7 +10,7 @@ class LabelGroup extends BaseComponent {
         const created = new child.type.ctor(child.props);
         this.element = new Element({...props, field: created});
     }
-    
+
     render() {
         return <div ref={(nodeElement) => {nodeElement && nodeElement.appendChild(this.element.dom)}} />
     }

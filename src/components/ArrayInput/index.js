@@ -33,6 +33,7 @@ const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
 
 /**
  * @name ArrayInput
+ * @class
  * @classdesc Element that allows editing an array of values.
  * @property {boolean} renderChanges - If true the input will flash when changed.
  * @augments Element

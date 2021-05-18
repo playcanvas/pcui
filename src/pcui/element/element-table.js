@@ -23,6 +23,7 @@ const CSS_PROPERTY_HEIGHT_AFTER = '--resizing-after';
 
 /**
  * @name Table
+ * @class
  * @classdesc Represents a table view with optional resizable and sortable columns.
  * @augments Container
  * @property {object[]} columns The columns of the table. Each column has the following format:

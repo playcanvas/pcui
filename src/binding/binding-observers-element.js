@@ -2,6 +2,7 @@ import BindingBase from './binding-base';
 
 /**
  * @name BindingObserversToElement
+ * @class
  * @classdesc Provides one way binding between Observers and an IBindable element and Observers. Any changes from the observers
  * will be propagated to the element.
  * @augments BindingBase

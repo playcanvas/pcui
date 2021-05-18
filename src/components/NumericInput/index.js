@@ -12,6 +12,7 @@ const REGEX_COMMA = /,/g;
 
 /**
  * @name NumericInput
+ * @class
  * @classdesc The NumericInput represents an input element that holds numbers.
  * @property {number} [min=0] Gets / sets the minimum value this field can take.
  * @property {number} [max=1] Gets / sets the maximum value this field can take.

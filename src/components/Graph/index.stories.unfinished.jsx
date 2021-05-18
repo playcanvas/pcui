@@ -21,6 +21,6 @@ export default {
     argTypes: config.args
 };
 
-export const Default = (args) => { 
+export const Default = (args) => {
     return <Component {...args} />;
 };

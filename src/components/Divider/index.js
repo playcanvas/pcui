@@ -6,6 +6,7 @@ const CLASS_ROOT = 'pcui-divider';
 /**
  * @name Divider
  * @augments Element
+ * @class
  * @classdesc Represents a vertical division between two elements
  */
 class Divider extends Element {

@@ -136,6 +136,7 @@ const curvePickerDom = (parent) => [
 
 /**
  * @name CurveInput
+ * @class
  * @classdesc Shows a curve or curveset
  * @property {boolean} renderChanges If true the input will flash when changed.
  * @augments Element
