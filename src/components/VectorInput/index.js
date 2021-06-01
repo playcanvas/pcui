@@ -203,7 +203,9 @@ class VectorInput extends Element {
     /* eslint accessor-pairs: 0 */
     set values(values) {
         // create an array for each dimension (e.g. one array for x one for y one for z)
-        values = this._inputs.map((_, i) => values.map((arr) => arr[i]));
+        values = this._inputs.map((_, i) => values.map((arr) => {
+            return arr ? arr[i] : undefined;
+        }));
 
         this._inputs.forEach((input, i) => {
             input.values = values[i];
