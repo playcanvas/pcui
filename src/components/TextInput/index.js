@@ -105,6 +105,7 @@ class TextInput extends Element {
     _onInputFocus(evt) {
         this.class.add(pcuiClass.FOCUS);
         this.emit('focus', evt);
+        this._prevValue = this.value;
     }
 
     _onInputBlur(evt) {
@@ -113,7 +114,10 @@ class TextInput extends Element {
     }
 
     _onInputKeyDown(evt) {
-        if ((evt.keyCode === 27 && this.blurOnEscape) || (evt.keyCode === 13 && this.blurOnEnter)) {
+        if (evt.keyCode === 27 && this.blurOnEscape) {
+            this.value = this._prevValue;
+            this._domInput.blur();
+        } else if (evt.keyCode === 13 && this.blurOnEnter) {
             this._domInput.blur();
         }
 
