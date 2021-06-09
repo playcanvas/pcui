@@ -329,11 +329,13 @@ class TreeViewItem extends Container {
     }
 
     set selected(value) {
-        if (value) {
-            this.focus();
-        }
+        if (value === this.selected) {
+            if (value) {
+                this.focus();
+            }
 
-        if (value === this.selected) return;
+            return;
+        }
 
         if (value) {
             this._containerContents.classAdd(CLASS_SELECTED);
@@ -341,6 +343,8 @@ class TreeViewItem extends Container {
             if (this._treeView) {
                 this._treeView._onChildSelected(this);
             }
+
+            this.focus();
         } else {
             this._containerContents.classRemove(CLASS_SELECTED);
             this.blur();
