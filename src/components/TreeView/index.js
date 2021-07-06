@@ -57,6 +57,16 @@ const DRAG_AREA_AFTER = 'after';
  */
 
 /**
+ * @typedef TreeViewArgs__extends__ElementArgs
+ * @property {Function} [onContextMenu] - A function to be called when we right click on a TreeViewItem.
+ * @property {Function} [onReparent] - A function to be called when we try to reparent tree items. If a function is provided then the
+ * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
+ * @property {boolean} [allowDrag] - allowDrag
+ * @property {boolean} [allowReordering] - allowReordering
+ * @property {boolean} [allowRenaming] - allowRenaming
+ */
+
+/**
  * @name TreeView
  * @class
  * @classdesc A container that can show a treeview like a hierarchy. The treeview contains
@@ -68,15 +78,12 @@ const DRAG_AREA_AFTER = 'after';
  * @property {boolean} isDragging Whether we are currently dragging a TreeViewItem.
  * @property {string} filter Gets / sets a filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
  * @property {TreeViewItem[]} selected Gets the selected TreeViewItems.
+ * @param {TreeViewArgs__extends__ElementArgs} [args] - The arguments. All properties can be set through the arguments as well.
  */
 class TreeView extends Container {
     /**
      * Creates a new TreeView.
-     *
-     * @param {object} [args] - The arguments. All properties can be set through the arguments as well.
-     * @param {Function} [args.onContextMenu] - A function to be called when we right click on a TreeViewItem.
-     * @param {Function} [args.onReparent] - A function to be called when we try to reparent tree items. If a function is provided then the
-     * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
+     * @param {TreeViewArgs__extends__ElementArgs} [args] - The arguments. All properties can be set through the arguments as well.
      */
     constructor(args) {
         if (!args) args = {};

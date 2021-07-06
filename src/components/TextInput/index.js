@@ -5,6 +5,17 @@ import * as pcuiClass from '../../class';
 const CLASS_TEXT_INPUT = 'pcui-text-input';
 
 /**
+ * @typedef TextInputArgs__extends__ElementArgs
+ * @property {string} [placeholder] Placeholder label that appears on the right of the input.
+ * @property {HTMLElement} [input] Gets the HTML input element.
+ * @property {boolean} [renderChanges] If true then the TextInput will flash when its text changes.
+ * @property {boolean} [blurOnEnter=true] Whether pressing Enter will blur (unfocus) the field. Defaults to true.
+ * @property {boolean} [blurOnEscape=true] Whether pressing Escape will blur (unfocus) the field. Defaults to true.
+ * @property {boolean} [keyChange] Whether any key up event will cause a change event to be fired.} args
+ * @property {Function} [onValidate] A function that validates the value that is entered into the input and returns true if it is valid or false otherwise.
+ */
+
+/**
  * @name TextInput
  * @class
  * @classdesc The TextInput is an input element of type text.
@@ -19,12 +30,13 @@ const CLASS_TEXT_INPUT = 'pcui-text-input';
  * @property {boolean} keyChange Gets / sets whether any key up event will cause a change event to be fired.} args
  * @property {Function} onValidate A function that validates the value that is entered into the input and returns true if it is valid or false otherwise.
  * If false then the input will be set in an error state and the value will not propagate to the binding.
+ * @param {TextInputArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
  */
 class TextInput extends Element {
     /**
      * Creates a new TextInput.
      *
-     * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+     * @param {TextInputArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
         if (!args) args = {};

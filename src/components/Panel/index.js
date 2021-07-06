@@ -28,6 +28,21 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
  */
 
 /**
+ * @typedef PanelArgs__extends__ElementArgs
+ * @property {boolean} [flex] - Enable flex (incompatible with grid)
+ * @property {boolean} [grid] - Enable grid (incompatible with flex)
+ * @property {boolean} [scrollable] - scrollable
+ * @property {string} [panelType] - panelType
+ * @property {number} [headerSize] - headerSize
+ * @property {boolean} [collapsible] - collapsible
+ * @property {boolean} [collapsed] - collapsed
+ * @property {boolean} [collapseHorizontally] - collapseHorizontally
+ * @property {boolean} [sortable] - sortable
+ * @property {boolean} [removable] - removable
+ * @property {string} [headerText] - headerText
+ */
+
+/**
  * @name Panel
  * @class
  * @classdesc The Panel is a pcui.Container that itself contains a header container and a content container. The
@@ -48,12 +63,13 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
  * @mixes ICollapsible
  * @mixes IScrollable
  * @mixes IResizable
+ * @param {PanelArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
  */
 class Panel extends Container {
     /**
      * Creates a new Panel.
-     *
-     * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+     * 
+     * @param {PanelArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
         if (!args) args = {};

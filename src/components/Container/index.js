@@ -47,6 +47,13 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
  */
 
 /**
+ * @typedef ContainerArgs__extends__ElementArgs
+ * @property {HTMLElement} [dom] - The DOM element to use for the container. If unspecified a new element will be created.
+ * @property {boolean} [flex] - Enable flex
+ * @property {boolean} [scrollable] - Enable flex
+ */
+
+/**
  * @name Container
  * @class
  * @classdesc A container is the basic building block for Elements that are grouped together.
@@ -57,13 +64,13 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
  * @mixes IGrid
  * @mixes IScrollable
  * @mixes IResizable
+ * @param {ContainerArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
  */
 class Container extends Element {
     /**
      * Creates a new Container.
-     *
-     * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
-     * @param {HTMLElement} [args.dom] - The DOM element to use for the container. If unspecified a new element will be created.
+     * 
+     * @param {ContainerArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
         if (!args) args = {};

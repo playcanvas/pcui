@@ -6,25 +6,30 @@ import * as pcuiClass from '../../class';
 const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 
 /**
+ * @typedef VectorInputArgs__extends__ElementArgs
+ * @property {number} [dimensions=3] - The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
+ * @property {number} [min] - The minimum value for each vector element.
+ * @property {number} [max] - The maximum value for each vector element.
+ * @property {number} [precision] - The decimal precision for each vector element.
+ * @property {number} [step] - The incremental step when using arrow keys for each vector element.
+ * @property {boolean} [renderChanges] - If true each vector element will flash on changes.
+ * @property {string[]|string} [placeholder] - The placeholder string for each vector element.
+ */
+
+/**
  * @name VectorInput
  * @class
  * @classdesc A vector input
  * @augments Element
  * @mixes IBindable
  * @mixes IFocusable
+ * @param {VectorInputArgs__extends__ElementArgs} [args] - The arguments.
  */
 class VectorInput extends Element {
     /**
      * Creates a new pcui.VectorInput.
      *
-     * @param {object} args - The arguments.
-     * @param {number} [args.dimensions=3] - The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
-     * @param {number} [args.min] - The minimum value for each vector element.
-     * @param {number} [args.max] - The maximum value for each vector element.
-     * @param {number} [args.precision] - The decimal precision for each vector element.
-     * @param {number} [args.step] - The incremental step when using arrow keys for each vector element.
-     * @param {boolean} [args.renderChanges] - If true each vector element will flash on changes.
-     * @param {string[]|string} [args.placeholder] - The placeholder string for each vector element.
+     * @param {VectorInputArgs__extends__ElementArgs} [args] - The arguments.
      */
     constructor(args) {
         args = Object.assign({}, args);

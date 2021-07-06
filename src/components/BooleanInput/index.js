@@ -8,6 +8,13 @@ const CLASS_BOOLEAN_INPUT_TICKED = CLASS_BOOLEAN_INPUT + '-ticked';
 const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
 
 /**
+ * @typedef BooleanInputArgs__extends__ElementArgs
+ * @property {string} [type] - The type of checkbox currently can be null or 'toggle'.
+ * @property {boolean} [renderChanges] If true the input will flash when changed.
+ * @property {boolean} [value] Either true/false.
+ */
+
+/**
  * @name BooleanInput
  * @class
  * @classdesc A checkbox element.
@@ -15,13 +22,13 @@ const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
  * @augments Element
  * @mixes IBindable
  * @mixes IFocusable
+ * @param {BooleanInputArgs__extends__ElementArgs} [args] - The arguments.
  */
 class BooleanInput extends Element {
     /**
      * Creates a new pcui.BooleanInput.
      *
-     * @param {object} args - The arguments.
-     * @param {string} [args.type] - The type of checkbox currently can be null or 'toggle'.
+     * @param {BooleanInputArgs__extends__ElementArgs} [args] - The arguments.
      */
     constructor(args) {
         args = Object.assign({

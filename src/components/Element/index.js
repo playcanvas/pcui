@@ -112,6 +112,20 @@ const ELEMENT_REGISTRY = {};
  */
 
 /**
+ * @typedef {object} ElementArgs
+ * @property {string} [id] - The desired id for the Element HTML node.
+ * @property {string|string[]} [class] - The CSS class or classes we want to add to the element.
+ * @property {boolean} [isRoot] - If true then this is the root element. Set this to true for the topmost Element in your page.
+ * @property {boolean} [enabled] - Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
+ * @property {HTMLElement} [dom] - The DOM element that this pcui.Element wraps.
+ * @property {boolean} [ignoreParent] - Gets / sets whether the Element will ignore parent events & variable states.
+ * @property {number} [width] - Gets / sets the width of the Element in pixels. Can also be an empty string to remove it.
+ * @property {number} [height] - Gets / sets the height of the Element in pixels. Can also be an empty string to remove it.
+ * @property {number} [tabIndex] - Gets / sets the tabIndex of the Element.
+ * @property {BindingBase} [binding] - Gets / sets the Binding object for the element.
+ */
+
+/**
  * @name Element
  * @class
  * @classdesc The base class for all UI elements.
@@ -130,16 +144,14 @@ const ELEMENT_REGISTRY = {};
  * @property {BindingBase} binding Gets / sets the Binding object for the element.
  * @property {CSSStyleDeclaration} style Shortcut to pcui.Element.dom.style.
  * @property {DOMTokenList} class Shortcut to pcui.Element.dom.classList.
+ * @param {HTMLElement} dom - The DOM element that this pcui.Element wraps.
+ * @param {ElementArgs} [args] - The arguments. All settable properties can also be set through the constructor.
  */
 class Element extends Events {
     /**
      * Creates a new Element.
-     *
      * @param {HTMLElement} dom - The DOM element that this pcui.Element wraps.
-     * @param {object} args - The arguments. All settable properties can also be set through the constructor.
-     * @param {string} [args.id] - The desired id for the Element HTML node.
-     * @param {string|string[]} [args.class] - The CSS class or classes we want to add to the element.
-     * @param {boolean} [args.isRoot] - If true then this is the root element. Set this to true for the topmost Element in your page.
+     * @param {ElementArgs} [args] - The arguments. All settable properties can also be set through the constructor.
      */
     constructor(dom, args) {
         super();

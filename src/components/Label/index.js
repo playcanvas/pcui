@@ -5,6 +5,15 @@ import Element from '../Element';
 const CLASS_LABEL = 'pcui-label';
 
 /**
+ * @typedef LabelArgs__extends__ElementArgs
+ * @property {boolean} [unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
+ * @property {boolean} [nativeTooltip] - If true then use the text of the label as the native HTML tooltip.
+ * @property {boolean} [allowTextSelection] - If true then the label can be clicked to select text.
+ * @property {string} [text] - The text of the Label.
+ * @property {string} [value] - The text of the Label, used when `text` is not set.
+ */
+
+/**
  * @name Label
  * @class
  * @classdesc The Label is a simple span element that displays some text.
@@ -13,15 +22,12 @@ const CLASS_LABEL = 'pcui-label';
  * @property {boolean} renderChanges If true then the Label will flash when its text changes.
  * @augments Element
  * @mixes IBindable
+ * @param {LabelArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
  */
 class Label extends Element {
     /**
      * Creates a new Label.
-     *
-     * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
-     * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
-     * @param {boolean} [args.nativeTooltip] - If true then use the text of the label as the native HTML tooltip.
-     * @param {boolean} [args.allowTextSelection] - If true then the label can be clicked to select text.
+     * @param {LabelArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
         if (!args) args = {};

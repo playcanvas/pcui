@@ -43,6 +43,14 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
  */
 
 /**
+ * @typedef TreeViewItemArgs__extends__ElementArgs
+ * @property {string} [text] - text
+ * @property {boolean} [allowSelect] - allowSelect
+ * @property {boolean} [allowDrag] - allowDrag
+ * @property {boolean} [allowDrop] - allowDrop
+ */
+
+/**
  * @name TreeViewItem
  * @class
  * @classdesc Represents a Tree View Item to be added to a pcui.TreeView.
@@ -62,12 +70,12 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
  * @property {TreeViewItem} lastChild Gets the last child item.
  * @property {TreeViewItem} nextSibling Gets the first sibling item.
  * @property {TreeViewItem} previousSibling Gets the last sibling item.
+ * @param {TreeViewItemArgs__extends__ElementArgs} [args] - The arguments. All properties can be set through the arguments as well.
  */
 class TreeViewItem extends Container {
     /**
      * Creates a new TreeViewItem.
-     *
-     * @param {object} [args] - The arguments.
+     * @param {TreeViewItemArgs__extends__ElementArgs} [args] - The arguments. All properties can be set through the arguments as well.
      */
     constructor(args) {
         if (!args) {

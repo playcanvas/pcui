@@ -29,6 +29,15 @@ const CLASS_OPEN = 'pcui-open';
 
 const DEFAULT_BOTTOM_OFFSET = 25;
 
+/**
+ * @typedef SelectInputArgs__extends__ElementArgs
+ * @property {boolean} [allowNull] - If true then null is a valid input value. Defaults to false.
+ * @property {boolean} [allowInput] - If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
+ * @property {boolean} [allowCreate] - If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.
+ * @property {Function} [createFn] - A function to be executed when the user selects to create a new value. The function takes the new value as a parameter.
+ * @property {string} [createLabelText] - The placeholder text to show when creating a new value. Used when allowInput and allowCreate are both true.
+ * @property {string} [type] - The type of each value. Can be one of 'string', 'number' or 'boolean'.
+ */
 
 /**
  * @name SelectInput
@@ -42,18 +51,13 @@ const DEFAULT_BOTTOM_OFFSET = 25;
  * @augments Element
  * @mixes IBindable
  * @mixes IFocusable
+ * @param {SelectInputArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments.
  */
 class SelectInput extends Element {
     /**
      * Creates a new SelectInput.
      *
-     * @param {object} args - The arguments. Extends the pcui.Element constructor arguments.
-     * @param {boolean} [args.allowNull] - If true then null is a valid input value. Defaults to false.
-     * @param {boolean} [args.allowInput] - If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
-     * @param {boolean} [args.allowCreate] - If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.
-     * @param {Function} [args.createFn] - A function to be executed when the user selects to create a new value. The function takes the new value as a parameter.
-     * @param {string} [args.createLabelText] - The placeholder text to show when creating a new value. Used when allowInput and allowCreate are both true.
-     * @param {string} [args.type] - The type of each value. Can be one of 'string', 'number' or 'boolean'.
+     * @param {SelectInputArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments.
      */
     constructor(args) {
         if (!args) args = {};
