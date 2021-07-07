@@ -1,5 +1,5 @@
 import Label from '../Label';
-import Container from '../Container';
+import Container, { ContainerArgs } from '../Container';
 import TextInput from '../TextInput';
 import * as pcuiClass from '../../class';
 
@@ -43,6 +43,19 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
  */
 
 /**
+ * @name TreeViewItemArgs
+ * @class
+ * @classdesc The class for all TreeViewItem arguments extending ContainerArgs.
+ * @augments ContainerArgs
+ * @property {string} [text] - The text shown by the TreeViewItem.
+ * @property {boolean} [allowSelect] - Whether the item can be selected.
+ * @property {boolean} [allowDrag] - Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
+ * @property {boolean} [allowDrop] - Whether dropping is allowed on the tree item.
+ */
+export class TreeViewItemArgs extends ContainerArgs {
+}
+
+/**
  * @name TreeViewItem
  * @class
  * @classdesc Represents a Tree View Item to be added to a pcui.TreeView.
@@ -62,12 +75,13 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
  * @property {TreeViewItem} lastChild Gets the last child item.
  * @property {TreeViewItem} nextSibling Gets the first sibling item.
  * @property {TreeViewItem} previousSibling Gets the last sibling item.
+ * @param {TreeViewItemArgs} [args] - The arguments. All properties can be set through the arguments as well.
  */
 class TreeViewItem extends Container {
     /**
      * Creates a new TreeViewItem.
      *
-     * @param {object} [args] - The arguments.
+     * @param {TreeViewItemArgs} [args] - The arguments. All properties can be set through the arguments as well.
      */
     constructor(args) {
         if (!args) {

@@ -4,6 +4,19 @@ import Element from '../Element';
 const CLASS_BUTTON = 'pcui-button';
 
 /**
+ * @name ButtonArgs
+ * @class
+ * @classdesc The class for all Button arguments extending ElementArgs.
+ * @augments ElementArgs
+ * @property {boolean} [unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
+ * @property {string} [text] - Text of the button
+ * @property {string} [size] - The 'size' type of the button. Can be null or 'small'.
+ * @property {string} [icon] - The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
+ */
+export class ButtonArgs extends ElementArgs {
+}
+
+/**
  * @name Button
  * @class
  * @classdesc Represents a button.
@@ -12,13 +25,13 @@ const CLASS_BUTTON = 'pcui-button';
  * @property {string} size Gets / sets the 'size' type of the button. Can be null or 'small'.
  * @property {string} [icon=E401] The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
  * @mixes IFocusable
+ * @param {ButtonArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
  */
 class Button extends Element {
     /**
      * Creates a new Button.
      *
-     * @param {object} args - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
-     * @param {boolean} [args.unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
+     * @param {ButtonArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
         if (!args) args = {};

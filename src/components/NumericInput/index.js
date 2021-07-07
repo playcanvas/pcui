@@ -11,6 +11,21 @@ const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CON
 const REGEX_COMMA = /,/g;
 
 /**
+ * @name NumericInputArgs
+ * @class
+ * @classdesc The class for all NumericInput arguments extending ElementArgs.
+ * @augments ElementArgs
+ * @property {boolean} [allowNull] - Whether the value can be null. If not then it will be 0 instead of null.
+ * @property {number} [min=0] Minimum value this field can take.
+ * @property {number} [max=1] Maximum value this field can take.
+ * @property {number} [precision=7] Maximum number of decimals a value can take.
+ * @property {number} [step=0.01] Amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
+ * @property {boolean} [hideSlider=true] Hide the input mouse drag slider.
+ */
+export class NumericInputArgs extends ElementArgs {
+}
+
+/**
  * @name NumericInput
  * @class
  * @classdesc The NumericInput represents an input element that holds numbers.
@@ -20,13 +35,13 @@ const REGEX_COMMA = /,/g;
  * @property {number} [step=0.01] Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
  * @property {boolean} [hideSlider=true] Hide the input mouse drag slider.
  * @augments TextInput
+ * @param {NumericInputArgs} [args] - The arguments. Extends the pcui.TextInput constructor arguments.
  */
 class NumericInput extends TextInput {
     /**
      * Creates a new NumericInput.
      *
-     * @param {object} args - The arguments. Extends the pcui.TextInput constructor arguments.
-     * @param {boolean} [args.allowNull] - Gets / sets whether the value can be null. If not then it will be 0 instead of null.
+     * @param {NumericInputArgs} [args] - The arguments. Extends the pcui.TextInput constructor arguments.
      */
     constructor(args) {
         // make copy of args
