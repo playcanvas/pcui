@@ -1,5 +1,5 @@
 import './style.scss';
-import Element, { ElementArgs } from '../Element';
+import Element from '../Element';
 import TextInput from '../TextInput';
 import * as pcuiClass from '../../class';
 
@@ -15,7 +15,7 @@ const REGEX_COMMA = /,/g;
  * @class
  * @classdesc The class for all NumericInput arguments extending ElementArgs.
  * @augments ElementArgs
- * @property {boolean} [args.allowNull] - Whether the value can be null. If not then it will be 0 instead of null.
+ * @property {boolean} [allowNull] - Whether the value can be null. If not then it will be 0 instead of null.
  * @property {number} [min=0] Minimum value this field can take.
  * @property {number} [max=1] Maximum value this field can take.
  * @property {number} [precision=7] Maximum number of decimals a value can take.

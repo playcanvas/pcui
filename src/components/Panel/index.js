@@ -1,6 +1,6 @@
 import './style.scss';
 import * as pcuiClass from '../../class';
-import Element, { ElementArgs } from '../Element';
+import Element from '../Element';
 import Container from '../Container';
 import Label from '../Label';
 import Button from '../Button';
@@ -73,7 +73,7 @@ export class PanelArgs extends ElementArgs {
 class Panel extends Container {
     /**
      * Creates a new Panel.
-     * 
+     *
      * @param {PanelArgs} [args] - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {

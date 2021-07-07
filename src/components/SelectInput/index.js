@@ -1,5 +1,5 @@
 import './style.scss';
-import Element, { ElementArgs } from '../Element';
+import Element from '../Element';
 import Container from '../Container';
 import TextInput from '../TextInput';
 import Button from '../Button';

@@ -1,5 +1,5 @@
 import './style.scss';
-import Element, { ElementArgs } from '../Element';
+import Element from '../Element';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
 

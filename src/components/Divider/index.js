@@ -1,5 +1,5 @@
 import './style.scss';
-import Element, { ElementArgs } from '../Element';
+import Element from '../Element';
 
 const CLASS_ROOT = 'pcui-divider';
 
@@ -13,6 +13,7 @@ const CLASS_ROOT = 'pcui-divider';
 class Divider extends Element {
     /**
      * Creates a new Divider.
+     *
      * @param {ElementArgs} [args] - The arguments. All properties can be set through the arguments as well.
      */
     constructor(args) {

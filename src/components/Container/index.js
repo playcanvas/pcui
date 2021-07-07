@@ -1,5 +1,5 @@
 import './style.scss';
-import Element, { ElementArgs } from '../Element';
+import Element from '../Element';
 import * as pcuiClass from '../../class';
 
 const RESIZE_HANDLE_SIZE = 4;
@@ -74,7 +74,7 @@ export class ContainerArgs extends ElementArgs {
 class Container extends Element {
     /**
      * Creates a new Container.
-     * 
+     *
      * @param {ContainerArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {

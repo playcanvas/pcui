@@ -88,7 +88,7 @@ export class TreeViewArgs extends ContainerArgs {
 class TreeView extends Container {
     /**
      * Creates a new TreeView.
-     * 
+     *
      * @param {TreeViewArgs} [args] - The arguments. All properties can be set through the arguments as well.
      */
     constructor(args) {

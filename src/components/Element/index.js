@@ -155,7 +155,7 @@ export class ElementArgs {
 class Element extends Events {
     /**
      * Creates a new Element.
-     * 
+     *
      * @param {HTMLElement} dom - The DOM element that this pcui.Element wraps.
      * @param {ElementArgs} [args] - The arguments. All settable properties can also be set through the constructor.
      */

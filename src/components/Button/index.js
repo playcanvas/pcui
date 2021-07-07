@@ -1,5 +1,5 @@
 import './style.scss';
-import Element, { ElementArgs } from '../Element';
+import Element from '../Element';
 
 const CLASS_BUTTON = 'pcui-button';
 
@@ -30,6 +30,7 @@ export class ButtonArgs extends ElementArgs {
 class Button extends Element {
     /**
      * Creates a new Button.
+     *
      * @param {ButtonArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {

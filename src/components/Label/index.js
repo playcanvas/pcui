@@ -1,6 +1,6 @@
 import './style.scss';
 import * as pcuiClass from '../../class';
-import Element, { ElementArgs } from '../Element';
+import Element from '../Element';
 
 const CLASS_LABEL = 'pcui-label';
 
@@ -15,7 +15,7 @@ const CLASS_LABEL = 'pcui-label';
  * @property {string} [text] - The text of the Label.
  * @property {string} [value] - The text of the Label, used when `text` is not set.
  */
-class LabelArgs extends ElementArgs {
+export class LabelArgs extends ElementArgs {
 }
 
 /**
@@ -32,7 +32,7 @@ class LabelArgs extends ElementArgs {
 class Label extends Element {
     /**
      * Creates a new Label.
-     * 
+     *
      * @param {LabelArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
