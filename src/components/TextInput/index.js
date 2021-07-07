@@ -8,6 +8,7 @@ const CLASS_TEXT_INPUT = 'pcui-text-input';
  * @name TextInputArgs
  * @class
  * @classdesc The class for all TextInput arguments extending ElementArgs.
+ * @augments ElementArgs
  * @property {string} [placeholder] Placeholder label that appears on the right of the input.
  * @property {HTMLElement} [input] Gets the HTML input element.
  * @property {boolean} [renderChanges] If true then the TextInput will flash when its text changes.

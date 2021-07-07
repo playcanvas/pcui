@@ -50,6 +50,7 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
  * @name ContainerArgs
  * @class
  * @classdesc The class for all Container arguments extending ElementArgs.
+ * @augments ElementArgs
  * @property {HTMLElement} [dom] - The DOM element to use for the container. If unspecified a new element will be created.
  * @property {boolean} [flex] - Enable flex
  * @property {boolean} [scrollable] - Whether the Element should be scrollable.

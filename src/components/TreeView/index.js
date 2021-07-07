@@ -60,6 +60,7 @@ const DRAG_AREA_AFTER = 'after';
  * @name TreeViewArgs
  * @class
  * @classdesc The class for all TreeView arguments extending ContainerArgs.
+ * @augments ContainerArgs
  * @property {Function} [onContextMenu] - A function to be called when we right click on a TreeViewItem.
  * @property {Function} [onReparent] - A function to be called when we try to reparent tree items. If a function is provided then the
  * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.

@@ -46,10 +46,11 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
  * @name TreeViewItemArgs
  * @class
  * @classdesc The class for all TreeViewItem arguments extending ContainerArgs.
- * @property {string} [text] - text
- * @property {boolean} [allowSelect] - allowSelect
- * @property {boolean} [allowDrag] - allowDrag
- * @property {boolean} [allowDrop] - allowDrop
+ * @augments ContainerArgs
+ * @property {string} [text] - The text shown by the TreeViewItem.
+ * @property {boolean} [allowSelect] - Whether the item can be selected.
+ * @property {boolean} [allowDrag] - Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
+ * @property {boolean} [allowDrop] - Whether dropping is allowed on the tree item.
  */
 export class TreeViewItemArgs extends ContainerArgs {
 }

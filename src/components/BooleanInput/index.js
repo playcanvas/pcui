@@ -11,6 +11,7 @@ const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
  * @name BooleanInputArgs
  * @class
  * @classdesc The class for all BooleanInput arguments extending ElementArgs.
+ * @augments ElementArgs
  * @property {string} [type] - The type of checkbox currently can be null or 'toggle'.
  * @property {boolean} [renderChanges] If true the input will flash when changed.
  * @property {boolean} [value] Either true/false.

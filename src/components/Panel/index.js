@@ -31,6 +31,7 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
  * @name PanelArgs
  * @class
  * @classdesc The class for all Panel arguments extending ElementArgs.
+ * @augments ElementArgs
  * @property {boolean} [flex] - Enable flex (incompatible with grid)
  * @property {boolean} [grid] - Enable grid (incompatible with flex)
  * @property {boolean} [scrollable] - Whether the Element should be scrollable.

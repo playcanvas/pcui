@@ -9,6 +9,7 @@ const CLASS_VECTOR_INPUT = 'pcui-vector-input';
  * @name VectorInputArgs
  * @class
  * @classdesc The class for all VectorInput arguments extending ElementArgs.
+ * @augments ElementArgs
  * @property {number} [dimensions=3] - The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
  * @property {number} [min] - The minimum value for each vector element.
  * @property {number} [max] - The maximum value for each vector element.

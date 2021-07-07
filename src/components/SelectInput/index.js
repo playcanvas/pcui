@@ -33,6 +33,7 @@ const DEFAULT_BOTTOM_OFFSET = 25;
  * @name SelectInputArgs
  * @class
  * @classdesc The class for all SelectInput arguments extending ElementArgs.
+ * @augments ElementArgs
  * @property {boolean} [allowNull] - If true then null is a valid input value. Defaults to false.
  * @property {boolean} [allowInput] - If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
  * @property {boolean} [allowCreate] - If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.

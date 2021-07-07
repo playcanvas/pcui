@@ -7,6 +7,7 @@ const CLASS_BUTTON = 'pcui-button';
  * @name ButtonArgs
  * @class
  * @classdesc The class for all Button arguments extending ElementArgs.
+ * @augments ElementArgs
  * @property {boolean} [unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
  * @property {string} [text] - Text of the button
  * @property {string} [size] - The 'size' type of the button. Can be null or 'small'.

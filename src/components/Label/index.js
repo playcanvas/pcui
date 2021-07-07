@@ -8,6 +8,7 @@ const CLASS_LABEL = 'pcui-label';
  * @name LabelArgs
  * @class
  * @classdesc The class for all Label arguments extending ElementArgs.
+ * @augments ElementArgs
  * @property {boolean} [unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
  * @property {boolean} [nativeTooltip] - If true then use the text of the label as the native HTML tooltip.
  * @property {boolean} [allowTextSelection] - If true then the label can be clicked to select text.
