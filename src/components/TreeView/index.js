@@ -1,5 +1,5 @@
 import './style.scss';
-import Container from '../Container';
+import Container, { ContainerArgs } from '../Container';
 import Element from '../Element';
 import TreeViewItem from '../TreeViewItem';
 import { searchItems } from '../../helpers/search';
@@ -57,14 +57,18 @@ const DRAG_AREA_AFTER = 'after';
  */
 
 /**
- * @typedef TreeViewArgs__extends__ElementArgs
+ * @name TreeViewArgs
+ * @class
+ * @classdesc The class for all TreeView arguments extending ContainerArgs.
  * @property {Function} [onContextMenu] - A function to be called when we right click on a TreeViewItem.
  * @property {Function} [onReparent] - A function to be called when we try to reparent tree items. If a function is provided then the
  * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
- * @property {boolean} [allowDrag] - allowDrag
- * @property {boolean} [allowReordering] - allowReordering
- * @property {boolean} [allowRenaming] - allowRenaming
+ * @property {boolean} [allowDrag] - Whether dragging a TreeViewItem is allowed.
+ * @property {boolean} [allowReordering] - Whether reordering TreeViewItems is allowed.
+ * @property {boolean} [allowRenaming] - Whether renaming TreeViewItems is allowed by double clicking on them.
  */
+export class TreeViewArgs extends ContainerArgs {
+}
 
 /**
  * @name TreeView
@@ -78,12 +82,13 @@ const DRAG_AREA_AFTER = 'after';
  * @property {boolean} isDragging Whether we are currently dragging a TreeViewItem.
  * @property {string} filter Gets / sets a filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
  * @property {TreeViewItem[]} selected Gets the selected TreeViewItems.
- * @param {TreeViewArgs__extends__ElementArgs} [args] - The arguments. All properties can be set through the arguments as well.
+ * @param {TreeViewArgs} [args] - The arguments. All properties can be set through the arguments as well.
  */
 class TreeView extends Container {
     /**
      * Creates a new TreeView.
-     * @param {TreeViewArgs__extends__ElementArgs} [args] - The arguments. All properties can be set through the arguments as well.
+     * 
+     * @param {TreeViewArgs} [args] - The arguments. All properties can be set through the arguments as well.
      */
     constructor(args) {
         if (!args) args = {};

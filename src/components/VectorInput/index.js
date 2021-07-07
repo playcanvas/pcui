@@ -1,12 +1,14 @@
 import './style.scss';
-import Element from '../Element';
+import Element, { ElementArgs } from '../Element';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
 
 const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 
 /**
- * @typedef VectorInputArgs__extends__ElementArgs
+ * @name VectorInputArgs
+ * @class
+ * @classdesc The class for all VectorInput arguments extending ElementArgs.
  * @property {number} [dimensions=3] - The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
  * @property {number} [min] - The minimum value for each vector element.
  * @property {number} [max] - The maximum value for each vector element.
@@ -15,6 +17,8 @@ const CLASS_VECTOR_INPUT = 'pcui-vector-input';
  * @property {boolean} [renderChanges] - If true each vector element will flash on changes.
  * @property {string[]|string} [placeholder] - The placeholder string for each vector element.
  */
+export class VectorInputArgs extends ElementArgs {
+}
 
 /**
  * @name VectorInput
@@ -23,13 +27,13 @@ const CLASS_VECTOR_INPUT = 'pcui-vector-input';
  * @augments Element
  * @mixes IBindable
  * @mixes IFocusable
- * @param {VectorInputArgs__extends__ElementArgs} [args] - The arguments.
+ * @param {VectorInputArgs} [args] - The arguments.
  */
 class VectorInput extends Element {
     /**
      * Creates a new pcui.VectorInput.
      *
-     * @param {VectorInputArgs__extends__ElementArgs} [args] - The arguments.
+     * @param {VectorInputArgs} [args] - The arguments.
      */
     constructor(args) {
         args = Object.assign({}, args);

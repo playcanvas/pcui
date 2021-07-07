@@ -1,5 +1,5 @@
 import './style.scss';
-import Element from '../Element';
+import Element, { ElementArgs } from '../Element';
 import Container from '../Container';
 import TextInput from '../TextInput';
 import Button from '../Button';
@@ -30,7 +30,9 @@ const CLASS_OPEN = 'pcui-open';
 const DEFAULT_BOTTOM_OFFSET = 25;
 
 /**
- * @typedef SelectInputArgs__extends__ElementArgs
+ * @name SelectInputArgs
+ * @class
+ * @classdesc The class for all SelectInput arguments extending ElementArgs.
  * @property {boolean} [allowNull] - If true then null is a valid input value. Defaults to false.
  * @property {boolean} [allowInput] - If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
  * @property {boolean} [allowCreate] - If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.
@@ -38,6 +40,8 @@ const DEFAULT_BOTTOM_OFFSET = 25;
  * @property {string} [createLabelText] - The placeholder text to show when creating a new value. Used when allowInput and allowCreate are both true.
  * @property {string} [type] - The type of each value. Can be one of 'string', 'number' or 'boolean'.
  */
+export class SelectInputArgs extends ElementArgs {
+}
 
 /**
  * @name SelectInput
@@ -51,13 +55,13 @@ const DEFAULT_BOTTOM_OFFSET = 25;
  * @augments Element
  * @mixes IBindable
  * @mixes IFocusable
- * @param {SelectInputArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments.
+ * @param {SelectInputArgs} [args] - The arguments. Extends the pcui.Element constructor arguments.
  */
 class SelectInput extends Element {
     /**
      * Creates a new SelectInput.
      *
-     * @param {SelectInputArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments.
+     * @param {SelectInputArgs} [args] - The arguments. Extends the pcui.Element constructor arguments.
      */
     constructor(args) {
         if (!args) args = {};

@@ -1,17 +1,21 @@
 import './style.scss';
 import * as pcuiClass from '../../class';
-import Element from '../Element';
+import Element, { ElementArgs } from '../Element';
 
 const CLASS_LABEL = 'pcui-label';
 
 /**
- * @typedef LabelArgs__extends__ElementArgs
+ * @name LabelArgs
+ * @class
+ * @classdesc The class for all Label arguments extending ElementArgs.
  * @property {boolean} [unsafe] - If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
  * @property {boolean} [nativeTooltip] - If true then use the text of the label as the native HTML tooltip.
  * @property {boolean} [allowTextSelection] - If true then the label can be clicked to select text.
  * @property {string} [text] - The text of the Label.
  * @property {string} [value] - The text of the Label, used when `text` is not set.
  */
+class LabelArgs extends ElementArgs {
+}
 
 /**
  * @name Label
@@ -22,12 +26,13 @@ const CLASS_LABEL = 'pcui-label';
  * @property {boolean} renderChanges If true then the Label will flash when its text changes.
  * @augments Element
  * @mixes IBindable
- * @param {LabelArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+ * @param {LabelArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
  */
 class Label extends Element {
     /**
      * Creates a new Label.
-     * @param {LabelArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+     * 
+     * @param {LabelArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
         if (!args) args = {};

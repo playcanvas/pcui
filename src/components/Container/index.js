@@ -1,5 +1,5 @@
 import './style.scss';
-import Element from '../Element';
+import Element, { ElementArgs } from '../Element';
 import * as pcuiClass from '../../class';
 
 const RESIZE_HANDLE_SIZE = 4;
@@ -47,11 +47,15 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
  */
 
 /**
- * @typedef ContainerArgs__extends__ElementArgs
+ * @name ContainerArgs
+ * @class
+ * @classdesc The class for all Container arguments extending ElementArgs.
  * @property {HTMLElement} [dom] - The DOM element to use for the container. If unspecified a new element will be created.
  * @property {boolean} [flex] - Enable flex
- * @property {boolean} [scrollable] - Enable flex
+ * @property {boolean} [scrollable] - Whether the Element should be scrollable.
  */
+export class ContainerArgs extends ElementArgs {
+}
 
 /**
  * @name Container
@@ -64,13 +68,13 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
  * @mixes IGrid
  * @mixes IScrollable
  * @mixes IResizable
- * @param {ContainerArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+ * @param {ContainerArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
  */
 class Container extends Element {
     /**
      * Creates a new Container.
      * 
-     * @param {ContainerArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
+     * @param {ContainerArgs} [args] - The arguments. Extends the pcui.Element constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
         if (!args) args = {};

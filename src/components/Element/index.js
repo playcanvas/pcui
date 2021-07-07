@@ -112,7 +112,9 @@ const ELEMENT_REGISTRY = {};
  */
 
 /**
- * @typedef {object} ElementArgs
+ * @name ElementArgs
+ * @class
+ * @classdesc The base class for all element arguments.
  * @property {string} [id] - The desired id for the Element HTML node.
  * @property {string|string[]} [class] - The CSS class or classes we want to add to the element.
  * @property {boolean} [isRoot] - If true then this is the root element. Set this to true for the topmost Element in your page.
@@ -124,6 +126,9 @@ const ELEMENT_REGISTRY = {};
  * @property {number} [tabIndex] - Gets / sets the tabIndex of the Element.
  * @property {BindingBase} [binding] - Gets / sets the Binding object for the element.
  */
+
+export class ElementArgs {
+}
 
 /**
  * @name Element
@@ -150,6 +155,7 @@ const ELEMENT_REGISTRY = {};
 class Element extends Events {
     /**
      * Creates a new Element.
+     * 
      * @param {HTMLElement} dom - The DOM element that this pcui.Element wraps.
      * @param {ElementArgs} [args] - The arguments. All settable properties can also be set through the constructor.
      */

@@ -1,5 +1,5 @@
 import './style.scss';
-import Element from '../Element';
+import Element, { ElementArgs } from '../Element';
 import TextInput from '../TextInput';
 import * as pcuiClass from '../../class';
 
@@ -11,7 +11,9 @@ const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CON
 const REGEX_COMMA = /,/g;
 
 /**
- * @typedef NumericInputArgs__extends__ElementArgs
+ * @name NumericInputArgs
+ * @class
+ * @classdesc The class for all NumericInput arguments extending ElementArgs.
  * @property {boolean} [args.allowNull] - Whether the value can be null. If not then it will be 0 instead of null.
  * @property {number} [min=0] Minimum value this field can take.
  * @property {number} [max=1] Maximum value this field can take.
@@ -19,6 +21,8 @@ const REGEX_COMMA = /,/g;
  * @property {number} [step=0.01] Amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
  * @property {boolean} [hideSlider=true] Hide the input mouse drag slider.
  */
+export class NumericInputArgs extends ElementArgs {
+}
 
 /**
  * @name NumericInput
@@ -30,13 +34,13 @@ const REGEX_COMMA = /,/g;
  * @property {number} [step=0.01] Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
  * @property {boolean} [hideSlider=true] Hide the input mouse drag slider.
  * @augments TextInput
- * @param {NumericInputArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.TextInput constructor arguments.
+ * @param {NumericInputArgs} [args] - The arguments. Extends the pcui.TextInput constructor arguments.
  */
 class NumericInput extends TextInput {
     /**
      * Creates a new NumericInput.
      *
-     * @param {NumericInputArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.TextInput constructor arguments.
+     * @param {NumericInputArgs} [args] - The arguments. Extends the pcui.TextInput constructor arguments.
      */
     constructor(args) {
         // make copy of args

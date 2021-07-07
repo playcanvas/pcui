@@ -1,5 +1,5 @@
 import Label from '../Label';
-import Container from '../Container';
+import Container, { ContainerArgs } from '../Container';
 import TextInput from '../TextInput';
 import * as pcuiClass from '../../class';
 
@@ -43,12 +43,16 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
  */
 
 /**
- * @typedef TreeViewItemArgs__extends__ElementArgs
+ * @name TreeViewItemArgs
+ * @class
+ * @classdesc The class for all TreeViewItem arguments extending ContainerArgs.
  * @property {string} [text] - text
  * @property {boolean} [allowSelect] - allowSelect
  * @property {boolean} [allowDrag] - allowDrag
  * @property {boolean} [allowDrop] - allowDrop
  */
+export class TreeViewItemArgs extends ContainerArgs {
+}
 
 /**
  * @name TreeViewItem
@@ -70,12 +74,13 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
  * @property {TreeViewItem} lastChild Gets the last child item.
  * @property {TreeViewItem} nextSibling Gets the first sibling item.
  * @property {TreeViewItem} previousSibling Gets the last sibling item.
- * @param {TreeViewItemArgs__extends__ElementArgs} [args] - The arguments. All properties can be set through the arguments as well.
+ * @param {TreeViewItemArgs} [args] - The arguments. All properties can be set through the arguments as well.
  */
 class TreeViewItem extends Container {
     /**
      * Creates a new TreeViewItem.
-     * @param {TreeViewItemArgs__extends__ElementArgs} [args] - The arguments. All properties can be set through the arguments as well.
+     * 
+     * @param {TreeViewItemArgs} [args] - The arguments. All properties can be set through the arguments as well.
      */
     constructor(args) {
         if (!args) {

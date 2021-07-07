@@ -1,6 +1,6 @@
 import './style.scss';
 import * as pcuiClass from '../../class';
-import Element from '../Element';
+import Element, { ElementArgs } from '../Element';
 import Container from '../Container';
 import Label from '../Label';
 import Button from '../Button';
@@ -28,19 +28,23 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
  */
 
 /**
- * @typedef PanelArgs__extends__ElementArgs
+ * @name PanelArgs
+ * @class
+ * @classdesc The class for all Panel arguments extending ElementArgs.
  * @property {boolean} [flex] - Enable flex (incompatible with grid)
  * @property {boolean} [grid] - Enable grid (incompatible with flex)
- * @property {boolean} [scrollable] - scrollable
- * @property {string} [panelType] - panelType
- * @property {number} [headerSize] - headerSize
- * @property {boolean} [collapsible] - collapsible
- * @property {boolean} [collapsed] - collapsed
+ * @property {boolean} [scrollable] - Whether the Element should be scrollable.
+ * @property {string} [panelType] - Add CSS class named pcui-panel-${panelType}
+ * @property {number} [headerSize] - The height of the header in pixels. Defaults to 32.
+ * @property {boolean} [collapsible] - Whether the Element is collapsible.
+ * @property {boolean} [collapsed] - Whether the Element should be collapsed.
  * @property {boolean} [collapseHorizontally] - collapseHorizontally
- * @property {boolean} [sortable] - sortable
- * @property {boolean} [removable] - removable
- * @property {string} [headerText] - headerText
+ * @property {boolean} [sortable] - Whether the panel can be reordered
+ * @property {boolean} [removable] - Whether the panel can be removed
+ * @property {string} [headerText] - The header text of the panel. Defaults to the empty string.
  */
+export class PanelArgs extends ElementArgs {
+}
 
 /**
  * @name Panel
@@ -63,13 +67,13 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
  * @mixes ICollapsible
  * @mixes IScrollable
  * @mixes IResizable
- * @param {PanelArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+ * @param {PanelArgs} [args] - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
  */
 class Panel extends Container {
     /**
      * Creates a new Panel.
      * 
-     * @param {PanelArgs__extends__ElementArgs} [args] - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+     * @param {PanelArgs} [args] - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
      */
     constructor(args) {
         if (!args) args = {};
