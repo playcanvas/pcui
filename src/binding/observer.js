@@ -331,7 +331,7 @@ Observer.prototype.set = function (path, value, silent, remote, force) {
         } else {
             node._data[key] = [];
             value.forEach((val) => {
-                this._doInsert(node, key, val);
+                this._doInsert(node, key, val, undefined, true);
             });
 
             state = obj.silence();
@@ -731,7 +731,7 @@ Observer.prototype.insert = function (path, value, ind, silent, remote) {
     return true;
 };
 
-Observer.prototype._doInsert = function (node, key, value, ind) {
+Observer.prototype._doInsert = function (node, key, value, ind, allowDuplicates) {
     const arr = node._data[key];
 
     if (typeof(value) === 'object' && ! (value instanceof Observer) && value !== null) {
@@ -743,11 +743,12 @@ Observer.prototype._doInsert = function (node, key, value, ind) {
     }
 
     const path = node._path ? `${node._path}.${key}` : key;
-    if (value !== null && (!this._pathsWithDuplicates || !this._pathsWithDuplicates[path])) {
+    if (value !== null && !allowDuplicates && (!this._pathsWithDuplicates || !this._pathsWithDuplicates[path])) {
         if (arr.indexOf(value) !== -1) {
             return;
         }
     }
+
 
     if (ind === undefined) {
         arr.push(value);
