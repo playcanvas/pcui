@@ -1,6 +1,6 @@
 import './style.scss';
 import * as pcuiClass from '../../class';
-import Element from '../Element';
+import Element, { ElementArgs } from '../Element';
 import Container from '../Container';
 import Label from '../Label';
 import Button from '../Button';

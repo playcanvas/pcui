@@ -1,5 +1,5 @@
 import './style.scss';
-import Element from '../Element';
+import Element, { ElementArgs } from '../Element';
 import * as pcuiClass from '../../class';
 
 const RESIZE_HANDLE_SIZE = 4;

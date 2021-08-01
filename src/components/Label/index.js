@@ -1,6 +1,6 @@
 import './style.scss';
 import * as pcuiClass from '../../class';
-import Element from '../Element';
+import Element, { ElementArgs } from '../Element';
 
 const CLASS_LABEL = 'pcui-label';
 

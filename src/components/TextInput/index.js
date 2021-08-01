@@ -1,5 +1,5 @@
 import './style.scss';
-import Element from '../Element';
+import Element, { ElementArgs } from '../Element';
 import * as pcuiClass from '../../class';
 
 const CLASS_TEXT_INPUT = 'pcui-text-input';
