@@ -90,7 +90,7 @@ Events.prototype.emit = function (name, arg0, arg1, arg2, arg3, arg4, arg5, arg6
     if (this._suspendEvents) return;
 
     var events = this._events[name];
-    if (events) {
+    if (events && events.length) {
         events = events.slice(0);
 
         for (var i = 0; i < events.length; i++) {
