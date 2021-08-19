@@ -29,6 +29,8 @@ function Events() {
 
     this._suspendEvents = false;
 
+    this._additionalEmitters = [];
+
     Object.defineProperty(this, 'suspendEvents', {
         get: function () {
             return this._suspendEvents;
@@ -88,21 +90,27 @@ Events.prototype.emit = function (name, arg0, arg1, arg2, arg3, arg4, arg5, arg6
     if (this._suspendEvents) return;
 
     var events = this._events[name];
-    if (! events)
-        return this;
+    if (events && events.length) {
+        events = events.slice(0);
 
-    events = events.slice(0);
+        for (var i = 0; i < events.length; i++) {
+            if (! events[i])
+                continue;
 
-    for (var i = 0; i < events.length; i++) {
-        if (! events[i])
-            continue;
-
-        try {
-            events[i].call(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-        } catch (ex) {
-            console.info('%c%s %c(event error)', 'color: #06f', name, 'color: #f00');
-            console.log(ex.stack);
+            try {
+                events[i].call(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+            } catch (ex) {
+                console.info('%c%s %c(event error)', 'color: #06f', name, 'color: #f00');
+                console.log(ex.stack);
+            }
         }
+    }
+
+    if (this._additionalEmitters.length) {
+        const emitters = this._additionalEmitters.slice();
+        emitters.forEach((emitter) => {
+            emitter.emit(name, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+        });
     }
 
     return this;
@@ -137,6 +145,30 @@ Events.prototype.unbind = function (name, fn) {
     }
 
     return this;
+};
+
+/**
+ * Adds another emitter. Any events fired by this instance
+ * will also be fired on the additional emitter.
+ *
+ * @param {Events} emitter - The emitter
+ */
+Events.prototype.addEmitter = function (emitter) {
+    if (!this._additionalEmitters.includes(emitter)) {
+        this._additionalEmitters.push(emitter);
+    }
+};
+
+/**
+ * Removes emitter.
+ *
+ * @param {Events} emitter - The emitter
+ */
+Events.prototype.removeEmitter = function (emitter) {
+    const idx = this._additionalEmitters.indexOf(emitter);
+    if (idx !== -1) {
+        this._additionalEmitters.splice(idx, 1);
+    }
 };
 
 /**
