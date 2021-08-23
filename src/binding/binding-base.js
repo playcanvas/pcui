@@ -11,6 +11,7 @@ import IBindable from '../interfaces/IBindable';
  * @property {string[]} paths The linked paths
  * @property {boolean} applyingChange Whether the binding is currently applying a change either to the observers or the element.
  * @property {boolean} linked Whether the binding is linked to observers.
+ * @property {boolean} historyEnabled Whether history is enabled for the binding. A valid history object must have been provided first.
  * @property {boolean} historyCombine If a history module is used whether to combine history actions when applying changes to observers.
  * @property {string} historyName The name of the history action when applying changes to observers.
  * @property {string} historyPrefix A string to prefix the historyName with.
@@ -196,6 +197,16 @@ class BindingBase extends Events {
 
     set historyPostfix(value) {
         this._historyPostfix = value;
+    }
+
+    get historyEnabled() {
+        return this._history && this._history.enabled;
+    }
+
+    set historyEnabled(value) {
+        if (this._history) {
+            this._history.enabled = value;
+        }
     }
 
     get observers() {

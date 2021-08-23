@@ -34,9 +34,14 @@ class BindingElementToObservers extends BindingBase {
         // so that we can undo on the same observers in the future
         const observers = this._observers.slice();
         const paths = this._paths.slice();
+        const context = {
+            observers,
+            paths
+        };
 
         const execute = () => {
             this._setValueToObservers(observers, paths, value, isArrayOfValues);
+            this.emit('history:redo', context);
         };
 
         if (this._history) {
@@ -52,12 +57,15 @@ class BindingElementToObservers extends BindingBase {
                 });
             }
 
+            this.emit('history:init', context);
+
             this._history.add({
                 name: this._getHistoryActionName(paths),
                 redo: execute,
                 combine: this._historyCombine,
                 undo: () => {
                     this._setValueToObservers(observers, paths, previousValues, true);
+                    this.emit('history:undo', context);
                 }
             });
 
@@ -85,7 +93,7 @@ class BindingElementToObservers extends BindingBase {
                 const path = paths[i];
                 const val = value[i];
                 if (value !== undefined) {
-                    latest.set(path, val);
+                    this._observerSet(latest, path, val);
                 } else {
                     latest.unset(path);
                 }
@@ -110,7 +118,7 @@ class BindingElementToObservers extends BindingBase {
             const path = this._pathAt(paths, i);
             const val = isArrayOfValues ? value[i] : value;
             if (value !== undefined) {
-                latest.set(path, val);
+                this._observerSet(latest, path, val);
             } else {
                 latest.unset(path);
             }
@@ -119,6 +127,24 @@ class BindingElementToObservers extends BindingBase {
                 latest.history.enabled = true;
             }
         }
+    }
+
+    // Handles setting a value to an observer
+    // in case that value is an array
+    _observerSet(observer, path, value) {
+        // check if the parent of the last field in the path
+        // exists in the observer because if it doesn't
+        // an error is most likely going to be raised by C3
+        const lastIndexDot = path.lastIndexOf('.');
+        if (lastIndexDot > 0 && !observer.has(path.substring(0, lastIndexDot))) {
+            return;
+        }
+
+        const isArray = Array.isArray(value);
+        // we need to slice an array value before passing it to the 'set'
+        // method otherwise there are cases where the Observer will be modifying
+        // the same array instance
+        observer.set(path, isArray && value ? value.slice() : value);
     }
 
     _addValues(values) {
@@ -293,9 +319,7 @@ class BindingElementToObservers extends BindingBase {
 
     setValues(values) {
         // make sure we deep copy arrays because they will not be cloned when set to the observers
-        values = values.slice().map((val) => {
-            return Array.isArray(val) ? val.slice() : val;
-        });
+        values = values.slice().map((val) => (Array.isArray(val) ? val.slice() : val));
         this._setValue(values, true);
     }
 
