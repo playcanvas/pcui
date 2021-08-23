@@ -123,8 +123,8 @@ const ELEMENT_REGISTRY = {};
  * @property {boolean} hiddenToRoot Gets whether the Element is hidden all the way up to the root. If the Element itself or any of its parents are hidden then this is true.
  * @property {boolean} readOnly Gets / sets whether the Element is read only.
  * @property {boolean} ignoreParent Gets / sets whether the Element will ignore parent events & variable states.
- * @property {number} width Gets / sets the width of the Element in pixels. Can also be an empty string to remove it.
- * @property {number} height Gets / sets the height of the Element in pixels. Can also be an empty string to remove it.
+ * @property {number} [width=null] Gets / sets the width of the Element in pixels. Can also be an empty string to remove it.
+ * @property {number} [height=null] Gets / sets the height of the Element in pixels. Can also be an empty string to remove it.
  * @property {number} tabIndex Gets / sets the tabIndex of the Element.
  * @property {boolean} error Gets / sets whether the Element is in an error state.
  * @property {BindingBase} binding Gets / sets the Binding object for the element.
