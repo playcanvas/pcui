@@ -7,6 +7,7 @@ import BindingBase from './binding-base';
  * will be propagated to the element.
  * @augments BindingBase
  */
+class BindingObserversToElement extends BindingBase {
     /**
      * Creates a new BindingObserversToElement instance.
      *
