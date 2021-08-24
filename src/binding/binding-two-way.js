@@ -27,6 +27,15 @@ class BindingTwoWay extends BindingBase {
         this._bindingElementToObservers.on('applyingChange', (value) => {
             this.applyingChange = value;
         });
+        this._bindingElementToObservers.on('history:init', (context) => {
+            this.emit('history:init', context);
+        });
+        this._bindingElementToObservers.on('history:undo', (context) => {
+            this.emit('history:undo', context);
+        });
+        this._bindingElementToObservers.on('history:redo', (context) => {
+            this.emit('history:redo', context);
+        });
 
         this._bindingObserversToElement.on('applyingChange', (value) => {
             this.applyingChange = value;
@@ -121,6 +130,14 @@ class BindingTwoWay extends BindingBase {
 
     set historyPostfix(value) {
         this._bindingElementToObservers.historyPostfix = value;
+    }
+
+    get historyEnabled() {
+        return this._bindingElementToObservers.historyEnabled;
+    }
+
+    set historyEnabled(value) {
+        this._bindingElementToObservers.historyEnabled = value;
     }
 }
 
