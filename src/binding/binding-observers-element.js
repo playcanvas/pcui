@@ -11,8 +11,8 @@ class BindingObserversToElement extends BindingBase {
     /**
      * Creates a new BindingObserversToElement instance.
      *
-     * @param {Function} customUpdate - Custom update function.
      * @param {object} args - The arguments.
+     * @param {Function} args.customUpdate - Custom update function
      */
     constructor({ customUpdate, ...args } = {}) {
         super(args);
@@ -112,7 +112,9 @@ class BindingObserversToElement extends BindingBase {
     }
 
     clone() {
-        return new BindingObserversToElement();
+        return new BindingObserversToElement({
+            customUpdate: this._customUpdate
+        });
     }
 }
 
