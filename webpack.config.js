@@ -4,8 +4,8 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const data = {
     mode: process.env.ENVIRONMENT === 'development' ? 'development' : 'production',
-    externals = {
-        '@playcanvas/playcanvas-observer': 'umd observer'
+    externals: {
+        '@playcanvas/playcanvas-observer': 'observer'
     },
     entry: {
         'pcui-react': './src/components/index.js',
