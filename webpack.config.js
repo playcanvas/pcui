@@ -4,9 +4,12 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const data = {
     mode: process.env.ENVIRONMENT === 'development' ? 'development' : 'production',
+    externals = {
+        '@playcanvas/playcanvas-observer': 'umd observer'
+    },
     entry: {
-        'pcui-react': process.env.STRIP_DEPENDENCIES ? './src/components/index.js' : './src/components/bundle.js',
-        'pcui': process.env.STRIP_DEPENDENCIES ? './src/index.js' : './src/bundle.js'
+        'pcui-react': './src/components/index.js',
+        'pcui': './src/index.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -59,11 +62,5 @@ const data = {
     },
     plugins: process.env.EXTRACT_CSS ? [new MiniCssExtractPlugin()] : []
 };
-
-if (process.env.STRIP_DEPENDENCIES) {
-    data.externals = {
-        '@playcanvas/playcanvas-observer': 'umd observer'
-    };
-}
 
 module.exports = data;
