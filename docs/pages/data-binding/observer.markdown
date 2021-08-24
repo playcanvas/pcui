@@ -14,19 +14,19 @@ A simple use case is shown below.
     <iframe src="/pcui/storybook/iframe.html?id=examples-observer--main&viewMode=story" style="width: 100%; border: none; height: 68px;"></iframe>
 </div>
 
-In this example the created label will start with `Hello World` as it's text value. When a user enters a value into the text input, the label will be updated with the new value. 
+In this example the created label will start with `Hello World` as it's text value. When a user enters a value into the text input, the label will be updated with the new value.
 
 ### How To
 
 First import the components and binding classes.
 
 ```javascript
-import { Label, TextInput } from '@playcanvas/pcui/pcui.js';
 import {
+    Label,
+    TextInput,
     BindingObserversToElement,
     BindingElementToObservers,
-    Observer 
-} from '@playcanvas/pcui/pcui-binding.js';
+    Observer } from '@playcanvas/pcui/pcui.js';
 ```
 
 Create a new observer for an object which contains a text string.

@@ -17,7 +17,6 @@ This will include the entire pcui library in your project. The various parts of 
 
 - ES6 Components: `@playcanvas/pcui/pcui.js`
 - React Components: `@playcanvas/pcui/pcui-react.js`
-- Data Binding: `@playcanvas/pcui/pcui-binding.js`
 
 You can then import the ES6 components into your own `.js` files and use them as follows:
 ```javascript

@@ -22,6 +22,13 @@ import TreeView from './TreeView/component';
 import TreeViewItem from './TreeViewItem/component';
 import VectorInput from './VectorInput/component';
 
+import {
+    BindingBase,
+    BindingElementToObservers,
+    BindingObserversToElement,
+    BindingTwoWay
+} from '../binding';
+
 // import pcui-hidden last
 import '../scss/_pcui-hidden.scss';
 
@@ -48,5 +55,9 @@ export {
     TextInput,
     TreeView,
     TreeViewItem,
-    VectorInput
+    VectorInput,
+    BindingBase,
+    BindingElementToObservers,
+    BindingObserversToElement,
+    BindingTwoWay
 };

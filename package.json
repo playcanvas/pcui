@@ -79,7 +79,8 @@
     "sass-loader": "^9.0.2",
     "tsd-jsdoc": "^2.5.0",
     "webpack": "^5.36.2",
-    "webpack-cli": "~4.6.0"
+    "webpack-cli": "~4.6.0",
+    "@playcanvas/playcanvas-observer": "git://github.com/playcanvas/playcanvas-observer.git#v1.0.0"
   },
   "directories": {
     "doc": "docs"

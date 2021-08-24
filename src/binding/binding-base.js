@@ -1,5 +1,4 @@
-import Events from './events';
-import Observer from '../binding/observer';
+import { Events, Observer } from '@playcanvas/playcanvas-observer';
 import IBindable from '../interfaces/IBindable';
 
 /**
