@@ -17,7 +17,12 @@ Commit any changes to the pcui repo.
 
 If you haven't cloned the [playcanvas.github.io](https://github.com/playcanvas/playcanvas.github.io) repo, install it locally to a projects folder which will now be referenced as `<projects_folder>`.
 
-In the puci directory run:
+In the `pcui/docs` directory run:
+`bundle install`
+
+To install the ruby dependencies. If you are having trouble with the install, try deleting the `Gemfile.lock` file.
+
+Then in the puci directory run:
 
 `npm run docs:local`
 
