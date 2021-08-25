@@ -3,7 +3,7 @@ import React from 'react';
 import Container from '../../components/Container/component';
 import TextInput from '../../components/TextInput/component';
 import Label from '../../components/Label/component';
-import { Observer } from '@playcanvas/playcanvas-observer';
+import { Observer } from '@playcanvas/observer/observer.mjs';
 import BindingObserversToElement from '../../binding/binding-observers-element';
 import BindingElementToObservers from '../../binding/binding-element-observers';
 

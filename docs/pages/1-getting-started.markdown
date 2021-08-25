@@ -10,17 +10,19 @@ nav_order: 1
 To build the component library, run the following in the projects directory:
 
 ```
+npm install --save-dev @playcanvas/observer
 npm install --save-dev @playcanvas/pcui
 ```
 
 This will include the entire pcui library in your project. The various parts of the library will be available to import from that package at the following locations:
 
-- ES6 Components: `@playcanvas/pcui/pcui.js`
-- React Components: `@playcanvas/pcui/pcui-react.js`
+- Observers: `@playcanvas/observer/observer.mjs`
+- ES6 Components: `@playcanvas/pcui/pcui.mjs`
+- React Components: `@playcanvas/pcui/pcui-react.mjs`
 
 You can then import the ES6 components into your own `.js` files and use them as follows:
 ```javascript
-import { Button } from '@playcanvas/pcui/pcui.js';
+import { Button } from '@playcanvas/pcui/pcui.mjs';
 
 const helloWorldButton = new Button({
     text: 'Click Me'
@@ -34,3 +36,8 @@ This will result in your first component being appended to your document body!
 <div class="highlighter-rouge example-background">
     <iframe src="/pcui/storybook/iframe.html?id=input-button--main&viewMode=story" style="border: none;" height="72px"></iframe>
 </div>
+
+
+### External Dependencies
+
+By default `pcui.mjs` and `pcui-react.mjs` include external dependencies from the `@playcanvas/observer` package. If you are using a bundler like Rollup you can reference `pcui.lib.mjs` or `pcui-react.lib.mjs` which do not include external dependencies. That will allow tree-shaking to work as well so that only one instance of each dependency exists in the final bundle.

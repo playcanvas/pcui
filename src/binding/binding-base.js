@@ -1,4 +1,4 @@
-import { Events, Observer } from '@playcanvas/playcanvas-observer';
+import { Events, Observer } from '@playcanvas/observer/observer.mjs';
 import IBindable from '../interfaces/IBindable';
 
 /**
