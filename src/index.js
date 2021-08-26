@@ -32,6 +32,13 @@ import GridView from './components/GridView';
 import GridViewItem from './components/GridViewItem';
 import VectorInput from './components/VectorInput';
 
+import {
+    BindingBase,
+    BindingElementToObservers,
+    BindingObserversToElement,
+    BindingTwoWay
+} from './binding';
+
 // import pcui-hidden last
 import './scss/_pcui-hidden.scss';
 
@@ -67,5 +74,9 @@ export {
     TreeViewItem,
     GridView,
     GridViewItem,
-    VectorInput
+    VectorInput,
+    BindingBase,
+    BindingElementToObservers,
+    BindingObserversToElement,
+    BindingTwoWay
 };

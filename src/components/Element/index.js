@@ -1,6 +1,6 @@
 import './style.scss';
 import * as pcuiClass from '../../class';
-import Events from '../../binding/events';
+import { Events } from '@playcanvas/observer/observer.mjs';
 
 /* global BindingBase */
 /* global Observer */

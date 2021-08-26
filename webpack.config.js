@@ -2,18 +2,18 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-module.exports = {
+const data = {
     mode: process.env.ENVIRONMENT === 'development' ? 'development' : 'production',
     entry: {
-        'pcui': './src/index.js',
         'pcui-react': './src/components/index.js',
-        'pcui-binding': './src/binding/index.js'
+        'pcui': './src/index.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: process.env.MODULE ? '[name].mjs' : '[name].js',
+        filename: process.env.MODULE ? (process.env.MODULE_STRIP ? '[name].lib.mjs' : '[name].mjs') : '[name].js',
         library: process.env.MODULE ? undefined : (process.env.LIBRARY_NAME ? `${process.env.LIBRARY_NAME}_[name]` : '[name]'),
-        libraryTarget: process.env.MODULE ? 'module' : 'umd'
+        libraryTarget: process.env.MODULE ? 'module' : 'umd',
+        environment: process.env.MODULE ? { module: true } : undefined
     },
     experiments: process.env.MODULE ? {
         outputModule: true
@@ -60,3 +60,17 @@ module.exports = {
     },
     plugins: process.env.EXTRACT_CSS ? [new MiniCssExtractPlugin()] : []
 };
+
+if (process.env.MODULE && process.env.MODULE_STRIP) {
+    data.externals = {
+        '@playcanvas/observer/observer.mjs': '@playcanvas/observer/observer.mjs'
+    };
+    data.externalsType = 'module';
+} else if (!process.env.MODULE) {
+    data.externals = {
+        '@playcanvas/observer/observer.mjs': 'observer'
+    };
+    data.externalsType = 'umd';
+}
+
+module.exports = data;
