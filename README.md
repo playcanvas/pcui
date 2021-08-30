@@ -27,12 +27,14 @@ npm run build
 ```
 This will build the entire library to the output path `dist`. The various parts of the library will be available to import from that path:
 
-- ES6 Components: `dist/pcui.mjs`
-- React Components: `dist/pcui-react.mjs`
+- ES6 Components under: `dist/%component%/index.mjs`
+- React Components under: `dist/%component%/component.mjs`
+
+There is also a UMD build under `dist/index.js`.
 
 You can then import the ES6 components into your own `.js` files and use them as follows:
 ```javascript
-import { Label } from 'dist/pcui.mjs';
+import { Label } from 'dist/Label';
 
 const helloWorldLabel = new Label({
     text: 'Hello World'
@@ -41,10 +43,14 @@ const helloWorldLabel = new Label({
 
 If you are more familar with react, you can import react elements into your own `.jsx` files and use them as follows:
 ```jsx
-import { Label } from 'dist/pcui-react.mjs';
+import { Label } from 'dist/Label/component';
 
 const helloWorldLabel = () => <Label text="Hello World" />;
 ```
+
+You will need to use a bundler like Rollup to build your project. If you do not wish to use a bundler then use the bundle builds instead:
+- ES6 Components under: `dist/bundle/%component$/index.mjs`
+- React Components under: `dist/bundle/%component$/component.mjs`
 
 ## Including your own font
 
@@ -63,11 +69,10 @@ The pcui library offers a data binding layer that can be used to synchonise data
 In this example the created label will start with `Hello World` as it's text value. When a user enters a value into the text input, the label will be updated with the new value.
 ```javascript
 import { Observer } from '@playcanvas/observer/observer.mjs';
-import {
-    BindingObserversToElement,
-    BindingElementToObservers,
-    Label,
-    TextInput } from '@playcanvas/pcui/pcui.mjs';
+import BindingObserversToElement from '@playcanvs/pcui/BindingObserversToElement';
+import BindingElementToObservers from '@playcanvs/pcui/BindingElementToObserver';
+import Label from '@playcanvs/pcui/Label';
+import TextInput } from '@playcanvs/pcui/TextInput';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
@@ -88,7 +93,8 @@ textInput.link(observer, 'text');
 Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in react to showcase binding with react components:
 ```jsx
 import { Observer } from '@playcanvas/observer/observer.mjs';
-import { TextInput, BindingTwoWay } from '@playcanvas/pcui/pcui-react.mjs';
+import TextInput from '@playcanvas/pcui/TextInput';
+import BindingTwoWay } from '@playcanvas/pcui/BindingTwoWay';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
@@ -99,7 +105,7 @@ const TextInput2 = () => <TextInput binding={new BindingTwoWay()} link={{ observ
 
 ## Development
 
-Each component exists in its own folder within the `./src/components` directory. They each contain:
+Each component exists in its own folder within the `./src` directory. They each contain:
 
 - `index.js`: The pcui element itself, which is exported to the `pcui` namespace.
 - `component.jsx`: A react wrapper for the element, currently used to display the element in Storybook.
