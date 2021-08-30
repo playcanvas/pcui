@@ -1,0 +1,168 @@
+@import '../scss/variables.scss';
+@import '../scss/fonts.scss';
+
+// boolean input
+.pcui-boolean-input {
+    display: inline-block;
+    position: relative;
+
+    box-sizing: border-box;
+
+    background-color: $bcg-dark;
+    color: #fff;
+
+    width: 14px;
+    height: 14px;
+    line-height: 1;
+
+    overflow: hidden;
+
+    margin: $element-margin;
+    transition: opacity 100ms, background-color 100ms, box-shadow 100ms;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+// ticked
+.pcui-boolean-input.pcui-boolean-input-ticked {
+    background-color: $text-secondary;
+    &:after {
+        @extend .font-icon;
+        content: '\E372';
+        color: $bcg-darkest;
+        background-color: inherit;
+        font-size: 19px;
+        display: block;
+        margin-top: -2px;
+        margin-left: -2px;
+    }
+}
+
+// hover / focus
+.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly) {
+    &:hover, &:focus {
+        cursor: pointer;
+        background-color: $bcg-darker;
+        box-shadow: $element-shadow-hover;
+    }
+
+    &.pcui-boolean-input-ticked {
+        &:hover, &:focus {
+            background-color: $text-secondary;
+        }
+    }
+}
+
+// disabled state
+.pcui-boolean-input.pcui-disabled {
+    opacity: $element-opacity-disabled;
+}
+
+// showing multiple values
+.pcui-boolean-input.pcui-multiple-values {
+    &:after {
+        position: absolute;
+        font-size: 17px;
+        font-weight: bold;
+        color: $text-secondary;
+        left: 4px;
+        top: -3px;
+        content: '-';
+    }
+}
+
+// toggle type
+.pcui-boolean-input-toggle {
+    display: inline-block;
+    position: relative;
+    width: 30px;
+    height: 16px;
+    border-radius: 8px;
+    flex-shrink: 0;
+
+    border: 1px solid $bcg-darker;
+    box-sizing: border-box;
+
+    background-color: $bcg-primary;
+    color: #fff;
+
+    line-height: 1;
+
+    overflow: hidden;
+
+    margin: $element-margin;
+    transition: opacity 100ms, background-color 100ms, box-shadow 100ms;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:after {
+        content: '\00a0';
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        width: 12px;
+        height: 12px;
+        border-radius: 6px;
+        background-color: $text-darkest;
+        transition: left 100ms ease, background-color 100ms ease;
+    }
+}
+
+// ticked
+.pcui-boolean-input-toggle.pcui-boolean-input-ticked {
+    border-color: $bcg-darker;
+
+    &:after {
+        left: 15px;
+        background-color: mix($text-darkest, #7f7, 50%);
+    }
+}
+
+// hover focus
+.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly) {
+    &:hover,
+    &:focus {
+        cursor: pointer;
+        border-color: $bcg-darkest;
+        background-color: $bcg-darkest;
+        box-shadow: $element-shadow-hover;
+
+        &:after {
+            background-color: $error-secondary;
+        }
+    }
+
+    &.pcui-boolean-input-ticked {
+        &:hover,
+        &:focus {
+            border-color: $bcg-darkest;
+            background-color: $bcg-darkest;
+        }
+
+        &:after {
+            background-color: #7f7;
+        }
+    }
+}
+
+// readonly
+.pcui-boolean-input-toggle.pcui-readonly {
+    opacity: $element-opacity-readonly;
+}
+
+// disabled
+.pcui-boolean-input-toggle.pcui-disabled {
+    opacity: $element-opacity-disabled;
+}
+
+// multiple values
+.pcui-boolean-input-toggle.pcui-multiple-values {
+    &:after {
+        left: 8px;
+        background-color: rgba($text-dark, 0.25);
+    }
+}
