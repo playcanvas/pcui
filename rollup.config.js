@@ -22,7 +22,7 @@ const umd = {
         }),
         sass({
             insert: !process.env.EXTRACT_CSS,
-            output: !!process.env.EXTRACT_CSS
+            output: false
         }),
         resolve()
     ]
@@ -44,7 +44,7 @@ const module = {
         }),
         sass({
             insert: !process.env.EXTRACT_CSS,
-            output: !!process.env.EXTRACT_CSS
+            output: false
         }),
         resolve(),
         babel({
@@ -75,7 +75,7 @@ const bundle = {
         }),
         sass({
             insert: !process.env.EXTRACT_CSS,
-            output: !!process.env.EXTRACT_CSS
+            output: false
         }),
         resolve(),
         babel({

@@ -1,5 +1,7 @@
+// #ifndef EXTRACT_CSS
 @import '../scss/variables.scss';
 @import '../scss/fonts.scss';
+// #endif EXTRACT_CSS
 
 @-webkit-keyframes pcui-flash-animation {
     from { outline-color: $text-active; }

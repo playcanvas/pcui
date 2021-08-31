@@ -1,6 +1,6 @@
 {
   "name": "@playcanvas/pcui",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://playcanvas.github.io/pcui",
   "description": "This library enables the creation of reliable and visually pleasing user interfaces by providing fully styled components that you can use directly on your site. The components are useful in a wide range of use cases, from creating simple forms to building graphical user interfaces for complex web tools.",
@@ -16,6 +16,7 @@
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint --ext .js src",
+    "clean:css": "node clean-scss.js",
     "storybook": "jsdoc -r -X src > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
     "docs:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "docs:build": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
@@ -65,6 +66,7 @@
     "@testing-library/user-event": "^7.1.2",
     "babel-loader": "^8.2.2",
     "eslint": "^7.25.0",
+    "glob": "^7.1.7",
     "jsdoc": "^3.6.5",
     "json-loader": "^0.5.7",
     "playcanvas": "^1.41.1",
