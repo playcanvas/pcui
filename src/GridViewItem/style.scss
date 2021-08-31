@@ -1,5 +1,7 @@
+// #ifndef EXTRACT_CSS
 @import '../scss/variables.scss';
 @import '../scss/pcui-common';
+// #endif EXTRACT_CSS
 
 .pcui-gridview-item {
     @extend .pcui-flex;
