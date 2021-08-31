@@ -8,7 +8,7 @@ nav_order: 3
 If you are more familar with react, you can import react elements into your own `.jsx` files and use them as follows:
 ```jsx
 import ReactDOM from 'react-dom';
-import { TextInput } from '@playcanvas/pcui/pcui-react.mjs';
+import TextInput from '@playcanvas/pcui/TextInput/component';
 
 ReactDOM.render(
     <TextInput />,

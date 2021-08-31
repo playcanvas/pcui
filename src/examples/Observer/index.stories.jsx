@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Container from '../../components/Container/component';
-import TextInput from '../../components/TextInput/component';
-import Label from '../../components/Label/component';
-import { Observer } from '@playcanvas/observer/observer.mjs';
-import BindingObserversToElement from '../../binding/binding-observers-element';
-import BindingElementToObservers from '../../binding/binding-element-observers';
+import Container from '../../Container/component';
+import TextInput from '../../TextInput/component';
+import Label from '../../Label/component';
+import { Observer } from '@playcanvas/observer';
+import BindingObserversToElement from '../../BindingObserversToElement';
+import BindingElementToObservers from '../../BindingElementToObservers';
 
 import './style.scss';
 

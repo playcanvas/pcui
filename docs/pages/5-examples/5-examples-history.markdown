@@ -20,8 +20,13 @@ In this example you can interact with the input slider to update the progress ba
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Observer, History } from '@playcanvas/observer/observer.mjs';
-import { Container, Button, SliderInput, Progress, Label, BindingTwoWay, } from '@playcanvas/pcui/pcui-react.mjs';
+import { Observer, History } from '@playcanvas/observer';
+import Container from '@playcanvas/pcui/Container/component';
+import Button from '@playcanvas/pcui/Button/component';
+import SliderInput from '@playcanvas/pcui/SliderInput/component';
+import Progress from '@playcanvas/pcui/Progress/component';
+import Label from '@playcanvas/pcui/Label/component';
+import BindingTwoWay from '@playcanvas/pcui/BindingTwoWay';
 
 const observer = new Observer({ progress: 0 });
 const history = new History();

@@ -1,4 +1,4 @@
-import Element from '../../components/Element';
+import Element from '../../Element';
 
 const CLASS_CANVAS = 'pcui-canvas';
 
