@@ -1,5 +1,5 @@
 import * as pcuiClass from '../class';
-import { Events } from '@playcanvas/observer/observer.mjs';
+import { Events } from '@playcanvas/observer';
 
 import './style.scss';
 

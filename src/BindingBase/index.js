@@ -1,4 +1,4 @@
-import { Events } from '@playcanvas/observer/observer.mjs';
+import { Events } from '@playcanvas/observer';
 
 /**
  * @name BindingBase

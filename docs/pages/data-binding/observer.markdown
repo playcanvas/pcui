@@ -21,7 +21,7 @@ In this example the created label will start with `Hello World` as it's text val
 First import the components and binding classes.
 
 ```javascript
-import { Observer } from '@playcanvas/observer/observer.mjs';
+import { Observer } from '@playcanvas/observer';
 import Label from '@playcanvas/pcui/Label';
 import TextInput from '@playcanvas/pcui/TextInput';
 import BindingObserversToElement from '@playcanvas/pcui/BindingObserversToElement';

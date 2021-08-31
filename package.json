@@ -14,7 +14,7 @@
     "url": "git+https://github.com/playcanvas/pcui.git"
   },
   "scripts": {
-    "build": "rm -r dist; rollup -c; rm dist/index.mjs; rm dist/bundle/index.mjs",
+    "build": "rollup -c",
     "lint": "eslint --ext .js src",
     "storybook": "jsdoc -r -X src > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
     "docs:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
@@ -47,7 +47,7 @@
     "@babel/preset-env": "^7.14.1",
     "@babel/preset-react": "^7.13.13",
     "@playcanvas/eslint-config": "^1.0.8",
-    "@playcanvas/observer": "1.0.4",
+    "@playcanvas/observer": "^1.1.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-replace": "^3.0.0",
     "@storybook/addon-actions": "^6.4.0-alpha.32",
@@ -76,6 +76,7 @@
     "react-is": "^16.13.1",
     "react-scripts": "3.4.1",
     "rollup": "^2.56.3",
+    "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-rename": "^1.0.1",
     "rollup-plugin-sass": "^1.2.6",

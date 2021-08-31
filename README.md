@@ -68,7 +68,7 @@ The pcui library offers a data binding layer that can be used to synchonise data
 
 In this example the created label will start with `Hello World` as it's text value. When a user enters a value into the text input, the label will be updated with the new value.
 ```javascript
-import { Observer } from '@playcanvas/observer/observer.mjs';
+import { Observer } from '@playcanvas/observer';
 import BindingObserversToElement from '@playcanvs/pcui/BindingObserversToElement';
 import BindingElementToObservers from '@playcanvs/pcui/BindingElementToObserver';
 import Label from '@playcanvs/pcui/Label';
@@ -92,7 +92,7 @@ textInput.link(observer, 'text');
 
 Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in react to showcase binding with react components:
 ```jsx
-import { Observer } from '@playcanvas/observer/observer.mjs';
+import { Observer } from '@playcanvas/observer';
 import TextInput from '@playcanvas/pcui/TextInput';
 import BindingTwoWay } from '@playcanvas/pcui/BindingTwoWay';
 

@@ -19,7 +19,7 @@ Observers can also be bound bi-directionally, in which case an element can both 
 First import the components and binding classes.
 
 ```javascript
-import { Observer } from '@playcanvas/observer/observer.mjs';
+import { Observer } from '@playcanvas/observer';
 import TextInput from '@playcanvas/pcui/TextInput/component';
 import BindingTwoWay from '@playcanvas/pcui/BindingTwoWay';
 ```

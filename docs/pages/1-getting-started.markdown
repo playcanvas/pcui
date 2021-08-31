@@ -16,7 +16,7 @@ npm install --save-dev @playcanvas/pcui
 
 This will include the entire pcui library in your project. The various parts of the library will be available to import from that package at the following locations:
 
-- Observers: `@playcanvas/observer/observer.mjs`
+- Observers: `@playcanvas/observer`
 - ES6 Components: `@playcanvas/pcui/pcui.mjs`
 - React Components: `@playcanvas/pcui/pcui-react.mjs`
 

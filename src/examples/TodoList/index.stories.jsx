@@ -8,7 +8,7 @@ import Label from '../../Label/component';
 import SelectInput from '../../SelectInput/component';
 import Button from '../../Button/component';
 import BindingTwoWay from '../../BindingTwoWay';
-import { Observer } from '@playcanvas/observer/observer.mjs';
+import { Observer } from '@playcanvas/observer';
 
 import './style.scss';
 

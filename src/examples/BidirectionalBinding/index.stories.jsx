@@ -2,7 +2,7 @@ import React from 'react';
 
 import Container from '../../Container/component';
 import TextInput from '../../TextInput/component';
-import { Observer } from '@playcanvas/observer/observer.mjs';
+import { Observer } from '@playcanvas/observer';
 import BindingTwoWay from '../../BindingTwoWay';
 
 import './style.scss';

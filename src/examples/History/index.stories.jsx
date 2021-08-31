@@ -6,7 +6,7 @@ import SliderInput from '../../SliderInput/component';
 import Progress from '../../Progress/component';
 import Label from '../../Label/component';
 import BindingTwoWay from '../../BindingTwoWay';
-import { Observer, History } from '@playcanvas/observer/observer.mjs';
+import { Observer, History } from '@playcanvas/observer';
 
 var name = 'History';
 var config = {

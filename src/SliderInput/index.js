@@ -31,10 +31,10 @@ const PROXY_FIELDS = [
  * @class
  * @classdesc The SliderInput shows a pcui.NumericInput and a slider widget next to it. It acts as a proxy
  * of the NumericInput.
- * @property {number} min Gets / sets the minimum value that the numeric input field can take.
- * @property {number} max Gets / sets the maximum value that the numeric input field can take.
- * @property {number} sliderMin Gets / sets the minimum value that the slider field can take.
- * @property {number} sliderMax Gets / sets the maximum value that the slider field can take.
+ * @property {number} min=0 Gets / sets the minimum value that the numeric input field can take.
+ * @property {number} max=1 Gets / sets the maximum value that the numeric input field can take.
+ * @property {number} sliderMin=0 Gets / sets the minimum value that the slider field can take.
+ * @property {number} sliderMax=1 Gets / sets the maximum value that the slider field can take.
  * @property {number} pre Gets / sets the maximum number of decimals a value can take.
  * @property {number} step Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
  * @property {boolean} allowNull Gets / sets whether the value can be null. If not then it will be 0 instead of null.

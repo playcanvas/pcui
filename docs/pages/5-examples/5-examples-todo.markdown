@@ -20,7 +20,7 @@ The todo list below allows you to add items to the list, toggle their 'done' sta
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Observer } from '@playcanvas/observer/observer.mjs';
+import { Observer } from '@playcanvas/observer';
 
 import Container from '@playcanvas/pcui/Container/component';
 import TextInput from '@playcanvas/pcui/TextInput/component';
