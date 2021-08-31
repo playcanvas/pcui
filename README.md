@@ -72,7 +72,7 @@ import { Observer } from '@playcanvas/observer';
 import BindingObserversToElement from '@playcanvs/pcui/BindingObserversToElement';
 import BindingElementToObservers from '@playcanvs/pcui/BindingElementToObserver';
 import Label from '@playcanvs/pcui/Label';
-import TextInput } from '@playcanvs/pcui/TextInput';
+import TextInput from '@playcanvs/pcui/TextInput';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
@@ -94,7 +94,7 @@ Observers can also be bound bi-directionally, in which case an element can both 
 ```jsx
 import { Observer } from '@playcanvas/observer';
 import TextInput from '@playcanvas/pcui/TextInput';
-import BindingTwoWay } from '@playcanvas/pcui/BindingTwoWay';
+import BindingTwoWay from '@playcanvas/pcui/BindingTwoWay';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
