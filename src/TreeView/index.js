@@ -436,9 +436,6 @@ class TreeView extends Container {
 
         this._dragItems = [];
 
-        // cannot drag root
-        if (element.parent === this) return;
-
         if (this._selectedItems.indexOf(element) !== -1) {
             const dragged = [];
 
@@ -496,15 +493,24 @@ class TreeView extends Container {
 
         this._dragItems.forEach((item) => item.class.remove(CLASS_DRAGGED_ITEM));
 
-        if (this._dragOverItem) {
+        // if the root is being dragged then
+        // do not allow reparenting because we do not
+        // want to reparent the root
+        let isRootDragged = false;
+        for (let i = 0; i < this._dragItems.length; i++) {
+            if (this._dragItems[i].parent === this)  {
+                isRootDragged = true;
+                break;
+            }
+        }
+
+        if (!isRootDragged && this._dragOverItem) {
             if (this._dragItems.length > 1) {
                 // sort items based on order in the hierarchy
-                if (this._dragItems.length > 1) {
-                    this._updateTreeOrder();
-                    this._dragItems.sort((a, b) => {
-                        return a._treeOrder - b._treeOrder;
-                    });
-                }
+                this._updateTreeOrder();
+                this._dragItems.sort((a, b) => {
+                    return a._treeOrder - b._treeOrder;
+                });
             }
 
             if (this._dragItems.length) {
