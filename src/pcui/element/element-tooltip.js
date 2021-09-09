@@ -1,5 +1,5 @@
-import Container from '../../components/Container';
-import Label from '../../components/Label';
+import Container from '../../Container';
+import Label from '../../Label';
 import * as pcuiClass from '../../class';
 
 const CLASS_ROOT = 'pcui-tooltip';

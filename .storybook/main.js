@@ -1,6 +1,6 @@
 const path = require('path');
 module.exports = {
-  stories: ['../src/components/**/*.stories.jsx', '../src/examples/**/*.stories.jsx'],
+  stories: ['../src/**/*.stories.jsx', '../src/examples/**/*.stories.jsx'],
   addons: [
     '@storybook/addon-actions/register',
     '@storybook/addon-links',
@@ -31,4 +31,7 @@ module.exports = {
     // Return the altered config
     return config;
   },
+  core: {
+    builder: "webpack5",
+  }
 };

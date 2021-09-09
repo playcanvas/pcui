@@ -19,8 +19,9 @@ Observers can also be bound bi-directionally, in which case an element can both 
 First import the components and binding classes.
 
 ```javascript
-import { TextInput } from '@playanvas/pcui/pcui-react.js';
-import { BindingTwoWay, Observer } from '@playanvas/pcui/pcui-binding.js';
+import { Observer } from '@playcanvas/observer';
+import TextInput from '@playcanvas/pcui/TextInput/component';
+import BindingTwoWay from '@playcanvas/pcui/BindingTwoWay';
 ```
 
 Then create a new observer for a an object which contains a text string.

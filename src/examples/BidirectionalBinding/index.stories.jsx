@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Container from '../../components/Container/component';
-import TextInput from '../../components/TextInput/component';
-import Observer from '../../binding/observer';
-import BindingTwoWay from '../../binding/binding-two-way';
+import Container from '../../Container/component';
+import TextInput from '../../TextInput/component';
+import { Observer } from '@playcanvas/observer';
+import BindingTwoWay from '../../BindingTwoWay';
 
 import './style.scss';
 
