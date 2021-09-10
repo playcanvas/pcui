@@ -28,6 +28,25 @@ const umd = {
     ]
 };
 
+const umdStandalone = {
+    input: 'src/index.js',
+    output: {
+        file: 'dist/umd-standalone.js',
+        format: 'umd',
+        name: 'pcui'
+    },
+    plugins: [
+        del({
+            targets: 'dist/umd-standalone.js'
+        }),
+        sass({
+            insert: !process.env.EXTRACT_CSS,
+            output: false
+        }),
+        resolve()
+    ]
+};
+
 const module = {
     input: 'src/index.jsx',
     external: ['@playcanvas/observer', 'react', 'prop-types'],
@@ -40,7 +59,12 @@ const module = {
     },
     plugins: [
         del({
-            targets: ['dist/*', '!dist/index.js', '!dist/bundle']
+            targets: [
+                'dist/*',
+                '!dist/index.js',
+                '!dist/umd-standalone.js',
+                '!dist/bundle'
+            ]
         }),
         sass({
             insert: !process.env.EXTRACT_CSS,
@@ -100,4 +124,9 @@ const bundle = {
     ]
 };
 
-export default [umd, module, bundle];
+export default [
+    umd,
+    umdStandalone,
+    module,
+    bundle
+];
