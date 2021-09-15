@@ -666,14 +666,20 @@ class TreeView extends Container {
         const rect = this.dom.getBoundingClientRect();
         this._dragScroll = 0;
         let top = rect.top;
+
         let bottom = rect.bottom;
-        if (this._dragScrollElement.dom !== this.dom) {
-            top += this._dragScrollElement.dom.scrollTop;
-            bottom += this._dragScrollElement.dom.scrollTop;
+        if (this._dragScrollElement !== this) {
+            const dragScrollRect = this._dragScrollElement.dom.getBoundingClientRect();
+            top = Math.max(top + this._dragScrollElement.dom.scrollTop, dragScrollRect.top);
+            bottom = Math.min(bottom + this._dragScrollElement.dom.scrollTop, dragScrollRect.bottom);
         }
-        if (evt.clientY - top < 32 && this._dragScrollElement.dom.scrollTop > 0) {
+
+        top = Math.max(0, top);
+        bottom = Math.min(bottom, document.body.clientHeight);
+
+        if (evt.pageY < top + 32 && this._dragScrollElement.dom.scrollTop > 0) {
             this._dragScroll = -1;
-        } else if (bottom - evt.clientY < 32 && this._dragScrollElement.dom.scrollHeight - (rect.height + this._dragScrollElement.dom.scrollTop) > 0) {
+        } else if (evt.pageY > bottom - 32 && this._dragScrollElement.dom.scrollHeight > this._dragScrollElement.height + this._dragScrollElement.dom.scrollTop) {
             this._dragScroll = 1;
         }
     }
