@@ -222,9 +222,24 @@ class TreeViewItem extends Container {
         const rect = this._containerContents.dom.getBoundingClientRect();
         if (this._numChildren > 0 && evt.clientX - rect.left < 0) {
             this.open = !this.open;
+            if (evt.altKey) {
+                // apply to all children as well
+                this._dfs((node) => {
+                    node.open = this.open;
+                });
+            }
             this.focus();
         } else if (this._treeView) {
             this._treeView._onChildClick(evt, this);
+        }
+    }
+
+    _dfs(fn) {
+        fn(this);
+        let child = this.firstChild;
+        while (child) {
+            child._dfs(fn);
+            child = child.nextSibling;
         }
     }
 
