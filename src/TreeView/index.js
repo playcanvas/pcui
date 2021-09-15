@@ -77,6 +77,8 @@ class TreeView extends Container {
      * @param {object} [args] - The arguments. All properties can be set through the arguments as well.
      * @param {Function} [args.onContextMenu] - A function to be called when we right click on a TreeViewItem.
      * @param {Function} [args.onReparent] - A function to be called when we try to reparent tree items. If a function is provided then the
+     * @param {Element} [args.dragScrollElement] - An element (usually a container of the tree view) that will be scrolled when the user
+     * drags towards the edges of the treeview. Defaults to the TreeView itself.
      * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
      */
     constructor(args) {
@@ -99,6 +101,7 @@ class TreeView extends Container {
         this._dragHandle = new Element(document.createElement('div'), {
             class: CLASS_DRAGGED_HANDLE
         });
+        this._dragScrollElement = args.dragScrollElement || this;
         this.append(this._dragHandle);
 
         this._onContextMenu = args.onContextMenu;
@@ -662,9 +665,15 @@ class TreeView extends Container {
         // Determine if we need to scroll the treeview if we are dragging towards the edges
         const rect = this.dom.getBoundingClientRect();
         this._dragScroll = 0;
-        if (evt.clientY - rect.top < 32 && this.dom.scrollTop > 0) {
+        let top = rect.top;
+        let bottom = rect.bottom;
+        if (this._dragScrollElement.dom !== this.dom) {
+            top += this._dragScrollElement.dom.scrollTop;
+            bottom += this._dragScrollElement.dom.scrollTop;
+        }
+        if (evt.clientY - top < 32 && this._dragScrollElement.dom.scrollTop > 0) {
             this._dragScroll = -1;
-        } else if (rect.bottom - evt.clientY < 32 && this.dom.scrollHeight - (rect.height + this.dom.scrollTop) > 0) {
+        } else if (bottom - evt.clientY < 32 && this._dragScrollElement.dom.scrollHeight - (rect.height + this._dragScrollElement.dom.scrollTop) > 0) {
             this._dragScroll = 1;
         }
     }
@@ -674,7 +683,7 @@ class TreeView extends Container {
         if (!this._dragging) return;
         if (this._dragScroll === 0) return;
 
-        this.dom.scrollTop += this._dragScroll * 8;
+        this._dragScrollElement.dom.scrollTop += this._dragScroll * 8;
         this._dragOverItem = null;
         this._updateDragHandle();
     }
@@ -992,7 +1001,7 @@ class TreeView extends Container {
             this._updateDragHandle();
 
             // handle mouse move to scroll when dragging if necessary
-            if (this.scrollable) {
+            if (this.scrollable || this._dragScrollElement !== this) {
                 window.removeEventListener('mousemove', this._domEvtMouseMove);
                 window.addEventListener('mousemove', this._domEvtMouseMove);
                 if (!this._dragScrollInterval) {
