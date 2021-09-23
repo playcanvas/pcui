@@ -1,15 +1,4 @@
-@font-face {
-    font-family: 'pc-icon';
-    src: url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.eot');
-    src: url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.eot?#iefix') format('embedded-opentype'),
-         url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.woff2') format('woff2'),
-         url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.woff') format('woff'),
-         url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.ttf') format('truetype'),
-         url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.svg') format('svg');
-
-    font-weight: normal;
-    font-style: normal;
-}
+@import './font-icon.scss';
 
 @font-face {
     font-family: 'Montserrat Thin';
@@ -47,12 +36,6 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
 
-.font-smooth {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-smoothing: antialiased;
-}
-
 .font-thin {
     font-family: 'Montserrat Thin', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: 100;
@@ -75,11 +58,6 @@
     font-family: 'Montserrat Bold', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-style: normal;
-}
-
-.font-icon {
-    font-family: 'pc-icon';
-    @extend .font-smooth;
 }
 
 .fixedFont {
