@@ -23,6 +23,7 @@ export class BooleanInputArgs extends ElementArgs {
  * @name BooleanInput
  * @class
  * @classdesc A checkbox element.
+ * @property {boolean} value Current value.
  * @property {boolean} renderChanges If true the input will flash when changed.
  * @augments Element
  * @mixes IBindable

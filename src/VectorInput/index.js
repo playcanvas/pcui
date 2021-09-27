@@ -30,6 +30,8 @@ export class VectorInputArgs extends ElementArgs {
  * @augments Element
  * @mixes IBindable
  * @mixes IFocusable
+ * @property {pc.Vec3} value Current value.
+ * @property {number} step The incremental step when using arrow keys for each vector element.
  * @param {VectorInputArgs} [args] - The arguments.
  */
 class VectorInput extends Element {
