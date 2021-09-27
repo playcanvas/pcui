@@ -59,6 +59,7 @@ export class TreeViewItemArgs extends ContainerArgs {
  * @name TreeViewItem
  * @class
  * @classdesc Represents a Tree View Item to be added to a pcui.TreeView.
+ * @augments Container
  * @mixes IFocusable
  * @property {boolean} selected Whether the item is selected.
  * @property {boolean} allowSelect=true Whether the item can be selected.
