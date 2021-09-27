@@ -18,7 +18,7 @@ const CLASS_VECTOR_INPUT = 'pcui-vector-input';
  * @property {number} [step] - The incremental step when using arrow keys for each vector element.
  * @property {boolean} [renderChanges] - If true each vector element will flash on changes.
  * @property {string[]|string} [placeholder] - The placeholder string for each vector element.
- * @property {pc.Vec3} [value] - Initial value
+ * @property {number[]} [value] - Initial value
  */
 export class VectorInputArgs extends ElementArgs {
 }
@@ -30,7 +30,7 @@ export class VectorInputArgs extends ElementArgs {
  * @augments Element
  * @mixes IBindable
  * @mixes IFocusable
- * @property {pc.Vec3} value Current value.
+ * @property {number[]} value Current value.
  * @property {number} step The incremental step when using arrow keys for each vector element.
  * @param {VectorInputArgs} [args] - The arguments.
  */
