@@ -31,6 +31,7 @@ export class TextInputArgs extends ElementArgs {
  * @mixes IFocusable
  * @property {string} placeholder Gets / sets the placeholder label that appears on the right of the input.
  * @property {HTMLElement} input Gets the HTML input element.
+ * @property {string} value Gets / sets the current value.
  * @property {boolean} renderChanges If true then the TextInput will flash when its text changes.
  * @property {boolean} blurOnEnter=true Gets / sets whether pressing Enter will blur (unfocus) the field. Defaults to true.
  * @property {boolean} blurOnEscape=true Gets / sets whether pressing Escape will blur (unfocus) the field. Defaults to true.
