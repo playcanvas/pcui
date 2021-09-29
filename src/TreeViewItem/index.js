@@ -68,7 +68,7 @@ export class TreeViewItemArgs extends ContainerArgs {
  * @property {boolean} allowDrag=true Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
  * @property {boolean} allowDrop=true Whether dropping is allowed on the tree item.
  * @property {string} text The text shown by the TreeViewItem.
- * @property {number} The number of direct children.
+ * @property {number} numChildren The number of direct children.
  * @property {Label} textLabel Gets the internal label that shows the text.
  * @property {Label} iconLabel Gets the internal label that shows the icon.
  * @property {TreeView} treeView Gets / sets the parent TreeView.

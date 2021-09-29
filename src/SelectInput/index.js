@@ -49,7 +49,7 @@ export class SelectInputArgs extends ElementArgs {
  * @name SelectInput
  * @class
  * @classdesc An input that allows selecting from a dropdown or entering tags.
- * @property {string} value Current value.
+ * @property {boolean | number | string} value Current value, type depends on option type.
  * @property {boolean} renderChanges If true then the input will flash when its value changes.
  * @property {string} placeholder The placeholder text to show next to the current value.
  * @property {boolean} multiSelect If true then the input value becomes an array allowing the selection of multiple options. Defaults to false.
