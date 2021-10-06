@@ -34,7 +34,7 @@ There is also a UMD build under `dist/index.js`.
 
 You can then import the ES6 components into your own `.js` files and use them as follows:
 ```javascript
-import { Label } from 'dist/Label';
+import Label from 'dist/Label';
 
 const helloWorldLabel = new Label({
     text: 'Hello World'
@@ -43,7 +43,7 @@ const helloWorldLabel = new Label({
 
 If you are more familar with react, you can import react elements into your own `.jsx` files and use them as follows:
 ```jsx
-import { Label } from 'dist/Label/component';
+import Label from 'dist/Label/component';
 
 const helloWorldLabel = () => <Label text="Hello World" />;
 ```
