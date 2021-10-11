@@ -31,7 +31,6 @@ import LabelGroup from './LabelGroup/component.jsx';
 import GridView from './GridView/component.jsx';
 import GridViewItem from './GridViewItem/component.jsx';
 import Menu from './Menu/component.jsx';
-import MenuItem from './MenuItem/component.jsx';
 import ArrayInput from './ArrayInput/component.jsx';
 import BindingBase from './BindingBase';
 import BindingElementToObservers from './BindingElementToObservers';
@@ -71,7 +70,6 @@ export {
     GridView,
     GridViewItem,
     Menu,
-    MenuItem,
     VectorInput,
     BindingBase,
     BindingElementToObservers,
