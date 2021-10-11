@@ -31,6 +31,8 @@ import LabelGroup from './LabelGroup';
 import GridView from './GridView';
 import GridViewItem from './GridViewItem';
 import ArrayInput from './ArrayInput';
+import MenuItem from './MenuItem';
+import Menu from './Menu';
 import BindingBase from './BindingBase';
 import BindingElementToObservers from './BindingElementToObservers';
 import BindingObserversToElement from './BindingObserversToElement';
@@ -55,6 +57,8 @@ export {
     InfoBox,
     Label,
     LabelGroup,
+    Menu,
+    MenuItem,
     NumericInput,
     Overlay,
     Panel,
