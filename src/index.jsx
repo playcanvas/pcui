@@ -30,6 +30,7 @@ import TreeViewItem from './TreeViewItem/component.jsx';
 import LabelGroup from './LabelGroup/component.jsx';
 import GridView from './GridView/component.jsx';
 import GridViewItem from './GridViewItem/component.jsx';
+import Menu from './Menu/component.jsx';
 import ArrayInput from './ArrayInput/component.jsx';
 import BindingBase from './BindingBase';
 import BindingElementToObservers from './BindingElementToObservers';
@@ -68,6 +69,7 @@ export {
     TreeViewItem,
     GridView,
     GridViewItem,
+    Menu,
     VectorInput,
     BindingBase,
     BindingElementToObservers,

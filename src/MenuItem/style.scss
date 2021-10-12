@@ -1,0 +1,91 @@
+// #ifndef EXTRACT_CSS
+@import '../scss/pcui.scss';
+// #endif EXTRACT_CSS
+
+.pcui-menu-item {
+    position: relative;
+    background-color: $bcg-darkest;
+    width: auto;
+}
+
+.pcui-menu-item-children {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+    position: absolute;
+    z-index: 1;
+    left: 100%;
+    top: 0;
+    opacity: 0;
+    transition: opacity 100ms, visibility 100ms;
+    visibility: hidden;
+}
+
+.pcui-menu-item:hover {
+    > .pcui-menu-item-children {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.pcui-menu-item-has-children {
+    & > .pcui-menu-item-content > .pcui-label {
+        padding-right: 32px;
+
+        &:after {
+            content: '\E160';
+            @extend .font-icon;
+            position: absolute;
+            right: $element-margin;
+        }
+    }
+}
+
+.pcui-menu-item-content {
+    min-width: 158px;
+    color: $text-dark;
+    border-bottom: 1px solid mix($bcg-darkest, $bcg-dark, 50%);
+    cursor: pointer;
+
+    &:hover {
+        color: $text-primary;
+        background-color: $text-darkest;
+    }
+}
+
+.pcui-menu-item:last-child {
+    > .pcui-menu-item-content {
+        border-bottom: none;
+    }
+}
+
+.pcui-menu-item-content > .pcui-label {
+    color: inherit;
+
+    &[data-icon] {
+        // show icon using data-icon attribute
+        // as the content
+        &:before {
+            content: attr(data-icon);
+            @extend .font-icon;
+            font-weight: 100;
+            font-size: inherit;
+            margin-right: $element-margin;
+            vertical-align: middle;
+        }
+    }
+}
+
+.pcui-menu-item.pcui-disabled {
+    .pcui-menu-item-content {
+        cursor: default;
+
+        &:hover {
+            color: $text-dark;
+            background-color: transparent;
+        }
+
+        & > .pcui-label {
+            cursor: default;
+            opacity: $disabled-opacity;
+        }
+    }
+}
