@@ -49,6 +49,10 @@
         color: $text-primary;
         background-color: $text-darkest;
     }
+
+    > .pcui-label {
+        transition: none;
+    }
 }
 
 .pcui-menu-item:last-child {
