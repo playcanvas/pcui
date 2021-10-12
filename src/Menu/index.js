@@ -10,7 +10,8 @@ const CLASS_MENU_ITEMS = CLASS_MENU + '-items';
  * @name Menu
  * @class
  * @classdesc A Menu is a list of MenuItems which can contain child MenuItems. Useful
- * to show context menus and nested menus.
+ * to show context menus and nested menus. Note that a Menu must be appended to the root Element
+ * and then positioned accordingly.
  * @augments Container
  * @mixes IFocusable
  */
