@@ -61,7 +61,8 @@ class MenuItem extends Container {
 
         this.text = args.text || 'Untitled';
 
-        this.on('click', this._onClickMenuItem.bind(this));
+        this._domEvtMenuItemClick = this._onClickMenuItem.bind(this);
+        this.dom.addEventListener('click', this._domEvtMenuItemClick);
 
         if (args.value) {
             this.value = args.value;
@@ -111,7 +112,9 @@ class MenuItem extends Container {
     _onClickMenuItem(evt) {
         evt.preventDefault();
         evt.stopPropagation();
-        this.select();
+        if (!this.disabled) {
+            this.select();
+        }
     }
 
     link(observers, paths) {
@@ -138,6 +141,14 @@ class MenuItem extends Container {
         if (this.menu) {
             this.menu.hidden = true;
         }
+    }
+
+    destroy() {
+        if (this.destroyed) return;
+
+        this.dom.removeEventListener('click', this._domEvtMenuItemClick);
+
+        super.destroy();
     }
 
     get text() {
