@@ -116,12 +116,18 @@ class TextInput extends Element {
     }
 
     _onInputKeyDown(evt) {
-        if (evt.keyCode === 27 && this.blurOnEscape) {
+        if (evt.keyCode === 13 && this.blurOnEnter) {
+            this._domInput.blur();
+        } else if (evt.keyCode === 27 && this.blurOnEscape) {
             this._suspendInputChangeEvt = true;
             this._domInput.value = this._prevValue;
             this._suspendInputChangeEvt = false;
-            this._domInput.blur();
-        } else if (evt.keyCode === 13 && this.blurOnEnter) {
+
+            // manually fire change event
+            if (this.keyChange) {
+                this._onInputChange(evt);
+            }
+
             this._domInput.blur();
         }
 
