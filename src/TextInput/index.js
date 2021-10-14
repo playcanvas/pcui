@@ -117,25 +117,36 @@ class TextInput extends Element {
 
     _onInputKeyDown(evt) {
         if (evt.keyCode === 13 && this.blurOnEnter) {
+            // do not fire input change event on blur
+            // if keyChange is true (because a change event)
+            // will have already been fired before for the current
+            // value
+            this._suspendInputChangeEvt = this.keyChange;
             this._domInput.blur();
-        } else if (evt.keyCode === 27 && this.blurOnEscape) {
+            this._suspendInputChangeEvt = false;
+        } else if (evt.keyCode === 27) {
             this._suspendInputChangeEvt = true;
+            const prev = this._domInput.value;
             this._domInput.value = this._prevValue;
             this._suspendInputChangeEvt = false;
 
             // manually fire change event
-            if (this.keyChange) {
+            if (this.keyChange && prev !== this._prevValue) {
                 this._onInputChange(evt);
             }
 
-            this._domInput.blur();
+            if (this.blurOnEscape) {
+                this._domInput.blur();
+            }
         }
 
         this.emit('keydown', evt);
     }
 
     _onInputKeyUp(evt) {
-        this._onInputChange(evt);
+        if (evt.keyCode !== 27) {
+            this._onInputChange(evt);
+        }
 
         this.emit('keyup', evt);
     }
