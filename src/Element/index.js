@@ -3,9 +3,6 @@ import { Events } from '@playcanvas/observer';
 
 import './style.scss';
 
-/* global BindingBase */
-/* global Observer */
-
 const CLASS_ELEMENT = 'pcui-element';
 
 // these are properties that are
