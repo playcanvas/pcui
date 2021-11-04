@@ -494,7 +494,7 @@ class TreeView extends Container {
     _onChildDragEnd(evt, element) {
         if (!this.allowDrag || !this._dragging) return;
 
-        this._dragItems.forEach((item) => item.class.remove(CLASS_DRAGGED_ITEM));
+        this._dragItems.forEach(item => item.class.remove(CLASS_DRAGGED_ITEM));
 
         // if the root is being dragged then
         // do not allow reparenting because we do not
@@ -563,7 +563,7 @@ class TreeView extends Container {
                     const fakeDom = [];
 
                     const getChildren = (treeviewItem) => {
-                        let idx = fakeDom.findIndex((entry) => entry.parent === treeviewItem);
+                        let idx = fakeDom.findIndex(entry => entry.parent === treeviewItem);
                         if (idx === -1) {
                             fakeDom.push({ parent: treeviewItem, children: [...treeviewItem.dom.childNodes] });
                             idx = fakeDom.length - 1;
@@ -699,7 +699,7 @@ class TreeView extends Container {
         evt.preventDefault();
         evt.stopPropagation();
 
-        if (! this._allowDrag || ! this._dragOverItem) return;
+        if (!this._allowDrag || !this._dragOverItem) return;
 
         const rect = this._dragHandle.dom.getBoundingClientRect();
         const area = Math.floor((evt.clientY - rect.top) / rect.height * 5);
@@ -717,7 +717,7 @@ class TreeView extends Container {
                 }
             }
 
-            if (! parent) {
+            if (!parent) {
                 this._dragArea = DRAG_AREA_INSIDE;
             }
         } else {
@@ -734,7 +734,7 @@ class TreeView extends Container {
                 this._dragOverItem = null;
             } else if (this._allowReordering && area <= 1 && this._dragItems.indexOf(this._dragOverItem.previousSibling) === -1) {
                 this._dragArea = DRAG_AREA_BEFORE;
-            } else if (this._allowReordering && area >= 4 && this._dragItems.indexOf(this._dragOverItem.nextSibling) === -1 && (this._dragOverItem.numChildren === 0 || ! this._dragOverItem.open)) {
+            } else if (this._allowReordering && area >= 4 && this._dragItems.indexOf(this._dragOverItem.nextSibling) === -1 && (this._dragOverItem.numChildren === 0 || !this._dragOverItem.open)) {
                 this._dragArea = DRAG_AREA_AFTER;
             } else {
                 let parent = false;
@@ -747,7 +747,7 @@ class TreeView extends Container {
                         }
                     }
                 }
-                if (! parent)
+                if (!parent)
                     this._dragArea = DRAG_AREA_INSIDE;
             }
         }

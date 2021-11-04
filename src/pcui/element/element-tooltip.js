@@ -159,7 +159,7 @@ class Tooltip extends Container {
     _onTargetDestroy() {
         if (!this._target) return;
 
-        this._targetEvents.forEach((evt) => evt.unbind());
+        this._targetEvents.forEach(evt => evt.unbind());
         this._targetEvents.length = 0;
     }
 

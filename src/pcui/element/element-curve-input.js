@@ -15,7 +15,7 @@ const CLASS_CURVE_PICKER_TOGGLES = CLASS_CURVE + '-picker-toggles';
 const CLASS_CURVE_PICKER_CANVAS = CLASS_CURVE + '-picker-canvas';
 const CLASS_CURVE_PICKER_FOOTER = CLASS_CURVE + '-picker-footer';
 
-const curvePickerDom = (parent) => [
+const curvePickerDom = parent => [
     {
         root: {
             picker: new Container({
@@ -74,7 +74,7 @@ const curvePickerDom = (parent) => [
                                 class: CLASS_CURVE_PICKER_TOGGLES
                             })
                         },
-                        children: parent.curveToggles.map((toggle) => ({
+                        children: parent.curveToggles.map(toggle => ({
                             [`toggle-${toggle}`]: new Button({
                                 text: toggle
                             })
@@ -329,14 +329,14 @@ class CurveInput extends Container {
 
             if (!this.betweenCurves) {
                 for (i = 0; i < this.numCurves; i++) {
-                    if (! this.curves[i + this.numCurves]) continue;
+                    if (!this.curves[i + this.numCurves]) continue;
 
                     // disable the secondary graph
                     // this._toggleCurve(this.curves[i + this.numCurves], false);
 
                     // make keys of secondary graph to be the same
                     // as the primary graph
-                    if (! this.suspendEvents) {
+                    if (!this.suspendEvents) {
                         // paths.push(this._getKeysPath(this.curves[i + this.numCurves]));
                         // values.push(this._serializeCurveKeys(this.curves[i]));
                     }
@@ -344,12 +344,12 @@ class CurveInput extends Container {
             } else {
                 // enable the secondary graphs if their respective primary graphs are enabled
                 for (i = 0; i < this.numCurves; i++) {
-                    if (! this.curves[i + this.numCurves]) continue;
+                    if (!this.curves[i + this.numCurves]) continue;
 
                     // we might have a different value for the secondary graphs
                     // when we re-enable betweenCurves so fire change event
                     // to make sure the different values are saved
-                    if (! this.suspendEvents) {
+                    if (!this.suspendEvents) {
                         // paths.push(this._getKeysPath(this.curves[i + this.numCurves]));
                         // values.push(this._serializeCurveKeys(this.curves[i + this.numCurves]));
                     }
@@ -890,7 +890,7 @@ class CurveInput extends Container {
         });
 
         this.enabledCurves.length = 0;
-        for (var i = 0; i < this.numCurves; i++)  {
+        for (var i = 0; i < this.numCurves; i++) {
             this.enabledCurves.push(this.curves[i]);
             if (this.betweenCurves) {
                 this.enabledCurves.push(this.curves[i + this.numCurves]);

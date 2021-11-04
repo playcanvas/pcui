@@ -1,4 +1,4 @@
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import sass from 'rollup-plugin-sass';
 import rename from 'rollup-plugin-rename';
 import replace from '@rollup/plugin-replace';

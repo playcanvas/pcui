@@ -3,7 +3,7 @@ var utils = { };
 
 // utils.deepCopy
 utils.deepCopy = function deepCopy(data) {
-    if (data == null || typeof(data) !== 'object')
+    if (data == null || typeof (data) !== 'object')
         return data;
 
     if (data instanceof Array) {
@@ -72,7 +72,7 @@ utils.proxy = function (targetClass, memberName, properties) {
 };
 
 // String.startsWith
-if (! String.prototype.startsWith) {
+if (!String.prototype.startsWith) {
     // eslint-disable-next-line
     Object.defineProperty(String.prototype, 'startsWith', {
         enumerable: false,
@@ -89,7 +89,7 @@ if (! String.prototype.startsWith) {
 }
 
 // String.endsWith polyfill
-if (! String.prototype.endsWith) {
+if (!String.prototype.endsWith) {
     // eslint-disable-next-line
     Object.defineProperty(String.prototype, 'endsWith', {
         enumerable: false,
@@ -108,7 +108,7 @@ if (! String.prototype.endsWith) {
 // Appends query parameter to string (supposedly the string is a URL)
 // automatically figuring out if the separator should be ? or &.
 // Example: url.appendQuery('t=123').appendQuery('q=345');
-if (! String.prototype.appendQuery) {
+if (!String.prototype.appendQuery) {
     // eslint-disable-next-line
     Object.defineProperty(String.prototype, 'appendQuery', {
         enumerable: false,
@@ -122,10 +122,10 @@ if (! String.prototype.appendQuery) {
 }
 
 utils.arrayEquals = function (lhs, rhs) {
-    if (! lhs)
+    if (!lhs)
         return false;
 
-    if (! rhs)
+    if (!rhs)
         return false;
 
     if (lhs.length !== rhs.length)
@@ -133,7 +133,7 @@ utils.arrayEquals = function (lhs, rhs) {
 
     for (var i = 0, l = lhs.length; i < l; i++) {
         if (this[i] instanceof Array && rhs[i] instanceof Array) {
-            if (! this[i].equals(rhs[i]))
+            if (!this[i].equals(rhs[i]))
                 return false;
         } else if (this[i] !== rhs[i]) {
             return false;

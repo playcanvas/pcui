@@ -350,7 +350,7 @@ class ArrayInput extends Element {
 
         this.emit('unlinkElement', element, index);
 
-        const path = (useSinglePath ? paths[0] + `.${index}` : paths.map((path) => `${path}.${index}`));
+        const path = (useSinglePath ? paths[0] + `.${index}` : paths.map(path => `${path}.${index}`));
         element.link(observers, path);
 
         this.emit('linkElement', element, index, path);
@@ -476,7 +476,7 @@ class ArrayInput extends Element {
 
     get value() {
         // construct value from values of array elements
-        return this._arrayElements.map((entry) => entry.element.value);
+        return this._arrayElements.map(entry => entry.element.value);
     }
 
     set value(value) {

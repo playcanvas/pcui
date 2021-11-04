@@ -175,7 +175,7 @@ class Table extends Container {
 
     _createRow(observer) {
         const row = this._createRowFn(observer);
-        row.on('click', (evt) => this._onRowClick(evt, row));
+        row.on('click', evt => this._onRowClick(evt, row));
         row.on('select', this._onRowSelectHandler);
         row.on('deselect', this._onRowDeselectHandler);
         row.on('focus', this._onRowFocusHandler);
@@ -411,7 +411,7 @@ class Table extends Container {
                 // should not see any movement or changes to the scrollview that way.
                 this.body.style.setProperty(CSS_PROPERTY_HEIGHT_BEFORE, beforeHeight + 'px');
                 this.body.style.setProperty(CSS_PROPERTY_HEIGHT_AFTER, afterHeight + 'px');
-                visible.forEach((dom) => dom.classList.add(CLASS_RESIZING_VISIBLE));
+                visible.forEach(dom => dom.classList.add(CLASS_RESIZING_VISIBLE));
                 this.dom.scrollTop = scrollTop;
             });
         }
@@ -421,7 +421,7 @@ class Table extends Container {
     _restoreRowsOutOfView() {
         this.body.style.removeProperty(CSS_PROPERTY_HEIGHT_BEFORE);
         this.body.style.removeProperty(CSS_PROPERTY_HEIGHT_AFTER);
-        this._resizingVisibleRows.forEach((dom) => dom.classList.remove(CLASS_RESIZING_VISIBLE));
+        this._resizingVisibleRows.forEach(dom => dom.classList.remove(CLASS_RESIZING_VISIBLE));
         this._resizingVisibleRows.length = 0;
         this.dom.scrollTop = this._prevScrollTop;
     }
