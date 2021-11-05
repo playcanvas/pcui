@@ -39,7 +39,7 @@ class GridView extends Container {
     _onAppendGridViewItem(item) {
         if (!(item instanceof GridViewItem)) return;
 
-        let evtClick = item.on('click', (evt) => this._onClickItem(evt, item));
+        let evtClick = item.on('click', evt => this._onClickItem(evt, item));
         let evtSelect = item.on('select', () => this._onSelectItem(item));
         let evtDeselect = item.on('deselect', () => this._onDeselectItem(item));
 

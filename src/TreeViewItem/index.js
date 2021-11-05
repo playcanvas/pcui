@@ -3,8 +3,6 @@ import Container from '../Container';
 import TextInput from '../TextInput';
 import * as pcuiClass from '../class';
 
-/* global TreeView */
-
 const CLASS_ROOT = 'pcui-treeview-item';
 const CLASS_ICON = CLASS_ROOT + '-icon';
 const CLASS_TEXT = CLASS_ROOT + '-text';

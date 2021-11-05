@@ -319,7 +319,7 @@ class BindingElementToObservers extends BindingBase {
 
     setValues(values) {
         // make sure we deep copy arrays because they will not be cloned when set to the observers
-        values = values.slice().map((val) => (Array.isArray(val) ? val.slice() : val));
+        values = values.slice().map(val => (Array.isArray(val) ? val.slice() : val));
         this._setValue(values, true);
     }
 

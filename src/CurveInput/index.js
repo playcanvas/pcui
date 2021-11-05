@@ -23,7 +23,7 @@ const CLASS_CURVE_PICKER_TOGGLE_ACTIVE = CLASS_CURVE_PICKER_TOGGLE + '-active';
 const CLASS_CURVE_PICKER_CANVAS = CLASS_CURVE + '-picker-canvas';
 const CLASS_CURVE_PICKER_FOOTER = CLASS_CURVE + '-picker-footer';
 
-const curvePickerDom = (parent) => [{
+const curvePickerDom = parent => [{
     root: {
         picker: new Container({
             class: CLASS_CURVE_PICKER
@@ -400,7 +400,7 @@ class CurveInput extends Container {
             }
 
             for (i = 0; i < this.numCurves; i++) {
-                if (! this.curves[this.numCurves + i]) continue;
+                if (!this.curves[this.numCurves + i]) continue;
 
                 if (this.betweenCurves) {
                     data.secondaryKeys.push(this._serializeCurveKeys(this.curves[this.numCurves + i]));
@@ -414,7 +414,7 @@ class CurveInput extends Container {
 
         this._pasteButton.on('click', () => {
             var data = localStorageGet('playcanvas_editor_clipboard_curves');
-            if (! data) return;
+            if (!data) return;
 
             var paths = [];
             var values = [];
@@ -464,7 +464,7 @@ class CurveInput extends Container {
             }
 
             this.enabledCurves.length = 0;
-            for (i = 0; i < this.numCurves; i++)  {
+            for (i = 0; i < this.numCurves; i++) {
                 if (this[`_toggle${i}`].class.contains(CLASS_CURVE_PICKER_TOGGLE_ACTIVE)) {
                     this.enabledCurves.push(this.curves[i]);
                     if (this.betweenCurves) {
@@ -533,7 +533,7 @@ class CurveInput extends Container {
         window.addEventListener('mouseup', this._onMouseUp.bind(this), { passive: false });
         window.addEventListener('mousemove', this._onMouseMove.bind(this), { passive: false });
         this._pickerCanvas.element.addEventListener('wheel', this._onMouseWheel.bind(this), { passive: false });
-        this._pickerCanvas.element.addEventListener('contextmenu', (e) => e.preventDefault(), { passive: false });
+        this._pickerCanvas.element.addEventListener('contextmenu', e => e.preventDefault(), { passive: false });
 
         this._resetCurveButton.on('click', () => {
             this._resetCurve(this.selectedCurve);
@@ -1746,11 +1746,11 @@ class CurveInput extends Container {
         if (!value || !value[0]) return;
 
         // draw curves
-        const primaryCurves = value.slice(0, this.numCurves).map((curve) => this._convertValueToCurves(curve)).flat();
+        const primaryCurves = value.slice(0, this.numCurves).map(curve => this._convertValueToCurves(curve)).flat();
 
         if (!primaryCurves) return;
 
-        const secondaryCurves = value.slice(this.numCurves, this.numCurves * 2).map((curve) => this._convertValueToCurves(curve)).flat();
+        const secondaryCurves = value.slice(this.numCurves, this.numCurves * 2).map(curve => this._convertValueToCurves(curve)).flat();
 
         const minValue = minMax[0];
         const maxValue = minMax[1];

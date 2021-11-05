@@ -283,7 +283,7 @@ class SelectInput extends Element {
         if (this.multiSelect) {
             if (!Array.isArray(value)) return value;
 
-            return value.map((val) => this._convertSingleValue(val));
+            return value.map(val => this._convertSingleValue(val));
         }
 
         return this._convertSingleValue(value);

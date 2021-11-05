@@ -167,7 +167,7 @@ class TextInput extends Element {
     _updateValue(value) {
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
 
-        if (value && typeof(value) === 'object') {
+        if (value && typeof (value) === 'object') {
             if (Array.isArray(value)) {
                 let isObject = false;
                 for (let i = 0; i < value.length; i++) {

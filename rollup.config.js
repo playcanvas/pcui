@@ -1,4 +1,4 @@
-import resolve from 'rollup-plugin-node-resolve';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import sass from 'rollup-plugin-sass';
 import rename from 'rollup-plugin-rename';
 import replace from '@rollup/plugin-replace';
@@ -24,7 +24,7 @@ const umd = {
             insert: !process.env.EXTRACT_CSS,
             output: false
         }),
-        resolve()
+        nodeResolve()
     ]
 };
 
@@ -46,7 +46,7 @@ const module = {
             insert: !process.env.EXTRACT_CSS,
             output: false
         }),
-        resolve(),
+        nodeResolve(),
         babel({
             include: ['**/*.jsx'],
             presets: ['@babel/env', '@babel/preset-react'],
@@ -77,7 +77,7 @@ const bundle = {
             insert: !process.env.EXTRACT_CSS,
             output: false
         }),
-        resolve(),
+        nodeResolve(),
         babel({
             include: ['**/*.jsx'],
             presets: ['@babel/env', '@babel/preset-react']

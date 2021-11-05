@@ -143,7 +143,7 @@ class VectorInput extends Element {
         } else {
             for (let i = 0; i < this._inputs.length; i++) {
                 // link observers to paths[i].i for each dimension
-                this._inputs[i].link(observers, paths.map((path) => `${path}.${i}`));
+                this._inputs[i].link(observers, paths.map(path => `${path}.${i}`));
             }
 
         }
@@ -182,7 +182,7 @@ class VectorInput extends Element {
                 value = JSON.parse(value);
                 // if the string could be converted to an array but some of it's values aren't numbers
                 // then use a default array also
-                if (Array.isArray(value) && value.some((i) => !Number.isFinite(i))) {
+                if (Array.isArray(value) && value.some(i => !Number.isFinite(i))) {
                     throw new Error('VectorInput value set to string which doesn\'t contain an array of numbers');
                 }
             } catch (e) {
@@ -229,7 +229,7 @@ class VectorInput extends Element {
     }
 
     get placeholder() {
-        return this._inputs.map((input) => input.placeholder);
+        return this._inputs.map(input => input.placeholder);
     }
 
     set placeholder(value) {

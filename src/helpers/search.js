@@ -167,11 +167,11 @@ export const searchItems = function (items, search, args) {
 
     search = (search || '').toLowerCase().trim();
 
-    if (! search)
+    if (!search)
         return [];
 
     var searchTokens = searchStringTokenize(search);
-    if (! searchTokens.length)
+    if (!searchTokens.length)
         return [];
 
     args = args || { };

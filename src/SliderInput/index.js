@@ -155,7 +155,7 @@ class SliderInput extends Element {
 
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
-            if (! touch.target.ui || touch.target.ui !== this)
+            if (!touch.target.ui || touch.target.ui !== this)
                 continue;
 
             this._touchId = touch.identifier;
