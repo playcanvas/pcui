@@ -36,10 +36,12 @@ class TextInput extends Element {
         let input = args.input;
         if (!input) {
             input = document.createElement('input');
-            input.ui = this;
             input.type = 'text';
-            input.tabIndex = 0;
         }
+
+        input.ui = this;
+        input.tabIndex = 0;
+        input.autocomplete = "off";
         this._domInput = input;
 
         this._domEvtChange = this._onInputChange.bind(this);
