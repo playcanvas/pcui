@@ -89,7 +89,7 @@ class Button extends Element {
     }
 
     set icon(value) {
-        if (this._icon === value | !value.match(/^E[0-9]{0,4}$/)) return;
+        if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
         this._icon = value;
         if (value) {
             // set data-icon attribute but first convert the value to a code point
