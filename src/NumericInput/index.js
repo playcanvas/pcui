@@ -213,7 +213,7 @@ class NumericInput extends TextInput {
 
         // fix precision
         if (this.precision !== null) {
-            value = parseFloat(Number(value).toFixed(this.precision), 10);
+            value = parseFloat(Number(value).toFixed(this.precision));
         }
 
         return value;
@@ -238,7 +238,7 @@ class NumericInput extends TextInput {
 
     get value() {
         const val = super.value;
-        return val !== '' ? parseFloat(val, 10) : null;
+        return val !== '' ? parseFloat(val) : null;
     }
 
     set value(value) {
