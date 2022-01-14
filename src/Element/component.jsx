@@ -1,4 +1,3 @@
-import React from 'react';
 import ElementCls from './index';
 import BaseComponent from '../BaseComponent/index.jsx';
 
