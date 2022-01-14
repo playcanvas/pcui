@@ -286,7 +286,7 @@ class SliderInput extends Element {
 
         const range = this._sliderMax - this._sliderMin;
         let value = (x * range) + this._sliderMin;
-        value = parseFloat(value.toFixed(this.precision), 10);
+        value = parseFloat(value.toFixed(this.precision));
 
         this.value = value;
     }
