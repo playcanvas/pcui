@@ -142,16 +142,12 @@ class BindingBase extends Events {
     removeValues(values) {
     }
 
-    get element() {
-        return this._element;
-    }
-
     set element(value) {
         this._element = value;
     }
 
-    get applyingChange() {
-        return this._applyingChange;
+    get element() {
+        return this._element;
     }
 
     set applyingChange(value) {
@@ -161,50 +157,54 @@ class BindingBase extends Events {
         this.emit('applyingChange', value);
     }
 
-    get linked() {
-        return this._linked;
+    get applyingChange() {
+        return this._applyingChange;
     }
 
-    get historyCombine() {
-        return this._historyCombine;
+    get linked() {
+        return this._linked;
     }
 
     set historyCombine(value) {
         this._historyCombine = value;
     }
 
-    get historyName() {
-        return this._historyName;
+    get historyCombine() {
+        return this._historyCombine;
     }
 
     set historyName(value) {
         this._historyName = value;
     }
 
-    get historyPrefix() {
-        return this._historyPrefix;
+    get historyName() {
+        return this._historyName;
     }
 
     set historyPrefix(value) {
         this._historyPrefix = value;
     }
 
-    get historyPostfix() {
-        return this._historyPostfix;
+    get historyPrefix() {
+        return this._historyPrefix;
     }
 
     set historyPostfix(value) {
         this._historyPostfix = value;
     }
 
-    get historyEnabled() {
-        return this._history && this._history.enabled;
+    get historyPostfix() {
+        return this._historyPostfix;
     }
 
     set historyEnabled(value) {
         if (this._history) {
             this._history.enabled = value;
         }
+    }
+
+    get historyEnabled() {
+        return this._history && this._history.enabled;
     }
 
     get observers() {

@@ -80,16 +80,12 @@ class GridViewItem extends Container {
         super.destroy();
     }
 
-    get allowSelect() {
-        return this._allowSelect;
-    }
-
     set allowSelect(value) {
         this._allowSelect = value;
     }
 
-    get selected() {
-        return this._selected;
+    get allowSelect() {
+        return this._allowSelect;
     }
 
     set selected(value) {
@@ -110,12 +106,16 @@ class GridViewItem extends Container {
         }
     }
 
-    get text() {
-        return this._labelText.text;
+    get selected() {
+        return this._selected;
     }
 
     set text(value) {
         this._labelText.text = value;
+    }
+
+    get text() {
+        return this._labelText.text;
     }
 
     get nextSibling() {

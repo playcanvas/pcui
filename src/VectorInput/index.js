@@ -166,15 +166,6 @@ class VectorInput extends Element {
         }
     }
 
-    get value() {
-        const value = new Array(this._inputs.length);
-        for (let i = 0; i < this._inputs.length; i++) {
-            value[i] = this._inputs[i].value;
-        }
-
-        return value;
-    }
-
     set value(value) {
         if (typeof value === 'string') {
             try {
@@ -199,6 +190,15 @@ class VectorInput extends Element {
         if (changed && this._binding) {
             this._binding.setValue(value);
         }
+    }
+
+    get value() {
+        const value = new Array(this._inputs.length);
+        for (let i = 0; i < this._inputs.length; i++) {
+            value[i] = this._inputs[i].value;
+        }
+
+        return value;
     }
 
     /* eslint accessor-pairs: 0 */
@@ -228,14 +228,14 @@ class VectorInput extends Element {
         return super.binding;
     }
 
-    get placeholder() {
-        return this._inputs.map(input => input.placeholder);
-    }
-
     set placeholder(value) {
         for (let i = 0; i < this._inputs.length; i++) {
             this._inputs[i].placeholder = value[i] || value || null;
         }
+    }
+
+    get placeholder() {
+        return this._inputs.map(input => input.placeholder);
     }
 
     get inputs() {

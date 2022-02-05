@@ -968,10 +968,6 @@ class TreeView extends Container {
         super.destroy();
     }
 
-    get allowDrag() {
-        return this._allowDrag;
-    }
-
     set allowDrag(value) {
         this._allowDrag = value;
         if (this._filter) {
@@ -979,24 +975,24 @@ class TreeView extends Container {
         }
     }
 
-    get allowReordering() {
-        return this._allowReordering;
+    get allowDrag() {
+        return this._allowDrag;
     }
 
     set allowReordering(value) {
         this._allowReordering = value;
     }
 
-    get allowRenaming() {
-        return this._allowRenaming;
+    get allowReordering() {
+        return this._allowReordering;
     }
 
     set allowRenaming(value) {
         this._allowRenaming = value;
     }
 
-    get isDragging() {
-        return this._dragging;
+    get allowRenaming() {
+        return this._allowRenaming;
     }
 
     set isDragging(value) {
@@ -1028,12 +1024,12 @@ class TreeView extends Container {
         }
     }
 
-    get selected() {
-        return this._selectedItems.slice();
+    get isDragging() {
+        return this._dragging;
     }
 
-    get filter() {
-        return this._filter;
+    get selected() {
+        return this._selectedItems.slice();
     }
 
     set filter(value) {
@@ -1046,6 +1042,10 @@ class TreeView extends Container {
         } else {
             this._clearFilter();
         }
+    }
+
+    get filter() {
+        return this._filter;
     }
 
     get pressedCtrl() {

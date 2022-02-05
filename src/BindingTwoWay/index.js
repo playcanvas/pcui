@@ -86,18 +86,14 @@ class BindingTwoWay extends BindingBase {
         this._bindingElementToObservers.removeValues(values);
     }
 
-    get element() {
-        return this._element;
-    }
-
     set element(value) {
         this._element = value;
         this._bindingElementToObservers.element = value;
         this._bindingObserversToElement.element = value;
     }
 
-    get applyingChange() {
-        return super.applyingChange;
+    get element() {
+        return this._element;
     }
 
     set applyingChange(value) {
@@ -108,36 +104,40 @@ class BindingTwoWay extends BindingBase {
         super.applyingChange = value;
     }
 
-    get historyCombine() {
-        return this._bindingElementToObservers.historyCombine;
+    get applyingChange() {
+        return super.applyingChange;
     }
 
     set historyCombine(value) {
         this._bindingElementToObservers.historyCombine = value;
     }
 
-    get historyPrefix() {
-        return this._bindingElementToObservers.historyPrefix;
+    get historyCombine() {
+        return this._bindingElementToObservers.historyCombine;
     }
 
     set historyPrefix(value) {
         this._bindingElementToObservers.historyPrefix = value;
     }
 
-    get historyPostfix() {
-        return this._bindingElementToObservers.historyPostfix;
+    get historyPrefix() {
+        return this._bindingElementToObservers.historyPrefix;
     }
 
     set historyPostfix(value) {
         this._bindingElementToObservers.historyPostfix = value;
     }
 
-    get historyEnabled() {
-        return this._bindingElementToObservers.historyEnabled;
+    get historyPostfix() {
+        return this._bindingElementToObservers.historyPostfix;
     }
 
     set historyEnabled(value) {
         this._bindingElementToObservers.historyEnabled = value;
+    }
+
+    get historyEnabled() {
+        return this._bindingElementToObservers.historyEnabled;
     }
 }
 

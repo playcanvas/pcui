@@ -460,10 +460,6 @@ class ArrayInput extends Element {
         super.destroy();
     }
 
-    get binding() {
-        return super.binding;
-    }
-
     // override binding setter to create
     // the same type of binding on each array element too
     set binding(value) {
@@ -474,9 +470,8 @@ class ArrayInput extends Element {
         });
     }
 
-    get value() {
-        // construct value from values of array elements
-        return this._arrayElements.map(entry => entry.element.value);
+    get binding() {
+        return super.binding;
     }
 
     set value(value) {
@@ -491,6 +486,11 @@ class ArrayInput extends Element {
         this._updateValues(new Array(this._values.length || 1).fill(value), true);
     }
 
+    get value() {
+        // construct value from values of array elements
+        return this._arrayElements.map(entry => entry.element.value);
+    }
+
     /* eslint accessor-pairs: 0 */
     set values(values) {
         if (utils.arrayEquals(this._values, values)) return;
@@ -498,15 +498,15 @@ class ArrayInput extends Element {
         this._updateValues(values, false);
     }
 
-    get renderChanges() {
-        return this._renderChanges;
-    }
-
     set renderChanges(value) {
         this._renderChanges = value;
         this._arrayElements.forEach((entry) => {
             entry.element.renderChanges = value;
         });
+    }
+
+    get renderChanges() {
+        return this._renderChanges;
     }
 }
 

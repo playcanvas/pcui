@@ -151,29 +151,25 @@ class MenuItem extends Container {
         super.destroy();
     }
 
-    get text() {
-        return this._labelText.text;
-    }
-
     set text(value) {
         this._labelText.text = value;
     }
 
-    get value() {
-        return this.text;
+    get text() {
+        return this._labelText.text;
     }
 
     set value(value) {
         this.text = value;
     }
 
+    get value() {
+        return this.text;
+    }
+
     /* eslint accessor-pairs: 0 */
     set values(values) {
         this._labelText.values = values;
-    }
-
-    get icon() {
-        return this._icon;
     }
 
     set icon(value) {
@@ -187,16 +183,16 @@ class MenuItem extends Container {
         }
     }
 
-    get binding() {
-        return this._labelText.binding;
+    get icon() {
+        return this._icon;
     }
 
     set binding(value) {
         this._labelText.binding = value;
     }
 
-    get menu() {
-        return this._menu;
+    get binding() {
+        return this._labelText.binding;
     }
 
     set menu(value) {
@@ -212,28 +208,32 @@ class MenuItem extends Container {
         }
     }
 
-    get onSelect() {
-        return this._onSelect;
+    get menu() {
+        return this._menu;
     }
 
     set onSelect(value) {
         this._onSelect = value;
     }
 
-    get onIsEnabled() {
-        return this._onIsEnabled;
+    get onSelect() {
+        return this._onSelect;
     }
 
     set onIsEnabled(value) {
         this._onIsEnabled = value;
     }
 
-    get onIsVisible() {
-        return this._onIsVisible;
+    get onIsEnabled() {
+        return this._onIsEnabled;
     }
 
     set onIsVisible(value) {
         this._onIsVisible = value;
+    }
+
+    get onIsVisible() {
+        return this._onIsVisible;
     }
 
     get hasChildren() {

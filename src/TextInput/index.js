@@ -231,10 +231,6 @@ class TextInput extends Element {
         super.destroy();
     }
 
-    get value() {
-        return this._domInput.value;
-    }
-
     set value(value) {
         const changed = this._updateValue(value);
 
@@ -246,6 +242,10 @@ class TextInput extends Element {
         if (changed && this._binding) {
             this._binding.setValue(value);
         }
+    }
+
+    get value() {
+        return this._domInput.value;
     }
 
     /* eslint accessor-pairs: 0 */
@@ -267,10 +267,6 @@ class TextInput extends Element {
         }
     }
 
-    get placeholder() {
-        return this.dom.getAttribute('placeholder');
-    }
-
     set placeholder(value) {
         if (value) {
             this.dom.setAttribute('placeholder', value);
@@ -279,8 +275,8 @@ class TextInput extends Element {
         }
     }
 
-    get keyChange() {
-        return this._keyChange;
+    get placeholder() {
+        return this.dom.getAttribute('placeholder');
     }
 
     set keyChange(value) {
@@ -294,16 +290,20 @@ class TextInput extends Element {
         }
     }
 
+    get keyChange() {
+        return this._keyChange;
+    }
+
     get input() {
         return this._domInput;
     }
 
-    get onValidate() {
-        return this._onValidate;
-    }
-
     set onValidate(value) {
         this._onValidate = value;
+    }
+
+    get onValidate() {
+        return this._onValidate;
     }
 }
 

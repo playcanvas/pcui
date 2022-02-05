@@ -1807,11 +1807,6 @@ class CurveInput extends Container {
         super.destroy();
     }
 
-
-    get value() {
-        return this._value;
-    }
-
     set value(value) {
         // TODO: maybe we should check for equality
         // but since this value will almost always be set using
@@ -1855,6 +1850,10 @@ class CurveInput extends Container {
         }
 
         this._renderCurves();
+    }
+
+    get value() {
+        return this._value;
     }
 
     /* eslint accessor-pairs: 0 */

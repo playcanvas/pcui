@@ -337,10 +337,6 @@ class TreeViewItem extends Container {
         super.destroy();
     }
 
-    get selected() {
-        return this._containerContents.class.contains(CLASS_SELECTED);
-    }
-
     set selected(value) {
         if (value === this.selected) {
             if (value) {
@@ -368,8 +364,8 @@ class TreeViewItem extends Container {
         }
     }
 
-    get text() {
-        return this._labelText.value;
+    get selected() {
+        return this._containerContents.class.contains(CLASS_SELECTED);
     }
 
     set text(value) {
@@ -381,16 +377,16 @@ class TreeViewItem extends Container {
         }
     }
 
+    get text() {
+        return this._labelText.value;
+    }
+
     get textLabel() {
         return this._labelText;
     }
 
     get iconLabel() {
         return this._labelIcon;
-    }
-
-    get open() {
-        return this.class.contains(CLASS_OPEN) || this.parent === this._treeView;
     }
 
     set open(value) {
@@ -406,14 +402,8 @@ class TreeViewItem extends Container {
         }
     }
 
-    get parentsOpen() {
-        let parent = this.parent;
-        while (parent && parent instanceof TreeViewItem) {
-            if (!parent.open) return false;
-            parent = parent.parent;
-        }
-
-        return true;
+    get open() {
+        return this.class.contains(CLASS_OPEN) || this.parent === this._treeView;
     }
 
     set parentsOpen(value) {
@@ -424,36 +414,46 @@ class TreeViewItem extends Container {
         }
     }
 
-    get allowDrop() {
-        return this._allowDrop;
+    get parentsOpen() {
+        let parent = this.parent;
+        while (parent && parent instanceof TreeViewItem) {
+            if (!parent.open) return false;
+            parent = parent.parent;
+        }
+
+        return true;
     }
 
     set allowDrop(value) {
         this._allowDrop = value;
     }
 
-    get allowDrag() {
-        return this._allowDrag;
+    get allowDrop() {
+        return this._allowDrop;
     }
 
     set allowDrag(value) {
         this._allowDrag = value;
     }
 
-    get allowSelect() {
-        return this._allowSelect;
+    get allowDrag() {
+        return this._allowDrag;
     }
 
     set allowSelect(value) {
         this._allowSelect = value;
     }
 
-    get treeView() {
-        return this._treeView;
+    get allowSelect() {
+        return this._allowSelect;
     }
 
     set treeView(value) {
         this._treeView = value;
+    }
+
+    get treeView() {
+        return this._treeView;
     }
 
     get numChildren() {
