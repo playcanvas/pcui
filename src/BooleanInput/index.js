@@ -128,15 +128,15 @@ class BooleanInput extends Element {
         super.destroy();
     }
 
-    get value() {
-        return this._value;
-    }
-
     set value(value) {
         const changed = this._updateValue(value);
         if (changed && this._binding) {
             this._binding.setValue(value);
         }
+    }
+
+    get value() {
+        return this._value;
     }
 
     /* eslint accessor-pairs: 0 */

@@ -70,10 +70,6 @@ class Button extends Element {
         super.destroy();
     }
 
-    get text() {
-        return this._text;
-    }
-
     set text(value) {
         if (this._text === value) return;
         this._text = value;
@@ -84,8 +80,8 @@ class Button extends Element {
         }
     }
 
-    get icon() {
-        return this._icon;
+    get text() {
+        return this._text;
     }
 
     set icon(value) {
@@ -99,8 +95,8 @@ class Button extends Element {
         }
     }
 
-    get size() {
-        return this._size;
+    get icon() {
+        return this._icon;
     }
 
     set size(value) {
@@ -115,6 +111,10 @@ class Button extends Element {
         if (this._size) {
             this.class.add('pcui-' + this._size);
         }
+    }
+
+    get size() {
+        return this._size;
     }
 }
 

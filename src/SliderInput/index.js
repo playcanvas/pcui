@@ -341,10 +341,6 @@ class SliderInput extends Element {
         super.destroy();
     }
 
-    get sliderMin() {
-        return this._sliderMin;
-    }
-
     set sliderMin(value) {
         if (this._sliderMin === value) return;
 
@@ -352,8 +348,8 @@ class SliderInput extends Element {
         this._updateHandle(this.value);
     }
 
-    get sliderMax() {
-        return this._sliderMax;
+    get sliderMin() {
+        return this._sliderMin;
     }
 
     set sliderMax(value) {
@@ -363,8 +359,8 @@ class SliderInput extends Element {
         this._updateHandle(this.value);
     }
 
-    get value() {
-        return this._numericInput.value;
+    get sliderMax() {
+        return this._sliderMax;
     }
 
     set value(value) {
@@ -374,6 +370,10 @@ class SliderInput extends Element {
         } else {
             this.class.remove(pcuiClass.MULTIPLE_VALUES);
         }
+    }
+
+    get value() {
+        return this._numericInput.value;
     }
 
     /* eslint accessor-pairs: 0 */

@@ -236,11 +236,6 @@ class NumericInput extends TextInput {
         return different;
     }
 
-    get value() {
-        const val = super.value;
-        return val !== '' ? parseFloat(val) : null;
-    }
-
     set value(value) {
         value = this._normalizeValue(value);
 
@@ -253,6 +248,11 @@ class NumericInput extends TextInput {
         if (this._sliderControl) {
             this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
         }
+    }
+
+    get value() {
+        const val = super.value;
+        return val !== '' ? parseFloat(val) : null;
     }
 
     /* eslint accessor-pairs: 0 */
@@ -280,10 +280,6 @@ class NumericInput extends TextInput {
         }
     }
 
-    get min() {
-        return this._min;
-    }
-
     set min(value) {
         if (this._min === value) return;
         this._min = value;
@@ -294,8 +290,8 @@ class NumericInput extends TextInput {
         }
     }
 
-    get max() {
-        return this._max;
+    get min() {
+        return this._min;
     }
 
     set max(value) {
@@ -308,8 +304,8 @@ class NumericInput extends TextInput {
         }
     }
 
-    get precision() {
-        return this._precision;
+    get max() {
+        return this._max;
     }
 
     set precision(value) {
@@ -322,12 +318,16 @@ class NumericInput extends TextInput {
         }
     }
 
-    get step() {
-        return this._step;
+    get precision() {
+        return this._precision;
     }
 
     set step(value) {
         this._step = value;
+    }
+
+    get step() {
+        return this._step;
     }
 
     destroy() {

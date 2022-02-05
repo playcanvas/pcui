@@ -38,10 +38,6 @@ class InfoBox extends Container {
         this.text = args.text || '';
     }
 
-    get icon() {
-        return this._icon;
-    }
-
     set icon(value) {
         if (this._icon === value) return;
         this._icon = value;
@@ -53,8 +49,8 @@ class InfoBox extends Container {
         }
     }
 
-    get title() {
-        return this._title;
+    get icon() {
+        return this._icon;
     }
 
     set title(value) {
@@ -67,8 +63,8 @@ class InfoBox extends Container {
         }
     }
 
-    get text() {
-        return this._text;
+    get title() {
+        return this._title;
     }
 
     set text(value) {
@@ -79,6 +75,10 @@ class InfoBox extends Container {
         } else {
             this._textElement.dom.textContent = value;
         }
+    }
+
+    get text() {
+        return this._text;
     }
 }
 

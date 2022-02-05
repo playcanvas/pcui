@@ -287,10 +287,6 @@ class Panel extends Container {
         super.destroy();
     }
 
-    get collapsible() {
-        return this._collapsible;
-    }
-
     set collapsible(value) {
         if (value === this._collapsible) return;
 
@@ -310,8 +306,8 @@ class Panel extends Container {
 
     }
 
-    get collapsed() {
-        return this._collapsed;
+    get collapsible() {
+        return this._collapsible;
     }
 
     set collapsed(value) {
@@ -326,8 +322,8 @@ class Panel extends Container {
         }
     }
 
-    get sortable() {
-        return this._sortable;
+    get collapsed() {
+        return this._collapsed;
     }
 
     set sortable(value) {
@@ -349,8 +345,8 @@ class Panel extends Container {
         }
     }
 
-    get removable() {
-        return !!this._btnRemove;
+    get sortable() {
+        return this._sortable;
     }
 
     set removable(value) {
@@ -369,8 +365,8 @@ class Panel extends Container {
         }
     }
 
-    get collapseHorizontally() {
-        return this._collapseHorizontally;
+    get removable() {
+        return !!this._btnRemove;
     }
 
     set collapseHorizontally(value) {
@@ -386,6 +382,10 @@ class Panel extends Container {
         this._reflow();
     }
 
+    get collapseHorizontally() {
+        return this._collapseHorizontally;
+    }
+
     get content() {
         return this._containerContent;
     }
@@ -394,16 +394,12 @@ class Panel extends Container {
         return this._containerHeader;
     }
 
-    get headerText() {
-        return this._labelTitle.text;
-    }
-
     set headerText(value) {
         this._labelTitle.text = value;
     }
 
-    get headerSize() {
-        return this._headerSize;
+    get headerText() {
+        return this._labelTitle.text;
     }
 
     set headerSize(value) {
@@ -412,6 +408,10 @@ class Panel extends Container {
         style.height = Math.max(0, value) + 'px';
         style.lineHeight = style.height;
         this._reflow();
+    }
+
+    get headerSize() {
+        return this._headerSize;
     }
 }
 
