@@ -36,15 +36,10 @@
     ]
   },
   "eslintConfig": {
-    "extends": "@playcanvas/eslint-config",
-    "parserOptions": {
-      "ecmaVersion": 9,
-      "sourceType": "module"
-    }
+    "extends": "@playcanvas/eslint-config"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/preset-env": "^7.14.1",
     "@babel/preset-react": "^7.13.13",
     "@playcanvas/eslint-config": "^1.0.16",

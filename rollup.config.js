@@ -49,8 +49,7 @@ const module = {
         nodeResolve(),
         babel({
             include: ['**/*.jsx'],
-            presets: ['@babel/env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-proposal-class-properties']
+            presets: ['@babel/env', '@babel/preset-react']
         }),
         del({
             targets: 'dist/index.mjs',
