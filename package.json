@@ -21,7 +21,7 @@
     "docs:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "docs:build": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "pcui:publish": "npm run build && npm run tsd && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && npm publish dist",
-    "tsd": "jsdoc -c conf-tsd.json && node tsd.js",
+    "tsd": "jsdoc -c conf-tsd.json && node tsd.js"
   },
   "browserslist": {
     "production": [
