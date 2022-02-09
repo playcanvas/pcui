@@ -1,7 +1,5 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import sass from 'rollup-plugin-sass';
-import rename from 'rollup-plugin-rename';
-import replace from '@rollup/plugin-replace';
 import { babel } from '@rollup/plugin-babel';
 import del from 'rollup-plugin-delete';
 
@@ -29,18 +27,38 @@ const umd = {
 };
 
 const module = {
+    input: 'src/index.js',
+    external: ['@playcanvas/observer'],
+    output: {
+        dir: 'dist/',
+        entryFileNames: '[name].mjs',
+        format: 'module',
+        preserveModules: true
+    },
+    plugins: [
+        del({
+            targets: 'dist/index.mjs'
+        }),
+        sass({
+            insert: !process.env.EXTRACT_CSS,
+            output: false
+        }),
+        nodeResolve()
+    ]
+};
+
+const react = {
     input: 'src/index.jsx',
     external: ['@playcanvas/observer', 'react', 'prop-types'],
     output: {
-        dir: 'dist',
-        format: 'module',
+        dir: 'dist/react',
         entryFileNames: '[name].mjs',
-        preserveModules: true,
-        preserveModulesRoot: 'src'
+        format: 'module',
+        preserveModules: true
     },
     plugins: [
         del({
-            targets: ['dist/*', '!dist/index.js', '!dist/bundle']
+            targets: 'dist/react'
         }),
         sass({
             insert: !process.env.EXTRACT_CSS,
@@ -49,54 +67,10 @@ const module = {
         nodeResolve(),
         babel({
             include: ['**/*.jsx'],
-            presets: ['@babel/env', '@babel/preset-react']
-        }),
-        del({
-            targets: 'dist/index.mjs',
-            hook: 'writeBundle'
+            presets: ['@babel/preset-react']
         })
     ]
 };
 
-const bundle = {
-    input: 'src/index.js',
-    external: ['react', 'prop-types'],
-    output: {
-        dir: 'dist/bundle',
-        format: 'module',
-        entryFileNames: '[name].mjs',
-        preserveModules: true,
-        preserveModulesRoot: 'src'
-    },
-    plugins: [
-        del({
-            targets: ['dist/bundle']
-        }),
-        sass({
-            insert: !process.env.EXTRACT_CSS,
-            output: false
-        }),
-        nodeResolve(),
-        babel({
-            include: ['**/*.jsx'],
-            presets: ['@babel/env', '@babel/preset-react']
-        }),
-        rename({
-            include: ['**/*.mjs'],
-            map: (name) => name.replace('node_modules/', 'dependencies/').replace('src/', '')
-        }),
-        replace({
-            values: {
-                'node_modules/': 'dependencies/'
-            },
-            preventAssignment: true,
-            delimiters: ['', '']
-        }),
-        del({
-            targets: 'dist/bundle/index.mjs',
-            hook: 'writeBundle'
-        })
-    ]
-};
 
-export default [umd, module, bundle];
+export default [umd, module, react];

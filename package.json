@@ -5,7 +5,8 @@
   "homepage": "https://playcanvas.github.io/pcui",
   "description": "This library enables the creation of reliable and visually pleasing user interfaces by providing fully styled components that you can use directly on your site. The components are useful in a wide range of use cases, from creating simple forms to building graphical user interfaces for complex web tools.",
   "license": "MIT",
-  "main": "pcui.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"
   },
@@ -20,9 +21,14 @@
     "storybook": "jsdoc -r -X src > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
     "docs:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "docs:build": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
-    "pcui:publish": "npm run build && npm run tsd && cp ./package.json dist && cp ./LICENSE dist && cp README.md dist && npm publish dist",
     "tsd": "jsdoc -c conf-tsd.json && node tsd.js"
   },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
