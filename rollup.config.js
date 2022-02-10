@@ -1,13 +1,12 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import sass from 'rollup-plugin-sass';
 import { babel } from '@rollup/plugin-babel';
-import del from 'rollup-plugin-delete';
 
 const umd = {
     input: 'src/index.js',
     external: ['@playcanvas/observer'],
     output: {
-        file: 'dist/index.js',
+        file: 'dist/pcui.js',
         format: 'umd',
         name: 'pcui',
         globals: {
@@ -15,9 +14,6 @@ const umd = {
         }
     },
     plugins: [
-        del({
-            targets: 'dist/index.js'
-        }),
         sass({
             insert: !process.env.EXTRACT_CSS,
             output: false
@@ -30,15 +26,11 @@ const module = {
     input: 'src/index.js',
     external: ['@playcanvas/observer'],
     output: {
-        dir: 'dist/',
+        file: 'dist/pcui.mjs',
         entryFileNames: '[name].mjs',
-        format: 'module',
-        preserveModules: true
+        format: 'module'
     },
     plugins: [
-        del({
-            targets: 'dist/index.mjs'
-        }),
         sass({
             insert: !process.env.EXTRACT_CSS,
             output: false
@@ -47,19 +39,38 @@ const module = {
     ]
 };
 
-const react = {
+const react_umd = {
     input: 'src/index.jsx',
     external: ['@playcanvas/observer', 'react', 'prop-types'],
     output: {
-        dir: 'dist/react',
-        entryFileNames: '[name].mjs',
-        format: 'module',
-        preserveModules: true
+        file: 'react/dist/pcui-react.js',
+        format: 'umd',
+        name: 'pcuiReact',
+        globals: {
+            '@playcanvas/observer': 'observer'
+        }
     },
     plugins: [
-        del({
-            targets: 'dist/react'
+        sass({
+            insert: !process.env.EXTRACT_CSS,
+            output: false
         }),
+        nodeResolve(),
+        babel({
+            include: ['**/*.jsx'],
+            presets: ['@babel/preset-react']
+        })
+    ]
+};
+
+const react_module = {
+    input: 'src/index.jsx',
+    external: ['@playcanvas/observer', 'react', 'prop-types'],
+    output: {
+        file: 'react/dist/pcui-react.mjs',
+        format: 'module'
+    },
+    plugins: [
         sass({
             insert: !process.env.EXTRACT_CSS,
             output: false
@@ -73,4 +84,4 @@ const react = {
 };
 
 
-export default [umd, module, react];
+export default [umd, module, react_umd, react_module];

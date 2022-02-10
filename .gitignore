@@ -11,6 +11,8 @@
 # production
 /build
 /dist
+/react/dist/pcui-react.js
+/react/dist/pcui-react.mjs
 /.storybook/utils/jsdoc-ast.json
 
 # misc

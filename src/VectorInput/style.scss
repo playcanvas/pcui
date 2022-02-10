@@ -9,7 +9,7 @@
 
     > .pcui-numeric-input {
         flex: 1;
-        margin: $element-margin $element-margin / 2;
+        margin: $element-margin calc($element-margin / 2);
 
         &:first-child {
             margin-left: 0;
