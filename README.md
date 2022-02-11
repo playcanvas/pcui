@@ -6,52 +6,47 @@ This library enables the creation of reliable and visually pleasing user interfa
 
 A full guide to using the PCUI library can be found [here](https://playcanvas.github.io/pcui).
 
-## Storybook
-
-If you wish to view which components are available in this library, you can run Storybook. It allows you to browse the entire collection of components. Each component page also includes component documentation and allows you to test each component in all of it's configuration states.
-
-Run Storybook as follows:
-
-```
-npm install
-npm run storybook
-```
-
 ## Getting Started
 
-To build the component library, run the following in the projects directory:
+To install pcui in your project, run the following npm commands:
 
 ```
-npm install
-npm run build
+npm install --save @playcanvas/observer
+npm install --save @playcanvas/pcui
 ```
-This will build the entire library to the output path `dist`. The various parts of the library will be available to import from that path:
 
-- ES6 Components under: `dist/%component%/index.mjs`
-- React Components under: `dist/%component%/component.mjs`
-
-There is also a UMD build under `dist/index.js`.
-
-You can then import the ES6 components into your own `.js` files and use them as follows:
+If you are using ESM, you can then import each individual element from pcui using the following style of import:
 ```javascript
-import Label from 'dist/Label';
+import { Label } from '@playcanvas/pcui';
 
 const helloWorldLabel = new Label({
     text: 'Hello World'
 });
+document.body.appendChild(helloWorldLabel.dom);
 ```
 
-If you are more familar with react, you can import react elements into your own `.jsx` files and use them as follows:
-```jsx
-import Label from 'dist/Label/component';
+Alternatively you can also include the entire library in your project from the UMD bundle and use it as follows:
+```javascript
+const observer = require('@playcanvas/observer');
+const pcui = require('@playcanvas/pcui');
 
-const helloWorldLabel = () => <Label text="Hello World" />;
+const helloWorldLabel = new pcui.Label({
+    text: 'Hello World'
+});
+document.body.appendChild(helloWorldLabel.dom);
 ```
 
-You will need to use a bundler like Rollup to build your project. If you do not wish to use a bundler then use the bundle builds instead:
-- ES6 Components under: `dist/bundle/%component$/index.mjs`
-- React Components under: `dist/bundle/%component$/component.mjs`
+If you'd like you include pcui in your react project, you can import the individual components as follows:
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { TextInput } from '@playcanvas/pcui/react';
 
+ReactDOM.render(
+    <TextInput text='Hello World'/>,
+    document.body
+);
+```
 ## Including your own font
 
 PCUI uses four css classes to add styled fonts to the various components. These are `.font-regular`, `.font-bold`, `.font-thin` and `.font-light`. You can use your own font with PCUI by adding `font-family` css rules to these classes on your webpage. For example:
@@ -69,10 +64,7 @@ The pcui library offers a data binding layer that can be used to synchonise data
 In this example the created label will start with `Hello World` as it's text value. When a user enters a value into the text input, the label will be updated with the new value.
 ```javascript
 import { Observer } from '@playcanvas/observer';
-import BindingObserversToElement from '@playcanvs/pcui/BindingObserversToElement';
-import BindingElementToObservers from '@playcanvs/pcui/BindingElementToObserver';
-import Label from '@playcanvs/pcui/Label';
-import TextInput from '@playcanvs/pcui/TextInput';
+import { Label, TextInput, BindingObserversToElement, BindingElementToObservers } from '@playcanvs/pcui';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
@@ -93,8 +85,7 @@ textInput.link(observer, 'text');
 Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in react to showcase binding with react components:
 ```jsx
 import { Observer } from '@playcanvas/observer';
-import TextInput from '@playcanvas/pcui/TextInput';
-import BindingTwoWay from '@playcanvas/pcui/BindingTwoWay';
+import { TextInput, BindingTwoWay } from '@playcanvas/pcui';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
@@ -111,4 +102,17 @@ Each component exists in its own folder within the `./src` directory. They each 
 - `component.jsx`: A react wrapper for the element, currently used to display the element in Storybook.
 - `index.stories.jsx`: The Storybook entry for this component.
 
-Locally developed components can be viewed & tested by running the Storybook app, as mentioned in the previous section.
+Locally developed components can be viewed & tested by running the Storybook app, as mentioned in the following section.
+
+If you'd like to build your own custom version of the library you can run the `npm run build` command which will create a `dist` directory with your custom build.
+
+## Storybook
+
+If you wish to view all components available to you in the library, you can run a local version Storybook. It allows you to browse the entire collection of components and test any changes you make to them. Each component page also includes component documentation and allows you to test each component in all of it's configuration states.
+
+Run Storybook as follows:
+
+```
+npm install
+npm run storybook
+```

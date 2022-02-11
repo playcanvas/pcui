@@ -35,7 +35,7 @@
     }
 
     > .pcui-button {
-        margin-left: - $element-margin / 2;
+        margin-left: - calc($element-margin / 2);
         margin-right: 0;
         background-color: transparent;
         border: 0;

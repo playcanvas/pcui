@@ -22,10 +22,7 @@ First import the components and binding classes.
 
 ```javascript
 import { Observer } from '@playcanvas/observer';
-import Label from '@playcanvas/pcui/Label';
-import TextInput from '@playcanvas/pcui/TextInput';
-import BindingObserversToElement from '@playcanvas/pcui/BindingObserversToElement';
-import BindingElementToObservers from '@playcanvas/pcui/BindingElementToObservers';
+import { Label, TextInput, BindingObserversToElement, BindingElementToObservers } from '@playcanvas/pcui';
 ```
 
 Create a new observer for an object which contains a text string.
