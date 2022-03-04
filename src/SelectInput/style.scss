@@ -52,6 +52,10 @@
     transition: background-color 100ms, color 100ms;
 }
 
+.pcui-label.pcui-select-input-value {
+    margin: 0;
+}
+
 .pcui-select-input-textinput {
     margin: 0;
 }
@@ -62,7 +66,7 @@
     }
 }
 
-.pcui-select-input-icon {
+.pcui-label.pcui-select-input-icon {
     position: absolute;
     right: $element-margin;
     color: $text-darkest;
@@ -93,8 +97,8 @@
     }
 }
 
-.pcui-select-input-list {
-    position: absolute;
+.pcui-container.pcui-select-input-list {
+    position: absolute !important;
     z-index: 1;
     top: 100%;
     width: 100%;
