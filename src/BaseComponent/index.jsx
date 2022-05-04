@@ -6,6 +6,9 @@ class BaseComponent extends React.Component {
         if (props.onClick) {
             this.onClick = props.onClick;
         }
+        if (props.onRemove) {
+            this.onRemove = props.onRemove;
+        }
         if (props.onChange) {
             this.onChange = props.onChange;
         }
@@ -23,6 +26,9 @@ class BaseComponent extends React.Component {
         });
         if (this.onClick) {
             this.element.on('click', this.onClick);
+        }
+        if (this.onRemove) {
+            this.element.on('click:remove', this.onRemove);
         }
         if (this.onChange) {
             this.element.on('change', this.onChange);
