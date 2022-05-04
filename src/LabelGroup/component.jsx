@@ -1,33 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Element from './index';
 
-import BaseComponent from '../BaseComponent/index.jsx';
+import Label from '../Label/component.jsx';
 
-class LabelGroup extends BaseComponent {
+class LabelGroup extends Component {
     constructor(props) {
         super(props);
-        const child = props.children;
-        this.childElement = new child.type.ctor(child.props);
-        this.element = new Element({...props, field: this.childElement});
-        if (child.props.link) {
-            this.childLink = child.props.link;
-        }
-    }
-
-    componentDidMount() {
-        if (this.childLink) {
-            this.childElement.link(this.childLink.observer, this.childLink.path);
-        }
+        this.element = new Element({...props });
     }
 
     render() {
-        return <div ref={(nodeElement) => {nodeElement && nodeElement.appendChild(this.element.dom)}} />
+        return <div className='pcui-label-group'>
+            <Label text={this.props.text}/>
+            { this.props.children }
+        </div>;
     }
 }
 
 LabelGroup.propTypes = {};
 LabelGroup.ctor = Element;
-LabelGroup.defaultProps = {
-};
+LabelGroup.defaultProps = {};
 
 export default LabelGroup;

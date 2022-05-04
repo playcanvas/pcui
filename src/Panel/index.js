@@ -103,7 +103,7 @@ class Panel extends Container {
         this.sortable = args.sortable || false;
 
         this._btnRemove = null;
-        this.removable = args.removable || false;
+        this.removable = args.removable || args.onRemove || false;
 
         // set the contents container to be the content DOM element
         // from now on calling append functions on the panel will append themn
