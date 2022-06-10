@@ -52,6 +52,7 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
  * @property {boolean} allowDrag=true Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
  * @property {boolean} allowDrop=true Whether dropping is allowed on the tree item.
  * @property {string} text The text shown by the TreeViewItem.
+ * @property {string} icon The icon shown before the text in the TreeViewItem.
  * @property {number} The number of direct children.
  * @property {Label} textLabel Gets the internal label that shows the text.
  * @property {Label} iconLabel Gets the internal label that shows the icon.
@@ -92,6 +93,8 @@ class TreeViewItem extends Container {
             class: CLASS_ICON
         });
         this._containerContents.append(this._labelIcon);
+
+        this.icon = args.icon || 'E360';
 
         this._labelText = new Label({
             class: CLASS_TEXT
@@ -501,6 +504,22 @@ class TreeViewItem extends Container {
 
         return sibling && sibling.ui;
     }
+
+    set icon(value) {
+        if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
+        this._icon = value;
+        if (value) {
+            // set data-icon attribute but first convert the value to a code point
+            this._labelIcon.dom.setAttribute('data-icon', String.fromCodePoint(parseInt(value, 16)));
+        } else {
+            this._labelIcon.dom.removeAttribute('data-icon');
+        }
+    }
+
+    get icon() {
+        return this._icon;
+    }
+
 }
 
 export default TreeViewItem;
