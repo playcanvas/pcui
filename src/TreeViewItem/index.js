@@ -519,7 +519,6 @@ class TreeViewItem extends Container {
     get icon() {
         return this._icon;
     }
-
 }
 
 export default TreeViewItem;
