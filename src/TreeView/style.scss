@@ -75,7 +75,7 @@
     }
 
     &:after {
-        content: '\E360';
+        content: attr(data-icon);
         @extend .font-icon;
         display: inline-block;
         vertical-align: sub;
