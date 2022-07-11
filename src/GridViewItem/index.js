@@ -39,8 +39,6 @@ class GridViewItem extends Container {
         this.allowSelect = args.allowSelect !== undefined ? args.allowSelect : true;
         this._selected = false;
 
-        // args.type = 'radio'; // TODO: delete
-
         if (args.type == 'radio') {
             this.class.add(CLASS_ROOT_RADIO);
 
@@ -123,8 +121,6 @@ class GridViewItem extends Container {
     }
 
     set selected(value) {
-        const selectedClass = this._type == 'radio' ? CLASS_SELECTED_RADIO : CLASS_SELECTED;
-
         if (value) {
             this.focus();
         }
@@ -134,19 +130,19 @@ class GridViewItem extends Container {
         this._selected = value;
 
         if (value) {
-            this.classAdd(selectedClass);
-
             // Update radio button if it exists
             if (this._radioButton)
                 this._radioButton.value = value;
+            else
+                this.classAdd(CLASS_SELECTED);
 
             this.emit('select', this);
         } else {
-            this.classRemove(selectedClass);
-
             // Update radio button if it exists
             if (this._radioButton)
                 this._radioButton.value = false;
+            else
+                this.classRemove(CLASS_SELECTED);
 
             this.emit('deselect', this);
         }
