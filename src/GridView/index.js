@@ -12,7 +12,7 @@ const CLASS_VERTICAL = CLASS_ROOT + '-vertical';
  * @classdesc Represents a container that shows a flexible wrappable
  * list of items that looks like a grid. Contains GridViewItem's.
  * @property {GridViewItem[]} selected Gets the selected grid view items.
- * @property {boolean} vertical If true the gridview layout will be vertical
+ * @property {boolean} vertical If true the gridview layout will be vertical.
  * @property {boolean} multiSelect=true If true, the layout will allow for multiple options to be selected.
  * @property {boolean} allowDeselect=true If true and multiSelect is set to false, the layout will allow options to be deselected.
  */
