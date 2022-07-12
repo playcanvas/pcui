@@ -8,3 +8,10 @@
     flex-wrap: wrap;
     align-content: flex-start;
 }
+
+.pcui-gridview-vertical {
+    @extend .pcui-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
