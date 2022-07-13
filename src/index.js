@@ -15,6 +15,7 @@ import VectorInput from './VectorInput';
 import BooleanInput from './BooleanInput';
 import Label from './Label';
 import Button from './Button';
+import RadioButton from './RadioButton';
 import Code from './Code';
 import Container from './Container';
 import Panel from './Panel';
@@ -63,6 +64,7 @@ export {
     Overlay,
     Panel,
     Progress,
+    RadioButton,
     SelectInput,
     SliderInput,
     Spinner,

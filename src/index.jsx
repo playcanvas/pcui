@@ -5,6 +5,7 @@ import NumericInput from './NumericInput/component.jsx';
 import SliderInput from './SliderInput/component.jsx';
 import VectorInput from './VectorInput/component.jsx';
 import BooleanInput from './BooleanInput/component.jsx';
+import RadioButton from './RadioButton/index.js';
 import Label from './Label/component.jsx';
 import Button from './Button/component.jsx';
 import Code from './Code/component.jsx';
@@ -41,6 +42,7 @@ export {
     Overlay,
     Panel,
     Progress,
+    RadioButton,
     SelectInput,
     SliderInput,
     Spinner,
