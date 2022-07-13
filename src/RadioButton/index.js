@@ -155,6 +155,6 @@ class RadioButton extends Element {
     }
 }
 
-Element.register('boolean', RadioButton, { renderChanges: true });
+Element.register('radio', RadioButton, { renderChanges: true });
 
 export default RadioButton;
