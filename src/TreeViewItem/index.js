@@ -107,6 +107,10 @@ class TreeViewItem extends Container {
         if (args.text) {
             this.text = args.text;
         }
+        
+        if (args.selected) {
+            this.selected = args.selected;
+        }
 
         this._numChildren = 0;
 
