@@ -1,14 +1,14 @@
 import Container from '../Container';
 import Label from '../Label';
 import BindingObserversToElement from '../BindingObserversToElement';
-import './style.scss';
 import RadioButton from '../RadioButton';
+import './style.scss';
 
 const CLASS_ROOT = 'pcui-gridview-item';
 const CLASS_ROOT_RADIO = 'pcui-gridview-radio-container';
 const CLASS_SELECTED = CLASS_ROOT + '-selected';
 const CLASS_TEXT = CLASS_ROOT + '-text';
-const CLASS_RADIO_BUTTON = CLASS_ROOT + 'radiobtn';
+const CLASS_RADIO_BUTTON = 'pcui-gridview-radiobtn';
 
 /**
  * @name GridViewItem

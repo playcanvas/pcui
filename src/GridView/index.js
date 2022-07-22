@@ -31,7 +31,7 @@ class GridView extends Container {
 
         super(args);
 
-        this._vertical = args.vertical;
+        this._vertical = !!args.vertical;
         if (this._vertical) {
             this.class.add(CLASS_VERTICAL);
         } else {
@@ -46,8 +46,8 @@ class GridView extends Container {
         this._filterCanceled = false;
 
         // Default options for GridView layout
-        this._multiSelect = args.multiSelect;
-        this._allowDeselect = args.allowDeselect;
+        this._multiSelect = args.hasOwnProperty('multiSelect') ? args.multiSelect : true;
+        this._allowDeselect = args.hasOwnProperty('allowDeselect') ? args.allowDeselect : true;
 
         this._selected = [];
     }
