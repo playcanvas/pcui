@@ -1,8 +1,6 @@
 import Element from '../Element';
 import TextInput from '../TextInput';
 
-import './style.scss';
-
 const CLASS_TEXT_AREA_INPUT = 'pcui-text-area-input';
 const CLASS_TEXT_AREA_INPUT_RESIZABLE = CLASS_TEXT_AREA_INPUT + '-resizable';
 const CLASS_TEXT_AREA_INPUT_RESIZABLE_NONE = CLASS_TEXT_AREA_INPUT_RESIZABLE + '-none';

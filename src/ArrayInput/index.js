@@ -6,8 +6,6 @@ import Panel from '../Panel';
 import NumericInput from '../NumericInput';
 import Button from '../Button';
 
-import './style.scss';
-
 const CLASS_ARRAY_INPUT = 'pcui-array-input';
 const CLASS_ARRAY_EMPTY = 'pcui-array-empty';
 const CLASS_ARRAY_SIZE = CLASS_ARRAY_INPUT + '-size';

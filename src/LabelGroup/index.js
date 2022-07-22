@@ -1,7 +1,6 @@
 import Element from '../Element';
 import Container from '../Container';
 import Label from '../Label';
-import './style.scss';
 
 const CLASS_LABEL_GROUP = 'pcui-label-group';
 const CLASS_LABEL_TOP = CLASS_LABEL_GROUP + '-align-top';

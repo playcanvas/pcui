@@ -2,8 +2,6 @@ import Element from '../Element';
 import TextInput from '../TextInput';
 import * as pcuiClass from '../class';
 
-import './style.scss';
-
 const CLASS_NUMERIC_INPUT = 'pcui-numeric-input';
 const CLASS_NUMERIC_INPUT_SLIDER_CONTROL = CLASS_NUMERIC_INPUT + '-slider-control';
 const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-active';

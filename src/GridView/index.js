@@ -1,6 +1,5 @@
 import Container from '../Container';
 import GridViewItem from '../GridViewItem';
-import './style.scss';
 
 const CLASS_ROOT = 'pcui-gridview';
 const CLASS_VERTICAL = CLASS_ROOT + '-vertical';

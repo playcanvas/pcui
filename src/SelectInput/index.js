@@ -6,9 +6,6 @@ import Label from '../Label';
 import * as pcuiClass from '../class';
 import { searchItems } from '../helpers/search';
 
-import './style.scss';
-
-
 const CLASS_SELECT_INPUT = 'pcui-select-input';
 const CLASS_SELECT_INPUT_CONTAINER_VALUE = CLASS_SELECT_INPUT + '-container-value';
 const CLASS_MULTI_SELECT = CLASS_SELECT_INPUT + '-multi';

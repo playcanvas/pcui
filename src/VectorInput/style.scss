@@ -1,10 +1,6 @@
-// #ifndef EXTRACT_CSS
-@import '../scss/pcui.scss';
-// #endif EXTRACT_CSS
-
 .pcui-vector-input {
     @extend .pcui-flex;
-    flex-direction: row;
+    flex-direction: row; //
     align-items: center;
 
     > .pcui-numeric-input {

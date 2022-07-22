@@ -1,12 +1,7 @@
-// #ifndef EXTRACT_CSS
-@import '../scss/variables';
-@import '../scss/pcui-common';
-// #endif EXTRACT_CSS
-
 .pcui-label-group {
     @extend .pcui-flex;
     align-items: center;
-    flex-direction: row;
+    flex-direction: row; //
     flex-wrap: nowrap;
     margin: $element-margin;
 

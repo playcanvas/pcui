@@ -1,9 +1,3 @@
-// #ifndef EXTRACT_CSS
-@import '../scss/variables.scss';
-@import '../scss/pcui-common';
-@import '../RadioButton/style';
-// #endif EXTRACT_CSS
-
 // Gridview Regular Item
 .pcui-gridview-item {
     @extend .pcui-flex;
@@ -50,8 +44,4 @@
     :not(.pcui-disabled) {
         cursor: pointer;
     }
-}
-
-.pcui-gridview-radiobtn {
-    @extend .pcui-radio-button;
 }

@@ -16,7 +16,8 @@
     "url": "git+https://github.com/playcanvas/pcui.git"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && npm run bundle:styles",
+    "bundle:styles": "scss-bundle -e ./src/Element/style.scss -o ./dist/pcui.scss",
     "watch": "rollup -c -w",
     "lint": "eslint --ext .js src",
     "clean:css": "node clean-scss.js",
@@ -87,6 +88,7 @@
     "rollup-plugin-sass": "^1.2.10",
     "sass": "^1.49.7",
     "sass-loader": "^12.4.0",
+    "scss-bundle": "^3.1.2",
     "tsd-jsdoc": "^2.5.0",
     "webpack": "^5.68.0"
   },
