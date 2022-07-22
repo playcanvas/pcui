@@ -1,8 +1,6 @@
 import Container from '../Container';
 import Label from '../Label';
 
-import './style.scss';
-
 const CLASS_MENU_ITEM = 'pcui-menu-item';
 const CLASS_MENU_ITEM_CONTENT = CLASS_MENU_ITEM + '-content';
 const CLASS_MENU_ITEM_CHILDREN = CLASS_MENU_ITEM + '-children';

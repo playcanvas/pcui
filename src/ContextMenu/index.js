@@ -2,8 +2,6 @@ import Element from '../Element';
 import Label from '../Label';
 import Container from '../Container';
 
-import './style.scss';
-
 const CLASS_ContextMenu = 'pcui-contextmenu';
 const CLASS_ContextMenu_active = CLASS_ContextMenu + '-active';
 const CLASS_ContextMenu_parent = CLASS_ContextMenu + '-parent';

@@ -1,8 +1,6 @@
 import Element from '../Element';
 import Container from '../Container';
 
-import './style.scss';
-
 const CLASS_ROOT = 'pcui-progress';
 const CLASS_INNER = CLASS_ROOT + '-inner';
 /**

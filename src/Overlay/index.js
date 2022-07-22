@@ -1,8 +1,6 @@
 import Element from '../Element';
 import Container from '../Container';
 
-import './style.scss';
-
 const CLASS_OVERLAY = 'pcui-overlay';
 const CLASS_OVERLAY_INNER = CLASS_OVERLAY + '-inner';
 const CLASS_OVERLAY_CLICKABLE = CLASS_OVERLAY + '-clickable';

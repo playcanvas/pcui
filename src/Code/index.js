@@ -2,8 +2,6 @@ import Element from '../Element';
 import Container from '../Container';
 import Label from '../Label';
 
-import './style.scss';
-
 const CLASS_ROOT = 'pcui-code';
 const CLASS_INNER = CLASS_ROOT + '-inner';
 

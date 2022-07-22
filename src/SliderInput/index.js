@@ -3,9 +3,6 @@ import NumericInput from '../NumericInput';
 import * as pcuiClass from '../class';
 import utils from '../helpers/utils';
 
-import './style.scss';
-
-
 const CLASS_SLIDER = 'pcui-slider';
 const CLASS_SLIDER_CONTAINER = CLASS_SLIDER + '-container';
 const CLASS_SLIDER_BAR = CLASS_SLIDER + '-bar';

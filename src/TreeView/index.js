@@ -3,8 +3,6 @@ import Element from '../Element';
 import TreeViewItem from '../TreeViewItem';
 import { searchItems } from '../helpers/search';
 
-import './style.scss';
-
 const CLASS_ROOT = 'pcui-treeview';
 const CLASS_DRAGGED_ITEM = CLASS_ROOT + '-item-dragged';
 const CLASS_DRAGGED_HANDLE = CLASS_ROOT + '-drag-handle';

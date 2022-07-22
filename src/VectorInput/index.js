@@ -2,8 +2,6 @@ import Element from '../Element';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../class';
 
-import './style.scss';
-
 const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 
 /**

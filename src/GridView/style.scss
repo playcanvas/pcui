@@ -1,7 +1,3 @@
-// #ifndef EXTRACT_CSS
-@import '../scss/pcui-common';
-// #endif EXTRACT_CSS
-
 .pcui-gridview {
     @extend .pcui-flex;
     flex-direction: row;

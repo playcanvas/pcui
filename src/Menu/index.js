@@ -1,8 +1,6 @@
 import Container from '../Container';
 import MenuItem from '../MenuItem';
 
-import './style.scss';
-
 const CLASS_MENU = 'pcui-menu';
 const CLASS_MENU_ITEMS = CLASS_MENU + '-items';
 

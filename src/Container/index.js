@@ -1,8 +1,6 @@
 import Element from '../Element';
 import * as pcuiClass from '../class';
 
-import './style.scss';
-
 const RESIZE_HANDLE_SIZE = 4;
 
 const VALID_RESIZABLE_VALUES = [

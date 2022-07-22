@@ -4,8 +4,6 @@ import Container from '../Container';
 import Label from '../Label';
 import Button from '../Button';
 
-import './style.scss';
-
 const CLASS_PANEL = 'pcui-panel';
 const CLASS_PANEL_HEADER = CLASS_PANEL + '-header';
 const CLASS_PANEL_HEADER_TITLE = CLASS_PANEL_HEADER + '-title';
