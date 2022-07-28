@@ -1,16 +1,8 @@
-@import './fonts/PlayIcons-Regular-eot.scss';
-@import './fonts/PlayIcons-Regular-eot-iefix.scss';
-@import './fonts/PlayIcons-Regular-woff2.scss';
 @import './fonts/PlayIcons-Regular-woff.scss';
-@import './fonts/PlayIcons-Regular-ttf.scss';
 
 @font-face {
     font-family: 'pc-icon';
-    src: $playIconsRegularEot;
-    src: $playIconsRegularEotIefix,
-        $playIconsRegularWoff2,
-        $playIconsRegularWoff,
-        $playIconsRegularTtf;
+    src: $playIconsRegularWoff;
     font-weight: normal;
     font-style: normal;
 }

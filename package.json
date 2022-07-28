@@ -17,10 +17,10 @@
   },
   "scripts": {
     "build": "rollup -c && npm run bundle:styles",
-    "bundle:styles": "scss-bundle -e ./src/Element/style.scss -o ./dist/pcui.scss",
+    "bundle:styles": "scss-bundle -e ./src/Element/style.scss -o ./dist/pcui.scss && scss-bundle -e ./src/scss/variables.scss -o ./dist/variables.scss && scss-bundle -e ./src/scss/fonts.scss -o ./dist/fonts.scss",
     "watch": "rollup -c -w",
     "lint": "eslint --ext .js src",
-    "clean:css": "node clean-scss.js",
+    "build:font:icons": "cd ./src/scss/fonts && node ./buildFontIcons.js",
     "storybook": "jsdoc -r -X src > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
     "docs:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "docs:build": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
