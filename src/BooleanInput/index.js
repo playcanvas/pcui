@@ -1,8 +1,6 @@
 import Element from '../Element';
 import * as pcuiClass from '../class';
 
-import './style.scss';
-
 const CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
 const CLASS_BOOLEAN_INPUT_TICKED = CLASS_BOOLEAN_INPUT + '-ticked';
 const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
@@ -128,15 +126,15 @@ class BooleanInput extends Element {
         super.destroy();
     }
 
-    get value() {
-        return this._value;
-    }
-
     set value(value) {
         const changed = this._updateValue(value);
         if (changed && this._binding) {
             this._binding.setValue(value);
         }
+    }
+
+    get value() {
+        return this._value;
     }
 
     /* eslint accessor-pairs: 0 */

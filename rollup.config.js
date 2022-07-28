@@ -1,15 +1,12 @@
-import resolve from 'rollup-plugin-node-resolve';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import sass from 'rollup-plugin-sass';
-import rename from 'rollup-plugin-rename';
-import replace from '@rollup/plugin-replace';
 import { babel } from '@rollup/plugin-babel';
-import del from 'rollup-plugin-delete';
 
 const umd = {
     input: 'src/index.js',
     external: ['@playcanvas/observer'],
     output: {
-        file: 'dist/index.js',
+        file: 'dist/pcui.js',
         format: 'umd',
         name: 'pcui',
         globals: {
@@ -17,87 +14,74 @@ const umd = {
         }
     },
     plugins: [
-        del({
-            targets: 'dist/index.js'
-        }),
         sass({
             insert: !process.env.EXTRACT_CSS,
             output: false
         }),
-        resolve()
+        nodeResolve()
     ]
 };
 
 const module = {
+    input: 'src/index.js',
+    external: ['@playcanvas/observer'],
+    output: {
+        file: 'dist/pcui.mjs',
+        entryFileNames: '[name].mjs',
+        format: 'module'
+    },
+    plugins: [
+        sass({
+            insert: !process.env.EXTRACT_CSS,
+            output: false
+        }),
+        nodeResolve()
+    ]
+};
+
+const react_umd = {
     input: 'src/index.jsx',
     external: ['@playcanvas/observer', 'react', 'prop-types'],
     output: {
-        dir: 'dist',
-        format: 'module',
-        entryFileNames: '[name].mjs',
-        preserveModules: true,
-        preserveModulesRoot: 'src'
+        file: 'react/dist/pcui-react.js',
+        format: 'umd',
+        name: 'pcuiReact',
+        globals: {
+            '@playcanvas/observer': 'observer'
+        }
     },
     plugins: [
-        del({
-            targets: ['dist/*', '!dist/index.js', '!dist/bundle']
-        }),
         sass({
             insert: !process.env.EXTRACT_CSS,
             output: false
         }),
-        resolve(),
+        nodeResolve(),
         babel({
             include: ['**/*.jsx'],
-            presets: ['@babel/env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-proposal-class-properties']
-        }),
-        del({
-            targets: 'dist/index.mjs',
-            hook: 'writeBundle'
+            presets: ['@babel/preset-react']
         })
     ]
 };
 
-const bundle = {
-    input: 'src/index.js',
-    external: ['react', 'prop-types'],
+const react_module = {
+    input: 'src/index.jsx',
+    external: ['@playcanvas/observer', 'react', 'prop-types'],
     output: {
-        dir: 'dist/bundle',
-        format: 'module',
-        entryFileNames: '[name].mjs',
-        preserveModules: true,
-        preserveModulesRoot: 'src'
+        file: 'react/dist/pcui-react.mjs',
+        format: 'module'
     },
     plugins: [
-        del({
-            targets: ['dist/bundle']
-        }),
         sass({
             insert: !process.env.EXTRACT_CSS,
             output: false
         }),
-        resolve(),
+        nodeResolve(),
         babel({
             include: ['**/*.jsx'],
-            presets: ['@babel/env', '@babel/preset-react']
-        }),
-        rename({
-            include: ['**/*.mjs'],
-            map: (name) => name.replace('node_modules/', 'dependencies/').replace('src/', '')
-        }),
-        replace({
-            values: {
-                'node_modules/': 'dependencies/'
-            },
-            preventAssignment: true,
-            delimiters: ['', '']
-        }),
-        del({
-            targets: 'dist/bundle/index.mjs',
-            hook: 'writeBundle'
+            presets: ['@babel/preset-react']
         })
     ]
 };
 
-export default [umd, module, bundle];
+
+export default [umd, module, react_umd, react_module];

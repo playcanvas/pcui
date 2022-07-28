@@ -1,7 +1,5 @@
 import Element from '../Element';
 
-import './style.scss';
-
 const CLASS_ROOT = 'pcui-divider';
 
 /**

@@ -1,8 +1,6 @@
 import Element from '../Element';
 import Container from '../Container';
 
-import './style.scss';
-
 const CLASS_OVERLAY = 'pcui-overlay';
 const CLASS_OVERLAY_INNER = CLASS_OVERLAY + '-inner';
 const CLASS_OVERLAY_CLICKABLE = CLASS_OVERLAY + '-clickable';
@@ -84,10 +82,6 @@ class Overlay extends Container {
         super.destroy();
     }
 
-    get clickable() {
-        return this.class.contains(CLASS_OVERLAY_CLICKABLE);
-    }
-
     set clickable(value) {
         if (value) {
             this.class.add(CLASS_OVERLAY_CLICKABLE);
@@ -96,8 +90,8 @@ class Overlay extends Container {
         }
     }
 
-    get transparent() {
-        return this.class.contains(CLASS_OVERLAY_TRANSPARENT);
+    get clickable() {
+        return this.class.contains(CLASS_OVERLAY_CLICKABLE);
     }
 
     set transparent(value) {
@@ -106,6 +100,10 @@ class Overlay extends Container {
         } else {
             this.class.remove(CLASS_OVERLAY_TRANSPARENT);
         }
+    }
+
+    get transparent() {
+        return this.class.contains(CLASS_OVERLAY_TRANSPARENT);
     }
 }
 

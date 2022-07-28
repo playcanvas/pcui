@@ -1,7 +1,5 @@
 import Element from '../Element';
 
-import './style.scss';
-
 const CLASS_BUTTON = 'pcui-button';
 
 /**
@@ -70,10 +68,6 @@ class Button extends Element {
         super.destroy();
     }
 
-    get text() {
-        return this._text;
-    }
-
     set text(value) {
         if (this._text === value) return;
         this._text = value;
@@ -84,12 +78,12 @@ class Button extends Element {
         }
     }
 
-    get icon() {
-        return this._icon;
+    get text() {
+        return this._text;
     }
 
     set icon(value) {
-        if (this._icon === value | !value.match(/^E[0-9]{0,4}$/)) return;
+        if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
         this._icon = value;
         if (value) {
             // set data-icon attribute but first convert the value to a code point
@@ -99,8 +93,8 @@ class Button extends Element {
         }
     }
 
-    get size() {
-        return this._size;
+    get icon() {
+        return this._icon;
     }
 
     set size(value) {
@@ -115,6 +109,10 @@ class Button extends Element {
         if (this._size) {
             this.class.add('pcui-' + this._size);
         }
+    }
+
+    get size() {
+        return this._size;
     }
 }
 

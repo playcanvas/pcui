@@ -1,7 +1,6 @@
 import Element from '../Element';
 import Container from '../Container';
 import Label from '../Label';
-import './style.scss';
 
 const CLASS_LABEL_GROUP = 'pcui-label-group';
 const CLASS_LABEL_TOP = CLASS_LABEL_GROUP + '-align-top';
@@ -52,16 +51,12 @@ class LabelGroup extends Container {
         return this._field;
     }
 
-    get text() {
-        return this._label.text;
-    }
-
     set text(value) {
         this._label.text = value;
     }
 
-    get labelAlignTop() {
-        return this.class.contains(CLASS_LABEL_TOP);
+    get text() {
+        return this._label.text;
     }
 
     set labelAlignTop(value) {
@@ -70,6 +65,10 @@ class LabelGroup extends Container {
         } else {
             this.class.remove(CLASS_LABEL_TOP);
         }
+    }
+
+    get labelAlignTop() {
+        return this.class.contains(CLASS_LABEL_TOP);
     }
 }
 

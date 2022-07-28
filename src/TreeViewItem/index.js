@@ -3,8 +3,6 @@ import Container from '../Container';
 import TextInput from '../TextInput';
 import * as pcuiClass from '../class';
 
-/* global TreeView */
-
 const CLASS_ROOT = 'pcui-treeview-item';
 const CLASS_ICON = CLASS_ROOT + '-icon';
 const CLASS_TEXT = CLASS_ROOT + '-text';
@@ -54,6 +52,7 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
  * @property {boolean} allowDrag=true Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
  * @property {boolean} allowDrop=true Whether dropping is allowed on the tree item.
  * @property {string} text The text shown by the TreeViewItem.
+ * @property {string} icon The icon shown before the text in the TreeViewItem.
  * @property {number} The number of direct children.
  * @property {Label} textLabel Gets the internal label that shows the text.
  * @property {Label} iconLabel Gets the internal label that shows the icon.
@@ -95,6 +94,8 @@ class TreeViewItem extends Container {
         });
         this._containerContents.append(this._labelIcon);
 
+        this.icon = args.icon || 'E360';
+
         this._labelText = new Label({
             class: CLASS_TEXT
         });
@@ -105,6 +106,10 @@ class TreeViewItem extends Container {
         this.allowDrag = (args.allowDrag !== undefined ? args.allowDrag : true);
         if (args.text) {
             this.text = args.text;
+        }
+
+        if (args.selected) {
+            this.selected = args.selected;
         }
 
         this._numChildren = 0;
@@ -222,9 +227,24 @@ class TreeViewItem extends Container {
         const rect = this._containerContents.dom.getBoundingClientRect();
         if (this._numChildren > 0 && evt.clientX - rect.left < 0) {
             this.open = !this.open;
+            if (evt.altKey) {
+                // apply to all children as well
+                this._dfs((node) => {
+                    node.open = this.open;
+                });
+            }
             this.focus();
         } else if (this._treeView) {
             this._treeView._onChildClick(evt, this);
+        }
+    }
+
+    _dfs(fn) {
+        fn(this);
+        let child = this.firstChild;
+        while (child) {
+            child._dfs(fn);
+            child = child.nextSibling;
         }
     }
 
@@ -324,10 +344,6 @@ class TreeViewItem extends Container {
         super.destroy();
     }
 
-    get selected() {
-        return this._containerContents.class.contains(CLASS_SELECTED);
-    }
-
     set selected(value) {
         if (value === this.selected) {
             if (value) {
@@ -355,8 +371,8 @@ class TreeViewItem extends Container {
         }
     }
 
-    get text() {
-        return this._labelText.value;
+    get selected() {
+        return this._containerContents.class.contains(CLASS_SELECTED);
     }
 
     set text(value) {
@@ -368,16 +384,16 @@ class TreeViewItem extends Container {
         }
     }
 
+    get text() {
+        return this._labelText.value;
+    }
+
     get textLabel() {
         return this._labelText;
     }
 
     get iconLabel() {
         return this._labelIcon;
-    }
-
-    get open() {
-        return this.class.contains(CLASS_OPEN) || this.parent === this._treeView;
     }
 
     set open(value) {
@@ -393,14 +409,8 @@ class TreeViewItem extends Container {
         }
     }
 
-    get parentsOpen() {
-        let parent = this.parent;
-        while (parent && parent instanceof TreeViewItem) {
-            if (!parent.open) return false;
-            parent = parent.parent;
-        }
-
-        return true;
+    get open() {
+        return this.class.contains(CLASS_OPEN) || this.parent === this._treeView;
     }
 
     set parentsOpen(value) {
@@ -411,36 +421,46 @@ class TreeViewItem extends Container {
         }
     }
 
-    get allowDrop() {
-        return this._allowDrop;
+    get parentsOpen() {
+        let parent = this.parent;
+        while (parent && parent instanceof TreeViewItem) {
+            if (!parent.open) return false;
+            parent = parent.parent;
+        }
+
+        return true;
     }
 
     set allowDrop(value) {
         this._allowDrop = value;
     }
 
-    get allowDrag() {
-        return this._allowDrag;
+    get allowDrop() {
+        return this._allowDrop;
     }
 
     set allowDrag(value) {
         this._allowDrag = value;
     }
 
-    get allowSelect() {
-        return this._allowSelect;
+    get allowDrag() {
+        return this._allowDrag;
     }
 
     set allowSelect(value) {
         this._allowSelect = value;
     }
 
-    get treeView() {
-        return this._treeView;
+    get allowSelect() {
+        return this._allowSelect;
     }
 
     set treeView(value) {
         this._treeView = value;
+    }
+
+    get treeView() {
+        return this._treeView;
     }
 
     get numChildren() {
@@ -487,6 +507,21 @@ class TreeViewItem extends Container {
         }
 
         return sibling && sibling.ui;
+    }
+
+    set icon(value) {
+        if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
+        this._icon = value;
+        if (value) {
+            // set data-icon attribute but first convert the value to a code point
+            this._labelIcon.dom.setAttribute('data-icon', String.fromCodePoint(parseInt(value, 16)));
+        } else {
+            this._labelIcon.dom.removeAttribute('data-icon');
+        }
+    }
+
+    get icon() {
+        return this._icon;
     }
 }
 

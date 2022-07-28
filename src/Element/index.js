@@ -3,9 +3,6 @@ import { Events } from '@playcanvas/observer';
 
 import './style.scss';
 
-/* global BindingBase */
-/* global Observer */
-
 const CLASS_ELEMENT = 'pcui-element';
 
 // these are properties that are
@@ -487,11 +484,6 @@ class Element extends Events {
         return new cls(clsArgs);
     }
 
-    get enabled() {
-        if (this._ignoreParent) return this._enabled;
-        return this._enabled && (!this._parent || this._parent.enabled);
-    }
-
     set enabled(value) {
         if (this._enabled === value) return;
 
@@ -506,8 +498,9 @@ class Element extends Events {
         }
     }
 
-    get ignoreParent() {
-        return this._ignoreParent;
+    get enabled() {
+        if (this._ignoreParent) return this._enabled;
+        return this._enabled && (!this._parent || this._parent.enabled);
     }
 
     set ignoreParent(value) {
@@ -516,12 +509,12 @@ class Element extends Events {
         this._onReadOnlyChange(this.readOnly);
     }
 
-    get dom() {
-        return this._dom;
+    get ignoreParent() {
+        return this._ignoreParent;
     }
 
-    get parent() {
-        return this._parent;
+    get dom() {
+        return this._dom;
     }
 
     set parent(value) {
@@ -571,8 +564,8 @@ class Element extends Events {
         }
     }
 
-    get hidden() {
-        return this._hidden;
+    get parent() {
+        return this._parent;
     }
 
     set hidden(value) {
@@ -595,13 +588,12 @@ class Element extends Events {
         }
     }
 
-    get hiddenToRoot() {
-        return this._hidden || this._hiddenParents;
+    get hidden() {
+        return this._hidden;
     }
 
-    get readOnly() {
-        if (this._ignoreParent) return this._readOnly;
-        return this._readOnly || !!(this._parent && this._parent.readOnly);
+    get hiddenToRoot() {
+        return this._hidden || this._hiddenParents;
     }
 
     set readOnly(value) {
@@ -611,8 +603,9 @@ class Element extends Events {
         this._onReadOnlyChange(value);
     }
 
-    get error() {
-        return this._hasError;
+    get readOnly() {
+        if (this._ignoreParent) return this._readOnly;
+        return this._readOnly || !!(this._parent && this._parent.readOnly);
     }
 
     set error(value) {
@@ -625,16 +618,16 @@ class Element extends Events {
         }
     }
 
+    get error() {
+        return this._hasError;
+    }
+
     get style() {
         return this._dom.style;
     }
 
     get class() {
         return this._dom.classList;
-    }
-
-    get width() {
-        return this._dom.clientWidth;
     }
 
     set width(value) {
@@ -644,8 +637,8 @@ class Element extends Events {
         this.style.width = value;
     }
 
-    get height() {
-        return this._dom.clientHeight;
+    get width() {
+        return this._dom.clientWidth;
     }
 
     set height(value) {
@@ -655,16 +648,16 @@ class Element extends Events {
         this.style.height = value;
     }
 
-    get tabIndex() {
-        return this._dom.tabIndex;
+    get height() {
+        return this._dom.clientHeight;
     }
 
     set tabIndex(value) {
         this._dom.tabIndex = value;
     }
 
-    get binding() {
-        return this._binding;
+    get tabIndex() {
+        return this._dom.tabIndex;
     }
 
     set binding(value) {
@@ -692,34 +685,38 @@ class Element extends Events {
         }
     }
 
+    get binding() {
+        return this._binding;
+    }
+
     get destroyed() {
         return this._destroyed;
     }
 
     /*  Backwards Compatibility */
     // we should remove those after we migrate
-    get disabled() {
-        return !this.enabled;
-    }
-
     set disabled(value) {
         this.enabled = !value;
     }
 
-    get element() {
-        return this.dom;
+    get disabled() {
+        return !this.enabled;
     }
 
     set element(value) {
         this.dom = value;
     }
 
-    get innerElement() {
-        return this.domContent;
+    get element() {
+        return this.dom;
     }
 
     set innerElement(value) {
         this.domContent = value;
+    }
+
+    get innerElement() {
+        return this.domContent;
     }
 }
 

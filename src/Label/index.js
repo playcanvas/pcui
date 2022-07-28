@@ -1,8 +1,6 @@
 import * as pcuiClass from '../class';
 import Element from '../Element';
 
-import './style.scss';
-
 const CLASS_LABEL = 'pcui-label';
 
 /**
@@ -70,10 +68,6 @@ class Label extends Element {
         return true;
     }
 
-    get text() {
-        return this._text;
-    }
-
     set text(value) {
         if (value === undefined || value === null) {
             value = '';
@@ -86,12 +80,16 @@ class Label extends Element {
         }
     }
 
-    get value() {
-        return this.text;
+    get text() {
+        return this._text;
     }
 
     set value(value) {
         this.text = value;
+    }
+
+    get value() {
+        return this.text;
     }
 
     /* eslint accessor-pairs: 0 */
@@ -113,16 +111,16 @@ class Label extends Element {
         }
     }
 
-    get placeholder() {
-        return this.dom.getAttribute('placeholder');
-    }
-
     set placeholder(value) {
         if (value) {
             this.dom.setAttribute('placeholder', value);
         } else {
             this.dom.removeAttribute('placeholder');
         }
+    }
+
+    get placeholder() {
+        return this.dom.getAttribute('placeholder');
     }
 }
 

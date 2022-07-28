@@ -2,8 +2,6 @@ import Element from '../Element';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../class';
 
-import './style.scss';
-
 const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 
 /**
@@ -143,7 +141,7 @@ class VectorInput extends Element {
         } else {
             for (let i = 0; i < this._inputs.length; i++) {
                 // link observers to paths[i].i for each dimension
-                this._inputs[i].link(observers, paths.map((path) => `${path}.${i}`));
+                this._inputs[i].link(observers, paths.map(path => `${path}.${i}`));
             }
 
         }
@@ -166,15 +164,6 @@ class VectorInput extends Element {
         }
     }
 
-    get value() {
-        const value = new Array(this._inputs.length);
-        for (let i = 0; i < this._inputs.length; i++) {
-            value[i] = this._inputs[i].value;
-        }
-
-        return value;
-    }
-
     set value(value) {
         if (typeof value === 'string') {
             try {
@@ -182,7 +171,7 @@ class VectorInput extends Element {
                 value = JSON.parse(value);
                 // if the string could be converted to an array but some of it's values aren't numbers
                 // then use a default array also
-                if (Array.isArray(value) && value.some((i) => !Number.isFinite(i))) {
+                if (Array.isArray(value) && value.some(i => !Number.isFinite(i))) {
                     throw new Error('VectorInput value set to string which doesn\'t contain an array of numbers');
                 }
             } catch (e) {
@@ -199,6 +188,15 @@ class VectorInput extends Element {
         if (changed && this._binding) {
             this._binding.setValue(value);
         }
+    }
+
+    get value() {
+        const value = new Array(this._inputs.length);
+        for (let i = 0; i < this._inputs.length; i++) {
+            value[i] = this._inputs[i].value;
+        }
+
+        return value;
     }
 
     /* eslint accessor-pairs: 0 */
@@ -228,14 +226,14 @@ class VectorInput extends Element {
         return super.binding;
     }
 
-    get placeholder() {
-        return this._inputs.map((input) => input.placeholder);
-    }
-
     set placeholder(value) {
         for (let i = 0; i < this._inputs.length; i++) {
             this._inputs[i].placeholder = value[i] || value || null;
         }
+    }
+
+    get placeholder() {
+        return this._inputs.map(input => input.placeholder);
     }
 
     get inputs() {

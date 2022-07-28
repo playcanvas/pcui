@@ -1,7 +1,3 @@
-// #ifndef EXTRACT_CSS
-@import '../scss/pcui.scss';
-// #endif EXTRACT_CSS
-
 .pcui-select-input {
     @extend .pcui-flex;
     box-sizing: border-box;
@@ -52,6 +48,10 @@
     transition: background-color 100ms, color 100ms;
 }
 
+.pcui-label.pcui-select-input-value {
+    margin: 0;
+}
+
 .pcui-select-input-textinput {
     margin: 0;
 }
@@ -62,7 +62,7 @@
     }
 }
 
-.pcui-select-input-icon {
+.pcui-label.pcui-select-input-icon {
     position: absolute;
     right: $element-margin;
     color: $text-darkest;
@@ -93,7 +93,7 @@
     }
 }
 
-.pcui-select-input-list {
+.pcui-container.pcui-select-input-list {
     position: absolute;
     z-index: 1;
     top: 100%;

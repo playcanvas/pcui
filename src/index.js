@@ -15,6 +15,7 @@ import VectorInput from './VectorInput';
 import BooleanInput from './BooleanInput';
 import Label from './Label';
 import Button from './Button';
+import RadioButton from './RadioButton';
 import Code from './Code';
 import Container from './Container';
 import Panel from './Panel';
@@ -31,6 +32,8 @@ import LabelGroup from './LabelGroup';
 import GridView from './GridView';
 import GridViewItem from './GridViewItem';
 import ArrayInput from './ArrayInput';
+import MenuItem from './MenuItem';
+import Menu from './Menu';
 import BindingBase from './BindingBase';
 import BindingElementToObservers from './BindingElementToObservers';
 import BindingObserversToElement from './BindingObserversToElement';
@@ -55,10 +58,13 @@ export {
     InfoBox,
     Label,
     LabelGroup,
+    Menu,
+    MenuItem,
     NumericInput,
     Overlay,
     Panel,
     Progress,
+    RadioButton,
     SelectInput,
     SliderInput,
     Spinner,

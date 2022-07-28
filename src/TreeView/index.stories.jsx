@@ -26,7 +26,7 @@ export default {
 export const Main = (args) => (
     <TreeView {...args}>
         <TreeViewItem text='Item 1'>
-            <TreeViewItem text='Item 11' />
+            <TreeViewItem text='Item 11' icon='E401' />
             <TreeViewItem text='Item 12' />
             <TreeViewItem text='Item 13'>
                 <TreeViewItem text='Item 131'>

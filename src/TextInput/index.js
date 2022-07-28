@@ -1,8 +1,6 @@
 import Element from '../Element';
 import * as pcuiClass from '../class';
 
-import './style.scss';
-
 const CLASS_TEXT_INPUT = 'pcui-text-input';
 
 /**
@@ -36,10 +34,12 @@ class TextInput extends Element {
         let input = args.input;
         if (!input) {
             input = document.createElement('input');
-            input.ui = this;
             input.type = 'text';
-            input.tabIndex = 0;
         }
+
+        input.ui = this;
+        input.tabIndex = 0;
+        input.autocomplete = "off";
         this._domInput = input;
 
         this._domEvtChange = this._onInputChange.bind(this);
@@ -116,20 +116,37 @@ class TextInput extends Element {
     }
 
     _onInputKeyDown(evt) {
-        if (evt.keyCode === 27 && this.blurOnEscape) {
+        if (evt.keyCode === 13 && this.blurOnEnter) {
+            // do not fire input change event on blur
+            // if keyChange is true (because a change event)
+            // will have already been fired before for the current
+            // value
+            this._suspendInputChangeEvt = this.keyChange;
+            this._domInput.blur();
+            this._suspendInputChangeEvt = false;
+        } else if (evt.keyCode === 27) {
             this._suspendInputChangeEvt = true;
+            const prev = this._domInput.value;
             this._domInput.value = this._prevValue;
             this._suspendInputChangeEvt = false;
-            this._domInput.blur();
-        } else if (evt.keyCode === 13 && this.blurOnEnter) {
-            this._domInput.blur();
+
+            // manually fire change event
+            if (this.keyChange && prev !== this._prevValue) {
+                this._onInputChange(evt);
+            }
+
+            if (this.blurOnEscape) {
+                this._domInput.blur();
+            }
         }
 
         this.emit('keydown', evt);
     }
 
     _onInputKeyUp(evt) {
-        this._onInputChange(evt);
+        if (evt.keyCode !== 27) {
+            this._onInputChange(evt);
+        }
 
         this.emit('keyup', evt);
     }
@@ -150,7 +167,7 @@ class TextInput extends Element {
     _updateValue(value) {
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
 
-        if (value && typeof(value) === 'object') {
+        if (value && typeof (value) === 'object') {
             if (Array.isArray(value)) {
                 let isObject = false;
                 for (let i = 0; i < value.length; i++) {
@@ -212,10 +229,6 @@ class TextInput extends Element {
         super.destroy();
     }
 
-    get value() {
-        return this._domInput.value;
-    }
-
     set value(value) {
         const changed = this._updateValue(value);
 
@@ -227,6 +240,10 @@ class TextInput extends Element {
         if (changed && this._binding) {
             this._binding.setValue(value);
         }
+    }
+
+    get value() {
+        return this._domInput.value;
     }
 
     /* eslint accessor-pairs: 0 */
@@ -248,10 +265,6 @@ class TextInput extends Element {
         }
     }
 
-    get placeholder() {
-        return this.dom.getAttribute('placeholder');
-    }
-
     set placeholder(value) {
         if (value) {
             this.dom.setAttribute('placeholder', value);
@@ -260,8 +273,8 @@ class TextInput extends Element {
         }
     }
 
-    get keyChange() {
-        return this._keyChange;
+    get placeholder() {
+        return this.dom.getAttribute('placeholder');
     }
 
     set keyChange(value) {
@@ -275,16 +288,20 @@ class TextInput extends Element {
         }
     }
 
+    get keyChange() {
+        return this._keyChange;
+    }
+
     get input() {
         return this._domInput;
     }
 
-    get onValidate() {
-        return this._onValidate;
-    }
-
     set onValidate(value) {
         this._onValidate = value;
+    }
+
+    get onValidate() {
+        return this._onValidate;
     }
 }
 

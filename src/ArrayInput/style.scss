@@ -1,7 +1,3 @@
-// #ifndef EXTRACT_CSS
-@import '../scss/variables.scss';
-// #endif EXTRACT_CSS
-
 .pcui-array-input {
     margin: $element-margin;
     min-width: 0; // this prevents the element from overflowing
@@ -35,7 +31,7 @@
     }
 
     > .pcui-button {
-        margin-left: - $element-margin / 2;
+        margin-left: - calc($element-margin / 2);
         margin-right: 0;
         background-color: transparent;
         border: 0;

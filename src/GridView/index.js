@@ -1,8 +1,8 @@
 import Container from '../Container';
 import GridViewItem from '../GridViewItem';
-import './style.scss';
 
 const CLASS_ROOT = 'pcui-gridview';
+const CLASS_VERTICAL = CLASS_ROOT + '-vertical';
 
 /**
  * @name GridView
@@ -11,6 +11,9 @@ const CLASS_ROOT = 'pcui-gridview';
  * @classdesc Represents a container that shows a flexible wrappable
  * list of items that looks like a grid. Contains GridViewItem's.
  * @property {GridViewItem[]} selected Gets the selected grid view items.
+ * @property {boolean} vertical If true the gridview layout will be vertical.
+ * @property {boolean} multiSelect=true If true, the layout will allow for multiple options to be selected.
+ * @property {boolean} allowDeselect=true If true and multiSelect is set to false, the layout will allow options to be deselected.
  */
 class GridView extends Container {
     /**
@@ -18,13 +21,21 @@ class GridView extends Container {
      *
      * @param {object} [args] - The arguments
      * @param {Function} [args.filterFn] - A filter function to filter gridview items with signature (GridViewItem) => boolean.
+     * @param {boolean} [args.vertical] - Whether or not the layout will be vertically aligned
+     * @param {boolean} [args.multiSelect] - Whether or not the layout will allow for multiple items to be selected at once.
+     * @param {boolean} [args.allowDeselect] - Whether or not the layout will allow for options to be deselected.
      */
     constructor(args) {
         if (!args) args = {};
 
         super(args);
 
-        this.class.add(CLASS_ROOT);
+        this._vertical = !!args.vertical;
+        if (this._vertical) {
+            this.class.add(CLASS_VERTICAL);
+        } else {
+            this.class.add(CLASS_ROOT);
+        }
 
         this.on('append', this._onAppendGridViewItem.bind(this));
         this.on('remove', this._onRemoveGridViewItem.bind(this));
@@ -33,15 +44,26 @@ class GridView extends Container {
         this._filterAnimationFrame = null;
         this._filterCanceled = false;
 
+        // Default options for GridView layout
+        this._multiSelect = args.hasOwnProperty('multiSelect') ? args.multiSelect : true;
+        this._allowDeselect = args.hasOwnProperty('allowDeselect') ? args.allowDeselect : true;
+
         this._selected = [];
     }
 
     _onAppendGridViewItem(item) {
         if (!(item instanceof GridViewItem)) return;
 
-        let evtClick = item.on('click', (evt) => this._onClickItem(evt, item));
+        let evtClick;
+        if (this._clickFn)
+            evtClick = item.on('click', evt => this._clickFn(evt, item));
+        else
+            evtClick = item.on('click', evt => this._onClickItem(evt, item));
         let evtSelect = item.on('select', () => this._onSelectItem(item));
-        let evtDeselect = item.on('deselect', () => this._onDeselectItem(item));
+
+        let evtDeselect;
+        if (this._allowDeselect)
+            evtDeselect = item.on('deselect', () => this._onDeselectItem(item));
 
         if (this._filterFn && !this._filterFn(item)) {
             item.hidden = true;
@@ -54,8 +76,10 @@ class GridView extends Container {
             evtSelect.unbind();
             evtSelect = null;
 
-            evtDeselect.unbind();
-            evtDeselect = null;
+            if (this._allowDeselect) {
+                evtDeselect.unbind();
+                evtDeselect = null;
+            }
         });
     }
 
@@ -69,9 +93,9 @@ class GridView extends Container {
     }
 
     _onClickItem(evt, item) {
-        if (evt.ctrlKey || evt.metaKey) {
+        if ((evt.ctrlKey || evt.metaKey) && this._multiSelect) {
             item.selected = !item.selected;
-        } else if (evt.shiftKey) {
+        } else if (evt.shiftKey && this._multiSelect) {
             const lastSelected = this._selected[this._selected.length - 1];
             if (lastSelected) {
                 const comparePosition = lastSelected.dom.compareDocumentPosition(item.dom);
@@ -230,6 +254,10 @@ class GridView extends Container {
 
     get selected() {
         return this._selected.slice();
+    }
+
+    get vertical() {
+        return this._vertical;
     }
 }
 

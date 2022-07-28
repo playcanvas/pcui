@@ -3,9 +3,6 @@ import NumericInput from '../NumericInput';
 import * as pcuiClass from '../class';
 import utils from '../helpers/utils';
 
-import './style.scss';
-
-
 const CLASS_SLIDER = 'pcui-slider';
 const CLASS_SLIDER_CONTAINER = CLASS_SLIDER + '-container';
 const CLASS_SLIDER_BAR = CLASS_SLIDER + '-bar';
@@ -155,7 +152,7 @@ class SliderInput extends Element {
 
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
-            if (! touch.target.ui || touch.target.ui !== this)
+            if (!touch.target.ui || touch.target.ui !== this)
                 continue;
 
             this._touchId = touch.identifier;
@@ -286,7 +283,7 @@ class SliderInput extends Element {
 
         const range = this._sliderMax - this._sliderMin;
         let value = (x * range) + this._sliderMin;
-        value = parseFloat(value.toFixed(this.precision), 10);
+        value = parseFloat(value.toFixed(this.precision));
 
         this.value = value;
     }
@@ -341,10 +338,6 @@ class SliderInput extends Element {
         super.destroy();
     }
 
-    get sliderMin() {
-        return this._sliderMin;
-    }
-
     set sliderMin(value) {
         if (this._sliderMin === value) return;
 
@@ -352,8 +345,8 @@ class SliderInput extends Element {
         this._updateHandle(this.value);
     }
 
-    get sliderMax() {
-        return this._sliderMax;
+    get sliderMin() {
+        return this._sliderMin;
     }
 
     set sliderMax(value) {
@@ -363,8 +356,8 @@ class SliderInput extends Element {
         this._updateHandle(this.value);
     }
 
-    get value() {
-        return this._numericInput.value;
+    get sliderMax() {
+        return this._sliderMax;
     }
 
     set value(value) {
@@ -374,6 +367,10 @@ class SliderInput extends Element {
         } else {
             this.class.remove(pcuiClass.MULTIPLE_VALUES);
         }
+    }
+
+    get value() {
+        return this._numericInput.value;
     }
 
     /* eslint accessor-pairs: 0 */

@@ -21,17 +21,12 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { Observer, History } from '@playcanvas/observer';
-import Container from '@playcanvas/pcui/Container/component';
-import Button from '@playcanvas/pcui/Button/component';
-import SliderInput from '@playcanvas/pcui/SliderInput/component';
-import Progress from '@playcanvas/pcui/Progress/component';
-import Label from '@playcanvas/pcui/Label/component';
-import BindingTwoWay from '@playcanvas/pcui/BindingTwoWay';
+import { Container, Button, SliderInput, Progress, Label, BindingTwoWay } from '@playcanvas/pcui';
 
 const observer = new Observer({ progress: 0 });
 const history = new History();
 
-export const HistoryExample = (props) => {
+const HistoryExample = (props) => {
     const [ canUndo, setCanUndo ] = useState(false);
     const [ canRedo, setCanRedo ] = useState(false);
     const [ historyLabel, setHistoryLabel ] = useState('');

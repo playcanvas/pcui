@@ -6,9 +6,6 @@ import Label from '../Label';
 import * as pcuiClass from '../class';
 import { searchItems } from '../helpers/search';
 
-import './style.scss';
-
-
 const CLASS_SELECT_INPUT = 'pcui-select-input';
 const CLASS_SELECT_INPUT_CONTAINER_VALUE = CLASS_SELECT_INPUT + '-container-value';
 const CLASS_MULTI_SELECT = CLASS_SELECT_INPUT + '-multi';
@@ -283,7 +280,7 @@ class SelectInput extends Element {
         if (this.multiSelect) {
             if (!Array.isArray(value)) return value;
 
-            return value.map((val) => this._convertSingleValue(val));
+            return value.map(val => this._convertSingleValue(val));
         }
 
         return this._convertSingleValue(value);
@@ -877,10 +874,6 @@ class SelectInput extends Element {
         super.destroy();
     }
 
-    get options() {
-        return this._options.slice();
-    }
-
     set options(value) {
         if (this._options && this._options === value) return;
 
@@ -930,31 +923,20 @@ class SelectInput extends Element {
         }
     }
 
-    get invalidOptions() {
-        return this._invalidOptions;
+    get options() {
+        return this._options.slice();
     }
 
     set invalidOptions(value) {
         this._invalidOptions = value || null;
     }
 
-    get multiSelect() {
-        return this.class.contains(CLASS_MULTI_SELECT);
+    get invalidOptions() {
+        return this._invalidOptions;
     }
 
-    get value() {
-        if (!this.multiSelect) {
-            return this._value;
-        }
-
-        // if multi-select then construct an array
-        // value from the tags that are currently visible
-        const result = [];
-        this._containerTags.dom.childNodes.forEach((dom) => {
-            result.push(dom.ui.value);
-        });
-
-        return result;
+    get multiSelect() {
+        return this.class.contains(CLASS_MULTI_SELECT);
     }
 
     set value(value) {
@@ -989,6 +971,21 @@ class SelectInput extends Element {
         if (this._binding) {
             this._binding.setValue(value);
         }
+    }
+
+    get value() {
+        if (!this.multiSelect) {
+            return this._value;
+        }
+
+        // if multi-select then construct an array
+        // value from the tags that are currently visible
+        const result = [];
+        this._containerTags.dom.childNodes.forEach((dom) => {
+            result.push(dom.ui.value);
+        });
+
+        return result;
     }
 
     /* eslint accessor-pairs: 0 */
@@ -1030,12 +1027,12 @@ class SelectInput extends Element {
         }
     }
 
-    get placeholder() {
-        return this._input.placeholder;
-    }
-
     set placeholder(value) {
         this._input.placeholder = value;
+    }
+
+    get placeholder() {
+        return this._input.placeholder;
     }
 }
 

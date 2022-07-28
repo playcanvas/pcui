@@ -3,8 +3,6 @@ import Element from '../Element';
 import TreeViewItem from '../TreeViewItem';
 import { searchItems } from '../helpers/search';
 
-import './style.scss';
-
 const CLASS_ROOT = 'pcui-treeview';
 const CLASS_DRAGGED_ITEM = CLASS_ROOT + '-item-dragged';
 const CLASS_DRAGGED_HANDLE = CLASS_ROOT + '-drag-handle';
@@ -77,6 +75,8 @@ class TreeView extends Container {
      * @param {object} [args] - The arguments. All properties can be set through the arguments as well.
      * @param {Function} [args.onContextMenu] - A function to be called when we right click on a TreeViewItem.
      * @param {Function} [args.onReparent] - A function to be called when we try to reparent tree items. If a function is provided then the
+     * @param {Element} [args.dragScrollElement] - An element (usually a container of the tree view) that will be scrolled when the user
+     * drags towards the edges of the treeview. Defaults to the TreeView itself.
      * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
      */
     constructor(args) {
@@ -99,6 +99,7 @@ class TreeView extends Container {
         this._dragHandle = new Element(document.createElement('div'), {
             class: CLASS_DRAGGED_HANDLE
         });
+        this._dragScrollElement = args.dragScrollElement || this;
         this.append(this._dragHandle);
 
         this._onContextMenu = args.onContextMenu;
@@ -491,7 +492,7 @@ class TreeView extends Container {
     _onChildDragEnd(evt, element) {
         if (!this.allowDrag || !this._dragging) return;
 
-        this._dragItems.forEach((item) => item.class.remove(CLASS_DRAGGED_ITEM));
+        this._dragItems.forEach(item => item.class.remove(CLASS_DRAGGED_ITEM));
 
         // if the root is being dragged then
         // do not allow reparenting because we do not
@@ -560,7 +561,7 @@ class TreeView extends Container {
                     const fakeDom = [];
 
                     const getChildren = (treeviewItem) => {
-                        let idx = fakeDom.findIndex((entry) => entry.parent === treeviewItem);
+                        let idx = fakeDom.findIndex(entry => entry.parent === treeviewItem);
                         if (idx === -1) {
                             fakeDom.push({ parent: treeviewItem, children: [...treeviewItem.dom.childNodes] });
                             idx = fakeDom.length - 1;
@@ -662,9 +663,21 @@ class TreeView extends Container {
         // Determine if we need to scroll the treeview if we are dragging towards the edges
         const rect = this.dom.getBoundingClientRect();
         this._dragScroll = 0;
-        if (evt.clientY - rect.top < 32 && this.dom.scrollTop > 0) {
+        let top = rect.top;
+
+        let bottom = rect.bottom;
+        if (this._dragScrollElement !== this) {
+            const dragScrollRect = this._dragScrollElement.dom.getBoundingClientRect();
+            top = Math.max(top + this._dragScrollElement.dom.scrollTop, dragScrollRect.top);
+            bottom = Math.min(bottom + this._dragScrollElement.dom.scrollTop, dragScrollRect.bottom);
+        }
+
+        top = Math.max(0, top);
+        bottom = Math.min(bottom, document.body.clientHeight);
+
+        if (evt.pageY < top + 32 && this._dragScrollElement.dom.scrollTop > 0) {
             this._dragScroll = -1;
-        } else if (rect.bottom - evt.clientY < 32 && this.dom.scrollHeight - (rect.height + this.dom.scrollTop) > 0) {
+        } else if (evt.pageY > bottom - 32 && this._dragScrollElement.dom.scrollHeight > this._dragScrollElement.height + this._dragScrollElement.dom.scrollTop) {
             this._dragScroll = 1;
         }
     }
@@ -674,7 +687,7 @@ class TreeView extends Container {
         if (!this._dragging) return;
         if (this._dragScroll === 0) return;
 
-        this.dom.scrollTop += this._dragScroll * 8;
+        this._dragScrollElement.dom.scrollTop += this._dragScroll * 8;
         this._dragOverItem = null;
         this._updateDragHandle();
     }
@@ -684,7 +697,7 @@ class TreeView extends Container {
         evt.preventDefault();
         evt.stopPropagation();
 
-        if (! this._allowDrag || ! this._dragOverItem) return;
+        if (!this._allowDrag || !this._dragOverItem) return;
 
         const rect = this._dragHandle.dom.getBoundingClientRect();
         const area = Math.floor((evt.clientY - rect.top) / rect.height * 5);
@@ -702,7 +715,7 @@ class TreeView extends Container {
                 }
             }
 
-            if (! parent) {
+            if (!parent) {
                 this._dragArea = DRAG_AREA_INSIDE;
             }
         } else {
@@ -719,7 +732,7 @@ class TreeView extends Container {
                 this._dragOverItem = null;
             } else if (this._allowReordering && area <= 1 && this._dragItems.indexOf(this._dragOverItem.previousSibling) === -1) {
                 this._dragArea = DRAG_AREA_BEFORE;
-            } else if (this._allowReordering && area >= 4 && this._dragItems.indexOf(this._dragOverItem.nextSibling) === -1 && (this._dragOverItem.numChildren === 0 || ! this._dragOverItem.open)) {
+            } else if (this._allowReordering && area >= 4 && this._dragItems.indexOf(this._dragOverItem.nextSibling) === -1 && (this._dragOverItem.numChildren === 0 || !this._dragOverItem.open)) {
                 this._dragArea = DRAG_AREA_AFTER;
             } else {
                 let parent = false;
@@ -732,7 +745,7 @@ class TreeView extends Container {
                         }
                     }
                 }
-                if (! parent)
+                if (!parent)
                     this._dragArea = DRAG_AREA_INSIDE;
             }
         }
@@ -953,10 +966,6 @@ class TreeView extends Container {
         super.destroy();
     }
 
-    get allowDrag() {
-        return this._allowDrag;
-    }
-
     set allowDrag(value) {
         this._allowDrag = value;
         if (this._filter) {
@@ -964,24 +973,24 @@ class TreeView extends Container {
         }
     }
 
-    get allowReordering() {
-        return this._allowReordering;
+    get allowDrag() {
+        return this._allowDrag;
     }
 
     set allowReordering(value) {
         this._allowReordering = value;
     }
 
-    get allowRenaming() {
-        return this._allowRenaming;
+    get allowReordering() {
+        return this._allowReordering;
     }
 
     set allowRenaming(value) {
         this._allowRenaming = value;
     }
 
-    get isDragging() {
-        return this._dragging;
+    get allowRenaming() {
+        return this._allowRenaming;
     }
 
     set isDragging(value) {
@@ -992,7 +1001,7 @@ class TreeView extends Container {
             this._updateDragHandle();
 
             // handle mouse move to scroll when dragging if necessary
-            if (this.scrollable) {
+            if (this.scrollable || this._dragScrollElement !== this) {
                 window.removeEventListener('mousemove', this._domEvtMouseMove);
                 window.addEventListener('mousemove', this._domEvtMouseMove);
                 if (!this._dragScrollInterval) {
@@ -1013,12 +1022,12 @@ class TreeView extends Container {
         }
     }
 
-    get selected() {
-        return this._selectedItems.slice();
+    get isDragging() {
+        return this._dragging;
     }
 
-    get filter() {
-        return this._filter;
+    get selected() {
+        return this._selectedItems.slice();
     }
 
     set filter(value) {
@@ -1031,6 +1040,10 @@ class TreeView extends Container {
         } else {
             this._clearFilter();
         }
+    }
+
+    get filter() {
+        return this._filter;
     }
 
     get pressedCtrl() {

@@ -4,8 +4,6 @@ import Container from '../Container';
 import Label from '../Label';
 import Button from '../Button';
 
-import './style.scss';
-
 const CLASS_PANEL = 'pcui-panel';
 const CLASS_PANEL_HEADER = CLASS_PANEL + '-header';
 const CLASS_PANEL_HEADER_TITLE = CLASS_PANEL_HEADER + '-title';
@@ -103,7 +101,7 @@ class Panel extends Container {
         this.sortable = args.sortable || false;
 
         this._btnRemove = null;
-        this.removable = args.removable || false;
+        this.removable = args.removable || args.onRemove || false;
 
         // set the contents container to be the content DOM element
         // from now on calling append functions on the panel will append themn
@@ -287,10 +285,6 @@ class Panel extends Container {
         super.destroy();
     }
 
-    get collapsible() {
-        return this._collapsible;
-    }
-
     set collapsible(value) {
         if (value === this._collapsible) return;
 
@@ -310,8 +304,8 @@ class Panel extends Container {
 
     }
 
-    get collapsed() {
-        return this._collapsed;
+    get collapsible() {
+        return this._collapsible;
     }
 
     set collapsed(value) {
@@ -326,8 +320,8 @@ class Panel extends Container {
         }
     }
 
-    get sortable() {
-        return this._sortable;
+    get collapsed() {
+        return this._collapsed;
     }
 
     set sortable(value) {
@@ -349,8 +343,8 @@ class Panel extends Container {
         }
     }
 
-    get removable() {
-        return !!this._btnRemove;
+    get sortable() {
+        return this._sortable;
     }
 
     set removable(value) {
@@ -369,8 +363,8 @@ class Panel extends Container {
         }
     }
 
-    get collapseHorizontally() {
-        return this._collapseHorizontally;
+    get removable() {
+        return !!this._btnRemove;
     }
 
     set collapseHorizontally(value) {
@@ -386,6 +380,10 @@ class Panel extends Container {
         this._reflow();
     }
 
+    get collapseHorizontally() {
+        return this._collapseHorizontally;
+    }
+
     get content() {
         return this._containerContent;
     }
@@ -394,16 +392,12 @@ class Panel extends Container {
         return this._containerHeader;
     }
 
-    get headerText() {
-        return this._labelTitle.text;
-    }
-
     set headerText(value) {
         this._labelTitle.text = value;
     }
 
-    get headerSize() {
-        return this._headerSize;
+    get headerText() {
+        return this._labelTitle.text;
     }
 
     set headerSize(value) {
@@ -412,6 +406,10 @@ class Panel extends Container {
         style.height = Math.max(0, value) + 'px';
         style.lineHeight = style.height;
         this._reflow();
+    }
+
+    get headerSize() {
+        return this._headerSize;
     }
 }
 

@@ -2,8 +2,6 @@ import Element from '../Element';
 import Label from '../Label';
 import Container from '../Container';
 
-import './style.scss';
-
 const CLASS_ContextMenu = 'pcui-contextmenu';
 const CLASS_ContextMenu_active = CLASS_ContextMenu + '-active';
 const CLASS_ContextMenu_parent = CLASS_ContextMenu + '-parent';
@@ -106,15 +104,15 @@ class ContextMenu {
             }
             menuItemElement.dom.addEventListener('mouseover', (e) => {
                 // if (!e.fromElement.classList.contains('pcui-contextmenu-parent')) return;
-                this._menu.forEachChild((node) => node.class.remove(CLASS_ContextMenu_parent_active));
+                this._menu.forEachChild(node => node.class.remove(CLASS_ContextMenu_parent_active));
                 menuItemElement.class.add(CLASS_ContextMenu_parent_active);
 
                 var maxMenuHeight = menuItem.items ? menuItem.items.length * 27.0 : 0.0;
                 var maxMenuWidth = 150.0;
-                var left = e.clientX + maxMenuWidth > window.innerWidth ? - maxMenuWidth + 2.0 : maxMenuWidth;
+                var left = e.clientX + maxMenuWidth > window.innerWidth ? -maxMenuWidth + 2.0 : maxMenuWidth;
                 var top = 0;
                 if (e.clientY + maxMenuHeight > window.innerHeight) {
-                    top = - maxMenuHeight + 27.0;
+                    top = -maxMenuHeight + 27.0;
                 }
                 menuItemElement.forEachChild((node, j) => {
                     if (j === 0) return;

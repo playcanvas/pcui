@@ -2,8 +2,6 @@ import Element from '../Element';
 import TextInput from '../TextInput';
 import * as pcuiClass from '../class';
 
-import './style.scss';
-
 const CLASS_NUMERIC_INPUT = 'pcui-numeric-input';
 const CLASS_NUMERIC_INPUT_SLIDER_CONTROL = CLASS_NUMERIC_INPUT + '-slider-control';
 const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-active';
@@ -213,7 +211,7 @@ class NumericInput extends TextInput {
 
         // fix precision
         if (this.precision !== null) {
-            value = parseFloat(Number(value).toFixed(this.precision), 10);
+            value = parseFloat(Number(value).toFixed(this.precision));
         }
 
         return value;
@@ -236,11 +234,6 @@ class NumericInput extends TextInput {
         return different;
     }
 
-    get value() {
-        const val = super.value;
-        return val !== '' ? parseFloat(val, 10) : null;
-    }
-
     set value(value) {
         value = this._normalizeValue(value);
 
@@ -253,6 +246,11 @@ class NumericInput extends TextInput {
         if (this._sliderControl) {
             this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
         }
+    }
+
+    get value() {
+        const val = super.value;
+        return val !== '' ? parseFloat(val) : null;
     }
 
     /* eslint accessor-pairs: 0 */
@@ -280,10 +278,6 @@ class NumericInput extends TextInput {
         }
     }
 
-    get min() {
-        return this._min;
-    }
-
     set min(value) {
         if (this._min === value) return;
         this._min = value;
@@ -294,8 +288,8 @@ class NumericInput extends TextInput {
         }
     }
 
-    get max() {
-        return this._max;
+    get min() {
+        return this._min;
     }
 
     set max(value) {
@@ -308,8 +302,8 @@ class NumericInput extends TextInput {
         }
     }
 
-    get precision() {
-        return this._precision;
+    get max() {
+        return this._max;
     }
 
     set precision(value) {
@@ -322,12 +316,16 @@ class NumericInput extends TextInput {
         }
     }
 
-    get step() {
-        return this._step;
+    get precision() {
+        return this._precision;
     }
 
     set step(value) {
         this._step = value;
+    }
+
+    get step() {
+        return this._step;
     }
 
     destroy() {

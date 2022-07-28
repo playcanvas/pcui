@@ -1,8 +1,6 @@
 import Element from '../Element';
 import * as pcuiClass from '../class';
 
-import './style.scss';
-
 const RESIZE_HANDLE_SIZE = 4;
 
 const VALID_RESIZABLE_VALUES = [
@@ -633,10 +631,6 @@ class Container extends Element {
         super.destroy();
     }
 
-    get flex() {
-        return this._flex;
-    }
-
     set flex(value) {
         if (value === this._flex) return;
 
@@ -649,8 +643,8 @@ class Container extends Element {
         }
     }
 
-    get grid() {
-        return this._grid;
+    get flex() {
+        return this._flex;
     }
 
     set grid(value) {
@@ -665,8 +659,8 @@ class Container extends Element {
         }
     }
 
-    get scrollable() {
-        return this._scrollable;
+    get grid() {
+        return this._grid;
     }
 
     set scrollable(value) {
@@ -682,8 +676,8 @@ class Container extends Element {
 
     }
 
-    get resizable() {
-        return this._resizable;
+    get scrollable() {
+        return this._scrollable;
     }
 
     set resizable(value) {
@@ -718,31 +712,30 @@ class Container extends Element {
                 this._dom.removeChild(this._domResizeHandle);
             }
         }
-
     }
 
-    get resizeMin() {
-        return this._resizeMin;
+    get resizable() {
+        return this._resizable;
     }
 
     set resizeMin(value) {
         this._resizeMin = Math.max(0, Math.min(value, this._resizeMax));
     }
 
-    get resizeMax() {
-        return this._resizeMax;
+    get resizeMin() {
+        return this._resizeMin;
     }
 
     set resizeMax(value) {
         this._resizeMax = Math.max(this._resizeMin, value);
     }
 
-    // The internal dom element used as a the container of all children.
-    // Can be overriden by derived classes
-    get domContent() {
-        return this._domContent;
+    get resizeMax() {
+        return this._resizeMax;
     }
 
+    // The internal dom element used as a the container of all children.
+    // Can be overriden by derived classes
     set domContent(value) {
         if (this._domContent === value) return;
 
@@ -755,6 +748,10 @@ class Container extends Element {
         if (this._domContent) {
             this._domContent.addEventListener('scroll', this._domEventScroll);
         }
+    }
+
+    get domContent() {
+        return this._domContent;
     }
 }
 
