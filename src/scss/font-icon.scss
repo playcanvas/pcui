@@ -1,12 +1,8 @@
+@import './fonts/PlayIcons-Regular-woff.scss';
+
 @font-face {
     font-family: 'pc-icon';
-    src: url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.eot');
-    src: url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.eot?#iefix') format('embedded-opentype'),
-         url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.woff2') format('woff2'),
-         url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.woff') format('woff'),
-         url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.ttf') format('truetype'),
-         url('https://playcanvas.com/static-assets/fonts/PlayIcons-Regular.svg') format('svg');
-
+    src: $playIconsRegularWoff;
     font-weight: normal;
     font-style: normal;
 }
