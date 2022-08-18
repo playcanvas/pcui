@@ -172,14 +172,17 @@ class Element extends Events {
         // add font regular class
         this._dom.classList.add(pcuiClass.FONT_REGULAR);
 
+        this._class = [];
         // add user classes
         if (args.class) {
             if (Array.isArray(args.class)) {
                 for (let i = 0; i < args.class.length; i++) {
                     this._dom.classList.add(args.class[i]);
+                    this._class.push(args.class[i]);
                 }
             } else {
                 this._dom.classList.add(args.class);
+                this._class.push(args.class);
             }
         }
 
@@ -502,6 +505,25 @@ class Element extends Events {
         if (this._ignoreParent) return this._enabled;
         return this._enabled && (!this._parent || this._parent.enabled);
     }
+
+
+    set class(value) {
+        this._class.forEach((cls) => {
+            this.classRemove(cls);
+        });
+        if (!Array.isArray(value)) {
+            value = [value];
+        }
+        this._class = value;
+        this._class.forEach((cls) => {
+            this.classAdd(cls);
+        });
+    }
+
+    get class() {
+        return this._class;
+    }
+
 
     set ignoreParent(value) {
         this._ignoreParent = value;
