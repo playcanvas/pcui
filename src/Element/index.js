@@ -630,16 +630,18 @@ class Element extends Events {
     }
 
     set class(value) {
-        this._class.forEach((cls) => {
-            this.classRemove(cls);
-        });
         if (!Array.isArray(value)) {
             value = [value];
         }
-        this._class = value;
-        this._class.forEach((cls) => {
+        value.forEach((cls) => {
             this.classAdd(cls);
         });
+        this._class.forEach((cls) => {
+            if (!value.includes(cls)) {
+                this.classRemove(cls);
+            }
+        });
+        this._class = value;
     }
 
     get class() {
