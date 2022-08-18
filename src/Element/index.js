@@ -506,25 +506,6 @@ class Element extends Events {
         return this._enabled && (!this._parent || this._parent.enabled);
     }
 
-
-    set class(value) {
-        this._class.forEach((cls) => {
-            this.classRemove(cls);
-        });
-        if (!Array.isArray(value)) {
-            value = [value];
-        }
-        this._class = value;
-        this._class.forEach((cls) => {
-            this.classAdd(cls);
-        });
-    }
-
-    get class() {
-        return this._class;
-    }
-
-
     set ignoreParent(value) {
         this._ignoreParent = value;
         this._onEnabledChange(this.enabled);
@@ -646,6 +627,19 @@ class Element extends Events {
 
     get style() {
         return this._dom.style;
+    }
+
+    set class(value) {
+        this._class.forEach((cls) => {
+            this.classRemove(cls);
+        });
+        if (!Array.isArray(value)) {
+            value = [value];
+        }
+        this._class = value;
+        this._class.forEach((cls) => {
+            this.classAdd(cls);
+        });
     }
 
     get class() {
