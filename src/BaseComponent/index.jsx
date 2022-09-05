@@ -12,6 +12,12 @@ class BaseComponent extends React.Component {
         if (props.onChange) {
             this.onChange = props.onChange;
         }
+        if (props.onSelect) {
+            this.onSelect = props.onSelect;
+        }
+        if (props.onDeselect) {
+            this.onDeselect = props.onDeselect;
+        }
         if (props.link) {
             this.link = props.link;
         }
@@ -32,6 +38,12 @@ class BaseComponent extends React.Component {
         }
         if (this.onChange) {
             this.element.on('change', this.onChange);
+        }
+        if (this.onSelect) {
+            this.element.on('select', this.onSelect);
+        }
+        if (this.onDeselect) {
+            this.element.on('deselect', this.onDeselect);
         }
         if (this.props.parent) {
             this.element.parent = this.props.parent;
@@ -55,7 +67,13 @@ class BaseComponent extends React.Component {
         Object.keys(this.props).forEach(prop => {
             var propDescriptor = this.getPropertyDescriptor(this.element, prop);
             if (propDescriptor && propDescriptor.set) {
-                this.element[prop] = this.props[prop];
+                if (prop === 'value') {
+                    this.element._suppressChange = true;
+                    this.element[prop] = this.props[prop];
+                    this.element._suppressChange = false;
+                } else {
+                    this.element[prop] = this.props[prop];
+                }
             }
         });
         if (prevProps.link !== this.props.link) {
