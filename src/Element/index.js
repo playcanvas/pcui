@@ -216,6 +216,8 @@ class Element extends Events {
         }
 
         this._flashTimeout = null;
+
+        this._suppressChange = false;
     }
 
     /**
