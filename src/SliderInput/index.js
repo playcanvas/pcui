@@ -221,7 +221,9 @@ class SliderInput extends Element {
 
     _onValueChange(value) {
         this._updateHandle(value);
-        this.emit('change', value);
+        if (!this._suppressChange) {
+            this.emit('change', value);
+        }
 
         if (this._binding) {
             this._binding.setValue(value);

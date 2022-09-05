@@ -966,7 +966,9 @@ class SelectInput extends Element {
         this._value = value;
         this._onValueChange(value);
 
-        this.emit('change', value);
+        if (!this._suppressChange) {
+            this.emit('change', value);
+        }
 
         if (this._binding) {
             this._binding.setValue(value);
