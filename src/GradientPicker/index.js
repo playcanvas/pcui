@@ -551,6 +551,9 @@ class GradientPicker extends Element {
         }
     }
 
+    get channels() {
+        return this._channels;
+    }
 
     set value(value) {
         // TODO: maybe we should check for equality
@@ -567,20 +570,16 @@ class GradientPicker extends Element {
         this.setValue([value]);
     }
 
+    get value() {
+        return this._value;
+    }
+
     set values(values) { // eslint-disable-line accessor-pairs
         // we do not support multiple values so just
         // add the multiple values class which essentially disables
         // the input
         this.class.add(CLASS_MULTIPLE_VALUES);
         this._renderGradient();
-    }
-
-    get value() {
-        return this._value;
-    }
-
-    get channels() {
-        return this._channels;
     }
 
     _generateHue(canvas) {
@@ -710,17 +709,17 @@ class GradientPicker extends Element {
         let h = hsv[0];
         let s = hsv[1];
         let v = hsv[2];
-        let r, g, b, i, f, p, q, t;
+        let r, g, b;
         if (h && s === undefined && v === undefined) {
             s = h.s;
             v = h.v;
             h = h.h;
         }
-        i = Math.floor(h * 6);
-        f = h * 6 - i;
-        p = v * (1 - s);
-        q = v * (1 - f * s);
-        t = v * (1 - (1 - f) * s);
+        const i = Math.floor(h * 6);
+        const f = h * 6 - i;
+        const p = v * (1 - s);
+        const q = v * (1 - f * s);
+        const t = v * (1 - (1 - f) * s);
         switch (i % 6) {
             case 0:
                 r = v;
@@ -757,12 +756,12 @@ class GradientPicker extends Element {
     }
 
     _rgb2hsv(rgb) {
-        let rr, gg, bb,
-            r = rgb[0] / 255,
+        let rr, gg, bb;
+        const r = rgb[0] / 255,
             g = rgb[1] / 255,
-            b = rgb[2] / 255,
-            h, s,
-            v = Math.max(r, g, b),
+            b = rgb[2] / 255;
+        let h, s;
+        const v = Math.max(r, g, b),
             diff = v - Math.min(r, g, b),
             diffc = function (c) {
                 return (v - c) / 6 / diff + 1 / 2;
@@ -790,10 +789,6 @@ class GradientPicker extends Element {
             }
         }
         return [h, s, v];
-    }
-
-    get hsva() {
-        return this._hsva;
     }
 
     set hsva(hsva) {
@@ -833,8 +828,8 @@ class GradientPicker extends Element {
         this._hsva = hsva;
     }
 
-    get color() {
-        return this.Helpers.toRgba(this._hsva);
+    get hsva() {
+        return this._hsva;
     }
 
     set color(clr) {
@@ -847,6 +842,10 @@ class GradientPicker extends Element {
         this.hsva = hsva;
     }
 
+    get color() {
+        return this.Helpers.toRgba(this._hsva);
+    }
+
     set editAlpha(editAlpha) {
         if (editAlpha) {
             this.alphaRect.element.style.display = 'inline';
@@ -857,6 +856,10 @@ class GradientPicker extends Element {
             this.alphaHandle.style.display = 'none';
             this.aField.element.style.display = 'none';
         }
+    }
+
+    get editAlpha() {
+        return this.editAlpha;
     }
 
         // open the picker
@@ -892,11 +895,11 @@ class GradientPicker extends Element {
     }
 
     onDeleteKey() {
-        if (!UI.overlay.hidden) {
+        if (!this.UI.overlay.hidden) {
             if (this.STATE.selectedAnchor !== -1) {
                 const deleteTime = this.STATE.anchors[this.STATE.selectedAnchor];
                 this.STATE.selectedAnchor = -1;
-                deleteAnchor(deleteTime);
+                this.deleteAnchor(deleteTime);
             }
         }
     }
