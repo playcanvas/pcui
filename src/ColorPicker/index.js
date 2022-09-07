@@ -560,12 +560,12 @@ class ColorPicker extends Element {
     }
 
     _rgb2hsv(rgb) {
-        let rr, gg, bb,
-            r = rgb[0] / 255,
+        let rr, gg, bb;
+        const r = rgb[0] / 255,
             g = rgb[1] / 255,
-            b = rgb[2] / 255,
-            h, s,
-            v = Math.max(r, g, b),
+            b = rgb[2] / 255;
+        let h, s;
+        const v = Math.max(r, g, b),
             diff = v - Math.min(r, g, b),
             diffc = function (c) {
                 return (v - c) / 6 / diff + 1 / 2;
@@ -599,17 +599,17 @@ class ColorPicker extends Element {
         let h = hsv[0];
         let s = hsv[1];
         let v = hsv[2];
-        let r, g, b, i, f, p, q, t;
+        let r, g, b;
         if (h && s === undefined && v === undefined) {
             s = h.s;
             v = h.v;
             h = h.h;
         }
-        i = Math.floor(h * 6);
-        f = h * 6 - i;
-        p = v * (1 - s);
-        q = v * (1 - f * s);
-        t = v * (1 - (1 - f) * s);
+        const i = Math.floor(h * 6);
+        const f = h * 6 - i;
+        const p = v * (1 - s);
+        const q = v * (1 - f * s);
+        const t = v * (1 - (1 - f) * s);
         switch (i % 6) {
             case 0:
                 r = v;
@@ -725,10 +725,6 @@ class ColorPicker extends Element {
         super.destroy();
     }
 
-    get value() {
-        return this._value.slice(0, this._channels);
-    }
-
     set value(value) {
         value = value || [0, 0, 0, 0];
         const changed = this._updateValue(value);
@@ -736,6 +732,10 @@ class ColorPicker extends Element {
         if (changed && this._binding) {
             this._binding.setValue(value);
         }
+    }
+
+    get value() {
+        return this._value.slice(0, this._channels);
     }
 
     set values(values) {
@@ -763,14 +763,18 @@ class ColorPicker extends Element {
         }
     }
 
-    get channels() {
-        return this._channels;
+    get values() {
+        return this.values;
     }
 
     set channels(value) {
         if (this._channels === value) return;
         this._channels = Math.max(0, Math.min(value, 4));
         this._setValue(this.value);
+    }
+
+    get channels() {
+        return this._channels;
     }
 }
 

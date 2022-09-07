@@ -51,10 +51,6 @@ class Canvas extends Element {
         this.emit('resize', width, height);
     }
 
-    get width() {
-        return this._width;
-    }
-
     set width(value) {
         if (this._width === value)
             return;
@@ -65,8 +61,8 @@ class Canvas extends Element {
         this.emit('resize', this._width, this._height);
     }
 
-    get height() {
-        return this._height;
+    get width() {
+        return this._width;
     }
 
     set height(value) {
@@ -77,6 +73,10 @@ class Canvas extends Element {
         this.dom.height = this.pixelHeight;
         this.dom.style.height = value + 'px';
         this.emit('resize', this._width, this._height);
+    }
+
+    get height() {
+        return this._height;
     }
 
     get pixelWidth() {

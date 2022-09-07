@@ -3,7 +3,7 @@
  *
  * @namespace
  */
- const math = {
+const math = {
     /**
      * Conversion factor between degrees and radians.
      *
