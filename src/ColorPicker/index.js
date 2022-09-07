@@ -72,7 +72,7 @@ class ColorPicker extends Element {
         this._historyPostfix = null;
 
         this._value = args.value || [0, 0, 255, 1];
-        this._channels = args.channels || 4;
+        this._channels = args.channels || 3;
         this._setValue(this._value);
 
         this._isColorPickerOpen = false;
