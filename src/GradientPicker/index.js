@@ -10,6 +10,7 @@ import Label from '../Label';
 import { CurveSet } from '../Math/curve-set';
 import { Curve } from '../Math/curve';
 import { math } from '../Math/math';
+import { _hsv2rgb, _rgb2hsv } from '../Math/color-value';
 
 const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
 
@@ -110,21 +111,21 @@ class GradientPicker extends Element {
 
             // rgb(a) -> hsva
             toHsva: function (rgba) {
-                const hsva = this._rgb2hsv(rgba.map(function (v) {
+                const hsva = _rgb2hsv(rgba.map(function (v) {
                     return v * 255;
                 }));
                 hsva.push(rgba.length > 3 ? rgba[3] : 1);
                 return hsva;
-            }.bind(this),
+            },
 
             // hsv(1) -> rgba
             toRgba: function (hsva) {
-                const rgba = this._hsv2rgb(hsva).map(function (v) {
+                const rgba = _hsv2rgb(hsva).map(function (v) {
                     return v / 255;
                 });
                 rgba.push(hsva.length > 3 ? hsva[3] : 1);
                 return rgba;
-            }.bind(this),
+            },
 
             // calculate the normalized coordinate [x,y] relative to rect
             normalizedCoord: function (widget, x, y) {
@@ -588,7 +589,7 @@ class GradientPicker extends Element {
         const h = canvas.pixelHeight;
         const gradient = ctx.createLinearGradient(0, 0, 0, h);
         for (let t = 0; t <= 6; t += 1) {
-            gradient.addColorStop(t / 6, this.Helpers.rgbaStr(this._hsv2rgb([t / 6, 1, 1])));
+            gradient.addColorStop(t / 6, this.Helpers.rgbaStr(_hsv2rgb([t / 6, 1, 1])));
         }
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, w, h);
@@ -645,7 +646,7 @@ class GradientPicker extends Element {
                 const rgb = [parseInt(hex.substring(0, 2), 16),
                     parseInt(hex.substring(2, 4), 16),
                     parseInt(hex.substring(4, 6), 16)];
-                this.hsva = this._rgb2hsv(rgb).concat([this.hsva[3]]);
+                this.hsva = _rgb2hsv(rgb).concat([this.hsva[3]]);
                 this.colorSelectedAnchor(this.color);
             }
         }
@@ -792,8 +793,8 @@ class GradientPicker extends Element {
     }
 
     set hsva(hsva) {
-        const rgb = this._hsv2rgb(hsva);
-        const hueRgb = this._hsv2rgb([hsva[0], 1, 1]);
+        const rgb = _hsv2rgb(hsva);
+        const hueRgb = _hsv2rgb([hsva[0], 1, 1]);
 
         // regenerate gradient canvas if hue changes
         if (hsva[0] !== this._hsva[0]) {
@@ -813,7 +814,7 @@ class GradientPicker extends Element {
         this.hueHandle.style.top = e.offsetTop - 3 + Math.floor(140 * hsva[0]) + 'px';
         this.hueHandle.style.left = '162px';
 
-        this.alphaHandle.style.backgroundColor = this.Helpers.rgbaStr(this._hsv2rgb([0, 0, hsva[3]]));
+        this.alphaHandle.style.backgroundColor = this.Helpers.rgbaStr(_hsv2rgb([0, 0, hsva[3]]));
         this.alphaHandle.style.top = e.offsetTop - 3 + Math.floor(140 * (1 - hsva[3]))  + 'px';
         this.alphaHandle.style.left = '194px';
 

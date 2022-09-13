@@ -2,6 +2,7 @@ import Element from '../Element';
 import Overlay from '../Overlay';
 import NumericInput from '../NumericInput';
 import TextInput from '../TextInput';
+import { _hsv2rgb, _rgb2hsv } from '../Math/color-value';
 
 const CLASS_COLOR_INPUT = 'pcui-color-input';
 const CLASS_NOT_FLEXIBLE = 'pcui-not-flexible';
@@ -316,7 +317,7 @@ class ColorPicker extends Element {
             return;
 
         if (this.channelsNumber >= 3) {
-            const hsv = this._rgb2hsv(color);
+            const hsv = _rgb2hsv(color);
             this.colorHSV[0] = hsv[0];
             this.colorHSV[1] = hsv[1];
             this.colorHSV[2] = hsv[2];
@@ -388,7 +389,7 @@ class ColorPicker extends Element {
         this.channelsNumber = color.length;
 
         if (this.channelsNumber >= 3) {
-            const hsv = this._rgb2hsv(color);
+            const hsv = _rgb2hsv(color);
             this.colorHSV[0] = hsv[0];
             this.colorHSV[1] = hsv[1];
             this.colorHSV[2] = hsv[2];
@@ -475,7 +476,7 @@ class ColorPicker extends Element {
         this.colorHSV[2] = 1.0 - (y / this.size);
 
         this.directInput = false;
-        const rgb = this._hsv2rgb([this.colorHSV[0], this.colorHSV[1], this.colorHSV[2]]);
+        const rgb = _hsv2rgb([this.colorHSV[0], this.colorHSV[1], this.colorHSV[2]]);
         for (let i = 0; i < 3; i++) {
             this.pickerChannels[i].value = rgb[i];
         }
@@ -502,7 +503,7 @@ class ColorPicker extends Element {
         const y = Math.max(0, Math.min(this.size, Math.floor(evt.clientY - rect.top)));
         const h = y / this.size;
 
-        const rgb = this._hsv2rgb([h, this.colorHSV[1], this.colorHSV[2]]);
+        const rgb = _hsv2rgb([h, this.colorHSV[1], this.colorHSV[2]]);
         this.colorHSV[0] = h;
 
         this.directInput = false;
@@ -650,7 +651,7 @@ class ColorPicker extends Element {
             return channel.value || 0;
         }).slice(0, this.channelsNumber);
 
-        const hsv = this._rgb2hsv(color);
+        const hsv = _rgb2hsv(color);
         if (this.directInput) {
             const sum = color[0] + color[1] + color[2];
             if (sum !== 765 && sum !== 0)
@@ -671,7 +672,7 @@ class ColorPicker extends Element {
         this.pickRectHandle.style.top = Math.max(4, Math.min(this.size - 4, this.size * (1.0 - this.colorHSV[2]))) + 'px'; // v
 
         if (this.channelsNumber >= 3) {
-            const plainColor = this._hsv2rgb([this.colorHSV[0], 1, 1]).join(',');
+            const plainColor = _hsv2rgb([this.colorHSV[0], 1, 1]).join(',');
 
             // rect background color
             this.pickRect.style.backgroundColor = 'rgb(' + plainColor + ')';
