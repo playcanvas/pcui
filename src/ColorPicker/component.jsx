@@ -1,6 +1,5 @@
 import React from 'react';
 import Element from './index';
-import PropTypes from 'prop-types';
 import BaseComponent from '../BaseComponent/index.jsx';
 
 class ColorPicker extends BaseComponent {

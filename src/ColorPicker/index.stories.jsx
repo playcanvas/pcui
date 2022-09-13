@@ -23,5 +23,5 @@ export default {
     argTypes: getStorybookDocs(config.docs)
 };
 
-export const Main = (args) => <ColorPickerComponent {...args} />;
+export const Main = (args) => <ColorPickerComponent value={[255, 0, 0, 1]} {...args} />;
 
