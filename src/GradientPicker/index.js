@@ -268,6 +268,7 @@ class GradientPicker extends Element {
         this.UI.overlay.transparent = true;
         this.UI.overlay.hidden = true;
         this.UI.overlay.clickable = true;
+        this.UI.overlay.element.style.position = "fixed";
 
         this.UI.overlay.on('show', function () {
             this.onOpen();

@@ -367,7 +367,7 @@ class ColorPicker extends Element {
         // position picker
         const rectPicker = this.overlay.dom.getBoundingClientRect();
         const rectElement = this.dom.getBoundingClientRect();
-        this._setColorPickerPosition(rectElement.left - rectPicker.width, rectElement.top);
+        this._setColorPickerPosition(rectElement.left - rectPicker.width, rectElement.top + 25);
 
         // color changed, update picker
         this.evtColorToPicker = this.on('change', () => {
