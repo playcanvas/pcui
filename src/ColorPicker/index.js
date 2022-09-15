@@ -13,7 +13,7 @@ const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
  * @augments Element
  * @class
  * @classdesc Represents a color picker
- * @property {Array} value An optional array of 4 integers containing the RGBA values the picker should be initialised to
+ * @property {number[]} value An optional array of 4 integers containing the RGBA values the picker should be initialised to
  * @property {number} channels=3 Number of color channels; default is 3, changing to 4 adds the option to change the alpha value
  */
 class ColorPicker extends Element {
@@ -22,8 +22,7 @@ class ColorPicker extends Element {
      *
      * @param {object} args - The arguments. Extends the Element arguments. Any settable property can also be set through the constructor.
      */
-    constructor(args) {
-        if (!args) args = {};
+    constructor(args = {}) {
 
         super(args.dom ? args.dom : document.createElement('div'), args);
 

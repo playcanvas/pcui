@@ -26,7 +26,7 @@ const CLASS_GRADIENT = 'pcui-gradient';
  * @name GradientPicker
  * @augments Element
  * @property {object} value An optional object containing the curves the picker should be initialised to
- * @property {number} channels=3 Number of color channels; default is 3, changing to 4 adds the option to change the alpha value
+ * @property {number[]} channels=3 Number of color channels; default is 3, changing to 4 adds the option to change the alpha value
  * @classdesc Represents a gradient picker
  */
 class GradientPicker extends Element {
@@ -35,8 +35,7 @@ class GradientPicker extends Element {
      *
      * @param {object} args - The arguments. Extends the Element arguments. Any settable property can also be set through the constructor.
      */
-    constructor(args) {
-        if (!args) args = {};
+    constructor(args = {}) {
 
         super(args.dom ? args.dom : document.createElement('div'), args);
 
