@@ -1232,7 +1232,7 @@ class GradientPicker extends Element {
         const data = {
             type: this.STATE.curves[0].type,
             keys: this.STATE.curves.map(function (c) {
-                return [].concat.apply([], c.keys);
+                return [].concat(...c.keys);
             })
         };
         this.copiedData = data;
@@ -1251,7 +1251,7 @@ class GradientPicker extends Element {
                 if (index < data.keys.length) {
                     pasteData.keys.push(data.keys[index]);
                 } else {
-                    pasteData.keys.push([].concat.apply([], this.STATE.curves[index].keys));
+                    pasteData.keys.push([].concat(...this.STATE.curves[index].keys));
                 }
             }
 
