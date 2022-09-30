@@ -7,9 +7,9 @@ import TextInput from '../TextInput';
 import Panel from '../Panel';
 import Canvas from '../Canvas';
 import Label from '../Label';
-import { CurveSet } from '../Math/curve-set';
-import { Curve } from '../Math/curve';
-import { math } from '../Math/math';
+import { CurveSet } from 'playcanvas/build/playcanvas.mjs/math/curve-set';
+import { Curve } from 'playcanvas/build/playcanvas.mjs/math/curve';
+import { math } from 'playcanvas/build/playcanvas.mjs/math/math';
 import { _hsv2rgb, _rgb2hsv } from '../Math/color-value';
 
 const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
