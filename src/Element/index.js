@@ -1,7 +1,8 @@
 import * as pcuiClass from '../class';
 import { Events } from '@playcanvas/observer';
 
-import './style.scss';
+// import the application's styling and use the green theme
+import '../scss/themes/green/style.scss';
 
 const CLASS_ELEMENT = 'pcui-element';
 

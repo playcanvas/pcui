@@ -18,6 +18,9 @@ class BaseComponent extends React.Component {
         if (props.onDeselect) {
             this.onDeselect = props.onDeselect;
         }
+        if (props.onValidate) {
+            this.onValidate = props.onValidate;
+        }
         if (props.link) {
             this.link = props.link;
         }
@@ -47,6 +50,9 @@ class BaseComponent extends React.Component {
         }
         if (this.props.parent) {
             this.element.parent = this.props.parent;
+        }
+        if (this.onValidate) {
+            this.element.onValidate = this.onValidate;
         }
     }
     getPropertyDescriptor = (obj, prop) => {
