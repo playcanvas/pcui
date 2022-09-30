@@ -13,6 +13,8 @@
 /dist
 /react/dist/pcui-react.js
 /react/dist/pcui-react.mjs
+/react/dist/pcui-react-unstyled.js
+/react/dist/pcui-react-unstyled.mjs
 /.storybook/utils/jsdoc-ast.json
 
 # misc
