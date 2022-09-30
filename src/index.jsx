@@ -8,7 +8,9 @@ import BooleanInput from './BooleanInput/component.jsx';
 import RadioButton from './RadioButton/index.js';
 import Label from './Label/component.jsx';
 import Button from './Button/component.jsx';
+import Canvas from './Canvas/component.jsx';
 import Code from './Code/component.jsx';
+import ColorPicker from './ColorPicker/component.jsx';
 import Container from './Container/component.jsx';
 import Panel from './Panel/component.jsx';
 import Overlay from './Overlay/component.jsx';
@@ -21,6 +23,7 @@ import ContextMenu from './ContextMenu/component.jsx';
 import TreeView from './TreeView/component.jsx';
 import TreeViewItem from './TreeViewItem/component.jsx';
 import LabelGroup from './LabelGroup/component.jsx';
+import GradientPicker from './GradientPicker/component.jsx';
 import GridView from './GridView/component.jsx';
 import GridViewItem from './GridViewItem/component.jsx';
 import Menu from './Menu/component.jsx';
@@ -30,7 +33,9 @@ export {
     ArrayInput,
     BooleanInput,
     Button,
+    Canvas,
     Code,
+    ColorPicker,
     Container,
     ContextMenu,
     Divider,
@@ -50,6 +55,7 @@ export {
     TextInput,
     TreeView,
     TreeViewItem,
+    GradientPicker,
     GridView,
     GridViewItem,
     Menu,
