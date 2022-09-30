@@ -16,7 +16,9 @@ import BooleanInput from './BooleanInput';
 import Label from './Label';
 import Button from './Button';
 import RadioButton from './RadioButton';
+import Canvas from './Canvas';
 import Code from './Code';
+import ColorPicker from './ColorPicker';
 import Container from './Container';
 import Panel from './Panel';
 import Overlay from './Overlay';
@@ -29,6 +31,7 @@ import ContextMenu from './ContextMenu';
 import TreeView from './TreeView';
 import TreeViewItem from './TreeViewItem';
 import LabelGroup from './LabelGroup';
+import GradientPicker from './GradientPicker';
 import GridView from './GridView';
 import GridViewItem from './GridViewItem';
 import ArrayInput from './ArrayInput';
@@ -50,11 +53,14 @@ export {
     ArrayInput,
     BooleanInput,
     Button,
+    Canvas,
     Code,
+    ColorPicker,
     Container,
     ContextMenu,
     Divider,
     Element,
+    GradientPicker,
     InfoBox,
     Label,
     LabelGroup,

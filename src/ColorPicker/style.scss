@@ -1,0 +1,299 @@
+// color input
+.pcui-color-input {
+    @extend .noSelect;
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 44px;
+    height: 24px;
+    margin: $element-margin;
+    vertical-align: top;
+    cursor: pointer;
+    transition: opacity 100ms;
+
+    > .pcui-overlay-clickable {
+        position: fixed;
+    }
+
+    > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    // checkerboard pattern
+    //@include checkerboard(#fff, black, calc(44px/5));
+
+    &:after {
+        content: '\00a0';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        background-color: transparent;
+        border-bottom: 16px solid $bcg-darker;
+        border-left: 16px solid transparent;
+    }
+}
+
+.picker-color {
+    
+    &.c-1 > .pcui-overlay-content {
+        > .pick-opacity {
+            display: block;
+        }
+        > .fields > .field-r {
+            display: block;
+        }
+    }
+    &.c-2 > .pcui-overlay-content {
+        > .fields > .field-hex {
+            display: block;
+        }
+    }
+    &.c-3 > .pcui-overlay-content {
+        width: 298px;
+
+        > .pick-rect {
+            display: block;
+        }
+        > .pick-hue {
+            display: block;
+        }
+        > .pick-opacity {
+            display: none;
+        }
+        > .fields {
+            > .field-g,
+            > .field-b {
+                display: block;
+            }
+        }
+    }
+    &.c-4 > .pcui-overlay-content {
+        width: 320px;
+
+        > .pick-opacity {
+            display: block;
+        }
+        > .fields > .field-a {
+            display: block;
+        }
+    }
+    > .pcui-overlay-content {
+        border: 1px solid #000;
+        width: 320px;
+        height: 162px;
+        // background-color: #333;
+        white-space: nowrap;
+        transition: none;
+
+        > .pick-rect {
+            @extend .noSelect;
+            position: relative;
+            display: none;
+            float: left;
+            width: 146px;
+            height: 146px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            margin: 8px 0 8px 8px;
+            background-color: #f00;
+            cursor: crosshair;
+
+            > .white {
+                position: absolute;
+                width: 144px;
+                height: 144px;
+                top: 0;
+                left: 0;
+
+                background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(255,255,255,0.01) 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0.01))); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.01) 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.01) 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.01) 100%); /* IE10+ */
+                background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.01) 100%); /* W3C */
+            }
+            > .black {
+                position: absolute;
+                width: 144px;
+                height: 144px;
+                top: 0;
+                left: 0;
+
+                background: -moz-linear-gradient(top,  rgba(0,0,0,0.01) 0%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.01)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,1) 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,1) 100%); /* W3C */
+            }
+            > .handle {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 12px;
+                height: 12px;
+                margin: -7px 0 0 -7px;
+                border: 1px solid #000;
+                outline: 1px solid #fff;
+            }
+        }
+        > .pick-hue {
+            @extend .noSelect;
+            position: relative;
+            display: none;
+            float: left;
+            width: 14px;
+            height: 146px;
+            margin: 8px 0 8px 8px;
+            border: 1px solid #000;
+            box-sizing: border-box;
+            cursor: crosshair;
+
+            background: #000;
+            background: -moz-linear-gradient(top, /* FF3.6+ */
+                rgba(255, 0, 0, 1) 0%,
+                rgba(255, 255, 0, 1) 16.67%,
+                rgba(0, 255, 0, 1) 33.33%,
+                rgba(0, 255, 255, 1) 50%,
+                rgba(0, 0, 255, 1) 66.67%,
+                rgba(255, 0, 255, 1) 83.33%,
+                rgba(255, 0, 0, 1) 100%);
+            background: -webkit-gradient(linear, left top, left bottom, /* Chrome,Safari4+ */
+                color-stop(0%, rgba(255, 0, 0, 1)),
+                color-stop(16.67%, rgba(255, 255, 0, 1)),
+                color-stop(33.33%, rgba(0, 255, 0, 1)),
+                color-stop(50%, rgba(0, 255, 255, 1)),
+                color-stop(66.67%, rgba(0, 0, 255, 1)),
+                color-stop(83.33%, rgba(255, 0, 255, 1)),
+                color-stop(100%, rgba(255, 0, 0, 1)));
+            background: -webkit-linear-gradient(top, /* Chrome10+,Safari5.1+ */
+                rgba(255, 0, 0, 1) 0%,
+                rgba(255, 255, 0, 1) 16.67%,
+                rgba(0, 255, 0, 1) 33.33%,
+                rgba(0, 255, 255, 1) 50%,
+                rgba(0, 0, 255, 1) 66.67%,
+                rgba(255, 0, 255, 1) 83.33%,
+                rgba(255, 0, 0, 1) 100%);
+            background: -o-linear-gradient(top, /* Opera 11.10+ */
+                rgba(255, 0, 0, 1) 0%,
+                rgba(255, 255, 0, 1) 16.67%,
+                rgba(0, 255, 0, 1) 33.33%,
+                rgba(0, 255, 255, 1) 50%,
+                rgba(0, 0, 255, 1) 66.67%,
+                rgba(255, 0, 255, 1) 83.33%,
+                rgba(255, 0, 0, 1) 100%);
+            background: -ms-linear-gradient(top, /* IE10+ */
+                rgba(255, 0, 0, 1) 0%,
+                rgba(255, 255, 0, 1) 16.67%,
+                rgba(0, 255, 0, 1) 33.33%,
+                rgba(0, 255, 255, 1) 50%,
+                rgba(0, 0, 255, 1) 66.67%,
+                rgba(255, 0, 255, 1) 83.33%,
+                rgba(255, 0, 0, 1) 100%);
+            background: linear-gradient(to bottom, /* W3C */
+                rgba(255, 0, 0, 1) 0%,
+                rgba(255, 255, 0, 1) 16.67%,
+                rgba(0, 255, 0, 1) 33.33%,
+                rgba(0, 255, 255, 1) 50%,
+                rgba(0, 0, 255, 1) 66.67%,
+                rgba(255, 0, 255, 1) 83.33%,
+                rgba(255, 0, 0, 1) 100%);
+
+            > .handle {
+                position: absolute;
+                top: 0;
+                left: -3px;
+                width: 16px;
+                height: 4px;
+                margin: -3px 0 0 0;
+                border: 1px solid #000;
+                outline: 1px solid #fff;
+            }
+        }
+        > .pick-opacity {
+            @extend .noSelect;
+            position: relative;
+            display: none;
+            float: left;
+            width: 12px;
+            height: 144px;
+            margin: 8px 0 8px 8px;
+            border: 1px solid #000;
+            cursor: crosshair;
+
+            background: #000;
+            background: -moz-linear-gradient(top,  #ffffff 0%, #000000 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  #ffffff 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  #ffffff 0%,#000000 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  #ffffff 0%,#000000 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  #ffffff 0%,#000000 100%); /* W3C */
+
+            > .handle {
+                position: absolute;
+                top: 0;
+                left: -3px;
+                width: 16px;
+                height: 4px;
+                margin: -3px 0 0 0;
+                border: 1px solid #000;
+                outline: 1px solid #fff;
+            }
+        }
+
+        > .fields {
+            float: left;
+            width: 106px;
+            height: 154px;
+            margin: 0 0 0 8px;
+            padding: 4px;
+
+            > .field {
+                display: none;
+                width: calc(106px - 6px);
+            }
+        }
+    }
+}
+
+.pcui-color-input.pcui-multiple-values {
+    > div {
+        display: none;
+    }
+
+    //@include checkerboard(#465659, #5b696c, calc(44px/5));
+}
+
+// readonly color input
+.pcui-color-input.pcui-readonly {
+    cursor: default;
+    &:after {
+        display: none;
+    }
+}
+
+// disabled color input
+.pcui-color-input.pcui-disabled {
+    opacity: $element-opacity-disabled;
+    cursor: default;
+}
+
+// hover / focus states
+.pcui-color-input:not(.pcui-disabled):not(.pcui-readonly) {
+    &:hover, &:focus {
+        box-shadow: $element-shadow-hover;
+
+        &:after {
+            border-bottom-color: $bcg-darkest;
+        }
+    }
+    &:active {
+        box-shadow: $element-shadow-active;
+    }
+}
