@@ -44,7 +44,7 @@ const react_umd = unstyled => ({
     input: 'src/index.jsx',
     external: ['@playcanvas/observer', 'react', 'prop-types'],
     output: {
-        file: `react/dist/pcui-react${unstyled ? '-unstyled' : ''}.js`,
+        file: `react/${unstyled ? 'unstyled/' : ''}dist/pcui-react${unstyled ? '-unstyled' : ''}.js`,
         format: 'umd',
         name: 'pcuiReact',
         globals: {
@@ -68,7 +68,7 @@ const react_module = unstyled => ({
     input: 'src/index.jsx',
     external: ['@playcanvas/observer', 'react', 'prop-types'],
     output: {
-        file: `react/dist/pcui-react${unstyled ? '-unstyled' : ''}.mjs`,
+        file: `react/${unstyled ? 'unstyled/' : ''}dist/pcui-react${unstyled ? '-unstyled' : ''}.mjs`,
         format: 'module'
     },
     plugins: [
