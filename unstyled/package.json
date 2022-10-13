@@ -1,12 +1,12 @@
 {
-  "name": "pcui-react-unstyled",
+  "name": "pcui-unstyled",
   "version": "1.0.0",
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://playcanvas.github.io/pcui",
-  "description": "Unstyled PCUI components for react",
+  "description": "Unstyled PCUI components",
   "main": "dist/index.js",
   "module": "dist/module/src/index.mjs",
-  "types": "../types/index.d.ts",
+  "types": "../dist/pcui.d.ts",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"

@@ -5,8 +5,8 @@
   "homepage": "https://playcanvas.github.io/pcui",
   "description": "This library enables the creation of reliable and visually pleasing user interfaces by providing fully styled components that you can use directly on your site. The components are useful in a wide range of use cases, from creating simple forms to building graphical user interfaces for complex web tools.",
   "license": "MIT",
-  "main": "dist/pcui.js",
-  "module": "dist/pcui.mjs",
+  "main": "dist/index.js",
+  "module": "dist/module/src/index.mjs",
   "types": "dist/pcui.d.ts",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"
@@ -24,7 +24,8 @@
     "storybook": "jsdoc -r -X src > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
     "docs:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "docs:build": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
-    "tsd": "jsdoc -c conf-tsd.json && node tsd.js"
+    "tsd": "jsdoc -c conf-tsd.json && node tsd.js",
+    "build:types:react": "cd react && ../node_modules/.bin/tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir types"
   },
   "files": [
     "dist",
@@ -67,9 +68,7 @@
     "@storybook/manager-webpack5": "^6.4.18",
     "@storybook/preset-create-react-app": "^4.0.0",
     "@storybook/react": "^6.4.18",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
+    "@types/react": "^18.0.21",
     "babel-loader": "^8.2.2",
     "eslint": "^8.8.0",
     "glob": "^7.1.7",
@@ -77,11 +76,11 @@
     "json-loader": "^0.5.7",
     "playcanvas": "^1.57.0",
     "prop-types": "^15.8.1",
-    "react": "^17.0.2",
+    "react": "^18.2.0",
     "react-app-rewire-alias": "^1.1.7",
     "react-app-rewired": "^2.1.11",
-    "react-dom": "^17.0.2",
-    "react-is": "^17.0.2",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
     "react-scripts": "^5.0.0",
     "rollup": "^2.67.0",
     "rollup-plugin-rename": "^1.0.1",
@@ -94,5 +93,9 @@
   },
   "directories": {
     "doc": "docs"
+  },
+  "dependencies": {
+    "rollup-plugin-typescript2": "^0.34.1",
+    "typescript": "^4.8.4"
   }
 }

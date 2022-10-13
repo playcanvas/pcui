@@ -4,9 +4,9 @@
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://playcanvas.github.io/pcui",
   "description": "PCUI components for react",
-  "main": "dist/pcui-react.js",
-  "module": "dist/pcui-react.mjs",
-  "types": "dist/pcui-react.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/module/src/index.mjs",
+  "types": "types/index.d.ts",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"

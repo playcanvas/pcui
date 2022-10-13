@@ -1,7 +1,7 @@
 import Element from './index';
-import BaseComponent from '../BaseComponent/index.jsx';
+import ElementComponent from '../Element/componentx';
 
-class ButtonComponent extends BaseComponent {
+class ButtonComponent extends ElementComponent {
     constructor(props) {
         super(props);
         this.element = new Element(props);

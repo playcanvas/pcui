@@ -1,8 +1,8 @@
 import Element from './index';
 import PropTypes from 'prop-types';
-import BaseComponent from '../BaseComponent/index.jsx';
+import ElementComponent from '../Element/componentx';
 
-class Component extends BaseComponent {
+class Component extends ElementComponent {
     constructor(props) {
         super(props);
         this.element = new Element(props);
