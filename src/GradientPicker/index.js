@@ -964,7 +964,7 @@ class GradientPicker extends Element {
         // sort anchors and remove duplicates
         times.sort();
         times = times.filter(function (item, pos, ary) {
-            return !pos || item != ary[pos - 1];
+            return !pos || item !== ary[pos - 1];
         });
 
         return times;
@@ -1039,7 +1039,7 @@ class GradientPicker extends Element {
             }
 
             const hoveredAnchor = (closest !== -1 && closestDist < 0.02) ? closest : -1;
-            if (hoveredAnchor != this.STATE.hoveredAnchor) {
+            if (hoveredAnchor !== this.STATE.hoveredAnchor) {
                 this.selectHovered(hoveredAnchor);
                 this.render();
             }
@@ -1295,7 +1295,7 @@ class GradientPicker extends Element {
         // sanity checks mostly for script 'curve' attributes
         if (!(value instanceof Array) ||
             value.length !== 1 ||
-            value[0].keys == undefined ||
+            value[0].keys === undefined ||
             (value[0].keys.length !== 3 && value[0].keys.length !== 4))
             return;
 

@@ -1,5 +1,5 @@
 import Element from '../Element';
-import "jointjs/dist/joint.css";
+// import "jointjs/dist/joint.css";
 require('jquery');
 require('lodash');
 require('backbone');

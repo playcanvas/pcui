@@ -38,7 +38,7 @@ class GridViewItem extends Container {
         this.allowSelect = args.allowSelect !== undefined ? args.allowSelect : true;
         this._selected = false;
 
-        if (args.type == 'radio') {
+        if (args.type === 'radio') {
             this.class.add(CLASS_ROOT_RADIO);
 
             this._radioButton = new RadioButton({

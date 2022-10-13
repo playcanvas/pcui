@@ -4,15 +4,14 @@ import Button from '../Button';
 import NumericInput from '../NumericInput';
 import SelectInput from '../SelectInput';
 import BooleanInput from '../BooleanInput';
-import Canvas from '../pcui/element/element-canvas';
-import * as pcuiClass from '../pcui/element-class';
-import utils from '../pcui/helpers/utils';
-import { localStorageSet, localStorageGet } from '../pcui/helpers/localStorage';
+import Canvas from '../Canvas/index';
+import * as pcuiClass from '../class';
+import utils from '../helpers/utils';
+import { localStorageSet, localStorageGet } from '../helpers/localStorage';
 import {
     Curve,
     math
 } from 'playcanvas';
-import Tooltip from '../pcui/element/element-tooltip';
 
 const CLASS_CURVE = 'pcui-curve';
 const CLASS_CURVE_PICKER = CLASS_CURVE + '-picker';
@@ -501,33 +500,33 @@ class CurveInput extends Container {
             this._renderPicker();
         });
 
-        var resetZoomTooltip = new Tooltip({
-            title: 'Reset Zoom'
-        });
-        resetZoomTooltip.attach({
-            target: this._resetZoomButton
-        });
+        // var resetZoomTooltip = new Tooltip({
+        //     title: 'Reset Zoom'
+        // });
+        // resetZoomTooltip.attach({
+        //     target: this._resetZoomButton
+        // });
 
-        var resetCurveTooltip = new Tooltip({
-            title: 'Reset Curve'
-        });
-        resetCurveTooltip.attach({
-            target: this._resetCurveButton
-        });
+        // var resetCurveTooltip = new Tooltip({
+        //     title: 'Reset Curve'
+        // });
+        // resetCurveTooltip.attach({
+        //     target: this._resetCurveButton
+        // });
 
-        var copyTooltip = new Tooltip({
-            title: 'Copy'
-        });
-        copyTooltip.attach({
-            target: this._copyButton
-        });
+        // var copyTooltip = new Tooltip({
+        //     title: 'Copy'
+        // });
+        // copyTooltip.attach({
+        //     target: this._copyButton
+        // });
 
-        var pasteTooltip = new Tooltip({
-            title: 'Paste'
-        });
-        pasteTooltip.attach({
-            target: this._pasteButton
-        });
+        // var pasteTooltip = new Tooltip({
+        //     title: 'Paste'
+        // });
+        // pasteTooltip.attach({
+        //     target: this._pasteButton
+        // });
 
         this._pickerCanvas.element.addEventListener('mousedown', this._onMouseDown.bind(this), { passive: false });
         window.addEventListener('mouseup', this._onMouseUp.bind(this), { passive: false });

@@ -95,7 +95,7 @@ class ArrayInput extends Element {
             this._containerArray.hidden = false;
         });
         this._containerArray.on('remove', () => {
-            this._containerArray.hidden = this._arrayElements.length == 0;
+            this._containerArray.hidden = this._arrayElements.length === 0;
         });
         this._container.append(this._containerArray);
         this._suspendArrayElementEvts = false;
