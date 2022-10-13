@@ -24,15 +24,19 @@
     "storybook": "jsdoc -r -X src > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
     "docs:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
     "docs:build": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
-    "tsd": "jsdoc -c conf-tsd.json && node tsd.js",
-    "build:types:react": "cd react && ../node_modules/.bin/tsc --project tsconfig.json --declaration --emitDeclarationOnly --outDir types"
+    "build:types": "jsdoc -c conf-tsd.json && node tsd.js",
+    "build:types:react": "cd react && tsc --project ../tsconfig.json --declaration --emitDeclarationOnly --outDir types"
   },
   "files": [
     "dist",
     "package.json",
     "README.md",
     "LICENSE",
-    "react"
+    "react/dist",
+    "react/types",
+    "react/unstyled",
+    "react/package.json",
+    "unstyled"
   ],
   "browserslist": {
     "production": [

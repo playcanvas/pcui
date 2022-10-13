@@ -12,6 +12,6 @@
         "esModuleInterop" : true,
         "sourceMap": true
     },
-    "include": ["src"],
-    "exclude": ["node_modules"]
+    "include": ["./src/index.tsx"],
+    "exclude": ["node_modules/**/*", "node_modules"]
 }
