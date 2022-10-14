@@ -1,12 +1,12 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import sass from 'rollup-plugin-sass';
-import { babel } from '@rollup/plugin-babel';
+import typescript from 'rollup-plugin-typescript2';
 
 const umd = unstyled => ({
     input: 'src/index.js',
     external: ['@playcanvas/observer'],
     output: {
-        file: `dist/pcui${unstyled ? '-unstyled' : ''}.js`,
+        file: `${unstyled ? 'unstyled/' : ''}dist/index.js`,
         format: 'umd',
         name: 'pcui',
         globals: {
@@ -26,25 +26,28 @@ const module = unstyled => ({
     input: 'src/index.js',
     external: ['@playcanvas/observer'],
     output: {
-        file: `dist/pcui${unstyled ? '-unstyled' : ''}.mjs`,
+        dir: `${unstyled ? 'unstyled/' : ''}dist/module`,
         entryFileNames: '[name].mjs',
-        format: 'module'
+        format: 'esm'
     },
+    preserveModules: true,
     plugins: [
         sass({
             insert: !unstyled,
             output: false
         }),
         nodeResolve()
-    ]
+    ],
+    treeshake: 'smallest',
+    cache: false
 });
 
 
 const react_umd = unstyled => ({
-    input: 'src/index.jsx',
+    input: 'src/index.tsx',
     external: ['@playcanvas/observer', 'react', 'prop-types'],
     output: {
-        file: `react/${unstyled ? 'unstyled/' : ''}dist/pcui-react${unstyled ? '-unstyled' : ''}.js`,
+        file: `react/${unstyled ? 'unstyled/' : ''}dist/index.js`,
         format: 'umd',
         name: 'pcuiReact',
         globals: {
@@ -57,36 +60,39 @@ const react_umd = unstyled => ({
             output: false
         }),
         nodeResolve(),
-        babel({
-            include: ['**/*.jsx'],
-            presets: ['@babel/preset-react']
+        typescript({
+            tsconfig: 'tsconfig.json',
+            clean: true
         })
     ]
 });
 
 const react_module = unstyled => ({
-    input: 'src/index.jsx',
+    input: 'src/index.tsx',
     external: ['@playcanvas/observer', 'react', 'prop-types'],
     output: {
-        file: `react/${unstyled ? 'unstyled/' : ''}dist/pcui-react${unstyled ? '-unstyled' : ''}.mjs`,
-        format: 'module'
+        dir: `react/${unstyled ? 'unstyled/' : ''}dist/module`,
+        format: 'esm',
+        entryFileNames: '[name].mjs'
     },
+    preserveModules: true,
     plugins: [
         sass({
             insert: !unstyled,
             output: false
         }),
         nodeResolve(),
-        babel({
-            include: ['**/*.jsx'],
-            presets: ['@babel/preset-react']
+        typescript({
+            tsconfig: 'tsconfig.json',
+            clean: true
         })
-    ]
+    ],
+    treeshake: 'smallest',
+    cache: false
 });
 
 const configs = [umd, module, react_umd, react_module]
     .map(conf => [conf(true), conf(false)])
     .reduce((configs, configPair) => [...configs, configPair[0], configPair[1]], []);
-
 
 export default configs;
