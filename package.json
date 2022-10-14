@@ -1,6 +1,6 @@
 {
   "name": "@playcanvas/pcui",
-  "version": "2.7.1",
+  "version": "2.8.0",
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://playcanvas.github.io/pcui",
   "description": "This library enables the creation of reliable and visually pleasing user interfaces by providing fully styled components that you can use directly on your site. The components are useful in a wide range of use cases, from creating simple forms to building graphical user interfaces for complex web tools.",
@@ -89,17 +89,15 @@
     "rollup": "^2.67.0",
     "rollup-plugin-rename": "^1.0.1",
     "rollup-plugin-sass": "^1.2.10",
+    "rollup-plugin-typescript2": "^0.34.1",
     "sass": "^1.49.7",
     "sass-loader": "^12.4.0",
     "scss-bundle": "^3.1.2",
     "tsd-jsdoc": "^2.5.0",
+    "typescript": "^4.8.4",
     "webpack": "^5.68.0"
   },
   "directories": {
     "doc": "docs"
-  },
-  "dependencies": {
-    "rollup-plugin-typescript2": "^0.34.1",
-    "typescript": "^4.8.4"
   }
 }
