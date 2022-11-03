@@ -21,7 +21,8 @@ class VectorInput extends Element {
      * @param {number} [args.min] - The minimum value for each vector element.
      * @param {number} [args.max] - The maximum value for each vector element.
      * @param {number} [args.precision] - The decimal precision for each vector element.
-     * @param {number} [args.step] - The incremental step when using arrow keys for each vector element.
+     * @param {number} [args.step] - The incremental step when using arrow keys or dragger for each vector element.
+     * @param {number} [args.stepPrecision] - The incremental step when holding Shift and using arrow keys or dragger for each vector element.
      * @param {boolean} [args.renderChanges] - If true each vector element will flash on changes.
      * @param {string[]|string} [args.placeholder] - The placeholder string for each vector element.
      */
@@ -46,6 +47,7 @@ class VectorInput extends Element {
                 max: args.max,
                 precision: args.precision,
                 step: args.step,
+                stepPrecision: args.stepPrecision,
                 renderChanges: args.renderChanges,
                 placeholder: args.placeholder ? (Array.isArray(args.placeholder) ? args.placeholder[i] : args.placeholder) : null
             });
