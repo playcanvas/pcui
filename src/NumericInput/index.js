@@ -17,7 +17,7 @@ const REGEX_COMMA = /,/g;
  * @property {number} [max=1] Gets / sets the maximum value this field can take.
  * @property {number} [precision=7] Gets / sets the maximum number of decimals a value can take.
  * @property {number} [step=1] Gets / sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
- * @property {number} [stepPrecision=0.01] Gets / sets the amount that the value will be increased or decreased when holding shift using the arrow keys and the slider input. Defaults to {step} * 0.1.
+ * @property {number} [stepPrecision=0.01] Gets / sets the amount that the value will be increased or decreased when holding shift using the arrow keys and the slider input. Defaults to {@link NumericInput#step} * 0.1.
  * @property {boolean} [hideSlider=true] Hide the input mouse drag slider.
  * @augments TextInput
  */
