@@ -50,7 +50,7 @@ class NumericInput extends TextInput {
         if (Number.isFinite(args.step)) {
             this._step = args.step;
         } else if (Number.isFinite(args.precision)) {
-            this._step = 1 / Math.pow(10, args.precision);
+            this._step = 10 / Math.pow(10, args.precision);
         } else {
             this._step = 1;
         }
