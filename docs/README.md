@@ -22,7 +22,7 @@ In the `pcui/docs` directory run:
 
 To install the ruby dependencies. If you are having trouble with the install, try deleting the `Gemfile.lock` file.
 
-Then in the puci directory run:
+Then in the pcui directory run:
 
 `npm run docs:local`
 
@@ -38,7 +38,7 @@ Visit http://localhost:4000/pcui
 
 ### Publishing docs
 
-In the puci main directory run:
+In the pcui main directory run:
 
 `npm run docs:build`
 
