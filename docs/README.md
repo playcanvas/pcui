@@ -13,7 +13,9 @@ Add your new component to the components array (including the category and compo
 
 Commit any changes to the pcui repo.
 
-### Testing docs locally
+### Testing docs locally (macOS)
+
+Ensure you have Ruby 3.x installed.
 
 If you haven't cloned the [playcanvas.github.io](https://github.com/playcanvas/playcanvas.github.io) repo, install it locally to a projects folder which will now be referenced as `<projects_folder>`.
 
