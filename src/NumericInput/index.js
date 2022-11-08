@@ -16,7 +16,8 @@ const REGEX_COMMA = /,/g;
  * @property {number} [min=0] Gets / sets the minimum value this field can take.
  * @property {number} [max=1] Gets / sets the maximum value this field can take.
  * @property {number} [precision=7] Gets / sets the maximum number of decimals a value can take.
- * @property {number} [step=0.01] Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
+ * @property {number} [step=1] Gets / sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
+ * @property {number} [stepPrecision=0.01] Gets / sets the amount that the value will be increased or decreased when holding shift using the arrow keys and the slider input. Defaults to {@link NumericInput#step} * 0.1.
  * @property {boolean} [hideSlider=true] Hide the input mouse drag slider.
  * @augments TextInput
  */
@@ -49,9 +50,15 @@ class NumericInput extends TextInput {
         if (Number.isFinite(args.step)) {
             this._step = args.step;
         } else if (Number.isFinite(args.precision)) {
-            this._step = 1 / Math.pow(10, args.precision);
+            this._step = 10 / Math.pow(10, args.precision);
         } else {
             this._step = 1;
+        }
+
+        if (Number.isFinite(args.stepPrecision)) {
+            this._stepPrecision = args.stepPrecision;
+        } else {
+            this._stepPrecision = this._step * 0.1;
         }
 
         this._oldValue = undefined;
@@ -122,8 +129,9 @@ class NumericInput extends TextInput {
         } else if (evt.constructor === MouseEvent) {
             movement = evt.movementX;
         }
-        // move one step every 100 pixels
-        this._sliderMovement += movement / 100 * this._step;
+
+        // move one step or stepPrecision every 100 pixels
+        this._sliderMovement += movement / 100 * (evt.shiftKey ? this._stepPrecision : this._step);
         this.value = this._sliderPrevValue + this._sliderMovement;
     }
 
@@ -138,8 +146,8 @@ class NumericInput extends TextInput {
 
         // increase / decrease value with arrow keys
         if (evt.keyCode === 38 || evt.keyCode === 40) {
-            const inc = (evt.shiftKey ? 10 : 1) * (evt.keyCode === 40 ? -1 : 1);
-            this.value += this.step * inc;
+            const inc = evt.keyCode === 40 ? -1 : 1;
+            this.value += (evt.shiftKey ? this._stepPrecision : this._step) * inc;
             return;
         }
 
