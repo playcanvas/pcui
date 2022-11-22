@@ -1,48 +1,35 @@
 
 # PCUI docs guide
 
-### Updating component pages (Optional if you’ve added a new component)
+The PCUI documentation website is built using a Jekyll template. The markdown pages for the site can be found and edited in the `docs/pages` directory.
 
-Open `./docs/create-component-pages.js`
-
-Add your new component to the components array (including the category and component name).
-
-`cd ./docs`
-
-`node create-component-pages.js`
-
-Commit any changes to the pcui repo.
-
+The doc site also makes use of storybook to display React components and typedocs to display the API reference. If you are developing the PCUI library, you should use `npm run storybook` and `npm run typedocs` directly to generate the storybook and typedocs respectively. The following guide is for updating and publishing the documentation site.
 ### Testing docs locally (macOS)
 
 Ensure you have Ruby 3.x installed.
-
-If you haven't cloned the [playcanvas.github.io](https://github.com/playcanvas/playcanvas.github.io) repo, install it locally to a projects folder which will now be referenced as `<projects_folder>`.
 
 In the `pcui/docs` directory run:
 `bundle install`
 
 To install the ruby dependencies. If you are having trouble with the install, try deleting the `Gemfile.lock` file.
 
-Then in the pcui directory run:
+Then in the main pcui directory run:
 
-`npm run docs:local`
+`npm run build:typedocs` to build the latest typedocs API reference site which will be copied into the doc site in the next step
 
-`rm -rf ~/<projects_folder>/playcanvas.github.io/pcui/`
+`npm run build:docsite:local` to build the Jekyll doc site and latest storybook
 
-`cp -r ./docs/_site/ ~/<projects_folder>/playcanvas.github.io/pcui/`
+`npm run docsite:serve` to serve the Jekyll doc site
 
-`cd ~/<projects_folder>/playcanvas.github.io`
-
-`python -m SimpleHTTPServer 4000`
-
-Visit http://localhost:4000/pcui
+Visit http://localhost:3497/
 
 ### Publishing docs
 
-In the pcui main directory run:
+If you haven't cloned the [playcanvas.github.io](https://github.com/playcanvas/playcanvas.github.io) repo, install it locally to a projects folder which will now be referenced as `<projects_folder>`.
 
-`npm run docs:build`
+Then in the pcui main directory run:
+
+`npm run build:docsite:production`
 
 `rm -rf ~/<projects_folder>/playcanvas.github.io/pcui/`
 

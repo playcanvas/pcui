@@ -14,5 +14,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/playcanvas/pcui.git"
+  },
+  "scripts": {
+    "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types"
   }
 }

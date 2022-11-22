@@ -11,7 +11,7 @@ nav_order: 2
 In this example you can interact with the input slider to update the progress bar. Any actions you make can be undone / redone using the history buttons.
 
 <div class="highlighter-rouge example-background">
-    <iframe src="/pcui/storybook/iframe.html?id=examples-history--main&viewMode=story" style="width: 100%; border: none; min-height: 120px;" height="72px"></iframe>
+    <iframe src="/storybook/iframe?id=examples-history--main&viewMode=story" style="width: 100%; border: none; min-height: 120px;" height="72px"></iframe>
 </div>
 
 ### Code

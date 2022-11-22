@@ -3,7 +3,7 @@ import sass from 'rollup-plugin-sass';
 import typescript from 'rollup-plugin-typescript2';
 
 const umd = unstyled => ({
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: ['@playcanvas/observer'],
     output: {
         file: `${unstyled ? 'unstyled/' : ''}dist/index.js`,
@@ -18,12 +18,16 @@ const umd = unstyled => ({
             insert: !unstyled,
             output: false
         }),
-        nodeResolve()
+        nodeResolve(),
+        typescript({
+            tsconfig: 'tsconfig.json',
+            clean: true
+        })
     ]
 });
 
 const module = unstyled => ({
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: ['@playcanvas/observer'],
     output: {
         dir: `${unstyled ? 'unstyled/' : ''}dist/module`,
@@ -36,7 +40,11 @@ const module = unstyled => ({
             insert: !unstyled,
             output: false
         }),
-        nodeResolve()
+        nodeResolve(),
+        typescript({
+            tsconfig: 'tsconfig.json',
+            clean: true
+        })
     ],
     treeshake: 'smallest',
     cache: false
@@ -61,7 +69,7 @@ const react_umd = unstyled => ({
         }),
         nodeResolve(),
         typescript({
-            tsconfig: 'tsconfig.json',
+            tsconfig: 'react/tsconfig.json',
             clean: true
         })
     ]
@@ -83,7 +91,7 @@ const react_module = unstyled => ({
         }),
         nodeResolve(),
         typescript({
-            tsconfig: 'tsconfig.json',
+            tsconfig: 'react/tsconfig.json',
             clean: true
         })
     ],

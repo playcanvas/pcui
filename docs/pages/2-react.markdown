@@ -20,7 +20,7 @@ ReactDOM.render(
 This will render a single text input to the document's body element. You can see the result of this rendered component below:
 
 <div class="highlighter-rouge example-background">
-    <iframe src="/pcui/storybook/iframe.html?id=input-textinput--main&viewMode=story" style="border: none;" height="72px"></iframe>
+    <iframe src="/storybook/iframe?id=components-textinput--main&viewMode=story" style="border: none;" height="72px"></iframe>
 </div>
 
 For more extensive examples, see the [UI examples](/pcui/examples/) section.

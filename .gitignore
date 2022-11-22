@@ -11,11 +11,12 @@
 # production
 /build
 /dist
+/typedocs
+/types
 /unstyled/dist/
 /react/dist/
 /react/types/
 /react/unstyled/dist
-/.storybook/utils/jsdoc-ast.json
 
 # misc
 .DS_Store

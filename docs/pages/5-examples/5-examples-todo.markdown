@@ -11,7 +11,7 @@ nav_order: 1
 The todo list below allows you to add items to the list, toggle their 'done' status and filter items by that status.
 
 <div class="highlighter-rouge example-background">
-    <iframe src="/pcui/storybook/iframe.html?id=examples-todolist--main&viewMode=story" style="width: 100%; border: none; min-height: 400px;" height="72px"></iframe>
+    <iframe src="/storybook/iframe?id=examples-todolist--main&viewMode=story" style="width: 100%; border: none; min-height: 400px;" height="72px"></iframe>
 </div>
 
 ### Code
