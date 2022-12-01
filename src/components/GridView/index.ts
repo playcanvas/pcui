@@ -31,6 +31,12 @@ namespace GridView {
  */
 class GridView extends Container {
 
+    static readonly defaultArgs: GridView.Args = {
+        ...Container.defaultArgs,
+        multiSelect: true,
+        allowDeselect: true
+    };
+
     protected _vertical: boolean;
     protected _filterFn: (item: GridViewItem) => boolean;
     protected _filterAnimationFrame: any;
@@ -40,9 +46,8 @@ class GridView extends Container {
     protected _selected: any[];
     protected _clickFn: any;
 
-    constructor(args: GridView.Args) {
-        if (!args) args = {};
-
+    constructor(args: GridView.Args = GridView.defaultArgs) {
+        args = { ...GridView.defaultArgs, ...args };
         super(args);
 
         this._vertical = !!args.vertical;
@@ -60,8 +65,8 @@ class GridView extends Container {
         this._filterCanceled = false;
 
         // Default options for GridView layout
-        this._multiSelect = args.hasOwnProperty('multiSelect') ? args.multiSelect : true;
-        this._allowDeselect = args.hasOwnProperty('allowDeselect') ? args.allowDeselect : true;
+        this._multiSelect = args.multiSelect;
+        this._allowDeselect = args.allowDeselect;
 
         this._selected = [];
     }

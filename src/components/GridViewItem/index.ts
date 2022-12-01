@@ -37,6 +37,13 @@ namespace GridViewItem {
  */
 class GridViewItem extends Container implements Element.IFocusable {
 
+    static readonly defaultArgs: GridViewItem.Args = {
+        ...Container.defaultArgs,
+        allowSelect: true,
+        text: '',
+        tabIndex: 0
+    };
+
     protected _selected: boolean;
     protected _radioButton: RadioButton;
     protected _radioButtonClickEvt: any;
@@ -46,14 +53,11 @@ class GridViewItem extends Container implements Element.IFocusable {
     protected _domEvtBlur: any;
     protected _allowSelect: any;
 
-    constructor(args: GridViewItem.Args) {
-        args = Object.assign({
-            tabIndex: 0
-        }, args);
-
+    constructor(args: GridViewItem.Args = GridViewItem.defaultArgs) {
+        args = { ...GridViewItem.defaultArgs, ...args };
         super(args);
 
-        this.allowSelect = args.allowSelect !== undefined ? args.allowSelect : true;
+        this.allowSelect =args.allowSelect;
         this._selected = false;
 
         if (args.type === 'radio') {
@@ -82,7 +86,7 @@ class GridViewItem extends Container implements Element.IFocusable {
 
         this.append(this._labelText);
 
-        this.text = args.text || '';
+        this.text = args.text;
         this._type = args.type;
 
         this._domEvtFocus = this._onFocus.bind(this);

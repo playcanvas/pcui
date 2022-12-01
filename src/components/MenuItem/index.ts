@@ -9,7 +9,7 @@ const CLASS_MENU_ITEM_HAS_CHILDREN = CLASS_MENU_ITEM + '-has-children';
 
 namespace MenuItem {
     export interface Args extends Container.Args {
-        value: any;
+        value?: any;
         /**
          * Whether the MenuItem has any child MenuItems.
          */
@@ -51,6 +51,11 @@ namespace MenuItem {
  * can be useful to show nested Menus.
  */
 class MenuItem extends Container implements Element.IBindable {
+
+    static readonly defaultArgs: MenuItem.Args = {
+        ...Container.defaultArgs
+    };
+
     protected _containerContent: Container;
     protected _numChildren: number;
     protected _icon: any;
@@ -63,7 +68,8 @@ class MenuItem extends Container implements Element.IBindable {
     protected _onIsVisible: any;
     protected _renderChanges: boolean;
 
-    constructor(args: MenuItem.Args) {
+    constructor(args: MenuItem.Args = MenuItem.defaultArgs) {
+        args = { ...MenuItem.defaultArgs, ...args };
         super(args);
 
         this.class.add(CLASS_MENU_ITEM);

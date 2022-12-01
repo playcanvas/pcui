@@ -82,6 +82,22 @@ namespace SelectInput {
  */
 class SelectInput extends Element implements Element.IBindable, Element.IFocusable {
 
+    static readonly defaultArgs: SelectInput.Args = {
+        ...Element.defaultArgs,
+        optionsFn: null,
+        defaultValue: null,
+        multiSelect: false,
+        options: [],
+        invalidOptions: [],
+        allowNull: false,
+        allowInput: false,
+        allowCreate: false,
+        createFn: null,
+        createLabelText: 'Create',
+        type: 'string',
+        renderChanges: false
+    };
+
     protected _container: Container;
     protected _containerValue: Container;
     protected _domShadow: HTMLDivElement;
@@ -116,7 +132,8 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
     protected _invalidOptions: any;
     protected _renderChanges: boolean;
 
-    constructor(args: SelectInput.Args) {
+    constructor(args: SelectInput.Args = SelectInput.defaultArgs) {
+        args = { ...SelectInput.defaultArgs, ...args };
         // main container
         const container = new Container({ dom: args.dom });
         super(container.dom, args);
@@ -135,12 +152,12 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         this._domShadow.classList.add(CLASS_SHADOW);
         this._containerValue.append(this._domShadow);
 
-        this._allowInput = args.allowInput || false;
+        this._allowInput = args.allowInput;
         if (this._allowInput) {
             this.class.add(CLASS_ALLOW_INPUT);
         }
 
-        this._allowCreate = args.allowCreate || false;
+        this._allowCreate = args.allowCreate;
         this._createFn = args.createFn;
         this._createLabelText = args.createLabelText;
 
@@ -218,16 +235,16 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
 
         this.on('hide', this.close.bind(this));
 
-        this._type = args.type || 'string';
+        this._type = args.type;
 
         this._optionsIndex = {};
         this._labelsIndex = {};
         this._labelHighlighted = null;
         this.invalidOptions = args.invalidOptions;
-        this.options = args.options || [];
+        this.options = args.options;
         this._optionsFn = args.optionsFn;
 
-        this._allowNull = args.allowNull || false;
+        this._allowNull = args.allowNull;
 
         this._values = null;
 
@@ -239,7 +256,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
             this.value = null;
         }
 
-        this._renderChanges = args.renderChanges || false;
+        this._renderChanges = args.renderChanges;
 
         this.on('change', () => {
             this._updateInputFieldsVisibility();

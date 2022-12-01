@@ -5,7 +5,7 @@ import * as pcuiClass from '../../class';
 const CLASS_TEXT_INPUT = 'pcui-text-input';
 
 namespace TextInput {
-    export interface Args extends Element.Args, Element.IBindableArgs, Element.IPlaceholderArgs {
+    export interface Args extends Input.Args, Element.IBindableArgs, Element.IPlaceholderArgs {
         /**
          * Sets whether pressing Enter will blur (unfocus) the field. Defaults to true.
          */
@@ -36,9 +36,10 @@ namespace TextInput {
 class TextInput extends Input implements Element.IFocusable, Element.IPlaceholder {
 
     static readonly defaultArgs: TextInput.Args = {
-        ...Element.defaultArgs,
+        ...Input.defaultArgs,
         blurOnEnter: true,
-        blurOnEscape: true
+        blurOnEscape: true,
+        dom: document.createElement('div')
     }
     protected _domInput: HTMLInputElement;
     protected _domEvtChange: any;
@@ -55,8 +56,9 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
     protected _blurOnEnter: boolean;
     protected _blurOnEscape: boolean;
 
-    constructor(args: TextInput.Args) {
-        super(args.dom ? args.dom : document.createElement('div'), args);
+    constructor(args: TextInput.Args = TextInput.defaultArgs) {
+        args = { ...TextInput.defaultArgs, ...args };
+        super(args.dom, args);
 
         this.class.add(CLASS_TEXT_INPUT);
 

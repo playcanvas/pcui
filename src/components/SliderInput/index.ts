@@ -66,6 +66,13 @@ namespace SliderInput {
  * of the NumericInput.
  */
 class SliderInput extends Element implements Element.IBindable, Element.IFocusable {
+
+    static readonly defaultArgs: SliderInput.Args = {
+        ...Element.defaultArgs,
+        min: 0,
+        max: 1
+    };
+
     protected _historyCombine: boolean;
     protected _historyPostfix: any;
     protected _numericInput: NumericInput;
@@ -87,9 +94,8 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
     /**
      * Creates a new SliderInput.
      */
-    constructor(args: SliderInput.Args) {
-        args = Object.assign({}, args);
-
+    constructor(args: SliderInput.Args = SliderInput.defaultArgs) {
+        args = { ...SliderInput.defaultArgs, ...args };
         const inputArgs: NumericInput.Args = {};
         PROXY_FIELDS.forEach((field) => {
             // @ts-ignore
@@ -130,8 +136,8 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
             this.emit('blur');
         });
 
-        this._sliderMin = (args.sliderMin !== undefined ? args.sliderMin : args.min || 0);
-        this._sliderMax = (args.sliderMax !== undefined ? args.sliderMax : args.max || 1);
+        this._sliderMin = (args.sliderMin !== undefined ? args.sliderMin : args.min);
+        this._sliderMax = (args.sliderMax !== undefined ? args.sliderMax : args.max);
 
         this.dom.appendChild(this._numericInput.dom);
         this._numericInput.parent = this;

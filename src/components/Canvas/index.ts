@@ -24,6 +24,7 @@ class Canvas extends Element {
 
     static readonly defaultArgs: Canvas.Args = {
         ...Element.defaultArgs,
+        dom: document.createElement('canvas')
     };
 
     protected _width: number;
@@ -31,7 +32,8 @@ class Canvas extends Element {
     protected _ratio: number;
 
     constructor(args: Canvas.Args = Canvas.defaultArgs) {
-        super(args.dom ? args.dom : document.createElement('canvas'), args);
+        args = { ...Canvas.defaultArgs, ...args };
+        super(args.dom, args);
 
         this.dom.classList.add('pcui-canvas');
 

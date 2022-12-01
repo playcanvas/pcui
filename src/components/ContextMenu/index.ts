@@ -13,15 +13,15 @@ namespace ContextMenu {
         /**
          * The array of items used to populate the array. Example item: \{ 'text': 'Hello World', 'onClick': () => console.log('Hello World') \}.
          */
-        items: any;
+        items?: any;
         /**
          * The dom element to attach this context menu to.
          */
-        dom: HTMLElement,
+        dom?: HTMLElement,
         /**
          * The dom element that will trigger the context menu to open when right clicked. If undefined args.dom will be used.
          */
-        triggerElement: HTMLElement
+        triggerElement?: HTMLElement
     }
 }
 
@@ -30,12 +30,14 @@ namespace ContextMenu {
  */
 class ContextMenu {
 
+    static readonly defaultArgs: ContextMenu.Args = {};
+
     protected _menu: Container;
     protected _contextMenuEvent: void;
     protected _args: ContextMenu.Args;
 
-    constructor(args: ContextMenu.Args) {
-
+    constructor(args: ContextMenu.Args = ContextMenu.defaultArgs) {
+        args = { ...ContextMenu.defaultArgs, ...args };
         this._menu = new Container({ dom: args.dom });
         // @ts-ignore
         this._menu.contextMenu = this;

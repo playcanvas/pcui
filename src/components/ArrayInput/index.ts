@@ -42,6 +42,13 @@ namespace ArrayInput {
  * Element that allows editing an array of values.
  */
 class ArrayInput extends Element implements Element.IFocusable, Element.IBindable {
+
+    static readonly defaultArgs: ArrayInput.Args = {
+        ...Element.defaultArgs,
+        getDefaultFn: null,
+        usePanels: false
+    };
+
     /**
      * @event
      * @name linkElement 
@@ -86,8 +93,8 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
     protected _values: any[];
     protected _renderChanges: any;
 
-    constructor(args: ArrayInput.Args) {
-        args = Object.assign({}, args);
+    constructor(args: ArrayInput.Args = ArrayInput.defaultArgs) {
+        args = { ...ArrayInput.defaultArgs, ...args };
 
         // remove binding because we want to set it later
         const binding = args.binding;
@@ -105,7 +112,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
 
         this.class.add(CLASS_ARRAY_INPUT, CLASS_ARRAY_EMPTY);
 
-        this._usePanels = args.usePanels || false;
+        this._usePanels = args.usePanels;
 
         this._fixedSize = !!args.fixedSize;
 
@@ -139,7 +146,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
         this._suspendArrayElementEvts = false;
         this._arrayElementChangeTimeout = null;
 
-        this._getDefaultFn = args.getDefaultFn || null;
+        this._getDefaultFn = args.getDefaultFn;
 
         // @ts-ignore
         let valueType = args.elementArgs && args.elementArgs.type || args.type;

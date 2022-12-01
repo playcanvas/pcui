@@ -21,7 +21,13 @@ namespace TextAreaInput {
  * The TextAreaInput wraps a textarea element. It has the same interface as pcui.TextInput.
  */
 class TextAreaInput extends TextInput {
-    constructor(args: TextAreaInput.Args) {
+
+    static readonly defaultArgs: TextAreaInput.Args = {
+        ...TextInput.defaultArgs
+    };
+
+    constructor(args: TextAreaInput.Args = TextAreaInput.defaultArgs) {
+        args = { ...TextAreaInput.defaultArgs, ...args };
         args = Object.assign({
             input: document.createElement('textarea')
         }, args);

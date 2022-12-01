@@ -21,21 +21,21 @@ namespace Menu {
  */
 class Menu extends Container implements Element.IFocusable {
 
+    static readonly defaultArgs: Menu.Args = {
+        ...Container.defaultArgs,
+        hidden: true,
+        tabIndex: 1,
+        items: []
+    };
+
     protected _containerMenuItems: Container;
     protected _domEvtContextMenu: any;
     protected _domEvtKeyDown: any;
     protected _domEvtFocus: any;
     protected _domEvtBlur: any;
 
-    constructor(args: Menu.Args) {
-        if (args.hidden === undefined) {
-            args.hidden = true;
-        }
-
-        if (args.tabIndex === undefined) {
-            args.tabIndex = 1;
-        }
-
+    constructor(args: Menu.Args = Menu.defaultArgs) {
+        args = { ...Menu.defaultArgs, ...args };
         super(args);
 
         this.class.add(CLASS_MENU);

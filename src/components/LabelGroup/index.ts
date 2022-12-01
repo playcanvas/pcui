@@ -30,18 +30,24 @@ namespace LabelGroup {
  * Represents a group of a Label and a Element. Useful for rows of labeled fields.
  */
 class LabelGroup extends Container {
+
+    static readonly defaultArgs: LabelGroup.Args = {
+        ...Container.defaultArgs,
+        text: 'Label',
+        field: null,
+        labelAlignTop: false
+    };
     protected _label: Label;
     protected _field: Element;
 
-    constructor(args: LabelGroup.Args) {
-        if (!args) args = {};
-
+    constructor(args: LabelGroup.Args = LabelGroup.defaultArgs) {
+        args = { ...LabelGroup.defaultArgs, ...args };
         super(args);
 
         this.class.add(CLASS_LABEL_GROUP);
 
         this._label = new Label({
-            text: args.text || 'Label',
+            text: args.text,
             nativeTooltip: args.nativeTooltip
         });
         this.append(this._label);
@@ -51,7 +57,7 @@ class LabelGroup extends Container {
             this.append(this._field);
         }
 
-        this.labelAlignTop = args.labelAlignTop || false;
+        this.labelAlignTop = args.labelAlignTop;
     }
 
     /**

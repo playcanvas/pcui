@@ -24,7 +24,8 @@ class BooleanInput extends Input implements Element.IBindable, Element.IFocusabl
         ...Element.defaultArgs,
         renderChanges: false,
         value: false,
-        tabIndex: 0
+        tabIndex: 0,
+        dom: document.createElement('div')
     };
 
     protected _domEventKeyDown: any;
@@ -33,7 +34,8 @@ class BooleanInput extends Input implements Element.IBindable, Element.IFocusabl
     protected _value: any;
 
     constructor(args: BooleanInput.Args = BooleanInput.defaultArgs) {
-        super(args.dom ? args.dom : document.createElement('div'), args);
+        args = { ...BooleanInput.defaultArgs, ...args };
+        super(args.dom, args);
 
         if (args.type === 'toggle') {
             this.class.add(CLASS_BOOLEAN_INPUT_TOGGLE);

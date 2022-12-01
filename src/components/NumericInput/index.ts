@@ -46,6 +46,16 @@ namespace NumericInput {
  * The NumericInput represents an input element that holds numbers.
  */
 class NumericInput extends TextInput {
+
+    static readonly defaultArgs: NumericInput.Args = {
+        ...TextInput.defaultArgs,
+        precision: 7,
+        min: null,
+        max: null,
+        renderChanges: false,
+        allowNull: false
+    };
+
     protected _min: number;
     protected _max: number;
     protected _allowNull: boolean;
@@ -63,31 +73,30 @@ class NumericInput extends TextInput {
     protected _sliderControl: Element;
     protected _sliderMovement: number;
 
-    constructor(args: NumericInput.Args) {
+    constructor(args: NumericInput.Args = NumericInput.defaultArgs) {
+        args = { ...NumericInput.defaultArgs, ...args };
         // make copy of args
         args = Object.assign({}, args);
         const value = args.value;
         // delete value because we want to set it after
         // the other arguments
         delete args.value;
-        const renderChanges = args.renderChanges || false;
+        const renderChanges = args.renderChanges;
         delete args.renderChanges;
 
         super(args);
 
         this.class.add(CLASS_NUMERIC_INPUT);
 
-        this._min = args.min !== undefined ? args.min : null;
-        this._max = args.max !== undefined ? args.max : null;
-        this._allowNull = args.allowNull || false;
-        this._precision = Number.isFinite(args.precision) ? args.precision : 7;
+        this._min = args.min;
+        this._max = args.max;
+        this._allowNull = args.allowNull;
+        this._precision = args.precision;
 
         if (Number.isFinite(args.step)) {
             this._step = args.step;
-        } else if (Number.isFinite(args.precision)) {
-            this._step = 10 / Math.pow(10, args.precision);
         } else {
-            this._step = 1;
+            this._step = 10 / Math.pow(10, args.precision);
         }
 
         if (Number.isFinite(args.stepPrecision)) {

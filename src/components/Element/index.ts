@@ -3,6 +3,7 @@ import { Events, Observer } from '@playcanvas/observer';
 
 // import the application's styling and use the green theme
 import '../../scss/themes/green/style.scss';
+import { BindingBase } from '../../binding';
 
 const CLASS_ELEMENT = 'pcui-element';
 
@@ -52,7 +53,6 @@ namespace Element {
          * Sets multiple values to the Element. It is up to the Element to determine how to display them.
          */
         values?: Array<any>,
-
         /**
          * If true each input will flash on changes.
          */
@@ -83,7 +83,6 @@ namespace Element {
         /**
          * Unfocus the element
          */
-
         blur(): void
     }
 
@@ -102,7 +101,7 @@ namespace Element {
         /**
          * A binding to use with this Element.
          */
-        binding?: any;
+        binding?: BindingBase;
         /**
          * If provided and the element is clickable, this function will be called each time the element is clicked.
          */
@@ -178,6 +177,13 @@ namespace Element {
  * The base class for all UI elements.
  */
 class Element extends Events {
+
+    public static defaultArgs: Element.Args = {
+        hidden: false,
+        readOnly: false,
+        ignoreParent: false
+    };
+
     /**
      * @event
      * @name enable
@@ -269,8 +275,6 @@ class Element extends Events {
      */
     public static readonly EVENT_DESTROY = 'destroy';
 
-    public static defaultArgs: Element.Args = {};
-
     protected _destroyed: boolean;
     protected _parent: any;
     protected _domEventClick: any;
@@ -291,6 +295,7 @@ class Element extends Events {
     protected _domContent: any;
 
     constructor(dom: HTMLElement, args: Element.Args = Element.defaultArgs) {
+        args = { ...Element.defaultArgs, ...args };
         super();
 
         this._destroyed = false;
@@ -337,9 +342,9 @@ class Element extends Events {
 
         this.enabled = args.enabled !== undefined ? args.enabled : true;
         this._hiddenParents = !args.isRoot;
-        this.hidden = args.hidden || false;
-        this.readOnly = args.readOnly || false;
-        this.ignoreParent = args.ignoreParent || false;
+        this.hidden = args.hidden;
+        this.readOnly = args.readOnly;
+        this.ignoreParent = args.ignoreParent;
 
         if (args.width !== undefined) {
             // @ts-ignore

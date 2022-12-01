@@ -1,5 +1,9 @@
 import Element from '../Element/index';
 
+namespace Input {
+    export interface Args extends Element.Args {}
+}
+
 class Input extends Element implements Element.IBindable {
     protected _renderChanges: boolean;
 

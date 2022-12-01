@@ -38,10 +38,16 @@ namespace VectorInput {
  */
 class VectorInput extends Element implements Element.IBindable, Element.IFocusable, Element.IPlaceholder {
 
+    static readonly defaultArgs: VectorInput.Args = {
+        ...Element.defaultArgs,
+        dimensions: 3
+    };
+
     protected _inputs: any[];
     protected _applyingChange: boolean;
 
-    constructor(args: VectorInput.Args) {
+    constructor(args: VectorInput.Args = VectorInput.defaultArgs) {
+        args = { ...VectorInput.defaultArgs, ...args };
         args = Object.assign({}, args);
 
         // set binding after inputs have been created
@@ -52,7 +58,7 @@ class VectorInput extends Element implements Element.IBindable, Element.IFocusab
 
         this.class.add(CLASS_VECTOR_INPUT);
 
-        const dimensions = Math.max(2, Math.min(4, args.dimensions || 3));
+        const dimensions = Math.max(2, Math.min(4, args.dimensions));
 
         const onInputChange = this._onInputChange.bind(this);
         this._inputs = new Array(dimensions);

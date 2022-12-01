@@ -25,7 +25,7 @@ const CLASS_GRADIENT = 'pcui-gradient';
 
 namespace GradientPicker {
     export interface Args extends Element.Args {
-        renderChanges: boolean;
+        renderChanges?: boolean;
         /**
          * An optional array of 4 integers containing the RGBA values the picker should be initialised to
          */
@@ -41,6 +41,13 @@ namespace GradientPicker {
  * Represents a gradient picker
  */
 class GradientPicker extends Element {
+
+    static readonly defaultArgs: GradientPicker.Args = {
+        ...Element.defaultArgs,
+        renderChanges: true,
+        dom: document.createElement('div')
+    };
+
     protected _canvas: Canvas;
     protected _checkerboardPattern: any;
     protected _resizeInterval?: NodeJS.Timer;
@@ -87,9 +94,9 @@ class GradientPicker extends Element {
      *
      * @param {object} args - The arguments. Extends the Element arguments. Any settable property can also be set through the constructor.
      */
-    constructor(args: GradientPicker.Args) {
-
-        super(args.dom ? args.dom : document.createElement('div'), args);
+    constructor(args: GradientPicker.Args = GradientPicker.defaultArgs) {
+        args = { ...GradientPicker.defaultArgs, ...args };
+        super(args.dom, args);
 
         this.class.add(CLASS_GRADIENT);
 
@@ -120,7 +127,7 @@ class GradientPicker extends Element {
             this._openGradientPicker();
         });
 
-        this.renderChanges = args.renderChanges || false;
+        this.renderChanges = args.renderChanges;
 
         this.on('change', () => {
             if (this.renderChanges) {

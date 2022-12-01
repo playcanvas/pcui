@@ -73,6 +73,13 @@ namespace Container {
  * A container can contain any other element including other containers.
  */
 class Container extends Element {
+
+    static readonly defaultArgs: Container.Args = {
+        ...Element.defaultArgs,
+        resizable: null,
+        dom: document.createElement('div')
+    };
+
     /**
      * @event
      * @name append
@@ -126,9 +133,8 @@ class Container extends Element {
     protected _draggedHeight: any;
 
     constructor(args: Container.Args = Container.defaultArgs) {
-        const dom = args.dom || document.createElement('div');
-
-        super(dom, args);
+        args = { ...Container.defaultArgs, ...args };
+        super(args.dom, args);
 
         this.class.add(CLASS_CONTAINER);
 
@@ -168,7 +174,7 @@ class Container extends Element {
         this._resizeData = null;
         this._resizeHorizontally = true;
 
-        this.resizable = args.resizable || null;
+        this.resizable = args.resizable;
         this._resizeMin = 100;
         this._resizeMax = 300;
 

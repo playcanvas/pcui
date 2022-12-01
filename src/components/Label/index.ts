@@ -31,20 +31,28 @@ namespace Label {
 class Label extends Input implements Element.IPlaceholder {
 
     static readonly defaultArgs: Label.Args = {
-        ...Element.defaultArgs
+        ...Element.defaultArgs,
+        value: '',
+        text: '',
+        unsafe: false,
+        nativeTooltip: false,
+        allowTextSelection: false,
+        renderChanges: false,
+        placeholder: null,
+        dom: document.createElement('span')
     };
     protected _unsafe: boolean;
     protected _text: any;
     _optionValue: any;
 
-    constructor(args: Label.Args) {
-
-        super(args.dom ? args.dom : document.createElement('span'), args);
+    constructor(args: Label.Args = Label.defaultArgs) {
+        args = { ...Label.defaultArgs, ...args };
+        super(args.dom, args);
 
         this.class.add(CLASS_LABEL);
 
-        this._unsafe = args.unsafe || false;
-        this.text = args.text || args.value || '';
+        this._unsafe = args.unsafe;
+        this.text = args.text || args.value;
 
         if (args.allowTextSelection) {
             this.class.add(pcuiClass.DEFAULT_MOUSEDOWN);
@@ -53,9 +61,9 @@ class Label extends Input implements Element.IPlaceholder {
         if (args.nativeTooltip) {
             this.dom.title = this.text;
         }
-        this.placeholder = args.placeholder || null;
+        this.placeholder = args.placeholder;
 
-        this.renderChanges = args.renderChanges || false;
+        this.renderChanges = args.renderChanges;
 
         // @ts-ignore
         this.on('change', () => {

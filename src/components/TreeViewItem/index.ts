@@ -57,6 +57,16 @@ namespace TreeViewItem {
  * Represents a Tree View Item to be added to a pcui.TreeView.
  */
 class TreeViewItem extends Container {
+
+    static readonly defaultArgs: TreeViewItem.Args = {
+        ...Container.defaultArgs,
+        flex: true,
+        icon: 'E360',
+        allowSelect: true,
+        allowDrop: true,
+        allowDrag: true
+    };
+
     /**
      * @event
      * @name select
@@ -109,11 +119,12 @@ class TreeViewItem extends Container {
     protected _allowDrop: any;
     protected _allowSelect: any;
     protected _icon: any;
+
     /**
      * Creates a new TreeViewItem.
      */
-    constructor(args: TreeViewItem.Args) {
-        args.flex = true;
+    constructor(args: TreeViewItem.Args = TreeViewItem.defaultArgs) {
+        args = { ...TreeViewItem.defaultArgs, ...args };
         super(args);
 
         this.class.add(CLASS_ROOT, CLASS_EMPTY);
@@ -133,16 +144,17 @@ class TreeViewItem extends Container {
         });
         this._containerContents.append(this._labelIcon);
 
-        this.icon = args.icon || 'E360';
+        this.icon = args.icon;
 
         this._labelText = new Label({
             class: CLASS_TEXT
         });
         this._containerContents.append(this._labelText);
 
-        this.allowSelect = (args.allowSelect !== undefined ? args.allowSelect : true);
-        this.allowDrop = (args.allowDrop !== undefined ? args.allowDrop : true);
-        this.allowDrag = (args.allowDrag !== undefined ? args.allowDrag : true);
+        this.allowSelect = args.allowSelect;
+        this.allowDrop = args.allowDrop;
+        this.allowDrag = args.allowDrag;
+
         if (args.text) {
             this.text = args.text;
         }

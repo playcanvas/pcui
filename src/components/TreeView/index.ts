@@ -133,7 +133,8 @@ class TreeView extends Container {
     /**
      * Creates a new TreeView.
      */
-    constructor(args: TreeView.Args) {
+    constructor(args: TreeView.Args = TreeView.defaultArgs) {
+        args = { ...TreeView.defaultArgs, ...args };
         super(args);
 
         this.class.add(CLASS_ROOT);

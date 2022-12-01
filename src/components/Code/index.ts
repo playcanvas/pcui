@@ -18,15 +18,20 @@ namespace Code {
  * Represents a code block.
  */
 class Code extends Container {
+
+    static readonly defaultArgs: Code.Args = {
+        ...Container.defaultArgs
+    };
+
     protected _inner: Label;
     protected _text: any;
 
-    constructor(args: Code.Args) {
-        if (!args) args = {};
+    constructor(args: Code.Args = Code.defaultArgs) {
+        args = { ...Code.defaultArgs, ...args };
         super(args);
         this.class.add(CLASS_ROOT);
 
-        this._inner = new Label({});
+        this._inner = new Label();
         this.append(this._inner);
         this._inner.class.add(CLASS_INNER);
         if (args.text) {

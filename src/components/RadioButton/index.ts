@@ -17,6 +17,14 @@ namespace RadioButton {
  * A radio button element.
  */
 class RadioButton extends Element implements Element.IBindable, Element.IFocusable {
+
+    static readonly defaultArgs: RadioButton.Args = {
+        ...Element.defaultArgs,
+        text: '',
+        value: null,
+        tabIndex: 0
+    };
+
     protected _text: any;
     protected _domEventKeyDown: any;
     protected _domEventFocus: any;
@@ -24,14 +32,11 @@ class RadioButton extends Element implements Element.IBindable, Element.IFocusab
     protected _value: any;
     protected _renderChanges: boolean;
 
-    constructor(args: RadioButton.Args) {
-        args = Object.assign({
-            tabIndex: 0
-        }, args);
+    constructor(args: RadioButton.Args = RadioButton.defaultArgs) {
+        args = { ...RadioButton.defaultArgs, ...args };
+        super(args.dom, args);
 
-        super(args.dom ? args.dom : document.createElement('div'), args);
-
-        this._text = args.text || '';
+        this._text = args.text;
 
         this.class.add(CLASS_RADIO_BUTTON);
         this.class.add(pcuiClass.NOT_FLEXIBLE);
@@ -44,11 +49,7 @@ class RadioButton extends Element implements Element.IBindable, Element.IFocusab
         this.dom.addEventListener('focus', this._domEventFocus);
         this.dom.addEventListener('blur', this._domEventBlur);
 
-        this._value = null;
-        if (args.value !== undefined) {
-            this.value = args.value;
-        }
-
+        this.value = args.value;
         this._renderChanges = args.renderChanges;
     }
 

@@ -33,7 +33,8 @@ class Button extends Element {
         text: '',
         icon: '',
         unsafe: false,
-        size: null 
+        size: null,
+        dom: document.createElement('button')
     };
 
     protected _unsafe: any;
@@ -43,7 +44,8 @@ class Button extends Element {
     protected _size: any;
 
     constructor(args: Button.Args = Button.defaultArgs) {
-        super(args.dom ? args.dom : document.createElement('button'), args);
+        args = { ...Button.defaultArgs, ...args };
+        super(args.dom, args);
 
         this.class.add(CLASS_BUTTON);
 

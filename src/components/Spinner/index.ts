@@ -31,15 +31,18 @@ namespace Spinner {
  * Represents a spinning icon
  */
 class Spinner extends Element {
+
     static TYPE_SMALL_THICK = 'small-thick';
+
+    static readonly defaultArgs: Spinner.Args = {
+        ...Element.defaultArgs,
+        type: Spinner.TYPE_SMALL_THICK
+    };
     /**
      * Sets the pixel size of the spinner
      */
-    constructor(args: Spinner.Args) {
-        args = Object.assign({
-            type: Spinner.TYPE_SMALL_THICK
-        }, args);
-
+    constructor(args: Spinner.Args = Spinner.defaultArgs) {
+        args = { ...Spinner.defaultArgs, ...args };
         let dom = null;
 
         if (args.type === Spinner.TYPE_SMALL_THICK) {

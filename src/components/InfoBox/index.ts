@@ -29,6 +29,14 @@ namespace InfoBox {
  */
 class InfoBox extends Container {
 
+    static readonly defaultArgs: InfoBox.Args = {
+        ...Container.defaultArgs,
+        unsafe: false,
+        icon: '',
+        title: '',
+        text: ''
+    };
+
     protected _titleElement: Element;
     protected _textElement: Element;
     protected _unsafe: boolean;
@@ -36,7 +44,8 @@ class InfoBox extends Container {
     protected _title: any;
     protected _text: any;
 
-    constructor(args: InfoBox.Args) {
+    constructor(args: InfoBox.Args = InfoBox.defaultArgs) {
+        args = { ...InfoBox.defaultArgs, ...args };
         super(args);
 
         this.class.add(CLASS_INFOBOX);
@@ -45,11 +54,11 @@ class InfoBox extends Container {
         this.append(this._titleElement);
         this.append(this._textElement);
 
-        this._unsafe = args.unsafe || false;
+        this._unsafe = args.unsafe;
 
-        this.icon = args.icon || '';
-        this.title = args.title || '';
-        this.text = args.text || '';
+        this.icon = args.icon;
+        this.title = args.title;
+        this.text = args.text;
     }
 
     /**

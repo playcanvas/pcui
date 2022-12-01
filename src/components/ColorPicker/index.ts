@@ -10,7 +10,7 @@ const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
 
 namespace ColorPicker {
     export interface Args extends Element.Args {
-        renderChanges: boolean;
+        renderChanges?: boolean;
         /**
          * An optional array of 4 integers containing the RGBA values the picker should be initialised to
          */
@@ -26,6 +26,15 @@ namespace ColorPicker {
  * Represents a color picker
  */
 class ColorPicker extends Element {
+
+    static readonly defaultArgs: ColorPicker.Args = {
+        ...Element.defaultArgs,
+        channels: 3,
+        value: [0, 0, 255, 1],
+        renderChanges: false,
+        dom: document.createElement('div')
+    };
+
     protected _domColor: HTMLDivElement;
     protected _domEventKeyDown: any;
     protected _domEventFocus: any;
@@ -65,9 +74,9 @@ class ColorPicker extends Element {
 
     renderChanges: any;
 
-    constructor(args: ColorPicker.Args) {
-
-        super(args.dom ? args.dom : document.createElement('div'), args);
+    constructor(args: ColorPicker.Args = ColorPicker.defaultArgs) {
+        args = { ...ColorPicker.defaultArgs, ...args };
+        super(args.dom, args);
 
         this._size = 144;
         this._directInput = true;
@@ -114,13 +123,13 @@ class ColorPicker extends Element {
         this._historyCombine = false;
         this._historyPostfix = null;
 
-        this._value = args.value || [0, 0, 255, 1];
-        this._channels = args.channels || 3;
+        this._value = args.value;
+        this._channels = args.channels;
         this._setValue(this._value);
 
         this._isColorPickerOpen = false;
 
-        this.renderChanges = args.renderChanges || false;
+        this.renderChanges = args.renderChanges;
 
         this.on('change', () => {
             if (this.renderChanges) {
@@ -129,7 +138,7 @@ class ColorPicker extends Element {
         });
 
         // overlay
-        this._overlay = new Overlay({});
+        this._overlay = new Overlay();
         this._overlay.clickable = true;
         this._overlay.class.add('picker-color');
         // @ts-ignore center not a property of Overlay
