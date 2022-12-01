@@ -48,7 +48,6 @@ class VectorInput extends Element implements Element.IBindable, Element.IFocusab
 
     constructor(args: VectorInput.Args = VectorInput.defaultArgs) {
         args = { ...VectorInput.defaultArgs, ...args };
-        args = Object.assign({}, args);
 
         // set binding after inputs have been created
         const binding = args.binding;
