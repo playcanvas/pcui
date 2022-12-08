@@ -34,7 +34,7 @@ class Button extends Element {
         icon: '',
         unsafe: false,
         size: null,
-        dom: document.createElement('button')
+        dom: 'button'
     };
 
     protected _unsafe: any;

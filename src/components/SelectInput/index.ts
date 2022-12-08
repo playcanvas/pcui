@@ -241,7 +241,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         this._labelsIndex = {};
         this._labelHighlighted = null;
         this.invalidOptions = args.invalidOptions;
-        this.options = args.options;
+        this.options = args.options || [];
         this._optionsFn = args.optionsFn;
 
         this._allowNull = args.allowNull;

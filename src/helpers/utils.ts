@@ -131,10 +131,10 @@ export function arrayEquals(lhs: Array<any>, rhs: Array<any>) {
         return false;
 
     for (var i = 0, l = lhs.length; i < l; i++) {
-        if (this[i] instanceof Array && rhs[i] instanceof Array) {
-            if (!this[i].equals(rhs[i]))
+        if (lhs[i] instanceof Array && rhs[i] instanceof Array) {
+            if (!lhs[i].equals(rhs[i]))
                 return false;
-        } else if (this[i] !== rhs[i]) {
+        } else if (lhs[i] !== rhs[i]) {
             return false;
         }
     }

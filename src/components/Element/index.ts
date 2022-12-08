@@ -93,11 +93,30 @@ namespace Element {
         children?: React.ReactNode
     }
 
+    export interface IFlexArgs {
+        /**
+         * Sets whether the Element supports flex layout.
+         */
+        flex?: boolean,
+        /**
+         * Sets whether the Element supports the flex shrink property.
+         */
+        flexShrink?: number,
+        /**
+         * Sets whether the Element supports the flex grow property.
+         */
+        flexGrow?: number,
+        /**
+         * Sets the Elements flex direction property.
+         */
+        flexDirection?: string,
+    }
+
     export interface Args {
         /**
          * The HTMLElement to create this Element with. If not provided this Element will create one.
          */
-        dom?: HTMLElement;
+        dom?: HTMLElement | string;
         /**
          * A binding to use with this Element.
          */
@@ -294,7 +313,7 @@ class Element extends Events {
     protected _hasError: any;
     protected _domContent: any;
 
-    constructor(dom: HTMLElement, args: Element.Args = Element.defaultArgs) {
+    constructor(dom: HTMLElement | string, args: Element.Args = Element.defaultArgs) {
         args = { ...Element.defaultArgs, ...args };
         super();
 
@@ -305,6 +324,13 @@ class Element extends Events {
         this._domEventMouseOver = this._onMouseOver.bind(this);
         this._domEventMouseOut = this._onMouseOut.bind(this);
         this._eventsParent = [];
+
+        if (typeof dom === 'string') {
+            dom = document.createElement(dom);
+        }
+        else if (typeof args.dom === 'string') {
+            args.dom = document.createElement(args.dom);
+        }
 
         this._dom = dom || args.dom || document.createElement('div');
 

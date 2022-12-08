@@ -39,7 +39,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
         ...Input.defaultArgs,
         blurOnEnter: true,
         blurOnEscape: true,
-        dom: document.createElement('div')
+        dom: 'div'
     }
     protected _domInput: HTMLInputElement;
     protected _domEvtChange: any;

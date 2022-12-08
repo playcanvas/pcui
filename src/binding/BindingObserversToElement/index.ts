@@ -23,10 +23,10 @@ class BindingObserversToElement extends BindingBase {
     /**
      * Creates a new BindingObserversToElement instance.
      */
-    constructor({ customUpdate, ...args }: BindingObserversToElement.Args) {
+    constructor({ customUpdate, ...args }: any = {}) {
         super(args);
 
-        this._customUpdate = customUpdate;
+        this._customUpdate = args.customUpdate;
         this._events = [];
         this._updateElementHandler = this._updateElement.bind(this);
         this._updateTimeout = null;
@@ -84,16 +84,11 @@ class BindingObserversToElement extends BindingBase {
     link(observers: Observer[], paths: string[]) {
         super.link(observers, paths);
 
-        if (!this._element) return;
         // don't render changes when we link
-        const renderChanges = this._element.renderChanges;
-        if (renderChanges) {
+        if (this._element) {
+            const renderChanges = this._element.renderChanges;
             this._element.renderChanges = false;
-        }
-
-        this._updateElement();
-
-        if (renderChanges) {
+            this._updateElement();
             this._element.renderChanges = renderChanges;
         }
 

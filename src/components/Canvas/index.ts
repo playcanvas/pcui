@@ -24,7 +24,7 @@ class Canvas extends Element {
 
     static readonly defaultArgs: Canvas.Args = {
         ...Element.defaultArgs,
-        dom: document.createElement('canvas')
+        dom: 'canvas'
     };
 
     protected _width: number;

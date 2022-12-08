@@ -19,7 +19,7 @@ const CLASS_DRAGGED = CLASS_CONTAINER + '-dragged';
 const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
 
 namespace Container {
-    export interface Args extends Element.Args, Element.IParentArgs {
+    export interface Args extends Element.Args, Element.IParentArgs, Element.IFlexArgs {
         /**
          * Sets whether the Element is resizable and where the resize handle is located. Can
          * be one of 'top', 'bottom', 'right', 'left'. Set to null to disable resizing.
@@ -46,22 +46,6 @@ namespace Container {
          */
         grid?: boolean,
         /**
-         * Sets whether the Element supports flex layout.
-         */
-        flex?: boolean,
-        /**
-         * Sets whether the Element supports the flex shrink property.
-         */
-        flexShrink?: number,
-        /**
-         * Sets whether the Element supports the flex grow property.
-         */
-        flexGrow?: number,
-        /**
-         * Sets the Elements flex direction property.
-         */
-        flexDirection?: string,
-        /**
          * Sets the Elements align items property.
          */
         alignItems?: string
@@ -77,7 +61,7 @@ class Container extends Element {
     static readonly defaultArgs: Container.Args = {
         ...Element.defaultArgs,
         resizable: null,
-        dom: document.createElement('div')
+        dom: 'div'
     };
 
     /**

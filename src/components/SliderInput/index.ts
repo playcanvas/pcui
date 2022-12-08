@@ -25,7 +25,7 @@ const PROXY_FIELDS = [
 
 
 namespace SliderInput {
-    export interface Args extends Element.Args, Element.IBindableArgs {
+    export interface Args extends Element.Args, Element.IBindableArgs, Element.IFlexArgs {
         /**
          * Gets / sets the minimum value that the numeric input field can take.
          */
@@ -112,18 +112,18 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
 
         super(args.dom ? args.dom : document.createElement('div'), args);
 
-        if (args.precision) {
-            this.precision = args.precision;
-        } else if (args.pre) {
-            this.precision = args.pre;
-        }
-
         this.class.add(CLASS_SLIDER);
 
         this._historyCombine = false;
         this._historyPostfix = null;
 
         this._numericInput = new NumericInput({ ...inputArgs, hideSlider: true });
+
+        if (args.precision) {
+            this.precision = args.precision;
+        } else if (args.pre) {
+            this.precision = args.pre;
+        }
 
         // propagate change event
         this._numericInput.on('change', this._onValueChange.bind(this));

@@ -19,7 +19,7 @@ namespace Spinner {
         /**
          * Sets the pixel size of the spinner. Defaults to 12.
          */
-        size?: string,
+        size?: string | number,
         /**
          * Can be 'small-thick' or null. Defaults to 'small-thick'.
          */

@@ -5,11 +5,11 @@ import Input from '../Input/index';
 const CLASS_LABEL = 'pcui-label';
 
 namespace Label {
-    export interface Args extends Element.Args, Element.IBindableArgs, Element.IPlaceholderArgs {
+    export interface Args extends Element.Args, Element.IBindableArgs, Element.IPlaceholderArgs, Element.IFlexArgs {
         /**
          * Sets the text of the Label.
          */
-        text?: string,
+        text?: string | number,
         /**
          * If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
          */
@@ -39,7 +39,7 @@ class Label extends Input implements Element.IPlaceholder {
         allowTextSelection: false,
         renderChanges: false,
         placeholder: null,
-        dom: document.createElement('span')
+        dom: 'span'
     };
     protected _unsafe: boolean;
     protected _text: any;

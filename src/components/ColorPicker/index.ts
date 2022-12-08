@@ -32,7 +32,7 @@ class ColorPicker extends Element {
         channels: 3,
         value: [0, 0, 255, 1],
         renderChanges: false,
-        dom: document.createElement('div')
+        dom: 'div'
     };
 
     protected _domColor: HTMLDivElement;

@@ -45,7 +45,7 @@ class GradientPicker extends Element {
     static readonly defaultArgs: GradientPicker.Args = {
         ...Element.defaultArgs,
         renderChanges: true,
-        dom: document.createElement('div')
+        dom: 'div'
     };
 
     protected _canvas: Canvas;

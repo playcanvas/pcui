@@ -25,7 +25,7 @@ class BooleanInput extends Input implements Element.IBindable, Element.IFocusabl
         renderChanges: false,
         value: false,
         tabIndex: 0,
-        dom: document.createElement('div')
+        dom: 'div'
     };
 
     protected _domEventKeyDown: any;
