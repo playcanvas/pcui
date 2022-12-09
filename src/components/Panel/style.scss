@@ -233,7 +233,7 @@
 // disabled panel
 .pcui-panel.pcui-disabled {
     > .pcui-panel-header {
-        background-color: mix($bcg-dark, $bcg-primary, 60);
+        background-color: mix($bcg-dark, $bcg-primary, 60 * 1%);
         color: #999;
     }
 }

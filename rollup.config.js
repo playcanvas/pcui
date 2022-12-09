@@ -59,7 +59,8 @@ const react_umd = unstyled => ({
         format: 'umd',
         name: 'pcuiReact',
         globals: {
-            '@playcanvas/observer': 'observer'
+            '@playcanvas/observer': 'observer',
+            'react': 'React'
         }
     },
     plugins: [
@@ -81,7 +82,10 @@ const react_module = unstyled => ({
     output: {
         dir: `react/${unstyled ? 'unstyled/' : ''}dist/module`,
         format: 'esm',
-        entryFileNames: '[name].mjs'
+        entryFileNames: '[name].mjs',
+        globals: {
+            'react': 'React'
+        }
     },
     preserveModules: true,
     plugins: [
@@ -99,8 +103,27 @@ const react_module = unstyled => ({
     cache: false
 });
 
-const configs = [umd, module, react_umd, react_module]
-    .map(conf => [conf(true), conf(false)])
-    .reduce((configs, configPair) => [...configs, configPair[0], configPair[1]], []);
-
-export default configs;
+export default (args) => {
+    const targets = [];
+    const targetPairs = (target) => {
+        if (process.env.styled) {
+            return [target(false)];
+        }
+        return [target(false), target(true)];
+    };
+    if (process.env.target === 'es5') {
+        targets.push(...targetPairs(umd));
+    } else if (process.env.target === 'es6') {
+        targets.push(...targetPairs(module));
+    } else if (process.env.target === 'react:es5') {
+        targets.push(...targetPairs(react_umd));
+    } else if (process.env.target === 'react:es6') {
+        targets.push(...targetPairs(react_module));
+    } else {
+        targets.push(...targetPairs(umd));
+        targets.push(...targetPairs(module));
+        targets.push(...targetPairs(react_umd));
+        targets.push(...targetPairs(react_module));
+    }
+    return targets;
+};
