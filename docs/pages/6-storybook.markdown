@@ -9,4 +9,4 @@ nav_order: 6
 
 The storybook showcases all of PCUI's components in a single app. Each component can be adjusted using its documented properties. Their behaviour can then be tested each components canvas.
 
-[Click here](/storybook/) to view the storybook.
+[Click here](../storybook/) to view the storybook.

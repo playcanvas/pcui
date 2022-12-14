@@ -11,7 +11,7 @@ nav_order: 1
 A simple use case is shown below.
 
 <div class="highlighter-rouge example-background">
-    <iframe src="/storybook/iframe?id=examples-observer--main&viewMode=story" style="width: 100%; border: none; height: 68px;"></iframe>
+    <iframe src="../../storybook/iframe?id=examples-observer--main&viewMode=story" style="width: 100%; border: none; height: 68px;"></iframe>
 </div>
 
 In this example the created label will start with `Hello World` as it's text value. When a user enters a value into the text input, the label will be updated with the new value.
