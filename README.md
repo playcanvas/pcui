@@ -117,3 +117,6 @@ Run Storybook as follows:
 npm install
 npm run storybook
 ```
+## Documentation
+
+Information on building the documentation can be found in the [docs](./docs/README.md) directory.
