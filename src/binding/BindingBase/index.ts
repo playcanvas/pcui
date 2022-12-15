@@ -238,7 +238,7 @@ class BindingBase extends Events {
     }
 
     /**
-     * hether history is enabled for the binding. A valid history object must have been provided first.
+     * Whether history is enabled for the binding. A valid history object must have been provided first.
      */
     set historyEnabled(value) {
         if (this._history) {
