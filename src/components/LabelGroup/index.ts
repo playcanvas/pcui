@@ -20,7 +20,7 @@ namespace LabelGroup {
          */
         labelAlignTop?: boolean;
         /**
-         * Add a native tooltip to the label
+         * Add a native tooltip to the label.
          */
         nativeTooltip?: boolean;
     }
