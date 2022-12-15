@@ -4,7 +4,7 @@ const config = {
         '@storybook/addon-actions/register',
         '@storybook/addon-links',
         '@storybook/addon-docs',
-        '@storybook/addon-backgrounds/register',
+        '@storybook/addon-backgrounds/register'
     ],
     webpackFinal: async (config, { configType }) => {
         // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
