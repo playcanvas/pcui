@@ -988,7 +988,7 @@ class TreeView extends Container {
     }
 
     /**
-     * Removes all child tree view items
+     * Removes all child tree view items.
      */
     clearTreeItems() {
         let i = this.dom.childNodes.length;
