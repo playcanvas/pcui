@@ -34,7 +34,7 @@ jobs:
         node-version: 16.x
     - name: Install dependencies
       run: npm ci
-    - name: Build PCUI ES5
+    - name: Build PCUI ES6
       run: npm run build:es6
 
   build-react-es5:

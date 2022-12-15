@@ -4,7 +4,7 @@ const config = {
         '@storybook/addon-actions/register',
         '@storybook/addon-links',
         '@storybook/addon-docs',
-        '@storybook/addon-backgrounds/register',
+        '@storybook/addon-backgrounds/register'
     ],
     webpackFinal: async (config, { configType }) => {
         // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
@@ -21,7 +21,7 @@ const config = {
                 use: ['style-loader', 'css-loader', {
                     loader: 'sass-loader',
                     options: {
-                        additionalData: `@import '${__dirname}/../src/scss/pcui-storybook.scss';`,
+                        additionalData: `@import '${__dirname}/../src/scss/pcui-storybook.scss';`
                     }
                 }],
             }
@@ -31,7 +31,7 @@ const config = {
         return config;
     },
     core: {
-        builder: "webpack5",
+        builder: "webpack5"
     }
 };
 module.exports = config;

@@ -7,7 +7,7 @@ const CLASS_RADIO_BUTTON_SELECTED = CLASS_RADIO_BUTTON + '-selected';
 namespace RadioButton {
     export interface Args extends Element.Args, Element.IBindableArgs {
         /**
-         * The text to display next to the radio button
+         * The text to display next to the radio button.
          */
         text?: string;
     }

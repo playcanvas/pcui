@@ -23,7 +23,7 @@ namespace Panel {
      */
     collapsed?: number,
     /**
-     * Sets whether the panel can be reordered
+     * Sets whether the panel can be reordered.
      */
     sortable?: boolean,
     /**
@@ -31,7 +31,7 @@ namespace Panel {
      */
     collapseHorizontally?: boolean,
     /**
-     * Sets whether the panel can be removed
+     * Sets whether the panel can be removed.
      */
     removable?: boolean,
     /**
