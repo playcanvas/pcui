@@ -31,7 +31,7 @@ namespace Panel {
      */
     collapseHorizontally?: boolean,
     /**
-     * Sets whether the panel can be removed
+     * Sets whether the panel can be removed.
      */
     removable?: boolean,
     /**
