@@ -6,7 +6,6 @@ import BaseComponent from '../Element/component';
  * Represents an information box.
  */
 class InfoBox extends BaseComponent <Element.Args, any> {
-
     constructor(props: Element.Args) {
         super(props);
         this.elementClass = Element;
@@ -14,12 +13,10 @@ class InfoBox extends BaseComponent <Element.Args, any> {
 
     render() {
         // @ts-ignore
-        return <span ref={this.attachElement} />
+        return <span ref={this.attachElement} />;
     }
 }
 
 InfoBox.ctor = Element;
 
 export default InfoBox;
-
-

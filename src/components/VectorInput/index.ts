@@ -37,13 +37,13 @@ namespace VectorInput {
  * A vector input
  */
 class VectorInput extends Element implements Element.IBindable, Element.IFocusable, Element.IPlaceholder {
-
     static readonly defaultArgs: VectorInput.Args = {
         ...Element.defaultArgs,
         dimensions: 3
     };
 
     protected _inputs: any[];
+
     protected _applyingChange: boolean;
 
     constructor(args: VectorInput.Args = VectorInput.defaultArgs) {

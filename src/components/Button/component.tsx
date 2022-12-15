@@ -6,7 +6,6 @@ import BaseComponent from '../Element/component';
  * User input with click interaction
  */
 class Component extends BaseComponent <Element.Args, any> {
-
     constructor(props: Element.Args = Element.defaultArgs) {
         super(props);
         this.elementClass = Element;
@@ -14,7 +13,7 @@ class Component extends BaseComponent <Element.Args, any> {
 
     render() {
         // @ts-ignore
-        return <button ref={this.attachElement} />
+        return <button ref={this.attachElement} />;
     }
 }
 

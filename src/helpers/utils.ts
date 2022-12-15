@@ -1,5 +1,3 @@
-
-
 // utils.deepCopy
 export function deepCopy(data: any) {
     if (data == null || typeof (data) !== 'object')
@@ -20,12 +18,12 @@ export function deepCopy(data: any) {
     }
     return obj;
 
-};
+}
 
-export function isMobile () {
+export function isMobile() {
     return /Android/i.test(navigator.userAgent) ||
         /iPhone|iPad|iPod/i.test(navigator.userAgent);
-};
+}
 
 /**
  * @name utils.implements
@@ -45,7 +43,7 @@ export function classImplements(targetClass: any, sourceClass: any) {
     }
 
     Object.defineProperties(targetClass.prototype, properties);
-};
+}
 
 /**
  * @name utils.proxy
@@ -68,7 +66,7 @@ export function proxy(targetClass: any, memberName: string, properties: Array<st
             }
         });
     });
-};
+}
 
 // String.startsWith
 if (!String.prototype.startsWith) {
@@ -139,7 +137,7 @@ export function arrayEquals(lhs: Array<any>, rhs: Array<any>) {
         }
     }
     return true;
-};
+}
 
 // element.classList.add polyfill
 (function () {

@@ -42,7 +42,6 @@ namespace ArrayInput {
  * Element that allows editing an array of values.
  */
 class ArrayInput extends Element implements Element.IFocusable, Element.IBindable {
-
     static readonly defaultArgs: ArrayInput.Args = {
         ...Element.defaultArgs,
         getDefaultFn: null,
@@ -51,7 +50,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
 
     /**
      * @event
-     * @name linkElement 
+     * @name linkElement
      * @param {Element} element - The array element
      * @param {number} index - The index of the array element
      * @param {string} path - The path linked
@@ -59,9 +58,9 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
      */
     public static readonly EVENT_LINK_ELEMENT: 'linkElement';
 
-    /** 
+    /**
      * @event
-     * @name unlinkElement 
+     * @name unlinkElement
      * @param {Element} element - The array element
      * @param {number} index - The index of the array element
      * @description Fired when an array element is unlinked from observers
@@ -78,19 +77,33 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
     };
 
     protected _container: Container;
+
     protected _usePanels: any;
+
     protected _fixedSize: boolean;
+
     protected _inputSize: NumericInput;
+
     protected _suspendSizeChangeEvt: boolean;
+
     protected _containerArray: Container;
+
     protected _arrayElements: any;
+
     protected _suspendArrayElementEvts: boolean;
+
     protected _arrayElementChangeTimeout: any;
+
     protected _getDefaultFn: any;
+
     protected _valueType: any;
+
     protected _elementType: string;
+
     protected _elementArgs: any;
+
     protected _values: any[];
+
     protected _renderChanges: any;
 
     constructor(args: ArrayInput.Args = ArrayInput.defaultArgs) {

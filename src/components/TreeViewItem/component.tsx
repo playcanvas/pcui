@@ -6,7 +6,9 @@ import BaseComponent from '../Element/component';
  */
 class Component extends BaseComponent <Element.Args, any> {
     onSelect: () => void;
+
     onDeselect: () => void;
+
     constructor(props: Element.Args) {
         super(props);
         this.elementClass = Element;
@@ -17,7 +19,7 @@ class Component extends BaseComponent <Element.Args, any> {
                     this.element.selected = false;
                 });
             }
-        }
+        };
         if (props.onDeselect) {
             this.onDeselect = props.onDeselect;
         }

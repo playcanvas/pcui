@@ -10,7 +10,6 @@ namespace Divider {
  * Represents a vertical division between two elements
  */
 class Divider extends Element {
-
     static readonly defaultArgs: Divider.Args = {
         ...Element.defaultArgs
     };

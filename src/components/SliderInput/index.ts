@@ -27,11 +27,11 @@ const PROXY_FIELDS = [
 namespace SliderInput {
     export interface Args extends Element.Args, Element.IBindableArgs, Element.IFlexArgs {
         /**
-         * Gets / sets the minimum value that the numeric input field can take.
+         * Gets / sets the minimum value that the numeric input field can take. Defaults to 0.
          */
         min?: number,
         /**
-         * Gets / sets the maximum value that the numeric input field can take.
+         * Gets / sets the maximum value that the numeric input field can take. Defaults to 1.
          */
         max?: number,
         /**
@@ -66,7 +66,6 @@ namespace SliderInput {
  * of the NumericInput.
  */
 class SliderInput extends Element implements Element.IBindable, Element.IFocusable {
-
     static readonly defaultArgs: SliderInput.Args = {
         ...Element.defaultArgs,
         min: 0,
@@ -74,25 +73,43 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
     };
 
     protected _historyCombine: boolean;
+
     protected _historyPostfix: any;
+
     protected _numericInput: NumericInput;
+
     protected _sliderMin: any;
+
     protected _sliderMax: any;
+
     protected _domSlider: HTMLDivElement;
+
     protected _domBar: HTMLDivElement;
+
     protected _domHandle: HTMLDivElement;
+
     protected _cursorHandleOffset: number;
+
     protected _domMouseDown: any;
+
     protected _domMouseMove: any;
+
     protected _domMouseUp: any;
+
     protected _domTouchStart: any;
+
     protected _domTouchMove: any;
+
     protected _domTouchEnd: any;
+
     protected _domKeyDown: any;
+
     protected _touchId: any;
 
     /**
      * Creates a new SliderInput.
+     *
+     * @param args
      */
     constructor(args: SliderInput.Args = SliderInput.defaultArgs) {
         args = { ...SliderInput.defaultArgs, ...args };
@@ -449,56 +466,58 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
         }
     }
 
-    get renderChanges() {
-        return this._numericInput.renderChanges;
-    }
-
     set renderChanges(value: boolean) {
         this._numericInput.renderChanges = value;
+    }
+
+
+    get renderChanges() {
+        return this._numericInput.renderChanges;
     }
 
     /**
      * Gets / sets the minimum value that the numeric input field can take.
      */
-    get min() {
-        return this._numericInput.min;
-    }
-
     set min(value: number) {
         this._numericInput.min = value;
+    }
+
+    get min() {
+        return this._numericInput.min;
     }
 
     /**
      * Gets / sets the maximum value that the numeric input field can take.
      */
-    get max() {
-        return this._numericInput.max;
-    }
-
     set max(value: number) {
         this._numericInput.max = value;
+    }
+
+    get max() {
+        return this._numericInput.max;
     }
 
     /**
      * Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
      */
-    get step() {
-        return this._numericInput.step;
-    }
 
     set step(value: number) {
         this._numericInput.step = value;
     }
 
+    get step() {
+        return this._numericInput.step;
+    }
+
     /**
      * Gets / sets the maximum number of decimals a value can take.
      */
-    get precision() {
-        return this._numericInput.precision;
-    }
-
     set precision(value: number) {
         this._numericInput.precision = value;
+    }
+
+    get precision() {
+        return this._numericInput.precision;
     }
 }
 

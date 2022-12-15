@@ -9,7 +9,6 @@ import BindingBase from '../BindingBase';
  * @augments BindingBase
  */
 class BindingElementToObservers extends BindingBase {
-
     /**
      * Clone the binding and return a new instance.
      */

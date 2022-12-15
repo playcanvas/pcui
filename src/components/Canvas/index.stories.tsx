@@ -6,5 +6,4 @@ export default {
     component: CanvasComponent
 };
 
-export const Main = (args) => <CanvasComponent {...args} />;
-
+export const Main = args => <CanvasComponent {...args} />;

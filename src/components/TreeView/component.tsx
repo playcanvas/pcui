@@ -13,9 +13,10 @@ class Component extends BaseComponent <TreeViewElement.Args, any> {
     constructor(props: TreeViewElement.Args) {
         super(props);
         // @ts-ignore
-        this.element = new TreeViewElement({...props});
+        this.element = new TreeViewElement({ ...props });
         this.loadChildren(this.props.children, this.element);
     }
+
     loadChildren(children: any, element: any) {
         if (!children) return;
         if (!Array.isArray(children)) {
@@ -33,6 +34,7 @@ class Component extends BaseComponent <TreeViewElement.Args, any> {
             this.loadChildren(child.props.children, childElement);
         });
     }
+
     componentDidUpdate() {
         this.parentElement.removeChild(this.element.dom);
         // @ts-ignore
@@ -40,13 +42,15 @@ class Component extends BaseComponent <TreeViewElement.Args, any> {
         this.loadChildren(this.props.children, this.element);
         this.parentElement.appendChild(this.element.dom);
     }
+
     parentElementRendered(element: any) {
         if (!element) return;
         this.parentElement = element;
         this.parentElement.appendChild(this.element.dom);
     }
+
     render() {
-        return <div ref={this.parentElementRendered.bind(this)} />
+        return <div ref={this.parentElementRendered.bind(this)} />;
     }
 }
 

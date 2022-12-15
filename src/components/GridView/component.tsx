@@ -11,9 +11,10 @@ class GridView extends BaseComponent <GridViewElement.Args, any> {
     constructor(props: GridViewElement.Args) {
         super(props);
         // @ts-ignore
-        this.element = new GridViewElement({...props});
+        this.element = new GridViewElement({ ...props });
         this.loadChildren(this.props.children, this.element);
     }
+
     loadChildren(children: any, element: any) {
         if (!children) return;
         if (!Array.isArray(children)) {
@@ -26,8 +27,13 @@ class GridView extends BaseComponent <GridViewElement.Args, any> {
             this.loadChildren(child.props.children, childElement);
         });
     }
+
     render() {
-        return <div ref={(nodeElement) => {nodeElement && nodeElement.appendChild(this.element.dom)}} />
+        return <div ref={(nodeElement) => {
+            if (nodeElement) {
+                nodeElement.appendChild(this.element.dom);
+            }
+        }} />;
     }
 }
 

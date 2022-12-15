@@ -36,18 +36,29 @@ namespace BindingBase {
  */
 class BindingBase extends Events {
     protected _observers: Array<Observer>;
+
     protected _paths: Array<string>;
+
     protected _applyingChange: boolean;
+
     protected _element?: Element.IBindable;
+
     protected _history?: History;
+
     protected _historyPrefix?: string;
+
     protected _historyPostfix?: string;
+
     protected _historyName?: string;
+
     protected _historyCombine: boolean;
+
     protected _linked: boolean;
 
     /**
      * Creates a new binding.
+     *
+     * @param args
      */
     constructor(args: BindingBase.Args) {
         super();
@@ -168,7 +179,7 @@ class BindingBase extends Events {
         this._element = value;
     }
 
-    get element(): Element.IBindable | undefined{
+    get element(): Element.IBindable | undefined {
         return this._element;
     }
 

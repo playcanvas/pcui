@@ -17,14 +17,14 @@ namespace Progress {
  * Represents a bar that can highlight progress of an activity.
  */
 class Progress extends Container {
-
     static readonly defaultArgs: Progress.Args = {
         ...Container.defaultArgs
     };
 
     protected _inner: Element;
+
     protected _value: any;
-    
+
     constructor(args: Progress.Args = Progress.defaultArgs) {
         args = { ...Progress.defaultArgs, ...args };
         super(args);

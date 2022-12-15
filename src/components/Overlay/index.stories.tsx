@@ -5,5 +5,4 @@ export default {
     component: Component
 };
 
-export const Main = (args) => <Component {...args} />;
-
+export const Main = args => <Component {...args} />;

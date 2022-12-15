@@ -17,9 +17,9 @@ namespace Button {
          */
         icon?: string,
         /**
-         * Gets / sets the 'size' type of the button. Can be null or 'small'.
+         * Gets / sets the 'size' type of the button. Can be 'small'.
          */
-        size?: string
+        size?: 'small'
     }
 }
 
@@ -27,7 +27,6 @@ namespace Button {
  * User input with click interaction.
  */
 class Button extends Element {
-
     static readonly defaultArgs: Button.Args = {
         ...Element.defaultArgs,
         text: '',
@@ -38,9 +37,13 @@ class Button extends Element {
     };
 
     protected _unsafe: any;
+
     protected _domEventKeyDown: any;
+
     protected _text: any;
+
     protected _icon: any;
+
     protected _size: any;
 
     constructor(args: Button.Args = Button.defaultArgs) {

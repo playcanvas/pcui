@@ -29,11 +29,12 @@ namespace ContextMenu {
  * Represents a context menu. LEGACY: This is a legacy component and will be removed in the future. Use Menu instead.
  */
 class ContextMenu {
-
     static readonly defaultArgs: ContextMenu.Args = {};
 
     protected _menu: Container;
+
     protected _contextMenuEvent: void;
+
     protected _args: ContextMenu.Args;
 
     constructor(args: ContextMenu.Args = ContextMenu.defaultArgs) {

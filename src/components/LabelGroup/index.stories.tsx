@@ -7,7 +7,6 @@ export default {
     component: Component
 };
 
-export const Main = (args) => <Component {...args} text='A field: '>
-        <TextInput placeholder='foobar' />
-    </Component>;
-
+export const Main = args => <Component {...args} text='A field: '>
+    <TextInput placeholder='foobar' />
+</Component>;

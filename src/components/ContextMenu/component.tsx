@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Element from './index';
 import BaseComponent from '../Element/component';
@@ -14,9 +13,10 @@ class ContextMenu extends BaseComponent <Element.Args, any> {
 
     onDivLoaded = (element: any) => {
         this.element = new Element({ ...this.props, dom: element });
-    }
+    };
+
     render() {
-        return <div ref={this.onDivLoaded} />
+        return <div ref={this.onDivLoaded} />;
     }
 }
 

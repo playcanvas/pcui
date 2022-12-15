@@ -7,5 +7,4 @@ export default {
     component: Component
 };
 
-export const Main = (args) => <Component onChange={action('value-change')} {...args} />;
-
+export const Main = args => <Component onChange={action('value-change')} {...args} />;

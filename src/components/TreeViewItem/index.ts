@@ -19,7 +19,7 @@ namespace TreeViewItem {
          */
         selected?: any;
         /**
-         * Whether the item can be selected.
+         * Whether the item can be selected. Defaults to true.
          */
         allowSelect?: boolean,
         /**
@@ -27,11 +27,11 @@ namespace TreeViewItem {
          */
         open?: boolean,
         /**
-         * Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
+         * Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true. Defaults to true.
          */
         allowDrag?: boolean,
         /**
-         * Whether dropping is allowed on the tree item.
+         * Whether dropping is allowed on the tree item. Defaults to true.
          */
         allowDrop?: boolean,
         /**
@@ -39,7 +39,7 @@ namespace TreeViewItem {
          */
         text?: string,
         /**
-         * The icon shown before the text in the TreeViewItem.
+         * The icon shown before the text in the TreeViewItem. Defaults to E360.
          */
         icon?: string,
         /**
@@ -57,7 +57,6 @@ namespace TreeViewItem {
  * Represents a Tree View Item to be added to a pcui.TreeView.
  */
 class TreeViewItem extends Container {
-
     static readonly defaultArgs: TreeViewItem.Args = {
         ...Container.defaultArgs,
         flex: true,
@@ -100,28 +99,49 @@ class TreeViewItem extends Container {
     public static readonly EVENT_CLOSE = 'close';
 
     protected _containerContents: Container;
+
     protected _labelIcon: Label;
+
     protected _labelText: Label;
+
     protected _numChildren: number;
+
     protected _treeOrder: number;
+
     protected _domEvtFocus: any;
+
     protected _domEvtBlur: any;
+
     protected _domEvtKeyDown: any;
+
     protected _domEvtDragStart: any;
+
     protected _domEvtMouseDown: any;
+
     protected _domEvtMouseUp: any;
+
     protected _domEvtMouseOver: any;
+
     protected _domEvtClick: any;
+
     protected _domEvtDblClick: any;
+
     protected _domEvtContextMenu: any;
+
     protected _treeView: any;
+
     protected _allowDrag: any;
+
     protected _allowDrop: any;
+
     protected _allowSelect: any;
+
     protected _icon: any;
 
     /**
      * Creates a new TreeViewItem.
+     *
+     * @param args
      */
     constructor(args: TreeViewItem.Args = TreeViewItem.defaultArgs) {
         args = { ...TreeViewItem.defaultArgs, ...args };
@@ -401,7 +421,7 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the item is selected.
-     * 
+     *
      * @type {boolean}
      */
     set selected(value) {
@@ -437,7 +457,7 @@ class TreeViewItem extends Container {
 
     /**
      * The text shown by the TreeViewItem.
-     * 
+     *
      * @type {string}
      */
     set text(value) {
@@ -455,7 +475,7 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the internal label that shows the text.
-     * 
+     *
      * @type {Label}
      */
     get textLabel() {
@@ -464,7 +484,7 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the internal label that shows the icon.
-     * 
+     *
      * @type {Label}
      */
     get iconLabel() {
@@ -473,7 +493,7 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the item is open meaning showing its children.
-     * 
+     *
      * @type {boolean}
      */
     set open(value) {
@@ -495,7 +515,7 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the parents of the item are open or closed.
-     * 
+     *
      * @type {boolean}
      */
     set parentsOpen(value) {
@@ -518,7 +538,7 @@ class TreeViewItem extends Container {
 
     /**
      * Whether dropping is allowed on the tree item.
-     * 
+     *
      * @type {boolean}
      */
     set allowDrop(value) {
@@ -531,7 +551,7 @@ class TreeViewItem extends Container {
 
     /**
      * Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
-     * 
+     *
      * @type {boolean}
      */
     set allowDrag(value) {
@@ -544,7 +564,7 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the item can be selected.
-     * 
+     *
      * @type {boolean}
      */
     set allowSelect(value) {
@@ -557,7 +577,7 @@ class TreeViewItem extends Container {
 
     /**
      * Gets / sets the parent TreeView.
-     * 
+     *
      * @type {TreeView}
      */
     set treeView(value) {
@@ -570,7 +590,7 @@ class TreeViewItem extends Container {
 
     /**
      * number of direct children.
-     * 
+     *
      * @type {number}
      */
     get numChildren() {
@@ -579,15 +599,15 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the first child item.
-     * 
+     *
      * @type {TreeViewItem}
      */
     get firstChild() {
         if (this._numChildren) {
             for (let i = 0; i < this.dom.childNodes.length; i++) {
-                //@ts-ignore
+                // @ts-ignore
                 if (this.dom.childNodes[i].ui instanceof TreeViewItem) {
-                    //@ts-ignore
+                    // @ts-ignore
                     return this.dom.childNodes[i].ui;
                 }
             }
@@ -598,7 +618,7 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the last child item.
-     * 
+     *
      * @type {TreeViewItem}
      */
     get lastChild() {
@@ -606,7 +626,7 @@ class TreeViewItem extends Container {
             for (let i = this.dom.childNodes.length - 1; i >= 0; i--) {
                 // @ts-ignore
                 if (this.dom.childNodes[i].ui instanceof TreeViewItem) {
-                    //@ts-ignore
+                    // @ts-ignore
                     return this.dom.childNodes[i].ui;
                 }
             }
@@ -617,39 +637,39 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the first sibling item.
-     * 
+     *
      * @type {TreeViewItem}
      */
     get nextSibling() {
         let sibling = this.dom.nextSibling;
-        //@ts-ignore
+        // @ts-ignore
         while (sibling && !(sibling.ui instanceof TreeViewItem)) {
             sibling = sibling.nextSibling;
         }
 
-        //@ts-ignore
+        // @ts-ignore
         return sibling && sibling.ui;
     }
 
     /**
      * Gets the last sibling item.
-     * 
+     *
      * @type {TreeViewItem}
      */
     get previousSibling() {
         let sibling = this.dom.previousSibling;
-        //@ts-ignore
+        // @ts-ignore
         while (sibling && !(sibling.ui instanceof TreeViewItem)) {
             sibling = sibling.previousSibling;
         }
 
-        //@ts-ignore
+        // @ts-ignore
         return sibling && sibling.ui;
     }
 
     /**
      * The icon shown before the text in the TreeViewItem.
-     * 
+     *
      * @type {string}
      */
     set icon(value) {

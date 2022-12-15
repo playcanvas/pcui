@@ -16,12 +16,18 @@ namespace BindingObserversToElement {
  */
 class BindingObserversToElement extends BindingBase {
     _customUpdate: any;
+
     _events: any[];
+
     _updateElementHandler: any;
+
     _updateTimeout: any;
 
     /**
      * Creates a new BindingObserversToElement instance.
+     *
+     * @param root0
+     * @param root0.customUpdate
      */
     constructor({ customUpdate, ...args }: any = {}) {
         super(args);
@@ -80,6 +86,9 @@ class BindingObserversToElement extends BindingBase {
 
     /**
      * Link the binding to a set of observers and paths.
+     *
+     * @param observers
+     * @param paths
      */
     link(observers: Observer[], paths: string[]) {
         super.link(observers, paths);

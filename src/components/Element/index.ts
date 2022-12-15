@@ -1,3 +1,4 @@
+import React from 'react';
 import * as pcuiClass from '../../class';
 import { Events, Observer } from '@playcanvas/observer';
 
@@ -64,7 +65,7 @@ namespace Element {
          * Gets / sets the placeholder text of the input.
          */
         set placeholder(value: string),
-        get placeholder(): string 
+        get placeholder(): string
     }
 
     export interface IPlaceholderArgs {
@@ -196,7 +197,6 @@ namespace Element {
  * The base class for all UI elements.
  */
 class Element extends Events {
-
     public static defaultArgs: Element.Args = {
         hidden: false,
         readOnly: false,
@@ -295,22 +295,39 @@ class Element extends Events {
     public static readonly EVENT_DESTROY = 'destroy';
 
     protected _destroyed: boolean;
+
     protected _parent: any;
+
     protected _domEventClick: any;
+
     protected _domEventMouseOver: any;
+
     protected _domEventMouseOut: any;
+
     protected _eventsParent: any[];
+
     protected _dom: any;
+
     protected _class: any[];
+
     protected _hiddenParents: boolean;
+
     protected _flashTimeout: any;
+
     protected _suppressChange: boolean;
+
     protected _binding: any;
+
     protected _ignoreParent: any;
+
     protected _enabled: any;
+
     protected _readOnly: any;
+
     protected _hidden: any;
+
     protected _hasError: any;
+
     protected _domContent: any;
 
     constructor(dom: HTMLElement | string, args: Element.Args = Element.defaultArgs) {
@@ -327,8 +344,7 @@ class Element extends Events {
 
         if (typeof dom === 'string') {
             dom = document.createElement(dom);
-        }
-        else if (typeof args.dom === 'string') {
+        } else if (typeof args.dom === 'string') {
             args.dom = document.createElement(args.dom);
         }
 
@@ -404,12 +420,12 @@ class Element extends Events {
         this._suppressChange = false;
     }
 
-    /**
-     * @name Element#link
-     * @description Links the specified observers and paths to the Element's data binding.
-     * @param {Array<Observer>} observers - An array of observers or a single observer.
-     * @param {string|string[]} paths - A path for the observer(s) or an array of paths that maps to each separate observer.
-     * @ts-ignore */
+    //
+    // @name Element#link
+    // @description Links the specified observers and paths to the Element's data binding.
+    // @param {Array<Observer>} observers - An array of observers or a single observer.
+    // @param {string|string[]} paths - A path for the observer(s) or an array of paths that maps to each separate observer.
+    // @ts-ignore
     link(observers: Array<Observer>, paths: Array<string>|string) {
         if (this._binding) {
             this._binding.link(observers, paths);
@@ -532,6 +548,7 @@ class Element extends Events {
     }
 
     /**
+     * @param cls - The class to add
      * @name Element#classAdd
      * @description Adds the specified class to the DOM element but checks if the classList contains it first.
      */
@@ -543,6 +560,7 @@ class Element extends Events {
     }
 
     /**
+     * @param cls
      * @name Element#classRemove
      * @description Removes the specified class from the DOM element but checks if the classList contains it first.
      */
@@ -626,6 +644,7 @@ class Element extends Events {
 
         this.unbind();
     }
+
     unbind(name?: string, fn?: any): Events {
         // @ts-ignore
         return super.unbind(name, fn);
@@ -652,7 +671,7 @@ class Element extends Events {
      * @static
      * @param {string} type - The type of the Element (registered by pcui.Element#register)
      * @param {object} args - Arguments for the Element
-     * @returns {Element} A new pcui.Element of the desired type
+     * @returns {Element|undefined} A new pcui.Element of the desired type or undefined if type not found
      */
     static create(type: string, args: Element.Args) {
         const entry = ELEMENT_REGISTRY[type];
@@ -677,7 +696,7 @@ class Element extends Events {
 
     /**
      * Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
-     * 
+     *
      * @type {boolean}
      */
     set enabled(value) {
@@ -701,7 +720,7 @@ class Element extends Events {
 
     /**
      * Gets / sets whether the Element will ignore parent events & variable states.
-     * 
+     *
      * @type {boolean}
      */
     set ignoreParent(value) {
@@ -717,7 +736,7 @@ class Element extends Events {
 
     /**
      * Gets the root DOM node for this Element.
-     * 
+     *
      * @type {HTMLElement}
      */
     get dom(): HTMLElement {
@@ -854,6 +873,7 @@ class Element extends Events {
     get style(): CSSStyleDeclaration {
         return this._dom.style;
     }
+
     /**
      * Shortcut to pcui.Element.dom.classList.
      */

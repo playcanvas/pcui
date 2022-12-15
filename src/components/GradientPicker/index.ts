@@ -7,9 +7,7 @@ import TextInput from '../TextInput';
 import Panel from '../Panel';
 import Canvas from '../Canvas';
 import Label from '../Label';
-import { CurveSet } from 'playcanvas';
-import { Curve } from 'playcanvas';
-import { math } from 'playcanvas';
+import { CurveSet, Curve, math } from 'playcanvas';
 // @ts-ignore
 import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value.ts';
 
@@ -41,7 +39,6 @@ namespace GradientPicker {
  * Represents a gradient picker
  */
 class GradientPicker extends Element {
-
     static readonly defaultArgs: GradientPicker.Args = {
         ...Element.defaultArgs,
         renderChanges: true,
@@ -49,44 +46,79 @@ class GradientPicker extends Element {
     };
 
     protected _canvas: Canvas;
+
     protected _checkerboardPattern: any;
-    protected _resizeInterval?: NodeJS.Timer;
+
+    protected _resizeInterval?: any;
+
     protected _domEventKeyDown: any;
+
     protected _domEventFocus: any;
+
     protected _domEventBlur: any;
+
     protected _panel: Panel;
+
     protected _colorRect: Canvas;
+
     protected _colorHandle: HTMLDivElement;
+
     protected _hueRect: Canvas;
+
     protected _hueHandle: HTMLDivElement;
+
     protected _alphaRect: Canvas;
+
     protected _alphaHandle: HTMLDivElement;
+
     protected _fields: HTMLDivElement;
+
     protected _rField: any;
+
     protected _gField: any;
+
     protected _bField: any;
+
     protected _aField: any;
+
     protected _hexField: TextInput;
+
     protected _hsva: number[];
+
     protected _storeHsva: number[];
+
     protected _dragMode: number;
+
     protected _changing: boolean;
+
     protected _copiedData: any;
+
     protected _channels: number;
+
     protected _value: { type: number; keys: any[]; betweenCurves: boolean; };
+
     protected _evtPickerChanged: any;
+
     protected _evtRefreshPicker: any;
 
     protected renderChanges: boolean;
-    protected Helpers: any; 
-    protected CONSTANTS: any; 
+
+    protected Helpers: any;
+
+    protected CONSTANTS: any;
+
     protected UI: any;
+
     protected STATE: any;
 
     protected fieldChangeHandler: (evt: any) => void;
+
     protected hexChangeHandler: (evt: any) => void;
+
     protected downHandler: (evt: any) => void;
+
     protected moveHandler: (evt: any) => void;
+
     protected upHandler: (evt: any) => void;
 
     /**
@@ -1043,7 +1075,7 @@ class GradientPicker extends Element {
     }
 
     // get the bounding client rect minus padding
-    getClientRect(element: globalThis.Element) {
+    getClientRect(element: any) {
         const styles = window.getComputedStyle(element);
 
         const paddingTop = parseFloat(styles.paddingTop);

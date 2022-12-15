@@ -24,12 +24,12 @@ namespace Overlay {
  * An overlay element.
  */
 class Overlay extends Container {
-
     static readonly defaultArgs: Overlay.Args = {
         ...Element.defaultArgs
     };
 
     protected _domClickableOverlay: HTMLDivElement;
+
     protected _domEventMouseDown: any;
 
     constructor(args: Overlay.Args = Overlay.defaultArgs) {
@@ -74,6 +74,7 @@ class Overlay extends Container {
 
     /**
      * Position the overlay at specific x, y coordinates.
+     *
      * @param {number} x - The x coordinate
      * @param {number} y - The y coordinate
      */

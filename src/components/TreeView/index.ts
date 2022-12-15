@@ -104,34 +104,58 @@ class TreeView extends Container {
         ...Container.defaultArgs,
         allowDrag: true,
         allowReordering: true
-    }
+    };
 
     protected _selectedItems: any[];
+
     protected _dragItems: any[];
+
     protected _allowDrag: boolean;
+
     protected _allowReordering: boolean;
+
     protected _allowRenaming: boolean;
+
     protected _dragging: boolean;
+
     protected _dragOverItem: any;
+
     protected _dragArea: string;
+
     protected _dragScroll: number;
+
     protected _dragScrollInterval: any;
+
     protected _dragHandle: Element;
+
     protected _dragScrollElement: any;
+
     protected _onContextMenu: any;
+
     protected _onReparentFn: any;
+
     protected _pressedCtrl: boolean;
+
     protected _pressedShift: boolean;
+
     protected _filter: any;
+
     protected _filterResults: any[];
+
     protected _wasDraggingAllowedBeforeFiltering: any;
+
     protected _domEvtModifierKeys: any;
+
     protected _domEvtMouseLeave: any;
+
     protected _domEvtDragMove: any;
+
     protected _domEvtMouseMove: any;
 
     /**
      * Creates a new TreeView.
+     *
+     * @param args
      */
     constructor(args: TreeView.Args = TreeView.defaultArgs) {
         args = { ...TreeView.defaultArgs, ...args };
@@ -191,6 +215,11 @@ class TreeView extends Container {
      * Finds the next tree item that is not currently hidden
      *
      * @param {TreeViewItem} currentItem - The current tree item
+     * @param currentItem.numChildren
+     * @param currentItem.open
+     * @param currentItem.firstChild
+     * @param currentItem.nextSibling
+     * @param currentItem.parent
      * @returns {TreeViewItem} The next tree item.
      */
     protected _findNextVisibleTreeItem(currentItem: { numChildren: number; open: any; firstChild: any; nextSibling: any; parent: any; }) {
@@ -221,6 +250,9 @@ class TreeView extends Container {
      * Finds the last visible child tree item of the specified tree item.
      *
      * @param {TreeViewItem} currentItem - The current item.
+     * @param currentItem.numChildren
+     * @param currentItem.open
+     * @param currentItem.lastChild
      * @returns {TreeViewItem} The last child item.
      */
     protected _findLastVisibleChildTreeItem(currentItem: { numChildren: any; open: any; lastChild: any; }) {
@@ -238,6 +270,8 @@ class TreeView extends Container {
      * Finds the previous visible tree item of the specified tree item.
      *
      * @param {TreeViewItem} currentItem - The current tree item.
+     * @param currentItem.previousSibling
+     * @param currentItem.parent
      * @returns {TreeViewItem} The previous item.
      */
     protected _findPreviousVisibleTreeItem(currentItem: { previousSibling: any; parent: any; }) {
@@ -848,6 +882,7 @@ class TreeView extends Container {
      * Opens all the parents of the specified item
      *
      * @param {TreeViewItem} endItem - The end tree view item
+     * @param endItem.parentsOpen
      */
     protected _openHierarchy(endItem: { parentsOpen: boolean; }) {
         endItem.parentsOpen = true;
@@ -857,6 +892,7 @@ class TreeView extends Container {
      * Selects a tree view item
      *
      * @param {TreeViewItem} item - The tree view item
+     * @param item.selected
      */
     protected _selectSingleItem(item: { selected: boolean; }) {
         let i = this._selectedItems.length;
@@ -904,7 +940,10 @@ class TreeView extends Container {
      * Called when a child tree view item is renamed.
      *
      * @param {TreeViewItem} item - The tree view item.
+     * @param item.class
      * @param {string} newName - The new name.
+     * @param item.class.remove
+     * @param item.text
      */
     protected _onChildRename(item: { class: { remove: (arg0: string) => void; }; text: any; }, newName: any) {
         if (this._filter) {
@@ -970,6 +1009,8 @@ class TreeView extends Container {
 
     /**
      * Show the drag handle on the given tree item.
+     *
+     * @param treeItem
      */
     showDragHandle(treeItem: TreeViewItem) {
         this._updateDragHandle(treeItem, true);
@@ -1100,7 +1141,7 @@ class TreeView extends Container {
     /**
      * Returns all of the currently selected TreeViewItems.
      */
-    get selected() : Array<TreeViewItem>{
+    get selected() : Array<TreeViewItem> {
         return this._selectedItems.slice();
     }
 

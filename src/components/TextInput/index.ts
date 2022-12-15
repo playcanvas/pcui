@@ -34,26 +34,39 @@ namespace TextInput {
  * The TextInput is an input element of type text.
  */
 class TextInput extends Input implements Element.IFocusable, Element.IPlaceholder {
-
     static readonly defaultArgs: TextInput.Args = {
         ...Input.defaultArgs,
         blurOnEnter: true,
         blurOnEscape: true,
         dom: 'div'
-    }
+    };
+
     protected _domInput: HTMLInputElement;
+
     protected _domEvtChange: any;
+
     protected _domEvtFocus: any;
+
     protected _domEvtBlur: any;
+
     protected _domEvtKeyDown: any;
+
     protected _domEvtKeyUp: any;
+
     protected _domEvtCtxMenu: any;
+
     protected _suspendInputChangeEvt: boolean;
+
     protected _prevValue: any;
+
     protected _onValidate: any;
+
     protected _keyChange: any;
+
     protected _renderChanges: boolean;
+
     protected _blurOnEnter: boolean;
+
     protected _blurOnEscape: boolean;
 
     constructor(args: TextInput.Args = TextInput.defaultArgs) {
@@ -335,6 +348,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
     set onValidate(value) {
         this._onValidate = value;
     }
+
     get onValidate() {
         return this._onValidate;
     }
@@ -345,6 +359,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
     set blurOnEnter(value: boolean) {
         this._blurOnEnter = value;
     }
+
     get blurOnEnter() : boolean {
         return this._blurOnEnter;
     }
@@ -355,6 +370,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
     set blurOnEscape(value: boolean) {
         this._blurOnEnter = value;
     }
+
     get blurOnEscape() : boolean {
         return this._blurOnEnter;
     }

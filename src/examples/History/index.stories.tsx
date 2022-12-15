@@ -22,21 +22,21 @@ const observer = new Observer({ progress: 0 });
 const history = new History();
 
 export const Main = (props) => {
-    const [ canUndo, setCanUndo ] = useState(false);
-    const [ canRedo, setCanRedo ] = useState(false);
-    const [ historyLabel, setHistoryLabel ] = useState('');
+    const [canUndo, setCanUndo] = useState(false);
+    const [canRedo, setCanRedo] = useState(false);
+    const [historyLabel, setHistoryLabel] = useState('');
     history.on('canUndo', setCanUndo);
     history.on('canRedo', setCanRedo);
-    history.on('add', (name) => setHistoryLabel(`add action: ${name}`));
-    history.on('undo', (name) => setHistoryLabel(`undo action: ${name}`));
-    history.on('redo', (name) => setHistoryLabel(`redo action: ${name}`));
+    history.on('add', name => setHistoryLabel(`add action: ${name}`));
+    history.on('undo', name => setHistoryLabel(`undo action: ${name}`));
+    history.on('redo', name => setHistoryLabel(`redo action: ${name}`));
     return (
         <Container onResize={() => console.log('here!')} flex>
-            <Progress binding={new BindingTwoWay({ history })} link={{observer, path: 'progress'}}/>
+            <Progress binding={new BindingTwoWay({ history })} link={{ observer, path: 'progress' }}/>
             <Container>
             </Container>
             <Container>
-                <SliderInput min={0} sliderMin={0} max={100} sliderMax={100} binding={new BindingTwoWay({ history })} link={{observer, path: 'progress'}} />
+                <SliderInput min={0} sliderMin={0} max={100} sliderMax={100} binding={new BindingTwoWay({ history })} link={{ observer, path: 'progress' }} />
             </Container>
             <Container>
                 <Button text="Undo" enabled={canUndo} icon="E114" onClick={() => history.undo()} />
@@ -46,4 +46,3 @@ export const Main = (props) => {
         </Container>
     );
 };
-

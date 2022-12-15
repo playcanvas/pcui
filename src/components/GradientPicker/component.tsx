@@ -13,7 +13,7 @@ class GradientPicker extends BaseComponent <Element.Args, any> {
 
     render() {
         // @ts-ignore
-        return <div ref={this.attachElement}/>
+        return <div ref={this.attachElement}/>;
     }
 }
 

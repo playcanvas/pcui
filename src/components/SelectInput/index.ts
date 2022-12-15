@@ -70,9 +70,9 @@ namespace SelectInput {
          */
         createLabelText?: string;
         /**
-         * The type of each value. Can be one of 'string', 'number' or 'boolean'. 
+         * The type of each value. Can be one of 'string', 'number' or 'boolean'.
          */
-        type?: string;
+        type?: 'string' | 'number' | 'boolean';
     }
 }
 
@@ -81,7 +81,6 @@ namespace SelectInput {
  * An input that allows selecting from a dropdown or entering tags.
  */
 class SelectInput extends Element implements Element.IBindable, Element.IFocusable {
-
     static readonly defaultArgs: SelectInput.Args = {
         ...Element.defaultArgs,
         optionsFn: null,
@@ -99,37 +98,69 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
     };
 
     protected _container: Container;
+
     protected _containerValue: Container;
+
     protected _domShadow: HTMLDivElement;
+
     protected _allowInput: boolean;
+
     protected _allowCreate: boolean;
+
     protected _createFn?: (value: string) => void;
+
     protected _createLabelText?: string;
+
     protected _labelValue: Label;
+
     protected _timeoutLabelValueTabIndex: any;
+
     protected _labelIcon: Label;
+
     protected _input: TextInput;
+
     protected _lastInputValue: string;
+
     protected _suspendInputChange: boolean;
+
     protected _containerOptions: Container;
+
     protected _containerTags: Container;
+
     protected _domEvtKeyDown: any;
+
     protected _domEvtFocus: any;
+
     protected _domEvtBlur: any;
+
     protected _domEvtMouseDown: any;
+
     protected _domEvtWindowMouseDown: any;
+
     protected _domEvtWheel: any;
+
     protected _type: string;
+
     protected _optionsIndex: any;
+
     protected _labelsIndex: any;
+
     protected _labelHighlighted: any;
+
     protected _optionsFn: any;
+
     protected _allowNull: boolean;
+
     protected _values: any;
+
     protected _value: any;
+
     protected _createLabelContainer: any;
+
     protected _options: any;
+
     protected _invalidOptions: any;
+
     protected _renderChanges: boolean;
 
     constructor(args: SelectInput.Args = SelectInput.defaultArgs) {

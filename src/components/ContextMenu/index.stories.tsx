@@ -9,14 +9,14 @@ export default {
     component: Component
 };
 
-export const Main = (args) => <Container>
+export const Main = args => <Container>
     <Component {...args} items={[
-        {text: 'Hello', onClick: action('Hello')},
-        {text: 'World', items: [
-            {text: 'Foo', onClick: action('World -> Foo')},
-            {text: 'Bar', onClick: action('World -> Bar')},
-        ]}
+        { text: 'Hello', onClick: action('Hello') },
+        { text: 'World',
+            items: [
+                { text: 'Foo', onClick: action('World -> Foo') },
+                { text: 'Bar', onClick: action('World -> Bar') }
+            ] }
     ]}/>
     <Label text='This container can be right clicked to show a context menu' />
 </Container>;
-

@@ -36,7 +36,6 @@ namespace GridViewItem {
  *  Represents a grid view item used in GridView.
  */
 class GridViewItem extends Container implements Element.IFocusable {
-
     static readonly defaultArgs: GridViewItem.Args = {
         ...Container.defaultArgs,
         allowSelect: true,
@@ -45,19 +44,26 @@ class GridViewItem extends Container implements Element.IFocusable {
     };
 
     protected _selected: boolean;
+
     protected _radioButton: RadioButton;
+
     protected _radioButtonClickEvt: any;
+
     protected _labelText: Label;
+
     protected _type: any;
+
     protected _domEvtFocus: any;
+
     protected _domEvtBlur: any;
+
     protected _allowSelect: any;
 
     constructor(args: GridViewItem.Args = GridViewItem.defaultArgs) {
         args = { ...GridViewItem.defaultArgs, ...args };
         super(args);
 
-        this.allowSelect =args.allowSelect;
+        this.allowSelect = args.allowSelect;
         this._selected = false;
 
         if (args.type === 'radio') {

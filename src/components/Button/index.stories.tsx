@@ -3,7 +3,7 @@ import Component from './component';
 import { action } from '@storybook/addon-actions';
 
 export default {
-    component: Component 
+    component: Component
 };
 
 export const Text = (args) => {

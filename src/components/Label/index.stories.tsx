@@ -6,4 +6,4 @@ export default {
     component: Component
 };
 
-export const Main = (args) => <Component {...args} text='Foo Bar' />;
+export const Main = args => <Component {...args} text='Foo Bar' />;

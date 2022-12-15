@@ -28,7 +28,6 @@ namespace InfoBox {
  * Represents an information box.
  */
 class InfoBox extends Container {
-
     static readonly defaultArgs: InfoBox.Args = {
         ...Container.defaultArgs,
         unsafe: false,
@@ -38,10 +37,15 @@ class InfoBox extends Container {
     };
 
     protected _titleElement: Element;
+
     protected _textElement: Element;
+
     protected _unsafe: boolean;
+
     protected _icon: any;
+
     protected _title: any;
+
     protected _text: any;
 
     constructor(args: InfoBox.Args = InfoBox.defaultArgs) {

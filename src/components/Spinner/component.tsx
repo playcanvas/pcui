@@ -15,7 +15,7 @@ class Component extends BaseComponent <Element.Args, any> {
 
     render() {
         // @ts-ignore
-        return <svg ref={this.attachElement} />
+        return <svg ref={this.attachElement} />;
     }
 }
 

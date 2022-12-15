@@ -26,7 +26,6 @@ namespace ColorPicker {
  * Represents a color picker
  */
 class ColorPicker extends Element {
-
     static readonly defaultArgs: ColorPicker.Args = {
         ...Element.defaultArgs,
         channels: 3,
@@ -36,40 +35,75 @@ class ColorPicker extends Element {
     };
 
     protected _domColor: HTMLDivElement;
+
     protected _domEventKeyDown: any;
+
     protected _domEventFocus: any;
+
     protected _domEventBlur: any;
+
     protected _historyCombine: boolean;
+
     protected _historyPostfix: any;
+
     protected _value: number[];
+
     protected _channels: number;
+
     protected _isColorPickerOpen: boolean;
+
     protected _size: number;
+
     protected _directInput: boolean;
+
     protected _colorHSV: number[];
+
     protected _pickerChannels: any[];
+
     protected _channelsNumber: number;
+
     protected _changing: boolean;
+
     protected _dragging: boolean;
+
     protected _callingCallback: boolean;
+
     protected _overlay: Overlay;
+
     protected _pickRect: HTMLDivElement;
+
     protected _pickRectWhite: HTMLDivElement;
+
     protected _pickRectBlack: HTMLDivElement;
+
     protected _pickRectHandle: HTMLDivElement;
+
     protected _pickHue: HTMLDivElement;
+
     protected _pickHueHandle: HTMLDivElement;
+
     protected _pickOpacity: HTMLDivElement;
+
     protected _pickOpacityHandle: HTMLDivElement;
+
     protected _panelFields: HTMLDivElement;
+
     protected _evtColorPick: any;
+
     protected _evtColorToPicker: any;
+
     protected _evtColorPickStart: any;
+
     protected _evtColorPickEnd: any;
+
     protected _fieldR: NumericInput;
+
     protected _fieldG: NumericInput;
+
     protected _fieldB: NumericInput;
+
     protected _fieldA: NumericInput;
+
     protected _fieldHex: TextInput;
 
     renderChanges: any;

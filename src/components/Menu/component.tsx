@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Element from './index';
 import BaseComponent from '../Element/component';
@@ -13,12 +12,14 @@ class Menu extends BaseComponent <Element.Args, any> {
         super(props);
         this.elementClass = Element;
     }
+
     onDivLoaded = (element: any) => {
         // @ts-ignore
         this.element = new Element({ ...this.props, dom: element });
-    }
+    };
+
     render() {
-        return <div ref={this.onDivLoaded} />
+        return <div ref={this.onDivLoaded} />;
     }
 }
 

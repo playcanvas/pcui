@@ -26,16 +26,16 @@ window.addEventListener('contextmenu', (evt) => {
             menu.position(evt.clientX, evt.clientY);
         }
     }
-})
+});
 
-export const Main = (args) => <Container>
+export const Main = args => <Container>
     <Component {...args} hidden={true} items={[
-        {text: 'Hello', onSelect: action('Hello')},
-        {text: 'World', items: [
-            {text: 'Foo', onSelect: action('World -> Foo')},
-            {text: 'Bar', onSelect: action('World -> Bar'), onIsEnabled: () => false},
-        ]}
+        { text: 'Hello', onSelect: action('Hello') },
+        { text: 'World',
+            items: [
+                { text: 'Foo', onSelect: action('World -> Foo') },
+                { text: 'Bar', onSelect: action('World -> Bar'), onIsEnabled: () => false }
+            ] }
     ]}/>
     <Label text='This label can be right clicked to show a context menu'/>
 </Container>;
-

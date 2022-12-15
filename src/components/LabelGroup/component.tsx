@@ -25,7 +25,7 @@ class LabelGroup extends BaseComponent <Element.Args, any> {
             // @ts-ignore
             field: new this.props.children.type.ctor(this.props.children.props)
         });
-    }
+    };
 
     render() {
         return super.render();

@@ -21,14 +21,15 @@ namespace Canvas {
  * Represents a Canvas
  */
 class Canvas extends Element {
-
     static readonly defaultArgs: Canvas.Args = {
         ...Element.defaultArgs,
         dom: 'canvas'
     };
 
     protected _width: number;
+
     protected _height: number;
+
     protected _ratio: number;
 
     constructor(args: Canvas.Args = Canvas.defaultArgs) {
@@ -57,6 +58,9 @@ class Canvas extends Element {
 
     /**
      * Resize the canvas using the given width and height parameters.
+     *
+     * @param width
+     * @param height
      */
     resize(width: number, height: number) {
         if (this._width === width && this._height === height)

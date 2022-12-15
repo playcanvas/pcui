@@ -6,5 +6,4 @@ export default {
     component: ColorPickerComponent
 };
 
-export const Main = (args) => <ColorPickerComponent value={[255, 0, 0, 1]} {...args} />;
-
+export const Main = args => <ColorPickerComponent value={[255, 0, 0, 1]} {...args} />;

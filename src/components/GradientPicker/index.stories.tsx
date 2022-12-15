@@ -19,11 +19,10 @@ const defaultValue = {
         ]
     ],
     "betweenCurves": false
-}
+};
 
 export default {
     component: GradientPickerComponent
 };
 
-export const Main = (args) => <GradientPickerComponent value = {defaultValue} {...args} />;
-
+export const Main = args => <GradientPickerComponent value = {defaultValue} {...args} />;

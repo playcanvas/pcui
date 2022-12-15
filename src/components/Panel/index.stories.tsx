@@ -7,7 +7,6 @@ export default {
     component: Component
 };
 
-export const Main = (args) => <Component headerText='Foo Bar' collapsible {...args}>
+export const Main = args => <Component headerText='Foo Bar' collapsible {...args}>
     <Label text='Hello World' />
 </Component>;
-

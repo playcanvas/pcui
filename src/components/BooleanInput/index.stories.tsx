@@ -7,4 +7,4 @@ export default {
     component: Component
 };
 
-export const Main = (args) => <Component onChange={action('toggle')} {...args} />;
+export const Main = args => <Component onChange={action('toggle')} {...args} />;

@@ -45,11 +45,11 @@ namespace Panel {
     /**
      * Sets the panel type.
      */
-    panelType?: string,
+    panelType?: 'normal',
     /**
      * A dom element to use for the content container.
      */
-    content?: HTMLElement 
+    content?: HTMLElement
     /**
      * A dom element to use for the header container.
      */
@@ -79,25 +79,44 @@ class Panel extends Container {
     static readonly defaultArgs: Panel.Args = {
         ...Container.defaultArgs,
         headerSize: 32
-    }
+    };
+
     protected _suspendReflow: boolean;
+
     protected _domEvtDragStart: any;
+
     protected _domEvtDragMove: any;
+
     protected _domEvtDragEnd: any;
+
     protected _reflowTimeout: any;
+
     protected _widthBeforeCollapse: any;
+
     protected _heightBeforeCollapse: any;
+
     protected _iconSort: any;
+
     protected _btnRemove: any;
+
     protected _containerContent: any;
+
     protected _containerHeader: any;
+
     protected _labelTitle: any;
+
     protected _collapsible: any;
+
     protected _collapseHorizontally: any;
+
     protected _draggedChild: this;
+
     protected _destroyed: any;
+
     protected _collapsed: any;
+
     protected _sortable: any;
+
     protected _headerSize: any;
 
     /**

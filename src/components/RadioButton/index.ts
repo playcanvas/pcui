@@ -17,7 +17,6 @@ namespace RadioButton {
  * A radio button element.
  */
 class RadioButton extends Element implements Element.IBindable, Element.IFocusable {
-
     static readonly defaultArgs: RadioButton.Args = {
         ...Element.defaultArgs,
         text: '',
@@ -26,10 +25,15 @@ class RadioButton extends Element implements Element.IBindable, Element.IFocusab
     };
 
     protected _text: any;
+
     protected _domEventKeyDown: any;
+
     protected _domEventFocus: any;
+
     protected _domEventBlur: any;
+
     protected _value: any;
+
     protected _renderChanges: boolean;
 
     constructor(args: RadioButton.Args = RadioButton.defaultArgs) {

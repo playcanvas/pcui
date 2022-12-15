@@ -7,7 +7,7 @@ export default {
     component: GridView
 };
 
-export const Main = (args) => (
+export const Main = args => (
     <GridView {...args}>
         <GridViewItem text='Item 1' />
         <GridViewItem text='Item 2' />

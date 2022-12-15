@@ -46,7 +46,6 @@ namespace NumericInput {
  * The NumericInput represents an input element that holds numbers.
  */
 class NumericInput extends TextInput {
-
     static readonly defaultArgs: NumericInput.Args = {
         ...TextInput.defaultArgs,
         precision: 7,
@@ -57,20 +56,35 @@ class NumericInput extends TextInput {
     };
 
     protected _min: number;
+
     protected _max: number;
+
     protected _allowNull: boolean;
+
     protected _precision: number;
+
     protected _step: number;
+
     protected _stepPrecision: number;
+
     protected _oldValue: any;
+
     protected _historyCombine: boolean;
+
     protected _historyPostfix: any;
+
     protected _sliderPrevValue: number;
+
     protected _domEvtPointerLock: any;
+
     protected _domEvtSliderMouseDown: any;
+
     protected _domEvtSliderMouseUp: any;
+
     protected _domEvtMouseWheel: any;
+
     protected _sliderControl: Element;
+
     protected _sliderMovement: number;
 
     constructor(args: NumericInput.Args = NumericInput.defaultArgs) {

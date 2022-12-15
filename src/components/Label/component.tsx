@@ -10,9 +10,10 @@ class Component extends BaseComponent <Element.Args, any> {
         super(props);
         this.elementClass = Element;
     }
+
     render() {
         // @ts-ignore
-        return <span ref={this.attachElement} />
+        return <span ref={this.attachElement} />;
     }
 }
 

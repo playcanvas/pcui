@@ -15,15 +15,15 @@ function createSmallThick(size: any, dom: any) {
 
 namespace Spinner {
     export interface Args extends Element.Args {
-        
+
         /**
          * Sets the pixel size of the spinner. Defaults to 12.
          */
         size?: string | number,
         /**
-         * Can be 'small-thick' or null. Defaults to 'small-thick'.
+         * Can be 'small-thick'. Defaults to 'small-thick'.
          */
-        type?: string
+        type?: 'small-thick'
     }
 }
 
@@ -31,15 +31,17 @@ namespace Spinner {
  * Represents a spinning icon
  */
 class Spinner extends Element {
-
     static TYPE_SMALL_THICK = 'small-thick';
 
     static readonly defaultArgs: Spinner.Args = {
         ...Element.defaultArgs,
-        type: Spinner.TYPE_SMALL_THICK
+        type: 'small-thick'
     };
+
     /**
      * Sets the pixel size of the spinner
+     *
+     * @param args
      */
     constructor(args: Spinner.Args = Spinner.defaultArgs) {
         args = { ...Spinner.defaultArgs, ...args };

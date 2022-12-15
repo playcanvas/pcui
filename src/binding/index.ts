@@ -1,4 +1,3 @@
-
 import BindingBase from './BindingBase';
 import BindingElementToObservers from './BindingElementToObservers';
 import BindingObserversToElement from './BindingObserversToElement';
@@ -9,4 +8,4 @@ export {
     BindingElementToObservers,
     BindingObserversToElement,
     BindingTwoWay
-}
+};

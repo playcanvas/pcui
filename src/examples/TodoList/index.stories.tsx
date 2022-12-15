@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 import Container from '../../components/Container/component';
@@ -26,8 +25,8 @@ export default {
 const observer = new Observer({ input: '', items: {} });
 
 export const Main = (props) => {
-    const [ items, setItems ] = useState({});
-    const [ listFilter, setListFilter ] = useState(0);
+    const [items, setItems] = useState({});
+    const [listFilter, setListFilter] = useState(0);
     observer.on('items:set', setItems);
     const addItem = (value) => {
         const items = observer.get('items');
@@ -49,9 +48,9 @@ export const Main = (props) => {
     return (
         <Container class='todo'>
             <TextInput blurOnEnter={false} placeholder='enter item' binding={new BindingTwoWay()} link={{ observer, path: 'input' }} onChange={addItem}/>
-            <SelectInput type="number" options={[{v: 0, t: 'Show all items'}, {v: 1, t: 'Show active items'}, {v: 2, t: 'Show done items'}]} onChange={setListFilter} />
+            <SelectInput type="number" options={[{ v: 0, t: 'Show all items' }, { v: 1, t: 'Show active items' }, { v: 2, t: 'Show done items' }]} onChange={setListFilter} />
             <Container>
-                {Object.keys(items).map(key => {
+                {Object.keys(items).map((key) => {
                     var item = items[key];
                     if (listFilter !== 0) {
                         if ((listFilter === 1 && item.done) || (listFilter === 2 && !item.done)) return null;

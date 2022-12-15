@@ -19,7 +19,6 @@ namespace BooleanInput {
  * A checkbox element.
  */
 class BooleanInput extends Input implements Element.IBindable, Element.IFocusable {
-
     static readonly defaultArgs: BooleanInput.Args = {
         ...Element.defaultArgs,
         renderChanges: false,
@@ -29,8 +28,11 @@ class BooleanInput extends Input implements Element.IBindable, Element.IFocusabl
     };
 
     protected _domEventKeyDown: any;
+
     protected _domEventFocus: any;
+
     protected _domEventBlur: any;
+
     protected _value: any;
 
     constructor(args: BooleanInput.Args = BooleanInput.defaultArgs) {

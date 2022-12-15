@@ -30,14 +30,15 @@ namespace LabelGroup {
  * Represents a group of a Label and a Element. Useful for rows of labeled fields.
  */
 class LabelGroup extends Container {
-
     static readonly defaultArgs: LabelGroup.Args = {
         ...Container.defaultArgs,
         text: 'Label',
         field: null,
         labelAlignTop: false
     };
+
     protected _label: Label;
+
     protected _field: Element;
 
     constructor(args: LabelGroup.Args = LabelGroup.defaultArgs) {

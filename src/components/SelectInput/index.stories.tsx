@@ -4,8 +4,7 @@ import Component from './component';
 import { action } from '@storybook/addon-actions';
 
 export default {
-    component: Component,
+    component: Component
 };
 
-export const Main = (args) => <Component onChange={action('value-change')} {...args} />;
-
+export const Main = args => <Component onChange={action('value-change')} {...args} />;

@@ -7,18 +7,22 @@ import Element from './index';
 
 class Component <P extends Element.Args, S> extends React.Component <P, S> {
     static defaultArgs = Element.defaultArgs;
+
     static ctor: any;
 
     element: any;
+
     elementClass: any;
 
     onClick: () => void;
+
     onChange: (value: any) => void;
+
     onRemove: () => void;
 
     link: any;
 
-    onAttach?: any; 
+    onAttach?: any;
 
     constructor(props: P) {
         super(props);
@@ -36,6 +40,7 @@ class Component <P extends Element.Args, S> extends React.Component <P, S> {
             this.link = props.link;
         }
     }
+
     attachElement = (nodeElement: HTMLElement, containerElement: any) => {
         if (!nodeElement) return;
         if (this.elementClass === Element) {
@@ -72,14 +77,15 @@ class Component <P extends Element.Args, S> extends React.Component <P, S> {
         if (this.onAttach) {
             this.onAttach();
         }
-    }
+    };
+
     getPropertyDescriptor = (obj: any, prop: any) => {
         let desc;
         do {
             desc = Object.getOwnPropertyDescriptor(obj, prop);
         } while (!desc && (obj = Object.getPrototypeOf(obj)));
         return desc;
-    }
+    };
 
     componentDidMount() {
         if (this.link) {
@@ -88,7 +94,7 @@ class Component <P extends Element.Args, S> extends React.Component <P, S> {
     }
 
     componentDidUpdate(prevProps: any) {
-        Object.keys(this.props).forEach(prop => {
+        Object.keys(this.props).forEach((prop) => {
             var propDescriptor = this.getPropertyDescriptor(this.element, prop);
             if (propDescriptor && propDescriptor.set) {
                 if (prop === 'value') {
@@ -109,7 +115,7 @@ class Component <P extends Element.Args, S> extends React.Component <P, S> {
 
     render() {
         // @ts-ignore
-        return <div ref={this.attachElement} />
+        return <div ref={this.attachElement} />;
     }
 }
 

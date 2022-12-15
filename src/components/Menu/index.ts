@@ -20,7 +20,6 @@ namespace Menu {
  * and then positioned accordingly.
  */
 class Menu extends Container implements Element.IFocusable {
-
     static readonly defaultArgs: Menu.Args = {
         ...Container.defaultArgs,
         hidden: true,
@@ -29,9 +28,13 @@ class Menu extends Container implements Element.IFocusable {
     };
 
     protected _containerMenuItems: Container;
+
     protected _domEvtContextMenu: any;
+
     protected _domEvtKeyDown: any;
+
     protected _domEvtFocus: any;
+
     protected _domEvtBlur: any;
 
     constructor(args: Menu.Args = Menu.defaultArgs) {
@@ -103,7 +106,7 @@ class Menu extends Container implements Element.IFocusable {
         });
     }
 
-    protected _filterMenuItems(item: { onIsEnabled: () => any; enabled: any; onIsVisible: () => any; hidden: boolean; _containerItems: { dom: { childNodes: ChildNode[]; }; }; }) {
+    protected _filterMenuItems(item: { onIsEnabled: () => any; enabled: any; onIsVisible: () => any; hidden: boolean; _containerItems: { dom: { childNodes: any[]; }; }; }) {
         if (!(item instanceof MenuItem)) return;
 
         if (item.onIsEnabled) {
@@ -128,7 +131,7 @@ class Menu extends Container implements Element.IFocusable {
         }
     }
 
-    protected _limitSubmenuAtScreenEdges(item: { hasChildren: any; _containerItems: { style: { top: string; left: string; right: string; }; dom: { getBoundingClientRect: () => any; childNodes: ChildNode[]; }; }; }) {
+    protected _limitSubmenuAtScreenEdges(item: { hasChildren: any; _containerItems: { style: { top: string; left: string; right: string; }; dom: { getBoundingClientRect: () => any; childNodes: any[]; }; }; }) {
         if (!(item instanceof MenuItem) || !item.hasChildren) return;
 
         item._containerItems.style.top = '';

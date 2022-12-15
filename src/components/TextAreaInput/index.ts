@@ -13,7 +13,7 @@ namespace TextAreaInput {
         /**
          * Sets which directions the text area can be resized in. One of 'both', 'horizontal', 'vertical' or 'none'. Defaults to none.
          */
-        resizable?: string
+        resizable?: 'horizontal' | 'vertical' | 'both' | 'none'
     }
 }
 
@@ -21,7 +21,6 @@ namespace TextAreaInput {
  * The TextAreaInput wraps a textarea element. It has the same interface as pcui.TextInput.
  */
 class TextAreaInput extends TextInput {
-
     static readonly defaultArgs: TextAreaInput.Args = {
         ...TextInput.defaultArgs
     };

@@ -12,8 +12,8 @@ class Component extends BaseComponent <Element.Args, any> {
     }
 
     render() {
-        //@ts-ignore
-        return <canvas ref={this.attachElement}/>
+        // @ts-ignore
+        return <canvas ref={this.attachElement}/>;
     }
 }
 

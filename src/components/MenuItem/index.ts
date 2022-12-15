@@ -51,21 +51,30 @@ namespace MenuItem {
  * can be useful to show nested Menus.
  */
 class MenuItem extends Container implements Element.IBindable {
-
     static readonly defaultArgs: MenuItem.Args = {
         ...Container.defaultArgs
     };
 
     protected _containerContent: Container;
+
     protected _numChildren: number;
+
     protected _icon: any;
+
     protected _labelText: Label;
+
     protected _containerItems: Container;
+
     protected _domEvtMenuItemClick: any;
+
     protected _menu: any;
+
     protected _onSelect: any;
+
     protected _onIsEnabled: any;
+
     protected _onIsVisible: any;
+
     protected _renderChanges: boolean;
 
     constructor(args: MenuItem.Args = MenuItem.defaultArgs) {
@@ -308,7 +317,6 @@ class MenuItem extends Container implements Element.IBindable {
     get renderChanges() {
         return this._renderChanges;
     }
-
 }
 
 export default MenuItem;

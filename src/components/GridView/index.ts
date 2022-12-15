@@ -30,7 +30,6 @@ namespace GridView {
  * list of items that looks like a grid. Contains GridViewItem's.
  */
 class GridView extends Container {
-
     static readonly defaultArgs: GridView.Args = {
         ...Container.defaultArgs,
         multiSelect: true,
@@ -38,12 +37,19 @@ class GridView extends Container {
     };
 
     protected _vertical: boolean;
+
     protected _filterFn: (item: GridViewItem) => boolean;
+
     protected _filterAnimationFrame: any;
+
     protected _filterCanceled: boolean;
+
     protected _multiSelect: boolean;
+
     protected _allowDeselect: boolean;
+
     protected _selected: any[];
+
     protected _clickFn: any;
 
     constructor(args: GridView.Args = GridView.defaultArgs) {

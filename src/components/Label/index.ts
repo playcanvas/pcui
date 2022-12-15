@@ -29,7 +29,6 @@ namespace Label {
  * The Label is a simple span element that displays some text.
  */
 class Label extends Input implements Element.IPlaceholder {
-
     static readonly defaultArgs: Label.Args = {
         ...Element.defaultArgs,
         value: '',
@@ -41,8 +40,11 @@ class Label extends Input implements Element.IPlaceholder {
         placeholder: null,
         dom: 'span'
     };
+
     protected _unsafe: boolean;
+
     protected _text: any;
+
     _optionValue: any;
 
     constructor(args: Label.Args = Label.defaultArgs) {

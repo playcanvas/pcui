@@ -18,12 +18,12 @@ namespace Code {
  * Represents a code block.
  */
 class Code extends Container {
-
     static readonly defaultArgs: Code.Args = {
         ...Container.defaultArgs
     };
 
     protected _inner: Label;
+
     protected _text: any;
 
     constructor(args: Code.Args = Code.defaultArgs) {

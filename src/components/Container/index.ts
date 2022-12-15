@@ -57,7 +57,6 @@ namespace Container {
  * A container can contain any other element including other containers.
  */
 class Container extends Element {
-
     static readonly defaultArgs: Container.Args = {
         ...Element.defaultArgs,
         resizable: null,
@@ -96,24 +95,43 @@ class Container extends Element {
     public static readonly EVENT_RESIZE = 'resize';
 
     protected _domEventScroll: any;
+
     protected _scrollable: boolean;
+
     protected _flex: boolean;
+
     protected _grid: boolean;
+
     protected _domResizeHandle: any;
+
     protected _domEventResizeStart: any;
+
     protected _domEventResizeMove: any;
+
     protected _domEventResizeEnd: any;
+
     protected _domEventResizeTouchStart: any;
+
     protected _domEventResizeTouchMove: any;
+
     protected _domEventResizeTouchEnd: any;
+
     protected _resizeTouchId: any;
+
     protected _resizeData: any;
+
     protected _resizeHorizontally: boolean;
+
     protected _resizeMin: number;
+
     protected _resizeMax: number;
+
     protected _draggedStartIndex: number;
+
     protected _domContent: any;
+
     protected _resizable: string;
+
     protected _draggedHeight: any;
 
     constructor(args: Container.Args = Container.defaultArgs) {
@@ -600,6 +618,8 @@ class Container extends Element {
      * @param {object} node - The current element in the dom structure which must be recursively
      * traversed and appended to it's parent
      *
+     * @param node.root
+     * @param node.children
      * @returns {Element} - The recursively appended element node
      *
      */

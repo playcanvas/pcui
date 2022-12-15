@@ -21,14 +21,18 @@ namespace BindingTwoWay {
 /**
  * Provides two way data binding between Observers and IBindable elements. This means
  * that when the value of the Observers changes the IBindable will be updated and vice versa.
+ *
  * @augments BindingBase
  */
 class BindingTwoWay extends BindingBase {
     _bindingElementToObservers: any;
+
     _bindingObserversToElement: any;
 
     /**
      * Creates a new BindingTwoWay instance.
+     *
+     * @param args
      */
     constructor(args: BindingTwoWay.Args = {}) {
         super(args);
@@ -99,7 +103,7 @@ class BindingTwoWay extends BindingBase {
         this._bindingElementToObservers.removeValues(values);
     }
 
-    set element(value: Element.IBindable | undefined ) {
+    set element(value: Element.IBindable | undefined) {
         this._element = value;
         this._bindingElementToObservers.element = value;
         this._bindingObserversToElement.element = value;
