@@ -31,7 +31,7 @@ const config = {
         return config;
     },
     core: {
-        builder: "webpack5",
+        builder: "webpack5"
     }
 };
 module.exports = config;
