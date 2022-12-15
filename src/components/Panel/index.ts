@@ -23,7 +23,7 @@ namespace Panel {
      */
     collapsed?: number,
     /**
-     * Sets whether the panel can be reordered
+     * Sets whether the panel can be reordered.
      */
     sortable?: boolean,
     /**
