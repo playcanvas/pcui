@@ -15,7 +15,7 @@ namespace TextInput {
          */
         blurOnEscape?: boolean,
         /**
-         * Sets whether any key up event will cause a change event to be fired
+         * Sets whether any key up event will cause a change event to be fired.
          */
         keyChange?: boolean,
         /**
