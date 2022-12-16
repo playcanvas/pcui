@@ -7,7 +7,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/module/src/index.mjs",
-  "types": "dist/pcui.d.ts",
+  "types": "types/index.d.ts",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"
   },
@@ -16,16 +16,25 @@
     "url": "git+https://github.com/playcanvas/pcui.git"
   },
   "scripts": {
-    "build": "rollup -c && npm run bundle:styles",
+    "lint": "eslint --ext .ts --ext .tsx src",
+    "watch:es5": "rollup -c -w --environment styled --environment target:es5",
+    "watch:es6": "rollup -c -w --environment styled --environment target:es6",
+    "watch:react:es5": "rollup -c -w --environment styled --environment target:react:es5",
+    "watch:react:es6": "rollup -c -w --environment styled --environment target:react:es6",
+    "watch": "rollup -c -w --environment styled",
     "bundle:styles": "scss-bundle -e ./src/scss/themes/grey/colors.scss -o ./dist/theme-colors-grey.scss && scss-bundle -e ./src/scss/themes/green/colors.scss -o ./dist/theme-colors-green.scss && scss-bundle -e ./src/scss/themes/grey/style.scss -o ./dist/pcui-theme-grey.scss && scss-bundle -e ./src/scss/themes/green/style.scss -o ./dist/pcui-theme-green.scss && scss-bundle -e ./src/scss/variables.scss -o ./dist/variables.scss && scss-bundle -e ./src/scss/fonts.scss -o ./dist/fonts.scss",
-    "watch": "rollup -c -w",
-    "lint": "eslint --ext .js src",
+    "build:es5": "rollup -c --environment target:es5",
+    "build:es6": "rollup -c --environment target:es6",
+    "build:react:es5": "rollup -c --environment target:react:es5",
+    "build:react:es6": "rollup -c --environment target:react:es6",
+    "build": "rollup -c && npm run bundle:styles",
     "build:font:icons": "cd ./src/scss/fonts && node ./buildFontIcons.js",
-    "storybook": "jsdoc -r -X src > ./.storybook/utils/jsdoc-ast.json && start-storybook -p 9009 -s public",
-    "docs:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
-    "docs:build": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook",
-    "build:types": "jsdoc -c conf-tsd.json && node tsd.js",
-    "build:types:react": "cd react && tsc --project ../tsconfig.json --declaration --emitDeclarationOnly --outDir types"
+    "build:docsite:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook && cp -r ./typedocs ./docs/_site/typedocs",
+    "build:docsite:production": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook && cp -r ./typedocs ./docs/_site/typedocs",
+    "docsite:serve": "serve docs/_site -p 3497",
+    "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types",
+    "build:typedocs": "typedoc --tsconfig ./tsconfig.json",
+    "storybook": "start-storybook -p 9009 -s public"
   },
   "files": [
     "dist",
@@ -51,14 +60,30 @@
     ]
   },
   "eslintConfig": {
-    "extends": "@playcanvas/eslint-config"
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "extends": "@playcanvas/eslint-config",
+    "rules": {
+      "import/no-unresolved": "off",
+      "no-redeclare": "off",
+      "@typescript-eslint/no-redeclare": "error",
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-use-before-define": "error",
+      "jsdoc/require-returns": "off",
+      "jsdoc/require-param-description": "off",
+      "jsdoc/require-param-type": "off",
+      "no-throw-literal": "off"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@playcanvas/eslint-config": "^1.0.16",
-    "@playcanvas/observer": "^1.3.1",
+    "@playcanvas/observer": "^1.3.2",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-node-resolve": "^13.1.3",
     "@rollup/plugin-replace": "^3.0.1",
@@ -72,7 +97,10 @@
     "@storybook/manager-webpack5": "^6.4.18",
     "@storybook/preset-create-react-app": "^4.0.0",
     "@storybook/react": "^6.4.18",
+    "@types/estree": "^1.0.0",
     "@types/react": "^18.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
     "babel-loader": "^8.2.2",
     "eslint": "^8.8.0",
     "glob": "^7.1.7",
@@ -93,7 +121,9 @@
     "sass": "^1.49.7",
     "sass-loader": "^12.4.0",
     "scss-bundle": "^3.1.2",
+    "serve": "^14.1.2",
     "tsd-jsdoc": "^2.5.0",
+    "typedoc": "^0.23.20",
     "typescript": "^4.8.4",
     "webpack": "^5.68.0"
   },

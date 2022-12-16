@@ -10,8 +10,14 @@
         ],
         "allowSyntheticDefaultImports" : true,
         "esModuleInterop" : true,
-        "sourceMap": true
+        "sourceMap": true,
+        "moduleResolution": "node"
     },
-    "include": ["./src/index.tsx"],
+    "typedocOptions": {
+        "entryPoints": ["./src/index.ts"],
+        "out": "typedocs",
+        "readme": "none"
+    },
+    "include": ["./src/index.ts"],
     "exclude": ["node_modules/**/*", "node_modules"]
 }

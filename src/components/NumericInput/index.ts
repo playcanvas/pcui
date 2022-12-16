@@ -1,0 +1,435 @@
+import Element from '../Element/index';
+import TextInput from '../TextInput';
+import * as pcuiClass from '../../class';
+
+const CLASS_NUMERIC_INPUT = 'pcui-numeric-input';
+const CLASS_NUMERIC_INPUT_SLIDER_CONTROL = CLASS_NUMERIC_INPUT + '-slider-control';
+const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-active';
+const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-hidden';
+
+const REGEX_COMMA = /,/g;
+
+namespace NumericInput {
+    export interface Args extends TextInput.Args {
+        /**
+         * Sets the minimum value this field can take.
+         */
+        min?: number,
+        /**
+         * Sets the maximum value this field can take.
+         */
+        max?: number,
+        /**
+         * Sets the maximum value this field can take.
+         */
+        precision?: number,
+        /**
+         * Sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
+         */
+        step?: number,
+        /**
+         * Sets the amount that the value will be increased or decreased when holding shift using the arrow keys and the slider input. Defaults to {@link NumericInput#step} * 0.1.
+         */
+        stepPrecision?: number,
+        /**
+         * Hide the input mouse drag slider.
+         */
+        hideSlider?: boolean,
+        /**
+         * Sets whether the value can be null. If not then it will be 0 instead of null.
+         */
+        allowNull?: boolean
+    }
+}
+
+/**
+ * The NumericInput represents an input element that holds numbers.
+ */
+class NumericInput extends TextInput {
+    static readonly defaultArgs: NumericInput.Args = {
+        ...TextInput.defaultArgs,
+        precision: 7,
+        min: null,
+        max: null,
+        renderChanges: false,
+        allowNull: false
+    };
+
+    protected _min: number;
+
+    protected _max: number;
+
+    protected _allowNull: boolean;
+
+    protected _precision: number;
+
+    protected _step: number;
+
+    protected _stepPrecision: number;
+
+    protected _oldValue: any;
+
+    protected _historyCombine: boolean;
+
+    protected _historyPostfix: any;
+
+    protected _sliderPrevValue: number;
+
+    protected _domEvtPointerLock: any;
+
+    protected _domEvtSliderMouseDown: any;
+
+    protected _domEvtSliderMouseUp: any;
+
+    protected _domEvtMouseWheel: any;
+
+    protected _sliderControl: Element;
+
+    protected _sliderMovement: number;
+
+    constructor(args: NumericInput.Args = NumericInput.defaultArgs) {
+        args = { ...NumericInput.defaultArgs, ...args };
+        // make copy of args
+        args = Object.assign({}, args);
+        const value = args.value;
+        // delete value because we want to set it after
+        // the other arguments
+        delete args.value;
+        const renderChanges = args.renderChanges;
+        delete args.renderChanges;
+
+        super(args);
+
+        this.class.add(CLASS_NUMERIC_INPUT);
+
+        this._min = args.min;
+        this._max = args.max;
+        this._allowNull = args.allowNull;
+        this._precision = args.precision;
+
+        if (Number.isFinite(args.step)) {
+            this._step = args.step;
+        } else {
+            this._step = 10 / Math.pow(10, args.precision);
+        }
+
+        if (Number.isFinite(args.stepPrecision)) {
+            this._stepPrecision = args.stepPrecision;
+        } else {
+            this._stepPrecision = this._step * 0.1;
+        }
+
+        this._oldValue = undefined;
+        this.value = value;
+
+        this._historyCombine = false;
+        this._historyPostfix = null;
+        this._sliderPrevValue = 0;
+
+        this.renderChanges = renderChanges;
+
+        this._domEvtPointerLock = null;
+        this._domEvtSliderMouseDown = null;
+        this._domEvtSliderMouseUp = null;
+        this._domEvtMouseWheel = null;
+
+        if (!args.hideSlider) {
+            this._sliderControl = new Element(document.createElement('div'));
+            this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
+            this.dom.append(this._sliderControl.dom);
+
+            let sliderUsed = false;
+            this._domEvtSliderMouseDown = () => {
+                this._sliderControl.dom.requestPointerLock();
+                this._sliderMovement = 0.0;
+                this._sliderPrevValue = this.value;
+                sliderUsed = true;
+                if (this.binding) {
+                    this._historyCombine = this.binding.historyCombine;
+                    this._historyPostfix = this.binding.historyPostfix;
+
+                    this.binding.historyCombine = true;
+                    this.binding.historyPostfix = `(${Date.now()})`;
+                }
+            };
+
+            this._domEvtSliderMouseUp = () => {
+                document.exitPointerLock();
+                if (!sliderUsed) return;
+                sliderUsed = false;
+                this.value = this._sliderPrevValue + this._sliderMovement;
+
+                if (this.binding) {
+                    this.binding.historyCombine = this._historyCombine;
+                    this.binding.historyPostfix = this._historyPostfix;
+
+                    this._historyCombine = false;
+                    this._historyPostfix = null;
+                }
+            };
+
+            this._domEvtPointerLock = this._pointerLockChangeAlert.bind(this);
+
+            this._domEvtMouseWheel = this._updatePosition.bind(this);
+
+            this._sliderControl.dom.addEventListener('mousedown', this._domEvtSliderMouseDown);
+            this._sliderControl.dom.addEventListener('mouseup', this._domEvtSliderMouseUp);
+
+            document.addEventListener('pointerlockchange', this._domEvtPointerLock, false);
+            document.addEventListener('mozpointerlockchange', this._domEvtPointerLock, false);
+        }
+    }
+
+    protected _updatePosition(evt: any) {
+        let movement = 0;
+        if (evt.constructor === WheelEvent) {
+            movement = evt.deltaY;
+        } else if (evt.constructor === MouseEvent) {
+            movement = evt.movementX;
+        }
+
+        // move one step or stepPrecision every 100 pixels
+        this._sliderMovement += movement / 100 * (evt.shiftKey ? this._stepPrecision : this._step);
+        this.value = this._sliderPrevValue + this._sliderMovement;
+    }
+
+    protected _onInputChange(evt: any) {
+        // get the content of the input and pass it
+        // @ts-ignore through our value setter
+        this.value = this._domInput.value;
+    }
+
+    protected _onInputKeyDown(evt: any) {
+        if (!this.enabled || this.readOnly) return super._onInputKeyDown(evt);
+
+        // increase / decrease value with arrow keys
+        if (evt.keyCode === 38 || evt.keyCode === 40) {
+            const inc = evt.keyCode === 40 ? -1 : 1;
+            this.value += (evt.shiftKey ? this._stepPrecision : this._step) * inc;
+            return;
+        }
+
+        super._onInputKeyDown(evt);
+    }
+
+    protected _isScrolling() {
+        if (!this._sliderControl) return false;
+        return (document.pointerLockElement === this._sliderControl.dom ||
+        // @ts-ignore
+            document.mozPointerLockElement === this._sliderControl.dom);
+    }
+
+    protected _pointerLockChangeAlert() {
+        if (this._isScrolling()) {
+            this._sliderControl.dom.addEventListener("mousemove", this._domEvtMouseWheel, false);
+            this._sliderControl.dom.addEventListener("wheel", this._domEvtMouseWheel, false);
+            this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
+        } else {
+            this._sliderControl.dom.removeEventListener("mousemove", this._domEvtMouseWheel, false);
+            this._sliderControl.dom.removeEventListener("wheel", this._domEvtMouseWheel, false);
+            this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
+        }
+    }
+
+    protected _normalizeValue(value: any) {
+        try {
+            if (typeof value === 'string') {
+                // replace commas with dots (for some international keyboards)
+                value = value.replace(REGEX_COMMA, '.');
+
+                // remove spaces
+                value = value.replace(/\s/g, '');
+
+                // sanitize input to only allow short mathematical expressions to be evaluated
+                value = value.match(/^[*/+\-0-9().]+$/);
+                if (value !== null && value[0].length < 20) {
+                    var expression = value[0];
+                    var operators = ['+', '-', '/', '*'];
+                    operators.forEach((operator) => {
+                        var expressionArr = expression.split(operator);
+                        expressionArr.forEach((_: any, i: number) => {
+                            expressionArr[i] = expressionArr[i].replace(/^0+/, '');
+                        });
+                        expression = expressionArr.join(operator);
+                    });
+                    // eslint-disable-next-line
+                    value = Function('"use strict";return (' + expression + ')')();
+                }
+            }
+        } catch (error) {
+            value = null;
+        }
+
+        if (value === null || isNaN(value)) {
+            if (this._allowNull) {
+                return null;
+            }
+
+            value = 0;
+        }
+
+        // clamp between min max
+        if (this.min !== null && value < this.min) {
+            value = this.min;
+        }
+        if (this.max !== null && value > this.max) {
+            value = this.max;
+        }
+
+        // fix precision
+        if (this.precision !== null) {
+            value = parseFloat(Number(value).toFixed(this.precision));
+        }
+
+        return value;
+    }
+
+    protected _updateValue(value: any, force?: boolean) {
+        const different = (value !== this._oldValue || force);
+
+        // always set the value to the input because
+        // we always want it to show an actual number or nothing
+        this._oldValue = value;
+        this._domInput.value = value;
+
+        this.class.remove(pcuiClass.MULTIPLE_VALUES);
+
+        if (different) {
+            this.emit('change', value);
+        }
+
+        return different;
+    }
+
+    set value(value) {
+        value = this._normalizeValue(value);
+
+        const forceUpdate = this.class.contains(pcuiClass.MULTIPLE_VALUES) && value === null && this._allowNull;
+        const changed = this._updateValue(value, forceUpdate);
+
+        if (changed && this.binding) {
+            this.binding.setValue(value);
+        }
+        if (this._sliderControl) {
+            this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
+        }
+    }
+
+    get value() {
+        const val = super.value;
+        // @ts-ignore
+        return val !== '' ? parseFloat(val) : null;
+    }
+
+    /* eslint accessor-pairs: 0 */
+    set values(values: Array<number>) {
+        let different = false;
+        const value = this._normalizeValue(values[0]);
+        for (let i = 1; i < values.length; i++) {
+            if (value !== this._normalizeValue(values[i])) {
+                different = true;
+                break;
+            }
+        }
+
+        if (different) {
+            this._updateValue(null);
+            this.class.add(pcuiClass.MULTIPLE_VALUES);
+            if (this._sliderControl) {
+                this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
+            }
+        } else {
+            this._updateValue(value);
+            if (this._sliderControl) {
+                this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
+            }
+        }
+    }
+
+    /**
+     * Gets / Sets the minimum value this field can take.
+     */
+    set min(value) {
+        if (this._min === value) return;
+        this._min = value;
+
+        // reset value
+        if (this._min !== null) {
+            this.value = this.value; // eslint-disable-line no-self-assign
+        }
+    }
+
+    get min() {
+        return this._min;
+    }
+
+    /**
+     * Gets / Sets the maximum value this field can take.
+     */
+    set max(value) {
+        if (this._max === value) return;
+        this._max = value;
+
+        // reset value
+        if (this._max !== null) {
+            this.value = this.value; // eslint-disable-line no-self-assign
+        }
+    }
+
+    get max() {
+        return this._max;
+    }
+
+    /**
+     * Gets / Sets the precision of the input.
+     */
+    set precision(value) {
+        if (this._precision === value) return;
+        this._precision = value;
+
+        // reset value
+        if (this._precision !== null) {
+            this.value = this.value; // eslint-disable-line no-self-assign
+        }
+    }
+
+    get precision() {
+        return this._precision;
+    }
+
+    /**
+     * Gets / Sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
+     */
+    set step(value) {
+        this._step = value;
+    }
+
+    get step() {
+        return this._step;
+    }
+
+    destroy() {
+        if (this.destroyed) return;
+
+        if (this._domEvtSliderMouseDown) {
+            this._sliderControl.dom.removeEventListener('mousedown', this._domEvtSliderMouseDown);
+            this._sliderControl.dom.removeEventListener('mouseup', this._domEvtSliderMouseUp);
+        }
+
+        if (this._domEvtMouseWheel) {
+            this._sliderControl.dom.removeEventListener("mousemove", this._domEvtMouseWheel, false);
+            this._sliderControl.dom.removeEventListener("wheel", this._domEvtMouseWheel, false);
+        }
+
+        if (this._domEvtPointerLock) {
+            document.removeEventListener('pointerlockchange', this._domEvtPointerLock, false);
+            document.removeEventListener('mozpointerlockchange', this._domEvtPointerLock, false);
+        }
+
+        super.destroy();
+    }
+}
+
+Element.register('number', NumericInput, { renderChanges: true });
+
+export default NumericInput;

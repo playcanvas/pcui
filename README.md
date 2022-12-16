@@ -85,7 +85,8 @@ textInput.link(observer, 'text');
 Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in react to showcase binding with react components:
 ```jsx
 import { Observer } from '@playcanvas/observer';
-import { TextInput, BindingTwoWay } from '@playcanvas/pcui';
+import { BindingTwoWay } from '@playcanvas/pcui';
+import { TextInput } from '@playcanvas/pcui/react';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
@@ -116,3 +117,6 @@ Run Storybook as follows:
 npm install
 npm run storybook
 ```
+## Documentation
+
+Information on building the documentation can be found in the [docs](./docs/README.md) directory.

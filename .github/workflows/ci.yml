@@ -7,8 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-    name: Build
+  build-es5:
+    name: Build ES5
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -19,8 +19,53 @@ jobs:
         node-version: 16.x
     - name: Install dependencies
       run: npm ci
-    - name: Build PCUI
-      run: npm run build
+    - name: Build PCUI ES5
+      run: npm run build:es5
+
+  build-es6:
+    name: Build ES6
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup Node.js 16.x
+      uses: actions/setup-node@v2.1.4
+      with:
+        node-version: 16.x
+    - name: Install dependencies
+      run: npm ci
+    - name: Build PCUI ES6
+      run: npm run build:es6
+
+  build-react-es5:
+    name: Build React ES5
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup Node.js 16.x
+      uses: actions/setup-node@v2.1.4
+      with:
+        node-version: 16.x
+    - name: Install dependencies
+      run: npm ci
+    - name: Build PCUI React ES5
+      run: npm run build:react:es5
+
+  build-react-es6:
+    name: Build React ES6
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup Node.js 16.x
+      uses: actions/setup-node@v2.1.4
+      with:
+        node-version: 16.x
+    - name: Install dependencies
+      run: npm ci
+    - name: Build PCUI React ES6
+      run: npm run build:react:es6
 
   lint:
     name: Lint
