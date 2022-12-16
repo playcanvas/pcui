@@ -6,7 +6,7 @@
   "description": "Unstyled PCUI components",
   "main": "dist/index.js",
   "module": "dist/module/src/index.mjs",
-  "types": "../dist/pcui.d.ts",
+  "types": "../types/index.d.ts",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"
