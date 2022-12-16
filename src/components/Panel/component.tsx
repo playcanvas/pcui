@@ -21,12 +21,20 @@ class Component extends BaseComponent <Element.Args, any> {
     }
 
     render() {
+        let elements: any = React.Children.toArray(this.props.children);
+
+        if (elements.length === 1) {
+            elements = React.cloneElement(elements[0], { parent: this.element });
+        } else if (elements.length > 0) {
+            elements = elements.map((element: any) => React.cloneElement(element, { parent: this.element }));
+        }
         return <div ref={(nodeElement) => {
             this.nodeElement = nodeElement;
         }}>
             <div ref={(containerElement) => {
                 this.containerElement = containerElement;
             }} >
+                {elements}
             </div>
         </div>;
     }
