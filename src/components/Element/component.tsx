@@ -58,9 +58,18 @@ class Component <P extends Element.Args, S> extends React.Component <P, S> {
                 ...this.elementClass.defaultArgs,
                 ...this.props,
                 dom: nodeElement,
-                container: containerElement,
+                content: containerElement,
                 parent: undefined
             });
+            // @ts-ignore
+            const childrenProps = this.props.children;
+
+            if (containerElement && childrenProps) {
+                const children: any = React.Children.toArray(childrenProps);
+                children.forEach((child: any) => {
+                    this.element.append(new child.type.ctor(child.props));
+                });
+            }
         }
         if (this.onClick) {
             this.element.on('click', this.onClick);
