@@ -489,7 +489,7 @@ class GradientPicker extends Element {
         canvas.width = size;
         canvas.height = size;
 
-        const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#';
         ctx.fillStyle = "#949a9c";
         ctx.fillRect(0, 0, halfSize, halfSize);
