@@ -12,11 +12,11 @@ namespace ColorPicker {
     export interface Args extends Element.Args {
         renderChanges?: boolean;
         /**
-         * An optional array of 4 integers containing the RGBA values the picker should be initialised to
+         * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
          */
         value?: Array<number>;
         /**
-         * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value
+         * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
          */
         channels?: number;
     }
@@ -242,7 +242,7 @@ class ColorPicker extends Element {
         this._pickOpacity.classList.add('pick-opacity');
         this._overlay.append(this._pickOpacity);
 
-        // opacoty drag start
+        // opacity drag start
         this._pickOpacity.addEventListener('mousedown', function (evt: MouseEvent) {
             this._pickOpacityMouseMove(evt);
 

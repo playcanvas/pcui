@@ -611,12 +611,12 @@ class Container extends Element {
     }
 
     /**
-     * If the current node contains a root, recursively append it's children to this node
+     * If the current node contains a root, recursively append its children to this node
      * and return it. Otherwise return the current node. Also add each child to the parent
      * under its keyed name.
      *
      * @param {object} node - The current element in the dom structure which must be recursively
-     * traversed and appended to it's parent
+     * traversed and appended to its parent
      *
      * @param node.root
      * @param node.children
@@ -826,7 +826,7 @@ class Container extends Element {
 
     /**
      * The internal dom element used as a the container of all children.
-     * Can be overriden by derived classes
+     * Can be overridden by derived classes.
      */
     set domContent(value: HTMLElement) {
         if (this._domContent === value) return;

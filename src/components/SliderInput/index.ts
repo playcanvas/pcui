@@ -43,7 +43,7 @@ namespace SliderInput {
          */
         sliderMax?: number,
         /**
-         * Gets / sets the maximum number of decimals a value can take. Here for backwards compatability. Use the precision argument instead going forward.
+         * Gets / sets the maximum number of decimals a value can take. Here for backwards compatibility. Use the precision argument instead going forward.
          */
         pre?: number,
         /**

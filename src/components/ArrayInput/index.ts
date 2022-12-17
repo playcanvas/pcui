@@ -16,7 +16,7 @@ const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
 namespace ArrayInput {
     export interface Args extends Element.Args, Element.IBindableArgs {
         /**
-         * The type of valeus that the array can hold.
+         * The type of values that the array can hold.
          */
         type?: string;
         /**
@@ -188,7 +188,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
     }
 
     protected _onSizeChange(size: number) {
-        // if size is explicitely 0 then add empty class
+        // if size is explicitly 0 then add empty class
         // size can also be null with multi-select so do not
         // check just !size
         if (size === 0) {
@@ -475,7 +475,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
             lastElementIndex = i;
         }
 
-        // destory elements that are no longer in our values
+        // destroy elements that are no longer in our values
         for (let i = this._arrayElements.length - 1; i > lastElementIndex; i--) {
             this._arrayElements[i].container.destroy();
             this._arrayElements.splice(i, 1);

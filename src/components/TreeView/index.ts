@@ -702,7 +702,7 @@ class TreeView extends Container {
                             r.newChildIndex = index + 1;
                         }
 
-                        // substract 1 from new child index to account for the extra node that
+                        // subtract 1 from new child index to account for the extra node that
                         // each tree view item has inside
                         r.newChildIndex--;
                     });

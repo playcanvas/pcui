@@ -25,11 +25,11 @@ namespace GradientPicker {
     export interface Args extends Element.Args {
         renderChanges?: boolean;
         /**
-         * An optional array of 4 integers containing the RGBA values the picker should be initialised to
+         * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
          */
         value?: Array<number>;
         /**
-         * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value
+         * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
          */
         channels?: number;
     }
@@ -175,14 +175,14 @@ class GradientPicker extends Element {
         }
 
         this.Helpers = {
-            rgbaStr: function (colour: Array<number>, scale: number) {
+            rgbaStr: function (color: Array<number>, scale: number) {
                 if (!scale) {
                     scale = 1;
                 }
-                let rgba = colour.map(function (element: number, index: number) {
+                let rgba = color.map(function (element: number, index: number) {
                     return index < 3 ? Math.round(element * scale) : element;
                 }).join(',');
-                for (let i = colour.length; i < 4; ++i) {
+                for (let i = color.length; i < 4; ++i) {
                     rgba += ',' + (i < 3 ? scale : 1);
                 }
                 return 'rgba(' + rgba + ')';
@@ -677,8 +677,8 @@ class GradientPicker extends Element {
     }
 
     protected _generateHue(canvas: Canvas) {
-        // @ts-ignore
-        const ctx = canvas.element.getContext('2d');
+        const canvasElement = canvas.element as HTMLCanvasElement;
+        const ctx = canvasElement.getContext('2d');
         const w = canvas.pixelWidth;
         const h = canvas.pixelHeight;
         const gradient = ctx.createLinearGradient(0, 0, 0, h);
@@ -690,8 +690,8 @@ class GradientPicker extends Element {
     }
 
     protected _generateAlpha(canvas: Canvas) {
-        // @ts-ignore
-        const ctx = canvas.element.getContext('2d');
+        const canvasElement = canvas.element as HTMLCanvasElement;
+        const ctx = canvasElement.getContext('2d');
         const w = canvas.pixelWidth;
         const h = canvas.pixelHeight;
         const gradient = ctx.createLinearGradient(0, 0, 0, h);
@@ -702,8 +702,8 @@ class GradientPicker extends Element {
     }
 
     protected _generateGradient(canvas: Canvas, clr: any[]) {
-        // @ts-ignore
-        const ctx = canvas.element.getContext('2d');
+        const canvasElement = canvas.element as HTMLCanvasElement;
+        const ctx = canvasElement.getContext('2d');
         const w = canvas.pixelWidth;
         const h = canvas.pixelHeight;
 

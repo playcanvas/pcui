@@ -927,7 +927,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
      */
     close() {
         // there is a potential bug here if the user has set a max height
-        // themselves then this will be overriden
+        // themselves then this will be overridden
         this._containerOptions.style.maxHeight = '';
 
         this._highlightLabel(null);

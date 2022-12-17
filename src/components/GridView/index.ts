@@ -27,7 +27,7 @@ namespace GridView {
 
 /**
  * Represents a container that shows a flexible wrappable
- * list of items that looks like a grid. Contains GridViewItem's.
+ * list of items that looks like a grid. Contains GridViewItems.
  */
 class GridView extends Container {
     static readonly defaultArgs: GridView.Args = {

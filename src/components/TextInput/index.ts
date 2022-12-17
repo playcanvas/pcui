@@ -343,7 +343,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
     }
 
     /**
-     * Gets / sets the valudate method for the input.
+     * Gets / sets the validate method for the input.
      */
     set onValidate(value) {
         this._onValidate = value;

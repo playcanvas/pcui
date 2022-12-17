@@ -277,7 +277,7 @@ class Panel extends Container {
 
                 // add collapsed class after getting the width and height
                 // because if we add it before then because of overflow:hidden
-                // we might get innacurate width/heights.
+                // we might get inaccurate width/heights.
                 this.class.add(pcuiClass.COLLAPSED);
             } else {
                 // remove collapsed class first and the restore width and height

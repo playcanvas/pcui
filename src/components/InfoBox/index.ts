@@ -10,11 +10,11 @@ namespace InfoBox {
          */
         icon?: string;
         /**
-         * Gets / sets the 'title' of the info box
+         * Gets / sets the 'title' of the info box.
          */
         title?: string;
         /**
-         * Gets / sets the 'text' of the info box
+         * Gets / sets the 'text' of the info box.
          */
         text?: string;
         /**
@@ -66,7 +66,7 @@ class InfoBox extends Container {
     }
 
     /**
-     * Sets the icon of the info box
+     * Sets the icon of the info box.
      */
     set icon(value) {
         if (this._icon === value) return;
@@ -84,7 +84,7 @@ class InfoBox extends Container {
     }
 
     /**
-     * Sets the title of the info box
+     * Sets the title of the info box.
      */
     set title(value) {
         if (this._title === value) return;
@@ -101,7 +101,7 @@ class InfoBox extends Container {
     }
 
     /**
-     * Sets the text of the info box
+     * Sets the text of the info box.
      */
     set text(value) {
         if (this._text === value) return;

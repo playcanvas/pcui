@@ -83,7 +83,7 @@ class VectorInput extends Element implements Element.IBindable, Element.IFocusab
         }
 
         // set the binding after the inputs have been created
-        // because we rely on them in the overriden setter
+        // because we rely on them in the overridden setter
         if (binding) {
             this.binding = binding;
         }
@@ -243,7 +243,7 @@ class VectorInput extends Element implements Element.IBindable, Element.IFocusab
     }
 
     // we have to override the getter too because
-    // we have overriden the setter
+    // we have overridden the setter
     get binding() {
         return super.binding;
     }
