@@ -177,8 +177,7 @@ class GridView extends Container {
     }
 
     /**
-     * @name GridView#deselect
-     * @description Deselects all selected grid view items.
+     * Deselects all selected grid view items.
      */
     deselect() {
         let i = this._selected.length;
@@ -190,8 +189,7 @@ class GridView extends Container {
     }
 
     /**
-     * @name GridView#filter
-     * @description Filters grid view items with the filter function provided in the constructor.
+     * Filters grid view items with the filter function provided in the constructor.
      */
     filter() {
         this.forEachChild((child) => {
@@ -202,15 +200,15 @@ class GridView extends Container {
     }
 
     /**
-     * @name GridView#filterAsync
-     * @description Filters grid view items asynchronously by only allowing up to the specified
-     * number of grid view item operations. Fires following events:
-     * filter:start - When filtering starts
-     * filter:end - When filtering ends
-     * filter:delay - When an animation frame is requested to process another batch.
-     * filter:cancel - When filtering is canceled.
-     * @param {number} batchLimit - The maximum number of items to show
-     * before requesting another animation frame.
+     * Filters grid view items asynchronously by only allowing up to the specified number of grid
+     * view item operations. Fires the following events:
+     *
+     * - filter:start - When filtering starts.
+     * - filter:end - When filtering ends.
+     * - filter:delay - When an animation frame is requested to process another batch.
+     * - filter:cancel - When filtering is canceled.
+     *
+     * @param batchLimit - The maximum number of items to show before requesting another animation frame.
      */
     filterAsync(batchLimit: number) {
         let i = 0;
@@ -256,8 +254,7 @@ class GridView extends Container {
     }
 
     /**
-     * @name GridView#filterAsyncCancel
-     * @description Cancels asynchronous filtering.
+     * Cancels asynchronous filtering.
      */
     filterAsyncCancel() {
         if (this._filterAnimationFrame) {

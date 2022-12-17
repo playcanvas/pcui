@@ -318,15 +318,15 @@ class Element extends Events {
 
     protected _binding: any;
 
-    protected _ignoreParent: any;
+    protected _ignoreParent: boolean;
 
-    protected _enabled: any;
+    protected _enabled: boolean;
 
-    protected _readOnly: any;
+    protected _readOnly: boolean;
 
-    protected _hidden: any;
+    protected _hidden: boolean;
 
-    protected _hasError: any;
+    protected _hasError: boolean;
 
     protected _domContent: any;
 
@@ -418,22 +418,20 @@ class Element extends Events {
         this._suppressChange = false;
     }
 
-    //
-    // @name Element#link
-    // @description Links the specified observers and paths to the Element's data binding.
-    // @param {Array<Observer>} observers - An array of observers or a single observer.
-    // @param {string|string[]} paths - A path for the observer(s) or an array of paths that maps to each separate observer.
-    // @ts-ignore
+    /**
+     * Links the specified observers and paths to the Element's data binding.
+     *
+     * @param observers - An array of observers or a single observer.
+     * @param paths - A path for the observer(s) or an array of paths that maps to each separate observer.
+     */
     link(observers: Array<Observer>, paths: Array<string>|string) {
         if (this._binding) {
             this._binding.link(observers, paths);
         }
     }
 
-
     /**
-     * @name Element#unlink
-     * @description Unlinks the Element from its observers
+     * Unlinks the Element from its observers.
      */
     unlink() {
         if (this._binding) {
@@ -442,8 +440,7 @@ class Element extends Events {
     }
 
     /**
-     * @name Element#flash
-     * @description Triggers a flash animation on the Element.
+     * Triggers a flash animation on the Element.
      */
     flash() {
         if (this._flashTimeout) return;
@@ -546,32 +543,31 @@ class Element extends Events {
     }
 
     /**
-     * @param cls - The class to add
-     * @name Element#classAdd
-     * @description Adds the specified class to the DOM element but checks if the classList contains it first.
+     * Adds the specified class to the DOM element but checks if the classList contains it first.
+     *
+     * @param cls - The class to add.
      */
     classAdd(cls: string) {
-        var classList = this._dom.classList;
+        const classList = this._dom.classList;
         if (!classList.contains(cls)) {
             classList.add(cls);
         }
     }
 
     /**
-     * @param cls
-     * @name Element#classRemove
-     * @description Removes the specified class from the DOM element but checks if the classList contains it first.
+     * Removes the specified class from the DOM element but checks if the classList contains it first.
+     *
+     * @param cls - The class to remove.
      */
     classRemove(cls: string) {
-        var classList = this._dom.classList;
+        const classList = this._dom.classList;
         if (classList.contains(cls)) {
             classList.remove(cls);
         }
     }
 
     /**
-     * @name Element#destroy
-     * @description Destroys the Element and its events.
+     * Destroys the Element and its events.
      */
     destroy() {
         if (this._destroyed) return;
@@ -665,12 +661,11 @@ class Element extends Events {
     }
 
     /**
-     * @static
-     * @param {string} type - The type of the Element (registered by pcui.Element#register)
-     * @param {object} args - Arguments for the Element
-     * @returns {Element|undefined} A new pcui.Element of the desired type or undefined if type not found
+     * @param type - The type of the Element (registered by pcui.Element#register).
+     * @param args - Arguments for the Element.
+     * @returns A new pcui.Element of the desired type or undefined if type not found.
      */
-    static create(type: string, args: Element.Args) {
+    static create(type: string, args: Element.Args) : any {
         const entry = ELEMENT_REGISTRY[type];
         if (!entry) {
             console.error('Invalid type passed to pcui.Element#create', type);
@@ -717,8 +712,6 @@ class Element extends Events {
 
     /**
      * Gets / sets whether the Element will ignore parent events & variable states.
-     *
-     * @type {boolean}
      */
     set ignoreParent(value) {
         this._ignoreParent = value;

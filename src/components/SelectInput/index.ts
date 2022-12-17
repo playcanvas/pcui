@@ -861,8 +861,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
     }
 
     /**
-     * @name SelectInput#open
-     * @description Opens the dropdown menu
+     * Opens the dropdown menu.
      */
     open() {
         if (!this._containerOptions.hidden || !this.enabled || this.readOnly) return;
@@ -922,8 +921,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
     }
 
     /**
-     * @name SelectInput#close
-     * @description Closes the dropdown menu
+     * Closes the dropdown menu.
      */
     close() {
         // there is a potential bug here if the user has set a max height
@@ -954,8 +952,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
     }
 
     /**
-     * @name SelectInput#toggle
-     * @description Toggles the dropdown menu
+     * Toggles the dropdown menu.
      */
     toggle() {
         if (this._containerOptions.hidden) {
