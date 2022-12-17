@@ -6,7 +6,7 @@ const CLASS_INFOBOX = 'pcui-infobox';
 namespace InfoBox {
     export interface Args extends Container.Args {
         /**
-         * The CSS code for an icon for the info box. e.g. E401 (notice we omit the '\' character).
+         * The CSS code for an icon for the info box. e.g. 'E401' (notice we omit the '\\' character).
          */
         icon?: string;
         /**

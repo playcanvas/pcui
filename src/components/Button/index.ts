@@ -13,7 +13,7 @@ namespace Button {
          */
         text?: string,
         /**
-         * The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
+         * The CSS code for an icon for the button. e.g. 'E401' (notice we omit the '\\' character).
          */
         icon?: string,
         /**
@@ -112,7 +112,7 @@ class Button extends Element {
     }
 
     /**
-     * The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
+     * The CSS code for an icon for the button. e.g. 'E401' (notice we omit the '\\' character).
      */
     set icon(value: string) {
         if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;

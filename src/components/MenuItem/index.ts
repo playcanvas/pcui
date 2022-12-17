@@ -19,7 +19,7 @@ namespace MenuItem {
          */
         text?: string;
         /**
-         * Gets / Sets the CSS code for an icon for the MenuItem. e.g. E401 (notice we omit the '\' character).
+         * Gets / Sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
          */
         icon?: string;
         /**
@@ -220,7 +220,7 @@ class MenuItem extends Container implements Element.IBindable {
     }
 
     /**
-     * Gets / Sets the CSS code for an icon for the MenuItem. e.g. E401 (notice we omit the '\' character).
+     * Gets / Sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
      */
     set icon(value) {
         if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
