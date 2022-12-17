@@ -1074,7 +1074,7 @@ class GradientPicker extends Element {
     }
 
     // get the bounding client rect minus padding
-    getClientRect(element: globalThis.Element) {
+    getClientRect(element: any) {
         const styles = window.getComputedStyle(element);
 
         const paddingTop = parseFloat(styles.paddingTop);

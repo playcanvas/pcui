@@ -661,9 +661,10 @@ class Element extends Events {
     }
 
     /**
+     * Creates a new Element of the desired type. Returns undefined if type not found.
+     *
      * @param type - The type of the Element (registered by pcui.Element#register).
      * @param args - Arguments for the Element.
-     * @returns A new pcui.Element of the desired type or undefined if type not found.
      */
     static create(type: string, args: Element.Args) : any {
         const entry = ELEMENT_REGISTRY[type];
