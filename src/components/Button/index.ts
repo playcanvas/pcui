@@ -36,15 +36,15 @@ class Button extends Element {
         dom: 'button'
     };
 
-    protected _unsafe: any;
+    protected _unsafe: boolean;
 
     protected _domEventKeyDown: any;
 
-    protected _text: any;
+    protected _text: string;
 
-    protected _icon: any;
+    protected _icon: string;
 
-    protected _size: any;
+    protected _size: string | null;
 
     constructor(args: Button.Args = Button.defaultArgs) {
         args = { ...Button.defaultArgs, ...args };
