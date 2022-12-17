@@ -2,8 +2,8 @@ import Element from '../Element/index';
 import Overlay from '../Overlay/index';
 import NumericInput from '../NumericInput/index';
 import TextInput from '../TextInput/index';
-// @ts-ignore
-import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value.ts';
+import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
+
 const CLASS_COLOR_INPUT = 'pcui-color-input';
 const CLASS_NOT_FLEXIBLE = 'pcui-not-flexible';
 const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
@@ -462,7 +462,7 @@ class ColorPicker extends Element {
         });
     }
 
-    protected _callPicker(color: string | any[]) {
+    protected _callPicker(color: number[]) {
         // class for channels
         for (let i = 0; i < 4; i++) {
             if (color.length - 1 < i) {

@@ -8,8 +8,7 @@ import Panel from '../Panel';
 import Canvas from '../Canvas';
 import Label from '../Label';
 import { CurveSet, Curve, math } from 'playcanvas';
-// @ts-ignore
-import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value.ts';
+import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
 
 const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
 
@@ -1378,15 +1377,16 @@ class GradientPicker extends Element {
         const canvas = new Canvas();
         canvas.width = 16;
         canvas.height = 16;
-        // @ts-ignore
-        const ctx = canvas.element.getContext('2d');
+
+        const canvasElement = canvas.element as HTMLCanvasElement;
+        const ctx = canvasElement.getContext('2d');
         ctx.fillStyle = "#949a9c";
         ctx.fillRect(0, 0, 8, 8);
         ctx.fillRect(8, 8, 8, 8);
         ctx.fillStyle = "#657375";
         ctx.fillRect(8, 0, 8, 8);
         ctx.fillRect(0, 8, 8, 8);
-        return ctx.createPattern(canvas.element, 'repeat');
+        return ctx.createPattern(canvasElement, 'repeat');
     }
 
     setValue(value: any, args?: any) {

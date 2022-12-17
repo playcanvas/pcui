@@ -366,18 +366,15 @@ class TreeViewItem extends Container {
             class: pcuiClass.FONT_REGULAR
         });
 
-        // @ts-ignore
         textInput.on('blur', () => {
             textInput.destroy();
         });
 
-        // @ts-ignore
         textInput.on('destroy', () => {
             this.classRemove(CLASS_RENAME);
             this.focus();
         });
 
-        // @ts-ignore
         textInput.on('change', (value: any) => {
             value = value.trim();
             if (value) {
@@ -386,7 +383,6 @@ class TreeViewItem extends Container {
             }
         });
 
-        // @ts-ignore
         textInput.on('disable', () => {
             // make sure text input is editable even if this
             // tree item is disabled

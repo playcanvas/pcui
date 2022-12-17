@@ -67,7 +67,6 @@ class Label extends Input implements Element.IPlaceholder {
 
         this.renderChanges = args.renderChanges;
 
-        // @ts-ignore
         this.on('change', () => {
             if (this.renderChanges) {
                 this.flash();

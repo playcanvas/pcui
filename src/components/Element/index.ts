@@ -389,11 +389,9 @@ class Element extends Events {
         this.ignoreParent = args.ignoreParent;
 
         if (args.width !== undefined) {
-            // @ts-ignore
             this.width = args.width;
         }
         if (args.height !== undefined) {
-            // @ts-ignore
             this.height = args.height;
         }
         if (args.tabIndex !== undefined) {
@@ -646,7 +644,6 @@ class Element extends Events {
     }
 
     unbind(name?: string, fn?: any): Events {
-        // @ts-ignore
         return super.unbind(name, fn);
     }
 

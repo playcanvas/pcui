@@ -116,19 +116,15 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
             this.onValidate = args.onValidate;
         }
 
-        // @ts-ignore
         this.on('change', () => {
             if (this.renderChanges) {
                 this.flash();
             }
         });
-
-        // @ts-ignore
         this.on('disable', this._updateInputReadOnly.bind(this));
-        // @ts-ignore
         this.on('enable', this._updateInputReadOnly.bind(this));
-        // @ts-ignore
         this.on('readOnly', this._updateInputReadOnly.bind(this));
+
         this._updateInputReadOnly();
     }
 
