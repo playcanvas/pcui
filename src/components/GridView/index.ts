@@ -48,7 +48,7 @@ class GridView extends Container {
 
     protected _allowDeselect: boolean;
 
-    protected _selected: any[];
+    protected _selected: GridViewItem[];
 
     protected _clickFn: any;
 
