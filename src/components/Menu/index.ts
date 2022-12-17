@@ -165,10 +165,10 @@ class Menu extends Container implements Element.IFocusable {
     /**
      * Positions the menu at the specified coordinates.
      *
-     * @param {number} x - The x coordinate.
-     * @param {number} y - The y coordinate.
+     * @param x - The x coordinate.
+     * @param y - The y coordinate.
      */
-    position(x: any, y: any) {
+    position(x: number, y: number) {
         const rect = this._containerMenuItems.dom.getBoundingClientRect();
 
         let left = (x || 0);
