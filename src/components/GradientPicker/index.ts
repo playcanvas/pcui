@@ -574,7 +574,7 @@ class GradientPicker extends Element {
 
     protected _renderGradient() {
         const canvas = this._canvas.dom;
-        const context: any = canvas.getContext('2d');
+        const context = canvas.getContext('2d');
 
         const width = this._canvas.width;
         const height = this._canvas.height;
