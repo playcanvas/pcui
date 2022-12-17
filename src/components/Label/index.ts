@@ -43,7 +43,7 @@ class Label extends Input implements Element.IPlaceholder {
 
     protected _unsafe: boolean;
 
-    protected _text: any;
+    protected _text: string;
 
     _optionValue: any;
 
