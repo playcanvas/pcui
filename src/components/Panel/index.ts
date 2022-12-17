@@ -206,7 +206,7 @@ class Panel extends Container {
         this.append(this._containerHeader);
     }
 
-    protected _onHeaderClick(evt: any) {
+    protected _onHeaderClick(evt: MouseEvent) {
         if (!this._collapsible) return;
         if (evt.target !== this.header.dom && evt.target !== this._labelTitle.dom) return;
 
@@ -214,7 +214,7 @@ class Panel extends Container {
         this.collapsed = !this.collapsed;
     }
 
-    protected _onClickRemove(evt: any) {
+    protected _onClickRemove(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -302,7 +302,7 @@ class Panel extends Container {
         });
     }
 
-    protected _onDragStart(evt: any) {
+    protected _onDragStart(evt: MouseEvent) {
         if (this.disabled || this.readOnly) return;
 
         evt.stopPropagation();
@@ -320,7 +320,7 @@ class Panel extends Container {
         }
     }
 
-    protected _onDragMove(evt: any) {
+    protected _onDragMove(evt: MouseEvent) {
         this.emit('dragmove');
         // @ts-ignore accessing protected methods
         if (this.parent && this.parent._onChildDragStart) {
@@ -329,7 +329,7 @@ class Panel extends Container {
         }
     }
 
-    protected _onDragEnd(evt: any) {
+    protected _onDragEnd(evt: MouseEvent) {
         window.removeEventListener('mouseup', this._domEvtDragEnd);
         window.removeEventListener('mouseleave', this._domEvtDragEnd);
         window.removeEventListener('mousemove', this._domEvtDragMove);

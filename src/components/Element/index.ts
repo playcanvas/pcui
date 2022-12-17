@@ -457,17 +457,17 @@ class Element extends Events {
         }.bind(this), 200);
     }
 
-    protected _onClick(evt: any) {
+    protected _onClick(evt: MouseEvent) {
         if (this.enabled) {
             this.emit('click', evt);
         }
     }
 
-    protected _onMouseOver(evt: any) {
+    protected _onMouseOver(evt: MouseEvent) {
         this.emit('hover', evt);
     }
 
-    protected _onMouseOut(evt: any) {
+    protected _onMouseOut(evt: MouseEvent) {
         this.emit('hoverend', evt);
     }
 

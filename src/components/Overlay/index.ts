@@ -58,7 +58,7 @@ class Overlay extends Container {
         this.transparent = args.transparent || false;
     }
 
-    protected _onMouseDown(evt: any) {
+    protected _onMouseDown(evt: MouseEvent) {
         if (!this.clickable) return;
 
         // some field might be in focus

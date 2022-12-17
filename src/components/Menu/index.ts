@@ -82,17 +82,17 @@ class Menu extends Container implements Element.IFocusable {
         }
     }
 
-    protected _onClickMenu(evt: { target: Node; }) {
-        if (!this._containerMenuItems.dom.contains(evt.target)) {
+    protected _onClickMenu(evt: MouseEvent) {
+        if (!this._containerMenuItems.dom.contains(evt.target as Node)) {
             this.hidden = true;
         }
     }
 
-    protected _onFocus(evt: any) {
+    protected _onFocus(evt: FocusEvent) {
         this.emit('focus');
     }
 
-    protected _onBlur(evt: any) {
+    protected _onBlur(evt: FocusEvent) {
         this.emit('blur');
     }
 
@@ -122,7 +122,7 @@ class Menu extends Container implements Element.IFocusable {
         });
     }
 
-    protected _onKeyDown(evt: { keyCode: number; }) {
+    protected _onKeyDown(evt: KeyboardEvent) {
         if (this.hidden) return;
 
         // hide on esc

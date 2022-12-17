@@ -490,7 +490,7 @@ class GradientPicker extends Element {
         canvas.width = size;
         canvas.height = size;
 
-        const ctx: any = canvas.getContext('2d');
+        const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
         ctx.fillStyle = '#';
         ctx.fillStyle = "#949a9c";
         ctx.fillRect(0, 0, halfSize, halfSize);
@@ -502,7 +502,7 @@ class GradientPicker extends Element {
         return context.createPattern(canvas, 'repeat');
     }
 
-    protected _onKeyDown(evt: { keyCode: number; stopPropagation: () => void; preventDefault: () => void; }) {
+    protected _onKeyDown(evt: KeyboardEvent) {
         // escape blurs the field
         if (evt.keyCode === 27) {
             this.blur();
@@ -519,11 +519,11 @@ class GradientPicker extends Element {
         this._openGradientPicker();
     }
 
-    protected _onFocus(evt: any) {
+    protected _onFocus(evt: FocusEvent) {
         this.emit('focus');
     }
 
-    protected _onBlur(evt: any) {
+    protected _onBlur(evt: FocusEvent) {
         this.emit('blur');
     }
 
@@ -749,7 +749,7 @@ class GradientPicker extends Element {
         }
     }
 
-    protected _onMouseDown(evt: { currentTarget: HTMLElement; }) {
+    protected _onMouseDown(evt: MouseEvent) {
         if (evt.currentTarget === this._colorRect.element) {
             this._dragMode = 1;     // drag color
         } else if (evt.currentTarget === this._hueRect.element) {
@@ -766,7 +766,7 @@ class GradientPicker extends Element {
         window.addEventListener('mouseup', this.upHandler);
     }
 
-    protected _onMouseMove(evt: any) {
+    protected _onMouseMove(evt: MouseEvent) {
         let newhsva;
         if (this._dragMode === 1) {
             const m = this.Helpers.normalizedCoord(this._colorRect, evt.pageX, evt.pageY);
@@ -791,7 +791,7 @@ class GradientPicker extends Element {
         }
     }
 
-    protected _onMouseUp(evt: any) {
+    protected _onMouseUp(evt: MouseEvent) {
         window.removeEventListener('mousemove', this.moveHandler);
         window.removeEventListener('mouseup', this.upHandler);
 

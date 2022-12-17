@@ -186,7 +186,7 @@ class ColorPicker extends Element {
         this._pickRect.classList.add('pick-rect');
         this._overlay.append(this._pickRect);
 
-        this._pickRect.addEventListener('mousedown', function (evt: any) {
+        this._pickRect.addEventListener('mousedown', function (evt: MouseEvent) {
             this._pickRectMouseMove(evt);
 
             window.addEventListener('mousemove', this._pickRectMouseMove, false);
@@ -219,7 +219,7 @@ class ColorPicker extends Element {
         this._overlay.append(this._pickHue);
 
         // hue drag start
-        this._pickHue.addEventListener('mousedown', function (evt: any) {
+        this._pickHue.addEventListener('mousedown', function (evt: MouseEvent) {
             this._pickHueMouseMove(evt);
 
             window.addEventListener('mousemove', this._pickHueMouseMove, false);
@@ -243,7 +243,7 @@ class ColorPicker extends Element {
         this._overlay.append(this._pickOpacity);
 
         // opacoty drag start
-        this._pickOpacity.addEventListener('mousedown', function (evt: any) {
+        this._pickOpacity.addEventListener('mousedown', function (evt: MouseEvent) {
             this._pickOpacityMouseMove(evt);
 
             window.addEventListener('mousemove', this._pickOpacityMouseMove, false);
@@ -361,7 +361,7 @@ class ColorPicker extends Element {
         this.dom.blur();
     }
 
-    protected _onKeyDown(evt: any) {
+    protected _onKeyDown(evt: KeyboardEvent) {
         // escape blurs the field
         if (evt.keyCode === 27) {
             this.blur();
@@ -374,14 +374,13 @@ class ColorPicker extends Element {
 
         evt.stopPropagation();
         evt.preventDefault();
-
     }
 
-    protected _onFocus(evt: any) {
+    protected _onFocus(evt: FocusEvent) {
         this.emit('focus');
     }
 
-    protected _onBlur(evt: any) {
+    protected _onBlur(evt: FocusEvent) {
         this.emit('blur');
     }
 
@@ -554,7 +553,7 @@ class ColorPicker extends Element {
     }
 
     // rect drag
-    protected _pickRectMouseMove(evt: { clientX: number; clientY: number; }) {
+    protected _pickRectMouseMove(evt: MouseEvent) {
         this._changing = true;
         const rect = this._pickRect.getBoundingClientRect();
         const x = Math.max(0, Math.min(this._size, Math.floor(evt.clientX - rect.left)));
@@ -585,7 +584,7 @@ class ColorPicker extends Element {
     }
 
     // hue drag
-    protected _pickHueMouseMove(evt: { clientY: number; }) {
+    protected _pickHueMouseMove(evt: MouseEvent) {
         this._changing = true;
         const rect = this._pickHue.getBoundingClientRect();
         const y = Math.max(0, Math.min(this._size, Math.floor(evt.clientY - rect.top)));
@@ -613,7 +612,7 @@ class ColorPicker extends Element {
     }
 
     // opacity drag
-    protected _pickOpacityMouseMove(evt: { clientY: number; }) {
+    protected _pickOpacityMouseMove(evt: MouseEvent) {
         this._changing = true;
         const rect = this._pickOpacity.getBoundingClientRect();
         const y = Math.max(0, Math.min(this._size, Math.floor(evt.clientY - rect.top)));

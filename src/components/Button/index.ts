@@ -64,7 +64,7 @@ class Button extends Element {
 
     // click on enter
     // blur on escape
-    protected _onKeyDown(evt: KeyboardEvent) {
+    protected _onKeyDown(evt: any) {
         if (evt.keyCode === 27) {
             this.blur();
         } else if (evt.keyCode === 13) {
@@ -72,7 +72,7 @@ class Button extends Element {
         }
     }
 
-    protected _onClick(evt: Event) {
+    protected _onClick(evt: MouseEvent) {
         this.blur();
         if (this.readOnly) return;
 

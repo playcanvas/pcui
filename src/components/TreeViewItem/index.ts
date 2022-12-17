@@ -238,8 +238,9 @@ class TreeViewItem extends Container {
         super._onRemoveChild(element);
     }
 
-    protected _onContentKeyDown(evt: any) {
-        if (evt.target.tagName.toLowerCase() === 'input') return;
+    protected _onContentKeyDown(evt: KeyboardEvent) {
+        const element = evt.target as HTMLElement;
+        if (element.tagName.toLowerCase() === 'input') return;
 
         if (!this.allowSelect) return;
 
@@ -248,14 +249,14 @@ class TreeViewItem extends Container {
         }
     }
 
-    protected _onContentMouseDown(evt: any) {
+    protected _onContentMouseDown(evt: MouseEvent) {
         if (!this._treeView || !this._treeView.allowDrag || !this._allowDrag) return;
 
         this._treeView._updateModifierKeys(evt);
         evt.stopPropagation();
     }
 
-    protected _onContentMouseUp(evt: any) {
+    protected _onContentMouseUp(evt: MouseEvent) {
         evt.stopPropagation();
         evt.preventDefault();
 
@@ -265,7 +266,7 @@ class TreeViewItem extends Container {
         }
     }
 
-    protected _onContentMouseOver(evt: any) {
+    protected _onContentMouseOver(evt: MouseEvent) {
         evt.stopPropagation();
 
         if (this._treeView) {
@@ -276,7 +277,7 @@ class TreeViewItem extends Container {
         super._onMouseOver(evt);
     }
 
-    protected _onContentDragStart(evt: any) {
+    protected _onContentDragStart(evt: DragEvent) {
         evt.stopPropagation();
         evt.preventDefault();
 
@@ -289,9 +290,11 @@ class TreeViewItem extends Container {
         window.addEventListener('mouseup', this._domEvtMouseUp);
     }
 
-    protected _onContentClick(evt: any) {
+    protected _onContentClick(evt: MouseEvent) {
         if (!this.allowSelect || evt.button !== 0) return;
-        if (evt.target.tagName.toLowerCase() === 'input') return;
+
+        const element = evt.target as HTMLElement;
+        if (element.tagName.toLowerCase() === 'input') return;
 
         evt.stopPropagation();
 
@@ -319,9 +322,11 @@ class TreeViewItem extends Container {
         }
     }
 
-    protected _onContentDblClick(evt: any) {
+    protected _onContentDblClick(evt: MouseEvent) {
         if (!this._treeView || !this._treeView.allowRenaming || evt.button !== 0) return;
-        if (evt.target.tagName.toLowerCase() === 'input') return;
+
+        const element = evt.target as HTMLElement;
+        if (element.tagName.toLowerCase() === 'input') return;
 
         evt.stopPropagation();
         const rect = this._containerContents.dom.getBoundingClientRect();
@@ -337,17 +342,17 @@ class TreeViewItem extends Container {
         this.rename();
     }
 
-    protected _onContentContextMenu(evt: any) {
+    protected _onContentContextMenu(evt: MouseEvent) {
         if (this._treeView && this._treeView._onContextMenu) {
             this._treeView._onContextMenu(evt, this);
         }
     }
 
-    protected _onContentFocus(evt: any) {
+    protected _onContentFocus(evt: FocusEvent) {
         this.emit('focus');
     }
 
-    protected _onContentBlur(evt: any) {
+    protected _onContentBlur(evt: FocusEvent) {
         this.emit('blur');
     }
 

@@ -153,7 +153,7 @@ class MenuItem extends Container implements Element.IBindable {
         super._onRemoveChild(element);
     }
 
-    protected _onClickMenuItem(evt: any) {
+    protected _onClickMenuItem(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
         if (!this.disabled) {

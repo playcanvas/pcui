@@ -659,7 +659,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         this._resizeShadow();
     }
 
-    protected _onInputKeyDown(evt: any) {
+    protected _onInputKeyDown(evt: KeyboardEvent) {
         if (evt.keyCode === 13 && this.enabled && !this.readOnly) {
             evt.stopPropagation();
             evt.preventDefault();
@@ -694,12 +694,12 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         this._onKeyDown(evt);
     }
 
-    protected _onWindowMouseDown(evt: any) {
-        if (this.dom.contains(evt.target)) return;
+    protected _onWindowMouseDown(evt: MouseEvent) {
+        if (this.dom.contains(evt.target as Node)) return;
         this.close();
     }
 
-    protected _onKeyDown(evt: any) {
+    protected _onKeyDown(evt: KeyboardEvent) {
         // close options on ESC and blur
         if (evt.keyCode === 27) {
             this.close();
@@ -802,7 +802,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         this.emit('blur');
     }
 
-    protected _onWheel(evt: any) {
+    protected _onWheel(evt: WheelEvent) {
         // prevent scrolling on other stuff like the viewport
         // when we are scrolling on the select input
         evt.stopPropagation();

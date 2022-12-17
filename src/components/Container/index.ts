@@ -350,7 +350,7 @@ class Container extends Element {
         this.emit('remove', element);
     }
 
-    protected _onScroll(evt: any) {
+    protected _onScroll(evt: Event) {
         this.emit('scroll', evt);
     }
 
@@ -365,7 +365,7 @@ class Container extends Element {
         this._domResizeHandle = handle;
     }
 
-    protected _onResizeStart(evt: any) {
+    protected _onResizeStart(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -375,14 +375,14 @@ class Container extends Element {
         this._resizeStart();
     }
 
-    protected _onResizeMove(evt: any) {
+    protected _onResizeMove(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
         this._resizeMove(evt.clientX, evt.clientY);
     }
 
-    protected _onResizeEnd(evt: any) {
+    protected _onResizeEnd(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -392,7 +392,7 @@ class Container extends Element {
         this._resizeEnd();
     }
 
-    protected _onResizeTouchStart(evt: any) {
+    protected _onResizeTouchStart(evt: TouchEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -409,7 +409,7 @@ class Container extends Element {
         this._resizeStart();
     }
 
-    protected _onResizeTouchMove(evt: any) {
+    protected _onResizeTouchMove(evt: TouchEvent) {
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
             if (touch.identifier !== this._resizeTouchId) {
@@ -425,7 +425,7 @@ class Container extends Element {
         }
     }
 
-    protected _onResizeTouchEnd(evt: any) {
+    protected _onResizeTouchEnd(evt: TouchEvent) {
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
             if (touch.identifier === this._resizeTouchId) {

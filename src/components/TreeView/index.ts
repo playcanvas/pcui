@@ -206,7 +206,7 @@ class TreeView extends Container {
         });
     }
 
-    protected _updateModifierKeys(evt: { ctrlKey: any; metaKey: any; shiftKey: boolean; }) {
+    protected _updateModifierKeys(evt: KeyboardEvent) {
         this._pressedCtrl = evt.ctrlKey || evt.metaKey;
         this._pressedShift = evt.shiftKey;
     }
@@ -403,7 +403,7 @@ class TreeView extends Container {
     }
 
     // Called when a key is down on a child TreeViewItem.
-    protected _onChildKeyDown(evt: any, element: any) {
+    protected _onChildKeyDown(evt: KeyboardEvent, element: any) {
         if ([9, 37, 38, 39, 40].indexOf(evt.keyCode) === -1) return;
 
         evt.preventDefault();
@@ -740,7 +740,7 @@ class TreeView extends Container {
     }
 
     // Called when the mouse cursor leaves the tree view.
-    protected _onMouseLeave(evt: any) {
+    protected _onMouseLeave(evt: MouseEvent) {
         if (!this._allowDrag || !this._dragging) return;
 
         this._dragOverItem = null;
@@ -748,7 +748,7 @@ class TreeView extends Container {
     }
 
     // Called when the mouse moves while dragging
-    protected _onMouseMove(evt: { pageY: number; }) {
+    protected _onMouseMove(evt: MouseEvent) {
         if (!this._dragging) return;
 
         // Determine if we need to scroll the treeview if we are dragging towards the edges
@@ -784,7 +784,7 @@ class TreeView extends Container {
     }
 
     // Called while we drag the drag handle
-    protected _onDragMove(evt: { preventDefault: () => void; stopPropagation: () => void; clientY: number; }) {
+    protected _onDragMove(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
