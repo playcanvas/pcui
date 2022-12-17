@@ -457,7 +457,7 @@ class Element extends Events {
         }.bind(this), 200);
     }
 
-    protected _onClick(evt: MouseEvent) {
+    protected _onClick(evt: Event) {
         if (this.enabled) {
             this.emit('click', evt);
         }
