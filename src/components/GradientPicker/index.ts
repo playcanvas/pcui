@@ -46,7 +46,7 @@ class GradientPicker extends Element {
 
     protected _canvas: Canvas;
 
-    protected _checkerboardPattern: any;
+    protected _checkerboardPattern: CanvasPattern;
 
     protected _resizeInterval?: any;
 
@@ -1000,7 +1000,7 @@ class GradientPicker extends Element {
         }
     }
 
-    renderAnchor(ctx: any, time: number, type?: string) {
+    renderAnchor(ctx: CanvasRenderingContext2D, time: number, type?: string) {
         const coords = [time * this.UI.anchors.width, this.UI.anchors.height / 2];
         const radius = (type === "selected" ? this.CONSTANTS.selectedRadius : this.CONSTANTS.anchorRadius);
 
@@ -1074,7 +1074,7 @@ class GradientPicker extends Element {
     }
 
     // get the bounding client rect minus padding
-    getClientRect(element: any) {
+    getClientRect(element: globalThis.Element) {
         const styles = window.getComputedStyle(element);
 
         const paddingTop = parseFloat(styles.paddingTop);
@@ -1090,7 +1090,7 @@ class GradientPicker extends Element {
                            rect.height - paddingTop - paddingBottom);
     }
 
-    anchorsOnMouseDown(e: { clientX: any; clientY: any; }) {
+    anchorsOnMouseDown(e: MouseEvent) {
         if (this.STATE.hoveredAnchor === -1) {
             // user clicked in empty space, create new anchor and select it
             const coord = this.calcNormalizedCoord(e.clientX,
@@ -1112,7 +1112,7 @@ class GradientPicker extends Element {
         this.UI.draggingAnchor = true;
     }
 
-    anchorsOnMouseMove(e: { clientX: any; clientY: any; }) {
+    anchorsOnMouseMove(e: MouseEvent) {
         const coord = this.calcNormalizedCoord(e.clientX,
                                                e.clientY,
                                                this.getClientRect(this.UI.anchors.element));
@@ -1161,7 +1161,7 @@ class GradientPicker extends Element {
         }
     }
 
-    anchorsOnMouseUp(e: any) {
+    anchorsOnMouseUp(e: MouseEvent) {
         if (this.UI.draggingAnchor) {
             this.dragEnd();
             this.UI.draggingAnchor = false;
