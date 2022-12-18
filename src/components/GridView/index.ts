@@ -118,7 +118,7 @@ class GridView extends Container {
         item.unbind('griditem:remove');
     }
 
-    protected _onClickItem(evt: any, item: GridViewItem) {
+    protected _onClickItem(evt: MouseEvent, item: GridViewItem) {
         if ((evt.ctrlKey || evt.metaKey) && this._multiSelect) {
             item.selected = !item.selected;
         } else if (evt.shiftKey && this._multiSelect) {
@@ -210,9 +210,8 @@ class GridView extends Container {
      *
      * @param batchLimit - The maximum number of items to show before requesting another animation frame.
      */
-    filterAsync(batchLimit: number) {
+    filterAsync(batchLimit: number = 100) {
         let i = 0;
-        batchLimit = batchLimit || 100;
         const children = this.dom.childNodes;
         const len = children.length;
 
