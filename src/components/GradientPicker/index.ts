@@ -135,9 +135,7 @@ class GradientPicker extends Element {
         this.dom.appendChild(this._canvas.dom);
         this._canvas.parent = this;
         this._canvas.on('resize', this._renderGradient.bind(this));
-        // @ts-ignore
         this._checkerboardPattern = this.createCheckerboardPattern(this._canvas.dom.getContext('2d'));
-
 
         // make sure canvas is the same size as the container element
         // 20 times a second

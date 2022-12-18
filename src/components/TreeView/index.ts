@@ -293,11 +293,10 @@ class TreeView extends Container {
     /**
      * Gets the visible tree items between the specified start and end tree items.
      *
-     * @param {TreeViewItem} startChild - The start tree item.
-     * @param {TreeViewItem} endChild - The end tree item.
-     * @returns {TreeViewItem[]} The tree items.
+     * @param startChild - The start tree item.
+     * @param endChild - The end tree item.
      */
-    protected _getChildrenRange(startChild: any, endChild: any) {
+    protected _getChildrenRange(startChild: TreeViewItem, endChild: TreeViewItem) : TreeViewItem[] {
         const result = [];
 
         // select search results if we are currently filtering tree view items
@@ -449,7 +448,7 @@ class TreeView extends Container {
     }
 
     // Called when we click on a child TreeViewItem
-    protected _onChildClick(evt: any, element: { allowSelect: any; selected: boolean; }) {
+    protected _onChildClick(evt: MouseEvent, element: TreeViewItem) {
         if (evt.button !== 0) return;
         if (!element.allowSelect) return;
 

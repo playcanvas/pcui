@@ -335,7 +335,6 @@ class Panel extends Container {
         window.removeEventListener('mousemove', this._domEvtDragMove);
 
         if (this._draggedChild === this) {
-            // @ts-ignore
             this._draggedChild = null;
         }
 

@@ -130,13 +130,13 @@ class TreeViewItem extends Container {
 
     protected _treeView: any;
 
-    protected _allowDrag: any;
+    protected _allowDrag: boolean;
 
-    protected _allowDrop: any;
+    protected _allowDrop: boolean;
 
-    protected _allowSelect: any;
+    protected _allowSelect: boolean;
 
-    protected _icon: any;
+    protected _icon: string;
 
     /**
      * Creates a new TreeViewItem.

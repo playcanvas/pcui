@@ -1,7 +1,6 @@
 import Element from '../Element/index';
 import Container from '../Container/index';
 import Label from '../Label/index';
-// @ts-ignore
 import BindingObserversToElement from '../../binding/BindingObserversToElement/index';
 import RadioButton from '../RadioButton/index';
 

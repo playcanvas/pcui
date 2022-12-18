@@ -627,7 +627,6 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         // and add them back in best match order
         const containerDom = this._containerOptions.dom;
         while (containerDom.firstChild) {
-            // @ts-ignore
             containerDom.removeChild(containerDom.lastChild);
         }
 
