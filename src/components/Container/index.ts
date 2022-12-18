@@ -191,7 +191,8 @@ class Container extends Element {
     }
 
     /**
-     * @description Appends an element to the container.
+     * Appends an element to the container.
+     *
      * @param {Element} element - The element to append.
      * @fires 'append'
      */
@@ -202,7 +203,8 @@ class Container extends Element {
     }
 
     /**
-     * @description Appends an element to the container before the specified reference element.
+     * Appends an element to the container before the specified reference element.
+     *
      * @param {Element} element - The element to append.
      * @param {Element} referenceElement - The element before which the element will be appended.
      * @fires 'append'
@@ -218,8 +220,8 @@ class Container extends Element {
     }
 
     /**
-     * @name Container#appendAfter
-     * @description Appends an element to the container just after the specified reference element.
+     * Appends an element to the container just after the specified reference element.
+     *
      * @param {Element} element - The element to append.
      * @param {Element} referenceElement - The element after which the element will be appended.
      * @fires 'append'
@@ -239,8 +241,8 @@ class Container extends Element {
     }
 
     /**
-     * @name Container#prepend
-     * @description Inserts an element in the beginning of the container.
+     * Inserts an element in the beginning of the container.
+     *
      * @param {Element} element - The element to prepend.
      * @fires 'append'
      */
@@ -257,8 +259,8 @@ class Container extends Element {
     }
 
     /**
-     * @name Container#remove
-     * @description Removes the specified child element from the container.
+     * Removes the specified child element from the container.
+     *
      * @param {Element} element - The element to remove.
      * @fires 'remove'
      */
@@ -272,8 +274,8 @@ class Container extends Element {
     }
 
     /**
-     * @name Container#move
-     * @description Moves the specified child at the specified index.
+     * Moves the specified child at the specified index.
+     *
      * @param {Element} element - The element to move.
      * @param {number} index - The index
      */

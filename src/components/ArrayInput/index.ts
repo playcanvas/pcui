@@ -504,8 +504,8 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
     }
 
     /**
-     * @name ArrayInput#forEachArrayElement
-     * @description Executes the specified function for each array element.
+     * Executes the specified function for each array element.
+     *
      * @param {Function} fn - The function with signature (element, index) => bool to execute. If the function returns
      * false then the iteration will early out.
      */
