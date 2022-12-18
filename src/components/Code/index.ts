@@ -40,7 +40,7 @@ class Code extends Container {
     }
 
     /**
-     * Gets / Sets the text to display in the code block.
+     * Gets / sets the text to display in the code block.
      */
     set text(value) {
         this._text = value;

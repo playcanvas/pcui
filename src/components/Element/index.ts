@@ -729,7 +729,7 @@ class Element extends Events {
     }
 
     /**
-     * Gets / Sets the parent Element.
+     * Gets / sets the parent Element.
      */
     set parent(value: Element) {
         if (value === this._parent) return;
