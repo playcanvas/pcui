@@ -719,7 +719,7 @@ class Container extends Element {
         }
     }
 
-    get flex() : boolean {
+    get flex(): boolean {
         return this._flex;
     }
 
@@ -758,7 +758,7 @@ class Container extends Element {
 
     }
 
-    get scrollable() : boolean {
+    get scrollable(): boolean {
         return this._scrollable;
     }
 
@@ -811,7 +811,7 @@ class Container extends Element {
         this._resizeMin = Math.max(0, Math.min(value, this._resizeMax));
     }
 
-    get resizeMin() : number {
+    get resizeMin(): number {
         return this._resizeMin;
     }
 
@@ -822,7 +822,7 @@ class Container extends Element {
         this._resizeMax = Math.max(this._resizeMin, value);
     }
 
-    get resizeMax() : number {
+    get resizeMax(): number {
         return this._resizeMax;
     }
 
@@ -844,7 +844,7 @@ class Container extends Element {
         }
     }
 
-    get domContent() : HTMLElement {
+    get domContent(): HTMLElement {
         return this._domContent;
     }
 }

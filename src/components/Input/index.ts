@@ -11,7 +11,7 @@ class Input extends Element implements Element.IBindable {
         throw 'Not implemented!';
     }
 
-    get value() : any {
+    get value(): any {
         throw 'Not implemented!';
     }
 
@@ -19,7 +19,7 @@ class Input extends Element implements Element.IBindable {
         throw 'Not implemented!';
     }
 
-    get values() : Array<any> {
+    get values(): Array<any> {
         throw 'Not implemented!';
     }
 
@@ -27,7 +27,7 @@ class Input extends Element implements Element.IBindable {
         this._renderChanges = value;
     }
 
-    get renderChanges() : boolean {
+    get renderChanges(): boolean {
         return this._renderChanges;
     }
 }

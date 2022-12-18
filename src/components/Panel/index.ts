@@ -477,14 +477,14 @@ class Panel extends Container {
     /**
      * Gets the content container.
      */
-    get content() : Container {
+    get content(): Container {
         return this._containerContent;
     }
 
     /**
      * Gets the header container.
      */
-    get header() : Container {
+    get header(): Container {
         return this._containerHeader;
     }
 

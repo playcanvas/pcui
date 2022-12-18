@@ -79,7 +79,7 @@ namespace Element {
         /**
          * Focus on the element. If the input contains text and select is provided, the text will be selected on focus.
          */
-        focus(select?: boolean) : void
+        focus(select?: boolean): void
 
         /**
          * Unfocus the element
@@ -665,7 +665,7 @@ class Element extends Events {
      * @param type - The type of the Element (registered by pcui.Element#register).
      * @param args - Arguments for the Element.
      */
-    static create(type: string, args: Element.Args) : any {
+    static create(type: string, args: Element.Args): any {
         const entry = ELEMENT_REGISTRY[type];
         if (!entry) {
             console.error('Invalid type passed to pcui.Element#create', type);
@@ -778,7 +778,7 @@ class Element extends Events {
         }
     }
 
-    get parent() : Element {
+    get parent(): Element {
         return this._parent;
     }
 
@@ -805,7 +805,7 @@ class Element extends Events {
         }
     }
 
-    get hidden() : boolean {
+    get hidden(): boolean {
         return this._hidden;
     }
 
@@ -813,7 +813,7 @@ class Element extends Events {
     /**
      * Gets whether the Element is hidden all the way up to the root. If the Element itself or any of its parents are hidden then this is true.
      */
-    get hiddenToRoot() : boolean {
+    get hiddenToRoot(): boolean {
         return this._hidden || this._hiddenParents;
     }
 
@@ -828,7 +828,7 @@ class Element extends Events {
         this._onReadOnlyChange(value);
     }
 
-    get readOnly() : boolean {
+    get readOnly(): boolean {
         if (this._ignoreParent) return this._readOnly;
         return this._readOnly || !!(this._parent && this._parent.readOnly);
     }
@@ -847,7 +847,7 @@ class Element extends Events {
         }
     }
 
-    get error() : boolean {
+    get error(): boolean {
         return this._hasError;
     }
 
@@ -876,7 +876,7 @@ class Element extends Events {
         this._class = value;
     }
 
-    get class() : DOMTokenList {
+    get class(): DOMTokenList {
         return this._dom.classList;
     }
 
@@ -917,7 +917,7 @@ class Element extends Events {
         this._dom.tabIndex = value;
     }
 
-    get tabIndex() : number {
+    get tabIndex(): number {
         return this._dom.tabIndex;
     }
 
@@ -949,11 +949,11 @@ class Element extends Events {
         }
     }
 
-    get binding() : any {
+    get binding(): any {
         return this._binding;
     }
 
-    get destroyed() : boolean {
+    get destroyed(): boolean {
         return this._destroyed;
     }
 
@@ -966,7 +966,7 @@ class Element extends Events {
     }
 
     /** @ignore */
-    get disabled() : boolean {
+    get disabled(): boolean {
         return !this.enabled;
     }
 
@@ -976,7 +976,7 @@ class Element extends Events {
     }
 
     /** @ignore */
-    get element() : HTMLElement {
+    get element(): HTMLElement {
         return this.dom;
     }
 
@@ -986,7 +986,7 @@ class Element extends Events {
     }
 
     /** @ignore */
-    get innerElement() : HTMLElement {
+    get innerElement(): HTMLElement {
         return this._domContent;
     }
 }

@@ -867,7 +867,7 @@ class GradientPicker extends Element {
         }
     }
 
-    get editAlpha() : any {
+    get editAlpha(): any {
         return this.editAlpha;
     }
 

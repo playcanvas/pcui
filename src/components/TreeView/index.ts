@@ -296,7 +296,7 @@ class TreeView extends Container {
      * @param startChild - The start tree item.
      * @param endChild - The end tree item.
      */
-    protected _getChildrenRange(startChild: TreeViewItem, endChild: TreeViewItem) : TreeViewItem[] {
+    protected _getChildrenRange(startChild: TreeViewItem, endChild: TreeViewItem): TreeViewItem[] {
         const result = [];
 
         // select search results if we are currently filtering tree view items
@@ -1075,7 +1075,7 @@ class TreeView extends Container {
         }
     }
 
-    get allowDrag() : boolean {
+    get allowDrag(): boolean {
         return this._allowDrag;
     }
 
@@ -1086,7 +1086,7 @@ class TreeView extends Container {
         this._allowReordering = value;
     }
 
-    get allowReordering() : boolean {
+    get allowReordering(): boolean {
         return this._allowReordering;
     }
 
@@ -1097,7 +1097,7 @@ class TreeView extends Container {
         this._allowRenaming = value;
     }
 
-    get allowRenaming() : boolean {
+    get allowRenaming(): boolean {
         return this._allowRenaming;
     }
 
@@ -1133,14 +1133,14 @@ class TreeView extends Container {
         }
     }
 
-    get isDragging() : boolean {
+    get isDragging(): boolean {
         return this._dragging;
     }
 
     /**
      * Returns all of the currently selected TreeViewItems.
      */
-    get selected() : Array<TreeViewItem> {
+    get selected(): Array<TreeViewItem> {
         return this._selectedItems.slice();
     }
 
@@ -1159,21 +1159,21 @@ class TreeView extends Container {
         }
     }
 
-    get filter() : string {
+    get filter(): string {
         return this._filter;
     }
 
     /**
      * Whether Ctrl is currently pressed.
      */
-    get pressedCtrl() : boolean {
+    get pressedCtrl(): boolean {
         return this._pressedCtrl;
     }
 
     /**
      * Whether Shift is currently pressed.
      */
-    get pressedShift() : boolean {
+    get pressedShift(): boolean {
         return this._pressedShift;
     }
 }

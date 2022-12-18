@@ -277,7 +277,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
         }
     }
 
-    get value() : string | number {
+    get value(): string | number {
         return this._domInput.value;
     }
 
@@ -356,7 +356,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
         this._blurOnEnter = value;
     }
 
-    get blurOnEnter() : boolean {
+    get blurOnEnter(): boolean {
         return this._blurOnEnter;
     }
 
@@ -367,7 +367,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
         this._blurOnEnter = value;
     }
 
-    get blurOnEscape() : boolean {
+    get blurOnEscape(): boolean {
         return this._blurOnEnter;
     }
 }

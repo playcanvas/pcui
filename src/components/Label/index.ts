@@ -107,7 +107,7 @@ class Label extends Input implements Element.IPlaceholder {
         }
     }
 
-    get text() : string {
+    get text(): string {
         return this._text;
     }
 
@@ -115,7 +115,7 @@ class Label extends Input implements Element.IPlaceholder {
         this.text = value;
     }
 
-    get value() : string {
+    get value(): string {
         return this.text;
     }
 
@@ -146,7 +146,7 @@ class Label extends Input implements Element.IPlaceholder {
         }
     }
 
-    get placeholder() : string {
+    get placeholder(): string {
         return this.dom.getAttribute('placeholder');
     }
 }

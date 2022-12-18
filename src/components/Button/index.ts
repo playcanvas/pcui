@@ -107,7 +107,7 @@ class Button extends Element {
         }
     }
 
-    get text() : string {
+    get text(): string {
         return this._text;
     }
 
@@ -125,7 +125,7 @@ class Button extends Element {
         }
     }
 
-    get icon() : string {
+    get icon(): string {
         return this._icon;
     }
 
@@ -146,7 +146,7 @@ class Button extends Element {
         }
     }
 
-    get size() : string {
+    get size(): string {
         return this._size;
     }
 }
