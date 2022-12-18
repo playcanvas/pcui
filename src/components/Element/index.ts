@@ -959,26 +959,33 @@ class Element extends Events {
 
     /*  Backwards Compatibility */
     // we should remove those after we migrate
+
+    /** @ignore */
     set disabled(value: boolean) {
         this.enabled = !value;
     }
 
+    /** @ignore */
     get disabled() : boolean {
         return !this.enabled;
     }
 
+    /** @ignore */
     set element(value: HTMLElement) {
         this._dom = value;
     }
 
+    /** @ignore */
     get element() : HTMLElement {
         return this.dom;
     }
 
+    /** @ignore */
     set innerElement(value: HTMLElement) {
         this._domContent = value;
     }
 
+    /** @ignore */
     get innerElement() : HTMLElement {
         return this._domContent;
     }
