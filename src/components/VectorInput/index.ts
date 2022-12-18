@@ -42,7 +42,7 @@ class VectorInput extends Element implements Element.IBindable, Element.IFocusab
         dimensions: 3
     };
 
-    protected _inputs: any[];
+    protected _inputs: NumericInput[];
 
     protected _applyingChange: boolean;
 

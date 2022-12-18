@@ -17,7 +17,7 @@ namespace TreeViewItem {
         /**
          * Whether the item is selected.
          */
-        selected?: any;
+        selected?: boolean;
         /**
          * Whether the item can be selected. Defaults to true.
          */
@@ -422,8 +422,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the item is selected.
-     *
-     * @type {boolean}
      */
     set selected(value) {
         if (value === this.selected) {
@@ -458,8 +456,6 @@ class TreeViewItem extends Container {
 
     /**
      * The text shown by the TreeViewItem.
-     *
-     * @type {string}
      */
     set text(value) {
         if (this._labelText.value !== value) {
@@ -476,8 +472,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the internal label that shows the text.
-     *
-     * @type {Label}
      */
     get textLabel() {
         return this._labelText;
@@ -485,8 +479,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the internal label that shows the icon.
-     *
-     * @type {Label}
      */
     get iconLabel() {
         return this._labelIcon;
@@ -494,8 +486,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the item is open meaning showing its children.
-     *
-     * @type {boolean}
      */
     set open(value) {
         if (this.open === value) return;
@@ -516,8 +506,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the parents of the item are open or closed.
-     *
-     * @type {boolean}
      */
     set parentsOpen(value) {
         let parent = this.parent;
@@ -539,8 +527,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether dropping is allowed on the tree item.
-     *
-     * @type {boolean}
      */
     set allowDrop(value) {
         this._allowDrop = value;
@@ -552,8 +538,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
-     *
-     * @type {boolean}
      */
     set allowDrag(value) {
         this._allowDrag = value;
@@ -565,8 +549,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the item can be selected.
-     *
-     * @type {boolean}
      */
     set allowSelect(value) {
         this._allowSelect = value;
@@ -578,8 +560,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets / sets the parent TreeView.
-     *
-     * @type {TreeView}
      */
     set treeView(value) {
         this._treeView = value;
@@ -590,9 +570,7 @@ class TreeViewItem extends Container {
     }
 
     /**
-     * number of direct children.
-     *
-     * @type {number}
+     * The number of direct children.
      */
     get numChildren() {
         return this._numChildren;
@@ -600,8 +578,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the first child item.
-     *
-     * @type {TreeViewItem}
      */
     get firstChild() {
         if (this._numChildren) {
@@ -619,8 +595,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the last child item.
-     *
-     * @type {TreeViewItem}
      */
     get lastChild() {
         if (this._numChildren) {
@@ -638,8 +612,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the first sibling item.
-     *
-     * @type {TreeViewItem}
      */
     get nextSibling() {
         let sibling = this.dom.nextSibling;
@@ -654,8 +626,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the last sibling item.
-     *
-     * @type {TreeViewItem}
      */
     get previousSibling() {
         let sibling = this.dom.previousSibling;
@@ -670,8 +640,6 @@ class TreeViewItem extends Container {
 
     /**
      * The icon shown before the text in the TreeViewItem.
-     *
-     * @type {string}
      */
     set icon(value) {
         if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;

@@ -222,11 +222,12 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
         this._onSlideEnd(evt.pageX);
     }
 
-    protected _onTouchStart(evt: any) {
+    protected _onTouchStart(evt: TouchEvent) {
         if (!this.enabled || this.readOnly) return;
 
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
+            // @ts-ignore
             if (!touch.target.ui || touch.target.ui !== this)
                 continue;
 
