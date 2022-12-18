@@ -106,7 +106,7 @@ class Menu extends Container implements Element.IFocusable {
         });
     }
 
-    protected _filterMenuItems(item: { onIsEnabled: () => any; enabled: any; onIsVisible: () => any; hidden: boolean; _containerItems: { dom: { childNodes: any[]; }; }; }) {
+    protected _filterMenuItems(item: MenuItem) {
         if (!(item instanceof MenuItem)) return;
 
         if (item.onIsEnabled) {
@@ -116,6 +116,7 @@ class Menu extends Container implements Element.IFocusable {
             item.hidden = !item.onIsVisible();
         }
 
+        // @ts-ignore
         item._containerItems.dom.childNodes.forEach((child) => {
             // @ts-ignore
             this._filterMenuItems(child.ui);
@@ -131,24 +132,27 @@ class Menu extends Container implements Element.IFocusable {
         }
     }
 
-    protected _limitSubmenuAtScreenEdges(item: { hasChildren: any; _containerItems: { style: { top: string; left: string; right: string; }; dom: { getBoundingClientRect: () => any; childNodes: any[]; }; }; }) {
+    protected _limitSubmenuAtScreenEdges(item: MenuItem) {
         if (!(item instanceof MenuItem) || !item.hasChildren) return;
 
-        item._containerItems.style.top = '';
-        item._containerItems.style.left = '';
-        item._containerItems.style.right = '';
+        // @ts-ignore
+        const containerItems = item._containerItems;
 
-        const rect = item._containerItems.dom.getBoundingClientRect();
+        containerItems.style.top = '';
+        containerItems.style.left = '';
+        containerItems.style.right = '';
+
+        const rect = containerItems.dom.getBoundingClientRect();
         // limit to bottom / top of screen
         if (rect.bottom > window.innerHeight) {
-            item._containerItems.style.top = -(rect.bottom - window.innerHeight) + 'px';
+            containerItems.style.top = -(rect.bottom - window.innerHeight) + 'px';
         }
         if (rect.right > window.innerWidth) {
-            item._containerItems.style.left = 'auto';
-            item._containerItems.style.right = '100%';
+            containerItems.style.left = 'auto';
+            containerItems.style.right = '100%';
         }
 
-        item._containerItems.dom.childNodes.forEach((child) => {
+        containerItems.dom.childNodes.forEach((child) => {
             // @ts-ignore
             this._limitSubmenuAtScreenEdges(child.ui);
         });

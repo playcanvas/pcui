@@ -299,8 +299,8 @@ class Container extends Element {
     }
 
     /**
-     * @name Container#clear
-     * @description Clears all children from the container.
+     * Clears all children from the container.
+     *
      * @fires 'remove' for each child element.
      */
     clear() {
@@ -492,12 +492,12 @@ class Container extends Element {
     }
 
     /**
-     * Resize the container
+     * Resize the container.
      *
-     * @param {number} x - The amount of pixels to resize the width
-     * @param {number} y - The amount of pixels to resize the height
+     * @param x - The number of pixels to resize the width.
+     * @param y - The number of pixels to resize the height.
      */
-    resize(x: any, y: any) {
+    resize(x: number, y: number) {
         x = x || 0;
         y = y || 0;
 
@@ -517,7 +517,7 @@ class Container extends Element {
         return -1;
     }
 
-    protected _onChildDragStart(evt: any, childPanel: Element) {
+    protected _onChildDragStart(evt: MouseEvent, childPanel: Element) {
         this.class.add(CLASS_DRAGGED_CHILD);
 
         this._draggedStartIndex = this._getDraggedChildIndex(childPanel);
@@ -529,7 +529,7 @@ class Container extends Element {
         this.emit('child:dragstart', childPanel, this._draggedStartIndex);
     }
 
-    protected _onChildDragMove(evt: any, childPanel: Element) {
+    protected _onChildDragMove(evt: MouseEvent, childPanel: Element) {
         const rect = this.dom.getBoundingClientRect();
 
         const dragOut = (evt.clientX < rect.left || evt.clientX > rect.right || evt.clientY < rect.top || evt.clientY > rect.bottom);
@@ -582,7 +582,7 @@ class Container extends Element {
         }
     }
 
-    protected _onChildDragEnd(evt: any, childPanel: any) {
+    protected _onChildDragEnd(evt: MouseEvent, childPanel: Element) {
         this.class.remove(CLASS_DRAGGED_CHILD);
 
         childPanel.class.remove(CLASS_DRAGGED);
