@@ -358,13 +358,13 @@ class GradientPicker extends Element {
         this.UI.overlay.clickable = true;
         this.UI.overlay.element.style.position = "fixed";
 
-        this.UI.overlay.on('show', function () {
+        this.UI.overlay.on('show', () => {
             this.onOpen();
-        }.bind(this));
+        });
 
-        this.UI.overlay.on('hide', function () {
+        this.UI.overlay.on('hide', () => {
             this.onClose();
-        }.bind(this));
+        });
 
         // panel
         this.UI.panel.classList.add('picker-gradient-panel');
@@ -394,11 +394,11 @@ class GradientPicker extends Element {
         // this.UI.footer.append(this.UI.positionEdit);
         this.UI.positionEdit.style.width = '40px';
         this.UI.positionEdit.renderChanges = false;
-        this.UI.showSelectedPosition.on('change', function (value: number) {
+        this.UI.showSelectedPosition.on('change', (value: number) => {
             if (!this.STATE.changing) {
                 this.moveSelectedAnchor(value / 100);
             }
-        }.bind(this));
+        });
 
         this.UI.copyButton.on('click', this.doCopy);
         this.UI.copyButton.class.add('copy-curve-button');
@@ -1425,11 +1425,11 @@ class GradientPicker extends Element {
 
         // store the curves
         this.STATE.curves = [];
-        value[0].keys.forEach(function (keys: any) {
+        value[0].keys.forEach((keys: any) => {
             const curve = new Curve(keys);
             curve.type = value[0].type;
             this.STATE.curves.push(curve);
-        }.bind(this));
+        });
 
         // calculate the anchor times
         this.STATE.anchors = this.calcAnchorTimes();

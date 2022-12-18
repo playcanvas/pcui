@@ -494,12 +494,11 @@ class ColorPicker extends Element {
         this._overlay.hidden = false;
 
         // focus on hex field
-        // @ts-ignore
-        this._fieldHex._dom.focus();
+        this._fieldHex.dom.focus();
 
-        setTimeout(function () {
-            this._fieldHex._dom.focus();
-        }.bind(this), 100);
+        setTimeout(() => {
+            this._fieldHex.dom.focus();
+        }, 100);
     }
 
     protected _valueToColor(value: number) {

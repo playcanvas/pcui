@@ -446,10 +446,10 @@ class Element extends Events {
         if (this._flashTimeout) return;
 
         this.classAdd(pcuiClass.FLASH);
-        this._flashTimeout = setTimeout(function () {
+        this._flashTimeout = setTimeout(() => {
             this._flashTimeout = null;
             this.classRemove(pcuiClass.FLASH);
-        }.bind(this), 200);
+        }, 200);
     }
 
     protected _onClick(evt: Event) {
