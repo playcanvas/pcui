@@ -78,7 +78,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
 
     protected _container: Container;
 
-    protected _usePanels: any;
+    protected _usePanels: boolean;
 
     protected _fixedSize: boolean;
 
@@ -96,7 +96,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
 
     protected _getDefaultFn: any;
 
-    protected _valueType: any;
+    protected _valueType: string;
 
     protected _elementType: string;
 
@@ -104,7 +104,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
 
     protected _values: any[];
 
-    protected _renderChanges: any;
+    protected _renderChanges: boolean;
 
     constructor(args: ArrayInput.Args = ArrayInput.defaultArgs) {
         args = { ...ArrayInput.defaultArgs, ...args };

@@ -24,7 +24,7 @@ class RadioButton extends Element implements Element.IBindable, Element.IFocusab
         tabIndex: 0
     };
 
-    protected _text: any;
+    protected _text: string;
 
     protected _domEventKeyDown: any;
 
@@ -32,7 +32,7 @@ class RadioButton extends Element implements Element.IBindable, Element.IFocusab
 
     protected _domEventBlur: any;
 
-    protected _value: any;
+    protected _value: boolean;
 
     protected _renderChanges: boolean;
 
