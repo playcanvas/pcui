@@ -689,7 +689,7 @@ class Element extends Events {
     /**
      * Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
      */
-    set enabled(value) {
+    set enabled(value: boolean) {
         if (this._enabled === value) return;
 
         // remember if enabled in hierarchy
@@ -703,7 +703,7 @@ class Element extends Events {
         }
     }
 
-    get enabled() {
+    get enabled(): boolean {
         if (this._ignoreParent) return this._enabled;
         return this._enabled && (!this._parent || this._parent.enabled);
     }
