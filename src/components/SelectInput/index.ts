@@ -92,7 +92,6 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         allowInput: false,
         allowCreate: false,
         createFn: null,
-        createLabelText: 'Create',
         type: 'string',
         renderChanges: false
     };
