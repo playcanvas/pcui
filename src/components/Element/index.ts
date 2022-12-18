@@ -689,8 +689,6 @@ class Element extends Events {
 
     /**
      * Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
-     *
-     * @type {boolean}
      */
     set enabled(value) {
         if (this._enabled === value) return;
@@ -724,16 +722,12 @@ class Element extends Events {
         return this._ignoreParent;
     }
 
-
     /**
      * Gets the root DOM node for this Element.
-     *
-     * @type {HTMLElement}
      */
     get dom(): HTMLElement {
         return this._dom;
     }
-
 
     /**
      * Gets / Sets the parent Element.
