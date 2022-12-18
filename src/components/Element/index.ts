@@ -644,17 +644,16 @@ class Element extends Events {
     }
 
     /**
-     * @param {string} type - The type we want to reference this Element by
-     * @param {object} cls - The actual class of the Element
-     * @param {object} [defaultArguments] - Default arguments when creating this type
+     * @param type - The type we want to reference this Element by.
+     * @param cls - The actual class of the Element.
+     * @param defaultArguments - Default arguments when creating this type.
      */
     static register(type: string, cls: any, defaultArguments?: Object) {
         ELEMENT_REGISTRY[type] = { cls, defaultArguments };
     }
 
     /**
-     * @static
-     * @param {string} type - The type we want to unregister
+     * @param type - The type we want to unregister.
      */
     static unregister(type: string) {
         delete ELEMENT_REGISTRY[type];
