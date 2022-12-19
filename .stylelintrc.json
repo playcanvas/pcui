@@ -33,7 +33,6 @@
         "function-parentheses-newline-inside": null,
         "length-zero-no-unit": null,
         "max-empty-lines": null,
-        "number-leading-zero": null,
         "property-no-vendor-prefix": null,
         "rule-empty-line-before": null,
         "selector-list-comma-newline-after": null,
