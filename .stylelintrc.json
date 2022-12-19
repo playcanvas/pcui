@@ -22,7 +22,6 @@
         "value-keyword-case": null,
 
         "at-rule-no-vendor-prefix": null,
-        "block-closing-brace-empty-line-before": null,
         "block-no-empty": null,
         "declaration-block-no-duplicate-properties": null,
         "declaration-colon-newline-after": null,
