@@ -56,8 +56,8 @@
                 display: flex;
                 align-items: center;
                 text-align: center;
-                color: #9BA1A3;
-                background-color: #2C393C;
+                color: #9ba1a3;
+                background-color: #2c393c;
                 border-radius: 2px;
                 justify-content: center;
 
@@ -100,7 +100,7 @@
                     align-items: center;
                     text-align: center;
 
-                    color: #9BA1A3;
+                    color: #9ba1a3;
 
                     position: absolute;
                     width: 18px;
@@ -112,8 +112,8 @@
                     display: flex;
                     align-items: center;
                     text-align: center;
-                    color: #9BA1A3;
-                    background-color: #2C393C;
+                    color: #9ba1a3;
+                    background-color: #2c393c;
                     border-radius: 2px;
                     justify-content: center;
                 }
@@ -128,7 +128,7 @@
                 height: 28px;
                 display: block;
                 padding: 8px 10px 0px 11px;
-                background-color: #2C393C;
+                background-color: #2c393c;
 
                 .crosshair-active {
                     cursor: none;
@@ -140,7 +140,7 @@
                 height: 28px;
                 display: block;
                 padding: 0px 10px 0px 11px;
-                background-color: #2C393C;
+                background-color: #2c393c;
             }
 
             > .picker-gradient-footer {
@@ -184,7 +184,7 @@
                     }
 
                     > .copy-curve-button {
-                        border-color: #2C393C;
+                        border-color: #2c393c;
                         &:after {
                             content: '\e351';
                             position: absolute;
@@ -197,7 +197,7 @@
                     }
 
                     > .paste-curve-button {
-                        border-color: #2C393C;
+                        border-color: #2c393c;
                         &:after {
                             content: '\e348';
                             position: absolute;
@@ -210,7 +210,7 @@
                     }
 
                     > .delete-curve-button {
-                        border-color: #2C393C;
+                        border-color: #2c393c;
                         &:after {
                             content: '\e125';
                             position: absolute;
