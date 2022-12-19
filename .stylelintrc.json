@@ -26,7 +26,6 @@
         "block-no-empty": null,
         "declaration-block-no-duplicate-properties": null,
         "declaration-colon-newline-after": null,
-        "declaration-colon-space-after": null,
         "declaration-empty-line-before": null,
         "font-family-name-quotes": null,
         "function-comma-newline-after": null,
