@@ -21,7 +21,6 @@
         "string-quotes": "single",
         "value-keyword-case": null,
 
-        "alpha-value-notation": null,
         "at-rule-no-vendor-prefix": null,
         "block-closing-brace-empty-line-before": null,
         "block-no-empty": null,

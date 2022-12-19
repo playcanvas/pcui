@@ -22,11 +22,11 @@
     transform: rotateZ(90deg);
 }
 .pcui-numeric-input-slider-control:hover {
-    opacity: 50%;
+    opacity: 0.5;
     color: $text-secondary;
 }
 .pcui-numeric-input-slider-control-active {
-    opacity: 100% !important;
+    opacity: 1 !important;
     color: #7f7 !important;
 }
 .pcui-numeric-input-slider-control-hidden {
