@@ -30,7 +30,6 @@
         "property-no-vendor-prefix": null,
         "rule-empty-line-before": null,
         "selector-list-comma-newline-after": null,
-        "scss/double-slash-comment-whitespace-inside": null,
         "value-no-vendor-prefix": null
     }
 }
