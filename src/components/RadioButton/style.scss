@@ -16,7 +16,7 @@
     transition: opacity 100ms, background-color 100ms, box-shadow 100ms;
 
     // outer ring
-    &:before {
+    &::before {
         content: '';
         position: absolute;
         display: block;
@@ -34,7 +34,7 @@
     }
 
     // inner circle (hidden in initial state)
-    &:after {
+    &::after {
         position: absolute;
         left: 50%;
         top: 50%;
@@ -54,7 +54,7 @@
 .pcui-radio-button-selected {
 
     // outer ring
-    &:before {
+    &::before {
         width: 16px;
         min-width: 16px;
         height: 16px;
@@ -64,7 +64,7 @@
     }
 
     // inner circle
-    &:after {
+    &::after {
         content: '';
         display: block;
     }
@@ -85,7 +85,7 @@
     &:hover {
         cursor: pointer;
 
-        &:before {
+        &::before {
             background-color: $bcg-darkest;
         }
     }

@@ -26,7 +26,7 @@
     & > .pcui-menu-item-content > .pcui-label {
         padding-right: 32px;
 
-        &:after {
+        &::after {
             content: '\E160';
             @extend .font-icon;
             position: absolute;
@@ -63,7 +63,7 @@
     &[data-icon] {
         // show icon using data-icon attribute
         // as the content
-        &:before {
+        &::before {
             content: attr(data-icon);
             @extend .font-icon;
             font-weight: 100;

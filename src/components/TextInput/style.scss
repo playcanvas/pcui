@@ -26,13 +26,13 @@
         @extend .fixedFont;
     }
 
-    &:before {
+    &::before {
         color: inherit;
     }
 }
 
 .pcui-text-input.pcui-multiple-values {
-    &:before {
+    &::before {
         position: absolute;
         padding: 0 8px;
         content: '...';
@@ -62,7 +62,7 @@
 
 .pcui-text-input {
     &.pcui-focus, &:hover {
-        &:after, &:before {
+        &::after, &::before {
             display: none;
         }
     }
@@ -89,7 +89,7 @@
 .pcui-text-input[placeholder] {
     position: relative;
 
-    &:after {
+    &::after {
         content: attr(placeholder);
         background-color: $bcg-dark;
         position: absolute;

@@ -185,7 +185,7 @@
 
                     > .copy-curve-button {
                         border-color: #2c393c;
-                        &:after {
+                        &::after {
                             content: '\e351';
                             position: absolute;
                             top: 4px;
@@ -198,7 +198,7 @@
 
                     > .paste-curve-button {
                         border-color: #2c393c;
-                        &:after {
+                        &::after {
                             content: '\e348';
                             position: absolute;
                             top: 4px;
@@ -211,7 +211,7 @@
 
                     > .delete-curve-button {
                         border-color: #2c393c;
-                        &:after {
+                        &::after {
                             content: '\e125';
                             position: absolute;
                             top: 4px;

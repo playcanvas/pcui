@@ -26,7 +26,7 @@
     // checkerboard pattern
     //@include checkerboard(#fff, black, calc(44px/5));
 
-    &:after {
+    &::after {
         content: '\00a0';
         position: absolute;
         bottom: 0;
@@ -285,7 +285,7 @@
 // readonly color input
 .pcui-color-input.pcui-readonly {
     cursor: default;
-    &:after {
+    &::after {
         display: none;
     }
 }
@@ -301,7 +301,7 @@
     &:hover, &:focus {
         box-shadow: $element-shadow-hover;
 
-        &:after {
+        &::after {
             border-bottom-color: $bcg-darkest;
         }
     }

@@ -71,7 +71,7 @@
     margin: 0;
     height: 24px;
     line-height: 24px;
-    &:after {
+    &::after {
         @extend .font-icon;
         content: '\E159';
         vertical-align: middle;
@@ -87,7 +87,7 @@
         background-color: $bcg-darkest;
     }
 
-    .pcui-select-input-icon:after {
+    .pcui-select-input-icon::after {
         color: $text-primary;
         content: '\E157';
     }
@@ -117,7 +117,7 @@
 
         &.pcui-selected {
             color: $text-primary;
-            &:after {
+            &::after {
                 @extend .font-icon;
                 content: '\E133';
                 color: $text-darkest;
@@ -184,7 +184,7 @@
 .pcui-select-input-tag-not-everywhere {
     > .pcui-label {
         opacity: 0.5;
-        &:before {
+        &::before {
             content: '*';
             margin-right: 5px;
         }
@@ -238,7 +238,7 @@
     > .pcui-label:last-child {
         flex-shrink: 0;
         margin-left: auto;
-        &:before {
+        &::before {
             content: '\E120';
             @extend .font-icon;
             margin-right: $element-margin;
@@ -268,7 +268,7 @@
     &.pcui-select-input-allow-input:not(.pcui-select-input-multi) {
         opacity: $element-opacity-readonly;
 
-        .pcui-select-input-textinput:after {
+        .pcui-select-input-textinput::after {
             display: none;
         }
     }

@@ -10,7 +10,7 @@
     padding-left: 24px;
 
     // top line
-    &:before {
+    &::before {
         content: '\00a0';
         position: absolute;
         background-color: mix($bcg-dark, $bcg-primary, 50%);
@@ -21,7 +21,7 @@
     }
 
     // top line, last item
-    &:last-child:before {
+    &:last-child::before {
         height: 25px;
         bottom: auto;
     }
@@ -60,7 +60,7 @@
     margin: 0 2px 0 0;
     flex-shrink: 0;
 
-    &:before {
+    &::before {
         content: '\00a0';
         position: absolute;
         background-color: mix($bcg-dark, $bcg-primary, 50%);
@@ -70,7 +70,7 @@
         height: 2px;
     }
 
-    &:after {
+    &::after {
         content: attr(data-icon);
         @extend .font-icon;
         display: inline-block;
@@ -104,7 +104,7 @@
 }
 
 .pcui-treeview-item:not(.pcui-treeview-item-empty) {
-    > .pcui-treeview-item-contents:before {
+    > .pcui-treeview-item-contents::before {
         content: '\E120';
         @extend .font-icon;
         position: absolute;
@@ -124,7 +124,7 @@
     }
 
     &.pcui-treeview-item-open {
-        > .pcui-treeview-item-contents:before {
+        > .pcui-treeview-item-contents::before {
             content: '\E121';
         }
     }
@@ -134,7 +134,7 @@
     // direct children of tree
     > .pcui-treeview-item {
         padding-left: 0;
-        &:before {
+        &::before {
             content: none;
         }
 
@@ -142,10 +142,10 @@
             margin-left: 0;
 
             > .pcui-treeview-item-icon {
-                &:before {
+                &::before {
                     content: none;
                 }
-                &:after {
+                &::after {
                     margin-left: 0;
                 }
             }
@@ -155,7 +155,7 @@
             padding-left: 21px;
 
             // top line
-            &:before {
+            &::before {
                 left: 11px;
             }
         }
@@ -207,7 +207,7 @@
     }
 }
 
-.pcui-treeview-item-contents:after {
+.pcui-treeview-item-contents::after {
     content: ' ';
     display: block;
     clear:both;
@@ -258,8 +258,8 @@
 }
 
 .pcui-treeview-filtering-result {
-    .pcui-treeview-item-contents:before,
-    .pcui-treeview-item-icon:before {
+    .pcui-treeview-item-contents::before,
+    .pcui-treeview-item-icon::before {
         display: none;
     }
 }

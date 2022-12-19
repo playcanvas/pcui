@@ -41,7 +41,7 @@
         cursor: pointer;
 
         // expanded icon
-        &:before {
+        &::before {
             left: 0;
             content: '\E179';
             @extend .font-icon;
@@ -54,7 +54,7 @@
         // header collapsible hover state
         &:hover {
             color: $text-primary;
-            &:before {
+            &::before {
                 color: $text-primary;
             }
         }
@@ -62,7 +62,7 @@
     }
 
     &.pcui-panel-normal {
-        > .pcui-panel-header:before {
+        > .pcui-panel-header::before {
             content: '\E183';
             font-weight: 200;
         }
@@ -85,13 +85,13 @@
 
         > .pcui-panel-header {
             // collapsed icon
-            &:before {
+            &::before {
                 content: '\E180';
             }
         }
 
         &.pcui-panel-normal {
-            > .pcui-panel-header:before {
+            > .pcui-panel-header::before {
                 content: '\E184';
             }
         }
@@ -115,13 +115,13 @@
                 transform-origin: 0% 100%;
 
                 // collapsed icon
-                &:before {
+                &::before {
                     content: '\E177';
                 }
             }
 
             &.pcui-panel-normal {
-                > .pcui-panel-header:before {
+                > .pcui-panel-header::before {
                     content: '\E181'
                 }
             }
@@ -165,7 +165,7 @@
         height: 100%;
 
         // left border
-        &:before {
+        &::before {
             content: ' ';
             border-left: 1px solid $bcg-primary;
             margin-right: 10px;
@@ -174,7 +174,7 @@
         }
 
         // dots
-        &:after {
+        &::after {
             content: '.. .. ..';
             white-space: normal;
             width: 12px;
@@ -201,7 +201,7 @@
 // hide left border of sortable icon if panel is not collapsible
 .pcui-panel:not(.pcui-collapsible) {
     > .pcui-panel-header {
-        > .pcui-panel-sortable-icon:before {
+        > .pcui-panel-sortable-icon::before {
             display: none;
         }
     }
@@ -211,7 +211,7 @@
 .pcui-panel-remove {
     align-self: flex-end;
     order: 100; // always put remove button last
-    &:before {
+    &::before {
         line-height: 30px;
     }
 }
