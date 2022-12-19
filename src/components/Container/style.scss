@@ -35,13 +35,13 @@
             cursor: ew-resize;
         }
     }
-    &.pcui-resizable-left  {
+    &.pcui-resizable-left {
         > .pcui-resizable-handle {
             left: 0;
             border-left: 3px solid $bcg-darkest;
         }
     }
-    &.pcui-resizable-right  {
+    &.pcui-resizable-right {
         > .pcui-resizable-handle {
             right: 0;
             border-right: 3px solid $bcg-darkest;
@@ -58,13 +58,13 @@
             cursor: ns-resize;
         }
     }
-    &.pcui-resizable-top  {
+    &.pcui-resizable-top {
         > .pcui-resizable-handle {
             top: 0;
             border-top: 3px solid $bcg-darkest;
         }
     }
-    &.pcui-resizable-bottom  {
+    &.pcui-resizable-bottom {
         > .pcui-resizable-handle {
             bottom: 0;
             border-bottom: 3px solid $bcg-darkest;
