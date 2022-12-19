@@ -39,7 +39,6 @@
         "function-parentheses-newline-inside": null,
         "length-zero-no-unit": null,
         "max-empty-lines": null,
-        "no-eol-whitespace": null,
         "no-missing-end-of-source-newline": null,
         "number-leading-zero": null,
         "property-no-vendor-prefix": null,
