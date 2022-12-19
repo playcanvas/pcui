@@ -5,7 +5,6 @@ import Canvas from './Canvas/component';
 import Code from './Code/component';
 import ColorPicker from './ColorPicker/component';
 import Container from './Container/component';
-import ContextMenu from './ContextMenu/component';
 import Divider from './Divider/component';
 import Element from './Element/component';
 import GradientPicker from './GradientPicker/component';
@@ -37,7 +36,6 @@ export {
     Code,
     ColorPicker,
     Container,
-    ContextMenu,
     Divider,
     Element,
     GradientPicker,
