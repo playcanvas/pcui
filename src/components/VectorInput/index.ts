@@ -1,43 +1,41 @@
-import Element from '../Element/index';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element/index';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
 
 const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 
-namespace VectorInput {
-    export interface Args extends Element.Args, Element.IPlaceholderArgs, Element.IBindableArgs {
-        /**
-         * The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
-         */
-        dimensions?: number;
-        /**
-         * The minimum value of each vector element.
-         */
-        min?: number;
-        /**
-         * The maximum value of each vector element.
-         */
-        max?: number;
-        /**
-         * The incremental step when using arrow keys or dragger for each vector element.
-         */
-        step?: number;
-        /**
-         * The decimal precision of each vector element.
-         */
-        precision?: number;
-        /**
-         *  The incremental step when holding Shift and using arrow keys or dragger for each vector element.
-         */
-        stepPrecision?: number;
-    }
+export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindableArgs {
+    /**
+     * The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
+     */
+    dimensions?: number;
+    /**
+     * The minimum value of each vector element.
+     */
+    min?: number;
+    /**
+     * The maximum value of each vector element.
+     */
+    max?: number;
+    /**
+     * The incremental step when using arrow keys or dragger for each vector element.
+     */
+    step?: number;
+    /**
+     * The decimal precision of each vector element.
+     */
+    precision?: number;
+    /**
+     *  The incremental step when holding Shift and using arrow keys or dragger for each vector element.
+     */
+    stepPrecision?: number;
 }
 
 /**
  * A vector input
  */
-class VectorInput extends Element implements Element.IBindable, Element.IFocusable, Element.IPlaceholder {
-    static readonly defaultArgs: VectorInput.Args = {
+class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder {
+    static readonly defaultArgs: VectorInputArgs = {
         ...Element.defaultArgs,
         dimensions: 3
     };
@@ -46,7 +44,7 @@ class VectorInput extends Element implements Element.IBindable, Element.IFocusab
 
     protected _applyingChange: boolean;
 
-    constructor(args: VectorInput.Args = VectorInput.defaultArgs) {
+    constructor(args: VectorInputArgs = VectorInput.defaultArgs) {
         args = { ...VectorInput.defaultArgs, ...args };
 
         // set binding after inputs have been created

@@ -1,13 +1,11 @@
-import BindingBase from '../BindingBase';
+import BindingBase, { BindingBaseArgs } from '../BindingBase';
 import { Observer } from '@playcanvas/observer';
 
-namespace BindingObserversToElement {
-    export interface Args extends BindingBase.Args {
-        /**
-         * Custom update function
-         */
-        customUpdate?: any
-    }
+export interface BindingObserversToElementArgs extends BindingBaseArgs {
+    /**
+     * Custom update function
+     */
+    customUpdate?: any
 }
 
 /**

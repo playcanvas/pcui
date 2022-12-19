@@ -1,40 +1,38 @@
-import Element from '../Element/index';
-import Input from '../Input/index';
+import Element, { IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element/index';
+import Input, { InputArgs } from '../Input/index';
 import * as pcuiClass from '../../class';
 
 const CLASS_TEXT_INPUT = 'pcui-text-input';
 
-namespace TextInput {
-    export interface Args extends Input.Args, Element.IBindableArgs, Element.IPlaceholderArgs {
-        /**
-         * Sets whether pressing Enter will blur (unfocus) the field. Defaults to true.
-         */
-        blurOnEnter?: boolean,
-        /**
-         * Sets whether pressing Escape will blur (unfocus) the field. Defaults to true.
-         */
-        blurOnEscape?: boolean,
-        /**
-         * Sets whether any key up event will cause a change event to be fired.
-         */
-        keyChange?: boolean,
-        /**
-         * A function that validates the value that is entered into the input and returns true if it is valid or false otherwise.
-         * If false then the input will be set in an error state and the value will not propagate to the binding.
-         */
-        onValidate?: (value: string) => boolean,
-        /**
-         * The input element to associate this TextInput with. If not supplied one will be created instead.
-         */
-        input?: HTMLInputElement
-    }
+export interface TextInputArgs extends InputArgs, IBindableArgs, IPlaceholderArgs {
+    /**
+     * Sets whether pressing Enter will blur (unfocus) the field. Defaults to true.
+     */
+    blurOnEnter?: boolean,
+    /**
+     * Sets whether pressing Escape will blur (unfocus) the field. Defaults to true.
+     */
+    blurOnEscape?: boolean,
+    /**
+     * Sets whether any key up event will cause a change event to be fired.
+     */
+    keyChange?: boolean,
+    /**
+     * A function that validates the value that is entered into the input and returns true if it is valid or false otherwise.
+     * If false then the input will be set in an error state and the value will not propagate to the binding.
+     */
+    onValidate?: (value: string) => boolean,
+    /**
+     * The input element to associate this TextInput with. If not supplied one will be created instead.
+     */
+    input?: HTMLInputElement
 }
 
 /**
  * The TextInput is an input element of type text.
  */
-class TextInput extends Input implements Element.IFocusable, Element.IPlaceholder {
-    static readonly defaultArgs: TextInput.Args = {
+class TextInput extends Input implements IFocusable, IPlaceholder {
+    static readonly defaultArgs: TextInputArgs = {
         ...Input.defaultArgs,
         blurOnEnter: true,
         blurOnEscape: true,
@@ -69,7 +67,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
 
     protected _blurOnEscape: boolean;
 
-    constructor(args: TextInput.Args = TextInput.defaultArgs) {
+    constructor(args: TextInputArgs = TextInput.defaultArgs) {
         args = { ...TextInput.defaultArgs, ...args };
         super(args.dom, args);
 

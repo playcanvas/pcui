@@ -1,27 +1,25 @@
-import Element from '../Element/index';
+import Element, { ElementArgs } from '../Element/index';
 
-namespace Canvas {
-    export interface Args extends Element.Args {
-        /**
-         * Tab index of the canvas.
-         */
-        tabindex?: any;
-        /**
-         * Whether the canvas should use the device pixel ratio.
-         */
-        useDevicePixelRatio?: boolean;
-        /**
-         * The id to be given to the canvas in the dom.
-         */
-        id?: string
-    }
+export interface CanvasArgs extends ElementArgs {
+    /**
+     * Tab index of the canvas.
+     */
+    tabindex?: any;
+    /**
+     * Whether the canvas should use the device pixel ratio.
+     */
+    useDevicePixelRatio?: boolean;
+    /**
+     * The id to be given to the canvas in the dom.
+     */
+    id?: string
 }
 
 /**
  * Represents a Canvas
  */
 class Canvas extends Element {
-    static readonly defaultArgs: Canvas.Args = {
+    static readonly defaultArgs: CanvasArgs = {
         ...Element.defaultArgs,
         dom: 'canvas'
     };
@@ -32,7 +30,7 @@ class Canvas extends Element {
 
     protected _ratio: number;
 
-    constructor(args: Canvas.Args = Canvas.defaultArgs) {
+    constructor(args: CanvasArgs = Canvas.defaultArgs) {
         args = { ...Canvas.defaultArgs, ...args };
         super(args.dom, args);
 

@@ -1,11 +1,11 @@
-import Element from './index';
+import Element, { TextAreaInputArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
  * The TextAreaInput wraps a textarea element. It has the same interface as pcui.TextInput.
  */
-class Component extends BaseComponent <Element.Args, any> {
-    constructor(props: Element.Args) {
+class Component extends BaseComponent <TextAreaInputArgs, any> {
+    constructor(props: TextAreaInputArgs) {
         super(props);
         this.elementClass = Element;
     }

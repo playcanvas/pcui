@@ -1,5 +1,5 @@
 import Label from '../Label/index';
-import Container from '../Container/index';
+import Container, { ContainerArgs } from '../Container/index';
 import TextInput from '../TextInput/index';
 import * as pcuiClass from '../../class';
 
@@ -12,52 +12,50 @@ const CLASS_CONTENTS = CLASS_ROOT + '-contents';
 const CLASS_EMPTY = CLASS_ROOT + '-empty';
 const CLASS_RENAME = CLASS_ROOT + '-rename';
 
-namespace TreeViewItem {
-    export interface Args extends Container.Args {
-        /**
-         * Whether the item is selected.
-         */
-        selected?: boolean;
-        /**
-         * Whether the item can be selected. Defaults to true.
-         */
-        allowSelect?: boolean,
-        /**
-         * Whether the item is open meaning showing its children.
-         */
-        open?: boolean,
-        /**
-         * Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true. Defaults to true.
-         */
-        allowDrag?: boolean,
-        /**
-         * Whether dropping is allowed on the tree item. Defaults to true.
-         */
-        allowDrop?: boolean,
-        /**
-         * The text shown by the TreeViewItem.
-         */
-        text?: string,
-        /**
-         * The icon shown before the text in the TreeViewItem. Defaults to E360.
-         */
-        icon?: string,
-        /**
-         * Method to be called when the TreeViewItem is selected.
-         */
-        onSelect?: (deselect: () => void) => void,
-        /**
-         * Method to be called when the TreeViewItem is deselected.
-         */
-        onDeselect?: () => void
-    }
+export interface TreeViewItemArgs extends ContainerArgs {
+    /**
+     * Whether the item is selected.
+     */
+    selected?: boolean;
+    /**
+     * Whether the item can be selected. Defaults to true.
+     */
+    allowSelect?: boolean,
+    /**
+     * Whether the item is open meaning showing its children.
+     */
+    open?: boolean,
+    /**
+     * Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true. Defaults to true.
+     */
+    allowDrag?: boolean,
+    /**
+     * Whether dropping is allowed on the tree item. Defaults to true.
+     */
+    allowDrop?: boolean,
+    /**
+     * The text shown by the TreeViewItem.
+     */
+    text?: string,
+    /**
+     * The icon shown before the text in the TreeViewItem. Defaults to E360.
+     */
+    icon?: string,
+    /**
+     * Method to be called when the TreeViewItem is selected.
+     */
+    onSelect?: (deselect: () => void) => void,
+    /**
+     * Method to be called when the TreeViewItem is deselected.
+     */
+    onDeselect?: () => void
 }
 
 /**
  * Represents a Tree View Item to be added to a pcui.TreeView.
  */
 class TreeViewItem extends Container {
-    static readonly defaultArgs: TreeViewItem.Args = {
+    static readonly defaultArgs: TreeViewItemArgs = {
         ...Container.defaultArgs,
         flex: true,
         icon: 'E360',
@@ -143,7 +141,7 @@ class TreeViewItem extends Container {
      *
      * @param args
      */
-    constructor(args: TreeViewItem.Args = TreeViewItem.defaultArgs) {
+    constructor(args: TreeViewItemArgs = TreeViewItem.defaultArgs) {
         args = { ...TreeViewItem.defaultArgs, ...args };
         super(args);
 

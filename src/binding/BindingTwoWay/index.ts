@@ -1,21 +1,19 @@
-import BindingBase from '../BindingBase';
+import BindingBase, { BindingBaseArgs } from '../BindingBase';
 import BindingElementToObservers from '../BindingElementToObservers';
 import BindingObserversToElement from '../BindingObserversToElement';
-import Element from '../../components/Element/index';
 import { Observer } from '@playcanvas/observer';
+import { IBindable } from '../../components/Element';
 
-namespace BindingTwoWay {
-    export interface Args extends BindingBase.Args {
-        /**
-         * BindingElementToObservers instance.
-         */
-        bindingElementToObservers?: BindingElementToObservers;
+export interface BindingTwoWayArgs extends BindingBaseArgs {
+    /**
+     * BindingElementToObservers instance.
+     */
+    bindingElementToObservers?: BindingElementToObservers;
 
-        /**
-         * BindingObserversToElement instance.
-         */
-        bindingObserversToElement?: BindingObserversToElement;
-    }
+    /**
+     * BindingObserversToElement instance.
+     */
+    bindingObserversToElement?: BindingObserversToElement;
 }
 
 /**
@@ -34,7 +32,7 @@ class BindingTwoWay extends BindingBase {
      *
      * @param args
      */
-    constructor(args: BindingTwoWay.Args = {}) {
+    constructor(args: BindingTwoWayArgs = {}) {
         super(args);
 
         this._bindingElementToObservers = args.bindingElementToObservers || new BindingElementToObservers(args);
@@ -103,13 +101,13 @@ class BindingTwoWay extends BindingBase {
         this._bindingElementToObservers.removeValues(values);
     }
 
-    set element(value: Element.IBindable | undefined) {
+    set element(value: IBindable | undefined) {
         this._element = value;
         this._bindingElementToObservers.element = value;
         this._bindingObserversToElement.element = value;
     }
 
-    get element() : Element.IBindable | undefined {
+    get element() : IBindable | undefined {
         return this._element;
     }
 

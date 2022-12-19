@@ -8,36 +8,34 @@ const CLASS_ContextMenu_parent = CLASS_ContextMenu + '-parent';
 const CLASS_ContextMenu_child = CLASS_ContextMenu + '-child';
 const CLASS_ContextMenu_parent_active = CLASS_ContextMenu_parent + '-active';
 
-namespace ContextMenu {
-    export interface Args {
-        /**
-         * The array of items used to populate the array. Example item: \{ 'text': 'Hello World', 'onClick': () => console.log('Hello World') \}.
-         */
-        items?: any;
-        /**
-         * The dom element to attach this context menu to.
-         */
-        dom?: HTMLElement,
-        /**
-         * The dom element that will trigger the context menu to open when right clicked. If undefined args.dom will be used.
-         */
-        triggerElement?: HTMLElement
-    }
+export interface ContextMenuArgs {
+    /**
+     * The array of items used to populate the array. Example item: \{ 'text': 'Hello World', 'onClick': () => console.log('Hello World') \}.
+     */
+    items?: any;
+    /**
+     * The dom element to attach this context menu to.
+     */
+    dom?: HTMLElement,
+    /**
+     * The dom element that will trigger the context menu to open when right clicked. If undefined args.dom will be used.
+     */
+    triggerElement?: HTMLElement
 }
 
 /**
  * Represents a context menu. LEGACY: This is a legacy component and will be removed in the future. Use Menu instead.
  */
 class ContextMenu {
-    static readonly defaultArgs: ContextMenu.Args = {};
+    static readonly defaultArgs: ContextMenuArgs = {};
 
     protected _menu: Container;
 
     protected _contextMenuEvent: void;
 
-    protected _args: ContextMenu.Args;
+    protected _args: ContextMenuArgs;
 
-    constructor(args: ContextMenu.Args = ContextMenu.defaultArgs) {
+    constructor(args: ContextMenuArgs = ContextMenu.defaultArgs) {
         args = { ...ContextMenu.defaultArgs, ...args };
         this._menu = new Container({ dom: args.dom });
         // @ts-ignore

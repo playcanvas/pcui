@@ -1,34 +1,32 @@
 import Element from '../Element/index';
-import Container from '../Container';
+import Container, { ContainerArgs } from '../Container';
 
 const CLASS_INFOBOX = 'pcui-infobox';
 
-namespace InfoBox {
-    export interface Args extends Container.Args {
-        /**
-         * The CSS code for an icon for the info box. e.g. 'E401' (notice we omit the '\\' character).
-         */
-        icon?: string;
-        /**
-         * Gets / sets the 'title' of the info box.
-         */
-        title?: string;
-        /**
-         * Gets / sets the 'text' of the info box.
-         */
-        text?: string;
-        /**
-         * If true then the innerHTML property will be used to set the title/text. Otherwise textContent will be used instead.
-         */
-        unsafe?: boolean;
-    }
+export interface InfoBoxArgs extends ContainerArgs {
+    /**
+     * The CSS code for an icon for the info box. e.g. 'E401' (notice we omit the '\\' character).
+     */
+    icon?: string;
+    /**
+     * Gets / sets the 'title' of the info box.
+     */
+    title?: string;
+    /**
+     * Gets / sets the 'text' of the info box.
+     */
+    text?: string;
+    /**
+     * If true then the innerHTML property will be used to set the title/text. Otherwise textContent will be used instead.
+     */
+    unsafe?: boolean;
 }
 
 /**
  * Represents an information box.
  */
 class InfoBox extends Container {
-    static readonly defaultArgs: InfoBox.Args = {
+    static readonly defaultArgs: InfoBoxArgs = {
         ...Container.defaultArgs,
         unsafe: false,
         icon: '',
@@ -48,7 +46,7 @@ class InfoBox extends Container {
 
     protected _text: any;
 
-    constructor(args: InfoBox.Args = InfoBox.defaultArgs) {
+    constructor(args: InfoBoxArgs = InfoBox.defaultArgs) {
         args = { ...InfoBox.defaultArgs, ...args };
         super(args);
 

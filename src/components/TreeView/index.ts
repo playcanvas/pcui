@@ -1,4 +1,4 @@
-import Container from '../Container';
+import Container, { ContainerArgs } from '../Container';
 import Element from '../Element/index';
 import TreeViewItem from '../TreeViewItem';
 import { searchItems } from '../../helpers/search';
@@ -13,38 +13,36 @@ const DRAG_AREA_INSIDE = 'inside';
 const DRAG_AREA_BEFORE = 'before';
 const DRAG_AREA_AFTER = 'after';
 
-namespace TreeView {
-    export interface Args extends Container.Args {
-        /**
-         * Whether dragging a TreeViewItem is allowed.
-         */
-        allowDrag?: boolean,
-        /**
-         * Whether reordering TreeViewItems is allowed.
-         */
-        allowReordering?: boolean,
-        /**
-         * Whether renaming TreeViewItems is allowed by double clicking on them.
-         */
-        allowRenaming?: boolean,
-        /**
-         * A filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
-         */
-        filter?: string,
-        /**
-         * A function to be called when we right click on a TreeViewItem.
-         */
-        onContextMenu?: any,
-        /**
-         * A function to be called when we try to reparent tree items. If a function is provided then the
-         * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
-         */
-        onReparent?: any,
-        /**
-         * The element to scroll on drag. Defaults to this TreeView's dom.
-         */
-        dragScrollElement?: HTMLElement
-    }
+export interface TreeViewArgs extends ContainerArgs {
+    /**
+     * Whether dragging a TreeViewItem is allowed.
+     */
+    allowDrag?: boolean,
+    /**
+     * Whether reordering TreeViewItems is allowed.
+     */
+    allowReordering?: boolean,
+    /**
+     * Whether renaming TreeViewItems is allowed by double clicking on them.
+     */
+    allowRenaming?: boolean,
+    /**
+     * A filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
+     */
+    filter?: string,
+    /**
+     * A function to be called when we right click on a TreeViewItem.
+     */
+    onContextMenu?: any,
+    /**
+     * A function to be called when we try to reparent tree items. If a function is provided then the
+     * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
+     */
+    onReparent?: any,
+    /**
+     * The element to scroll on drag. Defaults to this TreeView's dom.
+     */
+    dragScrollElement?: HTMLElement
 }
 
 /**
@@ -100,7 +98,7 @@ class TreeView extends Container {
      */
     public static readonly EVENT_RENAME = 'rename';
 
-    static defaultArgs : TreeView.Args = {
+    static defaultArgs : TreeViewArgs = {
         ...Container.defaultArgs,
         allowDrag: true,
         allowReordering: true
@@ -157,7 +155,7 @@ class TreeView extends Container {
      *
      * @param args
      */
-    constructor(args: TreeView.Args = TreeView.defaultArgs) {
+    constructor(args: TreeViewArgs = TreeView.defaultArgs) {
         args = { ...TreeView.defaultArgs, ...args };
         super(args);
 

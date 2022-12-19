@@ -1,13 +1,13 @@
 import React from 'react';
-import Element from './index';
+import Element, { ContainerArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
  * A container is the basic building block for Elements that are grouped together.
  * A container can contain any other element including other containers.
  */
-class Component extends BaseComponent <Element.Args, any> {
-    constructor(props: Element.Args = Element.defaultArgs) {
+class Component extends BaseComponent <ContainerArgs, any> {
+    constructor(props: ContainerArgs = Element.defaultArgs) {
         super(props);
         this.elementClass = Element;
     }

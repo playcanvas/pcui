@@ -1,20 +1,18 @@
-import Element from '../Element/index';
+import Element, { ElementArgs } from '../Element/index';
 
 const CLASS_ROOT = 'pcui-divider';
 
-namespace Divider {
-    export interface Args extends Element.Args {}
-}
+export interface DividerArgs extends ElementArgs {}
 
 /**
  * Represents a vertical division between two elements
  */
 class Divider extends Element {
-    static readonly defaultArgs: Divider.Args = {
+    static readonly defaultArgs: DividerArgs = {
         ...Element.defaultArgs
     };
 
-    constructor(args: Element.Args = Divider.defaultArgs) {
+    constructor(args: ElementArgs = Divider.defaultArgs) {
         args = { ...Divider.defaultArgs, ...args };
         super(args.dom ? args.dom : document.createElement('div'), args);
 

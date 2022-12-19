@@ -1,35 +1,33 @@
 import * as pcuiClass from '../../class';
-import Element from '../Element/index';
+import Element, { ElementArgs, IBindableArgs, IFlexArgs, IPlaceholder, IPlaceholderArgs } from '../Element/index';
 import Input from '../Input/index';
 
 const CLASS_LABEL = 'pcui-label';
 
-namespace Label {
-    export interface Args extends Element.Args, Element.IBindableArgs, Element.IPlaceholderArgs, Element.IFlexArgs {
-        /**
-         * Sets the text of the Label.
-         */
-        text?: string | number,
-        /**
-         * If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
-         */
-        unsafe?: boolean,
-        /**
-         * If true then use the text of the label as the native HTML tooltip.
-         */
-        nativeTooltip?: boolean,
-        /**
-         * If true then the label can be clicked to select text.
-         */
-        allowTextSelection?: boolean
-    }
+export interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs, IFlexArgs {
+    /**
+     * Sets the text of the Label.
+     */
+    text?: string | number,
+    /**
+     * If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
+     */
+    unsafe?: boolean,
+    /**
+     * If true then use the text of the label as the native HTML tooltip.
+     */
+    nativeTooltip?: boolean,
+    /**
+     * If true then the label can be clicked to select text.
+     */
+    allowTextSelection?: boolean
 }
 
 /**
  * The Label is a simple span element that displays some text.
  */
-class Label extends Input implements Element.IPlaceholder {
-    static readonly defaultArgs: Label.Args = {
+class Label extends Input implements IPlaceholder {
+    static readonly defaultArgs: LabelArgs = {
         ...Element.defaultArgs,
         value: '',
         text: '',
@@ -47,7 +45,7 @@ class Label extends Input implements Element.IPlaceholder {
 
     _optionValue: any;
 
-    constructor(args: Label.Args = Label.defaultArgs) {
+    constructor(args: LabelArgs = Label.defaultArgs) {
         args = { ...Label.defaultArgs, ...args };
         super(args.dom, args);
 

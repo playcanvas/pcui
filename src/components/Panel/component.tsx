@@ -1,17 +1,17 @@
 import React from 'react';
-import Element from './index';
+import Element, { PanelArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
  * The Panel is a pcui.Container that itself contains a header container and a content container. The
  * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
  */
-class Component extends BaseComponent <Element.Args, any> {
+class Component extends BaseComponent <PanelArgs, any> {
     nodeElement: any;
 
     containerElement: any;
 
-    constructor(props: Element.Args = Element.defaultArgs) {
+    constructor(props: PanelArgs = Element.defaultArgs) {
         super(props);
         this.elementClass = Element;
     }

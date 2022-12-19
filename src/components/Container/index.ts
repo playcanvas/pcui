@@ -1,4 +1,4 @@
-import Element from '../Element/index';
+import Element, { ElementArgs, IFlexArgs, IParentArgs } from '../Element/index';
 import * as pcuiClass from '../../class';
 
 const RESIZE_HANDLE_SIZE = 4;
@@ -18,38 +18,36 @@ const CLASS_CONTAINER = 'pcui-container';
 const CLASS_DRAGGED = CLASS_CONTAINER + '-dragged';
 const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
 
-namespace Container {
-    export interface Args extends Element.Args, Element.IParentArgs, Element.IFlexArgs {
-        /**
-         * Sets whether the Element is resizable and where the resize handle is located. Can
-         * be one of 'top', 'bottom', 'right', 'left'. Set to null to disable resizing.
-         */
-        resizable?: string,
-        /**
-         * Sets the minimum size the Element can take when resized in pixels.
-         */
-        resizeMin?: number,
-        /**
-         * Sets the maximum size the Element can take when resized in pixels.
-         */
-        resizeMax?: number,
-        /**
-         * Called when the container has been resized.
-         */
-        onResize?: () => void,
-        /**
-         * Sets whether the Element should be scrollable.
-         */
-        scrollable?: boolean,
-        /**
-         * Sets whether the Element supports the grid layout.
-         */
-        grid?: boolean,
-        /**
-         * Sets the Elements align items property.
-         */
-        alignItems?: string
-    }
+export interface ContainerArgs extends ElementArgs, IParentArgs, IFlexArgs {
+    /**
+     * Sets whether the Element is resizable and where the resize handle is located. Can
+     * be one of 'top', 'bottom', 'right', 'left'. Set to null to disable resizing.
+     */
+    resizable?: string,
+    /**
+     * Sets the minimum size the Element can take when resized in pixels.
+     */
+    resizeMin?: number,
+    /**
+     * Sets the maximum size the Element can take when resized in pixels.
+     */
+    resizeMax?: number,
+    /**
+     * Called when the container has been resized.
+     */
+    onResize?: () => void,
+    /**
+     * Sets whether the Element should be scrollable.
+     */
+    scrollable?: boolean,
+    /**
+     * Sets whether the Element supports the grid layout.
+     */
+    grid?: boolean,
+    /**
+     * Sets the Elements align items property.
+     */
+    alignItems?: string
 }
 
 /**
@@ -57,7 +55,7 @@ namespace Container {
  * A container can contain any other element including other containers.
  */
 class Container extends Element {
-    static readonly defaultArgs: Container.Args = {
+    static readonly defaultArgs: ContainerArgs = {
         ...Element.defaultArgs,
         resizable: null,
         dom: 'div'
@@ -134,7 +132,7 @@ class Container extends Element {
 
     protected _draggedHeight: any;
 
-    constructor(args: Container.Args = Container.defaultArgs) {
+    constructor(args: ContainerArgs = Container.defaultArgs) {
         args = { ...Container.defaultArgs, ...args };
         super(args.dom, args);
 

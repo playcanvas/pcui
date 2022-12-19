@@ -1,5 +1,5 @@
-import Element from '../Element/index';
-import Container from '../Container/index';
+import { IFocusable } from '../Element/index';
+import Container, { ContainerArgs } from '../Container/index';
 import Label from '../Label/index';
 import BindingObserversToElement from '../../binding/BindingObserversToElement/index';
 import RadioButton from '../RadioButton/index';
@@ -10,32 +10,30 @@ const CLASS_SELECTED = CLASS_ROOT + '-selected';
 const CLASS_TEXT = CLASS_ROOT + '-text';
 const CLASS_RADIO_BUTTON = 'pcui-gridview-radiobtn';
 
-namespace GridViewItem {
-    export interface Args extends Container.Args {
-        /**
-         * The type of the gridview item, can be null or 'radio'
-         */
-        type?: string;
-        /**
-         * If true allow selecting the item. Defaults to true.
-         */
-        allowSelect?: boolean;
-        /**
-         * Whether the item is selected.
-         */
-        selected?: boolean;
-        /**
-         * The text of the item.
-         */
-        text?: string;
-    }
+export interface GridViewItemArgs extends ContainerArgs {
+    /**
+     * The type of the gridview item, can be null or 'radio'
+     */
+    type?: string;
+    /**
+     * If true allow selecting the item. Defaults to true.
+     */
+    allowSelect?: boolean;
+    /**
+     * Whether the item is selected.
+     */
+    selected?: boolean;
+    /**
+     * The text of the item.
+     */
+    text?: string;
 }
 
 /**
  *  Represents a grid view item used in GridView.
  */
-class GridViewItem extends Container implements Element.IFocusable {
-    static readonly defaultArgs: GridViewItem.Args = {
+class GridViewItem extends Container implements IFocusable {
+    static readonly defaultArgs: GridViewItemArgs = {
         ...Container.defaultArgs,
         allowSelect: true,
         text: '',
@@ -58,7 +56,7 @@ class GridViewItem extends Container implements Element.IFocusable {
 
     protected _allowSelect: any;
 
-    constructor(args: GridViewItem.Args = GridViewItem.defaultArgs) {
+    constructor(args: GridViewItemArgs = GridViewItem.defaultArgs) {
         args = { ...GridViewItem.defaultArgs, ...args };
         super(args);
 

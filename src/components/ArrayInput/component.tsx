@@ -1,11 +1,11 @@
-import Element from './index';
+import Element, { ArrayInputArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
  * Element that allows editing an array of values.
  */
-class Component extends BaseComponent <Element.Args, any> {
-    constructor(props: Element.Args) {
+class Component extends BaseComponent <ArrayInputArgs, any> {
+    constructor(props: ArrayInputArgs) {
         super(props);
         this.elementClass = Element;
     }

@@ -1,5 +1,5 @@
-import Container from '../Container';
-import Element from '../Element';
+import Container, { ContainerArgs } from '../Container';
+import { IBindable } from '../Element';
 import Label from '../Label';
 
 const CLASS_MENU_ITEM = 'pcui-menu-item';
@@ -7,42 +7,40 @@ const CLASS_MENU_ITEM_CONTENT = CLASS_MENU_ITEM + '-content';
 const CLASS_MENU_ITEM_CHILDREN = CLASS_MENU_ITEM + '-children';
 const CLASS_MENU_ITEM_HAS_CHILDREN = CLASS_MENU_ITEM + '-has-children';
 
-namespace MenuItem {
-    export interface Args extends Container.Args {
-        value?: any;
-        /**
-         * Whether the MenuItem has any child MenuItems.
-         */
-        hasChildren?: boolean;
-        /**
-         * Gets / sets the text shown on the MenuItem.
-         */
-        text?: string;
-        /**
-         * Gets / sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
-         */
-        icon?: string;
-        /**
-         * Gets / sets the parent Menu Element.
-         */
-        menu?: any;
-        /**
-         * Gets / sets the function called when we select the MenuItem.
-         */
-        onSelect?: () => void;
-        /**
-         * Gets / sets the function that determines whether the MenuItem should be enabled when the Menu is shown.
-         */
-        onIsEnabled?: () => boolean;
-        /**
-         * Gets / sets the function that determines whether the MenuItem should be visible when the Menu is shown.
-         */
-        onIsVisible?: () => boolean;
-        /**
-         * An array of MenuItem constructor data. If defined then child MenuItems will be created and added to the MenuItem.
-         */
-        items?: any;
-    }
+export interface MenuItemArgs extends ContainerArgs {
+    value?: any;
+    /**
+     * Whether the MenuItem has any child MenuItems.
+     */
+    hasChildren?: boolean;
+    /**
+     * Gets / sets the text shown on the MenuItem.
+     */
+    text?: string;
+    /**
+     * Gets / sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
+     */
+    icon?: string;
+    /**
+     * Gets / sets the parent Menu Element.
+     */
+    menu?: any;
+    /**
+     * Gets / sets the function called when we select the MenuItem.
+     */
+    onSelect?: () => void;
+    /**
+     * Gets / sets the function that determines whether the MenuItem should be enabled when the Menu is shown.
+     */
+    onIsEnabled?: () => boolean;
+    /**
+     * Gets / sets the function that determines whether the MenuItem should be visible when the Menu is shown.
+     */
+    onIsVisible?: () => boolean;
+    /**
+     * An array of MenuItem constructor data. If defined then child MenuItems will be created and added to the MenuItem.
+     */
+    items?: any;
 }
 
 /**
@@ -50,8 +48,8 @@ namespace MenuItem {
  * A MenuItem can also contain child MenuItems (by appending them to the MenuItem). This
  * can be useful to show nested Menus.
  */
-class MenuItem extends Container implements Element.IBindable {
-    static readonly defaultArgs: MenuItem.Args = {
+class MenuItem extends Container implements IBindable {
+    static readonly defaultArgs: MenuItemArgs = {
         ...Container.defaultArgs
     };
 
@@ -77,7 +75,7 @@ class MenuItem extends Container implements Element.IBindable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: MenuItem.Args = MenuItem.defaultArgs) {
+    constructor(args: MenuItemArgs = MenuItem.defaultArgs) {
         args = { ...MenuItem.defaultArgs, ...args };
         super(args);
 
