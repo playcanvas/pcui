@@ -13,46 +13,46 @@ const CLASS_PANEL_SORTABLE_ICON = CLASS_PANEL + '-sortable-icon';
 const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
 
 export interface PanelArgs extends ContainerArgs {
-/**
- * Sets whether the Element is collapsible.
- */
-collapsible?: boolean,
-/**
- * Sets whether the Element should be collapsed.
- */
-collapsed?: number,
-/**
- * Sets whether the panel can be reordered.
- */
-sortable?: boolean,
-/**
- * Sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
- */
-collapseHorizontally?: boolean,
-/**
- * Sets whether the panel can be removed.
- */
-removable?: boolean,
-/**
- * The height of the header in pixels. Defaults to 32.
- */
-headerSize?: number,
-/**
- * The header text of the panel. Defaults to the empty string.
- */
-headerText?: string,
-/**
- * Sets the panel type.
- */
-panelType?: 'normal',
-/**
- * A dom element to use for the content container.
- */
-content?: HTMLElement
-/**
- * A dom element to use for the header container.
- */
-header?: HTMLElement
+    /**
+     * Sets whether the Element is collapsible.
+     */
+    collapsible?: boolean,
+    /**
+     * Sets whether the Element should be collapsed.
+     */
+    collapsed?: number,
+    /**
+     * Sets whether the panel can be reordered.
+     */
+    sortable?: boolean,
+    /**
+     * Sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
+     */
+    collapseHorizontally?: boolean,
+    /**
+     * Sets whether the panel can be removed.
+     */
+    removable?: boolean,
+    /**
+     * The height of the header in pixels. Defaults to 32.
+     */
+    headerSize?: number,
+    /**
+     * The header text of the panel. Defaults to the empty string.
+     */
+    headerText?: string,
+    /**
+     * Sets the panel type.
+     */
+    panelType?: 'normal',
+    /**
+     * A dom element to use for the content container.
+     */
+    content?: HTMLElement
+    /**
+     * A dom element to use for the header container.
+     */
+    header?: HTMLElement
 }
 
 /**
