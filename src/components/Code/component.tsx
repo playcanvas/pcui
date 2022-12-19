@@ -1,13 +1,13 @@
-import Element from './index';
+import Element, { CodeArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
  * Represents a code block.
  */
-class Component extends BaseComponent <ElementArgs, any> {
-    static defaultProps: ElementArgs;
+class Component extends BaseComponent <CodeArgs, any> {
+    static defaultProps: CodeArgs;
 
-    constructor(props: ElementArgs) {
+    constructor(props: CodeArgs) {
         super(props);
         this.elementClass = Element;
     }

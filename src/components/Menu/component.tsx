@@ -1,5 +1,5 @@
 import React from 'react';
-import Element from './index';
+import Element, { MenuArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
@@ -7,8 +7,8 @@ import BaseComponent from '../Element/component';
  * to show context menus and nested menus. Note that a Menu must be appended to the root Element
  * and then positioned accordingly.
  */
-class Menu extends BaseComponent <ElementArgs, any> {
-    constructor(props: ElementArgs) {
+class Menu extends BaseComponent <MenuArgs, any> {
+    constructor(props: MenuArgs) {
         super(props);
         this.elementClass = Element;
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import TreeViewElement from './index';
+import TreeViewElement, { TreeViewArgs } from './index';
 import TreeViewItemElement from '../TreeViewItem/index';
 import BaseComponent from '../Element/component';
 
@@ -7,10 +7,10 @@ import BaseComponent from '../Element/component';
  * A container that can show a TreeView like a hierarchy. The TreeView contains
  * TreeViewItems.
  */
-class Component extends BaseComponent <TreeViewElementArgs, any> {
+class Component extends BaseComponent <TreeViewArgs, any> {
     parentElement: any;
 
-    constructor(props: TreeViewElementArgs) {
+    constructor(props: TreeViewArgs) {
         super(props);
 
         this.element = new TreeViewElement({ ...props });

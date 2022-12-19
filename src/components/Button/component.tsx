@@ -1,12 +1,12 @@
 import React from 'react';
-import Element from './index';
+import Element, { ButtonArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
  * User input with click interaction
  */
-class Component extends BaseComponent <ElementArgs, any> {
-    constructor(props: ElementArgs = Element.defaultArgs) {
+class Component extends BaseComponent <ButtonArgs, any> {
+    constructor(props: ButtonArgs = Element.defaultArgs) {
         super(props);
         this.elementClass = Element;
     }

@@ -1,13 +1,13 @@
-import Element from './index';
+import Element, { TextInputArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
  * The TextInput is an input element of type text.
  */
-class TextInput extends BaseComponent <ElementArgs, any> {
+class TextInput extends BaseComponent <TextInputArgs, any> {
     onValidate: (value: string) => boolean;
 
-    constructor(props: ElementArgs = Element.defaultArgs) {
+    constructor(props: TextInputArgs = Element.defaultArgs) {
         super(props);
         this.elementClass = Element;
 

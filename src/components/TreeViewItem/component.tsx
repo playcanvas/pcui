@@ -1,15 +1,15 @@
-import Element from './index';
+import Element, { TreeViewItemArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
  * Represents a Tree View Item to be added to a pcui.TreeView.
  */
-class Component extends BaseComponent <ElementArgs, any> {
+class Component extends BaseComponent <TreeViewItemArgs, any> {
     onSelect: () => void;
 
     onDeselect: () => void;
 
-    constructor(props: ElementArgs) {
+    constructor(props: TreeViewItemArgs) {
         super(props);
         this.elementClass = Element;
 

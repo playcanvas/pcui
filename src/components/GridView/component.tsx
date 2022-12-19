@@ -1,5 +1,5 @@
 import React from 'react';
-import GridViewElement from './index';
+import GridViewElement, { GridViewArgs } from './index';
 import GridViewItemElement from '../GridViewItem/index';
 import BaseComponent from '../Element/component';
 
@@ -7,8 +7,8 @@ import BaseComponent from '../Element/component';
  * Represents a container that shows a flexible wrappable
  * list of items that looks like a grid. Contains GridViewItem's.
  */
-class GridView extends BaseComponent <GridViewElementArgs, any> {
-    constructor(props: GridViewElementArgs) {
+class GridView extends BaseComponent <GridViewArgs, any> {
+    constructor(props: GridViewArgs) {
         super(props);
         // @ts-ignore
         this.element = new GridViewElement({ ...props });
