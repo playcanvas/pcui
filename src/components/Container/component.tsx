@@ -6,8 +6,8 @@ import BaseComponent from '../Element/component';
  * A container is the basic building block for Elements that are grouped together.
  * A container can contain any other element including other containers.
  */
-class Component extends BaseComponent <Element.Args, any> {
-    constructor(props: Element.Args = Element.defaultArgs) {
+class Component extends BaseComponent <ElementArgs, any> {
+    constructor(props: ElementArgs = Element.defaultArgs) {
         super(props);
         this.elementClass = Element;
     }

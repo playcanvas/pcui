@@ -1,11 +1,14 @@
-import BindingBase from './BindingBase';
+import BindingBase, { BindingBaseArgs } from './BindingBase';
 import BindingElementToObservers from './BindingElementToObservers';
-import BindingObserversToElement from './BindingObserversToElement';
-import BindingTwoWay from './BindingTwoWay';
+import BindingObserversToElement, { BindingObserversToElementArgs } from './BindingObserversToElement';
+import BindingTwoWay, { BindingTwoWayArgs } from './BindingTwoWay';
 
 export {
     BindingBase,
+    BindingBaseArgs,
     BindingElementToObservers,
     BindingObserversToElement,
-    BindingTwoWay
+    BindingObserversToElementArgs,
+    BindingTwoWay,
+    BindingTwoWayArgs
 };

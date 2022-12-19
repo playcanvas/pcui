@@ -1,10 +1,8 @@
-import Element from '../Element/index';
+import Element, { ElementArgs, IBindable } from '../Element/index';
 
-namespace Input {
-    export interface Args extends Element.Args {}
-}
+export interface InputArgs extends ElementArgs {}
 
-class Input extends Element implements Element.IBindable {
+class Input extends Element implements IBindable {
     protected _renderChanges: boolean;
 
     set value(value: any) {

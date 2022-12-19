@@ -5,8 +5,8 @@ import BaseComponent from '../Element/component';
 /**
  * Represents a gradient picker
  */
-class GradientPicker extends BaseComponent <Element.Args, any> {
-    constructor(props: Element.Args) {
+class GradientPicker extends BaseComponent <ElementArgs, any> {
+    constructor(props: ElementArgs) {
         super(props);
         this.elementClass = Element;
     }

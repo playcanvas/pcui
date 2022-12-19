@@ -1,6 +1,6 @@
 import * as pcuiClass from '../../class';
 import Element from '../Element/index';
-import Container from '../Container/index';
+import Container, { ContainerArgs } from '../Container/index';
 import Label from '../Label/index';
 import Button from '../Button/index';
 
@@ -12,49 +12,47 @@ const CLASS_PANEL_HORIZONTAL = CLASS_PANEL + '-horizontal';
 const CLASS_PANEL_SORTABLE_ICON = CLASS_PANEL + '-sortable-icon';
 const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
 
-namespace Panel {
-    export interface Args extends Container.Args {
-    /**
-     * Sets whether the Element is collapsible.
-     */
-    collapsible?: boolean,
-    /**
-     * Sets whether the Element should be collapsed.
-     */
-    collapsed?: number,
-    /**
-     * Sets whether the panel can be reordered.
-     */
-    sortable?: boolean,
-    /**
-     * Sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
-     */
-    collapseHorizontally?: boolean,
-    /**
-     * Sets whether the panel can be removed.
-     */
-    removable?: boolean,
-    /**
-     * The height of the header in pixels. Defaults to 32.
-     */
-    headerSize?: number,
-    /**
-     * The header text of the panel. Defaults to the empty string.
-     */
-    headerText?: string,
-    /**
-     * Sets the panel type.
-     */
-    panelType?: 'normal',
-    /**
-     * A dom element to use for the content container.
-     */
-    content?: HTMLElement
-    /**
-     * A dom element to use for the header container.
-     */
-    header?: HTMLElement
-    }
+export interface PanelArgs extends ContainerArgs {
+/**
+ * Sets whether the Element is collapsible.
+ */
+collapsible?: boolean,
+/**
+ * Sets whether the Element should be collapsed.
+ */
+collapsed?: number,
+/**
+ * Sets whether the panel can be reordered.
+ */
+sortable?: boolean,
+/**
+ * Sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
+ */
+collapseHorizontally?: boolean,
+/**
+ * Sets whether the panel can be removed.
+ */
+removable?: boolean,
+/**
+ * The height of the header in pixels. Defaults to 32.
+ */
+headerSize?: number,
+/**
+ * The header text of the panel. Defaults to the empty string.
+ */
+headerText?: string,
+/**
+ * Sets the panel type.
+ */
+panelType?: 'normal',
+/**
+ * A dom element to use for the content container.
+ */
+content?: HTMLElement
+/**
+ * A dom element to use for the header container.
+ */
+header?: HTMLElement
 }
 
 /**
@@ -76,7 +74,7 @@ class Panel extends Container {
      */
     public static readonly EVENT_EXPAND = 'expand';
 
-    static readonly defaultArgs: Panel.Args = {
+    static readonly defaultArgs: PanelArgs = {
         ...Container.defaultArgs,
         headerSize: 32
     };
@@ -124,7 +122,7 @@ class Panel extends Container {
      *
      * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
      */
-    constructor(args: Panel.Args = Panel.defaultArgs) {
+    constructor(args: PanelArgs = Panel.defaultArgs) {
         args = { ...Panel.defaultArgs, ...args };
 
         const panelArgs = Object.assign({}, args);
@@ -183,7 +181,7 @@ class Panel extends Container {
         this._reflow();
     }
 
-    protected _initializeHeader(args: Panel.Args) {
+    protected _initializeHeader(args: PanelArgs) {
         // header container
         this._containerHeader = new Container({
             flex: true,
@@ -221,7 +219,7 @@ class Panel extends Container {
         this.emit('click:remove');
     }
 
-    protected _initializeContent(args: Panel.Args) {
+    protected _initializeContent(args: PanelArgs) {
         // containers container
         this._containerContent = new Container({
             class: CLASS_PANEL_CONTENT,

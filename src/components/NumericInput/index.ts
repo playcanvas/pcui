@@ -1,5 +1,5 @@
 import Element from '../Element/index';
-import TextInput from '../TextInput';
+import TextInput, { TextInputArgs } from '../TextInput';
 import * as pcuiClass from '../../class';
 
 const CLASS_NUMERIC_INPUT = 'pcui-numeric-input';
@@ -9,44 +9,42 @@ const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CON
 
 const REGEX_COMMA = /,/g;
 
-namespace NumericInput {
-    export interface Args extends TextInput.Args {
-        /**
-         * Sets the minimum value this field can take.
-         */
-        min?: number,
-        /**
-         * Sets the maximum value this field can take.
-         */
-        max?: number,
-        /**
-         * Sets the maximum value this field can take.
-         */
-        precision?: number,
-        /**
-         * Sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
-         */
-        step?: number,
-        /**
-         * Sets the amount that the value will be increased or decreased when holding shift using the arrow keys and the slider input. Defaults to {@link NumericInput#step} * 0.1.
-         */
-        stepPrecision?: number,
-        /**
-         * Hide the input mouse drag slider.
-         */
-        hideSlider?: boolean,
-        /**
-         * Sets whether the value can be null. If not then it will be 0 instead of null.
-         */
-        allowNull?: boolean
-    }
+export interface NumericInputArgs extends TextInputArgs {
+    /**
+     * Sets the minimum value this field can take.
+     */
+    min?: number,
+    /**
+     * Sets the maximum value this field can take.
+     */
+    max?: number,
+    /**
+     * Sets the maximum value this field can take.
+     */
+    precision?: number,
+    /**
+     * Sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
+     */
+    step?: number,
+    /**
+     * Sets the amount that the value will be increased or decreased when holding shift using the arrow keys and the slider input. Defaults to {@link NumericInput#step} * 0.1.
+     */
+    stepPrecision?: number,
+    /**
+     * Hide the input mouse drag slider.
+     */
+    hideSlider?: boolean,
+    /**
+     * Sets whether the value can be null. If not then it will be 0 instead of null.
+     */
+    allowNull?: boolean
 }
 
 /**
  * The NumericInput represents an input element that holds numbers.
  */
 class NumericInput extends TextInput {
-    static readonly defaultArgs: NumericInput.Args = {
+    static readonly defaultArgs: NumericInputArgs = {
         ...TextInput.defaultArgs,
         precision: 7,
         min: null,
@@ -87,7 +85,7 @@ class NumericInput extends TextInput {
 
     protected _sliderMovement: number;
 
-    constructor(args: NumericInput.Args = NumericInput.defaultArgs) {
+    constructor(args: NumericInputArgs = NumericInput.defaultArgs) {
         args = { ...NumericInput.defaultArgs, ...args };
         // make copy of args
         args = Object.assign({}, args);

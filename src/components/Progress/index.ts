@@ -1,23 +1,21 @@
 import Element from '../Element/index';
-import Container from '../Container';
+import Container, { ContainerArgs } from '../Container';
 
 const CLASS_ROOT = 'pcui-progress';
 const CLASS_INNER = CLASS_ROOT + '-inner';
 
-namespace Progress {
-    export interface Args extends Container.Args {
-        /**
-         * Gets / sets the value of the progress bar (between 0 and 100).
-         */
-        value?: number
-    }
+export interface ProgressArgs extends ContainerArgs {
+    /**
+     * Gets / sets the value of the progress bar (between 0 and 100).
+     */
+    value?: number
 }
 
 /**
  * Represents a bar that can highlight progress of an activity.
  */
 class Progress extends Container {
-    static readonly defaultArgs: Progress.Args = {
+    static readonly defaultArgs: ProgressArgs = {
         ...Container.defaultArgs
     };
 
@@ -25,7 +23,7 @@ class Progress extends Container {
 
     protected _value: number;
 
-    constructor(args: Progress.Args = Progress.defaultArgs) {
+    constructor(args: ProgressArgs = Progress.defaultArgs) {
         args = { ...Progress.defaultArgs, ...args };
         super(args);
         this.class.add(CLASS_ROOT);

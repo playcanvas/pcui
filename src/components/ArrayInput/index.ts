@@ -1,6 +1,6 @@
 import * as utils from '../../helpers/utils';
 
-import Element from '../Element';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
 import Container from '../Container';
 import Panel from '../Panel';
 import NumericInput from '../NumericInput';
@@ -13,36 +13,34 @@ const CLASS_ARRAY_CONTAINER = CLASS_ARRAY_INPUT + '-items';
 const CLASS_ARRAY_ELEMENT = CLASS_ARRAY_INPUT + '-item';
 const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
 
-namespace ArrayInput {
-    export interface Args extends Element.Args, Element.IBindableArgs {
-        /**
-         * The type of values that the array can hold.
-         */
-        type?: string;
-        /**
-         * Arguments for each array Element.
-         */
-        elementArgs?: Array<any>;
-        /**
-         * If true then editing the number of elements that the array has will not be allowed.
-         */
-        fixedSize?: boolean;
-        /**
-         * If true then the array will be rendered using panels.
-         */
-        usePanels?: boolean;
-        /**
-         * Used to specify the default values for each element in the array. Can be left null.
-         */
-        getDefaultFn?: () => any;
-    }
+export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
+    /**
+     * The type of values that the array can hold.
+     */
+    type?: string;
+    /**
+     * Arguments for each array Element.
+     */
+    elementArgs?: Array<any>;
+    /**
+     * If true then editing the number of elements that the array has will not be allowed.
+     */
+    fixedSize?: boolean;
+    /**
+     * If true then the array will be rendered using panels.
+     */
+    usePanels?: boolean;
+    /**
+     * Used to specify the default values for each element in the array. Can be left null.
+     */
+    getDefaultFn?: () => any;
 }
 
 /**
  * Element that allows editing an array of values.
  */
-class ArrayInput extends Element implements Element.IFocusable, Element.IBindable {
-    static readonly defaultArgs: ArrayInput.Args = {
+class ArrayInput extends Element implements IFocusable, IBindable {
+    static readonly defaultArgs: ArrayInputArgs = {
         ...Element.defaultArgs,
         getDefaultFn: null,
         usePanels: false
@@ -106,7 +104,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
 
     protected _renderChanges: boolean;
 
-    constructor(args: ArrayInput.Args = ArrayInput.defaultArgs) {
+    constructor(args: ArrayInputArgs = ArrayInput.defaultArgs) {
         args = { ...ArrayInput.defaultArgs, ...args };
 
         // remove binding because we want to set it later

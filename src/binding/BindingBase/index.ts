@@ -1,34 +1,32 @@
-import Element from '../../components/Element/index';
+import { IBindable } from '../../components/Element/index';
 import { Events, History, Observer } from '@playcanvas/observer';
 
-namespace BindingBase {
-    export interface Args {
-        /**
-         * The IBindable element.
-         */
-        element?: Element.IBindable,
-        /**
-         * The history object which will be used to record undo / redo actions.
-         * If none is provided then no history will be recorded.
-         */
-        history?: History,
-        /**
-         * A prefix that will be used for the name of every history action.
-         */
-        historyPrefix?: string,
-        /**
-         * A postfix that will be used for the name of every history action.
-         */
-        historyPostfix?: string,
-        /**
-         * The name of each history action.
-         */
-        historyName?: string,
-        /**
-         * Whether to combine history actions.
-         */
-        historyCombine?: boolean
-    }
+export interface BindingBaseArgs {
+    /**
+     * The IBindable element.
+     */
+    element?: IBindable,
+    /**
+     * The history object which will be used to record undo / redo actions.
+     * If none is provided then no history will be recorded.
+     */
+    history?: History,
+    /**
+     * A prefix that will be used for the name of every history action.
+     */
+    historyPrefix?: string,
+    /**
+     * A postfix that will be used for the name of every history action.
+     */
+    historyPostfix?: string,
+    /**
+     * The name of each history action.
+     */
+    historyName?: string,
+    /**
+     * Whether to combine history actions.
+     */
+    historyCombine?: boolean
 }
 
 /**
@@ -41,7 +39,7 @@ class BindingBase extends Events {
 
     protected _applyingChange: boolean;
 
-    protected _element?: Element.IBindable;
+    protected _element?: IBindable;
 
     protected _history?: History;
 
@@ -60,7 +58,7 @@ class BindingBase extends Events {
      *
      * @param args
      */
-    constructor(args: BindingBase.Args) {
+    constructor(args: BindingBaseArgs) {
         super();
 
         // the observers we are binding to
@@ -175,11 +173,11 @@ class BindingBase extends Events {
     /**
      * The element
      */
-    set element(value: Element.IBindable | undefined) {
+    set element(value: IBindable | undefined) {
         this._element = value;
     }
 
-    get element(): Element.IBindable | undefined {
+    get element(): IBindable | undefined {
         return this._element;
     }
 

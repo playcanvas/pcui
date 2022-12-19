@@ -1,24 +1,22 @@
 import Element from '../Element/index';
-import Container from '../Container';
+import Container, { ContainerArgs } from '../Container';
 import Label from '../Label';
 
 const CLASS_ROOT = 'pcui-code';
 const CLASS_INNER = CLASS_ROOT + '-inner';
 
-namespace Code {
-    export interface Args extends Container.Args {
-        /**
-         * Sets the text to display in the code block.
-         */
-        text?: string
-    }
+export interface CodeArgs extends ContainerArgs {
+    /**
+     * Sets the text to display in the code block.
+     */
+    text?: string
 }
 
 /**
  * Represents a code block.
  */
 class Code extends Container {
-    static readonly defaultArgs: Code.Args = {
+    static readonly defaultArgs: CodeArgs = {
         ...Container.defaultArgs
     };
 
@@ -26,7 +24,7 @@ class Code extends Container {
 
     protected _text: string;
 
-    constructor(args: Code.Args = Code.defaultArgs) {
+    constructor(args: CodeArgs = Code.defaultArgs) {
         args = { ...Code.defaultArgs, ...args };
         super(args);
         this.class.add(CLASS_ROOT);

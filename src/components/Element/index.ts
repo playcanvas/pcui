@@ -26,178 +26,176 @@ const SIMPLE_CSS_PROPERTIES = [
 // Stores Element types by name and default arguments
 const ELEMENT_REGISTRY: any = {};
 
-namespace Element {
-    export interface IBindable {
-        /**
-         * Gets / sets the value of the Element.
-         */
-        set value(values: any),
-        get value(): any,
-        /**
-         * Gets / sets multiple values to the Element. It is up to the Element to determine how to display them.
-         */
-        set values(values: Array<any>),
-        get values(): Array<any>,
-        /**
-         * Gets / sets whether the input should flash on changes.
-         */
-        set renderChanges(value: boolean),
-        get renderChanges(): boolean,
-    }
+export interface IBindable {
+    /**
+     * Gets / sets the value of the Element.
+     */
+    set value(values: any),
+    get value(): any,
+    /**
+     * Gets / sets multiple values to the Element. It is up to the Element to determine how to display them.
+     */
+    set values(values: Array<any>),
+    get values(): Array<any>,
+    /**
+     * Gets / sets whether the input should flash on changes.
+     */
+    set renderChanges(value: boolean),
+    get renderChanges(): boolean,
+}
 
-    export interface IBindableArgs {
-        /**
-         * Sets the value of the Element.
-         */
-        value?: any,
-        /**
-         * Sets multiple values to the Element. It is up to the Element to determine how to display them.
-         */
-        values?: Array<any>,
-        /**
-         * If true each input will flash on changes.
-         */
-        renderChanges?: boolean
-    }
+export interface IBindableArgs {
+    /**
+     * Sets the value of the Element.
+     */
+    value?: any,
+    /**
+     * Sets multiple values to the Element. It is up to the Element to determine how to display them.
+     */
+    values?: Array<any>,
+    /**
+     * If true each input will flash on changes.
+     */
+    renderChanges?: boolean
+}
 
-    export interface IPlaceholder {
-        /**
-         * Gets / sets the placeholder text of the input.
-         */
-        set placeholder(value: string),
-        get placeholder(): string
-    }
+export interface IPlaceholder {
+    /**
+     * Gets / sets the placeholder text of the input.
+     */
+    set placeholder(value: string),
+    get placeholder(): string
+}
 
-    export interface IPlaceholderArgs {
-        /**
-         * Sets the placeholder label that appears on the right of the input.
-         */
-        placeholder?: string,
-    }
+export interface IPlaceholderArgs {
+    /**
+     * Sets the placeholder label that appears on the right of the input.
+     */
+    placeholder?: string,
+}
 
-    export interface IFocusable {
-        /**
-         * Focus on the element. If the input contains text and select is provided, the text will be selected on focus.
-         */
-        focus(select?: boolean): void
+export interface IFocusable {
+    /**
+     * Focus on the element. If the input contains text and select is provided, the text will be selected on focus.
+     */
+    focus(select?: boolean): void
 
-        /**
-         * Unfocus the element
-         */
-        blur(): void
-    }
+    /**
+     * Unfocus the element
+     */
+    blur(): void
+}
 
-    export interface IParentArgs {
-        /**
-         * The children of the current component.
-         */
-        children?: React.ReactNode
-    }
+export interface IParentArgs {
+    /**
+     * The children of the current component.
+     */
+    children?: React.ReactNode
+}
 
-    export interface IFlexArgs {
-        /**
-         * Sets whether the Element supports flex layout.
-         */
-        flex?: boolean,
-        /**
-         * Sets whether the Element supports the flex shrink property.
-         */
-        flexShrink?: number,
-        /**
-         * Sets whether the Element supports the flex grow property.
-         */
-        flexGrow?: number,
-        /**
-         * Sets the Elements flex direction property.
-         */
-        flexDirection?: string,
-    }
+export interface IFlexArgs {
+    /**
+     * Sets whether the Element supports flex layout.
+     */
+    flex?: boolean,
+    /**
+     * Sets whether the Element supports the flex shrink property.
+     */
+    flexShrink?: number,
+    /**
+     * Sets whether the Element supports the flex grow property.
+     */
+    flexGrow?: number,
+    /**
+     * Sets the Elements flex direction property.
+     */
+    flexDirection?: string,
+}
 
-    export interface Args {
-        /**
-         * The HTMLElement to create this Element with. If not provided this Element will create one.
-         */
-        dom?: HTMLElement | string;
-        /**
-         * A binding to use with this Element.
-         */
-        binding?: BindingBase;
-        /**
-         * If provided and the element is clickable, this function will be called each time the element is clicked.
-         */
-        onClick?: () => void,
-        /**
-         * If provided and the element is changeable, this function will be called each time the element value is changed.
-         */
-        onChange?: (value: any) => void,
-        /**
-         * If provided and the element is removable, this function will be called each time the element is removed.
-         */
-        onRemove?: () => void,
-        /**
-         * Sets the parent Element.
-         */
-        parent?: any,
-        /**
-         * Links the observer attribute at the path location in the given observer to this Element.
-         */
-        link?: { observer: any, path: string },
-        /**
-         * The id attribute of this Element's HTMLElement.
-         */
-        id?: string,
-        /**
-         * The class attribute of this Element's HTMLElement.
-         */
-        class?: string | Array<string>,
-        /**
-         * Sets whether this Element is at the root of the hierarchy.
-         */
-        isRoot?: boolean,
-        /**
-         * Sets whether it is possible to interact with this Element and its children.
-         */
-        enabled?: boolean,
-        /**
-         * Sets whether this Element is hidden.
-         */
-        hidden?: boolean,
-        /**
-         * If true, this Element will ignore its parent's enabled value when determining whether this Element is enabled.
-         */
-        ignoreParent?: boolean,
-        /**
-         * Sets the initial width of the element.
-         */
-        width?: number | null,
-        /**
-         * Sets the initial height of the element.
-         */
-        height?: number | null,
-        /**
-         * Gets / sets the tabIndex of the Element.
-         */
-        tabIndex?: number,
-        /**
-         * Gets / sets whether the Element is in an error state.
-         */
-        error?: boolean,
-        /**
-         * Sets an initial value for Element.dom.style.
-         */
-        style?: string,
-        /**
-         * Whether this Element is read only or not.
-         */
-        readOnly?: boolean
-    }
+export interface ElementArgs {
+    /**
+     * The HTMLElement to create this Element with. If not provided this Element will create one.
+     */
+    dom?: HTMLElement | string;
+    /**
+     * A binding to use with this Element.
+     */
+    binding?: BindingBase;
+    /**
+     * If provided and the element is clickable, this function will be called each time the element is clicked.
+     */
+    onClick?: () => void,
+    /**
+     * If provided and the element is changeable, this function will be called each time the element value is changed.
+     */
+    onChange?: (value: any) => void,
+    /**
+     * If provided and the element is removable, this function will be called each time the element is removed.
+     */
+    onRemove?: () => void,
+    /**
+     * Sets the parent Element.
+     */
+    parent?: any,
+    /**
+     * Links the observer attribute at the path location in the given observer to this Element.
+     */
+    link?: { observer: any, path: string },
+    /**
+     * The id attribute of this Element's HTMLElement.
+     */
+    id?: string,
+    /**
+     * The class attribute of this Element's HTMLElement.
+     */
+    class?: string | Array<string>,
+    /**
+     * Sets whether this Element is at the root of the hierarchy.
+     */
+    isRoot?: boolean,
+    /**
+     * Sets whether it is possible to interact with this Element and its children.
+     */
+    enabled?: boolean,
+    /**
+     * Sets whether this Element is hidden.
+     */
+    hidden?: boolean,
+    /**
+     * If true, this Element will ignore its parent's enabled value when determining whether this Element is enabled.
+     */
+    ignoreParent?: boolean,
+    /**
+     * Sets the initial width of the element.
+     */
+    width?: number | null,
+    /**
+     * Sets the initial height of the element.
+     */
+    height?: number | null,
+    /**
+     * Gets / sets the tabIndex of the Element.
+     */
+    tabIndex?: number,
+    /**
+     * Gets / sets whether the Element is in an error state.
+     */
+    error?: boolean,
+    /**
+     * Sets an initial value for Element.dom.style.
+     */
+    style?: string,
+    /**
+     * Whether this Element is read only or not.
+     */
+    readOnly?: boolean
 }
 
 /**
  * The base class for all UI elements.
  */
 class Element extends Events {
-    public static defaultArgs: Element.Args = {
+    public static defaultArgs: ElementArgs = {
         hidden: false,
         readOnly: false,
         ignoreParent: false
@@ -330,7 +328,7 @@ class Element extends Events {
 
     protected _domContent: any;
 
-    constructor(dom: HTMLElement | string, args: Element.Args = Element.defaultArgs) {
+    constructor(dom: HTMLElement | string, args: ElementArgs = Element.defaultArgs) {
         args = { ...Element.defaultArgs, ...args };
         super();
 
@@ -665,7 +663,7 @@ class Element extends Events {
      * @param type - The type of the Element (registered by pcui.Element#register).
      * @param args - Arguments for the Element.
      */
-    static create(type: string, args: Element.Args): any {
+    static create(type: string, args: ElementArgs): any {
         const entry = ELEMENT_REGISTRY[type];
         if (!entry) {
             console.error('Invalid type passed to pcui.Element#create', type);

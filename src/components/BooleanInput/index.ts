@@ -1,4 +1,4 @@
-import Element from '../Element/index';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element/index';
 import Input from '../Input/index';
 import * as pcuiClass from '../../class';
 
@@ -6,20 +6,18 @@ const CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
 const CLASS_BOOLEAN_INPUT_TICKED = CLASS_BOOLEAN_INPUT + '-ticked';
 const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
 
-namespace BooleanInput {
-    export interface Args extends Element.Args, Element.IBindableArgs {
-        /**
-         * The type of checkbox. Currently can be null or 'toggle'.
-         */
-        type?: string
-    }
+export interface BooleanInputArgs extends ElementArgs, IBindableArgs {
+    /**
+     * The type of checkbox. Currently can be null or 'toggle'.
+     */
+    type?: string
 }
 
 /**
  * A checkbox element.
  */
-class BooleanInput extends Input implements Element.IBindable, Element.IFocusable {
-    static readonly defaultArgs: BooleanInput.Args = {
+class BooleanInput extends Input implements IBindable, IFocusable {
+    static readonly defaultArgs: BooleanInputArgs = {
         ...Element.defaultArgs,
         renderChanges: false,
         value: false,
@@ -35,7 +33,7 @@ class BooleanInput extends Input implements Element.IBindable, Element.IFocusabl
 
     protected _value: any;
 
-    constructor(args: BooleanInput.Args = BooleanInput.defaultArgs) {
+    constructor(args: BooleanInputArgs = BooleanInput.defaultArgs) {
         args = { ...BooleanInput.defaultArgs, ...args };
         super(args.dom, args);
 

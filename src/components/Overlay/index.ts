@@ -1,4 +1,4 @@
-import Element from '../Element/index';
+import Element, { ElementArgs } from '../Element/index';
 import Container from '../Container';
 
 const CLASS_OVERLAY = 'pcui-overlay';
@@ -7,24 +7,22 @@ const CLASS_OVERLAY_CLICKABLE = CLASS_OVERLAY + '-clickable';
 const CLASS_OVERLAY_TRANSPARENT = CLASS_OVERLAY + '-transparent';
 const CLASS_OVERLAY_CONTENT = CLASS_OVERLAY + '-content';
 
-namespace Overlay {
-    export interface Args extends Element.Args {
-        /**
-         * Whether the overlay can be hidden by clicking on it.
-         */
-        clickable?: boolean,
-        /**
-         * Whether the overlay is transparent or not.
-         */
-        transparent?: boolean,
-    }
+export interface OverlayArgs extends ElementArgs {
+    /**
+     * Whether the overlay can be hidden by clicking on it.
+     */
+    clickable?: boolean,
+    /**
+     * Whether the overlay is transparent or not.
+     */
+    transparent?: boolean,
 }
 
 /**
  * An overlay element.
  */
 class Overlay extends Container {
-    static readonly defaultArgs: Overlay.Args = {
+    static readonly defaultArgs: OverlayArgs = {
         ...Element.defaultArgs
     };
 
@@ -32,7 +30,7 @@ class Overlay extends Container {
 
     protected _domEventMouseDown: any;
 
-    constructor(args: Overlay.Args = Overlay.defaultArgs) {
+    constructor(args: OverlayArgs = Overlay.defaultArgs) {
         args = { ...Overlay.defaultArgs, ...args };
         super(args);
 

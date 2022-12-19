@@ -1,4 +1,4 @@
-import Element from '../Element/index';
+import Element, { ElementArgs } from '../Element/index';
 import Overlay from '../Overlay/index';
 import NumericInput from '../NumericInput/index';
 import TextInput from '../TextInput/index';
@@ -8,25 +8,23 @@ const CLASS_COLOR_INPUT = 'pcui-color-input';
 const CLASS_NOT_FLEXIBLE = 'pcui-not-flexible';
 const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
 
-namespace ColorPicker {
-    export interface Args extends Element.Args {
-        renderChanges?: boolean;
-        /**
-         * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
-         */
-        value?: Array<number>;
-        /**
-         * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
-         */
-        channels?: number;
-    }
+export interface ColorPickerArgs extends ElementArgs {
+    renderChanges?: boolean;
+    /**
+     * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
+     */
+    value?: Array<number>;
+    /**
+     * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
+     */
+    channels?: number;
 }
 
 /**
  * Represents a color picker
  */
 class ColorPicker extends Element {
-    static readonly defaultArgs: ColorPicker.Args = {
+    static readonly defaultArgs: ColorPickerArgs = {
         ...Element.defaultArgs,
         channels: 3,
         value: [0, 0, 255, 1],
@@ -108,7 +106,7 @@ class ColorPicker extends Element {
 
     renderChanges: any;
 
-    constructor(args: ColorPicker.Args = ColorPicker.defaultArgs) {
+    constructor(args: ColorPickerArgs = ColorPicker.defaultArgs) {
         args = { ...ColorPicker.defaultArgs, ...args };
         super(args.dom, args);
 

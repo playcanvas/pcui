@@ -5,8 +5,8 @@ import BaseComponent from '../Element/component';
 /**
  * Represents a vertical division between two elements
  */
-class Component extends BaseComponent <BaseElement.Args, any> {
-    constructor(props: BaseElement.Args) {
+class Component extends BaseComponent <BaseElementArgs, any> {
+    constructor(props: BaseElementArgs) {
         super(props);
         this.elementClass = Element;
     }

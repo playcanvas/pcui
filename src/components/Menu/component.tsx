@@ -7,8 +7,8 @@ import BaseComponent from '../Element/component';
  * to show context menus and nested menus. Note that a Menu must be appended to the root Element
  * and then positioned accordingly.
  */
-class Menu extends BaseComponent <Element.Args, any> {
-    constructor(props: Element.Args) {
+class Menu extends BaseComponent <ElementArgs, any> {
+    constructor(props: ElementArgs) {
         super(props);
         this.elementClass = Element;
     }

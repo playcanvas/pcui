@@ -1,36 +1,34 @@
 import Element from '../Element/index';
-import Container from '../Container';
+import Container, { ContainerArgs } from '../Container';
 import Label from '../Label';
 
 const CLASS_LABEL_GROUP = 'pcui-label-group';
 const CLASS_LABEL_TOP = CLASS_LABEL_GROUP + '-align-top';
 
-namespace LabelGroup {
-    export interface Args extends Container.Args {
-        /**
-         * The label text.
-         */
-        text?: string;
-        /**
-         * The element to be wrapped by the label group.
-         */
-        field?: Element;
-        /**
-         * Whether to align the label at the top of the group. Defaults to false which aligns it at the center.
-         */
-        labelAlignTop?: boolean;
-        /**
-         * Add a native tooltip to the label.
-         */
-        nativeTooltip?: boolean;
-    }
+export interface LabelGroupArgs extends ContainerArgs {
+    /**
+     * The label text.
+     */
+    text?: string;
+    /**
+     * The element to be wrapped by the label group.
+     */
+    field?: Element;
+    /**
+     * Whether to align the label at the top of the group. Defaults to false which aligns it at the center.
+     */
+    labelAlignTop?: boolean;
+    /**
+     * Add a native tooltip to the label.
+     */
+    nativeTooltip?: boolean;
 }
 
 /**
  * Represents a group of a Label and a Element. Useful for rows of labeled fields.
  */
 class LabelGroup extends Container {
-    static readonly defaultArgs: LabelGroup.Args = {
+    static readonly defaultArgs: LabelGroupArgs = {
         ...Container.defaultArgs,
         text: 'Label',
         field: null,
@@ -41,7 +39,7 @@ class LabelGroup extends Container {
 
     protected _field: Element;
 
-    constructor(args: LabelGroup.Args = LabelGroup.defaultArgs) {
+    constructor(args: LabelGroupArgs = LabelGroup.defaultArgs) {
         args = { ...LabelGroup.defaultArgs, ...args };
         super(args);
 

@@ -5,8 +5,8 @@ import BaseComponent from '../Element/component';
 /**
  * Represents a color picker
  */
-class ColorPicker extends BaseComponent <Element.Args, any> {
-    constructor(props: Element.Args) {
+class ColorPicker extends BaseComponent <ElementArgs, any> {
+    constructor(props: ElementArgs) {
         super(props);
         this.elementClass = Element;
     }

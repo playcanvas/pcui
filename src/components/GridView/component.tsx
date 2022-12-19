@@ -7,8 +7,8 @@ import BaseComponent from '../Element/component';
  * Represents a container that shows a flexible wrappable
  * list of items that looks like a grid. Contains GridViewItem's.
  */
-class GridView extends BaseComponent <GridViewElement.Args, any> {
-    constructor(props: GridViewElement.Args) {
+class GridView extends BaseComponent <GridViewElementArgs, any> {
+    constructor(props: GridViewElementArgs) {
         super(props);
         // @ts-ignore
         this.element = new GridViewElement({ ...props });

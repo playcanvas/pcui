@@ -1,28 +1,26 @@
-import Container from '../Container';
+import Container, { ContainerArgs } from '../Container';
 import GridViewItem from '../GridViewItem';
 
 const CLASS_ROOT = 'pcui-gridview';
 const CLASS_VERTICAL = CLASS_ROOT + '-vertical';
 
-namespace GridView {
-    export interface Args extends Container.Args {
-        /**
-         * If true the gridview layout will be vertical.
-         */
-        vertical?: boolean;
-        /**
-         * If true, the layout will allow for multiple options to be selected.
-         */
-        multiSelect?: boolean;
-        /**
-         * If true and multiSelect is set to false, the layout will allow options to be deselected.
-         */
-        allowDeselect?: boolean;
-        /**
-         * A filter function to filter gridview items with signature (GridViewItem) => boolean.
-         */
-        filterFn?: (item: GridViewItem) => boolean;
-    }
+export interface GridViewArgs extends ContainerArgs {
+    /**
+     * If true the gridview layout will be vertical.
+     */
+    vertical?: boolean;
+    /**
+     * If true, the layout will allow for multiple options to be selected.
+     */
+    multiSelect?: boolean;
+    /**
+     * If true and multiSelect is set to false, the layout will allow options to be deselected.
+     */
+    allowDeselect?: boolean;
+    /**
+     * A filter function to filter gridview items with signature (GridViewItem) => boolean.
+     */
+    filterFn?: (item: GridViewItem) => boolean;
 }
 
 /**
@@ -30,7 +28,7 @@ namespace GridView {
  * list of items that looks like a grid. Contains GridViewItems.
  */
 class GridView extends Container {
-    static readonly defaultArgs: GridView.Args = {
+    static readonly defaultArgs: GridViewArgs = {
         ...Container.defaultArgs,
         multiSelect: true,
         allowDeselect: true
@@ -52,7 +50,7 @@ class GridView extends Container {
 
     protected _clickFn: any;
 
-    constructor(args: GridView.Args = GridView.defaultArgs) {
+    constructor(args: GridViewArgs = GridView.defaultArgs) {
         args = { ...GridView.defaultArgs, ...args };
         super(args);
 

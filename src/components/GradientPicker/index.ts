@@ -1,4 +1,4 @@
-import Element from '../Element/index';
+import Element, { ElementArgs } from '../Element/index';
 import Overlay from '../Overlay';
 import Button from '../Button';
 import SelectInput from '../SelectInput';
@@ -20,25 +20,23 @@ const REGEX_KEYS = /keys/;
 const REGEX_TYPE = /type/;
 const CLASS_GRADIENT = 'pcui-gradient';
 
-namespace GradientPicker {
-    export interface Args extends Element.Args {
-        renderChanges?: boolean;
-        /**
-         * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
-         */
-        value?: Array<number>;
-        /**
-         * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
-         */
-        channels?: number;
-    }
+export interface GradientPickerArgs extends ElementArgs {
+    renderChanges?: boolean;
+    /**
+     * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
+     */
+    value?: Array<number>;
+    /**
+     * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
+     */
+    channels?: number;
 }
 
 /**
  * Represents a gradient picker
  */
 class GradientPicker extends Element {
-    static readonly defaultArgs: GradientPicker.Args = {
+    static readonly defaultArgs: GradientPickerArgs = {
         ...Element.defaultArgs,
         renderChanges: true,
         dom: 'div'
@@ -125,7 +123,7 @@ class GradientPicker extends Element {
      *
      * @param {object} args - The arguments. Extends the Element arguments. Any settable property can also be set through the constructor.
      */
-    constructor(args: GradientPicker.Args = GradientPicker.defaultArgs) {
+    constructor(args: GradientPickerArgs = GradientPicker.defaultArgs) {
         args = { ...GradientPicker.defaultArgs, ...args };
         super(args.dom, args);
 

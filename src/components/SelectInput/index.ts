@@ -1,4 +1,4 @@
-import Element from '../Element/index';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholderArgs } from '../Element/index';
 import Container from '../Container';
 import TextInput from '../TextInput';
 import Button from '../Button';
@@ -27,61 +27,59 @@ const CLASS_OPEN = 'pcui-open';
 
 const DEFAULT_BOTTOM_OFFSET = 25;
 
-namespace SelectInput {
-    export interface Args extends Element.Args, Element.IBindableArgs, Element.IPlaceholderArgs {
-        /**
-         * Used to map the options
-         */
-        optionsFn?: any;
-        /**
-         * default value for the input
-         */
-        defaultValue?: any;
-        /**
-         * If true then the input value becomes an array allowing the selection of multiple options. Defaults to false.
-         */
-        multiSelect?: boolean;
-        /**
-         * The dropdown options of the input. Contains an array of objects with the following format \{v: Any, t: String\} where v is the value and t is the text of the option.
-         */
-        options?: Array<{ v: any, t: string }>;
-        /**
-         * An array of values against which new values are checked before they are created. If a value is in the array it will not be created.
-         */
-        invalidOptions?: Array<any>;
-        /**
-         * If true then null is a valid input value. Defaults to false.
-         */
-        allowNull?: boolean;
-        /**
-         * If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
-         */
-        allowInput?: boolean;
-        /**
-         * If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.
-         */
-        allowCreate?: boolean;
-        /**
-         * A function to be executed when the user selects to create a new value. The function takes the new value as a parameter.
-         */
-        createFn?: (value: string) => void;
-        /**
-         * The placeholder text to show when creating a new value. Used when allowInput and allowCreate are both true.
-         */
-        createLabelText?: string;
-        /**
-         * The type of each value. Can be one of 'string', 'number' or 'boolean'.
-         */
-        type?: 'string' | 'number' | 'boolean';
-    }
+export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
+    /**
+     * Used to map the options
+     */
+    optionsFn?: any;
+    /**
+     * default value for the input
+     */
+    defaultValue?: any;
+    /**
+     * If true then the input value becomes an array allowing the selection of multiple options. Defaults to false.
+     */
+    multiSelect?: boolean;
+    /**
+     * The dropdown options of the input. Contains an array of objects with the following format \{v: Any, t: String\} where v is the value and t is the text of the option.
+     */
+    options?: Array<{ v: any, t: string }>;
+    /**
+     * An array of values against which new values are checked before they are created. If a value is in the array it will not be created.
+     */
+    invalidOptions?: Array<any>;
+    /**
+     * If true then null is a valid input value. Defaults to false.
+     */
+    allowNull?: boolean;
+    /**
+     * If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
+     */
+    allowInput?: boolean;
+    /**
+     * If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.
+     */
+    allowCreate?: boolean;
+    /**
+     * A function to be executed when the user selects to create a new value. The function takes the new value as a parameter.
+     */
+    createFn?: (value: string) => void;
+    /**
+     * The placeholder text to show when creating a new value. Used when allowInput and allowCreate are both true.
+     */
+    createLabelText?: string;
+    /**
+     * The type of each value. Can be one of 'string', 'number' or 'boolean'.
+     */
+    type?: 'string' | 'number' | 'boolean';
 }
 
 
 /**
  * An input that allows selecting from a dropdown or entering tags.
  */
-class SelectInput extends Element implements Element.IBindable, Element.IFocusable {
-    static readonly defaultArgs: SelectInput.Args = {
+class SelectInput extends Element implements IBindable, IFocusable {
+    static readonly defaultArgs: SelectInputArgs = {
         ...Element.defaultArgs,
         optionsFn: null,
         defaultValue: null,
@@ -162,7 +160,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
 
     protected _renderChanges: boolean;
 
-    constructor(args: SelectInput.Args = SelectInput.defaultArgs) {
+    constructor(args: SelectInputArgs = SelectInput.defaultArgs) {
         args = { ...SelectInput.defaultArgs, ...args };
         // main container
         const container = new Container({ dom: args.dom });

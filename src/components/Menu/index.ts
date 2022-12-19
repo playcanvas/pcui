@@ -1,17 +1,15 @@
-import Container from '../Container';
-import Element from '../Element';
+import Container, { ContainerArgs } from '../Container';
+import { IFocusable } from '../Element';
 import MenuItem from '../MenuItem';
 
 const CLASS_MENU = 'pcui-menu';
 const CLASS_MENU_ITEMS = CLASS_MENU + '-items';
 
-namespace Menu {
-    export interface Args extends Container.Args {
-        /**
-         * An optional array of MenuItem data. If these are passed then new MenuItems will be created and appended to the menu.
-         */
-        items: any;
-    }
+export interface MenuArgs extends ContainerArgs {
+    /**
+     * An optional array of MenuItem data. If these are passed then new MenuItems will be created and appended to the menu.
+     */
+    items: any;
 }
 
 /**
@@ -19,8 +17,8 @@ namespace Menu {
  * to show context menus and nested menus. Note that a Menu must be appended to the root Element
  * and then positioned accordingly.
  */
-class Menu extends Container implements Element.IFocusable {
-    static readonly defaultArgs: Menu.Args = {
+class Menu extends Container implements IFocusable {
+    static readonly defaultArgs: MenuArgs = {
         ...Container.defaultArgs,
         hidden: true,
         tabIndex: 1,
@@ -37,7 +35,7 @@ class Menu extends Container implements Element.IFocusable {
 
     protected _domEvtBlur: any;
 
-    constructor(args: Menu.Args = Menu.defaultArgs) {
+    constructor(args: MenuArgs = Menu.defaultArgs) {
         args = { ...Menu.defaultArgs, ...args };
         super(args);
 

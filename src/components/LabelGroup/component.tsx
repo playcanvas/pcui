@@ -4,8 +4,8 @@ import BaseComponent from '../Element/component';
 /**
  * Represents a group of a Label and a Element. Useful for rows of labeled fields.
  */
-class LabelGroup extends BaseComponent <Element.Args, any> {
-    constructor(props: Element.Args) {
+class LabelGroup extends BaseComponent <ElementArgs, any> {
+    constructor(props: ElementArgs) {
         super(props);
         // @ts-ignore
         this.elementClass = Element;

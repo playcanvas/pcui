@@ -5,7 +5,7 @@ import Element from './index';
  * The base class for all UI elements. Wraps a dom element with the PCUI interface.
  */
 
-class Component <P extends Element.Args, S> extends React.Component <P, S> {
+class Component <P extends ElementArgs, S> extends React.Component <P, S> {
     static defaultArgs = Element.defaultArgs;
 
     static ctor: any;

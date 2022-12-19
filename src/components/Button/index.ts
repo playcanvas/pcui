@@ -1,33 +1,31 @@
-import Element from '../Element/index';
+import Element, { ElementArgs } from '../Element/index';
 
 const CLASS_BUTTON = 'pcui-button';
 
-namespace Button {
-    export interface Args extends Element.Args {
-        /**
-         * If unsafe is true, text will be set on the dom's innerHTML rather than textContent.
-         */
-        unsafe?: boolean;
-        /**
-         * Sets the text of the button.
-         */
-        text?: string,
-        /**
-         * The CSS code for an icon for the button. e.g. 'E401' (notice we omit the '\\' character).
-         */
-        icon?: string,
-        /**
-         * Gets / sets the 'size' type of the button. Can be 'small'.
-         */
-        size?: 'small'
-    }
+export interface ButtonArgs extends ElementArgs {
+    /**
+     * If unsafe is true, text will be set on the dom's innerHTML rather than textContent.
+     */
+    unsafe?: boolean;
+    /**
+     * Sets the text of the button.
+     */
+    text?: string,
+    /**
+     * The CSS code for an icon for the button. e.g. 'E401' (notice we omit the '\\' character).
+     */
+    icon?: string,
+    /**
+     * Gets / sets the 'size' type of the button. Can be 'small'.
+     */
+    size?: 'small'
 }
 
 /**
  * User input with click interaction.
  */
 class Button extends Element {
-    static readonly defaultArgs: Button.Args = {
+    static readonly defaultArgs: ButtonArgs = {
         ...Element.defaultArgs,
         text: '',
         icon: '',
@@ -46,7 +44,7 @@ class Button extends Element {
 
     protected _size: string | null;
 
-    constructor(args: Button.Args = Button.defaultArgs) {
+    constructor(args: ButtonArgs = Button.defaultArgs) {
         args = { ...Button.defaultArgs, ...args };
         super(args.dom, args);
 

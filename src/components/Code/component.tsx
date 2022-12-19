@@ -4,10 +4,10 @@ import BaseComponent from '../Element/component';
 /**
  * Represents a code block.
  */
-class Component extends BaseComponent <Element.Args, any> {
-    static defaultProps: Element.Args;
+class Component extends BaseComponent <ElementArgs, any> {
+    static defaultProps: ElementArgs;
 
-    constructor(props: Element.Args) {
+    constructor(props: ElementArgs) {
         super(props);
         this.elementClass = Element;
     }

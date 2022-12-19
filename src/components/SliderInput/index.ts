@@ -1,5 +1,5 @@
-import Element from '../Element/index';
-import NumericInput from '../NumericInput';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable } from '../Element/index';
+import NumericInput, { NumericInputArgs } from '../NumericInput';
 import * as pcuiClass from '../../class';
 import * as utils from '../../helpers/utils';
 
@@ -24,49 +24,47 @@ const PROXY_FIELDS = [
 ];
 
 
-namespace SliderInput {
-    export interface Args extends Element.Args, Element.IBindableArgs, Element.IFlexArgs {
-        /**
-         * Gets / sets the minimum value that the numeric input field can take. Defaults to 0.
-         */
-        min?: number,
-        /**
-         * Gets / sets the maximum value that the numeric input field can take. Defaults to 1.
-         */
-        max?: number,
-        /**
-         * Gets / sets the minimum value that the slider field can take.
-         */
-        sliderMin?: number,
-        /**
-         * Gets / sets the maximum value that the slider field can take.
-         */
-        sliderMax?: number,
-        /**
-         * Gets / sets the maximum number of decimals a value can take. Here for backwards compatibility. Use the precision argument instead going forward.
-         */
-        pre?: number,
-        /**
-         * Gets / sets the maximum number of decimals a value can take.
-         */
-        precision?: number,
-        /**
-         * Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
-         */
-        step?: number,
-        /**
-         * Gets / sets whether the value can be null. If not then it will be 0 instead of null.
-         */
-        allowNull?: boolean
-    }
+export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
+    /**
+     * Gets / sets the minimum value that the numeric input field can take. Defaults to 0.
+     */
+    min?: number,
+    /**
+     * Gets / sets the maximum value that the numeric input field can take. Defaults to 1.
+     */
+    max?: number,
+    /**
+     * Gets / sets the minimum value that the slider field can take.
+     */
+    sliderMin?: number,
+    /**
+     * Gets / sets the maximum value that the slider field can take.
+     */
+    sliderMax?: number,
+    /**
+     * Gets / sets the maximum number of decimals a value can take. Here for backwards compatibility. Use the precision argument instead going forward.
+     */
+    pre?: number,
+    /**
+     * Gets / sets the maximum number of decimals a value can take.
+     */
+    precision?: number,
+    /**
+     * Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
+     */
+    step?: number,
+    /**
+     * Gets / sets whether the value can be null. If not then it will be 0 instead of null.
+     */
+    allowNull?: boolean
 }
 
 /**
  * The SliderInput shows a pcui.NumericInput and a slider widget next to it. It acts as a proxy
  * of the NumericInput.
  */
-class SliderInput extends Element implements Element.IBindable, Element.IFocusable {
-    static readonly defaultArgs: SliderInput.Args = {
+class SliderInput extends Element implements IBindable, IFocusable {
+    static readonly defaultArgs: SliderInputArgs = {
         ...Element.defaultArgs,
         min: 0,
         max: 1
@@ -111,9 +109,9 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
      *
      * @param args
      */
-    constructor(args: SliderInput.Args = SliderInput.defaultArgs) {
+    constructor(args: SliderInputArgs = SliderInput.defaultArgs) {
         args = { ...SliderInput.defaultArgs, ...args };
-        const inputArgs: NumericInput.Args = {};
+        const inputArgs: NumericInputArgs = {};
         PROXY_FIELDS.forEach((field) => {
             // @ts-ignore
             inputArgs[field] = args[field];

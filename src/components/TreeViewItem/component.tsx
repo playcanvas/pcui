@@ -4,12 +4,12 @@ import BaseComponent from '../Element/component';
 /**
  * Represents a Tree View Item to be added to a pcui.TreeView.
  */
-class Component extends BaseComponent <Element.Args, any> {
+class Component extends BaseComponent <ElementArgs, any> {
     onSelect: () => void;
 
     onDeselect: () => void;
 
-    constructor(props: Element.Args) {
+    constructor(props: ElementArgs) {
         super(props);
         this.elementClass = Element;
 

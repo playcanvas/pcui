@@ -7,10 +7,10 @@ import BaseComponent from '../Element/component';
  * A container that can show a TreeView like a hierarchy. The TreeView contains
  * TreeViewItems.
  */
-class Component extends BaseComponent <TreeViewElement.Args, any> {
+class Component extends BaseComponent <TreeViewElementArgs, any> {
     parentElement: any;
 
-    constructor(props: TreeViewElement.Args) {
+    constructor(props: TreeViewElementArgs) {
         super(props);
 
         this.element = new TreeViewElement({ ...props });

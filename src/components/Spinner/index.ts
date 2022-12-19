@@ -1,4 +1,4 @@
-import Element from '../Element/index';
+import Element, { ElementArgs } from '../Element/index';
 
 const CLASS_ROOT = 'pcui-spinner';
 
@@ -13,18 +13,16 @@ function createSmallThick(size: any, dom: any) {
     return spinner;
 }
 
-namespace Spinner {
-    export interface Args extends Element.Args {
+export interface SpinnerArgs extends ElementArgs {
 
-        /**
-         * Sets the pixel size of the spinner. Defaults to 12.
-         */
-        size?: string | number,
-        /**
-         * Can be 'small-thick'. Defaults to 'small-thick'.
-         */
-        type?: 'small-thick'
-    }
+    /**
+     * Sets the pixel size of the spinner. Defaults to 12.
+     */
+    size?: string | number,
+    /**
+     * Can be 'small-thick'. Defaults to 'small-thick'.
+     */
+    type?: 'small-thick'
 }
 
 /**
@@ -33,7 +31,7 @@ namespace Spinner {
 class Spinner extends Element {
     static TYPE_SMALL_THICK = 'small-thick';
 
-    static readonly defaultArgs: Spinner.Args = {
+    static readonly defaultArgs: SpinnerArgs = {
         ...Element.defaultArgs,
         type: 'small-thick'
     };
@@ -43,7 +41,7 @@ class Spinner extends Element {
      *
      * @param args
      */
-    constructor(args: Spinner.Args = Spinner.defaultArgs) {
+    constructor(args: SpinnerArgs = Spinner.defaultArgs) {
         args = { ...Spinner.defaultArgs, ...args };
         let dom = null;
 
