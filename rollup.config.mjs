@@ -32,9 +32,9 @@ const module = unstyled => ({
     output: {
         dir: `${unstyled ? 'unstyled/' : ''}dist/module`,
         entryFileNames: '[name].mjs',
-        format: 'esm'
+        format: 'esm',
+        preserveModules: true
     },
-    preserveModules: true,
     plugins: [
         sass({
             insert: !unstyled,
@@ -85,9 +85,9 @@ const react_module = unstyled => ({
         entryFileNames: '[name].mjs',
         globals: {
             'react': 'React'
-        }
+        },
+        preserveModules: true
     },
-    preserveModules: true,
     plugins: [
         sass({
             insert: !unstyled,
