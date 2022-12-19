@@ -23,7 +23,6 @@
 
         "at-rule-no-vendor-prefix": null,
         "block-no-empty": null,
-        "declaration-block-no-duplicate-properties": null,
         "declaration-colon-newline-after": null,
         "declaration-empty-line-before": null,
         "function-comma-newline-after": null,
