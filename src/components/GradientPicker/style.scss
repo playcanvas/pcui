@@ -50,8 +50,8 @@
                 min-height: 17px !important;
                 height: 17px !important;
                 top: 14px;
-                margin-top: 0px;
-                margin-bottom: 0px;
+                margin-top: 0;
+                margin-bottom: 0;
 
                 display: flex;
                 align-items: center;
@@ -107,8 +107,8 @@
                     min-height: 17px !important;
                     height: 17px !important;
                     top: 14px;
-                    margin-top: 0px;
-                    margin-bottom: 0px;
+                    margin-top: 0;
+                    margin-bottom: 0;
                     display: flex;
                     align-items: center;
                     text-align: center;
@@ -127,7 +127,7 @@
                 width: 321px;
                 height: 28px;
                 display: block;
-                padding: 8px 10px 0px 11px;
+                padding: 8px 10px 0 11px;
                 background-color: #2c393c;
 
                 .crosshair-active {
@@ -139,7 +139,7 @@
                 width: 320px;
                 height: 28px;
                 display: block;
-                padding: 0px 10px 0px 11px;
+                padding: 0 10px 0 11px;
                 background-color: #2c393c;
             }
 
@@ -254,7 +254,7 @@
                     }
 
                     > .hue-rect, > .alpha-rect {
-                        margin: 5px 10px 10px 0px;
+                        margin: 5px 10px 10px 0;
                         width: 20px;
                         height: 140px;
                         cursor: crosshair;
@@ -272,18 +272,18 @@
 
                     > .fields {
                         display: inline-block;
-                        margin: 3px 0px 0px 0px;
+                        margin: 3px 0 0 0;
                         width: 112px;
                         height: 145px;
                         vertical-align: top;
 
                         > .pcui-numeric-input {
-                            margin: 2px 0px;
+                            margin: 2px 0;
                             width: 108px;
                         }
 
                         > .pcui-text-input {
-                            margin: 2px 0px;
+                            margin: 2px 0;
                             min-height: 22px;
                             min-width: 111px;
                         }

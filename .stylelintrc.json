@@ -31,7 +31,6 @@
         "font-family-name-quotes": null,
         "function-comma-newline-after": null,
         "function-parentheses-newline-inside": null,
-        "length-zero-no-unit": null,
         "max-empty-lines": null,
         "property-no-vendor-prefix": null,
         "rule-empty-line-before": null,
