@@ -5,7 +5,6 @@ import Canvas, { CanvasArgs } from './Canvas/index';
 import Code, { CodeArgs } from './Code/index';
 import ColorPicker, { ColorPickerArgs } from './ColorPicker/index';
 import Container, { ContainerArgs } from './Container/index';
-import ContextMenu, { ContextMenuArgs } from './ContextMenu/index';
 import Divider, { DividerArgs } from './Divider/index';
 import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable, IParentArgs, IPlaceholder, IPlaceholderArgs } from './Element/index';
 import GradientPicker, { GradientPickerArgs } from './GradientPicker/index';
@@ -46,8 +45,6 @@ export {
     ColorPickerArgs,
     Container,
     ContainerArgs,
-    ContextMenu,
-    ContextMenuArgs,
     Divider,
     DividerArgs,
     Element,
