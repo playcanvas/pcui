@@ -25,7 +25,6 @@
         "block-closing-brace-empty-line-before": null,
         "block-no-empty": null,
         "block-opening-brace-space-before": null,
-        "color-hex-length": null,
         "declaration-block-trailing-semicolon": null,
         "declaration-block-no-duplicate-properties": null,
         "declaration-colon-newline-after": null,
