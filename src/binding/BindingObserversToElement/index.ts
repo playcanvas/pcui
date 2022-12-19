@@ -116,7 +116,7 @@ class BindingObserversToElement extends BindingBase {
     }
 
     /**
-     * Unlink the binding from it's set of observers.
+     * Unlink the binding from its set of observers.
      */
     unlink() {
         for (let i = 0; i < this._events.length; i++) {

@@ -116,23 +116,19 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
             this.onValidate = args.onValidate;
         }
 
-        // @ts-ignore
         this.on('change', () => {
             if (this.renderChanges) {
                 this.flash();
             }
         });
-
-        // @ts-ignore
         this.on('disable', this._updateInputReadOnly.bind(this));
-        // @ts-ignore
         this.on('enable', this._updateInputReadOnly.bind(this));
-        // @ts-ignore
         this.on('readOnly', this._updateInputReadOnly.bind(this));
+
         this._updateInputReadOnly();
     }
 
-    protected _onInputChange(evt: any) {
+    protected _onInputChange(evt: Event) {
         if (this._suspendInputChangeEvt) return;
 
         if (this._onValidate) {
@@ -152,18 +148,18 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
         }
     }
 
-    protected _onInputFocus(evt: any) {
+    protected _onInputFocus(evt: FocusEvent) {
         this.class.add(pcuiClass.FOCUS);
         this.emit('focus', evt);
         this._prevValue = this.value;
     }
 
-    protected _onInputBlur(evt: any) {
+    protected _onInputBlur(evt: FocusEvent) {
         this.class.remove(pcuiClass.FOCUS);
         this.emit('blur', evt);
     }
 
-    protected _onInputKeyDown(evt: any) {
+    protected _onInputKeyDown(evt: KeyboardEvent) {
         if (evt.keyCode === 13 && this.blurOnEnter) {
             // do not fire input change event on blur
             // if keyChange is true (because a change event)
@@ -191,7 +187,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
         this.emit('keydown', evt);
     }
 
-    protected _onInputKeyUp(evt: any) {
+    protected _onInputKeyUp(evt: KeyboardEvent) {
         if (evt.keyCode !== 27) {
             this._onInputChange(evt);
         }
@@ -199,7 +195,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
         this.emit('keyup', evt);
     }
 
-    protected _onInputCtxMenu(evt: any) {
+    protected _onInputCtxMenu(evt: MouseEvent) {
         this._domInput.select();
     }
 
@@ -281,7 +277,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
         }
     }
 
-    get value() : string | number {
+    get value(): string | number {
         return this._domInput.value;
     }
 
@@ -343,7 +339,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
     }
 
     /**
-     * Gets / sets the valudate method for the input.
+     * Gets / sets the validate method for the input.
      */
     set onValidate(value) {
         this._onValidate = value;
@@ -360,7 +356,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
         this._blurOnEnter = value;
     }
 
-    get blurOnEnter() : boolean {
+    get blurOnEnter(): boolean {
         return this._blurOnEnter;
     }
 
@@ -371,7 +367,7 @@ class TextInput extends Input implements Element.IFocusable, Element.IPlaceholde
         this._blurOnEnter = value;
     }
 
-    get blurOnEscape() : boolean {
+    get blurOnEscape(): boolean {
         return this._blurOnEnter;
     }
 }

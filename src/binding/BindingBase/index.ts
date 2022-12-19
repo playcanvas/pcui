@@ -90,7 +90,7 @@ class BindingBase extends Events {
      * @name BindingBase#link
      * @description Links the specified observers to the specified paths.
      * @param {Observer[]|Observer} observers - The observer(s).
-     * @param {string[]|string} paths - The path(s). The behaviour of the binding depends on how many paths are passed.
+     * @param {string[]|string} paths - The path(s). The behavior of the binding depends on how many paths are passed.
      * If an equal amount of paths and observers are passed then the binding will map each path to each observer at each index.
      * If more observers than paths are passed then the path at index 0 will be used for all observers.
      * If one observer and multiple paths are passed then all of the paths will be used for the observer (e.g. for curves).

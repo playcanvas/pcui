@@ -79,7 +79,7 @@ namespace Element {
         /**
          * Focus on the element. If the input contains text and select is provided, the text will be selected on focus.
          */
-        focus(select?: boolean) : void
+        focus(select?: boolean): void
 
         /**
          * Unfocus the element
@@ -318,15 +318,15 @@ class Element extends Events {
 
     protected _binding: any;
 
-    protected _ignoreParent: any;
+    protected _ignoreParent: boolean;
 
-    protected _enabled: any;
+    protected _enabled: boolean;
 
-    protected _readOnly: any;
+    protected _readOnly: boolean;
 
-    protected _hidden: any;
+    protected _hidden: boolean;
 
-    protected _hasError: any;
+    protected _hasError: boolean;
 
     protected _domContent: any;
 
@@ -389,11 +389,9 @@ class Element extends Events {
         this.ignoreParent = args.ignoreParent;
 
         if (args.width !== undefined) {
-            // @ts-ignore
             this.width = args.width;
         }
         if (args.height !== undefined) {
-            // @ts-ignore
             this.height = args.height;
         }
         if (args.tabIndex !== undefined) {
@@ -420,22 +418,20 @@ class Element extends Events {
         this._suppressChange = false;
     }
 
-    //
-    // @name Element#link
-    // @description Links the specified observers and paths to the Element's data binding.
-    // @param {Array<Observer>} observers - An array of observers or a single observer.
-    // @param {string|string[]} paths - A path for the observer(s) or an array of paths that maps to each separate observer.
-    // @ts-ignore
+    /**
+     * Links the specified observers and paths to the Element's data binding.
+     *
+     * @param observers - An array of observers or a single observer.
+     * @param paths - A path for the observer(s) or an array of paths that maps to each separate observer.
+     */
     link(observers: Array<Observer>, paths: Array<string>|string) {
         if (this._binding) {
             this._binding.link(observers, paths);
         }
     }
 
-
     /**
-     * @name Element#unlink
-     * @description Unlinks the Element from its observers
+     * Unlinks the Element from its observers.
      */
     unlink() {
         if (this._binding) {
@@ -444,30 +440,29 @@ class Element extends Events {
     }
 
     /**
-     * @name Element#flash
-     * @description Triggers a flash animation on the Element.
+     * Triggers a flash animation on the Element.
      */
     flash() {
         if (this._flashTimeout) return;
 
         this.classAdd(pcuiClass.FLASH);
-        this._flashTimeout = setTimeout(function () {
+        this._flashTimeout = setTimeout(() => {
             this._flashTimeout = null;
             this.classRemove(pcuiClass.FLASH);
-        }.bind(this), 200);
+        }, 200);
     }
 
-    protected _onClick(evt: any) {
+    protected _onClick(evt: Event) {
         if (this.enabled) {
             this.emit('click', evt);
         }
     }
 
-    protected _onMouseOver(evt: any) {
+    protected _onMouseOver(evt: MouseEvent) {
         this.emit('hover', evt);
     }
 
-    protected _onMouseOut(evt: any) {
+    protected _onMouseOut(evt: MouseEvent) {
         this.emit('hoverend', evt);
     }
 
@@ -548,32 +543,31 @@ class Element extends Events {
     }
 
     /**
-     * @param cls - The class to add
-     * @name Element#classAdd
-     * @description Adds the specified class to the DOM element but checks if the classList contains it first.
+     * Adds the specified class to the DOM element but checks if the classList contains it first.
+     *
+     * @param cls - The class to add.
      */
     classAdd(cls: string) {
-        var classList = this._dom.classList;
+        const classList = this._dom.classList;
         if (!classList.contains(cls)) {
             classList.add(cls);
         }
     }
 
     /**
-     * @param cls
-     * @name Element#classRemove
-     * @description Removes the specified class from the DOM element but checks if the classList contains it first.
+     * Removes the specified class from the DOM element but checks if the classList contains it first.
+     *
+     * @param cls - The class to remove.
      */
     classRemove(cls: string) {
-        var classList = this._dom.classList;
+        const classList = this._dom.classList;
         if (classList.contains(cls)) {
             classList.remove(cls);
         }
     }
 
     /**
-     * @name Element#destroy
-     * @description Destroys the Element and its events.
+     * Destroys the Element and its events.
      */
     destroy() {
         if (this._destroyed) return;
@@ -646,34 +640,32 @@ class Element extends Events {
     }
 
     unbind(name?: string, fn?: any): Events {
-        // @ts-ignore
         return super.unbind(name, fn);
     }
 
     /**
-     * @param {string} type - The type we want to reference this Element by
-     * @param {object} cls - The actual class of the Element
-     * @param {object} [defaultArguments] - Default arguments when creating this type
+     * @param type - The type we want to reference this Element by.
+     * @param cls - The actual class of the Element.
+     * @param defaultArguments - Default arguments when creating this type.
      */
     static register(type: string, cls: any, defaultArguments?: Object) {
         ELEMENT_REGISTRY[type] = { cls, defaultArguments };
     }
 
     /**
-     * @static
-     * @param {string} type - The type we want to unregister
+     * @param type - The type we want to unregister.
      */
     static unregister(type: string) {
         delete ELEMENT_REGISTRY[type];
     }
 
     /**
-     * @static
-     * @param {string} type - The type of the Element (registered by pcui.Element#register)
-     * @param {object} args - Arguments for the Element
-     * @returns {Element|undefined} A new pcui.Element of the desired type or undefined if type not found
+     * Creates a new Element of the desired type. Returns undefined if type not found.
+     *
+     * @param type - The type of the Element (registered by pcui.Element#register).
+     * @param args - Arguments for the Element.
      */
-    static create(type: string, args: Element.Args) {
+    static create(type: string, args: Element.Args): any {
         const entry = ELEMENT_REGISTRY[type];
         if (!entry) {
             console.error('Invalid type passed to pcui.Element#create', type);
@@ -696,10 +688,8 @@ class Element extends Events {
 
     /**
      * Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
-     *
-     * @type {boolean}
      */
-    set enabled(value) {
+    set enabled(value: boolean) {
         if (this._enabled === value) return;
 
         // remember if enabled in hierarchy
@@ -713,15 +703,13 @@ class Element extends Events {
         }
     }
 
-    get enabled() {
+    get enabled(): boolean {
         if (this._ignoreParent) return this._enabled;
         return this._enabled && (!this._parent || this._parent.enabled);
     }
 
     /**
      * Gets / sets whether the Element will ignore parent events & variable states.
-     *
-     * @type {boolean}
      */
     set ignoreParent(value) {
         this._ignoreParent = value;
@@ -733,19 +721,15 @@ class Element extends Events {
         return this._ignoreParent;
     }
 
-
     /**
      * Gets the root DOM node for this Element.
-     *
-     * @type {HTMLElement}
      */
     get dom(): HTMLElement {
         return this._dom;
     }
 
-
     /**
-     * Gets / Sets the parent Element.
+     * Gets / sets the parent Element.
      */
     set parent(value: Element) {
         if (value === this._parent) return;
@@ -794,7 +778,7 @@ class Element extends Events {
         }
     }
 
-    get parent() : Element {
+    get parent(): Element {
         return this._parent;
     }
 
@@ -821,7 +805,7 @@ class Element extends Events {
         }
     }
 
-    get hidden() : boolean {
+    get hidden(): boolean {
         return this._hidden;
     }
 
@@ -829,7 +813,7 @@ class Element extends Events {
     /**
      * Gets whether the Element is hidden all the way up to the root. If the Element itself or any of its parents are hidden then this is true.
      */
-    get hiddenToRoot() : boolean {
+    get hiddenToRoot(): boolean {
         return this._hidden || this._hiddenParents;
     }
 
@@ -844,7 +828,7 @@ class Element extends Events {
         this._onReadOnlyChange(value);
     }
 
-    get readOnly() : boolean {
+    get readOnly(): boolean {
         if (this._ignoreParent) return this._readOnly;
         return this._readOnly || !!(this._parent && this._parent.readOnly);
     }
@@ -863,7 +847,7 @@ class Element extends Events {
         }
     }
 
-    get error() : boolean {
+    get error(): boolean {
         return this._hasError;
     }
 
@@ -892,7 +876,7 @@ class Element extends Events {
         this._class = value;
     }
 
-    get class() : DOMTokenList {
+    get class(): DOMTokenList {
         return this._dom.classList;
     }
 
@@ -933,7 +917,7 @@ class Element extends Events {
         this._dom.tabIndex = value;
     }
 
-    get tabIndex() : number {
+    get tabIndex(): number {
         return this._dom.tabIndex;
     }
 
@@ -965,37 +949,44 @@ class Element extends Events {
         }
     }
 
-    get binding() : any {
+    get binding(): any {
         return this._binding;
     }
 
-    get destroyed() : boolean {
+    get destroyed(): boolean {
         return this._destroyed;
     }
 
     /*  Backwards Compatibility */
     // we should remove those after we migrate
+
+    /** @ignore */
     set disabled(value: boolean) {
         this.enabled = !value;
     }
 
-    get disabled() : boolean {
+    /** @ignore */
+    get disabled(): boolean {
         return !this.enabled;
     }
 
+    /** @ignore */
     set element(value: HTMLElement) {
         this._dom = value;
     }
 
-    get element() : HTMLElement {
+    /** @ignore */
+    get element(): HTMLElement {
         return this.dom;
     }
 
+    /** @ignore */
     set innerElement(value: HTMLElement) {
         this._domContent = value;
     }
 
-    get innerElement() : HTMLElement {
+    /** @ignore */
+    get innerElement(): HTMLElement {
         return this._domContent;
     }
 }

@@ -24,7 +24,7 @@ class Code extends Container {
 
     protected _inner: Label;
 
-    protected _text: any;
+    protected _text: string;
 
     constructor(args: Code.Args = Code.defaultArgs) {
         args = { ...Code.defaultArgs, ...args };
@@ -40,7 +40,7 @@ class Code extends Container {
     }
 
     /**
-     * Gets / Sets the text to display in the code block.
+     * Gets / sets the text to display in the code block.
      */
     set text(value) {
         this._text = value;

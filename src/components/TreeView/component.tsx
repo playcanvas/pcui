@@ -12,7 +12,7 @@ class Component extends BaseComponent <TreeViewElement.Args, any> {
 
     constructor(props: TreeViewElement.Args) {
         super(props);
-        // @ts-ignore
+
         this.element = new TreeViewElement({ ...props });
         this.loadChildren(this.props.children, this.element);
     }
@@ -37,7 +37,6 @@ class Component extends BaseComponent <TreeViewElement.Args, any> {
 
     componentDidUpdate() {
         this.parentElement.removeChild(this.element.dom);
-        // @ts-ignore
         this.element = new TreeViewElement({ ...this.props });
         this.loadChildren(this.props.children, this.element);
         this.parentElement.appendChild(this.element.dom);

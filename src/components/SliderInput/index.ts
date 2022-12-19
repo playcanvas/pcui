@@ -43,7 +43,7 @@ namespace SliderInput {
          */
         sliderMax?: number,
         /**
-         * Gets / sets the maximum number of decimals a value can take. Here for backwards compatability. Use the precision argument instead going forward.
+         * Gets / sets the maximum number of decimals a value can take. Here for backwards compatibility. Use the precision argument instead going forward.
          */
         pre?: number,
         /**
@@ -205,28 +205,29 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
         }
     }
 
-    protected _onMouseDown(evt: any) {
+    protected _onMouseDown(evt: MouseEvent) {
         if (evt.button !== 0 || !this.enabled || this.readOnly) return;
         this._onSlideStart(evt.pageX);
     }
 
-    protected _onMouseMove(evt: any) {
+    protected _onMouseMove(evt: MouseEvent) {
         evt.stopPropagation();
         evt.preventDefault();
         this._onSlideMove(evt.pageX);
     }
 
-    protected _onMouseUp(evt: any) {
+    protected _onMouseUp(evt: MouseEvent) {
         evt.stopPropagation();
         evt.preventDefault();
         this._onSlideEnd(evt.pageX);
     }
 
-    protected _onTouchStart(evt: any) {
+    protected _onTouchStart(evt: TouchEvent) {
         if (!this.enabled || this.readOnly) return;
 
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
+            // @ts-ignore
             if (!touch.target.ui || touch.target.ui !== this)
                 continue;
 
@@ -236,7 +237,7 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
         }
     }
 
-    protected _onTouchMove(evt: any) {
+    protected _onTouchMove(evt: TouchEvent) {
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
 
@@ -251,7 +252,7 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
         }
     }
 
-    protected _onTouchEnd(evt: any) {
+    protected _onTouchEnd(evt: TouchEvent) {
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
 
@@ -267,7 +268,7 @@ class SliderInput extends Element implements Element.IBindable, Element.IFocusab
         }
     }
 
-    protected _onKeyDown(evt: any) {
+    protected _onKeyDown(evt: KeyboardEvent) {
         if (evt.keyCode === 27) {
             this.blur();
             return;

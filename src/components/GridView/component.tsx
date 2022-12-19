@@ -22,7 +22,7 @@ class GridView extends BaseComponent <GridViewElement.Args, any> {
         }
         children.forEach((child: any) => {
             // @ts-ignore
-            var childElement = new GridViewItemElement({ text: child.props.text, open: false });
+            const childElement = new GridViewItemElement({ text: child.props.text, open: false });
             element.append(childElement);
             this.loadChildren(child.props.children, childElement);
         });

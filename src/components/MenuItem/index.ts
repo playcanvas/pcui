@@ -15,11 +15,11 @@ namespace MenuItem {
          */
         hasChildren?: boolean;
         /**
-         * Gets / Sets the text shown on the MenuItem.
+         * Gets / sets the text shown on the MenuItem.
          */
         text?: string;
         /**
-         * Gets / Sets the CSS code for an icon for the MenuItem. e.g. E401 (notice we omit the '\' character).
+         * Gets / sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
          */
         icon?: string;
         /**
@@ -153,7 +153,7 @@ class MenuItem extends Container implements Element.IBindable {
         super._onRemoveChild(element);
     }
 
-    protected _onClickMenuItem(evt: any) {
+    protected _onClickMenuItem(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
         if (!this.disabled) {
@@ -196,7 +196,7 @@ class MenuItem extends Container implements Element.IBindable {
     }
 
     /**
-     * Gets / Sets the text shown on the MenuItem.
+     * Gets / sets the text shown on the MenuItem.
      */
     set text(value) {
         this._labelText.text = value;
@@ -220,7 +220,7 @@ class MenuItem extends Container implements Element.IBindable {
     }
 
     /**
-     * Gets / Sets the CSS code for an icon for the MenuItem. e.g. E401 (notice we omit the '\' character).
+     * Gets / sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
      */
     set icon(value) {
         if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
@@ -238,7 +238,7 @@ class MenuItem extends Container implements Element.IBindable {
     }
 
     /**
-     * Gets / Sets the binding for the MenuItem label.
+     * Gets / sets the binding for the MenuItem label.
      */
     set binding(value) {
         this._labelText.binding = value;
@@ -249,7 +249,7 @@ class MenuItem extends Container implements Element.IBindable {
     }
 
     /**
-     * Gets / Sets the menu.
+     * Gets / sets the menu.
      */
     set menu(value) {
         this._menu = value;
@@ -271,7 +271,7 @@ class MenuItem extends Container implements Element.IBindable {
     }
 
     /**
-     * Gets / Sets the function that is called when the MenuItem is selected.
+     * Gets / sets the function that is called when the MenuItem is selected.
      */
     set onSelect(value) {
         this._onSelect = value;
@@ -282,7 +282,7 @@ class MenuItem extends Container implements Element.IBindable {
     }
 
     /**
-     * Gets / Sets the function that is called when the MenuItem is enabled or disabled.
+     * Gets / sets the function that is called when the MenuItem is enabled or disabled.
      */
     set onIsEnabled(value) {
         this._onIsEnabled = value;
@@ -293,7 +293,7 @@ class MenuItem extends Container implements Element.IBindable {
     }
 
     /**
-     * Gets / Sets the function that is called when the MenuItem is visible or hidden.
+     * Gets / sets the function that is called when the MenuItem is visible or hidden.
      */
     set onIsVisible(value) {
         this._onIsVisible = value;

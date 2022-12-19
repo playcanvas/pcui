@@ -8,8 +8,7 @@ import Panel from '../Panel';
 import Canvas from '../Canvas';
 import Label from '../Label';
 import { CurveSet, Curve, math } from 'playcanvas';
-// @ts-ignore
-import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value.ts';
+import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
 
 const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
 
@@ -25,11 +24,11 @@ namespace GradientPicker {
     export interface Args extends Element.Args {
         renderChanges?: boolean;
         /**
-         * An optional array of 4 integers containing the RGBA values the picker should be initialised to
+         * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
          */
         value?: Array<number>;
         /**
-         * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value
+         * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
          */
         channels?: number;
     }
@@ -47,7 +46,7 @@ class GradientPicker extends Element {
 
     protected _canvas: Canvas;
 
-    protected _checkerboardPattern: any;
+    protected _checkerboardPattern: CanvasPattern;
 
     protected _resizeInterval?: any;
 
@@ -136,9 +135,7 @@ class GradientPicker extends Element {
         this.dom.appendChild(this._canvas.dom);
         this._canvas.parent = this;
         this._canvas.on('resize', this._renderGradient.bind(this));
-        // @ts-ignore
         this._checkerboardPattern = this.createCheckerboardPattern(this._canvas.dom.getContext('2d'));
-
 
         // make sure canvas is the same size as the container element
         // 20 times a second
@@ -175,14 +172,14 @@ class GradientPicker extends Element {
         }
 
         this.Helpers = {
-            rgbaStr: function (colour: Array<number>, scale: number) {
+            rgbaStr: function (color: Array<number>, scale: number) {
                 if (!scale) {
                     scale = 1;
                 }
-                let rgba = colour.map(function (element: number, index: number) {
+                let rgba = color.map(function (element: number, index: number) {
                     return index < 3 ? Math.round(element * scale) : element;
                 }).join(',');
-                for (let i = colour.length; i < 4; ++i) {
+                for (let i = color.length; i < 4; ++i) {
                     rgba += ',' + (i < 3 ? scale : 1);
                 }
                 return 'rgba(' + rgba + ')';
@@ -361,13 +358,13 @@ class GradientPicker extends Element {
         this.UI.overlay.clickable = true;
         this.UI.overlay.element.style.position = "fixed";
 
-        this.UI.overlay.on('show', function () {
+        this.UI.overlay.on('show', () => {
             this.onOpen();
-        }.bind(this));
+        });
 
-        this.UI.overlay.on('hide', function () {
+        this.UI.overlay.on('hide', () => {
             this.onClose();
-        }.bind(this));
+        });
 
         // panel
         this.UI.panel.classList.add('picker-gradient-panel');
@@ -397,11 +394,11 @@ class GradientPicker extends Element {
         // this.UI.footer.append(this.UI.positionEdit);
         this.UI.positionEdit.style.width = '40px';
         this.UI.positionEdit.renderChanges = false;
-        this.UI.showSelectedPosition.on('change', function (value: number) {
+        this.UI.showSelectedPosition.on('change', (value: number) => {
             if (!this.STATE.changing) {
                 this.moveSelectedAnchor(value / 100);
             }
-        }.bind(this));
+        });
 
         this.UI.copyButton.on('click', this.doCopy);
         this.UI.copyButton.class.add('copy-curve-button');
@@ -490,7 +487,7 @@ class GradientPicker extends Element {
         canvas.width = size;
         canvas.height = size;
 
-        const ctx: any = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
         ctx.fillStyle = '#';
         ctx.fillStyle = "#949a9c";
         ctx.fillRect(0, 0, halfSize, halfSize);
@@ -502,7 +499,7 @@ class GradientPicker extends Element {
         return context.createPattern(canvas, 'repeat');
     }
 
-    protected _onKeyDown(evt: { keyCode: number; stopPropagation: () => void; preventDefault: () => void; }) {
+    protected _onKeyDown(evt: KeyboardEvent) {
         // escape blurs the field
         if (evt.keyCode === 27) {
             this.blur();
@@ -519,11 +516,11 @@ class GradientPicker extends Element {
         this._openGradientPicker();
     }
 
-    protected _onFocus(evt: any) {
+    protected _onFocus(evt: FocusEvent) {
         this.emit('focus');
     }
 
-    protected _onBlur(evt: any) {
+    protected _onBlur(evt: FocusEvent) {
         this.emit('blur');
     }
 
@@ -575,7 +572,7 @@ class GradientPicker extends Element {
 
     protected _renderGradient() {
         const canvas = this._canvas.dom;
-        const context: any = canvas.getContext('2d');
+        const context = canvas.getContext('2d');
 
         const width = this._canvas.width;
         const height = this._canvas.height;
@@ -677,8 +674,8 @@ class GradientPicker extends Element {
     }
 
     protected _generateHue(canvas: Canvas) {
-        // @ts-ignore
-        const ctx = canvas.element.getContext('2d');
+        const canvasElement = canvas.element as HTMLCanvasElement;
+        const ctx = canvasElement.getContext('2d');
         const w = canvas.pixelWidth;
         const h = canvas.pixelHeight;
         const gradient = ctx.createLinearGradient(0, 0, 0, h);
@@ -690,8 +687,8 @@ class GradientPicker extends Element {
     }
 
     protected _generateAlpha(canvas: Canvas) {
-        // @ts-ignore
-        const ctx = canvas.element.getContext('2d');
+        const canvasElement = canvas.element as HTMLCanvasElement;
+        const ctx = canvasElement.getContext('2d');
         const w = canvas.pixelWidth;
         const h = canvas.pixelHeight;
         const gradient = ctx.createLinearGradient(0, 0, 0, h);
@@ -702,8 +699,8 @@ class GradientPicker extends Element {
     }
 
     protected _generateGradient(canvas: Canvas, clr: any[]) {
-        // @ts-ignore
-        const ctx = canvas.element.getContext('2d');
+        const canvasElement = canvas.element as HTMLCanvasElement;
+        const ctx = canvasElement.getContext('2d');
         const w = canvas.pixelWidth;
         const h = canvas.pixelHeight;
 
@@ -749,7 +746,7 @@ class GradientPicker extends Element {
         }
     }
 
-    protected _onMouseDown(evt: { currentTarget: HTMLElement; }) {
+    protected _onMouseDown(evt: MouseEvent) {
         if (evt.currentTarget === this._colorRect.element) {
             this._dragMode = 1;     // drag color
         } else if (evt.currentTarget === this._hueRect.element) {
@@ -766,7 +763,7 @@ class GradientPicker extends Element {
         window.addEventListener('mouseup', this.upHandler);
     }
 
-    protected _onMouseMove(evt: any) {
+    protected _onMouseMove(evt: MouseEvent) {
         let newhsva;
         if (this._dragMode === 1) {
             const m = this.Helpers.normalizedCoord(this._colorRect, evt.pageX, evt.pageY);
@@ -791,7 +788,7 @@ class GradientPicker extends Element {
         }
     }
 
-    protected _onMouseUp(evt: any) {
+    protected _onMouseUp(evt: MouseEvent) {
         window.removeEventListener('mousemove', this.moveHandler);
         window.removeEventListener('mouseup', this.upHandler);
 
@@ -870,7 +867,7 @@ class GradientPicker extends Element {
         }
     }
 
-    get editAlpha() : any {
+    get editAlpha(): any {
         return this.editAlpha;
     }
 
@@ -1001,7 +998,7 @@ class GradientPicker extends Element {
         }
     }
 
-    renderAnchor(ctx: any, time: number, type?: string) {
+    renderAnchor(ctx: CanvasRenderingContext2D, time: number, type?: string) {
         const coords = [time * this.UI.anchors.width, this.UI.anchors.height / 2];
         const radius = (type === "selected" ? this.CONSTANTS.selectedRadius : this.CONSTANTS.anchorRadius);
 
@@ -1091,7 +1088,7 @@ class GradientPicker extends Element {
                            rect.height - paddingTop - paddingBottom);
     }
 
-    anchorsOnMouseDown(e: { clientX: any; clientY: any; }) {
+    anchorsOnMouseDown(e: MouseEvent) {
         if (this.STATE.hoveredAnchor === -1) {
             // user clicked in empty space, create new anchor and select it
             const coord = this.calcNormalizedCoord(e.clientX,
@@ -1113,7 +1110,7 @@ class GradientPicker extends Element {
         this.UI.draggingAnchor = true;
     }
 
-    anchorsOnMouseMove(e: { clientX: any; clientY: any; }) {
+    anchorsOnMouseMove(e: MouseEvent) {
         const coord = this.calcNormalizedCoord(e.clientX,
                                                e.clientY,
                                                this.getClientRect(this.UI.anchors.element));
@@ -1162,7 +1159,7 @@ class GradientPicker extends Element {
         }
     }
 
-    anchorsOnMouseUp(e: any) {
+    anchorsOnMouseUp(e: MouseEvent) {
         if (this.UI.draggingAnchor) {
             this.dragEnd();
             this.UI.draggingAnchor = false;
@@ -1378,15 +1375,16 @@ class GradientPicker extends Element {
         const canvas = new Canvas();
         canvas.width = 16;
         canvas.height = 16;
-        // @ts-ignore
-        const ctx = canvas.element.getContext('2d');
+
+        const canvasElement = canvas.element as HTMLCanvasElement;
+        const ctx = canvasElement.getContext('2d');
         ctx.fillStyle = "#949a9c";
         ctx.fillRect(0, 0, 8, 8);
         ctx.fillRect(8, 8, 8, 8);
         ctx.fillStyle = "#657375";
         ctx.fillRect(8, 0, 8, 8);
         ctx.fillRect(0, 8, 8, 8);
-        return ctx.createPattern(canvas.element, 'repeat');
+        return ctx.createPattern(canvasElement, 'repeat');
     }
 
     setValue(value: any, args?: any) {
@@ -1427,11 +1425,11 @@ class GradientPicker extends Element {
 
         // store the curves
         this.STATE.curves = [];
-        value[0].keys.forEach(function (keys: any) {
+        value[0].keys.forEach((keys: any) => {
             const curve = new Curve(keys);
             curve.type = value[0].type;
             this.STATE.curves.push(curve);
-        }.bind(this));
+        });
 
         // calculate the anchor times
         this.STATE.anchors = this.calcAnchorTimes();

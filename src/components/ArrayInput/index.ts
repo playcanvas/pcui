@@ -16,7 +16,7 @@ const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
 namespace ArrayInput {
     export interface Args extends Element.Args, Element.IBindableArgs {
         /**
-         * The type of valeus that the array can hold.
+         * The type of values that the array can hold.
          */
         type?: string;
         /**
@@ -78,7 +78,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
 
     protected _container: Container;
 
-    protected _usePanels: any;
+    protected _usePanels: boolean;
 
     protected _fixedSize: boolean;
 
@@ -96,7 +96,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
 
     protected _getDefaultFn: any;
 
-    protected _valueType: any;
+    protected _valueType: string;
 
     protected _elementType: string;
 
@@ -104,7 +104,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
 
     protected _values: any[];
 
-    protected _renderChanges: any;
+    protected _renderChanges: boolean;
 
     constructor(args: ArrayInput.Args = ArrayInput.defaultArgs) {
         args = { ...ArrayInput.defaultArgs, ...args };
@@ -188,7 +188,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
     }
 
     protected _onSizeChange(size: number) {
-        // if size is explicitely 0 then add empty class
+        // if size is explicitly 0 then add empty class
         // size can also be null with multi-select so do not
         // check just !size
         if (size === 0) {
@@ -475,7 +475,7 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
             lastElementIndex = i;
         }
 
-        // destory elements that are no longer in our values
+        // destroy elements that are no longer in our values
         for (let i = this._arrayElements.length - 1; i > lastElementIndex; i--) {
             this._arrayElements[i].container.destroy();
             this._arrayElements.splice(i, 1);
@@ -504,8 +504,8 @@ class ArrayInput extends Element implements Element.IFocusable, Element.IBindabl
     }
 
     /**
-     * @name ArrayInput#forEachArrayElement
-     * @description Executes the specified function for each array element.
+     * Executes the specified function for each array element.
+     *
      * @param {Function} fn - The function with signature (element, index) => bool to execute. If the function returns
      * false then the iteration will early out.
      */

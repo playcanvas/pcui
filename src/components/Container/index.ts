@@ -191,7 +191,8 @@ class Container extends Element {
     }
 
     /**
-     * @description Appends an element to the container.
+     * Appends an element to the container.
+     *
      * @param {Element} element - The element to append.
      * @fires 'append'
      */
@@ -202,7 +203,8 @@ class Container extends Element {
     }
 
     /**
-     * @description Appends an element to the container before the specified reference element.
+     * Appends an element to the container before the specified reference element.
+     *
      * @param {Element} element - The element to append.
      * @param {Element} referenceElement - The element before which the element will be appended.
      * @fires 'append'
@@ -218,8 +220,8 @@ class Container extends Element {
     }
 
     /**
-     * @name Container#appendAfter
-     * @description Appends an element to the container just after the specified reference element.
+     * Appends an element to the container just after the specified reference element.
+     *
      * @param {Element} element - The element to append.
      * @param {Element} referenceElement - The element after which the element will be appended.
      * @fires 'append'
@@ -239,8 +241,8 @@ class Container extends Element {
     }
 
     /**
-     * @name Container#prepend
-     * @description Inserts an element in the beginning of the container.
+     * Inserts an element in the beginning of the container.
+     *
      * @param {Element} element - The element to prepend.
      * @fires 'append'
      */
@@ -257,8 +259,8 @@ class Container extends Element {
     }
 
     /**
-     * @name Container#remove
-     * @description Removes the specified child element from the container.
+     * Removes the specified child element from the container.
+     *
      * @param {Element} element - The element to remove.
      * @fires 'remove'
      */
@@ -272,8 +274,8 @@ class Container extends Element {
     }
 
     /**
-     * @name Container#move
-     * @description Moves the specified child at the specified index.
+     * Moves the specified child at the specified index.
+     *
      * @param {Element} element - The element to move.
      * @param {number} index - The index
      */
@@ -299,8 +301,8 @@ class Container extends Element {
     }
 
     /**
-     * @name Container#clear
-     * @description Clears all children from the container.
+     * Clears all children from the container.
+     *
      * @fires 'remove' for each child element.
      */
     clear() {
@@ -350,7 +352,7 @@ class Container extends Element {
         this.emit('remove', element);
     }
 
-    protected _onScroll(evt: any) {
+    protected _onScroll(evt: Event) {
         this.emit('scroll', evt);
     }
 
@@ -365,7 +367,7 @@ class Container extends Element {
         this._domResizeHandle = handle;
     }
 
-    protected _onResizeStart(evt: any) {
+    protected _onResizeStart(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -375,14 +377,14 @@ class Container extends Element {
         this._resizeStart();
     }
 
-    protected _onResizeMove(evt: any) {
+    protected _onResizeMove(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
         this._resizeMove(evt.clientX, evt.clientY);
     }
 
-    protected _onResizeEnd(evt: any) {
+    protected _onResizeEnd(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -392,7 +394,7 @@ class Container extends Element {
         this._resizeEnd();
     }
 
-    protected _onResizeTouchStart(evt: any) {
+    protected _onResizeTouchStart(evt: TouchEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -409,7 +411,7 @@ class Container extends Element {
         this._resizeStart();
     }
 
-    protected _onResizeTouchMove(evt: any) {
+    protected _onResizeTouchMove(evt: TouchEvent) {
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
             if (touch.identifier !== this._resizeTouchId) {
@@ -425,7 +427,7 @@ class Container extends Element {
         }
     }
 
-    protected _onResizeTouchEnd(evt: any) {
+    protected _onResizeTouchEnd(evt: TouchEvent) {
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
             if (touch.identifier === this._resizeTouchId) {
@@ -492,12 +494,12 @@ class Container extends Element {
     }
 
     /**
-     * Resize the container
+     * Resize the container.
      *
-     * @param {number} x - The amount of pixels to resize the width
-     * @param {number} y - The amount of pixels to resize the height
+     * @param x - The number of pixels to resize the width.
+     * @param y - The number of pixels to resize the height.
      */
-    resize(x: any, y: any) {
+    resize(x: number, y: number) {
         x = x || 0;
         y = y || 0;
 
@@ -517,7 +519,7 @@ class Container extends Element {
         return -1;
     }
 
-    protected _onChildDragStart(evt: any, childPanel: Element) {
+    protected _onChildDragStart(evt: MouseEvent, childPanel: Element) {
         this.class.add(CLASS_DRAGGED_CHILD);
 
         this._draggedStartIndex = this._getDraggedChildIndex(childPanel);
@@ -529,7 +531,7 @@ class Container extends Element {
         this.emit('child:dragstart', childPanel, this._draggedStartIndex);
     }
 
-    protected _onChildDragMove(evt: any, childPanel: Element) {
+    protected _onChildDragMove(evt: MouseEvent, childPanel: Element) {
         const rect = this.dom.getBoundingClientRect();
 
         const dragOut = (evt.clientX < rect.left || evt.clientX > rect.right || evt.clientY < rect.top || evt.clientY > rect.bottom);
@@ -582,7 +584,7 @@ class Container extends Element {
         }
     }
 
-    protected _onChildDragEnd(evt: any, childPanel: any) {
+    protected _onChildDragEnd(evt: MouseEvent, childPanel: Element) {
         this.class.remove(CLASS_DRAGGED_CHILD);
 
         childPanel.class.remove(CLASS_DRAGGED);
@@ -611,12 +613,12 @@ class Container extends Element {
     }
 
     /**
-     * If the current node contains a root, recursively append it's children to this node
+     * If the current node contains a root, recursively append its children to this node
      * and return it. Otherwise return the current node. Also add each child to the parent
      * under its keyed name.
      *
      * @param {object} node - The current element in the dom structure which must be recursively
-     * traversed and appended to it's parent
+     * traversed and appended to its parent
      *
      * @param node.root
      * @param node.children
@@ -717,7 +719,7 @@ class Container extends Element {
         }
     }
 
-    get flex() : boolean {
+    get flex(): boolean {
         return this._flex;
     }
 
@@ -756,7 +758,7 @@ class Container extends Element {
 
     }
 
-    get scrollable() : boolean {
+    get scrollable(): boolean {
         return this._scrollable;
     }
 
@@ -809,7 +811,7 @@ class Container extends Element {
         this._resizeMin = Math.max(0, Math.min(value, this._resizeMax));
     }
 
-    get resizeMin() : number {
+    get resizeMin(): number {
         return this._resizeMin;
     }
 
@@ -820,13 +822,13 @@ class Container extends Element {
         this._resizeMax = Math.max(this._resizeMin, value);
     }
 
-    get resizeMax() : number {
+    get resizeMax(): number {
         return this._resizeMax;
     }
 
     /**
      * The internal dom element used as a the container of all children.
-     * Can be overriden by derived classes
+     * Can be overridden by derived classes.
      */
     set domContent(value: HTMLElement) {
         if (this._domContent === value) return;
@@ -842,7 +844,7 @@ class Container extends Element {
         }
     }
 
-    get domContent() : HTMLElement {
+    get domContent(): HTMLElement {
         return this._domContent;
     }
 }

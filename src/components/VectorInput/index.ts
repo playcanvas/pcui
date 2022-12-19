@@ -42,7 +42,7 @@ class VectorInput extends Element implements Element.IBindable, Element.IFocusab
         dimensions: 3
     };
 
-    protected _inputs: any[];
+    protected _inputs: NumericInput[];
 
     protected _applyingChange: boolean;
 
@@ -83,7 +83,7 @@ class VectorInput extends Element implements Element.IBindable, Element.IFocusab
         }
 
         // set the binding after the inputs have been created
-        // because we rely on them in the overriden setter
+        // because we rely on them in the overridden setter
         if (binding) {
             this.binding = binding;
         }
@@ -191,7 +191,7 @@ class VectorInput extends Element implements Element.IBindable, Element.IFocusab
             try {
                 // try to parse the string
                 value = JSON.parse(value);
-                // if the string could be converted to an array but some of it's values aren't numbers
+                // if the string could be converted to an array but some of its values aren't numbers
                 // then use a default array also
                 if (Array.isArray(value) && value.some(i => !Number.isFinite(i))) {
                     throw new Error('VectorInput value set to string which doesn\'t contain an array of numbers');
@@ -243,7 +243,7 @@ class VectorInput extends Element implements Element.IBindable, Element.IFocusab
     }
 
     // we have to override the getter too because
-    // we have overriden the setter
+    // we have overridden the setter
     get binding() {
         return super.binding;
     }

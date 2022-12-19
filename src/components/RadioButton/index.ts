@@ -24,7 +24,7 @@ class RadioButton extends Element implements Element.IBindable, Element.IFocusab
         tabIndex: 0
     };
 
-    protected _text: any;
+    protected _text: string;
 
     protected _domEventKeyDown: any;
 
@@ -32,7 +32,7 @@ class RadioButton extends Element implements Element.IBindable, Element.IFocusab
 
     protected _domEventBlur: any;
 
-    protected _value: any;
+    protected _value: boolean;
 
     protected _renderChanges: boolean;
 
@@ -57,7 +57,7 @@ class RadioButton extends Element implements Element.IBindable, Element.IFocusab
         this._renderChanges = args.renderChanges;
     }
 
-    protected _onClick(evt: any) {
+    protected _onClick(evt: MouseEvent) {
         if (this.enabled) {
             this.focus();
         }
@@ -69,7 +69,7 @@ class RadioButton extends Element implements Element.IBindable, Element.IFocusab
         return super._onClick(evt);
     }
 
-    protected _onKeyDown(evt: any) {
+    protected _onKeyDown(evt: KeyboardEvent) {
         if (evt.keyCode === 27) {
             this.blur();
             return;
@@ -84,11 +84,11 @@ class RadioButton extends Element implements Element.IBindable, Element.IFocusab
         }
     }
 
-    protected _onFocus() {
+    protected _onFocus(evt: FocusEvent) {
         this.emit('focus');
     }
 
-    protected _onBlur() {
+    protected _onBlur(evt: FocusEvent) {
         this.emit('blur');
     }
 

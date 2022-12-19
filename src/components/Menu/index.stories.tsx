@@ -4,25 +4,24 @@ import Component from './component';
 import Container from '../Container/component';
 import Label from '../Label/component';
 import LabelElement from '../Label';
+import Menu from '../Menu';
 import { action } from '@storybook/addon-actions';
 
 export default {
     component: Component
 };
 
-window.addEventListener('contextmenu', (evt) => {
+window.addEventListener('contextmenu', (evt: MouseEvent) => {
     // @ts-ignore
     if (evt.target.ui instanceof LabelElement) {
-        let menu = document.querySelector('.pcui-menu');
-        if (menu) {
+        const element = document.querySelector('.pcui-menu');
+        if (element) {
             // @ts-ignore
-            menu = menu.ui;
+            const menu = element.ui as Menu;
             evt.stopPropagation();
             evt.preventDefault();
 
-            // @ts-ignore
             menu.hidden = false;
-            // @ts-ignore
             menu.position(evt.clientX, evt.clientY);
         }
     }

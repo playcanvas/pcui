@@ -206,7 +206,7 @@ class TreeView extends Container {
         });
     }
 
-    protected _updateModifierKeys(evt: { ctrlKey: any; metaKey: any; shiftKey: boolean; }) {
+    protected _updateModifierKeys(evt: KeyboardEvent) {
         this._pressedCtrl = evt.ctrlKey || evt.metaKey;
         this._pressedShift = evt.shiftKey;
     }
@@ -293,11 +293,10 @@ class TreeView extends Container {
     /**
      * Gets the visible tree items between the specified start and end tree items.
      *
-     * @param {TreeViewItem} startChild - The start tree item.
-     * @param {TreeViewItem} endChild - The end tree item.
-     * @returns {TreeViewItem[]} The tree items.
+     * @param startChild - The start tree item.
+     * @param endChild - The end tree item.
      */
-    protected _getChildrenRange(startChild: any, endChild: any) {
+    protected _getChildrenRange(startChild: TreeViewItem, endChild: TreeViewItem): TreeViewItem[] {
         const result = [];
 
         // select search results if we are currently filtering tree view items
@@ -403,7 +402,7 @@ class TreeView extends Container {
     }
 
     // Called when a key is down on a child TreeViewItem.
-    protected _onChildKeyDown(evt: any, element: any) {
+    protected _onChildKeyDown(evt: KeyboardEvent, element: any) {
         if ([9, 37, 38, 39, 40].indexOf(evt.keyCode) === -1) return;
 
         evt.preventDefault();
@@ -449,7 +448,7 @@ class TreeView extends Container {
     }
 
     // Called when we click on a child TreeViewItem
-    protected _onChildClick(evt: any, element: { allowSelect: any; selected: boolean; }) {
+    protected _onChildClick(evt: MouseEvent, element: TreeViewItem) {
         if (evt.button !== 0) return;
         if (!element.allowSelect) return;
 
@@ -702,7 +701,7 @@ class TreeView extends Container {
                             r.newChildIndex = index + 1;
                         }
 
-                        // substract 1 from new child index to account for the extra node that
+                        // subtract 1 from new child index to account for the extra node that
                         // each tree view item has inside
                         r.newChildIndex--;
                     });
@@ -740,7 +739,7 @@ class TreeView extends Container {
     }
 
     // Called when the mouse cursor leaves the tree view.
-    protected _onMouseLeave(evt: any) {
+    protected _onMouseLeave(evt: MouseEvent) {
         if (!this._allowDrag || !this._dragging) return;
 
         this._dragOverItem = null;
@@ -748,7 +747,7 @@ class TreeView extends Container {
     }
 
     // Called when the mouse moves while dragging
-    protected _onMouseMove(evt: { pageY: number; }) {
+    protected _onMouseMove(evt: MouseEvent) {
         if (!this._dragging) return;
 
         // Determine if we need to scroll the treeview if we are dragging towards the edges
@@ -784,7 +783,7 @@ class TreeView extends Container {
     }
 
     // Called while we drag the drag handle
-    protected _onDragMove(evt: { preventDefault: () => void; stopPropagation: () => void; clientY: number; }) {
+    protected _onDragMove(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -1076,7 +1075,7 @@ class TreeView extends Container {
         }
     }
 
-    get allowDrag() : boolean {
+    get allowDrag(): boolean {
         return this._allowDrag;
     }
 
@@ -1087,7 +1086,7 @@ class TreeView extends Container {
         this._allowReordering = value;
     }
 
-    get allowReordering() : boolean {
+    get allowReordering(): boolean {
         return this._allowReordering;
     }
 
@@ -1098,7 +1097,7 @@ class TreeView extends Container {
         this._allowRenaming = value;
     }
 
-    get allowRenaming() : boolean {
+    get allowRenaming(): boolean {
         return this._allowRenaming;
     }
 
@@ -1134,14 +1133,14 @@ class TreeView extends Container {
         }
     }
 
-    get isDragging() : boolean {
+    get isDragging(): boolean {
         return this._dragging;
     }
 
     /**
      * Returns all of the currently selected TreeViewItems.
      */
-    get selected() : Array<TreeViewItem> {
+    get selected(): Array<TreeViewItem> {
         return this._selectedItems.slice();
     }
 
@@ -1160,21 +1159,21 @@ class TreeView extends Container {
         }
     }
 
-    get filter() : string {
+    get filter(): string {
         return this._filter;
     }
 
     /**
      * Whether Ctrl is currently pressed.
      */
-    get pressedCtrl() : boolean {
+    get pressedCtrl(): boolean {
         return this._pressedCtrl;
     }
 
     /**
      * Whether Shift is currently pressed.
      */
-    get pressedShift() : boolean {
+    get pressedShift(): boolean {
         return this._pressedShift;
     }
 }

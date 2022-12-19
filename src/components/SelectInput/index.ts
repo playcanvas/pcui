@@ -626,7 +626,6 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         // and add them back in best match order
         const containerDom = this._containerOptions.dom;
         while (containerDom.firstChild) {
-            // @ts-ignore
             containerDom.removeChild(containerDom.lastChild);
         }
 
@@ -658,7 +657,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         this._resizeShadow();
     }
 
-    protected _onInputKeyDown(evt: any) {
+    protected _onInputKeyDown(evt: KeyboardEvent) {
         if (evt.keyCode === 13 && this.enabled && !this.readOnly) {
             evt.stopPropagation();
             evt.preventDefault();
@@ -693,12 +692,12 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         this._onKeyDown(evt);
     }
 
-    protected _onWindowMouseDown(evt: any) {
-        if (this.dom.contains(evt.target)) return;
+    protected _onWindowMouseDown(evt: MouseEvent) {
+        if (this.dom.contains(evt.target as Node)) return;
         this.close();
     }
 
-    protected _onKeyDown(evt: any) {
+    protected _onKeyDown(evt: KeyboardEvent) {
         // close options on ESC and blur
         if (evt.keyCode === 27) {
             this.close();
@@ -801,7 +800,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
         this.emit('blur');
     }
 
-    protected _onWheel(evt: any) {
+    protected _onWheel(evt: WheelEvent) {
         // prevent scrolling on other stuff like the viewport
         // when we are scrolling on the select input
         evt.stopPropagation();
@@ -860,8 +859,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
     }
 
     /**
-     * @name SelectInput#open
-     * @description Opens the dropdown menu
+     * Opens the dropdown menu.
      */
     open() {
         if (!this._containerOptions.hidden || !this.enabled || this.readOnly) return;
@@ -921,12 +919,11 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
     }
 
     /**
-     * @name SelectInput#close
-     * @description Closes the dropdown menu
+     * Closes the dropdown menu.
      */
     close() {
         // there is a potential bug here if the user has set a max height
-        // themselves then this will be overriden
+        // themselves then this will be overridden
         this._containerOptions.style.maxHeight = '';
 
         this._highlightLabel(null);
@@ -953,8 +950,7 @@ class SelectInput extends Element implements Element.IBindable, Element.IFocusab
     }
 
     /**
-     * @name SelectInput#toggle
-     * @description Toggles the dropdown menu
+     * Toggles the dropdown menu.
      */
     toggle() {
         if (this._containerOptions.hidden) {

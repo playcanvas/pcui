@@ -17,7 +17,7 @@ namespace TreeViewItem {
         /**
          * Whether the item is selected.
          */
-        selected?: any;
+        selected?: boolean;
         /**
          * Whether the item can be selected. Defaults to true.
          */
@@ -130,13 +130,13 @@ class TreeViewItem extends Container {
 
     protected _treeView: any;
 
-    protected _allowDrag: any;
+    protected _allowDrag: boolean;
 
-    protected _allowDrop: any;
+    protected _allowDrop: boolean;
 
-    protected _allowSelect: any;
+    protected _allowSelect: boolean;
 
-    protected _icon: any;
+    protected _icon: string;
 
     /**
      * Creates a new TreeViewItem.
@@ -238,8 +238,9 @@ class TreeViewItem extends Container {
         super._onRemoveChild(element);
     }
 
-    protected _onContentKeyDown(evt: any) {
-        if (evt.target.tagName.toLowerCase() === 'input') return;
+    protected _onContentKeyDown(evt: KeyboardEvent) {
+        const element = evt.target as HTMLElement;
+        if (element.tagName.toLowerCase() === 'input') return;
 
         if (!this.allowSelect) return;
 
@@ -248,14 +249,14 @@ class TreeViewItem extends Container {
         }
     }
 
-    protected _onContentMouseDown(evt: any) {
+    protected _onContentMouseDown(evt: MouseEvent) {
         if (!this._treeView || !this._treeView.allowDrag || !this._allowDrag) return;
 
         this._treeView._updateModifierKeys(evt);
         evt.stopPropagation();
     }
 
-    protected _onContentMouseUp(evt: any) {
+    protected _onContentMouseUp(evt: MouseEvent) {
         evt.stopPropagation();
         evt.preventDefault();
 
@@ -265,7 +266,7 @@ class TreeViewItem extends Container {
         }
     }
 
-    protected _onContentMouseOver(evt: any) {
+    protected _onContentMouseOver(evt: MouseEvent) {
         evt.stopPropagation();
 
         if (this._treeView) {
@@ -276,7 +277,7 @@ class TreeViewItem extends Container {
         super._onMouseOver(evt);
     }
 
-    protected _onContentDragStart(evt: any) {
+    protected _onContentDragStart(evt: DragEvent) {
         evt.stopPropagation();
         evt.preventDefault();
 
@@ -289,9 +290,11 @@ class TreeViewItem extends Container {
         window.addEventListener('mouseup', this._domEvtMouseUp);
     }
 
-    protected _onContentClick(evt: any) {
+    protected _onContentClick(evt: MouseEvent) {
         if (!this.allowSelect || evt.button !== 0) return;
-        if (evt.target.tagName.toLowerCase() === 'input') return;
+
+        const element = evt.target as HTMLElement;
+        if (element.tagName.toLowerCase() === 'input') return;
 
         evt.stopPropagation();
 
@@ -319,9 +322,11 @@ class TreeViewItem extends Container {
         }
     }
 
-    protected _onContentDblClick(evt: any) {
+    protected _onContentDblClick(evt: MouseEvent) {
         if (!this._treeView || !this._treeView.allowRenaming || evt.button !== 0) return;
-        if (evt.target.tagName.toLowerCase() === 'input') return;
+
+        const element = evt.target as HTMLElement;
+        if (element.tagName.toLowerCase() === 'input') return;
 
         evt.stopPropagation();
         const rect = this._containerContents.dom.getBoundingClientRect();
@@ -337,17 +342,17 @@ class TreeViewItem extends Container {
         this.rename();
     }
 
-    protected _onContentContextMenu(evt: any) {
+    protected _onContentContextMenu(evt: MouseEvent) {
         if (this._treeView && this._treeView._onContextMenu) {
             this._treeView._onContextMenu(evt, this);
         }
     }
 
-    protected _onContentFocus(evt: any) {
+    protected _onContentFocus(evt: FocusEvent) {
         this.emit('focus');
     }
 
-    protected _onContentBlur(evt: any) {
+    protected _onContentBlur(evt: FocusEvent) {
         this.emit('blur');
     }
 
@@ -361,18 +366,15 @@ class TreeViewItem extends Container {
             class: pcuiClass.FONT_REGULAR
         });
 
-        // @ts-ignore
         textInput.on('blur', () => {
             textInput.destroy();
         });
 
-        // @ts-ignore
         textInput.on('destroy', () => {
             this.classRemove(CLASS_RENAME);
             this.focus();
         });
 
-        // @ts-ignore
         textInput.on('change', (value: any) => {
             value = value.trim();
             if (value) {
@@ -381,7 +383,6 @@ class TreeViewItem extends Container {
             }
         });
 
-        // @ts-ignore
         textInput.on('disable', () => {
             // make sure text input is editable even if this
             // tree item is disabled
@@ -421,8 +422,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the item is selected.
-     *
-     * @type {boolean}
      */
     set selected(value) {
         if (value === this.selected) {
@@ -457,8 +456,6 @@ class TreeViewItem extends Container {
 
     /**
      * The text shown by the TreeViewItem.
-     *
-     * @type {string}
      */
     set text(value) {
         if (this._labelText.value !== value) {
@@ -475,8 +472,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the internal label that shows the text.
-     *
-     * @type {Label}
      */
     get textLabel() {
         return this._labelText;
@@ -484,8 +479,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the internal label that shows the icon.
-     *
-     * @type {Label}
      */
     get iconLabel() {
         return this._labelIcon;
@@ -493,8 +486,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the item is open meaning showing its children.
-     *
-     * @type {boolean}
      */
     set open(value) {
         if (this.open === value) return;
@@ -515,8 +506,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the parents of the item are open or closed.
-     *
-     * @type {boolean}
      */
     set parentsOpen(value) {
         let parent = this.parent;
@@ -538,8 +527,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether dropping is allowed on the tree item.
-     *
-     * @type {boolean}
      */
     set allowDrop(value) {
         this._allowDrop = value;
@@ -551,8 +538,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
-     *
-     * @type {boolean}
      */
     set allowDrag(value) {
         this._allowDrag = value;
@@ -564,8 +549,6 @@ class TreeViewItem extends Container {
 
     /**
      * Whether the item can be selected.
-     *
-     * @type {boolean}
      */
     set allowSelect(value) {
         this._allowSelect = value;
@@ -577,8 +560,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets / sets the parent TreeView.
-     *
-     * @type {TreeView}
      */
     set treeView(value) {
         this._treeView = value;
@@ -589,9 +570,7 @@ class TreeViewItem extends Container {
     }
 
     /**
-     * number of direct children.
-     *
-     * @type {number}
+     * The number of direct children.
      */
     get numChildren() {
         return this._numChildren;
@@ -599,8 +578,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the first child item.
-     *
-     * @type {TreeViewItem}
      */
     get firstChild() {
         if (this._numChildren) {
@@ -618,8 +595,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the last child item.
-     *
-     * @type {TreeViewItem}
      */
     get lastChild() {
         if (this._numChildren) {
@@ -637,8 +612,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the first sibling item.
-     *
-     * @type {TreeViewItem}
      */
     get nextSibling() {
         let sibling = this.dom.nextSibling;
@@ -653,8 +626,6 @@ class TreeViewItem extends Container {
 
     /**
      * Gets the last sibling item.
-     *
-     * @type {TreeViewItem}
      */
     get previousSibling() {
         let sibling = this.dom.previousSibling;
@@ -669,8 +640,6 @@ class TreeViewItem extends Container {
 
     /**
      * The icon shown before the text in the TreeViewItem.
-     *
-     * @type {string}
      */
     set icon(value) {
         if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;

@@ -59,7 +59,7 @@ PCUI uses four css classes to add styled fonts to the various components. These 
 
 ## Data Binding
 
-The pcui library offers a data binding layer that can be used to synchonise data across multiple components. It offers two way binding to a given observer object, so updates made in a component are reflected in the observers data and distributed out to all other subscribed components. A simple use case is shown below:
+The pcui library offers a data binding layer that can be used to synchronize data across multiple components. It offers two way binding to a given observer object, so updates made in a component are reflected in the observers data and distributed out to all other subscribed components. A simple use case is shown below:
 
 In this example the created label will start with `Hello World` as it's text value. When a user enters a value into the text input, the label will be updated with the new value.
 ```javascript

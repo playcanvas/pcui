@@ -199,7 +199,7 @@ class NumericInput extends TextInput {
         this.value = this._domInput.value;
     }
 
-    protected _onInputKeyDown(evt: any) {
+    protected _onInputKeyDown(evt: KeyboardEvent) {
         if (!this.enabled || this.readOnly) return super._onInputKeyDown(evt);
 
         // increase / decrease value with arrow keys
@@ -347,7 +347,7 @@ class NumericInput extends TextInput {
     }
 
     /**
-     * Gets / Sets the minimum value this field can take.
+     * Gets / sets the minimum value this field can take.
      */
     set min(value) {
         if (this._min === value) return;
@@ -364,7 +364,7 @@ class NumericInput extends TextInput {
     }
 
     /**
-     * Gets / Sets the maximum value this field can take.
+     * Gets / sets the maximum value this field can take.
      */
     set max(value) {
         if (this._max === value) return;
@@ -381,7 +381,7 @@ class NumericInput extends TextInput {
     }
 
     /**
-     * Gets / Sets the precision of the input.
+     * Gets / sets the precision of the input.
      */
     set precision(value) {
         if (this._precision === value) return;
@@ -398,7 +398,7 @@ class NumericInput extends TextInput {
     }
 
     /**
-     * Gets / Sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
+     * Gets / sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
      */
     set step(value) {
         this._step = value;

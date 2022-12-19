@@ -27,7 +27,7 @@ namespace GridView {
 
 /**
  * Represents a container that shows a flexible wrappable
- * list of items that looks like a grid. Contains GridViewItem's.
+ * list of items that looks like a grid. Contains GridViewItems.
  */
 class GridView extends Container {
     static readonly defaultArgs: GridView.Args = {
@@ -48,7 +48,7 @@ class GridView extends Container {
 
     protected _allowDeselect: boolean;
 
-    protected _selected: any[];
+    protected _selected: GridViewItem[];
 
     protected _clickFn: any;
 
@@ -118,7 +118,7 @@ class GridView extends Container {
         item.unbind('griditem:remove');
     }
 
-    protected _onClickItem(evt: any, item: GridViewItem) {
+    protected _onClickItem(evt: MouseEvent, item: GridViewItem) {
         if ((evt.ctrlKey || evt.metaKey) && this._multiSelect) {
             item.selected = !item.selected;
         } else if (evt.shiftKey && this._multiSelect) {
@@ -177,8 +177,7 @@ class GridView extends Container {
     }
 
     /**
-     * @name GridView#deselect
-     * @description Deselects all selected grid view items.
+     * Deselects all selected grid view items.
      */
     deselect() {
         let i = this._selected.length;
@@ -190,8 +189,7 @@ class GridView extends Container {
     }
 
     /**
-     * @name GridView#filter
-     * @description Filters grid view items with the filter function provided in the constructor.
+     * Filters grid view items with the filter function provided in the constructor.
      */
     filter() {
         this.forEachChild((child) => {
@@ -202,19 +200,18 @@ class GridView extends Container {
     }
 
     /**
-     * @name GridView#filterAsync
-     * @description Filters grid view items asynchronously by only allowing up to the specified
-     * number of grid view item operations. Fires following events:
-     * filter:start - When filtering starts
-     * filter:end - When filtering ends
-     * filter:delay - When an animation frame is requested to process another batch.
-     * filter:cancel - When filtering is canceled.
-     * @param {number} batchLimit - The maximum number of items to show
-     * before requesting another animation frame.
+     * Filters grid view items asynchronously by only allowing up to the specified number of grid
+     * view item operations. Fires the following events:
+     *
+     * - filter:start - When filtering starts.
+     * - filter:end - When filtering ends.
+     * - filter:delay - When an animation frame is requested to process another batch.
+     * - filter:cancel - When filtering is canceled.
+     *
+     * @param batchLimit - The maximum number of items to show before requesting another animation frame.
      */
-    filterAsync(batchLimit: number) {
+    filterAsync(batchLimit: number = 100) {
         let i = 0;
-        batchLimit = batchLimit || 100;
         const children = this.dom.childNodes;
         const len = children.length;
 
@@ -256,8 +253,7 @@ class GridView extends Container {
     }
 
     /**
-     * @name GridView#filterAsyncCancel
-     * @description Cancels asynchronous filtering.
+     * Cancels asynchronous filtering.
      */
     filterAsyncCancel() {
         if (this._filterAnimationFrame) {

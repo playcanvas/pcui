@@ -13,7 +13,7 @@ namespace Button {
          */
         text?: string,
         /**
-         * The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
+         * The CSS code for an icon for the button. e.g. 'E401' (notice we omit the '\\' character).
          */
         icon?: string,
         /**
@@ -36,15 +36,15 @@ class Button extends Element {
         dom: 'button'
     };
 
-    protected _unsafe: any;
+    protected _unsafe: boolean;
 
     protected _domEventKeyDown: any;
 
-    protected _text: any;
+    protected _text: string;
 
-    protected _icon: any;
+    protected _icon: string;
 
-    protected _size: any;
+    protected _size: string | null;
 
     constructor(args: Button.Args = Button.defaultArgs) {
         args = { ...Button.defaultArgs, ...args };
@@ -107,12 +107,12 @@ class Button extends Element {
         }
     }
 
-    get text() : string {
+    get text(): string {
         return this._text;
     }
 
     /**
-     * The CSS code for an icon for the button. e.g. E401 (notice we omit the '\' character).
+     * The CSS code for an icon for the button. e.g. 'E401' (notice we omit the '\\' character).
      */
     set icon(value: string) {
         if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
@@ -125,7 +125,7 @@ class Button extends Element {
         }
     }
 
-    get icon() : string {
+    get icon(): string {
         return this._icon;
     }
 
@@ -146,7 +146,7 @@ class Button extends Element {
         }
     }
 
-    get size() : string {
+    get size(): string {
         return this._size;
     }
 }

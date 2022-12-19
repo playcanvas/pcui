@@ -2,8 +2,8 @@ import Element from '../Element/index';
 import Overlay from '../Overlay/index';
 import NumericInput from '../NumericInput/index';
 import TextInput from '../TextInput/index';
-// @ts-ignore
-import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value.ts';
+import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
+
 const CLASS_COLOR_INPUT = 'pcui-color-input';
 const CLASS_NOT_FLEXIBLE = 'pcui-not-flexible';
 const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
@@ -12,11 +12,11 @@ namespace ColorPicker {
     export interface Args extends Element.Args {
         renderChanges?: boolean;
         /**
-         * An optional array of 4 integers containing the RGBA values the picker should be initialised to
+         * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
          */
         value?: Array<number>;
         /**
-         * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value
+         * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
          */
         channels?: number;
     }
@@ -186,7 +186,7 @@ class ColorPicker extends Element {
         this._pickRect.classList.add('pick-rect');
         this._overlay.append(this._pickRect);
 
-        this._pickRect.addEventListener('mousedown', function (evt: any) {
+        this._pickRect.addEventListener('mousedown', function (evt: MouseEvent) {
             this._pickRectMouseMove(evt);
 
             window.addEventListener('mousemove', this._pickRectMouseMove, false);
@@ -219,7 +219,7 @@ class ColorPicker extends Element {
         this._overlay.append(this._pickHue);
 
         // hue drag start
-        this._pickHue.addEventListener('mousedown', function (evt: any) {
+        this._pickHue.addEventListener('mousedown', function (evt: MouseEvent) {
             this._pickHueMouseMove(evt);
 
             window.addEventListener('mousemove', this._pickHueMouseMove, false);
@@ -242,8 +242,8 @@ class ColorPicker extends Element {
         this._pickOpacity.classList.add('pick-opacity');
         this._overlay.append(this._pickOpacity);
 
-        // opacoty drag start
-        this._pickOpacity.addEventListener('mousedown', function (evt: any) {
+        // opacity drag start
+        this._pickOpacity.addEventListener('mousedown', function (evt: MouseEvent) {
             this._pickOpacityMouseMove(evt);
 
             window.addEventListener('mousemove', this._pickOpacityMouseMove, false);
@@ -361,7 +361,7 @@ class ColorPicker extends Element {
         this.dom.blur();
     }
 
-    protected _onKeyDown(evt: any) {
+    protected _onKeyDown(evt: KeyboardEvent) {
         // escape blurs the field
         if (evt.keyCode === 27) {
             this.blur();
@@ -374,14 +374,13 @@ class ColorPicker extends Element {
 
         evt.stopPropagation();
         evt.preventDefault();
-
     }
 
-    protected _onFocus(evt: any) {
+    protected _onFocus(evt: FocusEvent) {
         this.emit('focus');
     }
 
-    protected _onBlur(evt: any) {
+    protected _onBlur(evt: FocusEvent) {
         this.emit('blur');
     }
 
@@ -463,7 +462,7 @@ class ColorPicker extends Element {
         });
     }
 
-    protected _callPicker(color: string | any[]) {
+    protected _callPicker(color: number[]) {
         // class for channels
         for (let i = 0; i < 4; i++) {
             if (color.length - 1 < i) {
@@ -495,12 +494,11 @@ class ColorPicker extends Element {
         this._overlay.hidden = false;
 
         // focus on hex field
-        // @ts-ignore
-        this._fieldHex._dom.focus();
+        this._fieldHex.dom.focus();
 
-        setTimeout(function () {
-            this._fieldHex._dom.focus();
-        }.bind(this), 100);
+        setTimeout(() => {
+            this._fieldHex.dom.focus();
+        }, 100);
     }
 
     protected _valueToColor(value: number) {
@@ -554,7 +552,7 @@ class ColorPicker extends Element {
     }
 
     // rect drag
-    protected _pickRectMouseMove(evt: { clientX: number; clientY: number; }) {
+    protected _pickRectMouseMove(evt: MouseEvent) {
         this._changing = true;
         const rect = this._pickRect.getBoundingClientRect();
         const x = Math.max(0, Math.min(this._size, Math.floor(evt.clientX - rect.left)));
@@ -585,7 +583,7 @@ class ColorPicker extends Element {
     }
 
     // hue drag
-    protected _pickHueMouseMove(evt: { clientY: number; }) {
+    protected _pickHueMouseMove(evt: MouseEvent) {
         this._changing = true;
         const rect = this._pickHue.getBoundingClientRect();
         const y = Math.max(0, Math.min(this._size, Math.floor(evt.clientY - rect.top)));
@@ -613,7 +611,7 @@ class ColorPicker extends Element {
     }
 
     // opacity drag
-    protected _pickOpacityMouseMove(evt: { clientY: number; }) {
+    protected _pickOpacityMouseMove(evt: MouseEvent) {
         this._changing = true;
         const rect = this._pickOpacity.getBoundingClientRect();
         const y = Math.max(0, Math.min(this._size, Math.floor(evt.clientY - rect.top)));

@@ -23,7 +23,7 @@ class Progress extends Container {
 
     protected _inner: Element;
 
-    protected _value: any;
+    protected _value: number;
 
     constructor(args: Progress.Args = Progress.defaultArgs) {
         args = { ...Progress.defaultArgs, ...args };
