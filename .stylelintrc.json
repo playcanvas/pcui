@@ -30,7 +30,6 @@
         "font-family-name-quotes": null,
         "function-comma-newline-after": null,
         "function-parentheses-newline-inside": null,
-        "max-empty-lines": null,
         "property-no-vendor-prefix": null,
         "rule-empty-line-before": null,
         "selector-list-comma-newline-after": null,
