@@ -43,7 +43,6 @@
         "property-no-vendor-prefix": null,
         "rule-empty-line-before": null,
         "selector-list-comma-newline-after": null,
-        "selector-not-notation": null,
         "selector-pseudo-element-colon-notation": null,
         "scss/double-slash-comment-empty-line-before": null,
         "scss/double-slash-comment-whitespace-inside": null,

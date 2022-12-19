@@ -38,7 +38,7 @@
 }
 
 // hover / focus
-.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly) {
+.pcui-boolean-input:not(.pcui-disabled, .pcui-readonly) {
     &:hover, &:focus {
         cursor: pointer;
         background-color: $bcg-darker;
@@ -120,7 +120,7 @@
 }
 
 // hover focus
-.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly) {
+.pcui-boolean-input-toggle:not(.pcui-disabled, .pcui-readonly) {
     &:hover,
     &:focus {
         cursor: pointer;

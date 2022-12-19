@@ -25,7 +25,7 @@
     // as specifically not flexible
     // and panel headers
     > *:first-child {
-        &:not(.pcui-not-flexible):not(.pcui-panel-header) {
+        &:not(.pcui-not-flexible, .pcui-panel-header) {
             flex: 1
         }
     }

@@ -166,7 +166,7 @@
     // direct children of tree
     > .pcui-treeview-item {
         .pcui-treeview-item {
-            &:not(.pcui-treeview-item-open):not(.pcui-treeview-item-empty) {
+            &:not(.pcui-treeview-item-open, .pcui-treeview-item-empty) {
                 > .pcui-treeview-item {
                     display: none;
                 }

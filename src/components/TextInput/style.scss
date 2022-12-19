@@ -44,7 +44,7 @@
 }
 
 // focus / hover states
-.pcui-text-input:not(.pcui-disabled):not(.pcui-readonly) {
+.pcui-text-input:not(.pcui-disabled, .pcui-readonly) {
     &:hover {
         background-color: $bcg-darker;
         color: $text-primary;

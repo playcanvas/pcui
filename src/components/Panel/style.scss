@@ -189,7 +189,7 @@
 }
 
 // hover on sortable
-.pcui-panel:not(.pcui-disabled):not(.pcui-readonly) {
+.pcui-panel:not(.pcui-disabled, .pcui-readonly) {
     > .pcui-panel-header {
         > .pcui-panel-sortable-icon:hover {
             color: $text-primary;
@@ -251,7 +251,7 @@
         background-color: $bcg-primary;
         border-color: $bcg-darker;
 
-        &:not(.pcui-disabled):not(.pcui-readonly) {
+        &:not(.pcui-disabled, .pcui-readonly) {
             &:hover, &:focus {
                 background-color: $bcg-primary;
             }

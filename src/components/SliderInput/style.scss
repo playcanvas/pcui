@@ -57,7 +57,7 @@
 }
 
 // hover state
-.pcui-slider:not(.pcui-disabled):not(.pcui-readonly) {
+.pcui-slider:not(.pcui-disabled, .pcui-readonly) {
     &:hover {
         cursor: pointer;
     }

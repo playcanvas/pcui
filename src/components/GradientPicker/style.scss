@@ -22,7 +22,7 @@
 }
 
 // hover / focus states
-.pcui-gradient:not(.pcui-disabled):not(.pcui-readonly):not(.pcui-multiple-values) {
+.pcui-gradient:not(.pcui-disabled, .pcui-readonly, .pcui-multiple-values) {
     &:hover, &:focus {
         cursor: pointer;
         box-shadow: $element-shadow-hover;

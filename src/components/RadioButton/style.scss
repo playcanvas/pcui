@@ -81,7 +81,7 @@
 }
 
 // hover
-.pcui-radio-button:not(.pcui-disabled):not(.pcui-readonly) {
+.pcui-radio-button:not(.pcui-disabled, .pcui-readonly) {
     &:hover {
         cursor: pointer;
 

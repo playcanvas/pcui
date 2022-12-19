@@ -56,7 +56,7 @@
     margin: 0;
 }
 
-.pcui-select-input-textinput:not(.pcui-disabled):not(.pcui-readonly):not(.pcui-error) {
+.pcui-select-input-textinput:not(.pcui-disabled, .pcui-readonly, .pcui-error) {
     &.pcui-focus, &:hover {
         box-shadow: none;
     }
@@ -173,7 +173,7 @@
         line-height: 18px;
         flex-shrink: 0;
 
-        &:not(.pcui-disabled):not(.pcui-readonly):hover {
+        &:not(.pcui-disabled, .pcui-readonly):hover {
             box-shadow: none;
             color: $error-secondary;
         }
@@ -191,7 +191,7 @@
     }
 }
 
-.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) {
+.pcui-select-input:not(.pcui-disabled, .pcui-readonly) {
     .pcui-select-input-container-value {
         &:hover {
             .pcui-select-input-shadow {
