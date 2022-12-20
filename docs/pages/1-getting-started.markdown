@@ -23,6 +23,7 @@ This will include the entire pcui library in your project. The various parts of 
 You can then import the ES6 components into your own `.js` files and use them as follows:
 ```javascript
 import { Button } from '@playcanvas/pcui';
+import '@playcanvas/pcui/styling';
 
 const helloWorldButton = new Button({
     text: 'Click Me'

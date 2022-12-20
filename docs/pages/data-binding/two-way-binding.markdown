@@ -16,11 +16,12 @@ Observers can also be bound bi-directionally, in which case an element can both 
 
 ### How To
 
-First import the components and binding classes.
+First import the components, binding classes and pcui styling.
 
 ```javascript
 import { Observer } from '@playcanvas/observer';
 import { TextInput, BindingTwoWay } from '@playcanvas/pcui';
+import '@playcanvas/pcui/styling';
 ```
 
 Then create a new observer for a an object which contains a text string.

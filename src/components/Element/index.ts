@@ -2,8 +2,6 @@ import React from 'react';
 import * as pcuiClass from '../../class';
 import { Events, Observer } from '@playcanvas/observer';
 
-// import the application's styling and use the green theme
-import '../../scss/themes/green/style.scss';
 import { BindingBase } from '../../binding';
 
 const CLASS_ELEMENT = 'pcui-element';
@@ -140,7 +138,7 @@ export interface ElementArgs {
     /**
      * Links the observer attribute at the path location in the given observer to this Element.
      */
-    link?: { observer: any, path: string },
+    link?: { observer: Array<Observer>|Observer, path: Array<string>|string },
     /**
      * The id attribute of this Element's HTMLElement.
      */
@@ -422,7 +420,7 @@ class Element extends Events {
      * @param observers - An array of observers or a single observer.
      * @param paths - A path for the observer(s) or an array of paths that maps to each separate observer.
      */
-    link(observers: Array<Observer>, paths: Array<string>|string) {
+    link(observers: Array<Observer>|Observer, paths: Array<string>|string) {
         if (this._binding) {
             this._binding.link(observers, paths);
         }
