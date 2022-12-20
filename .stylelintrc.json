@@ -4,7 +4,6 @@
         "indentation": 4,
         "color-function-notation": null,
         "declaration-block-no-redundant-longhand-properties": null,
-        "declaration-block-no-shorthand-property-overrides": null,
         "font-family-no-missing-generic-family-keyword": null,
         "max-line-length": null,
         "no-descending-specificity": null,
