@@ -93,7 +93,7 @@ class BindingBase extends Events {
      * If more observers than paths are passed then the path at index 0 will be used for all observers.
      * If one observer and multiple paths are passed then all of the paths will be used for the observer (e.g. for curves).
      */
-    link(observers: Observer[], paths: string[]) {
+    link(observers: Observer[]|Observer, paths: string[]|string) {
         if (this._observers) {
             this.unlink();
         }

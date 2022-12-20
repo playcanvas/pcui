@@ -13,10 +13,9 @@
 /dist
 /typedocs
 /types
-/unstyled/dist/
 /react/dist/
 /react/types/
-/react/unstyled/dist
+/styles/dist/
 
 # misc
 .DS_Store

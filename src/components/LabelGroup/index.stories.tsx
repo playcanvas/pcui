@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Component from './component';
+import '../../scss/index.js';
 import TextInput from '../TextInput/component';
 
 export default {

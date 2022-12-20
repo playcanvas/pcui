@@ -20,7 +20,7 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
 
     onRemove: () => void;
 
-    link: any;
+    link: ElementArgs["link"];
 
     onAttach?: any;
 

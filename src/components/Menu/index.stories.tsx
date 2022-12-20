@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Component from './component';
+import '../../scss/index.js';
 import Container from '../Container/component';
 import Label from '../Label/component';
 import LabelElement from '../Label';
