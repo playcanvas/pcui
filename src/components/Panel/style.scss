@@ -6,6 +6,7 @@
 // header of panel
 .pcui-panel-header {
     @extend .font-smooth;
+
     background-color: $bcg-darker;
     color: $text-primary;
     font-size: 12px;
@@ -20,6 +21,7 @@
     text-overflow: ellipsis;
     flex: 1;
     @extend .font-smooth;
+
     color: inherit;
     font-size: inherit;
     white-space: inherit;
@@ -45,6 +47,7 @@
             left: 0;
             content: '\E179';
             @extend .font-icon;
+
             font-size: 14px;
             margin-right: 10px;
             text-align: center;
@@ -107,7 +110,6 @@
                 -ms-transform: rotate(90deg);
                 -o-transform: rotate(90deg);
                 transform: rotate(90deg);
-
                 -webkit-transform-origin: 0% 100%;
                 -moz-transform-origin: 0% 100%;
                 -ms-transform-origin: 0% 100%;
@@ -160,6 +162,7 @@
         transition: color 100ms;
 
         @extend .pcui-flex;
+
         flex-direction: row;
         align-items: center;
         margin: 0 10px 0 0;

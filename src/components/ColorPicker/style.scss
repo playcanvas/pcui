@@ -1,6 +1,7 @@
 // color input
 .pcui-color-input {
     @extend .noSelect;
+
     position: relative;
     display: inline-block;
     box-sizing: border-box;
@@ -102,6 +103,7 @@
 
         > .pick-rect {
             @extend .noSelect;
+
             position: relative;
             display: none;
             float: left;
@@ -119,7 +121,6 @@
                 height: 144px;
                 top: 0;
                 left: 0;
-
                 background: -moz-linear-gradient(left, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* FF3.6+ */
                 background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 100%)), color-stop(100%, rgba(255, 255, 255, 1%))); /* Chrome,Safari4+ */
                 background: -webkit-linear-gradient(left, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* Chrome10+,Safari5.1+ */
@@ -134,7 +135,6 @@
                 height: 144px;
                 top: 0;
                 left: 0;
-
                 background: -moz-linear-gradient(top, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* FF3.6+ */
                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 1%)), color-stop(100%, rgba(0, 0, 0, 100%))); /* Chrome,Safari4+ */
                 background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* Chrome10+,Safari5.1+ */
@@ -157,6 +157,7 @@
 
         > .pick-hue {
             @extend .noSelect;
+
             position: relative;
             display: none;
             float: left;
@@ -166,7 +167,6 @@
             border: 1px solid #000;
             box-sizing: border-box;
             cursor: crosshair;
-
             background: #000;
             background:
                 -moz-linear-gradient(
@@ -251,6 +251,7 @@
 
         > .pick-opacity {
             @extend .noSelect;
+
             position: relative;
             display: none;
             float: left;
@@ -259,7 +260,6 @@
             margin: 8px 0 8px 8px;
             border: 1px solid #000;
             cursor: crosshair;
-
             background: #000;
             background: -moz-linear-gradient(top, #fff 0%, #000 100%); /* FF3.6+ */
             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #000)); /* Chrome,Safari4+ */

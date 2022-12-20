@@ -2,18 +2,13 @@
 .pcui-boolean-input {
     display: inline-block;
     position: relative;
-
     box-sizing: border-box;
-
     background-color: $bcg-dark;
     color: #fff;
-
     width: 14px;
     height: 14px;
     line-height: 1;
-
     overflow: hidden;
-
     margin: $element-margin;
     transition: opacity 100ms, background-color 100ms, box-shadow 100ms;
 
@@ -28,6 +23,7 @@
 
     &::after {
         @extend .font-icon;
+
         content: '\E372';
         color: $bcg-darkest;
         background-color: inherit;
@@ -81,17 +77,12 @@
     height: 16px;
     border-radius: 8px;
     flex-shrink: 0;
-
     border: 1px solid $bcg-darker;
     box-sizing: border-box;
-
     background-color: $bcg-primary;
     color: #fff;
-
     line-height: 1;
-
     overflow: hidden;
-
     margin: $element-margin;
     transition: opacity 100ms, background-color 100ms, box-shadow 100ms;
 

@@ -1,6 +1,7 @@
 // buttons
 .pcui-button {
     @extend .noSelect;
+
     font-family: inherit;
     display: inline-block;
     border: 1px solid $bcg-darkest;
@@ -20,7 +21,6 @@
     white-space: nowrap;
     cursor: pointer;
     transition: color 100ms, opacity 100ms, box-shadow 100ms;
-
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -32,6 +32,7 @@
     &::before {
         content: attr(data-icon);
         @extend .font-icon;
+
         font-weight: 100;
         font-size: inherit;
         margin-right: $element-margin;

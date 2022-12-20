@@ -5,7 +5,6 @@
     box-sizing: border-box;
     margin: $element-margin;
     transition: opacity 100ms, box-shadow 100ms;
-
     border: 1px solid $bcg-darker;
     background-color: $bcg-dark;
 
@@ -52,7 +51,6 @@
                 top: 14px;
                 margin-top: 0;
                 margin-bottom: 0;
-
                 display: flex;
                 align-items: center;
                 text-align: center;
@@ -93,7 +91,6 @@
                     font-size: 12px;
                     font-family: inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;
                     line-height: 22px;
-
                     position: absolute;
                     width: 18px;
                     min-height: 17px !important;
@@ -166,6 +163,7 @@
                         width: 22px;
                         height: 22px;
                         @extend .font-icon;
+
                         vertical-align: bottom;
                         margin: 0;
                         margin-right: 8px;

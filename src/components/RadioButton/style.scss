@@ -2,16 +2,12 @@
 .pcui-radio-button {
     display: inline-block;
     position: relative;
-
     background-color: $bcg-darker;
     color: #fff;
-
     width: 17px;
     height: 17px;
     border-radius: 50%;
-
     overflow: hidden;
-
     margin: $element-margin;
     transition: opacity 100ms, background-color 100ms, box-shadow 100ms;
 
@@ -22,14 +18,11 @@
         display: block;
         left: 50%;
         top: 50%;
-
         width: 16px;
         min-width: 16px;
         height: 16px;
-
         transform: translate(-50%, -50%);
         border-radius: 50%;
-
         background-color: $bcg-darker;
     }
 
@@ -38,14 +31,11 @@
         position: absolute;
         left: 50%;
         top: 50%;
-
         width: 11px;
         min-width: 11px;
         height: 11px;
-
         transform: translate(-50%, -50%);
         border-radius: 50%;
-
         background-color: white;
     }
 }
@@ -57,7 +47,6 @@
         width: 16px;
         min-width: 16px;
         height: 16px;
-
         box-sizing: border-box;
         border: 1px solid white;
     }

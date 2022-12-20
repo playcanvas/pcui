@@ -19,7 +19,6 @@
         "string-quotes": "single",
 
         "at-rule-no-vendor-prefix": null,
-        "declaration-empty-line-before": null,
         "property-no-vendor-prefix": null,
         "value-no-vendor-prefix": null
     }
