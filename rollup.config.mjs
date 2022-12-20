@@ -61,15 +61,12 @@ const styling = {
 }
 
 export default (args) => {
-    let targets = [];
     if (process.env.target === 'es6') {
-        targets.push(module);
+        return [module];
     } else if (process.env.target === 'react:es6') {
-        targets.push(react_module);
+        return [react_module];
     } else if (process.env.target === 'styling') {
-        targets.push(styling);
-    } else {
-        targets = [module, react_module, styling];
+        return [styling];
     }
-    return targets;
+    return [module, react_module, styling];
 };
