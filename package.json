@@ -16,7 +16,7 @@
     "url": "git+https://github.com/playcanvas/pcui.git"
   },
   "scripts": {
-    "lint:styles": "stylelint src/components/**/*.scss src/examples/**/*.scss",
+    "lint:styles": "stylelint src/**/*.scss",
     "lint": "eslint --ext .ts --ext .tsx src",
     "watch:es5": "rollup -c -w --environment styled --environment target:es5",
     "watch:es6": "rollup -c -w --environment styled --environment target:es6",
