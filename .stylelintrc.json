@@ -13,7 +13,6 @@
         "scss/no-global-function-names": null,
         "scss/at-extend-no-missing-placeholder": null,
         "selector-class-pattern": null,
-        "shorthand-property-no-redundant-values": null,
         "string-quotes": "single",
 
         "at-rule-no-vendor-prefix": null,
