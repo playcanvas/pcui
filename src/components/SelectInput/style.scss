@@ -72,6 +72,7 @@
     margin: 0;
     height: 24px;
     line-height: 24px;
+
     &::after {
         @extend .font-icon;
         content: '\E159';
@@ -83,6 +84,7 @@
     .pcui-select-input-shadow {
         box-shadow: $element-shadow-hover;
     }
+
     .pcui-select-input-value {
         color: $text-primary;
         background-color: $bcg-darkest;
@@ -118,6 +120,7 @@
 
         &.pcui-selected {
             color: $text-primary;
+
             &::after {
                 @extend .font-icon;
                 content: '\E133';
@@ -184,6 +187,7 @@
 .pcui-select-input-tag-not-everywhere {
     > .pcui-label {
         opacity: 0.5;
+
         &::before {
             content: '*';
             margin-right: 5px;
@@ -238,6 +242,7 @@
     > .pcui-label:last-child {
         flex-shrink: 0;
         margin-left: auto;
+
         &::before {
             content: '\E120';
             @extend .font-icon;

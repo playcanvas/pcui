@@ -22,7 +22,6 @@
         "block-no-empty": null,
         "declaration-empty-line-before": null,
         "property-no-vendor-prefix": null,
-        "rule-empty-line-before": null,
         "value-no-vendor-prefix": null
     }
 }

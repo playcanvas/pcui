@@ -134,6 +134,7 @@
     // direct children of tree
     > .pcui-treeview-item {
         padding-left: 0;
+
         &::before {
             content: none;
         }
@@ -145,6 +146,7 @@
                 &::before {
                     content: none;
                 }
+
                 &::after {
                     margin-left: 0;
                 }
@@ -241,6 +243,7 @@
     // }
     .pcui-treeview-item {
         padding-left: 0;
+
         &::before {
             display: none;
         }

@@ -29,13 +29,13 @@
         cursor: pointer;
         box-shadow: $element-shadow-hover;
     }
+
     &:active {
         box-shadow: $element-shadow-active;
     }
 }
 
 .picker-gradient {
-
     > .pcui-overlay-content {
         width: 343px;
         height: 262px;
@@ -165,6 +165,7 @@
                     > .pcui-numeric-input {
                         align-self: center;
                     }
+
                     > .pcui-button {
                         width: 22px;
                         height: 22px;
@@ -177,6 +178,7 @@
 
                     > .copy-curve-button {
                         border-color: #2c393c;
+
                         &::after {
                             content: '\e351';
                             position: absolute;
@@ -190,6 +192,7 @@
 
                     > .paste-curve-button {
                         border-color: #2c393c;
+
                         &::after {
                             content: '\e348';
                             position: absolute;
@@ -203,6 +206,7 @@
 
                     > .delete-curve-button {
                         border-color: #2c393c;
+
                         &::after {
                             content: '\e125';
                             position: absolute;
@@ -224,7 +228,6 @@
                 }
 
                 > .pcui-panel-content {
-
                     > .color-rect {
                         margin: 5px 10px 10px 10px;
                         width: 140px;

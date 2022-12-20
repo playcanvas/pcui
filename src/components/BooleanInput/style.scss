@@ -25,6 +25,7 @@
 // ticked
 .pcui-boolean-input.pcui-boolean-input-ticked {
     background-color: $text-secondary;
+
     &::after {
         @extend .font-icon;
         content: '\E372';

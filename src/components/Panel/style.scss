@@ -54,6 +54,7 @@
         // header collapsible hover state
         &:hover {
             color: $text-primary;
+
             &::before {
                 color: $text-primary;
             }
@@ -145,6 +146,7 @@
     // disable width / height transitions while resizing
     &.pcui-resizable-resizing {
         transition: none;
+
         > .pcui-panel-content {
             transition: none;
         }

@@ -40,32 +40,37 @@
 }
 
 .picker-color {
-
     &.c-1 > .pcui-overlay-content {
         > .pick-opacity {
             display: block;
         }
+
         > .fields > .field-r {
             display: block;
         }
     }
+
     &.c-2 > .pcui-overlay-content {
         > .fields > .field-hex {
             display: block;
         }
     }
+
     &.c-3 > .pcui-overlay-content {
         width: 298px;
 
         > .pick-rect {
             display: block;
         }
+
         > .pick-hue {
             display: block;
         }
+
         > .pick-opacity {
             display: none;
         }
+
         > .fields {
             > .field-g,
             > .field-b {
@@ -73,16 +78,19 @@
             }
         }
     }
+
     &.c-4 > .pcui-overlay-content {
         width: 320px;
 
         > .pick-opacity {
             display: block;
         }
+
         > .fields > .field-a {
             display: block;
         }
     }
+
     > .pcui-overlay-content {
         border: 1px solid #000;
         width: 320px;
@@ -119,6 +127,7 @@
                 background: -ms-linear-gradient(left, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* IE10+ */
                 background: linear-gradient(to right, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* W3C */
             }
+
             > .black {
                 position: absolute;
                 width: 144px;
@@ -133,6 +142,7 @@
                 background: -ms-linear-gradient(top, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* IE10+ */
                 background: linear-gradient(to bottom, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* W3C */
             }
+
             > .handle {
                 position: absolute;
                 top: 0;
@@ -144,6 +154,7 @@
                 outline: 1px solid #fff;
             }
         }
+
         > .pick-hue {
             @extend .noSelect;
             position: relative;
@@ -237,6 +248,7 @@
                 outline: 1px solid #fff;
             }
         }
+
         > .pick-opacity {
             @extend .noSelect;
             position: relative;
@@ -294,6 +306,7 @@
 // readonly color input
 .pcui-color-input.pcui-readonly {
     cursor: default;
+
     &::after {
         display: none;
     }
@@ -315,6 +328,7 @@
             border-bottom-color: $bcg-darkest;
         }
     }
+
     &:active {
         box-shadow: $element-shadow-active;
     }
