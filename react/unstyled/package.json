@@ -4,6 +4,7 @@
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://playcanvas.github.io/pcui",
   "description": "Unstyled PCUI components for react",
+  "private": true,
   "main": "dist/index.js",
   "module": "dist/module/src/index.mjs",
   "types": "../types/index.d.ts",
