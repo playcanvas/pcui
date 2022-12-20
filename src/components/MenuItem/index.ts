@@ -40,7 +40,7 @@ export interface MenuItemArgs extends ContainerArgs {
     /**
      * An array of MenuItem constructor data. If defined then child MenuItems will be created and added to the MenuItem.
      */
-    items?: any;
+    items?: Array<MenuItemArgs>;
 }
 
 /**
