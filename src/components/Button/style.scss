@@ -31,6 +31,7 @@
     // as the content
     &::before {
         content: attr(data-icon);
+
         @extend .font-icon;
 
         font-weight: 100;

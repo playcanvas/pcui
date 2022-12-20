@@ -73,6 +73,7 @@
 
     &::after {
         content: attr(data-icon);
+
         @extend .font-icon;
 
         display: inline-block;
@@ -107,6 +108,7 @@
 .pcui-treeview-item:not(.pcui-treeview-item-empty) {
     > .pcui-treeview-item-contents::before {
         content: '\E120';
+
         @extend .font-icon;
 
         position: absolute;

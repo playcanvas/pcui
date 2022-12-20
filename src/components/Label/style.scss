@@ -23,6 +23,7 @@
         content: '...';
         color: $text-secondary;
         white-space: nowrap;
+
         @extend .fixedFont;
 
         font-size: 12px;
@@ -37,6 +38,7 @@
     &:hover {
         color: $text-active;
         text-decoration: underline;
+
         @extend .noSelect;
     }
 }

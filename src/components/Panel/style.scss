@@ -20,6 +20,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     flex: 1;
+
     @extend .font-smooth;
 
     color: inherit;
@@ -46,6 +47,7 @@
         &::before {
             left: 0;
             content: '\E179';
+
             @extend .font-icon;
 
             font-size: 14px;

@@ -45,6 +45,7 @@
     height: 24px;
     line-height: 24px;
     font-size: 12px;
+
     @extend .fixedFont;
 
     transition: background-color 100ms, color 100ms;
@@ -114,6 +115,7 @@
         }
 
         font-size: 12px;
+
         @extend .fixedFont;
 
         height: 22px;
@@ -172,6 +174,7 @@
 
     > .pcui-label {
         padding: 0 5px 0 8px;
+
         @extend .fixedFont;
     }
 
@@ -249,6 +252,7 @@
 
         &::before {
             content: '\E120';
+
             @extend .font-icon;
 
             margin-right: $element-margin;
