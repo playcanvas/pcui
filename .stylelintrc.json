@@ -21,7 +21,6 @@
         "block-no-empty": null,
         "declaration-colon-newline-after": null,
         "declaration-empty-line-before": null,
-        "function-comma-newline-after": null,
         "property-no-vendor-prefix": null,
         "rule-empty-line-before": null,
         "selector-list-comma-newline-after": null,
