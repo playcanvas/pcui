@@ -15,7 +15,7 @@ npm install --save @playcanvas/observer
 npm install --save @playcanvas/pcui
 ```
 
-If you are using ESM, you can then import each individual element from pcui. Below you can see in the example below how the PCUI Label component is imported from the PCUI library. The styling for PCUI is then imported into the example to ensure that the component is styled correctly. This styling only needs to be imported once in your project.
+If you are using ESM, you can then import each individual element from pcui. In the example below you can see how the PCUI Label component is imported from the PCUI library. The styling for PCUI is then imported into the example to ensure that the component is styled correctly. This styling only needs to be imported once in your project.
 
 ```javascript
 import { Label } from '@playcanvas/pcui';
