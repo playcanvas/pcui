@@ -1,6 +1,6 @@
 import Container, { ContainerArgs } from '../Container';
 import { IFocusable } from '../Element';
-import MenuItem from '../MenuItem';
+import MenuItem, { MenuItemArgs } from '../MenuItem';
 
 const CLASS_MENU = 'pcui-menu';
 const CLASS_MENU_ITEMS = CLASS_MENU + '-items';
@@ -9,7 +9,7 @@ export interface MenuArgs extends ContainerArgs {
     /**
      * An optional array of MenuItem data. If these are passed then new MenuItems will be created and appended to the menu.
      */
-    items: any;
+    items: Array<MenuItemArgs>;
 }
 
 /**
@@ -195,6 +195,13 @@ class Menu extends Container implements IFocusable {
             // @ts-ignore
             this._limitSubmenuAtScreenEdges(child.ui);
         });
+    }
+
+    /**
+     * Remove all the current menu items from the menu.
+     */
+    clear() {
+        this._containerMenuItems.clear();
     }
 
     destroy() {
