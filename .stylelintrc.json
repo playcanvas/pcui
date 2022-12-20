@@ -7,7 +7,6 @@
         "declaration-block-no-redundant-longhand-properties": null,
         "declaration-block-no-shorthand-property-overrides": null,
         "font-family-no-missing-generic-family-keyword": null,
-        "function-name-case": null,
         "max-line-length": null,
         "no-descending-specificity": null,
         "no-duplicate-selectors": null,
