@@ -19,7 +19,6 @@
 
         "at-rule-no-vendor-prefix": null,
         "block-no-empty": null,
-        "declaration-colon-newline-after": null,
         "declaration-empty-line-before": null,
         "property-no-vendor-prefix": null,
         "rule-empty-line-before": null,
