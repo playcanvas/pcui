@@ -251,7 +251,8 @@
         border-color: $bcg-darker;
 
         &:not(.pcui-disabled, .pcui-readonly) {
-            &:hover, &:focus {
+            &:hover,
+            &:focus {
                 background-color: $bcg-primary;
             }
 

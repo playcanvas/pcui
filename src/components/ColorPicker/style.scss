@@ -301,7 +301,8 @@
 
 // hover / focus states
 .pcui-color-input:not(.pcui-disabled, .pcui-readonly) {
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         box-shadow: $element-shadow-hover;
 
         &::after {

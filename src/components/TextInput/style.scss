@@ -61,8 +61,10 @@
 }
 
 .pcui-text-input {
-    &.pcui-focus, &:hover {
-        &::after, &::before {
+    &.pcui-focus,
+    &:hover {
+        &::after,
+        &::before {
             display: none;
         }
     }

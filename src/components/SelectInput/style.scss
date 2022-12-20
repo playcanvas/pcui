@@ -57,7 +57,8 @@
 }
 
 .pcui-select-input-textinput:not(.pcui-disabled, .pcui-readonly, .pcui-error) {
-    &.pcui-focus, &:hover {
+    &.pcui-focus,
+    &:hover {
         box-shadow: none;
     }
 }
@@ -220,7 +221,8 @@
     }
 
     .pcui-select-input-list {
-        > *:hover, > .pcui-select-input-label-highlighted {
+        > *:hover,
+        > .pcui-select-input-label-highlighted {
             background-color: $bcg-darkest;
             color: $text-primary;
             cursor: pointer;

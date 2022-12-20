@@ -49,7 +49,8 @@
 
 // focus / hover states
 .pcui-button:not(.pcui-disabled, .pcui-readonly) {
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         color: $text-primary;
         background-color: $bcg-dark;
         box-shadow: $element-shadow-hover;

@@ -17,13 +17,15 @@
 }
 
 // disabled gradient input
-.pcui-gradient.pcui-disabled, .pcui-gradient.pcui-multiple-values {
+.pcui-gradient.pcui-disabled,
+.pcui-gradient.pcui-multiple-values {
     opacity: $element-opacity-disabled;
 }
 
 // hover / focus states
 .pcui-gradient:not(.pcui-disabled, .pcui-readonly, .pcui-multiple-values) {
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         cursor: pointer;
         box-shadow: $element-shadow-hover;
     }
@@ -242,7 +244,8 @@
                         pointer-events: none;
                     }
 
-                    > .hue-rect, > .alpha-rect {
+                    > .hue-rect,
+                    > .alpha-rect {
                         margin: 5px 10px 10px 0;
                         width: 20px;
                         height: 140px;
@@ -250,7 +253,8 @@
                         border-width: 1px;
                     }
 
-                    > .hue-handle, > .alpha-handle {
+                    > .hue-handle,
+                    > .alpha-handle {
                         position: absolute;
                         width: 20px;
                         height: 4px;

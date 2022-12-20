@@ -26,7 +26,8 @@
     }
 
     // horizontal handle
-    &.pcui-resizable-left, &.pcui-resizable-right {
+    &.pcui-resizable-left,
+    &.pcui-resizable-right {
         > .pcui-resizable-handle {
             top: 0;
             bottom: 0;
@@ -49,7 +50,8 @@
     }
 
     // vertical handle
-    &.pcui-resizable-top, &.pcui-resizable-bottom {
+    &.pcui-resizable-top,
+    &.pcui-resizable-bottom {
         > .pcui-resizable-handle {
             left: 0;
             right: 0;

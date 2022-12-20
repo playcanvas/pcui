@@ -35,7 +35,8 @@
     border: 1px solid $bcg-darker;
     transition: left 100ms ease;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         outline: none;
     }
 }
