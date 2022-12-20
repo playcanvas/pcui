@@ -1,2 +1,2 @@
-// import the application's styling and use the green theme
+// import the application's styles and use the green theme
 import './themes/green/style.scss';

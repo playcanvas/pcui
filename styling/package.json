@@ -1,9 +1,9 @@
 {
-  "name": "pcui-styling",
+  "name": "pcui-styles",
   "version": "1.0.0",
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://playcanvas.github.io/pcui",
-  "description": "PCUI component styling",
+  "description": "PCUI component styles",
   "private": true,
   "main": "dist/index.mjs",
   "license": "MIT",

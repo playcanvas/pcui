@@ -10,7 +10,7 @@ If you are more familar with react, you can import react elements into your own 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { TextInput } from '@playcanvas/pcui/react';
-import '@playcanvas/pcui/styling';
+import '@playcanvas/pcui/styles';
 
 ReactDOM.render(
     <TextInput />,

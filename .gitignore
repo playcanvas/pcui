@@ -15,7 +15,7 @@
 /types
 /react/dist/
 /react/types/
-/styling/dist/
+/styles/dist/
 
 # misc
 .DS_Store

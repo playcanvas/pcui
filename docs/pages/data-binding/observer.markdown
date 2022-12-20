@@ -18,12 +18,12 @@ In this example the created label will start with `Hello World` as it's text val
 
 ### How To
 
-First import the components, binding classes and pcui styling.
+First import the components, binding classes and pcui styles.
 
 ```javascript
 import { Observer } from '@playcanvas/observer';
 import { Label, TextInput, BindingObserversToElement, BindingElementToObservers } from '@playcanvas/pcui';
-import '@playcanvas/pcui/styling';
+import '@playcanvas/pcui/styles';
 ```
 
 Create a new observer for an object which contains a text string.

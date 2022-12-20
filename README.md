@@ -15,11 +15,11 @@ npm install --save @playcanvas/observer
 npm install --save @playcanvas/pcui
 ```
 
-If you are using ESM, you can then import each individual element from pcui. In the example below you can see how the PCUI Label component is imported from the PCUI library. The styling for PCUI is then imported into the example to ensure that the component is styled correctly. This styling only needs to be imported once in your project.
+If you are using ESM, you can then import each individual element from pcui. In the example below you can see how the PCUI Label component is imported from the PCUI library. The styles for PCUI are then imported into the example. Styles only need to be imported once per project.
 
 ```javascript
 import { Label } from '@playcanvas/pcui';
-import '@playcanvas/pcui/styling';
+import '@playcanvas/pcui/styles';
 
 const helloWorldLabel = new Label({
     text: 'Hello World'
@@ -32,7 +32,7 @@ If you'd like you include pcui in your react project, you can import the individ
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { TextInput } from '@playcanvas/pcui/react';
-import '@playcanvas/pcui/styling';
+import '@playcanvas/pcui/styles';
 
 ReactDOM.render(
     <TextInput text='Hello World'/>,
@@ -57,7 +57,7 @@ In this example the created label will start with `Hello World` as it's text val
 ```javascript
 import { Observer } from '@playcanvas/observer';
 import { Label, TextInput, BindingObserversToElement, BindingElementToObservers } from '@playcanvs/pcui';
-import '@playcanvas/pcui/styling';
+import '@playcanvas/pcui/styles';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
@@ -80,7 +80,7 @@ Observers can also be bound bi-directionally, in which case an element can both 
 import { Observer } from '@playcanvas/observer';
 import { BindingTwoWay } from '@playcanvas/pcui';
 import { TextInput } from '@playcanvas/pcui/react';
-import '@playcanvas/pcui/styling';
+import '@playcanvas/pcui/styles';
 
 // create a new observer for a simple object which contains a text string
 const observer = new Observer({text: 'Hello World'});
