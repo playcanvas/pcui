@@ -12,21 +12,21 @@
     top: 50%;
     cursor: ew-resize;
 }
-.pcui-numeric-input-slider-control:after {
+.pcui-numeric-input-slider-control::after {
     content: '\E408';
     font-size: 15px;
-    font-family: 'pc-icon';
+    font-family: pc-icon;
     position: absolute;
     left: -5px;
     top: -5px;
     transform: rotateZ(90deg);
 }
 .pcui-numeric-input-slider-control:hover {
-    opacity: 50%;
+    opacity: 0.5;
     color: $text-secondary;
 }
 .pcui-numeric-input-slider-control-active {
-    opacity: 100% !important;
+    opacity: 1 !important;
     color: #7f7 !important;
 }
 .pcui-numeric-input-slider-control-hidden {
@@ -44,7 +44,8 @@
     }
 }
 
-.pcui-numeric-input.pcui-disabled, .pcui-numeric-input.pcui-readonly {
+.pcui-numeric-input.pcui-disabled,
+.pcui-numeric-input.pcui-readonly {
     .pcui-numeric-input-slider-control {
         display: none;
     }

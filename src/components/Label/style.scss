@@ -19,7 +19,7 @@
     position: relative;
     color: transparent;
 
-    &:before {
+    &::before {
         content: '...';
         color: $text-secondary;
         white-space: nowrap;
@@ -44,7 +44,7 @@
 .pcui-label[placeholder] {
     position: relative;
 
-    &:after {
+    &::after {
         content: attr(placeholder);
         position: absolute;
         top: 0;

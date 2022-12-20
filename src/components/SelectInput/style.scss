@@ -56,8 +56,9 @@
     margin: 0;
 }
 
-.pcui-select-input-textinput:not(.pcui-disabled):not(.pcui-readonly):not(.pcui-error) {
-    &.pcui-focus, &:hover {
+.pcui-select-input-textinput:not(.pcui-disabled, .pcui-readonly, .pcui-error) {
+    &.pcui-focus,
+    &:hover {
         box-shadow: none;
     }
 }
@@ -71,14 +72,14 @@
     margin: 0;
     height: 24px;
     line-height: 24px;
-    &:after {
+    &::after {
         @extend .font-icon;
         content: '\E159';
         vertical-align: middle;
     }
 }
 
-.pcui-select-input.pcui-open  {
+.pcui-select-input.pcui-open {
     .pcui-select-input-shadow {
         box-shadow: $element-shadow-hover;
     }
@@ -87,7 +88,7 @@
         background-color: $bcg-darkest;
     }
 
-    .pcui-select-input-icon:after {
+    .pcui-select-input-icon::after {
         color: $text-primary;
         content: '\E157';
     }
@@ -117,7 +118,7 @@
 
         &.pcui-selected {
             color: $text-primary;
-            &:after {
+            &::after {
                 @extend .font-icon;
                 content: '\E133';
                 color: $text-darkest;
@@ -173,25 +174,24 @@
         line-height: 18px;
         flex-shrink: 0;
 
-        &:not(.pcui-disabled):not(.pcui-readonly):hover {
+        &:not(.pcui-disabled, .pcui-readonly):hover {
             box-shadow: none;
             color: $error-secondary;
         }
-
     }
 }
 
 .pcui-select-input-tag-not-everywhere {
     > .pcui-label {
         opacity: 0.5;
-        &:before {
+        &::before {
             content: '*';
             margin-right: 5px;
         }
     }
 }
 
-.pcui-select-input:not(.pcui-disabled):not(.pcui-readonly) {
+.pcui-select-input:not(.pcui-disabled, .pcui-readonly) {
     .pcui-select-input-container-value {
         &:hover {
             .pcui-select-input-shadow {
@@ -221,12 +221,12 @@
     }
 
     .pcui-select-input-list {
-        > *:hover, > .pcui-select-input-label-highlighted {
+        > *:hover,
+        > .pcui-select-input-label-highlighted {
             background-color: $bcg-darkest;
             color: $text-primary;
             cursor: pointer;
         }
-
     }
 }
 
@@ -238,7 +238,7 @@
     > .pcui-label:last-child {
         flex-shrink: 0;
         margin-left: auto;
-        &:before {
+        &::before {
             content: '\E120';
             @extend .font-icon;
             margin-right: $element-margin;
@@ -268,7 +268,7 @@
     &.pcui-select-input-allow-input:not(.pcui-select-input-multi) {
         opacity: $element-opacity-readonly;
 
-        .pcui-select-input-textinput:after {
+        .pcui-select-input-textinput::after {
             display: none;
         }
     }

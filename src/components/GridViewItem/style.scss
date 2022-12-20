@@ -11,7 +11,7 @@
     &:not(.pcui-disabled) {
         cursor: pointer;
 
-        &:not(.pcui-gridview-item-selected):not(.pcui-gridview-radiobtn):not(.pcui-gridview-radiobtn-selected):hover {
+        &:not(.pcui-gridview-item-selected, .pcui-gridview-radiobtn, .pcui-gridview-radiobtn-selected):hover {
             background-color: $bcg-darker;
         }
     }

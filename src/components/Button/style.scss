@@ -25,12 +25,11 @@
     text-overflow: ellipsis;
 }
 
-
 // icon
 .pcui-button[data-icon] {
     // show icon using data-icon attribute
     // as the content
-    &:before {
+    &::before {
         content: attr(data-icon);
         @extend .font-icon;
         font-weight: 100;
@@ -42,15 +41,16 @@
     // remove right margin from icons
     // if the button has no text
     &:empty {
-        &:before {
+        &::before {
             margin-right: 0;
         }
     }
 }
 
 // focus / hover states
-.pcui-button:not(.pcui-disabled):not(.pcui-readonly) {
-    &:hover, &:focus {
+.pcui-button:not(.pcui-disabled, .pcui-readonly) {
+    &:hover,
+    &:focus {
         color: $text-primary;
         background-color: $bcg-dark;
         box-shadow: $element-shadow-hover;

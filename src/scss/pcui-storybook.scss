@@ -1,7 +1,7 @@
-@import './variables.scss';
-@import './fonts-storybook.scss';
-@import 'pcui-common.scss';
-@import 'pcui-hidden.scss'; // this should be last
+@import './variables';
+@import './fonts-storybook';
+@import 'pcui-common';
+@import 'pcui-hidden'; // this should be last
 
 .css-kdwx3d {
     background-color: #374346;

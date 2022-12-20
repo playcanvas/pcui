@@ -25,7 +25,7 @@
 // ticked
 .pcui-boolean-input.pcui-boolean-input-ticked {
     background-color: $text-secondary;
-    &:after {
+    &::after {
         @extend .font-icon;
         content: '\E372';
         color: $bcg-darkest;
@@ -38,15 +38,17 @@
 }
 
 // hover / focus
-.pcui-boolean-input:not(.pcui-disabled):not(.pcui-readonly) {
-    &:hover, &:focus {
+.pcui-boolean-input:not(.pcui-disabled, .pcui-readonly) {
+    &:hover,
+    &:focus {
         cursor: pointer;
         background-color: $bcg-darker;
         box-shadow: $element-shadow-hover;
     }
 
     &.pcui-boolean-input-ticked {
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: $text-secondary;
         }
     }
@@ -59,7 +61,7 @@
 
 // showing multiple values
 .pcui-boolean-input.pcui-multiple-values {
-    &:after {
+    &::after {
         position: absolute;
         font-size: 17px;
         font-weight: bold;
@@ -96,7 +98,7 @@
         outline: none;
     }
 
-    &:after {
+    &::after {
         content: '\00a0';
         position: absolute;
         top: 1px;
@@ -113,14 +115,14 @@
 .pcui-boolean-input-toggle.pcui-boolean-input-ticked {
     border-color: $bcg-darker;
 
-    &:after {
+    &::after {
         left: 15px;
         background-color: mix($text-darkest, #7f7, 50%);
     }
 }
 
 // hover focus
-.pcui-boolean-input-toggle:not(.pcui-disabled):not(.pcui-readonly) {
+.pcui-boolean-input-toggle:not(.pcui-disabled, .pcui-readonly) {
     &:hover,
     &:focus {
         cursor: pointer;
@@ -128,7 +130,7 @@
         background-color: $bcg-darkest;
         box-shadow: $element-shadow-hover;
 
-        &:after {
+        &::after {
             background-color: $error-secondary;
         }
     }
@@ -140,7 +142,7 @@
             background-color: $bcg-darkest;
         }
 
-        &:after {
+        &::after {
             background-color: #7f7;
         }
     }
@@ -158,7 +160,7 @@
 
 // multiple values
 .pcui-boolean-input-toggle.pcui-multiple-values {
-    &:after {
+    &::after {
         left: 8px;
         background-color: rgba($text-dark, 0.25);
     }

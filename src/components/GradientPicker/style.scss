@@ -17,13 +17,15 @@
 }
 
 // disabled gradient input
-.pcui-gradient.pcui-disabled, .pcui-gradient.pcui-multiple-values {
+.pcui-gradient.pcui-disabled,
+.pcui-gradient.pcui-multiple-values {
     opacity: $element-opacity-disabled;
 }
 
 // hover / focus states
-.pcui-gradient:not(.pcui-disabled):not(.pcui-readonly):not(.pcui-multiple-values) {
-    &:hover, &:focus {
+.pcui-gradient:not(.pcui-disabled, .pcui-readonly, .pcui-multiple-values) {
+    &:hover,
+    &:focus {
         cursor: pointer;
         box-shadow: $element-shadow-hover;
     }
@@ -31,8 +33,6 @@
         box-shadow: $element-shadow-active;
     }
 }
-
-
 
 .picker-gradient {
 
@@ -50,14 +50,14 @@
                 min-height: 17px !important;
                 height: 17px !important;
                 top: 14px;
-                margin-top: 0px;
-                margin-bottom: 0px;
+                margin-top: 0;
+                margin-bottom: 0;
 
                 display: flex;
                 align-items: center;
                 text-align: center;
-                color: #9BA1A3;
-                background-color: #2C393C;
+                color: #9ba1a3;
+                background-color: #2c393c;
                 border-radius: 2px;
                 justify-content: center;
 
@@ -93,27 +93,19 @@
                     font-size: 12px;
                     font-family: inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;
                     line-height: 22px;
-                    justify-content: center;
-                    top: -27.5px !important;
-
-                    display: flex;
-                    align-items: center;
-                    text-align: center;
-
-                    color: #9BA1A3;
 
                     position: absolute;
                     width: 18px;
                     min-height: 17px !important;
                     height: 17px !important;
                     top: 14px;
-                    margin-top: 0px;
-                    margin-bottom: 0px;
+                    margin-top: 0;
+                    margin-bottom: 0;
                     display: flex;
                     align-items: center;
                     text-align: center;
-                    color: #9BA1A3;
-                    background-color: #2C393C;
+                    color: #9ba1a3;
+                    background-color: #2c393c;
                     border-radius: 2px;
                     justify-content: center;
                 }
@@ -127,8 +119,8 @@
                 width: 321px;
                 height: 28px;
                 display: block;
-                padding: 8px 10px 0px 11px;
-                background-color: #2C393C;
+                padding: 8px 10px 0 11px;
+                background-color: #2c393c;
 
                 .crosshair-active {
                     cursor: none;
@@ -139,15 +131,15 @@
                 width: 320px;
                 height: 28px;
                 display: block;
-                padding: 0px 10px 0px 11px;
-                background-color: #2C393C;
+                padding: 0 10px 0 11px;
+                background-color: #2c393c;
             }
 
             > .picker-gradient-footer {
                 padding: 5px 5px;
 
                 > .pcui-panel-header {
-                    display: None
+                    display: none;
                 }
 
                 > .pcui-panel-content {
@@ -163,7 +155,7 @@
                         align-content: center;
                         height: 20px;
                     }
-    
+
                     > .pcui-select-input {
                         align-self: center;
                         width: 162px;
@@ -184,9 +176,9 @@
                     }
 
                     > .copy-curve-button {
-                        border-color: #2C393C;
-                        &:after {
-                            content: "\e351";
+                        border-color: #2c393c;
+                        &::after {
+                            content: '\e351';
                             position: absolute;
                             top: 4px;
                             left: 218px;
@@ -197,9 +189,9 @@
                     }
 
                     > .paste-curve-button {
-                        border-color: #2C393C;
-                        &:after {
-                            content: "\e348";
+                        border-color: #2c393c;
+                        &::after {
+                            content: '\e348';
                             position: absolute;
                             top: 4px;
                             left: 248px;
@@ -210,9 +202,9 @@
                     }
 
                     > .delete-curve-button {
-                        border-color: #2C393C;
-                        &:after {
-                            content: "\e125";
+                        border-color: #2c393c;
+                        &::after {
+                            content: '\e125';
                             position: absolute;
                             top: 4px;
                             left: 278px;
@@ -220,7 +212,6 @@
                             text-align: center;
                             @extend .font-icon;
                         }
-
                     }
                 }
             }
@@ -229,7 +220,7 @@
                 height: 156px;
 
                 > .pcui-panel-header {
-                    display: None
+                    display: none;
                 }
 
                 > .pcui-panel-content {
@@ -253,15 +244,17 @@
                         pointer-events: none;
                     }
 
-                    > .hue-rect, > .alpha-rect {
-                        margin: 5px 10px 10px 0px;
+                    > .hue-rect,
+                    > .alpha-rect {
+                        margin: 5px 10px 10px 0;
                         width: 20px;
                         height: 140px;
                         cursor: crosshair;
                         border-width: 1px;
                     }
 
-                    > .hue-handle, > .alpha-handle {
+                    > .hue-handle,
+                    > .alpha-handle {
                         position: absolute;
                         width: 20px;
                         height: 4px;
@@ -272,18 +265,18 @@
 
                     > .fields {
                         display: inline-block;
-                        margin: 3px 0px 0px 0px;
+                        margin: 3px 0 0 0;
                         width: 112px;
                         height: 145px;
                         vertical-align: top;
 
                         > .pcui-numeric-input {
-                            margin: 2px 0px;
+                            margin: 2px 0;
                             width: 108px;
                         }
 
                         > .pcui-text-input {
-                            margin: 2px 0px;
+                            margin: 2px 0;
                             min-height: 22px;
                             min-width: 111px;
                         }

@@ -35,7 +35,8 @@
     border: 1px solid $bcg-darker;
     transition: left 100ms ease;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         outline: none;
     }
 }
@@ -57,7 +58,7 @@
 }
 
 // hover state
-.pcui-slider:not(.pcui-disabled):not(.pcui-readonly) {
+.pcui-slider:not(.pcui-disabled, .pcui-readonly) {
     &:hover {
         cursor: pointer;
     }

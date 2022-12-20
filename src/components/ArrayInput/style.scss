@@ -13,7 +13,6 @@
     }
 }
 
-
 .pcui-array-input-item {
     > * {
         margin-top: 1px;
@@ -25,8 +24,8 @@
     // as specifically not flexible
     // and panel headers
     > *:first-child {
-        &:not(.pcui-not-flexible):not(.pcui-panel-header) {
-            flex: 1
+        &:not(.pcui-not-flexible, .pcui-panel-header) {
+            flex: 1;
         }
     }
 

@@ -19,7 +19,7 @@
         display: grid;
         grid: auto-flow / min-content 1fr;
 
-        &:before {
+        &::before {
             content: attr(data-icon);
             @extend .font-icon;
             font-weight: 100;

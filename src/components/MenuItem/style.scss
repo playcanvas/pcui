@@ -5,7 +5,7 @@
 }
 
 .pcui-menu-item-children {
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 60%);
     position: absolute;
     z-index: 1;
     left: 100%;
@@ -26,7 +26,7 @@
     & > .pcui-menu-item-content > .pcui-label {
         padding-right: 32px;
 
-        &:after {
+        &::after {
             content: '\E160';
             @extend .font-icon;
             position: absolute;
@@ -63,7 +63,7 @@
     &[data-icon] {
         // show icon using data-icon attribute
         // as the content
-        &:before {
+        &::before {
             content: attr(data-icon);
             @extend .font-icon;
             font-weight: 100;
