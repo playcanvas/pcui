@@ -177,7 +177,7 @@ class ColorPicker extends Element {
         this._overlay.center = false;
         this._overlay.transparent = true;
         this._overlay.hidden = true;
-        this.dom.appendChild(this._overlay.element);
+        this.dom.appendChild(this._overlay.dom);
 
         // rectangular picker
         this._pickRect = document.createElement('div');
@@ -298,7 +298,7 @@ class ColorPicker extends Element {
         this._fieldR.flexGrow = 1;
         this._fieldR.class.add('field', 'field-r');
         this._fieldR.on('change', this._updateRects.bind(this));
-        this._panelFields.appendChild(this._fieldR.element);
+        this._panelFields.appendChild(this._fieldR.dom);
 
         // G
         this._fieldG = new NumericInput({
@@ -312,7 +312,7 @@ class ColorPicker extends Element {
         this._fieldG.placeholder = 'g';
         this._fieldG.class.add('field', 'field-g');
         this._fieldG.on('change', this._updateRects.bind(this));
-        this._panelFields.appendChild(this._fieldG.element);
+        this._panelFields.appendChild(this._fieldG.dom);
 
         // B
         this._fieldB = new NumericInput({
@@ -326,7 +326,7 @@ class ColorPicker extends Element {
         this._fieldB.placeholder = 'b';
         this._fieldB.class.add('field', 'field-b');
         this._fieldB.on('change', this._updateRects.bind(this));
-        this._panelFields.appendChild(this._fieldB.element);
+        this._panelFields.appendChild(this._fieldB.dom);
 
         this._fieldA = new NumericInput({
             precision: 1,
@@ -339,7 +339,7 @@ class ColorPicker extends Element {
         this._fieldA.placeholder = 'a';
         this._fieldA.class.add('field', 'field-a');
         this._fieldA.on('change', this._updateRectAlpha.bind(this));
-        this._panelFields.appendChild(this._fieldA.element);
+        this._panelFields.appendChild(this._fieldA.dom);
 
 
         // HEX
@@ -348,7 +348,7 @@ class ColorPicker extends Element {
         this._fieldHex.placeholder = '#';
         this._fieldHex.class.add('field', 'field-hex');
         this._fieldHex.on('change', this._updateHex.bind(this));
-        this._panelFields.appendChild(this._fieldHex.element);
+        this._panelFields.appendChild(this._fieldHex.dom);
     }
 
     focus() {

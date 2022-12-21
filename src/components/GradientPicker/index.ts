@@ -70,13 +70,13 @@ class GradientPicker extends Element {
 
     protected _fields: HTMLDivElement;
 
-    protected _rField: any;
+    protected _rField: NumericInput;
 
-    protected _gField: any;
+    protected _gField: NumericInput;
 
-    protected _bField: any;
+    protected _bField: NumericInput;
 
-    protected _aField: any;
+    protected _aField: NumericInput;
 
     protected _hexField: TextInput;
 
@@ -208,8 +208,8 @@ class GradientPicker extends Element {
             },
 
             // calculate the normalized coordinate [x,y] relative to rect
-            normalizedCoord: function (widget: any, x: number, y: number) {
-                const rect = widget.element.getBoundingClientRect();
+            normalizedCoord: function (canvas: Canvas, x: number, y: number) {
+                const rect = canvas.dom.getBoundingClientRect();
                 return [
                     (x - rect.left) / rect.width,
                     (y - rect.top) / rect.height
@@ -219,11 +219,11 @@ class GradientPicker extends Element {
 
         this._panel = new Panel({});
         this._panel.class.add('color-panel');
-        this.dom.appendChild(this._panel.element);
+        this.dom.appendChild(this._panel.dom);
 
         this._colorRect = new Canvas({ useDevicePixelRatio: true });
         this._colorRect.class.add('color-rect');
-        this._panel.append(this._colorRect.element);
+        this._panel.append(this._colorRect.dom);
         this._colorRect.resize(140, 140);
 
         this._colorHandle = document.createElement('div');
@@ -232,7 +232,7 @@ class GradientPicker extends Element {
 
         this._hueRect = new Canvas({ useDevicePixelRatio: true });
         this._hueRect.class.add('hue-rect');
-        this._panel.append(this._hueRect.element);
+        this._panel.append(this._hueRect.dom);
         this._hueRect.resize(20, 140);
 
         this._hueHandle = document.createElement('div');
@@ -241,7 +241,7 @@ class GradientPicker extends Element {
 
         this._alphaRect = new Canvas({ useDevicePixelRatio: true });
         this._alphaRect.class.add('alpha-rect');
-        this._panel.append(this._alphaRect.element);
+        this._panel.append(this._alphaRect.dom);
         this._alphaRect.resize(20, 140);
 
         this._alphaHandle = document.createElement('div');
@@ -268,7 +268,7 @@ class GradientPicker extends Element {
             field.renderChanges = false;
             field.placeholder = label;
             field.on('change', this.fieldChangeHandler);
-            this._fields.appendChild(field.element);
+            this._fields.appendChild(field.dom);
             return field;
         }
 
@@ -281,12 +281,12 @@ class GradientPicker extends Element {
         this._hexField.renderChanges = false;
         this._hexField.placeholder = '#';
         this._hexField.on('change', this.hexChangeHandler);
-        this._fields.appendChild(this._hexField.element);
+        this._fields.appendChild(this._hexField.dom);
 
         // hook up mouse handlers
-        this._colorRect.element.addEventListener('mousedown', this.downHandler);
-        this._hueRect.element.addEventListener('mousedown', this.downHandler);
-        this._alphaRect.element.addEventListener('mousedown', this.downHandler);
+        this._colorRect.dom.addEventListener('mousedown', this.downHandler);
+        this._hueRect.dom.addEventListener('mousedown', this.downHandler);
+        this._alphaRect.dom.addEventListener('mousedown', this.downHandler);
 
         this._generateHue(this._hueRect);
         this._generateAlpha(this._alphaRect);
@@ -323,12 +323,8 @@ class GradientPicker extends Element {
             showSelectedPosition: new NumericInput({ min: 0, max: 100, step: 1, hideSlider: true }),
             showCrosshairPosition: document.createElement('div'),
             anchorAddCrossHair: document.createElement('div'),
-            // copyButton: new Button({ text: '&#58193' }),
-            // pasteButton: new Button({ text: '&#58184' }),
             colorPicker: null
         };
-
-        // this.UI.panel.appendChild(this.panel.element);
 
         this.doCopy = this.doCopy.bind(this);
         this.doPaste = this.doPaste.bind(this);
@@ -348,13 +344,13 @@ class GradientPicker extends Element {
         };
 
         // initialize overlay
-        this.UI.root.appendChild(this.UI.overlay.element);
+        this.UI.root.appendChild(this.UI.overlay.dom);
         this.UI.overlay.class.add('picker-gradient');
         this.UI.overlay.center = false;
         this.UI.overlay.transparent = true;
         this.UI.overlay.hidden = true;
         this.UI.overlay.clickable = true;
-        this.UI.overlay.element.style.position = "fixed";
+        this.UI.overlay.dom.style.position = "fixed";
 
         this.UI.overlay.on('show', () => {
             this.onOpen();
@@ -369,17 +365,17 @@ class GradientPicker extends Element {
         this.UI.overlay.append(this.UI.panel);
 
         // gradient
-        this.UI.panel.appendChild(this.UI.gradient.element);
+        this.UI.panel.appendChild(this.UI.gradient.dom);
         this.UI.gradient.class.add('picker-gradient-gradient');
         this.UI.gradient.resize(320, 28);
 
         // anchors
-        this.UI.panel.appendChild(this.UI.anchors.element);
+        this.UI.panel.appendChild(this.UI.anchors.dom);
         this.UI.anchors.class.add('picker-gradient-anchors');
         this.UI.anchors.resize(320, 28);
 
         // footer
-        this.UI.panel.appendChild(this.UI.footer.element);
+        this.UI.panel.appendChild(this.UI.footer.dom);
         this.UI.footer.append(this.UI.typeLabel);
         this.UI.footer.class.add('picker-gradient-footer');
 
@@ -402,7 +398,7 @@ class GradientPicker extends Element {
         this.UI.copyButton.class.add('copy-curve-button');
         this.UI.footer.append(this.UI.copyButton);
         // Tooltip.attach({
-        //     target: this.UI.copyButton.element,
+        //     target: this.UI.copyButton.dom,
         //     text: 'Copy',
         //     align: 'bottom',
         //     root: this.UI.root
@@ -416,9 +412,9 @@ class GradientPicker extends Element {
         this.UI.deleteButton.class.add('delete-curve-button');
         this.UI.footer.append(this.UI.deleteButton);
 
-        this.UI.panel.appendChild(this._panel.element);
+        this.UI.panel.appendChild(this._panel.dom);
 
-        this.UI.panel.append(this.UI.showSelectedPosition.element);
+        this.UI.panel.append(this.UI.showSelectedPosition.dom);
         this.UI.showSelectedPosition.class.add('show-selected-position');
         this.UI.showSelectedPosition._domInput.classList.add('show-selected-position-input');
 
@@ -447,13 +443,6 @@ class GradientPicker extends Element {
         this.UI.anchorAddCrossHair.style.visibility = 'hidden';
 
         this.UI.panel.append(this.UI.anchorAddCrossHair);
-
-        // Tooltip.attach({
-        //     target: this.UI.pasteButton.element,
-        //     text: 'Paste',
-        //     align: 'bottom',
-        //     root: this.UI.root
-        // });
 
         // construct the color picker
         /* this.on('change', this.colorSelectedAnchor);*/
@@ -672,7 +661,7 @@ class GradientPicker extends Element {
     }
 
     protected _generateHue(canvas: Canvas) {
-        const canvasElement = canvas.element as HTMLCanvasElement;
+        const canvasElement = canvas.dom as HTMLCanvasElement;
         const ctx = canvasElement.getContext('2d');
         const w = canvas.pixelWidth;
         const h = canvas.pixelHeight;
@@ -685,7 +674,7 @@ class GradientPicker extends Element {
     }
 
     protected _generateAlpha(canvas: Canvas) {
-        const canvasElement = canvas.element as HTMLCanvasElement;
+        const canvasElement = canvas.dom as HTMLCanvasElement;
         const ctx = canvasElement.getContext('2d');
         const w = canvas.pixelWidth;
         const h = canvas.pixelHeight;
@@ -697,7 +686,7 @@ class GradientPicker extends Element {
     }
 
     protected _generateGradient(canvas: Canvas, clr: any[]) {
-        const canvasElement = canvas.element as HTMLCanvasElement;
+        const canvasElement = canvas.dom as HTMLCanvasElement;
         const ctx = canvasElement.getContext('2d');
         const w = canvas.pixelWidth;
         const h = canvas.pixelHeight;
@@ -745,9 +734,9 @@ class GradientPicker extends Element {
     }
 
     protected _onMouseDown(evt: MouseEvent) {
-        if (evt.currentTarget === this._colorRect.element) {
+        if (evt.currentTarget === this._colorRect.dom) {
             this._dragMode = 1;     // drag color
-        } else if (evt.currentTarget === this._hueRect.element) {
+        } else if (evt.currentTarget === this._hueRect.dom) {
             this._dragMode = 2;     // drag hue
         } else {
             this._dragMode = 3;     // drag alpha
@@ -807,7 +796,7 @@ class GradientPicker extends Element {
             this._generateGradient(this._colorRect, hueRgb);
         }
 
-        const e = this._colorRect.element;
+        const e = this._colorRect.dom;
         const r = e.getBoundingClientRect();
         const w = r.width - 2;
         const h = r.height - 2;
@@ -855,13 +844,13 @@ class GradientPicker extends Element {
 
     set editAlpha(editAlpha) {
         if (editAlpha) {
-            this._alphaRect.element.style.display = 'inline';
+            this._alphaRect.dom.style.display = 'inline';
             this._alphaHandle.style.display = 'block';
-            this._aField.element.style.display = 'inline-block';
+            this._aField.dom.style.display = 'inline-block';
         } else {
-            this._alphaRect.element.style.display = 'none';
+            this._alphaRect.dom.style.display = 'none';
             this._alphaHandle.style.display = 'none';
-            this._aField.element.style.display = 'none';
+            this._aField.dom.style.display = 'none';
         }
     }
 
@@ -883,7 +872,7 @@ class GradientPicker extends Element {
     onOpen() {
         window.addEventListener('mousemove', this.anchorsOnMouseMove);
         window.addEventListener('mouseup', this.anchorsOnMouseUp);
-        this.UI.anchors.element.addEventListener('mousedown', this.anchorsOnMouseDown);
+        this.UI.anchors.dom.addEventListener('mousedown', this.anchorsOnMouseDown);
         // editor.emit('picker:gradient:open');
         // editor.emit('picker:open', 'gradient');
     }
@@ -893,7 +882,7 @@ class GradientPicker extends Element {
         this.STATE.hoveredAnchor = -1;
         window.removeEventListener('mousemove', this.anchorsOnMouseMove);
         window.removeEventListener('mouseup', this.anchorsOnMouseUp);
-        this.UI.anchors.element.removeEventListener('mousedown', this.anchorsOnMouseDown);
+        this.UI.anchors.dom.removeEventListener('mousedown', this.anchorsOnMouseDown);
 
         this._evtRefreshPicker.unbind();
         this._evtRefreshPicker = null;
@@ -928,7 +917,7 @@ class GradientPicker extends Element {
     }
 
     renderGradient() {
-        const ctx = this.UI.gradient.element.getContext('2d');
+        const ctx = this.UI.gradient.dom.getContext('2d');
         const w = this.UI.gradient.width;
         const h = this.UI.gradient.height;
         const r = this.UI.gradient.pixelRatio;
@@ -967,7 +956,7 @@ class GradientPicker extends Element {
     }
 
     renderAnchors() {
-        const ctx = this.UI.anchors.element.getContext('2d');
+        const ctx = this.UI.anchors.dom.getContext('2d');
         const w = this.UI.anchors.width;
         const h = this.UI.anchors.height;
         const r = this.UI.anchors.pixelRatio;
@@ -1091,7 +1080,7 @@ class GradientPicker extends Element {
             // user clicked in empty space, create new anchor and select it
             const coord = this.calcNormalizedCoord(e.clientX,
                                                    e.clientY,
-                                                   this.getClientRect(this.UI.anchors.element));
+                                                   this.getClientRect(this.UI.anchors.dom));
             this.insertAnchor(coord[0], this.evaluateGradient(coord[0]));
             this.STATE.anchors = this.calcAnchorTimes();
             this.selectAnchor(this.STATE.anchors.indexOf(coord[0]));
@@ -1100,7 +1089,7 @@ class GradientPicker extends Element {
             this.selectAnchor(this.STATE.hoveredAnchor);
         }
 
-        this.UI.anchors.element.style.cursor = 'grabbing';
+        this.UI.anchors.dom.style.cursor = 'grabbing';
         this.UI.anchorAddCrossHair.style.visibility = 'hidden';
 
         // drag the selected anchor
@@ -1111,7 +1100,7 @@ class GradientPicker extends Element {
     anchorsOnMouseMove(e: MouseEvent) {
         const coord = this.calcNormalizedCoord(e.clientX,
                                                e.clientY,
-                                               this.getClientRect(this.UI.anchors.element));
+                                               this.getClientRect(this.UI.anchors.dom));
 
         if (this.UI.draggingAnchor) {
             this.dragUpdate(math.clamp(coord[0], 0, 1));
@@ -1138,7 +1127,7 @@ class GradientPicker extends Element {
 
             if (hoveredAnchor === -1) {
                 this.UI.anchorAddCrossHair.style.visibility = 'visible';
-                this.UI.anchors.element.style.cursor = 'none';
+                this.UI.anchors.dom.style.cursor = 'none';
             } else {
                 this.UI.anchorAddCrossHair.style.visibility = 'hidden';
             }
@@ -1163,12 +1152,12 @@ class GradientPicker extends Element {
             this.UI.draggingAnchor = false;
         }
 
-        this.UI.anchors.element.style.cursor = 'pointer';
+        this.UI.anchors.dom.style.cursor = 'pointer';
     }
 
     selectHovered(index: number) {
         this.STATE.hoveredAnchor = index;
-        this.UI.anchors.element.style.cursor = (index === -1 ? '' : 'pointer');
+        this.UI.anchors.dom.style.cursor = (index === -1 ? '' : 'pointer');
     }
 
     selectAnchor(index: number) {
@@ -1374,7 +1363,7 @@ class GradientPicker extends Element {
         canvas.width = 16;
         canvas.height = 16;
 
-        const canvasElement = canvas.element as HTMLCanvasElement;
+        const canvasElement = canvas.dom as HTMLCanvasElement;
         const ctx = canvasElement.getContext('2d');
         ctx.fillStyle = "#949a9c";
         ctx.fillRect(0, 0, 8, 8);
@@ -1448,7 +1437,7 @@ class GradientPicker extends Element {
     }
 
     getGradientPickerRect() {
-        return this.UI.overlay.element.getBoundingClientRect();
+        return this.UI.overlay.dom.getBoundingClientRect();
     }
 
     positionGradientPicker(x: number, y: number) {
