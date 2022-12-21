@@ -1,5 +1,6 @@
 .pcui-slider {
     @extend .noSelect;
+
     display: inline-flex;
     height: 24px;
     margin: $element-margin;
@@ -79,6 +80,7 @@
     .pcui-numeric-input {
         flex: 1;
     }
+
     .pcui-slider-bar {
         display: none;
     }

@@ -5,7 +5,6 @@
     box-sizing: border-box;
     margin: $element-margin;
     transition: opacity 100ms, box-shadow 100ms;
-
     border: 1px solid $bcg-darker;
     background-color: $bcg-dark;
 
@@ -29,13 +28,13 @@
         cursor: pointer;
         box-shadow: $element-shadow-hover;
     }
+
     &:active {
         box-shadow: $element-shadow-active;
     }
 }
 
 .picker-gradient {
-
     > .pcui-overlay-content {
         width: 343px;
         height: 262px;
@@ -52,7 +51,6 @@
                 top: 14px;
                 margin-top: 0;
                 margin-bottom: 0;
-
                 display: flex;
                 align-items: center;
                 text-align: center;
@@ -93,7 +91,6 @@
                     font-size: 12px;
                     font-family: inconsolatamedium, Monaco, Menlo, 'Ubuntu Mono', Consolas, source-code-pro, monospace;
                     line-height: 22px;
-
                     position: absolute;
                     width: 18px;
                     min-height: 17px !important;
@@ -109,10 +106,6 @@
                     border-radius: 2px;
                     justify-content: center;
                 }
-            }
-
-            > .picker-gradient-header {
-
             }
 
             > .picker-gradient-gradient {
@@ -136,7 +129,7 @@
             }
 
             > .picker-gradient-footer {
-                padding: 5px 5px;
+                padding: 5px;
 
                 > .pcui-panel-header {
                     display: none;
@@ -165,10 +158,13 @@
                     > .pcui-numeric-input {
                         align-self: center;
                     }
+
                     > .pcui-button {
                         width: 22px;
                         height: 22px;
+
                         @extend .font-icon;
+
                         vertical-align: bottom;
                         margin: 0;
                         margin-right: 8px;
@@ -177,6 +173,7 @@
 
                     > .copy-curve-button {
                         border-color: #2c393c;
+
                         &::after {
                             content: '\e351';
                             position: absolute;
@@ -184,12 +181,14 @@
                             left: 218px;
                             font-size: 15px;
                             text-align: center;
+
                             @extend .font-icon;
                         }
                     }
 
                     > .paste-curve-button {
                         border-color: #2c393c;
+
                         &::after {
                             content: '\e348';
                             position: absolute;
@@ -197,12 +196,14 @@
                             left: 248px;
                             font-size: 15px;
                             text-align: center;
+
                             @extend .font-icon;
                         }
                     }
 
                     > .delete-curve-button {
                         border-color: #2c393c;
+
                         &::after {
                             content: '\e125';
                             position: absolute;
@@ -210,6 +211,7 @@
                             left: 278px;
                             font-size: 15px;
                             text-align: center;
+
                             @extend .font-icon;
                         }
                     }
@@ -224,9 +226,8 @@
                 }
 
                 > .pcui-panel-content {
-
                     > .color-rect {
-                        margin: 5px 10px 10px 10px;
+                        margin: 5px 10px 10px;
                         width: 140px;
                         height: 140px;
                         cursor: crosshair;
@@ -265,7 +266,7 @@
 
                     > .fields {
                         display: inline-block;
-                        margin: 3px 0 0 0;
+                        margin: 3px 0 0;
                         width: 112px;
                         height: 145px;
                         vertical-align: top;

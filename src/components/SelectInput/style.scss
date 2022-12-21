@@ -1,5 +1,6 @@
 .pcui-select-input {
     @extend .pcui-flex;
+
     box-sizing: border-box;
     margin: $element-margin;
     border-radius: 2px;
@@ -8,6 +9,7 @@
 
 .pcui-select-input-container-value {
     @extend .pcui-flex;
+
     background-color: $bcg-dark;
     transition: box-shadow 100ms, opacity 100ms;
 }
@@ -43,6 +45,7 @@
     height: 24px;
     line-height: 24px;
     font-size: 12px;
+
     @extend .fixedFont;
 
     transition: background-color 100ms, color 100ms;
@@ -72,8 +75,10 @@
     margin: 0;
     height: 24px;
     line-height: 24px;
+
     &::after {
         @extend .font-icon;
+
         content: '\E159';
         vertical-align: middle;
     }
@@ -83,6 +88,7 @@
     .pcui-select-input-shadow {
         box-shadow: $element-shadow-hover;
     }
+
     .pcui-select-input-value {
         color: $text-primary;
         background-color: $bcg-darkest;
@@ -101,15 +107,17 @@
     width: 100%;
     max-height: 200px;
     overflow-y: auto;
-
     background-color: $bcg-darker;
 
     .pcui-label {
         &:not(.pcui-hidden) {
             display: block;
         }
+
         font-size: 12px;
+
         @extend .fixedFont;
+
         height: 22px;
         line-height: 22px;
         padding: 0 24px 0 $element-margin;
@@ -118,8 +126,10 @@
 
         &.pcui-selected {
             color: $text-primary;
+
             &::after {
                 @extend .font-icon;
+
                 content: '\E133';
                 color: $text-darkest;
                 position: absolute;
@@ -151,7 +161,6 @@
     align-items: center;
     border-radius: 2px;
     border: 1px solid $border-primary;
-
     margin-right: 2px;
     margin-top: 2px;
     min-width: 0; // prevents flex overflow
@@ -165,6 +174,7 @@
 
     > .pcui-label {
         padding: 0 5px 0 8px;
+
         @extend .fixedFont;
     }
 
@@ -184,6 +194,7 @@
 .pcui-select-input-tag-not-everywhere {
     > .pcui-label {
         opacity: 0.5;
+
         &::before {
             content: '*';
             margin-right: 5px;
@@ -238,9 +249,12 @@
     > .pcui-label:last-child {
         flex-shrink: 0;
         margin-left: auto;
+
         &::before {
             content: '\E120';
+
             @extend .font-icon;
+
             margin-right: $element-margin;
         }
     }

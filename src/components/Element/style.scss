@@ -3,6 +3,7 @@
     from { outline-color: $text-active; }
     to { outline-color: rgba($text-active, 0); }
 }
+
 @keyframes pcui-flash-animation {
     from { outline-color: $text-active; }
     to { outline-color: rgba($text-active, 0); }

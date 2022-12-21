@@ -21,7 +21,9 @@
 
         &::before {
             content: attr(data-icon);
+
             @extend .font-icon;
+
             font-weight: 100;
             font-size: 16px;
             margin-right: 2 * $element-margin;

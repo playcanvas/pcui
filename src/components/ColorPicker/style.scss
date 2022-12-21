@@ -1,6 +1,7 @@
 // color input
 .pcui-color-input {
     @extend .noSelect;
+
     position: relative;
     display: inline-block;
     box-sizing: border-box;
@@ -40,32 +41,37 @@
 }
 
 .picker-color {
-
     &.c-1 > .pcui-overlay-content {
         > .pick-opacity {
             display: block;
         }
+
         > .fields > .field-r {
             display: block;
         }
     }
+
     &.c-2 > .pcui-overlay-content {
         > .fields > .field-hex {
             display: block;
         }
     }
+
     &.c-3 > .pcui-overlay-content {
         width: 298px;
 
         > .pick-rect {
             display: block;
         }
+
         > .pick-hue {
             display: block;
         }
+
         > .pick-opacity {
             display: none;
         }
+
         > .fields {
             > .field-g,
             > .field-b {
@@ -73,16 +79,19 @@
             }
         }
     }
+
     &.c-4 > .pcui-overlay-content {
         width: 320px;
 
         > .pick-opacity {
             display: block;
         }
+
         > .fields > .field-a {
             display: block;
         }
     }
+
     > .pcui-overlay-content {
         border: 1px solid #000;
         width: 320px;
@@ -94,6 +103,7 @@
 
         > .pick-rect {
             @extend .noSelect;
+
             position: relative;
             display: none;
             float: left;
@@ -111,7 +121,6 @@
                 height: 144px;
                 top: 0;
                 left: 0;
-
                 background: -moz-linear-gradient(left, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* FF3.6+ */
                 background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 100%)), color-stop(100%, rgba(255, 255, 255, 1%))); /* Chrome,Safari4+ */
                 background: -webkit-linear-gradient(left, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* Chrome10+,Safari5.1+ */
@@ -119,13 +128,13 @@
                 background: -ms-linear-gradient(left, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* IE10+ */
                 background: linear-gradient(to right, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* W3C */
             }
+
             > .black {
                 position: absolute;
                 width: 144px;
                 height: 144px;
                 top: 0;
                 left: 0;
-
                 background: -moz-linear-gradient(top, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* FF3.6+ */
                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 1%)), color-stop(100%, rgba(0, 0, 0, 100%))); /* Chrome,Safari4+ */
                 background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* Chrome10+,Safari5.1+ */
@@ -133,6 +142,7 @@
                 background: -ms-linear-gradient(top, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* IE10+ */
                 background: linear-gradient(to bottom, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* W3C */
             }
+
             > .handle {
                 position: absolute;
                 top: 0;
@@ -144,8 +154,10 @@
                 outline: 1px solid #fff;
             }
         }
+
         > .pick-hue {
             @extend .noSelect;
+
             position: relative;
             display: none;
             float: left;
@@ -155,7 +167,6 @@
             border: 1px solid #000;
             box-sizing: border-box;
             cursor: crosshair;
-
             background: #000;
             background:
                 -moz-linear-gradient(
@@ -232,13 +243,15 @@
                 left: -3px;
                 width: 16px;
                 height: 4px;
-                margin: -3px 0 0 0;
+                margin: -3px 0 0;
                 border: 1px solid #000;
                 outline: 1px solid #fff;
             }
         }
+
         > .pick-opacity {
             @extend .noSelect;
+
             position: relative;
             display: none;
             float: left;
@@ -247,7 +260,6 @@
             margin: 8px 0 8px 8px;
             border: 1px solid #000;
             cursor: crosshair;
-
             background: #000;
             background: -moz-linear-gradient(top, #fff 0%, #000 100%); /* FF3.6+ */
             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #000)); /* Chrome,Safari4+ */
@@ -262,7 +274,7 @@
                 left: -3px;
                 width: 16px;
                 height: 4px;
-                margin: -3px 0 0 0;
+                margin: -3px 0 0;
                 border: 1px solid #000;
                 outline: 1px solid #fff;
             }
@@ -294,6 +306,7 @@
 // readonly color input
 .pcui-color-input.pcui-readonly {
     cursor: default;
+
     &::after {
         display: none;
     }
@@ -315,6 +328,7 @@
             border-bottom-color: $bcg-darkest;
         }
     }
+
     &:active {
         box-shadow: $element-shadow-active;
     }

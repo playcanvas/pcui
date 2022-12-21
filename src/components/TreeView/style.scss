@@ -73,7 +73,9 @@
 
     &::after {
         content: attr(data-icon);
+
         @extend .font-icon;
+
         display: inline-block;
         vertical-align: sub;
         width: 22px;
@@ -106,7 +108,9 @@
 .pcui-treeview-item:not(.pcui-treeview-item-empty) {
     > .pcui-treeview-item-contents::before {
         content: '\E120';
+
         @extend .font-icon;
+
         position: absolute;
         font-size: 10px;
         font-weight: bold;
@@ -134,6 +138,7 @@
     // direct children of tree
     > .pcui-treeview-item {
         padding-left: 0;
+
         &::before {
             content: none;
         }
@@ -145,6 +150,7 @@
                 &::before {
                     content: none;
                 }
+
                 &::after {
                     margin-left: 0;
                 }
@@ -241,6 +247,7 @@
     // }
     .pcui-treeview-item {
         padding-left: 0;
+
         &::before {
             display: none;
         }

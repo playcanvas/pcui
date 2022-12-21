@@ -28,7 +28,9 @@
 
         &::after {
             content: '\E160';
+
             @extend .font-icon;
+
             position: absolute;
             right: $element-margin;
         }
@@ -65,7 +67,9 @@
         // as the content
         &::before {
             content: attr(data-icon);
+
             @extend .font-icon;
+
             font-weight: 100;
             font-size: inherit;
             margin-right: $element-margin;

@@ -10,7 +10,6 @@
     vertical-align: top;
     transition: color 100ms, background-color 100ms, box-shadow 100ms;
     position: relative;
-
     color: $text-secondary;
 
     > input {
@@ -23,6 +22,7 @@
         border: none;
         outline: none;
         box-shadow: none;
+
         @extend .fixedFont;
     }
 
@@ -37,7 +37,9 @@
         padding: 0 8px;
         content: '...';
         white-space: nowrap;
+
         @extend .fixedFont;
+
         top: 5px;
         font-size: 12px;
     }
