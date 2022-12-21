@@ -28,7 +28,7 @@ export interface MenuItemArgs extends ContainerArgs {
     /**
      * Gets / sets the function called when we select the MenuItem.
      */
-    onSelect?: () => void;
+    onSelect?: (evt?: MouseEvent) => void;
     /**
      * Gets / sets the function that determines whether the MenuItem should be enabled when the Menu is shown.
      */
