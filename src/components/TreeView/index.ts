@@ -401,10 +401,8 @@ class TreeView extends Container {
 
     // Called when a key is down on a child TreeViewItem.
     protected _onChildKeyDown(evt: KeyboardEvent, element: any) {
-        if (evt.key !== 'ArrowDown' && evt.key !== 'ArrowUp' && evt.key !== 'ArrowLeft' && evt.key !== 'ArrowRight' && evt.key !== 'Tab') {
-            return;
-        }
-        
+        if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Tab'].includes(evt.key)) return;
+
         evt.preventDefault();
         evt.stopPropagation();
 
