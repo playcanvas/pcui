@@ -656,7 +656,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
     }
 
     protected _onInputKeyDown(evt: KeyboardEvent) {
-        if (evt.keyCode === 13 && this.enabled && !this.readOnly) {
+        if (evt.key === 'Enter' && this.enabled && !this.readOnly) {
             evt.stopPropagation();
             evt.preventDefault();
 
@@ -697,20 +697,19 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _onKeyDown(evt: KeyboardEvent) {
         // close options on ESC and blur
-        if (evt.keyCode === 27) {
+        if (evt.key === 'Escape') {
             this.close();
             return;
         }
 
-        // handle tab
-        if (evt.keyCode === 9) {
+        if (evt.key === 'Tab') {
             this.close();
             return;
         }
 
         if (!this.enabled || this.readOnly) return;
 
-        if (evt.keyCode === 13 && !this._allowInput) {
+        if (evt.key === 'Enter' && !this._allowInput) {
             if (this._labelHighlighted && this._labelHighlighted._optionValue !== undefined) {
                 this._onSelectValue(this._labelHighlighted._optionValue);
                 this.close();
@@ -719,9 +718,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
             return;
         }
 
-        if ([38, 40].indexOf(evt.keyCode) === -1) {
-            return;
-        }
+        if (evt.key !== 'ArrowUp' && evt.key !== 'ArrowDown') return;
 
         evt.stopPropagation();
         evt.preventDefault();
@@ -742,9 +739,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 }
             }
 
-            if (evt.keyCode === 38) {
+            if (evt.key === 'ArrowUp') {
                 index--;
-            } else if (evt.keyCode === 40) {
+            } else if (evt.key === 'ArrowDown') {
                 index++;
             }
 
@@ -760,9 +757,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
             } else {
                 let highlightedLabelDom = this._labelHighlighted.dom;
                 do {
-                    if (evt.keyCode === 38) {
+                    if (evt.key === 'ArrowUp') {
                         highlightedLabelDom = highlightedLabelDom.previousSibling;
-                    } else if (evt.keyCode === 40) {
+                    } else if (evt.key === 'ArrowDown') {
                         highlightedLabelDom = highlightedLabelDom.nextSibling;
                     }
                 } while (highlightedLabelDom && highlightedLabelDom.ui.hidden);

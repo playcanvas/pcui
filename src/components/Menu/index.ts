@@ -124,8 +124,7 @@ class Menu extends Container implements IFocusable {
     protected _onKeyDown(evt: KeyboardEvent) {
         if (this.hidden) return;
 
-        // hide on esc
-        if (evt.keyCode === 27) {
+        if (evt.key === 'Escape') {
             this.hidden = true;
         }
     }

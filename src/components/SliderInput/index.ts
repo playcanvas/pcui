@@ -267,7 +267,7 @@ class SliderInput extends Element implements IBindable, IFocusable {
     }
 
     protected _onKeyDown(evt: KeyboardEvent) {
-        if (evt.keyCode === 27) {
+        if (evt.key === 'Escape') {
             this.blur();
             return;
         }
@@ -275,11 +275,11 @@ class SliderInput extends Element implements IBindable, IFocusable {
         if (!this.enabled || this.readOnly) return;
 
         // move slider with left / right arrow keys
-        if (evt.keyCode !== 37 && evt.keyCode !== 39) return;
+        if (evt.key !== 'ArrowLeft' && evt.key !== 'ArrowRight') return;
 
         evt.stopPropagation();
         evt.preventDefault();
-        let x = evt.keyCode === 37 ? -1 : 1;
+        let x = evt.key === 'ArrowLeft' ? -1 : 1;
         if (evt.shiftKey) {
             x *= 10;
         }

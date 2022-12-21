@@ -361,12 +361,12 @@ class ColorPicker extends Element {
 
     protected _onKeyDown(evt: KeyboardEvent) {
         // escape blurs the field
-        if (evt.keyCode === 27) {
+        if (evt.key === 'Escape') {
             this.blur();
         }
 
         // enter opens the color picker
-        if (evt.keyCode !== 13 || !this.enabled || this.readOnly) {
+        if (evt.key !== 'Enter' || !this.enabled || this.readOnly) {
             return;
         }
 
@@ -397,7 +397,7 @@ class ColorPicker extends Element {
         this._overlay.position(x, y);
     }
 
-    protected _setPickerColor(color: any) {
+    protected _setPickerColor(color: number[]) {
         if (this._changing || this._dragging)
             return;
 

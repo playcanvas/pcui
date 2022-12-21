@@ -158,7 +158,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
     }
 
     protected _onInputKeyDown(evt: KeyboardEvent) {
-        if (evt.keyCode === 13 && this.blurOnEnter) {
+        if (evt.key === 'Enter' && this.blurOnEnter) {
             // do not fire input change event on blur
             // if keyChange is true (because a change event)
             // will have already been fired before for the current
@@ -166,7 +166,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
             this._suspendInputChangeEvt = this.keyChange;
             this._domInput.blur();
             this._suspendInputChangeEvt = false;
-        } else if (evt.keyCode === 27) {
+        } else if (evt.key === 'Escape') {
             this._suspendInputChangeEvt = true;
             const prev = this._domInput.value;
             this._domInput.value = this._prevValue;
@@ -186,7 +186,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
     }
 
     protected _onInputKeyUp(evt: KeyboardEvent) {
-        if (evt.keyCode !== 27) {
+        if (evt.key !== 'Escape') {
             this._onInputChange(evt);
         }
 
