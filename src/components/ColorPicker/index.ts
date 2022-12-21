@@ -397,7 +397,7 @@ class ColorPicker extends Element {
         this._overlay.position(x, y);
     }
 
-    protected _setPickerColor(color: number[]) {
+    protected _setPickerColor(color: any) {
         if (this._changing || this._dragging)
             return;
 
