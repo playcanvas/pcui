@@ -155,7 +155,7 @@ class MenuItem extends Container implements IBindable {
         evt.preventDefault();
         evt.stopPropagation();
         if (!this.disabled) {
-            this.select();
+            this.select(evt);
         }
     }
 
@@ -172,11 +172,13 @@ class MenuItem extends Container implements IBindable {
     /**
      * Selects the MenuItem which also happens automatically
      * when the user clicks on the MenuItem.
+     *
+     * @param evt - The mouse event that triggered the selection.
      */
-    select() {
+    select(evt?: MouseEvent) {
         if (!this.enabled) return;
         if (this._onSelect) {
-            this._onSelect();
+            this._onSelect(evt);
         }
         this.emit('select');
 
