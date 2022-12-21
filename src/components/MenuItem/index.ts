@@ -28,7 +28,7 @@ export interface MenuItemArgs extends ContainerArgs {
     /**
      * Gets / sets the function called when we select the MenuItem.
      */
-    onSelect?: () => void;
+    onSelect?: (evt?: MouseEvent) => void;
     /**
      * Gets / sets the function that determines whether the MenuItem should be enabled when the Menu is shown.
      */
@@ -155,7 +155,12 @@ class MenuItem extends Container implements IBindable {
         evt.preventDefault();
         evt.stopPropagation();
         if (this.enabled) {
-            this.select();
+            this._onSelect(evt);
+            this.emit('select');
+
+            if (this.menu) {
+                this.menu.hidden = true;
+            }
         }
     }
 
