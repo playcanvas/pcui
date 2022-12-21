@@ -2,17 +2,9 @@ import Element, { ElementArgs } from '../Element/index';
 
 export interface CanvasArgs extends ElementArgs {
     /**
-     * Tab index of the canvas.
-     */
-    tabindex?: any;
-    /**
      * Whether the canvas should use the device pixel ratio.
      */
     useDevicePixelRatio?: boolean;
-    /**
-     * The id to be given to the canvas in the dom.
-     */
-    id?: string
 }
 
 /**
@@ -36,12 +28,6 @@ class Canvas extends Element {
 
         const canvas = this._dom as HTMLCanvasElement;
         canvas.classList.add('pcui-canvas');
-
-        if (args.id !== undefined)
-            canvas.id = args.id;
-
-        if (args.tabindex !== undefined)
-            canvas.setAttribute('tabindex', args.tabindex);
 
         this._width = 300;
         this._height = 150;
