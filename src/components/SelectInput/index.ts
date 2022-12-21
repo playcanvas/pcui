@@ -718,7 +718,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
             return;
         }
 
-        if (evt.key !== 'ArrowUp' && evt.key !== 'ArrowDown') return;
+        if (evt.key !== 'ArrowUp' && evt.key !== 'ArrowDown') {
+            return;
+        }
 
         evt.stopPropagation();
         evt.preventDefault();
