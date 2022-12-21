@@ -128,10 +128,6 @@ class Canvas extends Element {
     get pixelRatio(): number {
         return this._ratio;
     }
-
-    get dom(): HTMLCanvasElement {
-        return this._dom;
-    }
 }
 
 Element.register('canvas', Canvas);
