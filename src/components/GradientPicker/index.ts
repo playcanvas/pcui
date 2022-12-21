@@ -1171,7 +1171,7 @@ class GradientPicker extends Element {
             this.UI.positionEdit.value = Math.round(time * 100);
             this.STATE.selectedValue = this.evaluateGradient(time);
             this.color = this.STATE.selectedValue;
-            this.UI.showSelectedPosition.element.style.left = (this.STATE.anchors[index] * this.UI.gradient.width - 4).toString() + "px";
+            this.UI.showSelectedPosition.dom.style.left = (this.STATE.anchors[index] * this.UI.gradient.width - 4).toString() + "px";
             this.UI.showSelectedPosition.value = Math.round(this.STATE.anchors[index] * 100);
         }
         this.STATE.changing = false;
