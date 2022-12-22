@@ -99,7 +99,7 @@ class Menu extends Container implements IFocusable {
 
         // filter child menu items
         this._containerMenuItems.dom.childNodes.forEach((child) => {
-            this._filterMenuItems(child.ui);
+            this._filterMenuItems(child.ui as MenuItem);
         });
     }
 
