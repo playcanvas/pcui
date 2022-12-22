@@ -2,17 +2,9 @@ import Element, { ElementArgs } from '../Element/index';
 
 export interface CanvasArgs extends ElementArgs {
     /**
-     * Tab index of the canvas.
-     */
-    tabindex?: any;
-    /**
      * Whether the canvas should use the device pixel ratio.
      */
     useDevicePixelRatio?: boolean;
-    /**
-     * The id to be given to the canvas in the dom.
-     */
-    id?: string
 }
 
 /**
@@ -34,31 +26,24 @@ class Canvas extends Element {
         args = { ...Canvas.defaultArgs, ...args };
         super(args.dom, args);
 
-        this.dom.classList.add('pcui-canvas');
-
-        if (args.id !== undefined)
-            this.dom.id = args.id;
-
-        if (args.tabindex !== undefined)
-            this.dom.setAttribute('tabindex', args.tabindex);
+        const canvas = this._dom as HTMLCanvasElement;
+        canvas.classList.add('pcui-canvas');
 
         this._width = 300;
         this._height = 150;
         this._ratio = (args.useDevicePixelRatio !== undefined && args.useDevicePixelRatio) ? window.devicePixelRatio : 1;
 
         // Disable I-bar cursor on click+drag
-        this.dom.onselectstart = this.onselectstart;
-    }
-
-    private onselectstart() {
-        return false;
+        canvas.onselectstart = (event: Event) => {
+            return false;
+        };
     }
 
     /**
      * Resize the canvas using the given width and height parameters.
      *
-     * @param width
-     * @param height
+     * @param width - The new width of the canvas.
+     * @param height - The new height of the canvas.
      */
     resize(width: number, height: number) {
         if (this._width === width && this._height === height)
@@ -66,10 +51,13 @@ class Canvas extends Element {
 
         this._width = width;
         this._height = height;
-        this.dom.width = this.pixelWidth;
-        this.dom.height = this.pixelHeight;
-        this.dom.style.width = width + 'px';
-        this.dom.style.height = height + 'px';
+
+        const canvas = this._dom as HTMLCanvasElement;
+        canvas.width = this.pixelWidth;
+        canvas.height = this.pixelHeight;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
         this.emit('resize', width, height);
     }
 
@@ -81,8 +69,11 @@ class Canvas extends Element {
             return;
 
         this._width = value;
-        this.dom.width = this.pixelWidth;
-        this.dom.style.width = value + 'px';
+
+        const canvas = this._dom as HTMLCanvasElement;
+        canvas.width = this.pixelWidth;
+        canvas.style.width = value + 'px';
+
         this.emit('resize', this._width, this._height);
     }
 
@@ -99,8 +90,11 @@ class Canvas extends Element {
             return;
 
         this._height = value;
-        this.dom.height = this.pixelHeight;
-        this.dom.style.height = value + 'px';
+
+        const canvas = this._dom as HTMLCanvasElement;
+        canvas.height = this.pixelHeight;
+        canvas.style.height = value + 'px';
+
         this.emit('resize', this._width, this._height);
     }
 
@@ -127,10 +121,6 @@ class Canvas extends Element {
      */
     get pixelRatio(): number {
         return this._ratio;
-    }
-
-    get dom(): HTMLCanvasElement {
-        return this._dom;
     }
 }
 
