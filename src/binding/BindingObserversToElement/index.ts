@@ -3,7 +3,7 @@ import { Observer } from '@playcanvas/observer';
 
 export interface BindingObserversToElementArgs extends BindingBaseArgs {
     /**
-     * Custom update function
+     * Custom update function.
      */
     customUpdate?: any
 }
