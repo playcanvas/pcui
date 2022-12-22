@@ -189,6 +189,13 @@ export interface ElementArgs {
     readOnly?: boolean
 }
 
+// Declare an additional property on the base Node interface that references the owner Element
+declare global {
+    interface Node { // eslint-disable-line no-unused-vars
+        ui: Element;
+    }
+}
+
 /**
  * The base class for all UI elements.
  */
@@ -302,13 +309,13 @@ class Element extends Events {
 
     protected _eventsParent: any[];
 
-    protected _dom: any;
+    protected _dom: HTMLElement;
 
     protected _class: any[];
 
     protected _hiddenParents: boolean;
 
-    protected _flashTimeout: any;
+    protected _flashTimeout: number;
 
     protected _suppressChange: boolean;
 
@@ -339,12 +346,16 @@ class Element extends Events {
         this._eventsParent = [];
 
         if (typeof dom === 'string') {
-            dom = document.createElement(dom);
+            this._dom = document.createElement(dom);
+        } else if (dom instanceof HTMLElement) {
+            this._dom = dom;
         } else if (typeof args.dom === 'string') {
-            args.dom = document.createElement(args.dom);
+            this._dom = document.createElement(args.dom);
+        } else if (args.dom instanceof HTMLElement) {
+            this._dom = args.dom;
+        } else {
+            this._dom = document.createElement('div');
         }
-
-        this._dom = dom || args.dom || document.createElement('div');
 
         if (args.id !== undefined) {
             this._dom.id = args.id;
@@ -442,7 +453,7 @@ class Element extends Events {
         if (this._flashTimeout) return;
 
         this.classAdd(pcuiClass.FLASH);
-        this._flashTimeout = setTimeout(() => {
+        this._flashTimeout = window.setTimeout(() => {
             this._flashTimeout = null;
             this.classRemove(pcuiClass.FLASH);
         }, 200);
@@ -627,7 +638,7 @@ class Element extends Events {
         this._domEventMouseOut = null;
 
         if (this._flashTimeout) {
-            clearTimeout(this._flashTimeout);
+            window.clearTimeout(this._flashTimeout);
         }
 
         this.emit('destroy', dom, this);

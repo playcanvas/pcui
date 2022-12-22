@@ -305,7 +305,6 @@ class TreeView extends Container {
             let endIndex = -1;
 
             for (let i = 0; i < filterResults.length; i++) {
-                // @ts-ignore ui
                 const item = filterResults[i].ui;
 
                 if (item === startChild) {
@@ -318,8 +317,7 @@ class TreeView extends Container {
                     const start = (startIndex < endIndex ? startIndex : endIndex);
                     const end = (startIndex < endIndex ? endIndex : startIndex);
                     for (let j = start; j <= end; j++) {
-                        // @ts-ignore ui
-                        result.push(filterResults[j].ui);
+                        result.push(filterResults[j].ui as TreeViewItem);
                     }
 
                     break;

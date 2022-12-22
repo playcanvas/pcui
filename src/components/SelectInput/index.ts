@@ -648,7 +648,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
 
         if (containerDom.firstChild) {
-            // @ts-ignore
             this._highlightLabel(containerDom.firstChild.ui);
         }
 
@@ -754,7 +753,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
             if (!this._containerOptions.dom.childNodes.length) return;
 
             if (!this._labelHighlighted) {
-                // @ts-ignore
                 this._highlightLabel(this._containerOptions.dom.childNodes[0].ui);
             } else {
                 let highlightedLabelDom = this._labelHighlighted.dom;
@@ -878,7 +876,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
             }
         });
         if (!this._labelHighlighted) {
-            // @ts-ignore
             this._highlightLabel(this._containerOptions.dom.childNodes[0].ui);
         }
 
