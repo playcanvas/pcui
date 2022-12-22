@@ -301,7 +301,7 @@ class Panel extends Container {
     }
 
     protected _onDragStart(evt: MouseEvent) {
-        if (this.disabled || this.readOnly) return;
+        if (!this.enabled || this.readOnly) return;
 
         evt.stopPropagation();
         evt.preventDefault();

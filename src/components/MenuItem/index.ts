@@ -154,7 +154,7 @@ class MenuItem extends Container implements IBindable {
     protected _onClickMenuItem(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
-        if (!this.disabled) {
+        if (this.enabled) {
             this._onSelect(evt);
             this.emit('select');
 
