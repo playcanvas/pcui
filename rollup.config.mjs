@@ -45,10 +45,10 @@ const react_module = {
     cache: false
 };
 
-const styling = {
+const styles = {
     input: 'src/scss/index.js',
     output: {
-        file: 'styling/dist/index.mjs',
+        file: 'styles/dist/index.mjs',
         format: 'esm'
     },
     plugins: [
@@ -65,8 +65,8 @@ export default (args) => {
         return [module];
     } else if (process.env.target === 'react:es6') {
         return [react_module];
-    } else if (process.env.target === 'styling') {
-        return [styling];
+    } else if (process.env.target === 'styles') {
+        return [styles];
     }
-    return [module, react_module, styling];
+    return [module, react_module, styles];
 };
