@@ -489,12 +489,12 @@ class GradientPicker extends Element {
 
     protected _onKeyDown(evt: KeyboardEvent) {
         // escape blurs the field
-        if (evt.keyCode === 27) {
+        if (evt.key === 'Escape') {
             this.blur();
         }
 
         // enter opens the gradient picker
-        if (evt.keyCode !== 13 || !this.enabled || this.readOnly || this.class.contains(CLASS_MULTIPLE_VALUES)) {
+        if (evt.key !== 'Enter' || !this.enabled || this.readOnly || this.class.contains(CLASS_MULTIPLE_VALUES)) {
             return;
         }
 

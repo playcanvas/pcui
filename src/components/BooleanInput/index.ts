@@ -73,14 +73,14 @@ class BooleanInput extends Input implements IBindable, IFocusable {
     }
 
     protected _onKeyDown(evt: KeyboardEvent) {
-        if (evt.keyCode === 27) {
+        if (evt.key === 'Escape') {
             this.blur();
             return;
         }
 
         if (!this.enabled || this.readOnly) return;
 
-        if (evt.keyCode === 32) {
+        if (evt.key === ' ') {
             evt.stopPropagation();
             evt.preventDefault();
             this.value = !this.value;

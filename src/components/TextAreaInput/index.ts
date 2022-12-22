@@ -50,7 +50,7 @@ class TextAreaInput extends TextInput {
     }
 
     protected _onInputKeyDown(evt: KeyboardEvent) {
-        if ((evt.keyCode === 27 && this.blurOnEscape) || (evt.keyCode === 13 && this.blurOnEnter && !evt.shiftKey)) {
+        if ((evt.key === 'Escape' && this.blurOnEscape) || (evt.key === 'Enter' && this.blurOnEnter && !evt.shiftKey)) {
             this._domInput.blur();
         }
 

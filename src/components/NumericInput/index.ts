@@ -201,8 +201,8 @@ class NumericInput extends TextInput {
         if (!this.enabled || this.readOnly) return super._onInputKeyDown(evt);
 
         // increase / decrease value with arrow keys
-        if (evt.keyCode === 38 || evt.keyCode === 40) {
-            const inc = evt.keyCode === 40 ? -1 : 1;
+        if (evt.key === 'ArrowUp' || evt.key === 'ArrowDown') {
+            const inc = evt.key === 'ArrowDown' ? -1 : 1;
             this.value += (evt.shiftKey ? this._stepPrecision : this._step) * inc;
             return;
         }

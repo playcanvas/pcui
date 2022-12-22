@@ -401,12 +401,12 @@ class TreeView extends Container {
 
     // Called when a key is down on a child TreeViewItem.
     protected _onChildKeyDown(evt: KeyboardEvent, element: any) {
-        if ([9, 37, 38, 39, 40].indexOf(evt.keyCode) === -1) return;
+        if (['Tab', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(evt.key) === -1) return;
 
         evt.preventDefault();
         evt.stopPropagation();
 
-        if (evt.keyCode === 40) {
+        if (evt.key === 'ArrowDown') {
             // down - select next tree item
             if (this._selectedItems.length) {
                 const next = this._findNextVisibleTreeItem(element);
@@ -418,7 +418,7 @@ class TreeView extends Container {
                     }
                 }
             }
-        } else if (evt.keyCode === 38) {
+        } else if (evt.key === 'ArrowUp') {
             // up - select previous tree item
             if (this._selectedItems.length) {
                 const prev = this._findPreviousVisibleTreeItem(element);
@@ -431,15 +431,15 @@ class TreeView extends Container {
                 }
             }
 
-        } else if (evt.keyCode === 37) {
+        } else if (evt.key === 'ArrowLeft') {
             // left (close)
             if (element.parent !== this) {
                 element.open = false;
             }
-        } else if (evt.keyCode === 39) {
+        } else if (evt.key === 'ArrowRight') {
             // right (open)
             element.open = true;
-        } else if (evt.keyCode === 9) {
+        } else if (evt.key === 'Tab') {
             // tab
             // skip
         }
