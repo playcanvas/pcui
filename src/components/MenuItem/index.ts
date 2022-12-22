@@ -260,9 +260,7 @@ class MenuItem extends Container implements IBindable {
         // set menu on child menu items
         if (!this._containerItems.destroyed) {
             this._containerItems.dom.childNodes.forEach((child) => {
-                // @ts-ignore
                 if (child.ui instanceof MenuItem) {
-                    // @ts-ignore
                     child.ui.menu = value;
                 }
             });

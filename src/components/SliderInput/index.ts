@@ -163,12 +163,10 @@ class SliderInput extends Element implements IBindable, IFocusable {
 
         this._domBar = document.createElement('div');
         this._domBar.classList.add(CLASS_SLIDER_BAR);
-        // @ts-ignore
         this._domBar.ui = this;
         this._domSlider.appendChild(this._domBar);
 
         this._domHandle = document.createElement('div');
-        // @ts-ignore
         this._domHandle.ui = this;
         this._domHandle.tabIndex = 0;
         this._domHandle.classList.add(CLASS_SLIDER_HANDLE);

@@ -199,9 +199,7 @@ class GridViewItem extends Container implements IFocusable {
     get nextSibling() {
         let sibling = this.dom.nextSibling;
         while (sibling) {
-            // @ts-ignore
             if (sibling.ui instanceof GridViewItem && !sibling.ui.hidden) {
-                // @ts-ignore
                 return sibling.ui;
             }
 
@@ -217,9 +215,7 @@ class GridViewItem extends Container implements IFocusable {
     get previousSibling() {
         let sibling = this.dom.previousSibling;
         while (sibling) {
-            // @ts-ignore
             if (sibling.ui instanceof GridViewItem && !sibling.ui.hidden) {
-                // @ts-ignore
                 return sibling.ui;
             }
 

@@ -99,7 +99,6 @@ class Menu extends Container implements IFocusable {
 
         // filter child menu items
         this._containerMenuItems.dom.childNodes.forEach((child) => {
-            // @ts-ignore
             this._filterMenuItems(child.ui);
         });
     }
@@ -116,8 +115,7 @@ class Menu extends Container implements IFocusable {
 
         // @ts-ignore
         item._containerItems.dom.childNodes.forEach((child) => {
-            // @ts-ignore
-            this._filterMenuItems(child.ui);
+            this._filterMenuItems(child.ui as MenuItem);
         });
     }
 
@@ -150,8 +148,7 @@ class Menu extends Container implements IFocusable {
         }
 
         containerItems.dom.childNodes.forEach((child) => {
-            // @ts-ignore
-            this._limitSubmenuAtScreenEdges(child.ui);
+            this._limitSubmenuAtScreenEdges(child.ui as MenuItem);
         });
     }
 
@@ -191,8 +188,7 @@ class Menu extends Container implements IFocusable {
         this._containerMenuItems.style.top = top + 'px';
 
         this._containerMenuItems.dom.childNodes.forEach((child) => {
-            // @ts-ignore
-            this._limitSubmenuAtScreenEdges(child.ui);
+            this._limitSubmenuAtScreenEdges(child.ui as MenuItem);
         });
     }
 

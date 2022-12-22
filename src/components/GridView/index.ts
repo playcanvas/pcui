@@ -227,7 +227,6 @@ class GridView extends Container {
                     return;
                 }
 
-                // @ts-ignore
                 const child = children[i].ui;
                 if (child instanceof GridViewItem) {
                     if (this._filterFn && !this._filterFn(child)) {

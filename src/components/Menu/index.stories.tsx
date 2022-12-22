@@ -17,7 +17,6 @@ window.addEventListener('contextmenu', (evt: MouseEvent) => {
     if (evt.target.ui instanceof LabelElement) {
         const element = document.querySelector('.pcui-menu');
         if (element) {
-            // @ts-ignore
             const menu = element.ui as Menu;
             evt.stopPropagation();
             evt.preventDefault();

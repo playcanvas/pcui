@@ -301,7 +301,7 @@ class TreeViewItem extends Container {
             this.open = !this.open;
             if (evt.altKey) {
                 // apply to all children as well
-                this._dfs((node: any) => {
+                this._dfs((node: TreeViewItem) => {
                     node.open = this.open;
                 });
             }
@@ -313,10 +313,10 @@ class TreeViewItem extends Container {
 
     protected _dfs(fn: any) {
         fn(this);
-        let child = this.firstChild;
+        let child = this.firstChild as TreeViewItem;
         while (child) {
             child._dfs(fn);
-            child = child.nextSibling;
+            child = child.nextSibling as TreeViewItem;
         }
     }
 
@@ -580,10 +580,8 @@ class TreeViewItem extends Container {
     get firstChild() {
         if (this._numChildren) {
             for (let i = 0; i < this.dom.childNodes.length; i++) {
-                // @ts-ignore
                 if (this.dom.childNodes[i].ui instanceof TreeViewItem) {
-                    // @ts-ignore
-                    return this.dom.childNodes[i].ui;
+                    return this.dom.childNodes[i].ui as TreeViewItem;
                 }
             }
         }
@@ -597,10 +595,8 @@ class TreeViewItem extends Container {
     get lastChild() {
         if (this._numChildren) {
             for (let i = this.dom.childNodes.length - 1; i >= 0; i--) {
-                // @ts-ignore
                 if (this.dom.childNodes[i].ui instanceof TreeViewItem) {
-                    // @ts-ignore
-                    return this.dom.childNodes[i].ui;
+                    return this.dom.childNodes[i].ui as TreeViewItem;
                 }
             }
         }
@@ -613,12 +609,10 @@ class TreeViewItem extends Container {
      */
     get nextSibling() {
         let sibling = this.dom.nextSibling;
-        // @ts-ignore
         while (sibling && !(sibling.ui instanceof TreeViewItem)) {
             sibling = sibling.nextSibling;
         }
 
-        // @ts-ignore
         return sibling && sibling.ui;
     }
 
@@ -627,12 +621,10 @@ class TreeViewItem extends Container {
      */
     get previousSibling() {
         let sibling = this.dom.previousSibling;
-        // @ts-ignore
         while (sibling && !(sibling.ui instanceof TreeViewItem)) {
             sibling = sibling.previousSibling;
         }
 
-        // @ts-ignore
         return sibling && sibling.ui;
     }
 
