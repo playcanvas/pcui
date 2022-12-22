@@ -280,7 +280,7 @@ class Container extends Element {
     move(element: any, index: number) {
         let idx = -1;
         for (let i = 0; i < this.dom.childNodes.length; i++) {
-            if ((this.dom.childNodes[i] as any).ui === element) {
+            if (this.dom.childNodes[i].ui === element) {
                 idx = i;
                 break;
             }
@@ -357,7 +357,7 @@ class Container extends Element {
     protected _createResizeHandle() {
         const handle = document.createElement('div');
         handle.classList.add(CLASS_RESIZABLE_HANDLE);
-        (handle as any).ui = this;
+        handle.ui = this;
 
         handle.addEventListener('mousedown', this._domEventResizeStart);
         handle.addEventListener('touchstart', this._domEventResizeTouchStart, { passive: false });
@@ -509,7 +509,7 @@ class Container extends Element {
 
     protected _getDraggedChildIndex(draggedChild: Element) {
         for (let i = 0; i < this.dom.childNodes.length; i++) {
-            if (((this.dom.childNodes[i] as unknown) as { ui: Element }).ui  === draggedChild) {
+            if (this.dom.childNodes[i].ui  === draggedChild) {
                 return i;
             }
         }
@@ -557,7 +557,7 @@ class Container extends Element {
 
         // hovered script
         for (let i = 0; i < this.dom.childNodes.length; i++) {
-            const otherPanel = (this.dom.childNodes[i] as any).ui;
+            const otherPanel = this.dom.childNodes[i].ui as any;
             const otherTop = otherPanel.dom.offsetTop;
             if (i < childPanelIndex) {
                 if (y <= otherTop + otherPanel.header.height) {
@@ -599,7 +599,7 @@ class Container extends Element {
      */
     forEachChild(fn: { (container: any, i: any): any; (arg0: any, arg1: number): any; }) {
         for (let i = 0; i < this.dom.childNodes.length; i++) {
-            const node = (this.dom.childNodes[i] as any).ui;
+            const node = this.dom.childNodes[i].ui;
             if (node) {
                 const result = fn(node, i);
                 if (result === false) {
