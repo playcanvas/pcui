@@ -85,10 +85,10 @@ class BindingBase extends Events {
     }
 
     /**
-     * @name BindingBase#link
-     * @description Links the specified observers to the specified paths.
-     * @param {Observer[]|Observer} observers - The observer(s).
-     * @param {string[]|string} paths - The path(s). The behavior of the binding depends on how many paths are passed.
+     * Links the specified observers to the specified paths.
+     *
+     * @param observers - The observer(s).
+     * @param paths - The path(s). The behavior of the binding depends on how many paths are passed.
      * If an equal amount of paths and observers are passed then the binding will map each path to each observer at each index.
      * If more observers than paths are passed then the path at index 0 will be used for all observers.
      * If one observer and multiple paths are passed then all of the paths will be used for the observer (e.g. for curves).
@@ -105,8 +105,7 @@ class BindingBase extends Events {
     }
 
     /**
-     * @name BindingBase#unlink
-     * @description Unlinks the observers and paths.
+     * Unlinks the observers and paths.
      */
     unlink() {
         this._observers = [];
@@ -115,57 +114,56 @@ class BindingBase extends Events {
     }
 
     /**
-     * @name BindingBase#clone
-     * @description Clones the binding. To be implemented by derived classes.
+     * Clones the binding. To be implemented by derived classes.
      */
     clone() {
         throw new Error('pcui.BindingBase#clone: Not implemented');
     }
 
     /**
-     * @name BindingBase#setValue
-     * @description Sets a value to the linked observers at the linked paths.
-     * @param {*} value - The value
+     * Sets a value to the linked observers at the linked paths.
+     *
+     * @param value - The value
      */
     setValue(value: any) {
     }
 
     /**
-     * @name BindingBase#setValues
-     * @description Sets an array of values to the linked observers at the linked paths.
-     * @param {Array<*>} values - The values
+     * Sets an array of values to the linked observers at the linked paths.
+     *
+     * @param values - The values.
      */
     setValues(values: any[]) {
     }
 
     /**
-     * @name BindingBase#addValue
-     * @description Adds (inserts) a value to the linked observers at the linked paths.
-     * @param {*} value - The value
+     * Adds (inserts) a value to the linked observers at the linked paths.
+     *
+     * @param value - The value.
      */
     addValue(value: any) {
     }
 
     /**
-     * @name BindingBase#addValues
-     * @description Adds (inserts) multiple values to the linked observers at the linked paths.
-     * @param {Array<*>} values - The values
+     * Adds (inserts) multiple values to the linked observers at the linked paths.
+     *
+     * @param values - The values.
      */
     addValues(values: any[]) {
     }
 
     /**
-     * @name BindingBase#removeValue
-     * @description Removes a value from the linked observers at the linked paths.
-     * @param {*} value - The value
+     * Removes a value from the linked observers at the linked paths.
+     *
+     * @param value - The value.
      */
     removeValue(value: any) {
     }
 
     /**
-     * @name BindingBase#removeValues
-     * @description Removes multiple values from the linked observers from the linked paths.
-     * @param {Array<*>} values - The values
+     * Removes multiple values from the linked observers from the linked paths.
+     *
+     * @param values - The values.
      */
     removeValues(values: any[]) {
     }
