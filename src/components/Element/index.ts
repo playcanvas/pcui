@@ -189,7 +189,7 @@ export interface ElementArgs {
     readOnly?: boolean
 }
 
-// Declare an additional property on the HTMLElement interface that references the owner Element
+// Declare an additional property on the base Node interface that references the owner Element
 declare global {
     interface Node { // eslint-disable-line no-unused-vars
         ui: Element;
