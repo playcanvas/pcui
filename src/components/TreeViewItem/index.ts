@@ -313,7 +313,7 @@ class TreeViewItem extends Container {
 
     protected _dfs(fn: any) {
         fn(this);
-        let child = this.firstChild as TreeViewItem;
+        let child = this.firstChild;
         while (child) {
             child._dfs(fn);
             child = child.nextSibling as TreeViewItem;
