@@ -4,12 +4,7 @@ import * as pcuiClass from '../../class';
 const CLASS_RADIO_BUTTON = 'pcui-radio-button';
 const CLASS_RADIO_BUTTON_SELECTED = CLASS_RADIO_BUTTON + '-selected';
 
-export interface RadioButtonArgs extends ElementArgs, IBindableArgs {
-    /**
-     * The text to display next to the radio button.
-     */
-    text?: string;
-}
+export interface RadioButtonArgs extends ElementArgs, IBindableArgs {}
 
 /**
  * A radio button element.
@@ -17,12 +12,9 @@ export interface RadioButtonArgs extends ElementArgs, IBindableArgs {
 class RadioButton extends Element implements IBindable, IFocusable {
     static readonly defaultArgs: RadioButtonArgs = {
         ...Element.defaultArgs,
-        text: '',
         value: null,
         tabIndex: 0
     };
-
-    protected _text: string;
 
     protected _domEventKeyDown: any;
 
@@ -37,8 +29,6 @@ class RadioButton extends Element implements IBindable, IFocusable {
     constructor(args: RadioButtonArgs = RadioButton.defaultArgs) {
         args = { ...RadioButton.defaultArgs, ...args };
         super(args.dom, args);
-
-        this._text = args.text;
 
         this.class.add(CLASS_RADIO_BUTTON);
         this.class.add(pcuiClass.NOT_FLEXIBLE);
