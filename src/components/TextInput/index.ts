@@ -79,7 +79,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
             input.type = 'text';
         }
 
-        (input as any).ui = this;
+        input.ui = this;
         input.tabIndex = 0;
         input.autocomplete = "off";
         this._domInput = input;
