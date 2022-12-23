@@ -107,6 +107,7 @@ const TextInput2 = () => <TextInput binding={new BindingTwoWay()} link={{ observ
 Each component exists in its own folder within the `./src/components` directory. They each contain:
 
 - `index.ts`: The PCUI element itself.
+- `style.scss`: The SASS styles for the component.
 - `component.tsx`: A React wrapper for the element, currently used to display the element in Storybook.
 - `index.stories.tsx`: The Storybook entry for this component.
 
