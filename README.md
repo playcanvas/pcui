@@ -41,6 +41,10 @@ ReactDOM.render(
 );
 ```
 
+## Using with PlayCanvas Editor projects
+
+If you would like to use PCUI with a PlayCanvas project, please refer to our [build guide](BUILDGUIDE.md#playcanvas-editor).
+
 ## Including your own font
 
 PCUI uses four CSS classes to add styled fonts to the various components. These are `.font-regular`, `.font-bold`, `.font-thin` and `.font-light`. You can use your own font with PCUI by adding `font-family` CSS rules to these classes on your webpage. For example:
