@@ -1,6 +1,6 @@
-# PlayCanvas Editor
+# Building a UMD Bundle
 
-As the PlayCanvas Editor only supports UMD builds of libraries, to use PCUI in a project we will have to create our own bundled build. This can be done with the following steps:
+If you need a UMD version of the library so that you for example, it can useed with a PlayCanvas Editor project, please use the following steps:
 
 * Create a new folder and navigate to it on command line.
 * Create a new NPM project with `npm init` and accept the default options.
@@ -50,7 +50,7 @@ module.exports = {
 ```
 npm run build
 ```
-* This will build the PCUI bundle JS file in the `dist` folder that can be copied into an Editor project and the PCUI functionality can be accessed under the global `pcui` object. Example:
+* This will build the PCUI UMD bundle JS file in the `dist` folder to be used in your project where the PCUI functionality can be accessed under the global `pcui` object. Example:
 ```js
 const panel = new pcui.Panel({
     flex: true,

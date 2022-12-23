@@ -41,9 +41,9 @@ ReactDOM.render(
 );
 ```
 
-## Using with PlayCanvas Editor projects
+## Building a UMD bundle
 
-If you would like to use PCUI with a PlayCanvas project, please refer to our [build guide](BUILDGUIDE.md#playcanvas-editor).
+If you need a UMD version of the library so that you for example, it can useed with a PlayCanvas Editor project, please refer to our [build guide](BUILDGUIDE.md).
 
 ## Including your own font
 
