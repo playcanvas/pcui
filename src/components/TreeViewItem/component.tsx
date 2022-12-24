@@ -2,7 +2,7 @@ import Element, { TreeViewItemArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
- * Represents a Tree View Item to be added to a pcui.TreeView.
+ * Represents a Tree View Item to be added to a TreeView.
  */
 class Component extends BaseComponent <TreeViewItemArgs, any> {
     onSelect: () => void;

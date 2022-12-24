@@ -312,7 +312,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
 
     /**
-     * Gets / sets the method to call when keyup is called on the input dom element.
+     * Gets / sets the method to call when keyup is called on the input DOM element.
      */
     set keyChange(value) {
         if (this._keyChange === value) return;
@@ -330,7 +330,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
     }
 
     /**
-     * Gets the input dom element.
+     * Gets the input DOM element.
      */
     get input() {
         return this._domInput;

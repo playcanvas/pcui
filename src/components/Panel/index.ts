@@ -195,9 +195,8 @@ class Panel extends Container {
         });
         this._containerHeader.append(this._labelTitle);
 
-        // use native click listener because the pcui.Element#click event is only fired
-        // if the element is enabled. However we still want to catch header click events in order
-        // to collapse them
+        // use native click listener because the Element#click event is only fired if the element
+        // is enabled. However we still want to catch header click events in order to collapse them
         this._containerHeader.dom.addEventListener('click', this._onHeaderClick.bind(this));
 
         this.append(this._containerHeader);

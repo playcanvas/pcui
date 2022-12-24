@@ -333,7 +333,7 @@ class Container extends Element {
         }
 
         if (element.element) {
-            // console.log('Legacy ui.Element passed to pcui.Container', this.class, element.class);
+            // console.log('Legacy ui.Element passed to Container', this.class, element.class);
             return element.element;
         }
 
@@ -828,7 +828,7 @@ class Container extends Element {
     }
 
     /**
-     * The internal dom element used as a the container of all children.
+     * The internal DOM element used as a the container of all children.
      * Can be overridden by derived classes.
      */
     set domContent(value: HTMLElement) {

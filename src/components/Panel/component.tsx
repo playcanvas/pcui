@@ -3,8 +3,9 @@ import Element, { PanelArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
- * The Panel is a pcui.Container that itself contains a header container and a content container. The
- * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
+ * The Panel is a Container that itself contains a header container and a content container. The
+ * respective Container functions work using the content container. One can also append elements to
+ * the header of the Panel.
  */
 class Component extends BaseComponent <PanelArgs, any> {
     nodeElement: any;

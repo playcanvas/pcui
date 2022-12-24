@@ -117,7 +117,7 @@ class BindingBase extends Events {
      * Clones the binding. To be implemented by derived classes.
      */
     clone() {
-        throw new Error('pcui.BindingBase#clone: Not implemented');
+        throw new Error('BindingBase#clone: Not implemented');
     }
 
     /**

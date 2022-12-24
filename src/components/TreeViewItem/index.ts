@@ -52,7 +52,7 @@ export interface TreeViewItemArgs extends ContainerArgs {
 }
 
 /**
- * Represents a Tree View Item to be added to a pcui.TreeView.
+ * Represents a Tree View Item to be added to a TreeView.
  */
 class TreeViewItem extends Container {
     static readonly defaultArgs: TreeViewItemArgs = {

@@ -669,13 +669,13 @@ class Element extends Events {
     /**
      * Creates a new Element of the desired type. Returns undefined if type not found.
      *
-     * @param type - The type of the Element (registered by pcui.Element#register).
+     * @param type - The type of the Element (registered by Element#register).
      * @param args - Arguments for the Element.
      */
     static create(type: string, args: ElementArgs): any {
         const entry = ELEMENT_REGISTRY[type];
         if (!entry) {
-            console.error('Invalid type passed to pcui.Element#create', type);
+            console.error('Invalid type passed to Element.create:', type);
             return;
         }
 
@@ -859,14 +859,14 @@ class Element extends Events {
     }
 
     /**
-     * Shortcut to pcui.Element.dom.style.
+     * Shortcut to Element.dom.style.
      */
     get style(): CSSStyleDeclaration {
         return this._dom.style;
     }
 
     /**
-     * Shortcut to pcui.Element.dom.classList.
+     * Shortcut to Element.dom.classList.
      */
     set class(value: any) {
         if (!Array.isArray(value)) {

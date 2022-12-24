@@ -16,7 +16,7 @@ export interface TextAreaInputArgs extends TextInputArgs {
 }
 
 /**
- * The TextAreaInput wraps a textarea element. It has the same interface as pcui.TextInput.
+ * The TextAreaInput wraps a textarea element. It has the same interface as TextInput.
  */
 class TextAreaInput extends TextInput {
     static readonly defaultArgs: TextAreaInputArgs = {

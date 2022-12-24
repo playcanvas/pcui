@@ -42,7 +42,8 @@ export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
      */
     sliderMax?: number,
     /**
-     * Gets / sets the maximum number of decimals a value can take. Here for backwards compatibility. Use the precision argument instead going forward.
+     * Gets / sets the maximum number of decimals a value can take. Here for backwards
+     * compatibility. Use the precision argument instead going forward.
      */
     pre?: number,
     /**
@@ -50,7 +51,8 @@ export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
      */
     precision?: number,
     /**
-     * Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
+     * Gets / sets the amount that the value will be increased or decreased when using the arrow
+     * keys. Holding Shift will use 10x the step.
      */
     step?: number,
     /**
@@ -60,8 +62,8 @@ export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
 }
 
 /**
- * The SliderInput shows a pcui.NumericInput and a slider widget next to it. It acts as a proxy
- * of the NumericInput.
+ * The SliderInput shows a NumericInput and a slider widget next to it. It acts as a proxy of the
+ * NumericInput.
  */
 class SliderInput extends Element implements IBindable, IFocusable {
     static readonly defaultArgs: SliderInputArgs = {
