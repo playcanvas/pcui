@@ -467,10 +467,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
             const scrollTop = this._containerOptions.dom.scrollTop;
             if (labelTop < scrollTop) {
                 this._containerOptions.dom.scrollTop = labelTop;
-            } else if (labelTop + this._labelHighlighted.height >
-                // @ts-ignore
-                this._containerOptions.height + scrollTop) {
-                // @ts-ignore
+            } else if (labelTop + this._labelHighlighted.height > this._containerOptions.height + scrollTop) {
                 this._containerOptions.dom.scrollTop = labelTop + this._labelHighlighted.height - this._containerOptions.height;
             }
         }
@@ -772,7 +769,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
     }
 
     protected _resizeShadow() {
-        // @ts-ignore
         this._domShadow.style.height = (this._containerValue.height + this._containerOptions.height) + 'px';
     }
 
@@ -891,9 +887,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         // if the dropdown list goes below the window show it above the field
         const startField = this._allowInput ? this._input.dom : this._labelValue.dom;
         const rect = startField.getBoundingClientRect();
-        // @ts-ignore
         let fitHeight = (rect.bottom + this._containerOptions.height + DEFAULT_BOTTOM_OFFSET >= window.innerHeight);
-        // @ts-ignore
         if (fitHeight && rect.top - this._containerOptions.height < 0) {
             // if showing it above the field means that some of it will not be visible
             // then show it below instead and adjust the max height to the maximum available space

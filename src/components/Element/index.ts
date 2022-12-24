@@ -898,7 +898,7 @@ class Element extends Events {
         this.style.width = value;
     }
 
-    get width() {
+    get width(): number {
         return this._dom.clientWidth;
     }
 
@@ -912,7 +912,7 @@ class Element extends Events {
         this.style.height = value;
     }
 
-    get height() {
+    get height(): number {
         return this._dom.clientHeight;
     }
 
