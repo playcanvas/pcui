@@ -259,7 +259,7 @@ class Container extends Element {
     /**
      * Removes the specified child element from the container.
      *
-     * @param {Element} element - The element to remove.
+     * @param element - The element to remove.
      * @fires 'remove'
      */
     remove(element: Element) {

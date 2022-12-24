@@ -247,13 +247,10 @@ class TreeView extends Container {
     /**
      * Finds the last visible child tree item of the specified tree item.
      *
-     * @param {TreeViewItem} currentItem - The current item.
-     * @param currentItem.numChildren
-     * @param currentItem.open
-     * @param currentItem.lastChild
-     * @returns {TreeViewItem} The last child item.
+     * @param currentItem - The current item.
+     * @returns The last child item.
      */
-    protected _findLastVisibleChildTreeItem(currentItem: { numChildren: any; open: any; lastChild: any; }) {
+    protected _findLastVisibleChildTreeItem(currentItem: TreeViewItem) {
         if (!currentItem.numChildren || !currentItem.open) return null;
 
         let lastChild = currentItem.lastChild;
@@ -267,12 +264,10 @@ class TreeView extends Container {
     /**
      * Finds the previous visible tree item of the specified tree item.
      *
-     * @param {TreeViewItem} currentItem - The current tree item.
-     * @param currentItem.previousSibling
-     * @param currentItem.parent
-     * @returns {TreeViewItem} The previous item.
+     * @param currentItem - The current tree item.
+     * @returns The previous item.
      */
-    protected _findPreviousVisibleTreeItem(currentItem: { previousSibling: any; parent: any; }) {
+    protected _findPreviousVisibleTreeItem(currentItem: TreeViewItem) {
         const sibling = currentItem.previousSibling;
         if (sibling) {
             if (sibling.numChildren > 0 && sibling.open)  {
@@ -477,7 +472,7 @@ class TreeView extends Container {
     /**
      * Call specified function on every child TreeViewItem by traversing the hierarchy depth first.
      *
-     * @param {Function} fn - The function to call. The function takes the TreeViewItem as an argument.
+     * @param fn - The function to call. The function takes the TreeViewItem as an argument.
      */
     protected _traverseDepthFirst(fn: (item: TreeViewItem) => void) {
         function traverse(item: Element) {
@@ -917,7 +912,7 @@ class TreeView extends Container {
     /**
      * Called when a child tree view item is deselected.
      *
-     * @param {TreeViewItem} item - The tree view item.
+     * @param item - The tree view item.
      */
     protected _onChildDeselected(item: TreeViewItem) {
         const index = this._selectedItems.indexOf(item);
@@ -930,13 +925,10 @@ class TreeView extends Container {
     /**
      * Called when a child tree view item is renamed.
      *
-     * @param {TreeViewItem} item - The tree view item.
-     * @param item.class
-     * @param {string} newName - The new name.
-     * @param item.class.remove
-     * @param item.text
+     * @param item - The tree view item.
+     * @param newName - The new name.
      */
-    protected _onChildRename(item: { class: { remove: (arg0: string) => void; }; text: any; }, newName: any) {
+    protected _onChildRename(item: TreeViewItem, newName: string) {
         if (this._filter) {
             // unfilter this item
             item.class.remove(CLASS_FILTER_RESULT);
@@ -959,7 +951,6 @@ class TreeView extends Container {
             this._filterResults.push(item);
             item.class.add(CLASS_FILTER_RESULT);
         });
-
     }
 
     /**

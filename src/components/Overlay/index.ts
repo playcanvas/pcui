@@ -71,8 +71,8 @@ class Overlay extends Container {
     /**
      * Position the overlay at specific x, y coordinates.
      *
-     * @param {number} x - The x coordinate
-     * @param {number} y - The y coordinate
+     * @param x - The x coordinate.
+     * @param y - The y coordinate.
      */
     position(x: number, y: number) {
         const area = this._domClickableOverlay.getBoundingClientRect();

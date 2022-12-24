@@ -121,7 +121,8 @@ class GradientPicker extends Element {
     /**
      * Creates a new GradientPicker.
      *
-     * @param {object} args - The arguments. Extends the Element arguments. Any settable property can also be set through the constructor.
+     * @param args - The arguments. Extends the Element arguments. Any settable property can also
+     * be set through the constructor.
      */
     constructor(args: GradientPickerArgs = GradientPicker.defaultArgs) {
         args = { ...GradientPicker.defaultArgs, ...args };

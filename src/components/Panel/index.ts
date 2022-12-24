@@ -120,7 +120,8 @@ class Panel extends Container {
     /**
      * Creates a new Panel.
      *
-     * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+     * @param args - The arguments. Extends the Container constructor arguments. All settable
+     * properties can also be set through the constructor.
      */
     constructor(args: PanelArgs = Panel.defaultArgs) {
         args = { ...Panel.defaultArgs, ...args };

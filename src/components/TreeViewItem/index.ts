@@ -613,7 +613,7 @@ class TreeViewItem extends Container {
             sibling = sibling.nextSibling;
         }
 
-        return sibling && sibling.ui;
+        return sibling && sibling.ui as TreeViewItem;
     }
 
     /**
@@ -625,7 +625,7 @@ class TreeViewItem extends Container {
             sibling = sibling.previousSibling;
         }
 
-        return sibling && sibling.ui;
+        return sibling && sibling.ui as TreeViewItem;
     }
 
     /**
