@@ -147,14 +147,21 @@ class BooleanInput extends Input implements IBindable, IFocusable {
     }
 
     /* eslint accessor-pairs: 0 */
-    set values(values: boolean[]) {
-        const allSame = values.every(v => v === values[0]);
+    set values(values: Array<boolean>) {
+        let different = false;
+        const value = values[0];
+        for (let i = 1; i < values.length; i++) {
+            if (values[i] !== value) {
+                different = true;
+                break;
+            }
+        }
 
-        if (allSame) {
-            this._updateValue(values[0]);
-        } else {
+        if (different) {
             this._updateValue(null);
             this.class.add(pcuiClass.MULTIPLE_VALUES);
+        } else {
+            this._updateValue(values[0]);
         }
     }
 }
