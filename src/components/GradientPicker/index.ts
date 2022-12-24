@@ -687,7 +687,7 @@ class GradientPicker extends Element {
         ctx.fillRect(0, 0, w, h);
     }
 
-    protected _generateGradient(canvas: Canvas, clr: any[]) {
+    protected _generateGradient(canvas: Canvas, clr: number[]) {
         const canvasElement = canvas.dom as HTMLCanvasElement;
         const ctx = canvasElement.getContext('2d');
         const w = canvas.pixelWidth;

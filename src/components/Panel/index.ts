@@ -20,7 +20,7 @@ export interface PanelArgs extends ContainerArgs {
     /**
      * Sets whether the Element should be collapsed.
      */
-    collapsed?: number,
+    collapsed?: boolean,
     /**
      * Sets whether the panel can be reordered.
      */
@@ -46,18 +46,19 @@ export interface PanelArgs extends ContainerArgs {
      */
     panelType?: 'normal',
     /**
-     * A dom element to use for the content container.
+     * A DOM element to use for the content container.
      */
     content?: HTMLElement
     /**
-     * A dom element to use for the header container.
+     * A DOM element to use for the header container.
      */
     header?: HTMLElement
 }
 
 /**
- * The Panel is a pcui.Container that itself contains a header container and a content container. The
- * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
+ * The Panel is a Container that itself contains a header container and a content container. The
+ * respective Container functions work using the content container. One can also append elements to
+ * the header of the Panel.
  */
 class Panel extends Container {
     /**
@@ -87,35 +88,33 @@ class Panel extends Container {
 
     protected _domEvtDragEnd: any;
 
-    protected _reflowTimeout: any;
+    protected _reflowTimeout: number;
 
-    protected _widthBeforeCollapse: any;
+    protected _widthBeforeCollapse: string;
 
-    protected _heightBeforeCollapse: any;
+    protected _heightBeforeCollapse: string;
 
-    protected _iconSort: any;
+    protected _iconSort: Label;
 
-    protected _btnRemove: any;
+    protected _btnRemove: Button;
 
-    protected _containerContent: any;
+    protected _containerContent: Container;
 
-    protected _containerHeader: any;
+    protected _containerHeader: Container;
 
-    protected _labelTitle: any;
+    protected _labelTitle: Label;
 
-    protected _collapsible: any;
+    protected _collapsible: boolean;
 
-    protected _collapseHorizontally: any;
+    protected _collapseHorizontally: boolean;
 
     protected _draggedChild: this;
 
-    protected _destroyed: any;
+    protected _collapsed: boolean;
 
-    protected _collapsed: any;
+    protected _sortable: boolean;
 
-    protected _sortable: any;
-
-    protected _headerSize: any;
+    protected _headerSize: number;
 
     /**
      * Creates a new Panel.
@@ -172,9 +171,8 @@ class Panel extends Container {
         this._btnRemove = null;
         this.removable = args.removable || !!args.onRemove || false;
 
-        // set the contents container to be the content DOM element
-        // from now on calling append functions on the panel will append themn
-        // elements to the contents container
+        // Set the contents container to be the content DOM element. From now on, calling append
+        // functions on the panel will append the elements to the contents container.
         this.domContent = this._containerContent.dom;
 
         // execute reflow now after all fields have been initialized
@@ -405,7 +403,7 @@ class Panel extends Container {
     }
 
     /**
-     * Gets / sets whether the panel can be reordered
+     * Gets / sets whether the panel can be reordered.
      */
     set sortable(value) {
         if (this._sortable === value) return;

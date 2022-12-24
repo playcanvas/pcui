@@ -24,8 +24,8 @@ export interface GridViewArgs extends ContainerArgs {
 }
 
 /**
- * Represents a container that shows a flexible wrappable
- * list of items that looks like a grid. Contains GridViewItems.
+ * Represents a container that shows a flexible wrappable list of items that looks like a grid.
+ * Contains GridViewItems.
  */
 class GridView extends Container {
     static readonly defaultArgs: GridViewArgs = {
@@ -38,7 +38,7 @@ class GridView extends Container {
 
     protected _filterFn: (item: GridViewItem) => boolean;
 
-    protected _filterAnimationFrame: any;
+    protected _filterAnimationFrame: number;
 
     protected _filterCanceled: boolean;
 

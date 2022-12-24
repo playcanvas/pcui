@@ -17,7 +17,8 @@ export interface InfoBoxArgs extends ContainerArgs {
      */
     text?: string;
     /**
-     * If true then the innerHTML property will be used to set the title/text. Otherwise textContent will be used instead.
+     * If true then the innerHTML property will be used to set the title/text. Otherwise
+     * textContent will be used instead.
      */
     unsafe?: boolean;
 }
@@ -40,11 +41,11 @@ class InfoBox extends Container {
 
     protected _unsafe: boolean;
 
-    protected _icon: any;
+    protected _icon: string;
 
-    protected _title: any;
+    protected _title: string;
 
-    protected _text: any;
+    protected _text: string;
 
     constructor(args: InfoBoxArgs = InfoBox.defaultArgs) {
         args = { ...InfoBox.defaultArgs, ...args };

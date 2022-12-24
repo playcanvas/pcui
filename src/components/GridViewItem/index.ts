@@ -3,6 +3,7 @@ import Container, { ContainerArgs } from '../Container/index';
 import Label from '../Label/index';
 import BindingObserversToElement from '../../binding/BindingObserversToElement/index';
 import RadioButton from '../RadioButton/index';
+import { Observer } from '@playcanvas/observer';
 
 const CLASS_ROOT = 'pcui-gridview-item';
 const CLASS_ROOT_RADIO = 'pcui-gridview-radio-container';
@@ -12,7 +13,7 @@ const CLASS_RADIO_BUTTON = 'pcui-gridview-radiobtn';
 
 export interface GridViewItemArgs extends ContainerArgs {
     /**
-     * The type of the gridview item, can be null or 'radio'
+     * The type of the gridview item, can be null or 'radio'.
      */
     type?: string;
     /**
@@ -48,13 +49,13 @@ class GridViewItem extends Container implements IFocusable {
 
     protected _labelText: Label;
 
-    protected _type: any;
+    protected _type: string;
 
     protected _domEvtFocus: any;
 
     protected _domEvtBlur: any;
 
-    protected _allowSelect: any;
+    protected _allowSelect: boolean;
 
     constructor(args: GridViewItemArgs = GridViewItem.defaultArgs) {
         args = { ...GridViewItem.defaultArgs, ...args };
@@ -119,7 +120,7 @@ class GridViewItem extends Container implements IFocusable {
         this.dom.blur();
     }
 
-    link(observers: any, paths: any) {
+    link(observers: Observer | Observer[], paths: string | string[]) {
         this._labelText.link(observers, paths);
     }
 
