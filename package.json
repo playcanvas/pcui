@@ -63,14 +63,18 @@
     "plugins": [
       "@typescript-eslint"
     ],
-    "extends": "@playcanvas/eslint-config",
+    "extends": [
+      "@playcanvas/eslint-config",
+      "plugin:@typescript-eslint/recommended"
+    ],
     "rules": {
-      "@typescript-eslint/no-redeclare": "error",
-      "@typescript-eslint/no-use-before-define": "error",
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/no-empty-interface": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "off",
       "import/no-unresolved": "off",
-      "no-redeclare": "off",
       "no-throw-literal": "off",
-      "no-use-before-define": "off",
       "jsdoc/require-returns": "off",
       "jsdoc/require-returns-type": "off",
       "jsdoc/require-param-description": "off",

@@ -189,13 +189,6 @@ export interface ElementArgs {
     readOnly?: boolean
 }
 
-// Declare an additional property on the base Node interface that references the owner Element
-declare global {
-    interface Node { // eslint-disable-line no-unused-vars
-        ui: Element;
-    }
-}
-
 /**
  * The base class for all UI elements.
  */
@@ -655,7 +648,7 @@ class Element extends Events {
      * @param cls - The actual class of the Element.
      * @param defaultArguments - Default arguments when creating this type.
      */
-    static register(type: string, cls: any, defaultArguments?: Object) {
+    static register(type: string, cls: any, defaultArguments?: any) {
         ELEMENT_REGISTRY[type] = { cls, defaultArguments };
     }
 
@@ -1013,5 +1006,12 @@ function exposeCssProperty(name: string) {
 
 // expose rest of CSS properties
 SIMPLE_CSS_PROPERTIES.forEach(exposeCssProperty);
+
+// Declare an additional property on the base Node interface that references the owner Element
+declare global {
+    interface Node { // eslint-disable-line no-unused-vars
+        ui: Element;
+    }
+}
 
 export default Element;

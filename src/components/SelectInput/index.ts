@@ -479,7 +479,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
             this._labelValue.value = this._optionsIndex[value] || '';
 
             value = '' + value;
-            for (var key in this._labelsIndex) {
+            for (const key in this._labelsIndex) {
                 if (key === value) {
                     this._labelsIndex[key].class.add(CLASS_SELECTED);
                 } else {
@@ -530,7 +530,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         });
 
         // add special class to tags that do not exist everywhere
-        for (var val in valueCounts) {
+        for (const val in valueCounts) {
             if (valueCounts[val] !== values.length) {
                 tags[val].class.add(CLASS_TAG_NOT_EVERYWHERE);
                 if (this._labelsIndex[val]) {

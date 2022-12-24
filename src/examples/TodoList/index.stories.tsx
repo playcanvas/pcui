@@ -51,7 +51,7 @@ export const Main = (props) => {
             <SelectInput type="number" options={[{ v: 0, t: 'Show all items' }, { v: 1, t: 'Show active items' }, { v: 2, t: 'Show done items' }]} onChange={setListFilter} />
             <Container>
                 {Object.keys(items).map((key) => {
-                    var item = items[key];
+                    const item = items[key];
                     if (listFilter !== 0) {
                         if ((listFilter === 1 && item.done) || (listFilter === 2 && !item.done)) return null;
                     }

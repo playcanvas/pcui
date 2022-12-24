@@ -208,7 +208,7 @@ class GridView extends Container {
      *
      * @param batchLimit - The maximum number of items to show before requesting another animation frame.
      */
-    filterAsync(batchLimit: number = 100) {
+    filterAsync(batchLimit = 100) {
         let i = 0;
         const children = this.dom.childNodes;
         const len = children.length;

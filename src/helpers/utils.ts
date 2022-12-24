@@ -3,15 +3,15 @@ export function deepCopy(data: any) {
         return data;
 
     if (data instanceof Array) {
-        var arr: any[] = [];
-        for (var i = 0; i < data.length; i++) {
+        const arr: any[] = [];
+        for (let i = 0; i < data.length; i++) {
             arr[i] = deepCopy(data[i]);
         }
         return arr;
     }
 
-    var obj: any = { };
-    for (var key in data) {
+    const obj: any = { };
+    for (const key in data) {
         if (data.hasOwnProperty(key))
             obj[key] = deepCopy(data[key]);
     }
@@ -50,7 +50,7 @@ export function arrayEquals(lhs: Array<any>, rhs: Array<any>) {
     if (lhs.length !== rhs.length)
         return false;
 
-    for (var i = 0, l = lhs.length; i < l; i++) {
+    for (let i = 0, l = lhs.length; i < l; i++) {
         if (lhs[i] instanceof Array && rhs[i] instanceof Array) {
             if (!lhs[i].equals(rhs[i]))
                 return false;

@@ -7,8 +7,8 @@ export const searchStringEditDistance = function (a: string, b: string) {
     if (b.length === 0) return a.length;
     if (a === b) return 0;
 
-    var i, j;
-    var matrix: any = [];
+    let i, j;
+    const matrix: any = [];
 
     for (i = 0; i <= b.length; i++)
         matrix[i] = [i];
@@ -36,9 +36,9 @@ export const searchCharsContains = function (a: string, b: string) {
     if (a === b)
         return a.length;
 
-    var contains = 0;
-    var ind = { };
-    var i;
+    let contains = 0;
+    const ind = { };
+    let i;
 
     for (i = 0; i < b.length; i++)
         // @ts-ignore
@@ -56,19 +56,19 @@ export const searchCharsContains = function (a: string, b: string) {
 
 // tokenize string into array of tokens
 export const searchStringTokenize = function (name: string) {
-    var tokens: any = [];
+    const tokens: any = [];
 
     // camelCase
     // upperCASE123
-    var string = name.replace(/([^A-Z])([A-Z][^A-Z])/g, '$1 $2').replace(/([A-Z0-9]{2,})/g, ' $1');
+    const string = name.replace(/([^A-Z])([A-Z][^A-Z])/g, '$1 $2').replace(/([A-Z0-9]{2,})/g, ' $1');
 
     // space notation
     // dash-notation
     // underscore_notation
-    var parts: string[] = string.split(/(\s|\-|_)/g);
+    const parts: string[] = string.split(/(\s|\-|_)/g);
 
     // filter valid tokens
-    for (var i = 0; i < parts.length; i++) {
+    for (let i = 0; i < parts.length; i++) {
         parts[i] = parts[i].toLowerCase().trim();
         if (parts[i] && parts[i] !== '-' && parts[i] !== '_')
             tokens.push(parts[i]);
@@ -79,10 +79,10 @@ export const searchStringTokenize = function (name: string) {
 
 
 const _searchItems = function (items: any, search: any, args: any) {
-    var results: any = [];
+    const results: any = [];
 
-    for (var i = 0; i < items.length; i++) {
-        var item = items[i];
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
 
         // direct hit
         if (item.subFull !== Infinity) {
@@ -108,15 +108,15 @@ const _searchItems = function (items: any, search: any, args: any) {
         }
 
         // check if name contains enough of search characters
-        var contains = searchCharsContains(search, item.name);
+        const contains = searchCharsContains(search, item.name);
         if (contains / search.length < args.containsCharsTolerance)
             continue;
 
-        var editsCandidate = Infinity;
-        var subCandidate = Infinity;
+        let editsCandidate = Infinity;
+        let subCandidate = Infinity;
 
         // for each token
-        for (var t = 0; t < item.tokens.length; t++) {
+        for (let t = 0; t < item.tokens.length; t++) {
             // direct token match
             if (item.tokens[t] === search) {
                 editsCandidate = 0;
@@ -124,7 +124,7 @@ const _searchItems = function (items: any, search: any, args: any) {
                 break;
             }
 
-            var edits = searchStringEditDistance(search, item.tokens[t]);
+            const edits = searchStringEditDistance(search, item.tokens[t]);
 
             if ((subCandidate === Infinity || edits < editsCandidate) && item.tokens[t].indexOf(search) !== -1) {
                 // search is a substring of a token
@@ -172,7 +172,7 @@ export const searchItems = function (items: any, search: any, args?: any) {
     if (!search)
         return [];
 
-    var searchTokens = searchStringTokenize(search);
+    const searchTokens = searchStringTokenize(search);
     if (!searchTokens.length)
         return [];
 
@@ -180,10 +180,10 @@ export const searchItems = function (items: any, search: any, args?: any) {
     args.containsCharsTolerance = args.containsCharsTolerance || 0.5;
     args.editsDistanceTolerance = args.editsDistanceTolerance || 0.5;
 
-    var records: any = [];
+    let records: any = [];
 
     for (i = 0; i < items.length; i++) {
-        var subInd = items[i][0].toLowerCase().trim().indexOf(search);
+        const subInd = items[i][0].toLowerCase().trim().indexOf(search);
 
         records.push({
             name: items[i][0],

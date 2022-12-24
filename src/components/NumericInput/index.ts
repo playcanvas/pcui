@@ -241,10 +241,10 @@ class NumericInput extends TextInput {
                 // sanitize input to only allow short mathematical expressions to be evaluated
                 value = value.match(/^[*/+\-0-9().]+$/);
                 if (value !== null && value[0].length < 20) {
-                    var expression = value[0];
-                    var operators = ['+', '-', '/', '*'];
+                    let expression = value[0];
+                    const operators = ['+', '-', '/', '*'];
                     operators.forEach((operator) => {
-                        var expressionArr = expression.split(operator);
+                        const expressionArr = expression.split(operator);
                         expressionArr.forEach((_: any, i: number) => {
                             expressionArr[i] = expressionArr[i].replace(/^0+/, '');
                         });

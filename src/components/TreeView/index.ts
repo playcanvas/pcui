@@ -817,7 +817,7 @@ class TreeView extends Container {
             } else {
                 let parent = false;
                 if (this._allowReordering && this._dragOverItem.open) {
-                    for (var i = 0; i < this._dragItems.length; i++) {
+                    for (let i = 0; i < this._dragItems.length; i++) {
                         if (this._dragItems[i].parent === this._dragOverItem) {
                             parent = true;
                             this._dragArea = DRAG_AREA_BEFORE;
