@@ -262,7 +262,7 @@ class Container extends Element {
      * @param {Element} element - The element to remove.
      * @fires 'remove'
      */
-    remove(element: any) {
+    remove(element: Element) {
         if (element.parent !== this) return;
 
         const dom = this._getDomFromElement(element);
@@ -274,10 +274,10 @@ class Container extends Element {
     /**
      * Moves the specified child at the specified index.
      *
-     * @param {Element} element - The element to move.
-     * @param {number} index - The index
+     * @param element - The element to move.
+     * @param index - The index to move the element to.
      */
-    move(element: any, index: number) {
+    move(element: Element, index: number) {
         let idx = -1;
         for (let i = 0; i < this.dom.childNodes.length; i++) {
             if (this.dom.childNodes[i].ui === element) {
@@ -340,12 +340,12 @@ class Container extends Element {
         return element;
     }
 
-    protected _onAppendChild(element: any) {
+    protected _onAppendChild(element: Element) {
         element.parent = this;
         this.emit('append', element);
     }
 
-    protected _onRemoveChild(element: any) {
+    protected _onRemoveChild(element: Element) {
         element.parent = null;
         this.emit('remove', element);
     }
@@ -595,9 +595,12 @@ class Container extends Element {
     }
 
     /**
-     * Iterate over each child container using the supplied function.
+     * Iterate over each child element using the supplied function. To early out of the iteration,
+     * return false from the function.
+     *
+     * @param fn - The function to call for each child element.
      */
-    forEachChild(fn: { (container: any, i: any): any; (arg0: any, arg1: number): any; }) {
+    forEachChild(fn: (child: Element, index: number) => void | false) {
         for (let i = 0; i < this.dom.childNodes.length; i++) {
             const node = this.dom.childNodes[i].ui;
             if (node) {

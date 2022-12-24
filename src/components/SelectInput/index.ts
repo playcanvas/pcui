@@ -871,7 +871,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         // highlight label that displays current value
         this._containerOptions.forEachChild((label) => {
             label.hidden = false;
-            if (label._optionValue === this.value) {
+            if ((label as Label)._optionValue === this.value) {
                 this._highlightLabel(label);
             }
         });

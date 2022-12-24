@@ -1,3 +1,4 @@
+import Element from '../Element/index';
 import Container, { ContainerArgs } from '../Container';
 import { IFocusable } from '../Element';
 import MenuItem, { MenuItemArgs } from '../MenuItem';
@@ -7,15 +8,16 @@ const CLASS_MENU_ITEMS = CLASS_MENU + '-items';
 
 export interface MenuArgs extends ContainerArgs {
     /**
-     * An optional array of MenuItem data. If these are passed then new MenuItems will be created and appended to the menu.
+     * An optional array of MenuItem data. If these are passed then new MenuItems will be created
+     * and appended to the menu.
      */
     items: Array<MenuItemArgs>;
 }
 
 /**
- * A Menu is a list of MenuItems which can contain child MenuItems. Useful
- * to show context menus and nested menus. Note that a Menu must be appended to the root Element
- * and then positioned accordingly.
+ * A Menu is a list of MenuItems which can contain child MenuItems. Useful to show context menus
+ * and nested menus. Note that a Menu must be appended to the root Element and then positioned
+ * accordingly.
  */
 class Menu extends Container implements IFocusable {
     static readonly defaultArgs: MenuArgs = {
@@ -61,20 +63,20 @@ class Menu extends Container implements IFocusable {
         this.dom.addEventListener('keydown', this._domEvtKeyDown);
 
         if (args.items) {
-            args.items.forEach((item: any) => {
+            args.items.forEach((item: MenuItemArgs) => {
                 const menuItem = new MenuItem(item);
                 this.append(menuItem);
             });
         }
     }
 
-    protected _onAppendChild(element: any) {
+    protected _onAppendChild(element: Element) {
         if (element instanceof MenuItem) {
             element.menu = this;
         }
     }
 
-    protected _onRemoveChild(element: { menu: any; }) {
+    protected _onRemoveChild(element: Element) {
         if (element instanceof MenuItem) {
             element.menu = null;
         }
