@@ -34,7 +34,7 @@ function _rgb2hsv(rgb: Array<number>) {
     return [h, s, v];
 }
 
-function _hsv2rgb(hsv: any) {
+function _hsv2rgb(hsv: number[]) {
     let h = hsv[0];
     let s = hsv[1];
     let v = hsv[2];
