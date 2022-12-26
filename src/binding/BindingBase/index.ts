@@ -30,7 +30,7 @@ export interface BindingBaseArgs {
 }
 
 /**
- * Base class for data binding between IBindable Elements and Observers.
+ * Base class for data binding between {@link IBindable} {@link Element}s and Observers.
  */
 class BindingBase extends Events {
     protected _observers: Array<Observer>;

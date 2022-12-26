@@ -9,8 +9,8 @@ export interface BindingObserversToElementArgs extends BindingBaseArgs {
 }
 
 /**
- * Provides one way binding between Observers and an IBindable element and Observers. Any changes from the observers
- * will be propagated to the element.
+ * Provides one way binding between Observers and an {@link IBindable} element and Observers. Any
+ * changes from the observers will be propagated to the element.
  */
 class BindingObserversToElement extends BindingBase {
     _customUpdate: any;

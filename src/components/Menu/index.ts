@@ -15,9 +15,9 @@ export interface MenuArgs extends ContainerArgs {
 }
 
 /**
- * A Menu is a list of MenuItems which can contain child MenuItems. Useful to show context menus
- * and nested menus. Note that a Menu must be appended to the root Element and then positioned
- * accordingly.
+ * A Menu is a list of {@link MenuItem}s which can contain child MenuItems. Useful to show context
+ * menus and nested menus. Note that a Menu must be appended to the root Element and then
+ * positioned accordingly.
  */
 class Menu extends Container implements IFocusable {
     static readonly defaultArgs: MenuArgs = {

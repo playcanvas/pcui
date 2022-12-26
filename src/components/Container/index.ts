@@ -51,8 +51,8 @@ export interface ContainerArgs extends ElementArgs, IParentArgs, IFlexArgs {
 }
 
 /**
- * A container is the basic building block for Elements that are grouped together.
- * A container can contain any other element including other containers.
+ * A container is the basic building block for {@link Element}s that are grouped together. A
+ * container can contain any other element including other containers.
  */
 class Container extends Element {
     static readonly defaultArgs: ContainerArgs = {

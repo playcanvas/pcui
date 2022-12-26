@@ -8,7 +8,7 @@ export interface CanvasArgs extends ElementArgs {
 }
 
 /**
- * Represents a Canvas
+ * Represents a Canvas.
  */
 class Canvas extends Element {
     static readonly defaultArgs: CanvasArgs = {

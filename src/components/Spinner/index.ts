@@ -26,7 +26,7 @@ export interface SpinnerArgs extends ElementArgs {
 }
 
 /**
- * Represents a spinning icon
+ * Represents a spinning icon.
  */
 class Spinner extends Element {
     static TYPE_SMALL_THICK = 'small-thick';

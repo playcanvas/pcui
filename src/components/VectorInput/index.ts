@@ -32,7 +32,7 @@ export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindabl
 }
 
 /**
- * A vector input
+ * A vector input.
  */
 class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder {
     static readonly defaultArgs: VectorInputArgs = {

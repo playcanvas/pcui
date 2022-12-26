@@ -25,7 +25,7 @@ export interface GridViewArgs extends ContainerArgs {
 
 /**
  * Represents a container that shows a flexible wrappable list of items that looks like a grid.
- * Contains GridViewItems.
+ * Contains {@link GridViewItem}s.
  */
 class GridView extends Container {
     static readonly defaultArgs: GridViewArgs = {

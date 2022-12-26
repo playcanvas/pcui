@@ -44,9 +44,9 @@ export interface MenuItemArgs extends ContainerArgs {
 }
 
 /**
- * The MenuItem is a selectable option that is appended to a Menu.
- * A MenuItem can also contain child MenuItems (by appending them to the MenuItem). This
- * can be useful to show nested Menus.
+ * The MenuItem is a selectable option that is appended to a {@link Menu}. A MenuItem can also
+ * contain child MenuItems (by appending them to the MenuItem). This can be useful to show nested
+ * Menus.
  */
 class MenuItem extends Container implements IBindable {
     static readonly defaultArgs: MenuItemArgs = {

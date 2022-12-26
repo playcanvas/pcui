@@ -33,7 +33,7 @@ export interface GradientPickerArgs extends ElementArgs {
 }
 
 /**
- * Represents a gradient picker
+ * Represents a gradient picker.
  */
 class GradientPicker extends Element {
     static readonly defaultArgs: GradientPickerArgs = {

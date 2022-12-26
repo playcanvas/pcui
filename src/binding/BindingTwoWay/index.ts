@@ -17,8 +17,8 @@ export interface BindingTwoWayArgs extends BindingBaseArgs {
 }
 
 /**
- * Provides two way data binding between Observers and IBindable elements. This means
- * that when the value of the Observers changes the IBindable will be updated and vice versa.
+ * Provides two way data binding between Observers and {@link IBindable} elements. This means that
+ * when the value of the Observers changes the IBindable will be updated and vice versa.
  */
 class BindingTwoWay extends BindingBase {
     _bindingElementToObservers: any;

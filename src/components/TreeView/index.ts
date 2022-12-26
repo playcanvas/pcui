@@ -47,7 +47,7 @@ export interface TreeViewArgs extends ContainerArgs {
 
 /**
  * A container that can show a TreeView like a hierarchy. The TreeView contains
- * TreeViewItems.
+ * {@link TreeViewItem}s.
  */
 class TreeView extends Container {
     /**

@@ -31,7 +31,7 @@ export interface GridViewItemArgs extends ContainerArgs {
 }
 
 /**
- *  Represents a grid view item used in GridView.
+ *  Represents a grid view item used in {@link GridView}.
  */
 class GridViewItem extends Container implements IFocusable {
     static readonly defaultArgs: GridViewItemArgs = {

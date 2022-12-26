@@ -10,13 +10,14 @@ const CLASS_TEXT_AREA_INPUT_RESIZABLE_VERTICAL = CLASS_TEXT_AREA_INPUT_RESIZABLE
 
 export interface TextAreaInputArgs extends TextInputArgs {
     /**
-     * Sets which directions the text area can be resized in. One of 'both', 'horizontal', 'vertical' or 'none'. Defaults to none.
+     * Sets which directions the text area can be resized in. One of 'both', 'horizontal',
+     * 'vertical' or 'none'. Defaults to 'none'.
      */
     resizable?: 'horizontal' | 'vertical' | 'both' | 'none'
 }
 
 /**
- * The TextAreaInput wraps a textarea element. It has the same interface as TextInput.
+ * The TextAreaInput wraps a textarea element. It has the same interface as {@link TextInput}.
  */
 class TextAreaInput extends TextInput {
     static readonly defaultArgs: TextAreaInputArgs = {

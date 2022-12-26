@@ -56,9 +56,9 @@ export interface PanelArgs extends ContainerArgs {
 }
 
 /**
- * The Panel is a Container that itself contains a header container and a content container. The
- * respective Container functions work using the content container. One can also append elements to
- * the header of the Panel.
+ * The Panel is a {@link Container} that itself contains a header container and a content
+ * container. The respective Container functions work using the content container. One can also
+ * append elements to the header of the Panel.
  */
 class Panel extends Container {
     /**

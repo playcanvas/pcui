@@ -5,7 +5,7 @@ const CLASS_ROOT = 'pcui-divider';
 export interface DividerArgs extends ElementArgs {}
 
 /**
- * Represents a vertical division between two elements
+ * Represents a vertical division between two elements.
  */
 class Divider extends Element {
     static readonly defaultArgs: DividerArgs = {
