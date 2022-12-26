@@ -1,6 +1,6 @@
 // calculate, how many string `a`
 // requires edits, to become string `b`
-export const searchStringEditDistance = (a: string, b: string): number => {
+const searchStringEditDistance = (a: string, b: string): number => {
     // Levenshtein distance
     // https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#JavaScript
     if (a.length === 0) return b.length;
@@ -31,7 +31,7 @@ export const searchStringEditDistance = (a: string, b: string): number => {
 
 // calculate, how many characters string `b`
 // contains of a string `a`
-export const searchCharsContains = (a: string, b: string): number => {
+const searchCharsContains = (a: string, b: string): number => {
     if (a === b)
         return a.length;
 
@@ -51,7 +51,7 @@ export const searchCharsContains = (a: string, b: string): number => {
 
 
 // tokenize string into array of tokens
-export const searchStringTokenize = (name: string): string[] => {
+const searchStringTokenize = (name: string): string[] => {
     const tokens: string[] = [];
 
     // camelCase
@@ -74,7 +74,7 @@ export const searchStringTokenize = (name: string): string[] => {
 };
 
 
-const _searchItems = function (items: any, search: string, args: any) {
+const _searchItems = (items: any, search: string, args: any) => {
     const results: any = [];
 
     for (let i = 0; i < items.length; i++) {
@@ -160,7 +160,7 @@ const _searchItems = function (items: any, search: string, args: any) {
 //     [ 'Sun', {object} ]
 // ]
 //
-export const searchItems = function (items: any, search: string, args?: any) {
+export const searchItems = (items: any, search: string, args?: any) => {
     let i;
 
     search = (search || '').toLowerCase().trim();
