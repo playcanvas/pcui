@@ -21,7 +21,7 @@ export interface ColorPickerArgs extends ElementArgs {
 }
 
 /**
- * Represents a color picker
+ * Represents a color picker.
  */
 class ColorPicker extends Element {
     static readonly defaultArgs: ColorPickerArgs = {
@@ -56,7 +56,7 @@ class ColorPicker extends Element {
 
     protected _colorHSV: number[];
 
-    protected _pickerChannels: any[];
+    protected _pickerChannels: NumericInput[];
 
     protected _channelsNumber: number;
 
@@ -397,7 +397,7 @@ class ColorPicker extends Element {
         this._overlay.position(x, y);
     }
 
-    protected _setPickerColor(color: any) {
+    protected _setPickerColor(color: number[]) {
         if (this._changing || this._dragging)
             return;
 
@@ -505,7 +505,7 @@ class ColorPicker extends Element {
 
     }
 
-    protected _setValue(value: any) {
+    protected _setValue(value: number[]) {
         const r = this._valueToColor(value[0]);
         const g = this._valueToColor(value[1]);
         const b = this._valueToColor(value[2]);
@@ -520,7 +520,7 @@ class ColorPicker extends Element {
         }
     }
 
-    protected _updateValue(value: string | any[]) {
+    protected _updateValue(value: number[]) {
         let dirty = false;
         for (let i = 0; i < value.length; i++) {
             if (this._value[i] !== value[i]) {

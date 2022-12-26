@@ -276,8 +276,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
     'min',
     'max',
     'precision',
-    'step',
-    'renderChanges'
+    'step'
 ].forEach((property) => {
     Object.defineProperty(VectorInput.prototype, property, {
         get: function () {

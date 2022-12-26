@@ -110,7 +110,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _labelValue: Label;
 
-    protected _timeoutLabelValueTabIndex: any;
+    protected _timeoutLabelValueTabIndex: number;
 
     protected _labelIcon: Label;
 

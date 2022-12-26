@@ -136,7 +136,7 @@ class TreeView extends Container {
 
     protected _pressedShift: boolean;
 
-    protected _filter: any;
+    protected _filter: string;
 
     protected _filterResults: any[];
 
@@ -715,11 +715,11 @@ class TreeView extends Container {
     }
 
     // Called when we drag over a TreeViewItem.
-    protected _onChildDragOver(evt: any, element: { allowDrop: any; }) {
+    protected _onChildDragOver(evt: MouseEvent, item: TreeViewItem) {
         if (!this._allowDrag || !this._dragging) return;
 
-        if (element.allowDrop && this._dragItems.indexOf(element) === -1) {
-            this._dragOverItem = element;
+        if (item.allowDrop && this._dragItems.indexOf(item) === -1) {
+            this._dragOverItem = item;
         } else {
             this._dragOverItem = null;
         }
@@ -1129,7 +1129,7 @@ class TreeView extends Container {
     /**
      * A filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
      */
-    set filter(value: string) {
+    set filter(value) {
         if (this._filter === value) return;
 
         this._filter = value;
@@ -1141,7 +1141,7 @@ class TreeView extends Container {
         }
     }
 
-    get filter(): string {
+    get filter() {
         return this._filter;
     }
 

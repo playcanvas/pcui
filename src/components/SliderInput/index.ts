@@ -78,9 +78,9 @@ class SliderInput extends Element implements IBindable, IFocusable {
 
     protected _numericInput: NumericInput;
 
-    protected _sliderMin: any;
+    protected _sliderMin: number;
 
-    protected _sliderMax: any;
+    protected _sliderMax: number;
 
     protected _domSlider: HTMLDivElement;
 
@@ -104,7 +104,7 @@ class SliderInput extends Element implements IBindable, IFocusable {
 
     protected _domKeyDown: any;
 
-    protected _touchId: any;
+    protected _touchId: number;
 
     /**
      * Creates a new SliderInput.

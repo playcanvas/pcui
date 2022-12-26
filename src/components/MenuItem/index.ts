@@ -1,5 +1,5 @@
+import Element, { IBindable } from '../Element';
 import Container, { ContainerArgs } from '../Container';
-import { IBindable } from '../Element';
 import Label from '../Label';
 
 const CLASS_MENU_ITEM = 'pcui-menu-item';
@@ -123,14 +123,14 @@ class MenuItem extends Container implements IBindable {
         this._menu = null;
 
         if (args.items) {
-            args.items.forEach((item: any) => {
+            args.items.forEach((item) => {
                 const menuItem = new MenuItem(item);
                 this.append(menuItem);
             });
         }
     }
 
-    protected _onAppendChild(element: any) {
+    protected _onAppendChild(element: Element) {
         super._onAppendChild(element);
 
         this._numChildren++;
@@ -140,7 +140,7 @@ class MenuItem extends Container implements IBindable {
         }
     }
 
-    protected _onRemoveChild(element: any) {
+    protected _onRemoveChild(element: Element) {
         if (element instanceof MenuItem) {
             this._numChildren--;
             if (this._numChildren === 0) {
@@ -218,7 +218,7 @@ class MenuItem extends Container implements IBindable {
     }
 
     /* eslint accessor-pairs: 0 */
-    set values(values: any) {
+    set values(values: string[]) {
         this._labelText.values = values;
     }
 
