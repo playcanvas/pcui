@@ -33,9 +33,9 @@ export interface BindingBaseArgs {
  * Base class for data binding between {@link IBindable} {@link Element}s and Observers.
  */
 class BindingBase extends Events {
-    protected _observers: Array<Observer>;
+    protected _observers: Observer[];
 
-    protected _paths: Array<string>;
+    protected _paths: string[];
 
     protected _applyingChange: boolean;
 
@@ -260,14 +260,14 @@ class BindingBase extends Events {
     }
 
     /**
-     * The linked observers
+     * The linked observers.
      */
     get observers() {
         return this._observers;
     }
 
     /**
-     * The linked paths
+     * The linked paths.
      */
     get paths() {
         return this._paths;

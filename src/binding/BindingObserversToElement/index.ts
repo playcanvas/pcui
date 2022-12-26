@@ -24,10 +24,9 @@ class BindingObserversToElement extends BindingBase {
     /**
      * Creates a new BindingObserversToElement instance.
      *
-     * @param root0
-     * @param root0.customUpdate
+     * @param args
      */
-    constructor({ customUpdate, ...args }: any = {}) {
+    constructor(args: BindingObserversToElementArgs = {}) {
         super(args);
 
         this._customUpdate = args.customUpdate;
