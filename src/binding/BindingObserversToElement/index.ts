@@ -1,5 +1,5 @@
-import BindingBase, { BindingBaseArgs } from '../BindingBase';
 import { Observer } from '@playcanvas/observer';
+import BindingBase, { BindingBaseArgs } from '../BindingBase';
 
 export interface BindingObserversToElementArgs extends BindingBaseArgs {
     /**
@@ -88,7 +88,7 @@ class BindingObserversToElement extends BindingBase {
      * @param observers
      * @param paths
      */
-    link(observers: Observer[], paths: string[]) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
 
         // don't render changes when we link

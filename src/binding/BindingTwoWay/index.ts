@@ -55,7 +55,7 @@ class BindingTwoWay extends BindingBase {
         });
     }
 
-    link(observers: Observer[], paths: string[]) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
         this._bindingElementToObservers.link(observers, paths);
         this._bindingObserversToElement.link(observers, paths);

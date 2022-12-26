@@ -1,6 +1,6 @@
+import { Events, Observer } from '@playcanvas/observer';
 import React from 'react';
 import * as pcuiClass from '../../class';
-import { Events, Observer } from '@playcanvas/observer';
 
 import { BindingBase } from '../../binding';
 
@@ -424,7 +424,7 @@ class Element extends Events {
      * @param observers - An array of observers or a single observer.
      * @param paths - A path for the observer(s) or an array of paths that maps to each separate observer.
      */
-    link(observers: Observer | Observer[], paths: string | string[]) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         if (this._binding) {
             this._binding.link(observers, paths);
         }

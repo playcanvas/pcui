@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
+import { Observer, History } from '@playcanvas/observer';
 import Container from '../../components/Container/component';
 import Button from '../../components/Button/component';
 import SliderInput from '../../components/SliderInput/component';
 import Progress from '../../components/Progress/component';
 import Label from '../../components/Label/component';
 import BindingTwoWay from '../../binding/BindingTwoWay';
-import { Observer, History } from '@playcanvas/observer';
 
 export default {
     title: 'Examples/History',

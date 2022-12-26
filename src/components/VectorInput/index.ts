@@ -1,3 +1,4 @@
+import { Observer } from '@playcanvas/observer';
 import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element/index';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
@@ -147,7 +148,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         return true;
     }
 
-    link(observers: Array<any>, paths: Array<string>) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
         observers = Array.isArray(observers) ? observers : [observers];
         paths = Array.isArray(paths) ? paths : [paths];

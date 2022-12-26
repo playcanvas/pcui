@@ -1,3 +1,4 @@
+import { Observer } from '@playcanvas/observer';
 import Element, { IBindable } from '../Element';
 import Container, { ContainerArgs } from '../Container';
 import Label from '../Label';
@@ -164,7 +165,7 @@ class MenuItem extends Container implements IBindable {
         }
     }
 
-    link(observers: Array<any>, paths: Array<string>) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
         this._labelText.link(observers, paths);
     }
