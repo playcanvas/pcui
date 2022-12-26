@@ -38,8 +38,7 @@ class Overlay extends Container {
 
         this._domClickableOverlay = document.createElement('div');
         this._domClickableOverlay.ui = this;
-        // @ts-ignore
-        this._domClickableOverlay.classList = CLASS_OVERLAY_INNER;
+        this._domClickableOverlay.classList.add(CLASS_OVERLAY_INNER);
         this.dom.appendChild(this._domClickableOverlay);
 
         this._domEventMouseDown = this._onMouseDown.bind(this);
