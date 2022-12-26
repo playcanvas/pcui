@@ -301,8 +301,8 @@ class TreeViewItem extends Container {
             this.open = !this.open;
             if (evt.altKey) {
                 // apply to all children as well
-                this._dfs((node: TreeViewItem) => {
-                    node.open = this.open;
+                this._dfs((item: TreeViewItem) => {
+                    item.open = this.open;
                 });
             }
             this.focus();
@@ -311,12 +311,12 @@ class TreeViewItem extends Container {
         }
     }
 
-    protected _dfs(fn: any) {
+    protected _dfs(fn: (item: TreeViewItem) => void) {
         fn(this);
         let child = this.firstChild;
         while (child) {
             child._dfs(fn);
-            child = child.nextSibling as TreeViewItem;
+            child = child.nextSibling;
         }
     }
 
