@@ -943,7 +943,7 @@ class TreeView extends Container {
         this.emit('rename', item, newName);
     }
 
-    protected _searchItems(searchArr: any, filter: any) {
+    protected _searchItems(searchArr: any, filter: string) {
         const results = searchItems(searchArr, filter);
         if (!results.length) return;
 
