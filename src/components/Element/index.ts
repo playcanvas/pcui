@@ -137,7 +137,7 @@ export interface ElementArgs {
     /**
      * Sets the parent {@link Element}.
      */
-    parent?: Element,
+    parent?: Element, // eslint-disable-line no-use-before-define
     /**
      * Links the observer attribute at the path location in the given observer to this {@link Element}.
      */
@@ -295,7 +295,7 @@ class Element extends Events {
 
     protected _destroyed: boolean;
 
-    protected _parent: Element;
+    protected _parent: Element; // eslint-disable-line no-use-before-define
 
     protected _domEventClick: any;
 
