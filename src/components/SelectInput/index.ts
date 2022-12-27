@@ -141,11 +141,11 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _type: string;
 
-    protected _optionsIndex: any;
+    protected _optionsIndex: { [key: string]: string };
 
-    protected _labelsIndex: any;
+    protected _labelsIndex: { [key: string]: Label };
 
-    protected _labelHighlighted: any;
+    protected _labelHighlighted: Label;
 
     protected _optionsFn: any;
 
@@ -453,7 +453,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
     }
 
-    protected _highlightLabel(label: any) {
+    protected _highlightLabel(label: Label) {
         if (this._labelHighlighted === label) return;
 
         if (this._labelHighlighted) {
@@ -577,7 +577,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         return container;
     }
 
-    protected _removeTag(tagElement: any, value: any) {
+    protected _removeTag(tagElement: any, value: string) {
         tagElement.destroy();
 
         if (this._labelsIndex[value]) {
@@ -585,7 +585,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
 
         if (this._values) {
-            this._values.forEach((arr: any) => {
+            this._values.forEach((arr: string[]) => {
                 if (!arr) return;
                 const idx = arr.indexOf(value);
                 if (idx !== -1) {
@@ -632,7 +632,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 return [option.t, option.v];
             });
             const searchResults = searchItems(searchOptions, filter);
-            searchResults.forEach((value: any) => {
+            searchResults.forEach((value: string) => {
                 containerDom.appendChild(this._labelsIndex[value].dom);
             });
 
@@ -648,7 +648,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
 
         if (containerDom.firstChild) {
-            this._highlightLabel(containerDom.firstChild.ui);
+            this._highlightLabel(containerDom.firstChild.ui as Label);
         }
 
         this._resizeShadow();
@@ -753,9 +753,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
             if (!this._containerOptions.dom.childNodes.length) return;
 
             if (!this._labelHighlighted) {
-                this._highlightLabel(this._containerOptions.dom.childNodes[0].ui);
+                this._highlightLabel(this._containerOptions.dom.childNodes[0].ui as Label);
             } else {
-                let highlightedLabelDom = this._labelHighlighted.dom;
+                let highlightedLabelDom = this._labelHighlighted.dom as Node;
                 do {
                     if (evt.key === 'ArrowUp') {
                         highlightedLabelDom = highlightedLabelDom.previousSibling;
@@ -765,7 +765,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 } while (highlightedLabelDom && highlightedLabelDom.ui.hidden);
 
                 if (highlightedLabelDom) {
-                    this._highlightLabel(highlightedLabelDom.ui);
+                    this._highlightLabel(highlightedLabelDom.ui as Label);
                 }
             }
         }
@@ -875,7 +875,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
             }
         });
         if (!this._labelHighlighted) {
-            this._highlightLabel(this._containerOptions.dom.childNodes[0].ui);
+            this._highlightLabel(this._containerOptions.dom.childNodes[0].ui as Label);
         }
 
         // show options

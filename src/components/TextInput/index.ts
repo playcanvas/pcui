@@ -233,7 +233,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         if (value === this.value) return false;
 
         this._suspendInputChangeEvt = true;
-        (this._domInput as any).value = (value === null || value === undefined) ? '' : value;
+        this._domInput.value = (value === null || value === undefined) ? '' : String(value);
         this._suspendInputChangeEvt = false;
 
         this.emit('change', value);
@@ -265,7 +265,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         super.destroy();
     }
 
-    set value(value) {
+    set value(value: string | number | Array<string | number>) {
         const changed = this._updateValue(value);
 
         if (changed) {
