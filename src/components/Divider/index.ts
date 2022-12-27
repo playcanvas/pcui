@@ -2,6 +2,9 @@ import Element, { ElementArgs } from '../Element/index';
 
 const CLASS_ROOT = 'pcui-divider';
 
+/**
+ * The arguments for the {@link Divider} constructor.
+ */
 export interface DividerArgs extends ElementArgs {}
 
 /**

@@ -24,6 +24,9 @@ const PROXY_FIELDS = [
 ];
 
 
+/**
+ * The arguments for the {@link SliderInput} constructor.
+ */
 export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
     /**
      * Gets / sets the minimum value that the numeric input field can take. Defaults to 0.

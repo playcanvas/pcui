@@ -4,21 +4,24 @@ import GridViewItem from '../GridViewItem';
 const CLASS_ROOT = 'pcui-gridview';
 const CLASS_VERTICAL = CLASS_ROOT + '-vertical';
 
+/**
+ * The arguments for the {@link GridView} constructor.
+ */
 export interface GridViewArgs extends ContainerArgs {
     /**
-     * If true the gridview layout will be vertical.
+     * If `true` the {@link GridView} layout will be vertical.
      */
     vertical?: boolean;
     /**
-     * If true, the layout will allow for multiple options to be selected.
+     * If `true`, the layout will allow for multiple options to be selected.
      */
     multiSelect?: boolean;
     /**
-     * If true and multiSelect is set to false, the layout will allow options to be deselected.
+     * If `true` and `multiSelect` is set to `false`, the layout will allow options to be deselected.
      */
     allowDeselect?: boolean;
     /**
-     * A filter function to filter gridview items with signature (GridViewItem) => boolean.
+     * A filter function to filter {@link GridViewItem}s with signature `(GridViewItem) => boolean`.
      */
     filterFn?: (item: GridViewItem) => boolean;
 }

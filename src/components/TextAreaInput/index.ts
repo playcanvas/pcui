@@ -8,6 +8,9 @@ const CLASS_TEXT_AREA_INPUT_RESIZABLE_BOTH = CLASS_TEXT_AREA_INPUT_RESIZABLE + '
 const CLASS_TEXT_AREA_INPUT_RESIZABLE_HORIZONTAL = CLASS_TEXT_AREA_INPUT_RESIZABLE + '-horizontal';
 const CLASS_TEXT_AREA_INPUT_RESIZABLE_VERTICAL = CLASS_TEXT_AREA_INPUT_RESIZABLE + '-vertical';
 
+/**
+ * The arguments for the {@link TextAreaInput} constructor.
+ */
 export interface TextAreaInputArgs extends TextInputArgs {
     /**
      * Sets which directions the text area can be resized in. One of 'both', 'horizontal',

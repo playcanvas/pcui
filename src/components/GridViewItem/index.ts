@@ -11,13 +11,16 @@ const CLASS_SELECTED = CLASS_ROOT + '-selected';
 const CLASS_TEXT = CLASS_ROOT + '-text';
 const CLASS_RADIO_BUTTON = 'pcui-gridview-radiobtn';
 
+/**
+ * The arguments for the {@link GridViewItem} constructor.
+ */
 export interface GridViewItemArgs extends ContainerArgs {
     /**
-     * The type of the gridview item, can be null or 'radio'.
+     * The type of the {@link GridViewItem}. Can be `null` or 'radio'.
      */
     type?: string;
     /**
-     * If true allow selecting the item. Defaults to true.
+     * If `true`, allow selecting the item. Defaults to `true`.
      */
     allowSelect?: boolean;
     /**
@@ -25,7 +28,7 @@ export interface GridViewItemArgs extends ContainerArgs {
      */
     selected?: boolean;
     /**
-     * The text of the item.
+     * The text of the item. Defaults to ''.
      */
     text?: string;
 }
@@ -138,7 +141,7 @@ class GridViewItem extends Container implements IFocusable {
     }
 
     /**
-     * If true allow selecting the item. Defaults to true.
+     * If `true` allow selecting the item. Defaults to `true`.
      */
     set allowSelect(value) {
         this._allowSelect = value;

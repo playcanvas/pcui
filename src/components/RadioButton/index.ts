@@ -4,6 +4,9 @@ import * as pcuiClass from '../../class';
 const CLASS_RADIO_BUTTON = 'pcui-radio-button';
 const CLASS_RADIO_BUTTON_SELECTED = CLASS_RADIO_BUTTON + '-selected';
 
+/**
+ * The arguments for the {@link RadioButton} constructor.
+ */
 export interface RadioButtonArgs extends ElementArgs, IBindableArgs {}
 
 /**

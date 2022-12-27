@@ -13,6 +13,9 @@ const CLASS_ARRAY_CONTAINER = CLASS_ARRAY_INPUT + '-items';
 const CLASS_ARRAY_ELEMENT = CLASS_ARRAY_INPUT + '-item';
 const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
 
+/**
+ * The arguments for the {@link ArrayInput} constructor.
+ */
 export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
     /**
      * The type of values that the array can hold.
@@ -23,11 +26,11 @@ export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
      */
     elementArgs?: Array<any>;
     /**
-     * If true then editing the number of elements that the array has will not be allowed.
+     * If `true` then editing the number of elements that the array has will not be allowed.
      */
     fixedSize?: boolean;
     /**
-     * If true then the array will be rendered using panels.
+     * If `true` then the array will be rendered using panels.
      */
     usePanels?: boolean;
     /**

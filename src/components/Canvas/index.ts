@@ -1,8 +1,12 @@
 import Element, { ElementArgs } from '../Element/index';
 
+/**
+ * The arguments for the {@link Canvas} constructor.
+ */
 export interface CanvasArgs extends ElementArgs {
     /**
-     * Whether the canvas should use the device pixel ratio.
+     * Whether the canvas should use the {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio devicePixelRatio}.
+     * Defaults to `false`.
      */
     useDevicePixelRatio?: boolean;
 }

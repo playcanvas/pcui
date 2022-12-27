@@ -3,22 +3,26 @@ import Container, { ContainerArgs } from '../Container';
 
 const CLASS_INFOBOX = 'pcui-infobox';
 
+/**
+ * The arguments for the {@link InfoBox} constructor.
+ */
 export interface InfoBoxArgs extends ContainerArgs {
     /**
-     * The CSS code for an icon for the info box. e.g. 'E401' (notice we omit the '\\' character).
+     * The CSS code for an icon for the info box. e.g. 'E401' (notice we omit the '\\' character). Defaults to ''.
      */
     icon?: string;
     /**
-     * Gets / sets the 'title' of the info box.
+     * Gets / sets the 'title' of the info box. Defaults to ''.
      */
     title?: string;
     /**
-     * Gets / sets the 'text' of the info box.
+     * Gets / sets the 'text' of the info box. Defaults to ''.
      */
     text?: string;
     /**
-     * If true then the innerHTML property will be used to set the title/text. Otherwise
-     * textContent will be used instead.
+     * If `true`, the {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML} property will be
+     * used to set the text. Otherwise, {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
+     * will be used instead. Defaults to `false`.
      */
     unsafe?: boolean;
 }

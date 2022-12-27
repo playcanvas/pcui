@@ -13,8 +13,10 @@ function createSmallThick(size: any, dom: any) {
     return spinner;
 }
 
+/**
+ * The arguments for the {@link Spinner} constructor.
+ */
 export interface SpinnerArgs extends ElementArgs {
-
     /**
      * Sets the pixel size of the spinner. Defaults to 12.
      */

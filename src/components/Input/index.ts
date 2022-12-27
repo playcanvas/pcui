@@ -1,5 +1,8 @@
 import Element, { ElementArgs, IBindable } from '../Element/index';
 
+/**
+ * The arguments for the {@link Input} constructor.
+ */
 export interface InputArgs extends ElementArgs {}
 
 class Input extends Element implements IBindable {

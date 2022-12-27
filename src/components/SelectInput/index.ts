@@ -27,17 +27,20 @@ const CLASS_OPEN = 'pcui-open';
 
 const DEFAULT_BOTTOM_OFFSET = 25;
 
+/**
+ * The arguments for the {@link SelectInput} constructor.
+ */
 export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
-     * Used to map the options
+     * Used to map the options.
      */
     optionsFn?: any;
     /**
-     * default value for the input
+     * Default value for the input.
      */
     defaultValue?: any;
     /**
-     * If true then the input value becomes an array allowing the selection of multiple options. Defaults to false.
+     * If `true` then the input value becomes an array allowing the selection of multiple options. Defaults to `false`.
      */
     multiSelect?: boolean;
     /**
@@ -49,15 +52,15 @@ export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholde
      */
     invalidOptions?: Array<any>;
     /**
-     * If true then null is a valid input value. Defaults to false.
+     * If `true` then null is a valid input value. Defaults to `false`.
      */
     allowNull?: boolean;
     /**
-     * If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
+     * If `true` then a text field is shown for the user to search for values or enter new ones. Defaults to `false`.
      */
     allowInput?: boolean;
     /**
-     * If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.
+     * If `true` then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to `false`.
      */
     allowCreate?: boolean;
     /**
@@ -69,7 +72,7 @@ export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholde
      */
     createLabelText?: string;
     /**
-     * The type of each value. Can be one of 'string', 'number' or 'boolean'.
+     * The type of each value. Can be one of 'string', 'number' or 'boolean'. Defaults to 'string'.
      */
     type?: 'string' | 'number' | 'boolean';
 }

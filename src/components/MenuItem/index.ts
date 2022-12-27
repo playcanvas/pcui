@@ -8,6 +8,9 @@ const CLASS_MENU_ITEM_CONTENT = CLASS_MENU_ITEM + '-content';
 const CLASS_MENU_ITEM_CHILDREN = CLASS_MENU_ITEM + '-children';
 const CLASS_MENU_ITEM_HAS_CHILDREN = CLASS_MENU_ITEM + '-has-children';
 
+/**
+ * The arguments for the {@link MenuItem} constructor.
+ */
 export interface MenuItemArgs extends ContainerArgs {
     value?: any;
     /**

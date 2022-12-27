@@ -13,34 +13,38 @@ const DRAG_AREA_INSIDE = 'inside';
 const DRAG_AREA_BEFORE = 'before';
 const DRAG_AREA_AFTER = 'after';
 
+/**
+ * The arguments for the {@link TreeView} constructor.
+ */
 export interface TreeViewArgs extends ContainerArgs {
     /**
-     * Whether dragging a TreeViewItem is allowed.
+     * Whether dragging a {@link TreeViewItem} is allowed.
      */
     allowDrag?: boolean,
     /**
-     * Whether reordering TreeViewItems is allowed.
+     * Whether reordering {@link TreeViewItem}s is allowed.
      */
     allowReordering?: boolean,
     /**
-     * Whether renaming TreeViewItems is allowed by double clicking on them.
+     * Whether renaming {@link TreeViewItem}s is allowed by double clicking on them.
      */
     allowRenaming?: boolean,
     /**
-     * A filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
+     * A filter that searches {@link TreeViewItem}s and only shows the ones that are relevant to the filter.
      */
     filter?: string,
     /**
-     * A function to be called when we right click on a TreeViewItem.
+     * A function to be called when we right click on a {@link TreeViewItem}.
      */
     onContextMenu?: any,
     /**
      * A function to be called when we try to reparent tree items. If a function is provided then the
-     * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
+     * tree items will not be reparented by the {@link TreeView} but instead will rely on the function to
+     * reparent them as it sees fit.
      */
     onReparent?: any,
     /**
-     * The element to scroll on drag. Defaults to this TreeView's dom.
+     * The element to scroll on drag. Defaults to this {@link TreeView}'s DOM element.
      */
     dragScrollElement?: HTMLElement
 }

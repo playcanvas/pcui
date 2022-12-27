@@ -12,13 +12,16 @@ const CLASS_CONTENTS = CLASS_ROOT + '-contents';
 const CLASS_EMPTY = CLASS_ROOT + '-empty';
 const CLASS_RENAME = CLASS_ROOT + '-rename';
 
+/**
+ * The arguments for the {@link TreeViewItem} constructor.
+ */
 export interface TreeViewItemArgs extends ContainerArgs {
     /**
      * Whether the item is selected.
      */
     selected?: boolean;
     /**
-     * Whether the item can be selected. Defaults to true.
+     * Whether the item can be selected. Defaults to `true`.
      */
     allowSelect?: boolean,
     /**
@@ -26,27 +29,28 @@ export interface TreeViewItemArgs extends ContainerArgs {
      */
     open?: boolean,
     /**
-     * Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true. Defaults to true.
+     * Whether this {@link TreeViewItem} can be dragged. Only considered if the parent {@link TreeView}
+     * has `allowDrag` set to `true`. Defaults to `true`.
      */
     allowDrag?: boolean,
     /**
-     * Whether dropping is allowed on the tree item. Defaults to true.
+     * Whether dropping is allowed on the {@link TreeViewItem}. Defaults to `true`.
      */
     allowDrop?: boolean,
     /**
-     * The text shown by the TreeViewItem.
+     * The text shown by the {@link TreeViewItem}.
      */
     text?: string,
     /**
-     * The icon shown before the text in the TreeViewItem. Defaults to E360.
+     * The icon shown before the text in the {@link TreeViewItem}. Defaults to 'E360'.
      */
     icon?: string,
     /**
-     * Method to be called when the TreeViewItem is selected.
+     * Method to be called when the {@link TreeViewItem} is selected.
      */
     onSelect?: (deselect: () => void) => void,
     /**
-     * Method to be called when the TreeViewItem is deselected.
+     * Method to be called when the {@link TreeViewItem} is deselected.
      */
     onDeselect?: () => void
 }

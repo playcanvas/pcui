@@ -4,21 +4,26 @@ import Input from '../Input/index';
 
 const CLASS_LABEL = 'pcui-label';
 
+/**
+ * The arguments for the {@link Label} constructor.
+ */
 export interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs, IFlexArgs {
     /**
-     * Sets the text of the Label.
+     * Sets the text of the Label. Defaults to ''.
      */
     text?: string | number,
     /**
-     * If true then the innerHTML property will be used to set the text. Otherwise textContent will be used instead.
+     * If `true`, the {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML} property will be
+     * used to set the text. Otherwise, {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
+     * will be used instead. Defaults to `false`.
      */
     unsafe?: boolean,
     /**
-     * If true then use the text of the label as the native HTML tooltip.
+     * If `true` then use the text of the label as the native HTML tooltip. Defaults to `false`.
      */
     nativeTooltip?: boolean,
     /**
-     * If true then the label can be clicked to select text.
+     * If `true` then the label can be clicked to select text. Defaults to `false`.
      */
     allowTextSelection?: boolean
 }

@@ -7,6 +7,9 @@ const CLASS_OVERLAY_CLICKABLE = CLASS_OVERLAY + '-clickable';
 const CLASS_OVERLAY_TRANSPARENT = CLASS_OVERLAY + '-transparent';
 const CLASS_OVERLAY_CONTENT = CLASS_OVERLAY + '-content';
 
+/**
+ * The arguments for the {@link Overlay} constructor.
+ */
 export interface OverlayArgs extends ElementArgs {
     /**
      * Whether the overlay can be hidden by clicking on it.

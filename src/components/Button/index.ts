@@ -2,21 +2,26 @@ import Element, { ElementArgs } from '../Element/index';
 
 const CLASS_BUTTON = 'pcui-button';
 
+/**
+ * The arguments for the {@link Button} constructor.
+ */
 export interface ButtonArgs extends ElementArgs {
     /**
-     * If unsafe is true, text will be set on the dom's innerHTML rather than textContent.
+     * If `true`, the {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML} property will be
+     * used to set the text. Otherwise, {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
+     * will be used instead. Defaults to `false`.
      */
     unsafe?: boolean;
     /**
-     * Sets the text of the button.
+     * Sets the text of the button. Defaults to ''.
      */
     text?: string,
     /**
-     * The CSS code for an icon for the button. e.g. 'E401' (notice we omit the '\\' character).
+     * The CSS code for an icon for the button. e.g. 'E401' (notice we omit the '\\' character). Defaults to ''.
      */
     icon?: string,
     /**
-     * Gets / sets the 'size' type of the button. Can be 'small'.
+     * Gets / sets the 'size' type of the button. Can be 'small' or `null`. Defaults to `null`.
      */
     size?: 'small'
 }

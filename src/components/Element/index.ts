@@ -52,7 +52,7 @@ export interface IBindableArgs {
      */
     values?: Array<any>,
     /**
-     * If true each input will flash on changes.
+     * If `true` each input will flash on changes.
      */
     renderChanges?: boolean
 }
@@ -110,25 +110,28 @@ export interface IFlexArgs {
     flexDirection?: string,
 }
 
+/**
+ * The arguments for the {@link Element} constructor.
+ */
 export interface ElementArgs {
     /**
-     * The HTMLElement to create this Element with. If not provided this Element will create one.
+     * The HTMLElement to create this {@link Element} with. If not provided this Element will create one.
      */
     dom?: HTMLElement | string;
     /**
-     * A binding to use with this Element.
+     * A binding to use with this {@link Element}.
      */
     binding?: BindingBase;
     /**
-     * If provided and the element is clickable, this function will be called each time the element is clicked.
+     * If provided and the {@link Element} is clickable, this function will be called each time the element is clicked.
      */
     onClick?: () => void,
     /**
-     * If provided and the element is changeable, this function will be called each time the element value is changed.
+     * If provided and the {@link Element} is changeable, this function will be called each time the element value is changed.
      */
     onChange?: (value: any) => void,
     /**
-     * If provided and the element is removable, this function will be called each time the element is removed.
+     * If provided and the {@link Element} is removable, this function will be called each time the element is removed.
      */
     onRemove?: () => void,
     /**
@@ -136,47 +139,47 @@ export interface ElementArgs {
      */
     parent?: any,
     /**
-     * Links the observer attribute at the path location in the given observer to this Element.
+     * Links the observer attribute at the path location in the given observer to this {@link Element}.
      */
     link?: { observer: Array<Observer>|Observer, path: Array<string>|string },
     /**
-     * The id attribute of this Element's HTMLElement.
+     * The id attribute of this {@link Element}'s HTMLElement.
      */
     id?: string,
     /**
-     * The class attribute of this Element's HTMLElement.
+     * The class attribute of this {@link Element}'s HTMLElement.
      */
     class?: string | Array<string>,
     /**
-     * Sets whether this Element is at the root of the hierarchy.
+     * Sets whether this {@link Element} is at the root of the hierarchy.
      */
     isRoot?: boolean,
     /**
-     * Sets whether it is possible to interact with this Element and its children.
+     * Sets whether it is possible to interact with this {@link Element} and its children.
      */
     enabled?: boolean,
     /**
-     * Sets whether this Element is hidden.
+     * Sets whether this {@link Element} is hidden.
      */
     hidden?: boolean,
     /**
-     * If true, this Element will ignore its parent's enabled value when determining whether this Element is enabled.
+     * If `true`, this {@link Element} will ignore its parent's enabled value when determining whether this element is enabled.
      */
     ignoreParent?: boolean,
     /**
-     * Sets the initial width of the element.
+     * Sets the initial width of the {@link Element}.
      */
     width?: number | null,
     /**
-     * Sets the initial height of the element.
+     * Sets the initial height of the {@link Element}.
      */
     height?: number | null,
     /**
-     * Gets / sets the tabIndex of the Element.
+     * Gets / sets the tabIndex of the {@link Element}.
      */
     tabIndex?: number,
     /**
-     * Gets / sets whether the Element is in an error state.
+     * Gets / sets whether the {@link Element} is in an error state.
      */
     error?: boolean,
     /**
@@ -184,7 +187,7 @@ export interface ElementArgs {
      */
     style?: string,
     /**
-     * Whether this Element is read only or not.
+     * Whether this {@link Element} is read only or not.
      */
     readOnly?: boolean
 }
@@ -687,7 +690,7 @@ class Element extends Events {
 
 
     /**
-     * Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
+     * Gets / sets whether the Element or its parent chain is enabled or not. Defaults to `true`.
      */
     set enabled(value: boolean) {
         if (this._enabled === value) return;

@@ -5,17 +5,20 @@ import Label from '../Label';
 const CLASS_LABEL_GROUP = 'pcui-label-group';
 const CLASS_LABEL_TOP = CLASS_LABEL_GROUP + '-align-top';
 
+/**
+ * The arguments for the {@link LabelGroup} constructor.
+ */
 export interface LabelGroupArgs extends ContainerArgs {
     /**
      * The label text.
      */
     text?: string;
     /**
-     * The element to be wrapped by the label group.
+     * The {@link Element} to be wrapped by the label group.
      */
     field?: Element;
     /**
-     * Whether to align the label at the top of the group. Defaults to false which aligns it at the center.
+     * Whether to align the label at the top of the group. Defaults to `false` which aligns it at the center.
      */
     labelAlignTop?: boolean;
     /**
@@ -25,7 +28,7 @@ export interface LabelGroupArgs extends ContainerArgs {
 }
 
 /**
- * Represents a group of a Label and a Element. Useful for rows of labeled fields.
+ * Represents a group of an {@link Element} and a {@link Label}. Useful for rows of labeled fields.
  */
 class LabelGroup extends Container {
     static readonly defaultArgs: LabelGroupArgs = {

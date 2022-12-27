@@ -8,14 +8,17 @@ const CLASS_COLOR_INPUT = 'pcui-color-input';
 const CLASS_NOT_FLEXIBLE = 'pcui-not-flexible';
 const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
 
+/**
+ * The arguments for the {@link ColorPicker} constructor.
+ */
 export interface ColorPickerArgs extends ElementArgs {
     renderChanges?: boolean;
     /**
-     * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
+     * An array of 4 integers containing the RGBA values the picker should be initialized to. Defaults to `[0, 0, 255, 1]`.
      */
-    value?: Array<number>;
+    value?: number[];
     /**
-     * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
+     * Number of color channels. Defaults to 3. Changing to 4 adds the option to change the alpha value.
      */
     channels?: number;
 }

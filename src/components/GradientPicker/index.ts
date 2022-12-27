@@ -20,14 +20,17 @@ const REGEX_KEYS = /keys/;
 const REGEX_TYPE = /type/;
 const CLASS_GRADIENT = 'pcui-gradient';
 
+/**
+ * The arguments for the {@link GradientPicker} constructor.
+ */
 export interface GradientPickerArgs extends ElementArgs {
     renderChanges?: boolean;
     /**
-     * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
+     * An array of 4 integers containing the RGBA values the picker should be initialized to.
      */
-    value?: Array<number>;
+    value?: number[];
     /**
-     * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
+     * Number of color channels. Defaults to 3. Changing to 4 adds the option to change the alpha value.
      */
     channels?: number;
 }

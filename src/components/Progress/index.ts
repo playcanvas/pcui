@@ -4,6 +4,9 @@ import Container, { ContainerArgs } from '../Container';
 const CLASS_ROOT = 'pcui-progress';
 const CLASS_INNER = CLASS_ROOT + '-inner';
 
+/**
+ * The arguments for the {@link Progress} constructor.
+ */
 export interface ProgressArgs extends ContainerArgs {
     /**
      * Gets / sets the value of the progress bar (between 0 and 100).

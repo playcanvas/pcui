@@ -18,34 +18,37 @@ const CLASS_CONTAINER = 'pcui-container';
 const CLASS_DRAGGED = CLASS_CONTAINER + '-dragged';
 const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
 
+/**
+ * The arguments for the {@link Container} constructor.
+ */
 export interface ContainerArgs extends ElementArgs, IParentArgs, IFlexArgs {
     /**
-     * Sets whether the Element is resizable and where the resize handle is located. Can
+     * Sets whether the {@link Container} is resizable and where the resize handle is located. Can
      * be one of 'top', 'bottom', 'right', 'left'. Set to null to disable resizing.
      */
     resizable?: string,
     /**
-     * Sets the minimum size the Element can take when resized in pixels.
+     * Sets the minimum size the {@link Container} can take when resized in pixels.
      */
     resizeMin?: number,
     /**
-     * Sets the maximum size the Element can take when resized in pixels.
+     * Sets the maximum size the {@link Container} can take when resized in pixels.
      */
     resizeMax?: number,
     /**
-     * Called when the container has been resized.
+     * Called when the {@link Container} has been resized.
      */
     onResize?: () => void,
     /**
-     * Sets whether the Element should be scrollable.
+     * Sets whether the {@link Container} should be scrollable.
      */
     scrollable?: boolean,
     /**
-     * Sets whether the Element supports the grid layout.
+     * Sets whether the {@link Container} supports the grid layout.
      */
     grid?: boolean,
     /**
-     * Sets the Elements align items property.
+     * Sets the {@link Container}'s align items property.
      */
     alignItems?: string
 }

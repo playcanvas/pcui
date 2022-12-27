@@ -12,6 +12,9 @@ const CLASS_PANEL_HORIZONTAL = CLASS_PANEL + '-horizontal';
 const CLASS_PANEL_SORTABLE_ICON = CLASS_PANEL + '-sortable-icon';
 const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
 
+/**
+ * The arguments for the {@link Panel} constructor.
+ */
 export interface PanelArgs extends ContainerArgs {
     /**
      * Sets whether the Element is collapsible.
@@ -26,7 +29,7 @@ export interface PanelArgs extends ContainerArgs {
      */
     sortable?: boolean,
     /**
-     * Sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
+     * Sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to `false`.
      */
     collapseHorizontally?: boolean,
     /**
@@ -451,7 +454,7 @@ class Panel extends Container {
     }
 
     /**
-     * Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
+     * Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to `false`.
      */
     set collapseHorizontally(value) {
         if (this._collapseHorizontally === value) return;
