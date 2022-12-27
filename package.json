@@ -77,7 +77,6 @@
       "no-throw-literal": "off",
       "jsdoc/require-returns": "off",
       "jsdoc/require-returns-type": "off",
-      "jsdoc/require-param-description": "off",
       "jsdoc/require-param-type": "off"
     }
   },

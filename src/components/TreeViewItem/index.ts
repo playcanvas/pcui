@@ -143,7 +143,7 @@ class TreeViewItem extends Container {
     /**
      * Creates a new TreeViewItem.
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: TreeViewItemArgs = TreeViewItem.defaultArgs) {
         args = { ...TreeViewItem.defaultArgs, ...args };

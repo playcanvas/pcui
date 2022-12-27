@@ -41,7 +41,7 @@ class Spinner extends Element {
     /**
      * Sets the pixel size of the spinner
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: SpinnerArgs = Spinner.defaultArgs) {
         args = { ...Spinner.defaultArgs, ...args };

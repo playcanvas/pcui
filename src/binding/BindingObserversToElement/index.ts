@@ -24,7 +24,7 @@ class BindingObserversToElement extends BindingBase {
     /**
      * Creates a new BindingObserversToElement instance.
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: BindingObserversToElementArgs = {}) {
         super(args);
@@ -81,12 +81,6 @@ class BindingObserversToElement extends BindingBase {
         this.applyingChange = false;
     }
 
-    /**
-     * Link the binding to a set of observers and paths.
-     *
-     * @param observers
-     * @param paths
-     */
     link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
 

@@ -621,12 +621,11 @@ class Container extends Element {
      * and return it. Otherwise return the current node. Also add each child to the parent
      * under its keyed name.
      *
-     * @param {object} node - The current element in the dom structure which must be recursively
-     * traversed and appended to its parent
-     *
-     * @param node.root
-     * @param node.children
-     * @returns {Element} - The recursively appended element node
+     * @param node - The current element in the dom structure which must be recursively
+     * traversed and appended to its parent.
+     * @param node.root - The root node of the dom structure.
+     * @param node.children - The children of the root node.
+     * @returns The recursively appended element node.
      *
      */
     protected _buildDomNode(node: { [x: string]: any; root?: any; children?: any; }) {
@@ -653,7 +652,7 @@ class Container extends Element {
      * appends them to this container. These child elements are traversed recursively using
      * _buildDomNode.
      *
-     * @param {Array} dom - An array of child pcui elements to append to this container.
+     * @param dom - An array of child pcui elements to append to this container.
      *
      * @example
      * buildDom([

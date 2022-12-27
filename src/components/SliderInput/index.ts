@@ -112,7 +112,7 @@ class SliderInput extends Element implements IBindable, IFocusable {
     /**
      * Creates a new SliderInput.
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: SliderInputArgs = SliderInput.defaultArgs) {
         args = { ...SliderInput.defaultArgs, ...args };

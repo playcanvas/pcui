@@ -157,7 +157,7 @@ class TreeView extends Container {
     /**
      * Creates a new TreeView.
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: TreeViewArgs = TreeView.defaultArgs) {
         args = { ...TreeView.defaultArgs, ...args };
@@ -214,17 +214,12 @@ class TreeView extends Container {
     }
 
     /**
-     * Finds the next tree item that is not currently hidden
+     * Finds the next tree item that is not currently hidden.
      *
-     * @param {TreeViewItem} currentItem - The current tree item
-     * @param currentItem.numChildren
-     * @param currentItem.open
-     * @param currentItem.firstChild
-     * @param currentItem.nextSibling
-     * @param currentItem.parent
-     * @returns {TreeViewItem} The next tree item.
+     * @param currentItem - The current tree item.
+     * @returns The next visible tree item.
      */
-    protected _findNextVisibleTreeItem(currentItem: { numChildren: number; open: any; firstChild: any; nextSibling: any; parent: any; }) {
+    protected _findNextVisibleTreeItem(currentItem: TreeViewItem): TreeViewItem {
         if (currentItem.numChildren > 0 && currentItem.open) {
             return currentItem.firstChild;
         }
@@ -996,7 +991,7 @@ class TreeView extends Container {
     /**
      * Show the drag handle on the given tree item.
      *
-     * @param treeItem
+     * @param treeItem - The tree item.
      */
     showDragHandle(treeItem: TreeViewItem) {
         this._updateDragHandle(treeItem, true);

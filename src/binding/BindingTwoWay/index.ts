@@ -28,7 +28,7 @@ class BindingTwoWay extends BindingBase {
     /**
      * Creates a new BindingTwoWay instance.
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: BindingTwoWayArgs = {}) {
         super(args);

@@ -56,7 +56,7 @@ class BindingBase extends Events {
     /**
      * Creates a new binding.
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: BindingBaseArgs) {
         super();
