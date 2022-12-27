@@ -135,9 +135,9 @@ export interface ElementArgs {
      */
     onRemove?: () => void,
     /**
-     * Sets the parent Element.
+     * Sets the parent {@link Element}.
      */
-    parent?: any,
+    parent?: Element,
     /**
      * Links the observer attribute at the path location in the given observer to this {@link Element}.
      */
@@ -149,7 +149,7 @@ export interface ElementArgs {
     /**
      * The class attribute of this {@link Element}'s HTMLElement.
      */
-    class?: string | Array<string>,
+    class?: string | string[],
     /**
      * Sets whether this {@link Element} is at the root of the hierarchy.
      */
@@ -295,7 +295,7 @@ class Element extends Events {
 
     protected _destroyed: boolean;
 
-    protected _parent: any;
+    protected _parent: Element;
 
     protected _domEventClick: any;
 
@@ -584,20 +584,21 @@ class Element extends Events {
         }
 
         if (this.parent) {
-            const parent = (this.parent as any);
+            const parent = this.parent;
 
             for (let i = 0; i < this._eventsParent.length; i++) {
                 this._eventsParent[i].unbind();
             }
             this._eventsParent.length = 0;
 
-
             // remove element from parent
             // check if parent has been destroyed already
             // because we do not want to be emitting events
             // on a destroyed parent after it's been destroyed
             // as it is easy to lead to null exceptions
+            // @ts-ignore
             if (parent.remove && !parent._destroyed) {
+                // @ts-ignore
                 parent.remove(this);
             }
 
@@ -613,7 +614,6 @@ class Element extends Events {
             if (!parent._destroyed && this._dom && this._dom.parentElement) {
                 this._dom.parentElement.removeChild(this._dom);
             }
-
         }
 
         const dom = this._dom;

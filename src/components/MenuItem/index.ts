@@ -61,7 +61,7 @@ class MenuItem extends Container implements IBindable {
 
     protected _numChildren: number;
 
-    protected _icon: any;
+    protected _icon: string;
 
     protected _labelText: Label;
 
