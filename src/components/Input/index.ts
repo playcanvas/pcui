@@ -9,19 +9,19 @@ class Input extends Element implements IBindable {
     protected _renderChanges: boolean;
 
     set value(value: any) {
-        throw 'Not implemented!';
+        throw new Error('Not implemented!');
     }
 
     get value(): any {
-        throw 'Not implemented!';
+        throw new Error('Not implemented!');
     }
 
     set values(value: Array<any>) {
-        throw 'Not implemented!';
+        throw new Error('Not implemented!');
     }
 
     get values(): Array<any> {
-        throw 'Not implemented!';
+        throw new Error('Not implemented!');
     }
 
     set renderChanges(value: boolean) {

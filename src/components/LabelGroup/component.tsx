@@ -14,7 +14,7 @@ class LabelGroup extends BaseComponent <LabelGroupArgs, any> {
     attachElement = (nodeElement: HTMLElement, containerElement: any) => {
         if (!nodeElement) return;
         if (Array.isArray(this.props.children) || !this.props.children) {
-            throw 'A LabelGroup must contain a single child react component';
+            throw new Error('A LabelGroup must contain a single child react component');
         }
         this.element = new this.elementClass({
             ...this.elementClass.defaultArgs,
