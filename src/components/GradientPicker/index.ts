@@ -1151,7 +1151,7 @@ class GradientPicker extends Element {
         }
     }
 
-    anchorsOnMouseUp(e: MouseEvent) {
+    anchorsOnMouseUp(evt: MouseEvent) {
         if (this.UI.draggingAnchor) {
             this.dragEnd();
             this.UI.draggingAnchor = false;

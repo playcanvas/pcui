@@ -110,7 +110,7 @@ class TreeView extends Container {
 
     protected _selectedItems: TreeViewItem[];
 
-    protected _dragItems: any[];
+    protected _dragItems: TreeViewItem[];
 
     protected _allowDrag: boolean;
 
@@ -120,7 +120,7 @@ class TreeView extends Container {
 
     protected _dragging: boolean;
 
-    protected _dragOverItem: any;
+    protected _dragOverItem: TreeViewItem;
 
     protected _dragArea: string;
 
@@ -568,7 +568,7 @@ class TreeView extends Container {
     }
 
     // Called when we stop dragging a TreeViewItem.
-    protected _onChildDragEnd(evt: any, element: any) {
+    protected _onChildDragEnd(evt: MouseEvent, item: TreeViewItem) {
         if (!this.allowDrag || !this._dragging) return;
 
         this._dragItems.forEach(item => item.class.remove(CLASS_DRAGGED_ITEM));
@@ -589,6 +589,7 @@ class TreeView extends Container {
                 // sort items based on order in the hierarchy
                 this._updateTreeOrder();
                 this._dragItems.sort((a, b) => {
+                    // @ts-ignore
                     return a._treeOrder - b._treeOrder;
                 });
             }
@@ -608,7 +609,7 @@ class TreeView extends Container {
                             item: item,
                             oldParent: item.parent
                         });
-                        item.parent.remove(item);
+                        (item.parent as Container).remove(item);
                     });
 
                     // now reparent items
@@ -616,6 +617,7 @@ class TreeView extends Container {
                         if (this._dragArea === DRAG_AREA_BEFORE) {
                             // If dragged before a TreeViewItem...
                             r.newParent = this._dragOverItem.parent;
+                            // @ts-ignore
                             this._dragOverItem.parent.appendBefore(r.item, this._dragOverItem);
                             r.newChildIndex = this._getChildIndex(r.item, r.newParent);
                         } else if (this._dragArea === DRAG_AREA_INSIDE) {
@@ -627,6 +629,7 @@ class TreeView extends Container {
                         } else if (this._dragArea === DRAG_AREA_AFTER) {
                             // If dragged after a TreeViewItem...
                             r.newParent = this._dragOverItem.parent;
+                            // @ts-ignore
                             this._dragOverItem.parent.appendAfter(r.item, i > 0 ? reparented[i - 1].item : this._dragOverItem);
                             r.newChildIndex = this._getChildIndex(r.item, r.newParent);
                         }
@@ -835,7 +838,7 @@ class TreeView extends Container {
     }
 
     // Updates the drag handle position and size
-    protected _updateDragHandle(dragOverItem?: any, force?: boolean) {
+    protected _updateDragHandle(dragOverItem?: TreeViewItem, force?: boolean) {
         if (!force && (!this._allowDrag || !this._dragging)) return;
 
         if (!dragOverItem) {
@@ -845,6 +848,7 @@ class TreeView extends Container {
         if (!dragOverItem || dragOverItem.hidden || !dragOverItem.parentsOpen) {
             this._dragHandle.hidden = true;
         } else {
+            // @ts-ignore
             const rect = dragOverItem._containerContents.dom.getBoundingClientRect();
 
             this._dragHandle.hidden = false;

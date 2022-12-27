@@ -38,7 +38,7 @@ class Canvas extends Element {
         this._ratio = (args.useDevicePixelRatio !== undefined && args.useDevicePixelRatio) ? window.devicePixelRatio : 1;
 
         // Disable I-bar cursor on click+drag
-        canvas.onselectstart = (event: Event) => {
+        canvas.onselectstart = (evt: Event) => {
             return false;
         };
     }
