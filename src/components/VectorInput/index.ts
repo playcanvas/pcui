@@ -119,7 +119,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         this.emit('change', this.value);
     }
 
-    protected _updateValue(value: any) {
+    protected _updateValue(value: number[]) {
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
 
         if (JSON.stringify(this.value) === JSON.stringify(value)) return false;
@@ -214,12 +214,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
     }
 
     get value() {
-        const value = new Array(this._inputs.length);
-        for (let i = 0; i < this._inputs.length; i++) {
-            value[i] = this._inputs[i].value;
-        }
-
-        return value;
+        return this._inputs.map(input => input.value);
     }
 
     /* eslint accessor-pairs: 0 */
