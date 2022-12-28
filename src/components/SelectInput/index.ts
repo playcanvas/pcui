@@ -27,17 +27,20 @@ const CLASS_OPEN = 'pcui-open';
 
 const DEFAULT_BOTTOM_OFFSET = 25;
 
+/**
+ * The arguments for the {@link SelectInput} constructor.
+ */
 export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
-     * Used to map the options
+     * Used to map the options.
      */
     optionsFn?: any;
     /**
-     * default value for the input
+     * Default value for the input.
      */
     defaultValue?: any;
     /**
-     * If true then the input value becomes an array allowing the selection of multiple options. Defaults to false.
+     * If `true` then the input value becomes an array allowing the selection of multiple options. Defaults to `false`.
      */
     multiSelect?: boolean;
     /**
@@ -49,15 +52,15 @@ export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholde
      */
     invalidOptions?: Array<any>;
     /**
-     * If true then null is a valid input value. Defaults to false.
+     * If `true` then null is a valid input value. Defaults to `false`.
      */
     allowNull?: boolean;
     /**
-     * If true then a text field is shown for the user to search for values or enter new ones. Defaults to false.
+     * If `true` then a text field is shown for the user to search for values or enter new ones. Defaults to `false`.
      */
     allowInput?: boolean;
     /**
-     * If true then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to false.
+     * If `true` then the input allows creating new values from the text field. Only used when allowInput is true. Defaults to `false`.
      */
     allowCreate?: boolean;
     /**
@@ -69,7 +72,7 @@ export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholde
      */
     createLabelText?: string;
     /**
-     * The type of each value. Can be one of 'string', 'number' or 'boolean'.
+     * The type of each value. Can be one of 'string', 'number' or 'boolean'. Defaults to 'string'.
      */
     type?: 'string' | 'number' | 'boolean';
 }
@@ -110,7 +113,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _labelValue: Label;
 
-    protected _timeoutLabelValueTabIndex: any;
+    protected _timeoutLabelValueTabIndex: number;
 
     protected _labelIcon: Label;
 
@@ -138,11 +141,11 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _type: string;
 
-    protected _optionsIndex: any;
+    protected _optionsIndex: { [key: string]: string };
 
-    protected _labelsIndex: any;
+    protected _labelsIndex: { [key: string]: Label };
 
-    protected _labelHighlighted: any;
+    protected _labelHighlighted: Label;
 
     protected _optionsFn: any;
 
@@ -450,7 +453,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
     }
 
-    protected _highlightLabel(label: any) {
+    protected _highlightLabel(label: Label) {
         if (this._labelHighlighted === label) return;
 
         if (this._labelHighlighted) {
@@ -467,10 +470,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
             const scrollTop = this._containerOptions.dom.scrollTop;
             if (labelTop < scrollTop) {
                 this._containerOptions.dom.scrollTop = labelTop;
-            } else if (labelTop + this._labelHighlighted.height >
-                // @ts-ignore
-                this._containerOptions.height + scrollTop) {
-                // @ts-ignore
+            } else if (labelTop + this._labelHighlighted.height > this._containerOptions.height + scrollTop) {
                 this._containerOptions.dom.scrollTop = labelTop + this._labelHighlighted.height - this._containerOptions.height;
             }
         }
@@ -482,7 +482,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
             this._labelValue.value = this._optionsIndex[value] || '';
 
             value = '' + value;
-            for (var key in this._labelsIndex) {
+            for (const key in this._labelsIndex) {
                 if (key === value) {
                     this._labelsIndex[key].class.add(CLASS_SELECTED);
                 } else {
@@ -533,7 +533,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         });
 
         // add special class to tags that do not exist everywhere
-        for (var val in valueCounts) {
+        for (const val in valueCounts) {
             if (valueCounts[val] !== values.length) {
                 tags[val].class.add(CLASS_TAG_NOT_EVERYWHERE);
                 if (this._labelsIndex[val]) {
@@ -577,7 +577,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         return container;
     }
 
-    protected _removeTag(tagElement: any, value: any) {
+    protected _removeTag(tagElement: any, value: string) {
         tagElement.destroy();
 
         if (this._labelsIndex[value]) {
@@ -585,7 +585,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
 
         if (this._values) {
-            this._values.forEach((arr: any) => {
+            this._values.forEach((arr: string[]) => {
                 if (!arr) return;
                 const idx = arr.indexOf(value);
                 if (idx !== -1) {
@@ -632,7 +632,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 return [option.t, option.v];
             });
             const searchResults = searchItems(searchOptions, filter);
-            searchResults.forEach((value: any) => {
+            searchResults.forEach((value: string) => {
                 containerDom.appendChild(this._labelsIndex[value].dom);
             });
 
@@ -648,7 +648,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
 
         if (containerDom.firstChild) {
-            this._highlightLabel(containerDom.firstChild.ui);
+            this._highlightLabel(containerDom.firstChild.ui as Label);
         }
 
         this._resizeShadow();
@@ -753,9 +753,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
             if (!this._containerOptions.dom.childNodes.length) return;
 
             if (!this._labelHighlighted) {
-                this._highlightLabel(this._containerOptions.dom.childNodes[0].ui);
+                this._highlightLabel(this._containerOptions.dom.childNodes[0].ui as Label);
             } else {
-                let highlightedLabelDom = this._labelHighlighted.dom;
+                let highlightedLabelDom = this._labelHighlighted.dom as Node;
                 do {
                     if (evt.key === 'ArrowUp') {
                         highlightedLabelDom = highlightedLabelDom.previousSibling;
@@ -765,14 +765,13 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 } while (highlightedLabelDom && highlightedLabelDom.ui.hidden);
 
                 if (highlightedLabelDom) {
-                    this._highlightLabel(highlightedLabelDom.ui);
+                    this._highlightLabel(highlightedLabelDom.ui as Label);
                 }
             }
         }
     }
 
     protected _resizeShadow() {
-        // @ts-ignore
         this._domShadow.style.height = (this._containerValue.height + this._containerOptions.height) + 'px';
     }
 
@@ -869,14 +868,14 @@ class SelectInput extends Element implements IBindable, IFocusable {
         if (this._containerOptions.dom.childNodes.length === 0) return;
 
         // highlight label that displays current value
-        this._containerOptions.forEachChild((label) => {
+        this._containerOptions.forEachChild((label: Label) => {
             label.hidden = false;
             if (label._optionValue === this.value) {
                 this._highlightLabel(label);
             }
         });
         if (!this._labelHighlighted) {
-            this._highlightLabel(this._containerOptions.dom.childNodes[0].ui);
+            this._highlightLabel(this._containerOptions.dom.childNodes[0].ui as Label);
         }
 
         // show options
@@ -891,9 +890,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         // if the dropdown list goes below the window show it above the field
         const startField = this._allowInput ? this._input.dom : this._labelValue.dom;
         const rect = startField.getBoundingClientRect();
-        // @ts-ignore
         let fitHeight = (rect.bottom + this._containerOptions.height + DEFAULT_BOTTOM_OFFSET >= window.innerHeight);
-        // @ts-ignore
         if (fitHeight && rect.top - this._containerOptions.height < 0) {
             // if showing it above the field means that some of it will not be visible
             // then show it below instead and adjust the max height to the maximum available space

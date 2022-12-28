@@ -1,6 +1,6 @@
+import { Events, Observer } from '@playcanvas/observer';
 import React from 'react';
 import * as pcuiClass from '../../class';
-import { Events, Observer } from '@playcanvas/observer';
 
 import { BindingBase } from '../../binding';
 
@@ -52,7 +52,7 @@ export interface IBindableArgs {
      */
     values?: Array<any>,
     /**
-     * If true each input will flash on changes.
+     * If `true` each input will flash on changes.
      */
     renderChanges?: boolean
 }
@@ -110,73 +110,76 @@ export interface IFlexArgs {
     flexDirection?: string,
 }
 
+/**
+ * The arguments for the {@link Element} constructor.
+ */
 export interface ElementArgs {
     /**
-     * The HTMLElement to create this Element with. If not provided this Element will create one.
+     * The HTMLElement to create this {@link Element} with. If not provided this Element will create one.
      */
     dom?: HTMLElement | string;
     /**
-     * A binding to use with this Element.
+     * A binding to use with this {@link Element}.
      */
     binding?: BindingBase;
     /**
-     * If provided and the element is clickable, this function will be called each time the element is clicked.
+     * If provided and the {@link Element} is clickable, this function will be called each time the element is clicked.
      */
     onClick?: () => void,
     /**
-     * If provided and the element is changeable, this function will be called each time the element value is changed.
+     * If provided and the {@link Element} is changeable, this function will be called each time the element value is changed.
      */
     onChange?: (value: any) => void,
     /**
-     * If provided and the element is removable, this function will be called each time the element is removed.
+     * If provided and the {@link Element} is removable, this function will be called each time the element is removed.
      */
     onRemove?: () => void,
     /**
-     * Sets the parent Element.
+     * Sets the parent {@link Element}.
      */
-    parent?: any,
+    parent?: Element, // eslint-disable-line no-use-before-define
     /**
-     * Links the observer attribute at the path location in the given observer to this Element.
+     * Links the observer attribute at the path location in the given observer to this {@link Element}.
      */
     link?: { observer: Array<Observer>|Observer, path: Array<string>|string },
     /**
-     * The id attribute of this Element's HTMLElement.
+     * The id attribute of this {@link Element}'s HTMLElement.
      */
     id?: string,
     /**
-     * The class attribute of this Element's HTMLElement.
+     * The class attribute of this {@link Element}'s HTMLElement.
      */
-    class?: string | Array<string>,
+    class?: string | string[],
     /**
-     * Sets whether this Element is at the root of the hierarchy.
+     * Sets whether this {@link Element} is at the root of the hierarchy.
      */
     isRoot?: boolean,
     /**
-     * Sets whether it is possible to interact with this Element and its children.
+     * Sets whether it is possible to interact with this {@link Element} and its children.
      */
     enabled?: boolean,
     /**
-     * Sets whether this Element is hidden.
+     * Sets whether this {@link Element} is hidden.
      */
     hidden?: boolean,
     /**
-     * If true, this Element will ignore its parent's enabled value when determining whether this Element is enabled.
+     * If `true`, this {@link Element} will ignore its parent's enabled value when determining whether this element is enabled.
      */
     ignoreParent?: boolean,
     /**
-     * Sets the initial width of the element.
+     * Sets the initial width of the {@link Element}.
      */
     width?: number | null,
     /**
-     * Sets the initial height of the element.
+     * Sets the initial height of the {@link Element}.
      */
     height?: number | null,
     /**
-     * Gets / sets the tabIndex of the Element.
+     * Gets / sets the tabIndex of the {@link Element}.
      */
     tabIndex?: number,
     /**
-     * Gets / sets whether the Element is in an error state.
+     * Gets / sets whether the {@link Element} is in an error state.
      */
     error?: boolean,
     /**
@@ -184,16 +187,9 @@ export interface ElementArgs {
      */
     style?: string,
     /**
-     * Whether this Element is read only or not.
+     * Whether this {@link Element} is read only or not.
      */
     readOnly?: boolean
-}
-
-// Declare an additional property on the base Node interface that references the owner Element
-declare global {
-    interface Node { // eslint-disable-line no-unused-vars
-        ui: Element;
-    }
 }
 
 /**
@@ -299,7 +295,7 @@ class Element extends Events {
 
     protected _destroyed: boolean;
 
-    protected _parent: any;
+    protected _parent: Element; // eslint-disable-line no-use-before-define
 
     protected _domEventClick: any;
 
@@ -347,7 +343,7 @@ class Element extends Events {
 
         if (typeof dom === 'string') {
             this._dom = document.createElement(dom);
-        } else if (dom instanceof HTMLElement) {
+        } else if (dom instanceof Node) {
             this._dom = dom;
         } else if (typeof args.dom === 'string') {
             this._dom = document.createElement(args.dom);
@@ -431,7 +427,7 @@ class Element extends Events {
      * @param observers - An array of observers or a single observer.
      * @param paths - A path for the observer(s) or an array of paths that maps to each separate observer.
      */
-    link(observers: Array<Observer>|Observer, paths: Array<string>|string) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         if (this._binding) {
             this._binding.link(observers, paths);
         }
@@ -588,20 +584,21 @@ class Element extends Events {
         }
 
         if (this.parent) {
-            const parent = (this.parent as any);
+            const parent = this.parent;
 
             for (let i = 0; i < this._eventsParent.length; i++) {
                 this._eventsParent[i].unbind();
             }
             this._eventsParent.length = 0;
 
-
             // remove element from parent
             // check if parent has been destroyed already
             // because we do not want to be emitting events
             // on a destroyed parent after it's been destroyed
             // as it is easy to lead to null exceptions
+            // @ts-ignore
             if (parent.remove && !parent._destroyed) {
+                // @ts-ignore
                 parent.remove(this);
             }
 
@@ -617,7 +614,6 @@ class Element extends Events {
             if (!parent._destroyed && this._dom && this._dom.parentElement) {
                 this._dom.parentElement.removeChild(this._dom);
             }
-
         }
 
         const dom = this._dom;
@@ -655,7 +651,7 @@ class Element extends Events {
      * @param cls - The actual class of the Element.
      * @param defaultArguments - Default arguments when creating this type.
      */
-    static register(type: string, cls: any, defaultArguments?: Object) {
+    static register(type: string, cls: any, defaultArguments?: any) {
         ELEMENT_REGISTRY[type] = { cls, defaultArguments };
     }
 
@@ -669,13 +665,13 @@ class Element extends Events {
     /**
      * Creates a new Element of the desired type. Returns undefined if type not found.
      *
-     * @param type - The type of the Element (registered by pcui.Element#register).
+     * @param type - The type of the Element (registered by Element#register).
      * @param args - Arguments for the Element.
      */
     static create(type: string, args: ElementArgs): any {
         const entry = ELEMENT_REGISTRY[type];
         if (!entry) {
-            console.error('Invalid type passed to pcui.Element#create', type);
+            console.error('Invalid type passed to Element.create:', type);
             return;
         }
 
@@ -694,7 +690,7 @@ class Element extends Events {
 
 
     /**
-     * Gets / sets whether the Element or its parent chain is enabled or not. Defaults to true.
+     * Gets / sets whether the Element or its parent chain is enabled or not. Defaults to `true`.
      */
     set enabled(value: boolean) {
         if (this._enabled === value) return;
@@ -859,14 +855,14 @@ class Element extends Events {
     }
 
     /**
-     * Shortcut to pcui.Element.dom.style.
+     * Shortcut to Element.dom.style.
      */
     get style(): CSSStyleDeclaration {
         return this._dom.style;
     }
 
     /**
-     * Shortcut to pcui.Element.dom.classList.
+     * Shortcut to Element.dom.classList.
      */
     set class(value: any) {
         if (!Array.isArray(value)) {
@@ -898,7 +894,7 @@ class Element extends Events {
         this.style.width = value;
     }
 
-    get width() {
+    get width(): number {
         return this._dom.clientWidth;
     }
 
@@ -912,7 +908,7 @@ class Element extends Events {
         this.style.height = value;
     }
 
-    get height() {
+    get height(): number {
         return this._dom.clientHeight;
     }
 
@@ -1013,5 +1009,12 @@ function exposeCssProperty(name: string) {
 
 // expose rest of CSS properties
 SIMPLE_CSS_PROPERTIES.forEach(exposeCssProperty);
+
+// Declare an additional property on the base Node interface that references the owner Element
+declare global {
+    interface Node { // eslint-disable-line no-unused-vars
+        ui: Element;
+    }
+}
 
 export default Element;

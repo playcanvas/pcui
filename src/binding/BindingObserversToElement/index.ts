@@ -1,5 +1,5 @@
-import BindingBase, { BindingBaseArgs } from '../BindingBase';
 import { Observer } from '@playcanvas/observer';
+import BindingBase, { BindingBaseArgs } from '../BindingBase';
 
 export interface BindingObserversToElementArgs extends BindingBaseArgs {
     /**
@@ -9,8 +9,8 @@ export interface BindingObserversToElementArgs extends BindingBaseArgs {
 }
 
 /**
- * Provides one way binding between Observers and an IBindable element and Observers. Any changes from the observers
- * will be propagated to the element.
+ * Provides one way binding between Observers and an {@link IBindable} element and Observers. Any
+ * changes from the observers will be propagated to the element.
  */
 class BindingObserversToElement extends BindingBase {
     _customUpdate: any;
@@ -24,10 +24,9 @@ class BindingObserversToElement extends BindingBase {
     /**
      * Creates a new BindingObserversToElement instance.
      *
-     * @param root0
-     * @param root0.customUpdate
+     * @param args - The arguments.
      */
-    constructor({ customUpdate, ...args }: any = {}) {
+    constructor(args: BindingObserversToElementArgs = {}) {
         super(args);
 
         this._customUpdate = args.customUpdate;
@@ -82,13 +81,7 @@ class BindingObserversToElement extends BindingBase {
         this.applyingChange = false;
     }
 
-    /**
-     * Link the binding to a set of observers and paths.
-     *
-     * @param observers
-     * @param paths
-     */
-    link(observers: Observer[], paths: string[]) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
 
         // don't render changes when we link

@@ -12,6 +12,9 @@ const CLASS_PANEL_HORIZONTAL = CLASS_PANEL + '-horizontal';
 const CLASS_PANEL_SORTABLE_ICON = CLASS_PANEL + '-sortable-icon';
 const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
 
+/**
+ * The arguments for the {@link Panel} constructor.
+ */
 export interface PanelArgs extends ContainerArgs {
     /**
      * Sets whether the Element is collapsible.
@@ -20,13 +23,13 @@ export interface PanelArgs extends ContainerArgs {
     /**
      * Sets whether the Element should be collapsed.
      */
-    collapsed?: number,
+    collapsed?: boolean,
     /**
      * Sets whether the panel can be reordered.
      */
     sortable?: boolean,
     /**
-     * Sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
+     * Sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to `false`.
      */
     collapseHorizontally?: boolean,
     /**
@@ -46,18 +49,19 @@ export interface PanelArgs extends ContainerArgs {
      */
     panelType?: 'normal',
     /**
-     * A dom element to use for the content container.
+     * A DOM element to use for the content container.
      */
     content?: HTMLElement
     /**
-     * A dom element to use for the header container.
+     * A DOM element to use for the header container.
      */
     header?: HTMLElement
 }
 
 /**
- * The Panel is a pcui.Container that itself contains a header container and a content container. The
- * respective pcui.Container functions work using the content container. One can also append elements to the header of the Panel.
+ * The Panel is a {@link Container} that itself contains a header container and a content
+ * container. The respective Container functions work using the content container. One can also
+ * append elements to the header of the Panel.
  */
 class Panel extends Container {
     /**
@@ -87,40 +91,39 @@ class Panel extends Container {
 
     protected _domEvtDragEnd: any;
 
-    protected _reflowTimeout: any;
+    protected _reflowTimeout: number;
 
-    protected _widthBeforeCollapse: any;
+    protected _widthBeforeCollapse: string;
 
-    protected _heightBeforeCollapse: any;
+    protected _heightBeforeCollapse: string;
 
-    protected _iconSort: any;
+    protected _iconSort: Label;
 
-    protected _btnRemove: any;
+    protected _btnRemove: Button;
 
-    protected _containerContent: any;
+    protected _containerContent: Container;
 
-    protected _containerHeader: any;
+    protected _containerHeader: Container;
 
-    protected _labelTitle: any;
+    protected _labelTitle: Label;
 
-    protected _collapsible: any;
+    protected _collapsible: boolean;
 
-    protected _collapseHorizontally: any;
+    protected _collapseHorizontally: boolean;
 
     protected _draggedChild: this;
 
-    protected _destroyed: any;
+    protected _collapsed: boolean;
 
-    protected _collapsed: any;
+    protected _sortable: boolean;
 
-    protected _sortable: any;
-
-    protected _headerSize: any;
+    protected _headerSize: number;
 
     /**
      * Creates a new Panel.
      *
-     * @param {object} args - The arguments. Extends the pcui.Container constructor arguments. All settable properties can also be set through the constructor.
+     * @param args - The arguments. Extends the Container constructor arguments. All settable
+     * properties can also be set through the constructor.
      */
     constructor(args: PanelArgs = Panel.defaultArgs) {
         args = { ...Panel.defaultArgs, ...args };
@@ -171,9 +174,8 @@ class Panel extends Container {
         this._btnRemove = null;
         this.removable = args.removable || !!args.onRemove || false;
 
-        // set the contents container to be the content DOM element
-        // from now on calling append functions on the panel will append themn
-        // elements to the contents container
+        // Set the contents container to be the content DOM element. From now on, calling append
+        // functions on the panel will append the elements to the contents container.
         this.domContent = this._containerContent.dom;
 
         // execute reflow now after all fields have been initialized
@@ -196,9 +198,8 @@ class Panel extends Container {
         });
         this._containerHeader.append(this._labelTitle);
 
-        // use native click listener because the pcui.Element#click event is only fired
-        // if the element is enabled. However we still want to catch header click events in order
-        // to collapse them
+        // use native click listener because the Element#click event is only fired if the element
+        // is enabled. However we still want to catch header click events in order to collapse them
         this._containerHeader.dom.addEventListener('click', this._onHeaderClick.bind(this));
 
         this.append(this._containerHeader);
@@ -404,7 +405,7 @@ class Panel extends Container {
     }
 
     /**
-     * Gets / sets whether the panel can be reordered
+     * Gets / sets whether the panel can be reordered.
      */
     set sortable(value) {
         if (this._sortable === value) return;
@@ -453,7 +454,7 @@ class Panel extends Container {
     }
 
     /**
-     * Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to false.
+     * Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to `false`.
      */
     set collapseHorizontally(value) {
         if (this._collapseHorizontally === value) return;

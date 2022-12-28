@@ -1,5 +1,5 @@
-import { IBindable } from '../../components/Element/index';
 import { Events, History, Observer } from '@playcanvas/observer';
+import { IBindable } from '../../components/Element/index';
 
 export interface BindingBaseArgs {
     /**
@@ -30,12 +30,12 @@ export interface BindingBaseArgs {
 }
 
 /**
- * Base class for data binding between IBindable Elements and Observers.
+ * Base class for data binding between {@link IBindable} {@link Element}s and Observers.
  */
 class BindingBase extends Events {
-    protected _observers: Array<Observer>;
+    protected _observers: Observer[];
 
-    protected _paths: Array<string>;
+    protected _paths: string[];
 
     protected _applyingChange: boolean;
 
@@ -56,7 +56,7 @@ class BindingBase extends Events {
     /**
      * Creates a new binding.
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: BindingBaseArgs) {
         super();
@@ -93,7 +93,7 @@ class BindingBase extends Events {
      * If more observers than paths are passed then the path at index 0 will be used for all observers.
      * If one observer and multiple paths are passed then all of the paths will be used for the observer (e.g. for curves).
      */
-    link(observers: Observer[]|Observer, paths: string[]|string) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         if (this._observers) {
             this.unlink();
         }
@@ -117,7 +117,7 @@ class BindingBase extends Events {
      * Clones the binding. To be implemented by derived classes.
      */
     clone() {
-        throw new Error('pcui.BindingBase#clone: Not implemented');
+        throw new Error('BindingBase#clone: Not implemented');
     }
 
     /**
@@ -260,14 +260,14 @@ class BindingBase extends Events {
     }
 
     /**
-     * The linked observers
+     * The linked observers.
      */
     get observers() {
         return this._observers;
     }
 
     /**
-     * The linked paths
+     * The linked paths.
      */
     get paths() {
         return this._paths;

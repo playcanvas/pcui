@@ -1,9 +1,13 @@
+import { Observer } from '@playcanvas/observer';
 import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element/index';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
 
 const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 
+/**
+ * The arguments for the {@link VectorInput} constructor.
+ */
 export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindableArgs {
     /**
      * The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
@@ -32,7 +36,7 @@ export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindabl
 }
 
 /**
- * A vector input
+ * A vector input.
  */
 class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder {
     static readonly defaultArgs: VectorInputArgs = {
@@ -91,7 +95,6 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         if (args.value !== undefined) {
             this.value = args.value;
         }
-
     }
 
     protected _onInputChange() {
@@ -116,7 +119,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         this.emit('change', this.value);
     }
 
-    protected _updateValue(value: any) {
+    protected _updateValue(value: number[]) {
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
 
         if (JSON.stringify(this.value) === JSON.stringify(value)) return false;
@@ -147,7 +150,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         return true;
     }
 
-    link(observers: Array<any>, paths: Array<string>) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
         observers = Array.isArray(observers) ? observers : [observers];
         paths = Array.isArray(paths) ? paths : [paths];
@@ -211,12 +214,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
     }
 
     get value() {
-        const value = new Array(this._inputs.length);
-        for (let i = 0; i < this._inputs.length; i++) {
-            value[i] = this._inputs[i].value;
-        }
-
-        return value;
+        return this._inputs.map(input => input.value);
     }
 
     /* eslint accessor-pairs: 0 */
@@ -276,8 +274,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
     'min',
     'max',
     'precision',
-    'step',
-    'renderChanges'
+    'step'
 ].forEach((property) => {
     Object.defineProperty(VectorInput.prototype, property, {
         get: function () {

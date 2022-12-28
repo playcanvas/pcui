@@ -2,9 +2,8 @@ import React from 'react';
 import Element, { ElementArgs } from './index';
 
 /**
- * The base class for all UI elements. Wraps a dom element with the PCUI interface.
+ * The base class for all UI elements. Wraps a DOM element with the PCUI interface.
  */
-
 class Component <P extends ElementArgs, S> extends React.Component <P, S> {
     static defaultArgs = Element.defaultArgs;
 
@@ -95,7 +94,7 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
 
     componentDidUpdate(prevProps: any) {
         Object.keys(this.props).forEach((prop) => {
-            var propDescriptor = this.getPropertyDescriptor(this.element, prop);
+            const propDescriptor = this.getPropertyDescriptor(this.element, prop);
             if (propDescriptor && propDescriptor.set) {
                 if (prop === 'value') {
                     this.element._suppressChange = true;

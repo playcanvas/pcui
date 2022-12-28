@@ -1,23 +1,22 @@
 // calculate, how many string `a`
 // requires edits, to become string `b`
-export const searchStringEditDistance = function (a: string, b: string) {
+const searchStringEditDistance = (a: string, b: string): number => {
     // Levenshtein distance
     // https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#JavaScript
     if (a.length === 0) return b.length;
     if (b.length === 0) return a.length;
     if (a === b) return 0;
 
-    var i, j;
-    var matrix: any = [];
+    const matrix: number[][] = [];
 
-    for (i = 0; i <= b.length; i++)
+    for (let i = 0; i <= b.length; i++)
         matrix[i] = [i];
 
-    for (j = 0; j <= a.length; j++)
+    for (let j = 0; j <= a.length; j++)
         matrix[0][j] = j;
 
-    for (i = 1; i <= b.length; i++) {
-        for (j = 1; j <= a.length; j++) {
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
             if (b.charAt(i - 1) === a.charAt(j - 1)) {
                 matrix[i][j] = matrix[i - 1][j - 1];
             } else {
@@ -32,21 +31,18 @@ export const searchStringEditDistance = function (a: string, b: string) {
 
 // calculate, how many characters string `b`
 // contains of a string `a`
-export const searchCharsContains = function (a: string, b: string) {
+const searchCharsContains = (a: string, b: string): number => {
     if (a === b)
         return a.length;
 
-    var contains = 0;
-    var ind = { };
-    var i;
+    let contains = 0;
+    const ind = new Set<string>();
 
-    for (i = 0; i < b.length; i++)
-        // @ts-ignore
-        ind[b.charAt(i)] = true;
+    for (let i = 0; i < b.length; i++)
+        ind.add(b.charAt(i));
 
-    for (i = 0; i < a.length; i++) {
-        // @ts-ignore
-        if (ind[a.charAt(i)])
+    for (let i = 0; i < a.length; i++) {
+        if (ind.has(a.charAt(i)))
             contains++;
     }
 
@@ -55,20 +51,20 @@ export const searchCharsContains = function (a: string, b: string) {
 
 
 // tokenize string into array of tokens
-export const searchStringTokenize = function (name: string) {
-    var tokens: any = [];
+const searchStringTokenize = (name: string): string[] => {
+    const tokens: string[] = [];
 
     // camelCase
     // upperCASE123
-    var string = name.replace(/([^A-Z])([A-Z][^A-Z])/g, '$1 $2').replace(/([A-Z0-9]{2,})/g, ' $1');
+    const string = name.replace(/([^A-Z])([A-Z][^A-Z])/g, '$1 $2').replace(/([A-Z0-9]{2,})/g, ' $1');
 
     // space notation
     // dash-notation
     // underscore_notation
-    var parts: string[] = string.split(/(\s|\-|_)/g);
+    const parts = string.split(/(\s|\-|_)/g);
 
     // filter valid tokens
-    for (var i = 0; i < parts.length; i++) {
+    for (let i = 0; i < parts.length; i++) {
         parts[i] = parts[i].toLowerCase().trim();
         if (parts[i] && parts[i] !== '-' && parts[i] !== '_')
             tokens.push(parts[i]);
@@ -78,11 +74,11 @@ export const searchStringTokenize = function (name: string) {
 };
 
 
-const _searchItems = function (items: any, search: any, args: any) {
-    var results: any = [];
+const _searchItems = (items: any, search: string, args: any) => {
+    const results: any = [];
 
-    for (var i = 0; i < items.length; i++) {
-        var item = items[i];
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
 
         // direct hit
         if (item.subFull !== Infinity) {
@@ -108,15 +104,15 @@ const _searchItems = function (items: any, search: any, args: any) {
         }
 
         // check if name contains enough of search characters
-        var contains = searchCharsContains(search, item.name);
+        const contains = searchCharsContains(search, item.name);
         if (contains / search.length < args.containsCharsTolerance)
             continue;
 
-        var editsCandidate = Infinity;
-        var subCandidate = Infinity;
+        let editsCandidate = Infinity;
+        let subCandidate = Infinity;
 
         // for each token
-        for (var t = 0; t < item.tokens.length; t++) {
+        for (let t = 0; t < item.tokens.length; t++) {
             // direct token match
             if (item.tokens[t] === search) {
                 editsCandidate = 0;
@@ -124,7 +120,7 @@ const _searchItems = function (items: any, search: any, args: any) {
                 break;
             }
 
-            var edits = searchStringEditDistance(search, item.tokens[t]);
+            const edits = searchStringEditDistance(search, item.tokens[t]);
 
             if ((subCandidate === Infinity || edits < editsCandidate) && item.tokens[t].indexOf(search) !== -1) {
                 // search is a substring of a token
@@ -164,7 +160,7 @@ const _searchItems = function (items: any, search: any, args: any) {
 //     [ 'Sun', {object} ]
 // ]
 //
-export const searchItems = function (items: any, search: any, args?: any) {
+export const searchItems = (items: any, search: string, args?: any) => {
     let i;
 
     search = (search || '').toLowerCase().trim();
@@ -172,7 +168,7 @@ export const searchItems = function (items: any, search: any, args?: any) {
     if (!search)
         return [];
 
-    var searchTokens = searchStringTokenize(search);
+    const searchTokens = searchStringTokenize(search);
     if (!searchTokens.length)
         return [];
 
@@ -180,10 +176,10 @@ export const searchItems = function (items: any, search: any, args?: any) {
     args.containsCharsTolerance = args.containsCharsTolerance || 0.5;
     args.editsDistanceTolerance = args.editsDistanceTolerance || 0.5;
 
-    var records: any = [];
+    let records: any = [];
 
     for (i = 0; i < items.length; i++) {
-        var subInd = items[i][0].toLowerCase().trim().indexOf(search);
+        const subInd = items[i][0].toLowerCase().trim().indexOf(search);
 
         records.push({
             name: items[i][0],

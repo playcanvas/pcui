@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { Observer } from '@playcanvas/observer';
 import Container from '../../components/Container/component';
 import TextInput from '../../components/TextInput/component';
 import BooleanInput from '../../components/BooleanInput/component';
@@ -7,7 +8,6 @@ import Label from '../../components/Label/component';
 import SelectInput from '../../components/SelectInput/component';
 import Button from '../../components/Button/component';
 import BindingTwoWay from '../../binding/BindingTwoWay';
-import { Observer } from '@playcanvas/observer';
 
 import './style.scss';
 
@@ -51,7 +51,7 @@ export const Main = (props) => {
             <SelectInput type="number" options={[{ v: 0, t: 'Show all items' }, { v: 1, t: 'Show active items' }, { v: 2, t: 'Show done items' }]} onChange={setListFilter} />
             <Container>
                 {Object.keys(items).map((key) => {
-                    var item = items[key];
+                    const item = items[key];
                     if (listFilter !== 0) {
                         if ((listFilter === 1 && item.done) || (listFilter === 2 && !item.done)) return null;
                     }

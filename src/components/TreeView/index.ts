@@ -13,41 +13,45 @@ const DRAG_AREA_INSIDE = 'inside';
 const DRAG_AREA_BEFORE = 'before';
 const DRAG_AREA_AFTER = 'after';
 
+/**
+ * The arguments for the {@link TreeView} constructor.
+ */
 export interface TreeViewArgs extends ContainerArgs {
     /**
-     * Whether dragging a TreeViewItem is allowed.
+     * Whether dragging a {@link TreeViewItem} is allowed.
      */
     allowDrag?: boolean,
     /**
-     * Whether reordering TreeViewItems is allowed.
+     * Whether reordering {@link TreeViewItem}s is allowed.
      */
     allowReordering?: boolean,
     /**
-     * Whether renaming TreeViewItems is allowed by double clicking on them.
+     * Whether renaming {@link TreeViewItem}s is allowed by double clicking on them.
      */
     allowRenaming?: boolean,
     /**
-     * A filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
+     * A filter that searches {@link TreeViewItem}s and only shows the ones that are relevant to the filter.
      */
     filter?: string,
     /**
-     * A function to be called when we right click on a TreeViewItem.
+     * A function to be called when we right click on a {@link TreeViewItem}.
      */
     onContextMenu?: any,
     /**
      * A function to be called when we try to reparent tree items. If a function is provided then the
-     * tree items will not be reparented by the TreeView but instead will rely on the function to reparent them as it sees fit.
+     * tree items will not be reparented by the {@link TreeView} but instead will rely on the function to
+     * reparent them as it sees fit.
      */
     onReparent?: any,
     /**
-     * The element to scroll on drag. Defaults to this TreeView's dom.
+     * The element to scroll on drag. Defaults to this {@link TreeView}'s DOM element.
      */
     dragScrollElement?: HTMLElement
 }
 
 /**
  * A container that can show a TreeView like a hierarchy. The TreeView contains
- * TreeViewItems.
+ * {@link TreeViewItem}s.
  */
 class TreeView extends Container {
     /**
@@ -104,9 +108,9 @@ class TreeView extends Container {
         allowReordering: true
     };
 
-    protected _selectedItems: any[];
+    protected _selectedItems: TreeViewItem[];
 
-    protected _dragItems: any[];
+    protected _dragItems: TreeViewItem[];
 
     protected _allowDrag: boolean;
 
@@ -116,7 +120,7 @@ class TreeView extends Container {
 
     protected _dragging: boolean;
 
-    protected _dragOverItem: any;
+    protected _dragOverItem: TreeViewItem;
 
     protected _dragArea: string;
 
@@ -136,11 +140,11 @@ class TreeView extends Container {
 
     protected _pressedShift: boolean;
 
-    protected _filter: any;
+    protected _filter: string;
 
     protected _filterResults: any[];
 
-    protected _wasDraggingAllowedBeforeFiltering: any;
+    protected _wasDraggingAllowedBeforeFiltering: boolean;
 
     protected _domEvtModifierKeys: any;
 
@@ -153,7 +157,7 @@ class TreeView extends Container {
     /**
      * Creates a new TreeView.
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: TreeViewArgs = TreeView.defaultArgs) {
         args = { ...TreeView.defaultArgs, ...args };
@@ -210,17 +214,12 @@ class TreeView extends Container {
     }
 
     /**
-     * Finds the next tree item that is not currently hidden
+     * Finds the next tree item that is not currently hidden.
      *
-     * @param {TreeViewItem} currentItem - The current tree item
-     * @param currentItem.numChildren
-     * @param currentItem.open
-     * @param currentItem.firstChild
-     * @param currentItem.nextSibling
-     * @param currentItem.parent
-     * @returns {TreeViewItem} The next tree item.
+     * @param currentItem - The current tree item.
+     * @returns The next visible tree item.
      */
-    protected _findNextVisibleTreeItem(currentItem: { numChildren: number; open: any; firstChild: any; nextSibling: any; parent: any; }) {
+    protected _findNextVisibleTreeItem(currentItem: TreeViewItem): TreeViewItem {
         if (currentItem.numChildren > 0 && currentItem.open) {
             return currentItem.firstChild;
         }
@@ -247,13 +246,10 @@ class TreeView extends Container {
     /**
      * Finds the last visible child tree item of the specified tree item.
      *
-     * @param {TreeViewItem} currentItem - The current item.
-     * @param currentItem.numChildren
-     * @param currentItem.open
-     * @param currentItem.lastChild
-     * @returns {TreeViewItem} The last child item.
+     * @param currentItem - The current item.
+     * @returns The last child item.
      */
-    protected _findLastVisibleChildTreeItem(currentItem: { numChildren: any; open: any; lastChild: any; }) {
+    protected _findLastVisibleChildTreeItem(currentItem: TreeViewItem) {
         if (!currentItem.numChildren || !currentItem.open) return null;
 
         let lastChild = currentItem.lastChild;
@@ -267,12 +263,10 @@ class TreeView extends Container {
     /**
      * Finds the previous visible tree item of the specified tree item.
      *
-     * @param {TreeViewItem} currentItem - The current tree item.
-     * @param currentItem.previousSibling
-     * @param currentItem.parent
-     * @returns {TreeViewItem} The previous item.
+     * @param currentItem - The current tree item.
+     * @returns The previous item.
      */
-    protected _findPreviousVisibleTreeItem(currentItem: { previousSibling: any; parent: any; }) {
+    protected _findPreviousVisibleTreeItem(currentItem: TreeViewItem) {
         const sibling = currentItem.previousSibling;
         if (sibling) {
             if (sibling.numChildren > 0 && sibling.open)  {
@@ -353,7 +347,7 @@ class TreeView extends Container {
         return result;
     }
 
-    protected _onAppendChild(element: any) {
+    protected _onAppendChild(element: Element) {
         super._onAppendChild(element);
 
         if (element instanceof TreeViewItem) {
@@ -361,7 +355,7 @@ class TreeView extends Container {
         }
     }
 
-    protected _onRemoveChild(element: any) {
+    protected _onRemoveChild(element: Element) {
         if (element instanceof TreeViewItem) {
             this._onRemoveTreeViewItem(element);
         }
@@ -379,7 +373,7 @@ class TreeView extends Container {
         }
 
         // do the same for all children of the element
-        element.forEachChild((child: any) => {
+        element.forEachChild((child) => {
             if (child instanceof TreeViewItem) {
                 this._onAppendTreeViewItem(child);
             }
@@ -390,7 +384,7 @@ class TreeView extends Container {
         element.selected = false;
 
         // do the same for all children of the element
-        element.forEachChild((child: any) => {
+        element.forEachChild((child) => {
             if (child instanceof TreeViewItem) {
                 this._onRemoveTreeViewItem(child);
             }
@@ -477,10 +471,10 @@ class TreeView extends Container {
     /**
      * Call specified function on every child TreeViewItem by traversing the hierarchy depth first.
      *
-     * @param {Function} fn - The function to call. The function takes the TreeViewItem as an argument.
+     * @param fn - The function to call. The function takes the TreeViewItem as an argument.
      */
-    protected _traverseDepthFirst(fn: any) {
-        function traverse(item: { numChildren: any; dom: { childNodes: string | any[]; }; }) {
+    protected _traverseDepthFirst(fn: (item: TreeViewItem) => void) {
+        function traverse(item: Element) {
             if (!item || !(item instanceof TreeViewItem)) return;
 
             fn(item);
@@ -493,8 +487,6 @@ class TreeView extends Container {
         }
 
         for (let i = 0; i < this.dom.childNodes.length; i++) {
-
-            // @ts-ignore ui
             traverse(this.dom.childNodes[i].ui);
         }
     }
@@ -508,7 +500,8 @@ class TreeView extends Container {
     protected _updateTreeOrder() {
         let order = 0;
 
-        this._traverseDepthFirst((item: { _treeOrder: number; }) => {
+        this._traverseDepthFirst((item: TreeViewItem) => {
+            // @ts-ignore
             item._treeOrder = order++;
         });
     }
@@ -518,12 +511,12 @@ class TreeView extends Container {
     }
 
     // Called when we start dragging a TreeViewItem.
-    protected _onChildDragStart(evt: any, element: { class: { add: (arg0: string) => void; }; }) {
+    protected _onChildDragStart(evt: MouseEvent, item: TreeViewItem) {
         if (!this.allowDrag || this._dragging) return;
 
         this._dragItems = [];
 
-        if (this._selectedItems.indexOf(element) !== -1) {
+        if (this._selectedItems.indexOf(item) !== -1) {
             const dragged = [];
 
             // check that all selected items to be dragged are
@@ -559,8 +552,8 @@ class TreeView extends Container {
             // add dragged class to each item
             this._dragItems = dragged;
         } else {
-            element.class.add(CLASS_DRAGGED_ITEM);
-            this._dragItems.push(element);
+            item.class.add(CLASS_DRAGGED_ITEM);
+            this._dragItems.push(item);
         }
 
         if (this._dragItems.length) {
@@ -575,7 +568,7 @@ class TreeView extends Container {
     }
 
     // Called when we stop dragging a TreeViewItem.
-    protected _onChildDragEnd(evt: any, element: any) {
+    protected _onChildDragEnd(evt: MouseEvent, item: TreeViewItem) {
         if (!this.allowDrag || !this._dragging) return;
 
         this._dragItems.forEach(item => item.class.remove(CLASS_DRAGGED_ITEM));
@@ -596,6 +589,7 @@ class TreeView extends Container {
                 // sort items based on order in the hierarchy
                 this._updateTreeOrder();
                 this._dragItems.sort((a, b) => {
+                    // @ts-ignore
                     return a._treeOrder - b._treeOrder;
                 });
             }
@@ -615,7 +609,7 @@ class TreeView extends Container {
                             item: item,
                             oldParent: item.parent
                         });
-                        item.parent.remove(item);
+                        (item.parent as Container).remove(item);
                     });
 
                     // now reparent items
@@ -623,6 +617,7 @@ class TreeView extends Container {
                         if (this._dragArea === DRAG_AREA_BEFORE) {
                             // If dragged before a TreeViewItem...
                             r.newParent = this._dragOverItem.parent;
+                            // @ts-ignore
                             this._dragOverItem.parent.appendBefore(r.item, this._dragOverItem);
                             r.newChildIndex = this._getChildIndex(r.item, r.newParent);
                         } else if (this._dragArea === DRAG_AREA_INSIDE) {
@@ -634,6 +629,7 @@ class TreeView extends Container {
                         } else if (this._dragArea === DRAG_AREA_AFTER) {
                             // If dragged after a TreeViewItem...
                             r.newParent = this._dragOverItem.parent;
+                            // @ts-ignore
                             this._dragOverItem.parent.appendAfter(r.item, i > 0 ? reparented[i - 1].item : this._dragOverItem);
                             r.newChildIndex = this._getChildIndex(r.item, r.newParent);
                         }
@@ -721,11 +717,11 @@ class TreeView extends Container {
     }
 
     // Called when we drag over a TreeViewItem.
-    protected _onChildDragOver(evt: any, element: { allowDrop: any; }) {
+    protected _onChildDragOver(evt: MouseEvent, item: TreeViewItem) {
         if (!this._allowDrag || !this._dragging) return;
 
-        if (element.allowDrop && this._dragItems.indexOf(element) === -1) {
-            this._dragOverItem = element;
+        if (item.allowDrop && this._dragItems.indexOf(item) === -1) {
+            this._dragOverItem = item;
         } else {
             this._dragOverItem = null;
         }
@@ -823,7 +819,7 @@ class TreeView extends Container {
             } else {
                 let parent = false;
                 if (this._allowReordering && this._dragOverItem.open) {
-                    for (var i = 0; i < this._dragItems.length; i++) {
+                    for (let i = 0; i < this._dragItems.length; i++) {
                         if (this._dragItems[i].parent === this._dragOverItem) {
                             parent = true;
                             this._dragArea = DRAG_AREA_BEFORE;
@@ -842,7 +838,7 @@ class TreeView extends Container {
     }
 
     // Updates the drag handle position and size
-    protected _updateDragHandle(dragOverItem?: any, force?: boolean) {
+    protected _updateDragHandle(dragOverItem?: TreeViewItem, force?: boolean) {
         if (!force && (!this._allowDrag || !this._dragging)) return;
 
         if (!dragOverItem) {
@@ -852,6 +848,7 @@ class TreeView extends Container {
         if (!dragOverItem || dragOverItem.hidden || !dragOverItem.parentsOpen) {
             this._dragHandle.hidden = true;
         } else {
+            // @ts-ignore
             const rect = dragOverItem._containerContents.dom.getBoundingClientRect();
 
             this._dragHandle.hidden = false;
@@ -874,22 +871,20 @@ class TreeView extends Container {
     }
 
     /**
-     * Opens all the parents of the specified item
+     * Opens all the parents of the specified item.
      *
-     * @param {TreeViewItem} endItem - The end tree view item
-     * @param endItem.parentsOpen
+     * @param endItem - The end tree view item.
      */
-    protected _openHierarchy(endItem: { parentsOpen: boolean; }) {
+    protected _openHierarchy(endItem: TreeViewItem) {
         endItem.parentsOpen = true;
     }
 
     /**
-     * Selects a tree view item
+     * Selects a tree view item.
      *
-     * @param {TreeViewItem} item - The tree view item
-     * @param item.selected
+     * @param item - The tree view item.
      */
-    protected _selectSingleItem(item: { selected: boolean; }) {
+    protected _selectSingleItem(item: TreeViewItem) {
         let i = this._selectedItems.length;
         let othersSelected = false;
         while (i--) {
@@ -909,9 +904,9 @@ class TreeView extends Container {
     /**
      * Called when a child tree view item is selected.
      *
-     * @param {TreeViewItem} item - The tree view item.
+     * @param item - The tree view item.
      */
-    protected _onChildSelected(item: any) {
+    protected _onChildSelected(item: TreeViewItem) {
         this._selectedItems.push(item);
         this._openHierarchy(item);
         this.emit('select', item);
@@ -920,27 +915,23 @@ class TreeView extends Container {
     /**
      * Called when a child tree view item is deselected.
      *
-     * @param {TreeViewItem} item - The tree view item.
-     * @param {Element} element - The element.
+     * @param item - The tree view item.
      */
-    protected _onChildDeselected(element: any) {
-        const index = this._selectedItems.indexOf(element);
+    protected _onChildDeselected(item: TreeViewItem) {
+        const index = this._selectedItems.indexOf(item);
         if (index !== -1) {
             this._selectedItems.splice(index, 1);
-            this.emit('deselect', element);
+            this.emit('deselect', item);
         }
     }
 
     /**
      * Called when a child tree view item is renamed.
      *
-     * @param {TreeViewItem} item - The tree view item.
-     * @param item.class
-     * @param {string} newName - The new name.
-     * @param item.class.remove
-     * @param item.text
+     * @param item - The tree view item.
+     * @param newName - The new name.
      */
-    protected _onChildRename(item: { class: { remove: (arg0: string) => void; }; text: any; }, newName: any) {
+    protected _onChildRename(item: TreeViewItem, newName: string) {
         if (this._filter) {
             // unfilter this item
             item.class.remove(CLASS_FILTER_RESULT);
@@ -955,7 +946,7 @@ class TreeView extends Container {
         this.emit('rename', item, newName);
     }
 
-    protected _searchItems(searchArr: any, filter: any) {
+    protected _searchItems(searchArr: any, filter: string) {
         const results = searchItems(searchArr, filter);
         if (!results.length) return;
 
@@ -963,15 +954,14 @@ class TreeView extends Container {
             this._filterResults.push(item);
             item.class.add(CLASS_FILTER_RESULT);
         });
-
     }
 
     /**
-     * Searches treeview
+     * Searches the treeview.
      *
-     * @param {string} filter - The search filter
+     * @param filter - The search filter.
      */
-    protected _applyFilter(filter: any) {
+    protected _applyFilter(filter: string) {
         this._clearFilter();
 
         this._wasDraggingAllowedBeforeFiltering = this._allowDrag;
@@ -980,7 +970,7 @@ class TreeView extends Container {
         this.class.add(CLASS_FILTERING);
 
         const search: any[][] = [];
-        this._traverseDepthFirst((item: { text: any; }) => {
+        this._traverseDepthFirst((item) => {
             search.push([item.text, item]);
         });
 
@@ -1005,7 +995,7 @@ class TreeView extends Container {
     /**
      * Show the drag handle on the given tree item.
      *
-     * @param treeItem
+     * @param treeItem - The tree item.
      */
     showDragHandle(treeItem: TreeViewItem) {
         this._updateDragHandle(treeItem, true);
@@ -1031,7 +1021,6 @@ class TreeView extends Container {
         while (i--) {
             const dom = this.dom.childNodes[i];
             if (!dom) continue;
-            // @ts-ignore ui
             const ui = dom.ui;
             if (ui instanceof TreeViewItem) {
                 ui.destroy();
@@ -1143,7 +1132,7 @@ class TreeView extends Container {
     /**
      * A filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
      */
-    set filter(value: string) {
+    set filter(value) {
         if (this._filter === value) return;
 
         this._filter = value;
@@ -1155,7 +1144,7 @@ class TreeView extends Container {
         }
     }
 
-    get filter(): string {
+    get filter() {
         return this._filter;
     }
 

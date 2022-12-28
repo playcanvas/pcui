@@ -13,6 +13,9 @@ const CLASS_ARRAY_CONTAINER = CLASS_ARRAY_INPUT + '-items';
 const CLASS_ARRAY_ELEMENT = CLASS_ARRAY_INPUT + '-item';
 const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
 
+/**
+ * The arguments for the {@link ArrayInput} constructor.
+ */
 export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
     /**
      * The type of values that the array can hold.
@@ -23,11 +26,11 @@ export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
      */
     elementArgs?: Array<any>;
     /**
-     * If true then editing the number of elements that the array has will not be allowed.
+     * If `true` then editing the number of elements that the array has will not be allowed.
      */
     fixedSize?: boolean;
     /**
-     * If true then the array will be rendered using panels.
+     * If `true` then the array will be rendered using panels.
      */
     usePanels?: boolean;
     /**
@@ -504,12 +507,12 @@ class ArrayInput extends Element implements IFocusable, IBindable {
     /**
      * Executes the specified function for each array element.
      *
-     * @param {Function} fn - The function with signature (element, index) => bool to execute. If the function returns
-     * false then the iteration will early out.
+     * @param fn - The function with signature (element, index) => bool to execute. If the function
+     * returns `false` then the iteration will early out.
      */
-    forEachArrayElement(fn: (arg0: any, arg1: any) => any) {
-        this._containerArray.forEachChild((container, i) => {
-            return fn(container.dom.firstChild.ui, i);
+    forEachArrayElement(fn: (element: Element, index: number) => false | void) {
+        this._containerArray.forEachChild((element, i) => {
+            return fn(element.dom.firstChild.ui, i);
         });
     }
 

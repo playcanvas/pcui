@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { Observer } from '@playcanvas/observer';
 import Container from '../../components/Container/component';
 import TextInput from '../../components/TextInput/component';
 import Label from '../../components/Label/component';
-import { Observer } from '@playcanvas/observer';
 import BindingObserversToElement from '../../binding/BindingObserversToElement';
 import BindingElementToObservers from '../../binding/BindingElementToObservers';
 

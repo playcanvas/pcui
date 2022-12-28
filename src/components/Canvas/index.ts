@@ -1,14 +1,18 @@
 import Element, { ElementArgs } from '../Element/index';
 
+/**
+ * The arguments for the {@link Canvas} constructor.
+ */
 export interface CanvasArgs extends ElementArgs {
     /**
-     * Whether the canvas should use the device pixel ratio.
+     * Whether the canvas should use the {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio devicePixelRatio}.
+     * Defaults to `false`.
      */
     useDevicePixelRatio?: boolean;
 }
 
 /**
- * Represents a Canvas
+ * Represents a Canvas.
  */
 class Canvas extends Element {
     static readonly defaultArgs: CanvasArgs = {
@@ -34,7 +38,7 @@ class Canvas extends Element {
         this._ratio = (args.useDevicePixelRatio !== undefined && args.useDevicePixelRatio) ? window.devicePixelRatio : 1;
 
         // Disable I-bar cursor on click+drag
-        canvas.onselectstart = (event: Event) => {
+        canvas.onselectstart = (evt: Event) => {
             return false;
         };
     }

@@ -6,9 +6,12 @@ const CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
 const CLASS_BOOLEAN_INPUT_TICKED = CLASS_BOOLEAN_INPUT + '-ticked';
 const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
 
+/**
+ * The arguments for the {@link BooleanInput} constructor.
+ */
 export interface BooleanInputArgs extends ElementArgs, IBindableArgs {
     /**
-     * The type of checkbox. Currently can be null or 'toggle'.
+     * The type of checkbox. Currently can be `null` or 'toggle'.
      */
     type?: string
 }
@@ -31,7 +34,7 @@ class BooleanInput extends Input implements IBindable, IFocusable {
 
     protected _domEventBlur: any;
 
-    protected _value: any;
+    protected _value: boolean;
 
     constructor(args: BooleanInputArgs = BooleanInput.defaultArgs) {
         args = { ...BooleanInput.defaultArgs, ...args };

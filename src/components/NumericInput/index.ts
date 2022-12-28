@@ -9,6 +9,9 @@ const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CON
 
 const REGEX_COMMA = /,/g;
 
+/**
+ * The arguments for the {@link NumericInput} constructor.
+ */
 export interface NumericInputArgs extends TextInputArgs {
     /**
      * Sets the minimum value this field can take.
@@ -35,7 +38,7 @@ export interface NumericInputArgs extends TextInputArgs {
      */
     hideSlider?: boolean,
     /**
-     * Sets whether the value can be null. If not then it will be 0 instead of null.
+     * Sets whether the value can be `null`. If not then it will be 0 instead of `null`.
      */
     allowNull?: boolean
 }
@@ -241,10 +244,10 @@ class NumericInput extends TextInput {
                 // sanitize input to only allow short mathematical expressions to be evaluated
                 value = value.match(/^[*/+\-0-9().]+$/);
                 if (value !== null && value[0].length < 20) {
-                    var expression = value[0];
-                    var operators = ['+', '-', '/', '*'];
+                    let expression = value[0];
+                    const operators = ['+', '-', '/', '*'];
                     operators.forEach((operator) => {
-                        var expressionArr = expression.split(operator);
+                        const expressionArr = expression.split(operator);
                         expressionArr.forEach((_: any, i: number) => {
                             expressionArr[i] = expressionArr[i].replace(/^0+/, '');
                         });

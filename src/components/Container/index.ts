@@ -18,41 +18,44 @@ const CLASS_CONTAINER = 'pcui-container';
 const CLASS_DRAGGED = CLASS_CONTAINER + '-dragged';
 const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
 
+/**
+ * The arguments for the {@link Container} constructor.
+ */
 export interface ContainerArgs extends ElementArgs, IParentArgs, IFlexArgs {
     /**
-     * Sets whether the Element is resizable and where the resize handle is located. Can
+     * Sets whether the {@link Container} is resizable and where the resize handle is located. Can
      * be one of 'top', 'bottom', 'right', 'left'. Set to null to disable resizing.
      */
     resizable?: string,
     /**
-     * Sets the minimum size the Element can take when resized in pixels.
+     * Sets the minimum size the {@link Container} can take when resized in pixels.
      */
     resizeMin?: number,
     /**
-     * Sets the maximum size the Element can take when resized in pixels.
+     * Sets the maximum size the {@link Container} can take when resized in pixels.
      */
     resizeMax?: number,
     /**
-     * Called when the container has been resized.
+     * Called when the {@link Container} has been resized.
      */
     onResize?: () => void,
     /**
-     * Sets whether the Element should be scrollable.
+     * Sets whether the {@link Container} should be scrollable.
      */
     scrollable?: boolean,
     /**
-     * Sets whether the Element supports the grid layout.
+     * Sets whether the {@link Container} supports the grid layout.
      */
     grid?: boolean,
     /**
-     * Sets the Elements align items property.
+     * Sets the {@link Container}'s align items property.
      */
     alignItems?: string
 }
 
 /**
- * A container is the basic building block for Elements that are grouped together.
- * A container can contain any other element including other containers.
+ * A container is the basic building block for {@link Element}s that are grouped together. A
+ * container can contain any other element including other containers.
  */
 class Container extends Element {
     static readonly defaultArgs: ContainerArgs = {
@@ -156,7 +159,7 @@ class Container extends Element {
         let grid = !!args.grid;
         if (grid) {
             if (this.flex) {
-                console.error('Invalid pcui.Container arguments: "grid" and "flex" cannot both be true.');
+                console.error('Invalid Container arguments: "grid" and "flex" cannot both be true.');
                 grid = false;
             }
         }
@@ -259,10 +262,10 @@ class Container extends Element {
     /**
      * Removes the specified child element from the container.
      *
-     * @param {Element} element - The element to remove.
+     * @param element - The element to remove.
      * @fires 'remove'
      */
-    remove(element: any) {
+    remove(element: Element) {
         if (element.parent !== this) return;
 
         const dom = this._getDomFromElement(element);
@@ -274,10 +277,10 @@ class Container extends Element {
     /**
      * Moves the specified child at the specified index.
      *
-     * @param {Element} element - The element to move.
-     * @param {number} index - The index
+     * @param element - The element to move.
+     * @param index - The index to move the element to.
      */
-    move(element: any, index: number) {
+    move(element: Element, index: number) {
         let idx = -1;
         for (let i = 0; i < this.dom.childNodes.length; i++) {
             if (this.dom.childNodes[i].ui === element) {
@@ -333,19 +336,19 @@ class Container extends Element {
         }
 
         if (element.element) {
-            // console.log('Legacy ui.Element passed to pcui.Container', this.class, element.class);
+            // console.log('Legacy ui.Element passed to Container', this.class, element.class);
             return element.element;
         }
 
         return element;
     }
 
-    protected _onAppendChild(element: any) {
+    protected _onAppendChild(element: Element) {
         element.parent = this;
         this.emit('append', element);
     }
 
-    protected _onRemoveChild(element: any) {
+    protected _onRemoveChild(element: Element) {
         element.parent = null;
         this.emit('remove', element);
     }
@@ -595,9 +598,12 @@ class Container extends Element {
     }
 
     /**
-     * Iterate over each child container using the supplied function.
+     * Iterate over each child element using the supplied function. To early out of the iteration,
+     * return `false` from the function.
+     *
+     * @param fn - The function to call for each child element.
      */
-    forEachChild(fn: { (container: any, i: any): any; (arg0: any, arg1: number): any; }) {
+    forEachChild(fn: (child: Element, index: number) => void | false) {
         for (let i = 0; i < this.dom.childNodes.length; i++) {
             const node = this.dom.childNodes[i].ui;
             if (node) {
@@ -615,12 +621,11 @@ class Container extends Element {
      * and return it. Otherwise return the current node. Also add each child to the parent
      * under its keyed name.
      *
-     * @param {object} node - The current element in the dom structure which must be recursively
-     * traversed and appended to its parent
-     *
-     * @param node.root
-     * @param node.children
-     * @returns {Element} - The recursively appended element node
+     * @param node - The current element in the dom structure which must be recursively
+     * traversed and appended to its parent.
+     * @param node.root - The root node of the dom structure.
+     * @param node.children - The children of the root node.
+     * @returns The recursively appended element node.
      *
      */
     protected _buildDomNode(node: { [x: string]: any; root?: any; children?: any; }) {
@@ -647,7 +652,7 @@ class Container extends Element {
      * appends them to this container. These child elements are traversed recursively using
      * _buildDomNode.
      *
-     * @param {Array} dom - An array of child pcui elements to append to this container.
+     * @param dom - An array of child pcui elements to append to this container.
      *
      * @example
      * buildDom([
@@ -825,7 +830,7 @@ class Container extends Element {
     }
 
     /**
-     * The internal dom element used as a the container of all children.
+     * The internal DOM element used as a the container of all children.
      * Can be overridden by derived classes.
      */
     set domContent(value: HTMLElement) {

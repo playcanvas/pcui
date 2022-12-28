@@ -5,6 +5,9 @@ import Label from '../Label';
 const CLASS_ROOT = 'pcui-code';
 const CLASS_INNER = CLASS_ROOT + '-inner';
 
+/**
+ * The arguments for the {@link Code} constructor.
+ */
 export interface CodeArgs extends ContainerArgs {
     /**
      * Sets the text to display in the code block.

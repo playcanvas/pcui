@@ -8,20 +8,23 @@ const CLASS_COLOR_INPUT = 'pcui-color-input';
 const CLASS_NOT_FLEXIBLE = 'pcui-not-flexible';
 const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
 
+/**
+ * The arguments for the {@link ColorPicker} constructor.
+ */
 export interface ColorPickerArgs extends ElementArgs {
     renderChanges?: boolean;
     /**
-     * An optional array of 4 integers containing the RGBA values the picker should be initialized to.
+     * An array of 4 integers containing the RGBA values the picker should be initialized to. Defaults to `[0, 0, 255, 1]`.
      */
-    value?: Array<number>;
+    value?: number[];
     /**
-     * Number of color channels; default is 3, changing to 4 adds the option to change the alpha value.
+     * Number of color channels. Defaults to 3. Changing to 4 adds the option to change the alpha value.
      */
     channels?: number;
 }
 
 /**
- * Represents a color picker
+ * Represents a color picker.
  */
 class ColorPicker extends Element {
     static readonly defaultArgs: ColorPickerArgs = {
@@ -56,7 +59,7 @@ class ColorPicker extends Element {
 
     protected _colorHSV: number[];
 
-    protected _pickerChannels: any[];
+    protected _pickerChannels: NumericInput[];
 
     protected _channelsNumber: number;
 
@@ -397,7 +400,7 @@ class ColorPicker extends Element {
         this._overlay.position(x, y);
     }
 
-    protected _setPickerColor(color: any) {
+    protected _setPickerColor(color: number[]) {
         if (this._changing || this._dragging)
             return;
 
@@ -505,7 +508,7 @@ class ColorPicker extends Element {
 
     }
 
-    protected _setValue(value: any) {
+    protected _setValue(value: number[]) {
         const r = this._valueToColor(value[0]);
         const g = this._valueToColor(value[1]);
         const b = this._valueToColor(value[2]);
@@ -520,7 +523,7 @@ class ColorPicker extends Element {
         }
     }
 
-    protected _updateValue(value: string | any[]) {
+    protected _updateValue(value: number[]) {
         let dirty = false;
         for (let i = 0; i < value.length; i++) {
             if (this._value[i] !== value[i]) {

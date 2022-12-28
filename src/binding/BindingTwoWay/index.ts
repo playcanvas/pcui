@@ -17,8 +17,8 @@ export interface BindingTwoWayArgs extends BindingBaseArgs {
 }
 
 /**
- * Provides two way data binding between Observers and IBindable elements. This means
- * that when the value of the Observers changes the IBindable will be updated and vice versa.
+ * Provides two way data binding between Observers and {@link IBindable} elements. This means that
+ * when the value of the Observers changes the IBindable will be updated and vice versa.
  */
 class BindingTwoWay extends BindingBase {
     _bindingElementToObservers: any;
@@ -28,7 +28,7 @@ class BindingTwoWay extends BindingBase {
     /**
      * Creates a new BindingTwoWay instance.
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: BindingTwoWayArgs = {}) {
         super(args);
@@ -55,7 +55,7 @@ class BindingTwoWay extends BindingBase {
         });
     }
 
-    link(observers: Observer[], paths: string[]) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
         this._bindingElementToObservers.link(observers, paths);
         this._bindingObserversToElement.link(observers, paths);

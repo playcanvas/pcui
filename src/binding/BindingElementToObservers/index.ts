@@ -2,8 +2,8 @@ import { Observer } from '@playcanvas/observer';
 import BindingBase from '../BindingBase';
 
 /**
- * Provides one way binding between an IBindable element and Observers. Any changes from the element
- * will be propagated to the observers.
+ * Provides one way binding between an {@link IBindable} element and Observers. Any changes from
+ * the element will be propagated to the observers.
  */
 class BindingElementToObservers extends BindingBase {
     /**

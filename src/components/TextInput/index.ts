@@ -4,13 +4,16 @@ import * as pcuiClass from '../../class';
 
 const CLASS_TEXT_INPUT = 'pcui-text-input';
 
+/**
+ * The arguments for the {@link TextInput} constructor.
+ */
 export interface TextInputArgs extends InputArgs, IBindableArgs, IPlaceholderArgs {
     /**
-     * Sets whether pressing Enter will blur (unfocus) the field. Defaults to true.
+     * Sets whether pressing Enter will blur (unfocus) the field. Defaults to `true`.
      */
     blurOnEnter?: boolean,
     /**
-     * Sets whether pressing Escape will blur (unfocus) the field. Defaults to true.
+     * Sets whether pressing Escape will blur (unfocus) the field. Defaults to `true`.
      */
     blurOnEscape?: boolean,
     /**
@@ -18,12 +21,12 @@ export interface TextInputArgs extends InputArgs, IBindableArgs, IPlaceholderArg
      */
     keyChange?: boolean,
     /**
-     * A function that validates the value that is entered into the input and returns true if it is valid or false otherwise.
-     * If false then the input will be set in an error state and the value will not propagate to the binding.
+     * A function that validates the value that is entered into the input and returns `true` if it is valid or `false` otherwise.
+     * If `false` then the input will be set in an error state and the value will not propagate to the binding.
      */
     onValidate?: (value: string) => boolean,
     /**
-     * The input element to associate this TextInput with. If not supplied one will be created instead.
+     * The input element to associate this {@link TextInput} with. If not supplied one will be created instead.
      */
     input?: HTMLInputElement
 }
@@ -230,7 +233,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         if (value === this.value) return false;
 
         this._suspendInputChangeEvt = true;
-        (this._domInput as any).value = (value === null || value === undefined) ? '' : value;
+        this._domInput.value = (value === null || value === undefined) ? '' : String(value);
         this._suspendInputChangeEvt = false;
 
         this.emit('change', value);
@@ -262,7 +265,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         super.destroy();
     }
 
-    set value(value) {
+    set value(value: string | number | Array<string | number>) {
         const changed = this._updateValue(value);
 
         if (changed) {
@@ -312,7 +315,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
 
     /**
-     * Gets / sets the method to call when keyup is called on the input dom element.
+     * Gets / sets the method to call when keyup is called on the input DOM element.
      */
     set keyChange(value) {
         if (this._keyChange === value) return;
@@ -330,7 +333,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
     }
 
     /**
-     * Gets the input dom element.
+     * Gets the input DOM element.
      */
     get input() {
         return this._domInput;

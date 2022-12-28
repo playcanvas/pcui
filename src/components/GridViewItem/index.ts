@@ -1,3 +1,4 @@
+import { Observer } from '@playcanvas/observer';
 import { IFocusable } from '../Element/index';
 import Container, { ContainerArgs } from '../Container/index';
 import Label from '../Label/index';
@@ -10,13 +11,16 @@ const CLASS_SELECTED = CLASS_ROOT + '-selected';
 const CLASS_TEXT = CLASS_ROOT + '-text';
 const CLASS_RADIO_BUTTON = 'pcui-gridview-radiobtn';
 
+/**
+ * The arguments for the {@link GridViewItem} constructor.
+ */
 export interface GridViewItemArgs extends ContainerArgs {
     /**
-     * The type of the gridview item, can be null or 'radio'
+     * The type of the {@link GridViewItem}. Can be `null` or 'radio'.
      */
     type?: string;
     /**
-     * If true allow selecting the item. Defaults to true.
+     * If `true`, allow selecting the item. Defaults to `true`.
      */
     allowSelect?: boolean;
     /**
@@ -24,13 +28,13 @@ export interface GridViewItemArgs extends ContainerArgs {
      */
     selected?: boolean;
     /**
-     * The text of the item.
+     * The text of the item. Defaults to ''.
      */
     text?: string;
 }
 
 /**
- *  Represents a grid view item used in GridView.
+ *  Represents a grid view item used in {@link GridView}.
  */
 class GridViewItem extends Container implements IFocusable {
     static readonly defaultArgs: GridViewItemArgs = {
@@ -48,13 +52,13 @@ class GridViewItem extends Container implements IFocusable {
 
     protected _labelText: Label;
 
-    protected _type: any;
+    protected _type: string;
 
     protected _domEvtFocus: any;
 
     protected _domEvtBlur: any;
 
-    protected _allowSelect: any;
+    protected _allowSelect: boolean;
 
     constructor(args: GridViewItemArgs = GridViewItem.defaultArgs) {
         args = { ...GridViewItem.defaultArgs, ...args };
@@ -119,7 +123,7 @@ class GridViewItem extends Container implements IFocusable {
         this.dom.blur();
     }
 
-    link(observers: any, paths: any) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         this._labelText.link(observers, paths);
     }
 
@@ -137,7 +141,7 @@ class GridViewItem extends Container implements IFocusable {
     }
 
     /**
-     * If true allow selecting the item. Defaults to true.
+     * If `true` allow selecting the item. Defaults to `true`.
      */
     set allowSelect(value) {
         this._allowSelect = value;

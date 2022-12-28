@@ -4,28 +4,31 @@ import GridViewItem from '../GridViewItem';
 const CLASS_ROOT = 'pcui-gridview';
 const CLASS_VERTICAL = CLASS_ROOT + '-vertical';
 
+/**
+ * The arguments for the {@link GridView} constructor.
+ */
 export interface GridViewArgs extends ContainerArgs {
     /**
-     * If true the gridview layout will be vertical.
+     * If `true` the {@link GridView} layout will be vertical.
      */
     vertical?: boolean;
     /**
-     * If true, the layout will allow for multiple options to be selected.
+     * If `true`, the layout will allow for multiple options to be selected.
      */
     multiSelect?: boolean;
     /**
-     * If true and multiSelect is set to false, the layout will allow options to be deselected.
+     * If `true` and `multiSelect` is set to `false`, the layout will allow options to be deselected.
      */
     allowDeselect?: boolean;
     /**
-     * A filter function to filter gridview items with signature (GridViewItem) => boolean.
+     * A filter function to filter {@link GridViewItem}s with signature `(GridViewItem) => boolean`.
      */
     filterFn?: (item: GridViewItem) => boolean;
 }
 
 /**
- * Represents a container that shows a flexible wrappable
- * list of items that looks like a grid. Contains GridViewItems.
+ * Represents a container that shows a flexible wrappable list of items that looks like a grid.
+ * Contains {@link GridViewItem}s.
  */
 class GridView extends Container {
     static readonly defaultArgs: GridViewArgs = {
@@ -38,7 +41,7 @@ class GridView extends Container {
 
     protected _filterFn: (item: GridViewItem) => boolean;
 
-    protected _filterAnimationFrame: any;
+    protected _filterAnimationFrame: number;
 
     protected _filterCanceled: boolean;
 
@@ -208,7 +211,7 @@ class GridView extends Container {
      *
      * @param batchLimit - The maximum number of items to show before requesting another animation frame.
      */
-    filterAsync(batchLimit: number = 100) {
+    filterAsync(batchLimit = 100) {
         let i = 0;
         const children = this.dom.childNodes;
         const len = children.length;

@@ -7,6 +7,9 @@ const CLASS_OVERLAY_CLICKABLE = CLASS_OVERLAY + '-clickable';
 const CLASS_OVERLAY_TRANSPARENT = CLASS_OVERLAY + '-transparent';
 const CLASS_OVERLAY_CONTENT = CLASS_OVERLAY + '-content';
 
+/**
+ * The arguments for the {@link Overlay} constructor.
+ */
 export interface OverlayArgs extends ElementArgs {
     /**
      * Whether the overlay can be hidden by clicking on it.
@@ -38,8 +41,7 @@ class Overlay extends Container {
 
         this._domClickableOverlay = document.createElement('div');
         this._domClickableOverlay.ui = this;
-        // @ts-ignore
-        this._domClickableOverlay.classList = CLASS_OVERLAY_INNER;
+        this._domClickableOverlay.classList.add(CLASS_OVERLAY_INNER);
         this.dom.appendChild(this._domClickableOverlay);
 
         this._domEventMouseDown = this._onMouseDown.bind(this);
@@ -71,8 +73,8 @@ class Overlay extends Container {
     /**
      * Position the overlay at specific x, y coordinates.
      *
-     * @param {number} x - The x coordinate
-     * @param {number} y - The y coordinate
+     * @param x - The x coordinate.
+     * @param y - The y coordinate.
      */
     position(x: number, y: number) {
         const area = this._domClickableOverlay.getBoundingClientRect();

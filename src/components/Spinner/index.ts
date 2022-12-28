@@ -13,8 +13,10 @@ function createSmallThick(size: any, dom: any) {
     return spinner;
 }
 
+/**
+ * The arguments for the {@link Spinner} constructor.
+ */
 export interface SpinnerArgs extends ElementArgs {
-
     /**
      * Sets the pixel size of the spinner. Defaults to 12.
      */
@@ -26,7 +28,7 @@ export interface SpinnerArgs extends ElementArgs {
 }
 
 /**
- * Represents a spinning icon
+ * Represents a spinning icon.
  */
 class Spinner extends Element {
     static TYPE_SMALL_THICK = 'small-thick';
@@ -39,7 +41,7 @@ class Spinner extends Element {
     /**
      * Sets the pixel size of the spinner
      *
-     * @param args
+     * @param args - The arguments.
      */
     constructor(args: SpinnerArgs = Spinner.defaultArgs) {
         args = { ...Spinner.defaultArgs, ...args };

@@ -34,16 +34,11 @@ function _rgb2hsv(rgb: Array<number>) {
     return [h, s, v];
 }
 
-function _hsv2rgb(hsv: any) {
-    let h = hsv[0];
-    let s = hsv[1];
-    let v = hsv[2];
+function _hsv2rgb(hsv: number[]) {
+    const h = hsv[0];
+    const s = hsv[1];
+    const v = hsv[2];
     let r, g, b;
-    if (h && s === undefined && v === undefined) {
-        s = h.s;
-        v = h.v;
-        h = h.h;
-    }
     const i = Math.floor(h * 6);
     const f = h * 6 - i;
     const p = v * (1 - s);

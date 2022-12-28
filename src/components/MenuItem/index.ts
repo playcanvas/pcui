@@ -1,5 +1,6 @@
+import { Observer } from '@playcanvas/observer';
+import Element, { IBindable } from '../Element';
 import Container, { ContainerArgs } from '../Container';
-import { IBindable } from '../Element';
 import Label from '../Label';
 
 const CLASS_MENU_ITEM = 'pcui-menu-item';
@@ -7,6 +8,9 @@ const CLASS_MENU_ITEM_CONTENT = CLASS_MENU_ITEM + '-content';
 const CLASS_MENU_ITEM_CHILDREN = CLASS_MENU_ITEM + '-children';
 const CLASS_MENU_ITEM_HAS_CHILDREN = CLASS_MENU_ITEM + '-has-children';
 
+/**
+ * The arguments for the {@link MenuItem} constructor.
+ */
 export interface MenuItemArgs extends ContainerArgs {
     value?: any;
     /**
@@ -44,9 +48,9 @@ export interface MenuItemArgs extends ContainerArgs {
 }
 
 /**
- * The MenuItem is a selectable option that is appended to a Menu.
- * A MenuItem can also contain child MenuItems (by appending them to the MenuItem). This
- * can be useful to show nested Menus.
+ * The MenuItem is a selectable option that is appended to a {@link Menu}. A MenuItem can also
+ * contain child MenuItems (by appending them to the MenuItem). This can be useful to show nested
+ * Menus.
  */
 class MenuItem extends Container implements IBindable {
     static readonly defaultArgs: MenuItemArgs = {
@@ -57,7 +61,7 @@ class MenuItem extends Container implements IBindable {
 
     protected _numChildren: number;
 
-    protected _icon: any;
+    protected _icon: string;
 
     protected _labelText: Label;
 
@@ -123,14 +127,14 @@ class MenuItem extends Container implements IBindable {
         this._menu = null;
 
         if (args.items) {
-            args.items.forEach((item: any) => {
+            args.items.forEach((item) => {
                 const menuItem = new MenuItem(item);
                 this.append(menuItem);
             });
         }
     }
 
-    protected _onAppendChild(element: any) {
+    protected _onAppendChild(element: Element) {
         super._onAppendChild(element);
 
         this._numChildren++;
@@ -140,7 +144,7 @@ class MenuItem extends Container implements IBindable {
         }
     }
 
-    protected _onRemoveChild(element: any) {
+    protected _onRemoveChild(element: Element) {
         if (element instanceof MenuItem) {
             this._numChildren--;
             if (this._numChildren === 0) {
@@ -164,7 +168,7 @@ class MenuItem extends Container implements IBindable {
         }
     }
 
-    link(observers: Array<any>, paths: Array<string>) {
+    link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
         this._labelText.link(observers, paths);
     }
@@ -218,7 +222,7 @@ class MenuItem extends Container implements IBindable {
     }
 
     /* eslint accessor-pairs: 0 */
-    set values(values: any) {
+    set values(values: string[]) {
         this._labelText.values = values;
     }
 
