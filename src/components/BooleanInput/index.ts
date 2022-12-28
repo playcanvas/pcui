@@ -28,12 +28,6 @@ class BooleanInput extends Input implements IBindable, IFocusable {
         dom: 'div'
     };
 
-    protected _domEventKeyDown: any;
-
-    protected _domEventFocus: any;
-
-    protected _domEventBlur: any;
-
     protected _value: boolean;
 
     constructor(args: BooleanInputArgs = BooleanInput.defaultArgs) {
@@ -47,13 +41,9 @@ class BooleanInput extends Input implements IBindable, IFocusable {
         }
         this.class.add(pcuiClass.NOT_FLEXIBLE);
 
-        this._domEventKeyDown = this._onKeyDown.bind(this);
-        this._domEventFocus = this._onFocus.bind(this);
-        this._domEventBlur = this._onBlur.bind(this);
-
-        this.dom.addEventListener('keydown', this._domEventKeyDown);
-        this.dom.addEventListener('focus', this._domEventFocus);
-        this.dom.addEventListener('blur', this._domEventBlur);
+        this.dom.addEventListener('keydown', this._onKeyDown);
+        this.dom.addEventListener('focus', this._onFocus);
+        this.dom.addEventListener('blur', this._onBlur);
 
         this._value = null;
         if (args.value !== undefined) {
@@ -61,6 +51,16 @@ class BooleanInput extends Input implements IBindable, IFocusable {
         }
 
         this.renderChanges = args.renderChanges;
+    }
+
+    destroy() {
+        if (this._destroyed) return;
+
+        this.dom.removeEventListener('keydown', this._onKeyDown);
+        this.dom.removeEventListener('focus', this._onFocus);
+        this.dom.removeEventListener('blur', this._onBlur);
+
+        super.destroy();
     }
 
     protected _onClick(evt: MouseEvent) {
@@ -75,7 +75,7 @@ class BooleanInput extends Input implements IBindable, IFocusable {
         return super._onClick(evt);
     }
 
-    protected _onKeyDown(evt: KeyboardEvent) {
+    protected _onKeyDown = (evt: KeyboardEvent) => {
         if (evt.key === 'Escape') {
             this.blur();
             return;
@@ -88,15 +88,15 @@ class BooleanInput extends Input implements IBindable, IFocusable {
             evt.preventDefault();
             this.value = !this.value;
         }
-    }
+    };
 
-    protected _onFocus() {
+    protected _onFocus = () => {
         this.emit('focus');
-    }
+    };
 
-    protected _onBlur() {
+    protected _onBlur = () => {
         this.emit('blur');
-    }
+    };
 
     protected _updateValue(value: boolean) {
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
@@ -126,16 +126,6 @@ class BooleanInput extends Input implements IBindable, IFocusable {
 
     blur() {
         this.dom.blur();
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-
-        this.dom.removeEventListener('keydown', this._domEventKeyDown);
-        this.dom.removeEventListener('focus', this._domEventFocus);
-        this.dom.removeEventListener('blur', this._domEventBlur);
-
-        super.destroy();
     }
 
     set value(value: boolean) {

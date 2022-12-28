@@ -31,8 +31,6 @@ class Overlay extends Container {
 
     protected _domClickableOverlay: HTMLDivElement;
 
-    protected _domEventMouseDown: any;
-
     constructor(args: OverlayArgs = Overlay.defaultArgs) {
         args = { ...Overlay.defaultArgs, ...args };
         super(args);
@@ -44,8 +42,7 @@ class Overlay extends Container {
         this._domClickableOverlay.classList.add(CLASS_OVERLAY_INNER);
         this.dom.appendChild(this._domClickableOverlay);
 
-        this._domEventMouseDown = this._onMouseDown.bind(this);
-        this._domClickableOverlay.addEventListener('mousedown', this._domEventMouseDown);
+        this._domClickableOverlay.addEventListener('mousedown', this._onMouseDown);
 
         this.domContent = document.createElement('div');
         this.domContent.ui = this;
@@ -56,7 +53,15 @@ class Overlay extends Container {
         this.transparent = args.transparent || false;
     }
 
-    protected _onMouseDown(evt: MouseEvent) {
+    destroy() {
+        if (this._destroyed) return;
+
+        this._domClickableOverlay.removeEventListener('mousedown', this._onMouseDown);
+
+        super.destroy();
+    }
+
+    protected _onMouseDown = (evt: MouseEvent) => {
         if (!this.clickable) return;
 
         // some field might be in focus
@@ -68,7 +73,7 @@ class Overlay extends Container {
         });
 
         evt.preventDefault();
-    }
+    };
 
     /**
      * Position the overlay at specific x, y coordinates.
@@ -86,12 +91,6 @@ class Overlay extends Container {
         this.domContent.style.position = 'absolute';
         this.domContent.style.left = `${x}px`;
         this.domContent.style.top = `${y}px`;
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-        this._domClickableOverlay.removeEventListener('mousedown', this._domEventMouseDown);
-        super.destroy();
     }
 
     /**

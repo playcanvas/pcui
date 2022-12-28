@@ -140,9 +140,9 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             min: 0,
             readOnly: this._fixedSize
         });
-        this._inputSize.on('change', this._onSizeChange.bind(this));
-        this._inputSize.on('focus', this._onFocus.bind(this));
-        this._inputSize.on('blur', this._onBlur.bind(this));
+        this._inputSize.on('change', this._onSizeChange);
+        this._inputSize.on('focus', this._onFocus);
+        this._inputSize.on('blur', this._onBlur);
         this._suspendSizeChangeEvt = false;
         this._container.append(this._inputSize);
 
@@ -188,7 +188,15 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         this.renderChanges = args.renderChanges || false;
     }
 
-    protected _onSizeChange(size: number) {
+    destroy() {
+        if (this._destroyed) return;
+
+        this._arrayElements.length = 0;
+
+        super.destroy();
+    }
+
+    protected _onSizeChange = (size: number) => {
         // if size is explicitly 0 then add empty class
         // size can also be null with multi-select so do not
         // check just !size
@@ -269,15 +277,15 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         }
 
         this._updateValues(values, true);
-    }
+    };
 
-    protected _onFocus() {
+    protected _onFocus = () => {
         this.emit('focus');
-    }
+    };
 
-    protected _onBlur() {
+    protected _onBlur = () => {
         this.emit('blur');
-    }
+    };
 
     protected _createArrayElement() {
         const args = Object.assign({}, this._elementArgs);
@@ -514,12 +522,6 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         this._containerArray.forEachChild((element, i) => {
             return fn(element.dom.firstChild.ui, i);
         });
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-        this._arrayElements.length = 0;
-        super.destroy();
     }
 
     // override binding setter to create
