@@ -32,14 +32,6 @@ class Menu extends Container implements IFocusable {
 
     protected _containerMenuItems: Container;
 
-    protected _domEvtContextMenu: any;
-
-    protected _domEvtKeyDown: any;
-
-    protected _domEvtFocus: any;
-
-    protected _domEvtBlur: any;
-
     constructor(args: MenuArgs = Menu.defaultArgs) {
         args = { ...Menu.defaultArgs, ...args };
         super(args);
@@ -55,15 +47,10 @@ class Menu extends Container implements IFocusable {
 
         this.domContent = this._containerMenuItems.dom;
 
-        this._domEvtContextMenu = this._onClickMenu.bind(this);
-        this._domEvtKeyDown = this._onKeyDown.bind(this);
-        this._domEvtFocus = this._onFocus.bind(this);
-        this._domEvtBlur = this._onBlur.bind(this);
-
-        this.on('click', this._onClickMenu.bind(this));
-        this.on('show', this._onShowMenu.bind(this));
-        this.dom.addEventListener('contextmenu', this._domEvtContextMenu);
-        this.dom.addEventListener('keydown', this._domEvtKeyDown);
+        this.on('click', this._onClickMenu);
+        this.on('show', this._onShowMenu);
+        this.dom.addEventListener('contextmenu', this._onClickMenu);
+        this.dom.addEventListener('keydown', this._onKeyDown);
 
         if (args.items) {
             args.items.forEach((item: MenuItemArgs) => {
@@ -71,6 +58,17 @@ class Menu extends Container implements IFocusable {
                 this.append(menuItem);
             });
         }
+    }
+
+    destroy() {
+        if (this.destroyed) return;
+
+        this.dom.removeEventListener('keydown', this._onKeyDown);
+        this.dom.removeEventListener('contextmenu', this._onClickMenu);
+        this.dom.removeEventListener('focus', this._onFocus);
+        this.dom.removeEventListener('blur', this._onBlur);
+
+        super.destroy();
     }
 
     protected _onAppendChild(element: Element) {
@@ -85,28 +83,19 @@ class Menu extends Container implements IFocusable {
         }
     }
 
-    protected _onClickMenu(evt: MouseEvent) {
+    protected _onClickMenu = (evt: MouseEvent) => {
         if (!this._containerMenuItems.dom.contains(evt.target as Node)) {
             this.hidden = true;
         }
-    }
+    };
 
-    protected _onFocus(evt: FocusEvent) {
+    protected _onFocus = (evt: FocusEvent) => {
         this.emit('focus');
-    }
+    };
 
-    protected _onBlur(evt: FocusEvent) {
+    protected _onBlur = (evt: FocusEvent) => {
         this.emit('blur');
-    }
-
-    protected _onShowMenu() {
-        this.focus();
-
-        // filter child menu items
-        this._containerMenuItems.dom.childNodes.forEach((child) => {
-            this._filterMenuItems(child.ui as MenuItem);
-        });
-    }
+    };
 
     protected _filterMenuItems(item: MenuItem) {
         if (!(item instanceof MenuItem)) return;
@@ -124,13 +113,22 @@ class Menu extends Container implements IFocusable {
         });
     }
 
-    protected _onKeyDown(evt: KeyboardEvent) {
+    protected _onShowMenu = () => {
+        this.focus();
+
+        // filter child menu items
+        this._containerMenuItems.dom.childNodes.forEach((child) => {
+            this._filterMenuItems(child.ui as MenuItem);
+        });
+    };
+
+    protected _onKeyDown = (evt: KeyboardEvent) => {
         if (this.hidden) return;
 
         if (evt.key === 'Escape') {
             this.hidden = true;
         }
-    }
+    };
 
     protected _limitSubmenuAtScreenEdges(item: MenuItem) {
         if (!(item instanceof MenuItem) || !item.hasChildren) return;
@@ -202,17 +200,6 @@ class Menu extends Container implements IFocusable {
      */
     clear() {
         this._containerMenuItems.clear();
-    }
-
-    destroy() {
-        if (this.destroyed) return;
-
-        this.dom.removeEventListener('keydown', this._domEvtKeyDown);
-        this.dom.removeEventListener('contextmenu', this._domEvtContextMenu);
-        this.dom.removeEventListener('focus', this._domEvtFocus);
-        this.dom.removeEventListener('blur', this._domEvtBlur);
-
-        super.destroy();
     }
 }
 
