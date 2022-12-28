@@ -508,7 +508,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
      * Executes the specified function for each array element.
      *
      * @param fn - The function with signature (element, index) => bool to execute. If the function
-     * returns false then the iteration will early out.
+     * returns `false` then the iteration will early out.
      */
     forEachArrayElement(fn: (element: Element, index: number) => false | void) {
         this._containerArray.forEachChild((element, i) => {

@@ -88,7 +88,7 @@ class LabelGroup extends Container {
     }
 
     /**
-     * Sets / Gets whether to align the label at the top of the group. Defaults to false which aligns it at the center.
+     * Sets / Gets whether to align the label at the top of the group. Defaults to `false` which aligns it at the center.
      */
     set labelAlignTop(value) {
         if (value) {

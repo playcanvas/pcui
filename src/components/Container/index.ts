@@ -159,7 +159,7 @@ class Container extends Element {
         let grid = !!args.grid;
         if (grid) {
             if (this.flex) {
-                console.error('Invalid pcui.Container arguments: "grid" and "flex" cannot both be true.');
+                console.error('Invalid Container arguments: "grid" and "flex" cannot both be true.');
                 grid = false;
             }
         }
@@ -599,7 +599,7 @@ class Container extends Element {
 
     /**
      * Iterate over each child element using the supplied function. To early out of the iteration,
-     * return false from the function.
+     * return `false` from the function.
      *
      * @param fn - The function to call for each child element.
      */

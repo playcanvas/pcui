@@ -8,15 +8,19 @@ const CLASS_INFOBOX = 'pcui-infobox';
  */
 export interface InfoBoxArgs extends ContainerArgs {
     /**
-     * The CSS code for an icon for the info box. e.g. 'E401' (notice we omit the '\\' character). Defaults to ''.
+     * The CSS code for an icon for the {@link InfoBox}. e.g. 'E401' (notice we omit the '\\' character). Defaults to ''.
+     * Useful icon values for InfoBox are:
+     *
+     * - 'E218' - warning
+     * - 'E400' - info
      */
     icon?: string;
     /**
-     * Gets / sets the 'title' of the info box. Defaults to ''.
+     * Gets / sets the 'title' of the {@link InfoBox}. Defaults to ''.
      */
     title?: string;
     /**
-     * Gets / sets the 'text' of the info box. Defaults to ''.
+     * Gets / sets the 'text' of the {@link InfoBox}. Defaults to ''.
      */
     text?: string;
     /**
