@@ -110,26 +110,6 @@ class TreeViewItem extends Container {
 
     protected _treeOrder: number;
 
-    protected _domEvtFocus: any;
-
-    protected _domEvtBlur: any;
-
-    protected _domEvtKeyDown: any;
-
-    protected _domEvtDragStart: any;
-
-    protected _domEvtMouseDown: any;
-
-    protected _domEvtMouseUp: any;
-
-    protected _domEvtMouseOver: any;
-
-    protected _domEvtClick: any;
-
-    protected _domEvtDblClick: any;
-
-    protected _domEvtContextMenu: any;
-
     protected _treeView: any;
 
     protected _allowDrag: boolean;
@@ -190,26 +170,35 @@ class TreeViewItem extends Container {
         // used the the parent treeview
         this._treeOrder = -1;
 
-        this._domEvtFocus = this._onContentFocus.bind(this);
-        this._domEvtBlur = this._onContentBlur.bind(this);
-        this._domEvtKeyDown = this._onContentKeyDown.bind(this);
-        this._domEvtDragStart = this._onContentDragStart.bind(this);
-        this._domEvtMouseDown = this._onContentMouseDown.bind(this);
-        this._domEvtMouseUp = this._onContentMouseUp.bind(this);
-        this._domEvtMouseOver = this._onContentMouseOver.bind(this);
-        this._domEvtClick = this._onContentClick.bind(this);
-        this._domEvtDblClick = this._onContentDblClick.bind(this);
-        this._domEvtContextMenu = this._onContentContextMenu.bind(this);
+        const dom = this._containerContents.dom;
+        dom.addEventListener('focus', this._onContentFocus);
+        dom.addEventListener('blur', this._onContentBlur);
+        dom.addEventListener('keydown', this._onContentKeyDown);
+        dom.addEventListener('dragstart', this._onContentDragStart);
+        dom.addEventListener('mousedown', this._onContentMouseDown);
+        dom.addEventListener('mouseover', this._onContentMouseOver);
+        dom.addEventListener('click', this._onContentClick);
+        dom.addEventListener('dblclick', this._onContentDblClick);
+        dom.addEventListener('contextmenu', this._onContentContextMenu);
+    }
 
-        this._containerContents.dom.addEventListener('focus', this._domEvtFocus);
-        this._containerContents.dom.addEventListener('blur', this._domEvtBlur);
-        this._containerContents.dom.addEventListener('keydown', this._domEvtKeyDown);
-        this._containerContents.dom.addEventListener('dragstart', this._domEvtDragStart);
-        this._containerContents.dom.addEventListener('mousedown', this._domEvtMouseDown);
-        this._containerContents.dom.addEventListener('mouseover', this._domEvtMouseOver);
-        this._containerContents.dom.addEventListener('click', this._domEvtClick);
-        this._containerContents.dom.addEventListener('dblclick', this._domEvtDblClick);
-        this._containerContents.dom.addEventListener('contextmenu', this._domEvtContextMenu);
+    destroy() {
+        if (this._destroyed) return;
+
+        const dom = this._containerContents.dom;
+        dom.removeEventListener('focus', this._onContentFocus);
+        dom.removeEventListener('blur', this._onContentBlur);
+        dom.removeEventListener('keydown', this._onContentKeyDown);
+        dom.removeEventListener('dragstart', this._onContentDragStart);
+        dom.removeEventListener('mousedown', this._onContentMouseDown);
+        dom.removeEventListener('mouseover', this._onContentMouseOver);
+        dom.removeEventListener('click', this._onContentClick);
+        dom.removeEventListener('dblclick', this._onContentDblClick);
+        dom.removeEventListener('contextmenu', this._onContentContextMenu);
+
+        window.removeEventListener('mouseup', this._onContentMouseUp);
+
+        super.destroy();
     }
 
     protected _onAppendChild(element: any) {
@@ -240,7 +229,7 @@ class TreeViewItem extends Container {
         super._onRemoveChild(element);
     }
 
-    protected _onContentKeyDown(evt: KeyboardEvent) {
+    protected _onContentKeyDown = (evt: KeyboardEvent) => {
         const element = evt.target as HTMLElement;
         if (element.tagName.toLowerCase() === 'input') return;
 
@@ -249,26 +238,26 @@ class TreeViewItem extends Container {
         if (this._treeView) {
             this._treeView._onChildKeyDown(evt, this);
         }
-    }
+    };
 
-    protected _onContentMouseDown(evt: MouseEvent) {
+    protected _onContentMouseDown = (evt: MouseEvent) => {
         if (!this._treeView || !this._treeView.allowDrag || !this._allowDrag) return;
 
         this._treeView._updateModifierKeys(evt);
         evt.stopPropagation();
-    }
+    };
 
-    protected _onContentMouseUp(evt: MouseEvent) {
+    protected _onContentMouseUp = (evt: MouseEvent) => {
         evt.stopPropagation();
         evt.preventDefault();
 
-        window.removeEventListener('mouseup', this._domEvtMouseUp);
+        window.removeEventListener('mouseup', this._onContentMouseUp);
         if (this._treeView) {
             this._treeView._onChildDragEnd(evt, this);
         }
-    }
+    };
 
-    protected _onContentMouseOver(evt: MouseEvent) {
+    protected _onContentMouseOver = (evt: MouseEvent) => {
         evt.stopPropagation();
 
         if (this._treeView) {
@@ -277,9 +266,9 @@ class TreeViewItem extends Container {
 
         // allow hover event
         super._onMouseOver(evt);
-    }
+    };
 
-    protected _onContentDragStart(evt: DragEvent) {
+    protected _onContentDragStart = (evt: DragEvent) => {
         evt.stopPropagation();
         evt.preventDefault();
 
@@ -289,10 +278,10 @@ class TreeViewItem extends Container {
 
         this._treeView._onChildDragStart(evt, this);
 
-        window.addEventListener('mouseup', this._domEvtMouseUp);
-    }
+        window.addEventListener('mouseup', this._onContentMouseUp);
+    };
 
-    protected _onContentClick(evt: MouseEvent) {
+    protected _onContentClick = (evt: MouseEvent) => {
         if (!this.allowSelect || evt.button !== 0) return;
 
         const element = evt.target as HTMLElement;
@@ -313,7 +302,7 @@ class TreeViewItem extends Container {
         } else if (this._treeView) {
             this._treeView._onChildClick(evt, this);
         }
-    }
+    };
 
     protected _dfs(fn: (item: TreeViewItem) => void) {
         fn(this);
@@ -324,7 +313,7 @@ class TreeViewItem extends Container {
         }
     }
 
-    protected _onContentDblClick(evt: MouseEvent) {
+    protected _onContentDblClick = (evt: MouseEvent) => {
         if (!this._treeView || !this._treeView.allowRenaming || evt.button !== 0) return;
 
         const element = evt.target as HTMLElement;
@@ -342,21 +331,21 @@ class TreeViewItem extends Container {
         }
 
         this.rename();
-    }
+    };
 
-    protected _onContentContextMenu(evt: MouseEvent) {
+    protected _onContentContextMenu = (evt: MouseEvent) => {
         if (this._treeView && this._treeView._onContextMenu) {
             this._treeView._onContextMenu(evt, this);
         }
-    }
+    };
 
-    protected _onContentFocus(evt: FocusEvent) {
+    protected _onContentFocus = (evt: FocusEvent) => {
         this.emit('focus');
-    }
+    };
 
-    protected _onContentBlur(evt: FocusEvent) {
+    protected _onContentBlur = (evt: FocusEvent) => {
         this.emit('blur');
-    }
+    };
 
     rename() {
         this.classAdd(CLASS_RENAME);
@@ -402,24 +391,6 @@ class TreeViewItem extends Container {
 
     blur() {
         this._containerContents.dom.blur();
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-
-        this._containerContents.dom.removeEventListener('focus', this._domEvtFocus);
-        this._containerContents.dom.removeEventListener('blur', this._domEvtBlur);
-        this._containerContents.dom.removeEventListener('keydown', this._domEvtKeyDown);
-        this._containerContents.dom.removeEventListener('mousedown', this._domEvtMouseDown);
-        this._containerContents.dom.removeEventListener('dragstart', this._domEvtDragStart);
-        this._containerContents.dom.removeEventListener('mouseover', this._domEvtMouseOver);
-        this._containerContents.dom.removeEventListener('click', this._domEvtClick);
-        this._containerContents.dom.removeEventListener('dblclick', this._domEvtDblClick);
-        this._containerContents.dom.removeEventListener('contextmenu', this._domEvtContextMenu);
-
-        window.removeEventListener('mouseup', this._domEvtMouseUp);
-
-        super.destroy();
     }
 
     /**

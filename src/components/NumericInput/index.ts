@@ -72,21 +72,15 @@ class NumericInput extends TextInput {
 
     protected _historyCombine: boolean;
 
-    protected _historyPostfix: any;
+    protected _historyPostfix: string;
 
     protected _sliderPrevValue: number;
-
-    protected _domEvtPointerLock: any;
-
-    protected _domEvtSliderMouseDown: any;
-
-    protected _domEvtSliderMouseUp: any;
-
-    protected _domEvtMouseWheel: any;
 
     protected _sliderControl: Element;
 
     protected _sliderMovement: number;
+
+    protected _sliderUsed = false;
 
     constructor(args: NumericInputArgs = NumericInput.defaultArgs) {
         args = { ...NumericInput.defaultArgs, ...args };
@@ -129,78 +123,84 @@ class NumericInput extends TextInput {
 
         this.renderChanges = renderChanges;
 
-        this._domEvtPointerLock = null;
-        this._domEvtSliderMouseDown = null;
-        this._domEvtSliderMouseUp = null;
-        this._domEvtMouseWheel = null;
-
         if (!args.hideSlider) {
             this._sliderControl = new Element(document.createElement('div'));
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
             this.dom.append(this._sliderControl.dom);
 
-            let sliderUsed = false;
-            this._domEvtSliderMouseDown = () => {
-                this._sliderControl.dom.requestPointerLock();
-                this._sliderMovement = 0.0;
-                this._sliderPrevValue = this.value;
-                sliderUsed = true;
-                if (this.binding) {
-                    this._historyCombine = this.binding.historyCombine;
-                    this._historyPostfix = this.binding.historyPostfix;
+            this._sliderControl.dom.addEventListener('mousedown', this._onSliderMouseDown);
+            this._sliderControl.dom.addEventListener('mouseup', this._onSliderMouseUp);
 
-                    this.binding.historyCombine = true;
-                    this.binding.historyPostfix = `(${Date.now()})`;
-                }
-            };
-
-            this._domEvtSliderMouseUp = () => {
-                document.exitPointerLock();
-                if (!sliderUsed) return;
-                sliderUsed = false;
-                this.value = this._sliderPrevValue + this._sliderMovement;
-
-                if (this.binding) {
-                    this.binding.historyCombine = this._historyCombine;
-                    this.binding.historyPostfix = this._historyPostfix;
-
-                    this._historyCombine = false;
-                    this._historyPostfix = null;
-                }
-            };
-
-            this._domEvtPointerLock = this._pointerLockChangeAlert.bind(this);
-
-            this._domEvtMouseWheel = this._updatePosition.bind(this);
-
-            this._sliderControl.dom.addEventListener('mousedown', this._domEvtSliderMouseDown);
-            this._sliderControl.dom.addEventListener('mouseup', this._domEvtSliderMouseUp);
-
-            document.addEventListener('pointerlockchange', this._domEvtPointerLock, false);
-            document.addEventListener('mozpointerlockchange', this._domEvtPointerLock, false);
+            document.addEventListener('pointerlockchange', this._onPointerLockChange, false);
         }
     }
 
-    protected _updatePosition(evt: any) {
-        let movement = 0;
-        if (evt.constructor === WheelEvent) {
-            movement = evt.deltaY;
-        } else if (evt.constructor === MouseEvent) {
-            movement = evt.movementX;
+    destroy() {
+        if (this.destroyed) return;
+
+        if (this._sliderControl) {
+            this._sliderControl.dom.removeEventListener('mousedown', this._onSliderMouseDown);
+            this._sliderControl.dom.removeEventListener('mouseup', this._onSliderMouseUp);
+
+            this._sliderControl.dom.removeEventListener("mousemove", this._onSliderMouseMove, false);
+            this._sliderControl.dom.removeEventListener("wheel", this._onSliderMouseWheel, false);
+
+            document.removeEventListener('pointerlockchange', this._onPointerLockChange, false);
         }
 
+        super.destroy();
+    }
+
+    protected _updatePosition = (movement: number, shiftKey: boolean) => {
         // move one step or stepPrecision every 100 pixels
-        this._sliderMovement += movement / 100 * (evt.shiftKey ? this._stepPrecision : this._step);
+        this._sliderMovement += movement / 100 * (shiftKey ? this._stepPrecision : this._step);
         this.value = this._sliderPrevValue + this._sliderMovement;
-    }
+    };
 
-    protected _onInputChange(evt: any) {
+    protected _onSliderMouseWheel = (evt: WheelEvent) => {
+        this._updatePosition(evt.deltaY, evt.shiftKey);
+    };
+
+    protected _onSliderMouseMove = (evt: MouseEvent) => {
+        this._updatePosition(evt.movementX, evt.shiftKey);
+    };
+
+    protected _onSliderMouseDown = () => {
+        this._sliderControl.dom.requestPointerLock();
+        this._sliderMovement = 0.0;
+        this._sliderPrevValue = this.value;
+        this._sliderUsed = true;
+        if (this.binding) {
+            this._historyCombine = this.binding.historyCombine;
+            this._historyPostfix = this.binding.historyPostfix;
+
+            this.binding.historyCombine = true;
+            this.binding.historyPostfix = `(${Date.now()})`;
+        }
+    };
+
+    protected _onSliderMouseUp = () => {
+        document.exitPointerLock();
+        if (!this._sliderUsed) return;
+        this._sliderUsed = false;
+        this.value = this._sliderPrevValue + this._sliderMovement;
+
+        if (this.binding) {
+            this.binding.historyCombine = this._historyCombine;
+            this.binding.historyPostfix = this._historyPostfix;
+
+            this._historyCombine = false;
+            this._historyPostfix = null;
+        }
+    };
+
+    protected _onInputChange = (evt: any) => {
         // get the content of the input and pass it
         // @ts-ignore through our value setter
         this.value = this._domInput.value;
-    }
+    };
 
-    protected _onInputKeyDown(evt: KeyboardEvent) {
+    protected _onInputKeyDown = (evt: KeyboardEvent) => {
         if (!this.enabled || this.readOnly) return super._onInputKeyDown(evt);
 
         // increase / decrease value with arrow keys
@@ -211,7 +211,7 @@ class NumericInput extends TextInput {
         }
 
         super._onInputKeyDown(evt);
-    }
+    };
 
     protected _isScrolling() {
         if (!this._sliderControl) return false;
@@ -220,17 +220,17 @@ class NumericInput extends TextInput {
             document.mozPointerLockElement === this._sliderControl.dom);
     }
 
-    protected _pointerLockChangeAlert() {
+    protected _onPointerLockChange = () => {
         if (this._isScrolling()) {
-            this._sliderControl.dom.addEventListener("mousemove", this._domEvtMouseWheel, false);
-            this._sliderControl.dom.addEventListener("wheel", this._domEvtMouseWheel, false);
+            this._sliderControl.dom.addEventListener("mousemove", this._onSliderMouseMove, false);
+            this._sliderControl.dom.addEventListener("wheel", this._onSliderMouseWheel, false);
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
         } else {
-            this._sliderControl.dom.removeEventListener("mousemove", this._domEvtMouseWheel, false);
-            this._sliderControl.dom.removeEventListener("wheel", this._domEvtMouseWheel, false);
+            this._sliderControl.dom.removeEventListener("mousemove", this._onSliderMouseMove, false);
+            this._sliderControl.dom.removeEventListener("wheel", this._onSliderMouseWheel, false);
             this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
         }
-    }
+    };
 
     protected _normalizeValue(value: any) {
         try {
@@ -407,27 +407,6 @@ class NumericInput extends TextInput {
 
     get step() {
         return this._step;
-    }
-
-    destroy() {
-        if (this.destroyed) return;
-
-        if (this._domEvtSliderMouseDown) {
-            this._sliderControl.dom.removeEventListener('mousedown', this._domEvtSliderMouseDown);
-            this._sliderControl.dom.removeEventListener('mouseup', this._domEvtSliderMouseUp);
-        }
-
-        if (this._domEvtMouseWheel) {
-            this._sliderControl.dom.removeEventListener("mousemove", this._domEvtMouseWheel, false);
-            this._sliderControl.dom.removeEventListener("wheel", this._domEvtMouseWheel, false);
-        }
-
-        if (this._domEvtPointerLock) {
-            document.removeEventListener('pointerlockchange', this._domEvtPointerLock, false);
-            document.removeEventListener('mozpointerlockchange', this._domEvtPointerLock, false);
-        }
-
-        super.destroy();
     }
 }
 

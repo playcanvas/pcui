@@ -64,8 +64,8 @@ class GridView extends Container {
             this.class.add(CLASS_ROOT);
         }
 
-        this.on('append', this._onAppendGridViewItem.bind(this));
-        this.on('remove', this._onRemoveGridViewItem.bind(this));
+        this.on('append', this._onAppendGridViewItem);
+        this.on('remove', this._onRemoveGridViewItem);
 
         this._filterFn = args.filterFn;
         this._filterAnimationFrame = null;
@@ -78,7 +78,7 @@ class GridView extends Container {
         this._selected = [];
     }
 
-    protected _onAppendGridViewItem(item: GridViewItem) {
+    protected _onAppendGridViewItem = (item: GridViewItem) => {
         if (!(item instanceof GridViewItem)) return;
 
         let evtClick: any;
@@ -108,16 +108,16 @@ class GridView extends Container {
                 evtDeselect = null;
             }
         });
-    }
+    };
 
-    protected _onRemoveGridViewItem(item: GridViewItem) {
+    protected _onRemoveGridViewItem = (item: GridViewItem) => {
         if (!(item instanceof GridViewItem)) return;
 
         item.selected = false;
 
         item.emit('griditem:remove');
         item.unbind('griditem:remove');
-    }
+    };
 
     protected _onClickItem(evt: MouseEvent, item: GridViewItem) {
         if ((evt.ctrlKey || evt.metaKey) && this._multiSelect) {
