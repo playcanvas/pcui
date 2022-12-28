@@ -48,15 +48,9 @@ class GridViewItem extends Container implements IFocusable {
 
     protected _radioButton: RadioButton;
 
-    protected _radioButtonClickEvt: any;
-
     protected _labelText: Label;
 
     protected _type: string;
-
-    protected _domEvtFocus: any;
-
-    protected _domEvtBlur: any;
 
     protected _allowSelect: boolean;
 
@@ -75,11 +69,9 @@ class GridViewItem extends Container implements IFocusable {
                 binding: new BindingObserversToElement({})
             });
 
-            this._radioButtonClickEvt = this._radioButtonClick.bind(this);
-
             // @ts-ignore Remove radio button click event listener
             this._radioButton.dom.removeEventListener('click', this._radioButton._onClick);
-            this._radioButton.dom.addEventListener('click', this._radioButtonClickEvt);
+            this._radioButton.dom.addEventListener('click', this._onRadioButtonClick);
 
             this.append(this._radioButton);
         } else {
@@ -96,24 +88,30 @@ class GridViewItem extends Container implements IFocusable {
         this.text = args.text;
         this._type = args.type;
 
-        this._domEvtFocus = this._onFocus.bind(this);
-        this._domEvtBlur = this._onBlur.bind(this);
-
-        this.dom.addEventListener('focus', this._domEvtFocus);
-        this.dom.addEventListener('blur', this._domEvtBlur);
+        this.dom.addEventListener('focus', this._onFocus);
+        this.dom.addEventListener('blur', this._onBlur);
     }
 
-    protected _radioButtonClick() {
+    destroy() {
+        if (this._destroyed) return;
+
+        this.dom.removeEventListener('focus', this._onFocus);
+        this.dom.removeEventListener('blur', this._onBlur);
+
+        super.destroy();
+    }
+
+    protected _onRadioButtonClick = () => {
         this._radioButton.value = this.selected;
-    }
+    };
 
-    protected _onFocus() {
+    protected _onFocus = () => {
         this.emit('focus');
-    }
+    };
 
-    protected _onBlur() {
+    protected _onBlur = () => {
         this.emit('blur');
-    }
+    };
 
     focus() {
         this.dom.focus();
@@ -129,15 +127,6 @@ class GridViewItem extends Container implements IFocusable {
 
     unlink() {
         this._labelText.unlink();
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-
-        this.dom.removeEventListener('focus', this._domEvtFocus);
-        this.dom.removeEventListener('blur', this._domEvtBlur);
-
-        super.destroy();
     }
 
     /**
