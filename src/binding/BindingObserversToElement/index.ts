@@ -17,9 +17,7 @@ class BindingObserversToElement extends BindingBase {
 
     _events: any[];
 
-    _updateElementHandler: any;
-
-    _updateTimeout: any;
+    _updateTimeout: number;
 
     /**
      * Creates a new BindingObserversToElement instance.
@@ -31,27 +29,26 @@ class BindingObserversToElement extends BindingBase {
 
         this._customUpdate = args.customUpdate;
         this._events = [];
-        this._updateElementHandler = this._updateElement.bind(this);
         this._updateTimeout = null;
     }
 
     private _linkObserver(observer: Observer, path: string) {
-        this._events.push(observer.on(path + ':set', this._deferUpdateElement.bind(this)));
-        this._events.push(observer.on(path + ':unset', this._deferUpdateElement.bind(this)));
-        this._events.push(observer.on(path + ':insert', this._deferUpdateElement.bind(this)));
-        this._events.push(observer.on(path + ':remove', this._deferUpdateElement.bind(this)));
+        this._events.push(observer.on(path + ':set', this._deferUpdateElement));
+        this._events.push(observer.on(path + ':unset', this._deferUpdateElement));
+        this._events.push(observer.on(path + ':insert', this._deferUpdateElement));
+        this._events.push(observer.on(path + ':remove', this._deferUpdateElement));
     }
 
-    private _deferUpdateElement() {
+    private _deferUpdateElement = () => {
         if (this.applyingChange) return;
         this.applyingChange = true;
 
-        this._updateTimeout = setTimeout(this._updateElementHandler);
-    }
+        this._updateTimeout = window.setTimeout(this._updateElement);
+    };
 
-    private _updateElement() {
+    private _updateElement = () => {
         if (this._updateTimeout) {
-            clearTimeout(this._updateTimeout);
+            window.clearTimeout(this._updateTimeout);
             this._updateTimeout = null;
         }
 
@@ -79,7 +76,7 @@ class BindingObserversToElement extends BindingBase {
         }
 
         this.applyingChange = false;
-    }
+    };
 
     link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
@@ -116,7 +113,7 @@ class BindingObserversToElement extends BindingBase {
         this._events.length = 0;
 
         if (this._updateTimeout) {
-            clearTimeout(this._updateTimeout);
+            window.clearTimeout(this._updateTimeout);
             this._updateTimeout = null;
         }
 

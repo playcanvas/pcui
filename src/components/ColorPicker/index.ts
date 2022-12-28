@@ -272,7 +272,7 @@ class ColorPicker extends Element {
         this._evtColorPickStart = null;
         this._evtColorPickEnd = null;
 
-        this._overlay.on('hide', function () {
+        this._overlay.on('hide', () => {
             this._evtColorPick.unbind();
             this._evtColorPick = null;
 
@@ -284,7 +284,7 @@ class ColorPicker extends Element {
 
             this._evtColorPickEnd.unbind();
             this._evtColorPickEnd = null;
-        }.bind(this));
+        });
 
         // R
         this._fieldR = new NumericInput({
