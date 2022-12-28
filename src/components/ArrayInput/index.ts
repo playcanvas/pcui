@@ -18,7 +18,14 @@ const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
  */
 export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
     /**
-     * The type of values that the array can hold.
+     * The type of values that the array can hold. Can be one of the following:
+     *
+     * - `boolean`
+     * - `number`
+     * - `string`
+     * - `vec2`
+     * - `vec3`
+     * - `vec4`
      */
     type?: string;
     /**

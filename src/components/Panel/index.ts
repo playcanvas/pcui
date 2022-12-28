@@ -85,12 +85,6 @@ class Panel extends Container {
 
     protected _suspendReflow: boolean;
 
-    protected _domEvtDragStart: any;
-
-    protected _domEvtDragMove: any;
-
-    protected _domEvtDragEnd: any;
-
     protected _reflowTimeout: number;
 
     protected _widthBeforeCollapse: string;
@@ -155,10 +149,6 @@ class Panel extends Container {
         // header size
         this.headerSize = args.headerSize !== undefined ? args.headerSize : 32;
 
-        this._domEvtDragStart = this._onDragStart.bind(this);
-        this._domEvtDragMove = this._onDragMove.bind(this);
-        this._domEvtDragEnd = this._onDragEnd.bind(this);
-
         // collapse related
         this._reflowTimeout = null;
         this._widthBeforeCollapse = null;
@@ -183,6 +173,21 @@ class Panel extends Container {
         this._reflow();
     }
 
+    destroy() {
+        if (this._destroyed) return;
+
+        if (this._reflowTimeout) {
+            cancelAnimationFrame(this._reflowTimeout);
+            this._reflowTimeout = null;
+        }
+
+        window.removeEventListener('mouseup', this._onDragEnd);
+        window.removeEventListener('mouseleave', this._onDragEnd);
+        window.removeEventListener('mousemove', this._onDragMove);
+
+        super.destroy();
+    }
+
     protected _initializeHeader(args: PanelArgs) {
         // header container
         this._containerHeader = new Container({
@@ -200,25 +205,25 @@ class Panel extends Container {
 
         // use native click listener because the Element#click event is only fired if the element
         // is enabled. However we still want to catch header click events in order to collapse them
-        this._containerHeader.dom.addEventListener('click', this._onHeaderClick.bind(this));
+        this._containerHeader.dom.addEventListener('click', this._onHeaderClick);
 
         this.append(this._containerHeader);
     }
 
-    protected _onHeaderClick(evt: MouseEvent) {
+    protected _onHeaderClick = (evt: MouseEvent) => {
         if (!this._collapsible) return;
         if (evt.target !== this.header.dom && evt.target !== this._labelTitle.dom) return;
 
         // toggle collapsed
         this.collapsed = !this.collapsed;
-    }
+    };
 
-    protected _onClickRemove(evt: MouseEvent) {
+    protected _onClickRemove = (evt: MouseEvent) => {
         evt.preventDefault();
         evt.stopPropagation();
 
         this.emit('click:remove');
-    }
+    };
 
     protected _initializeContent(args: PanelArgs) {
         // containers container
@@ -301,15 +306,15 @@ class Panel extends Container {
         });
     }
 
-    protected _onDragStart(evt: MouseEvent) {
+    protected _onDragStart = (evt: MouseEvent) => {
         if (!this.enabled || this.readOnly) return;
 
         evt.stopPropagation();
         evt.preventDefault();
 
-        window.addEventListener('mouseup', this._domEvtDragEnd);
-        window.addEventListener('mouseleave', this._domEvtDragEnd);
-        window.addEventListener('mousemove', this._domEvtDragMove);
+        window.addEventListener('mouseup', this._onDragEnd);
+        window.addEventListener('mouseleave', this._onDragEnd);
+        window.addEventListener('mousemove', this._onDragMove);
 
         this.emit('dragstart');
         // @ts-ignore accessing protected methods
@@ -317,21 +322,21 @@ class Panel extends Container {
             // @ts-ignore accessing protected methods
             this.parent._onChildDragStart(evt, this);
         }
-    }
+    };
 
-    protected _onDragMove(evt: MouseEvent) {
+    protected _onDragMove = (evt: MouseEvent) => {
         this.emit('dragmove');
         // @ts-ignore accessing protected methods
         if (this.parent && this.parent._onChildDragStart) {
             // @ts-ignore accessing protected methods
             this.parent._onChildDragMove(evt, this);
         }
-    }
+    };
 
-    protected _onDragEnd(evt: MouseEvent) {
-        window.removeEventListener('mouseup', this._domEvtDragEnd);
-        window.removeEventListener('mouseleave', this._domEvtDragEnd);
-        window.removeEventListener('mousemove', this._domEvtDragMove);
+    protected _onDragEnd = (evt: MouseEvent) => {
+        window.removeEventListener('mouseup', this._onDragEnd);
+        window.removeEventListener('mouseleave', this._onDragEnd);
+        window.removeEventListener('mousemove', this._onDragMove);
 
         if (this._draggedChild === this) {
             this._draggedChild = null;
@@ -343,21 +348,7 @@ class Panel extends Container {
             // @ts-ignore accessing protected methods
             this.parent._onChildDragEnd(evt, this);
         }
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-        if (this._reflowTimeout) {
-            cancelAnimationFrame(this._reflowTimeout);
-            this._reflowTimeout = null;
-        }
-
-        window.removeEventListener('mouseup', this._domEvtDragEnd);
-        window.removeEventListener('mouseleave', this._domEvtDragEnd);
-        window.removeEventListener('mousemove', this._domEvtDragMove);
-
-        super.destroy();
-    }
+    };
 
     /**
      * Gets / sets whether the Element is collapsible.
@@ -417,7 +408,7 @@ class Panel extends Container {
                 class: CLASS_PANEL_SORTABLE_ICON
             });
 
-            this._iconSort.dom.addEventListener('mousedown', this._domEvtDragStart);
+            this._iconSort.dom.addEventListener('mousedown', this._onDragStart);
 
             this.header.prepend(this._iconSort);
         } else if (this._iconSort) {
@@ -441,7 +432,7 @@ class Panel extends Container {
                 icon: 'E289',
                 class: CLASS_PANEL_REMOVE
             });
-            this._btnRemove.on('click', this._onClickRemove.bind(this));
+            this._btnRemove.on('click', this._onClickRemove);
             this.header.append(this._btnRemove);
         } else {
             this._btnRemove.destroy();
