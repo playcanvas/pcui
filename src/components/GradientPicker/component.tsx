@@ -3,7 +3,7 @@ import Element, { GradientPickerArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
- * Represents a gradient picker
+ * Represents a gradient picker.
  */
 class GradientPicker extends BaseComponent <GradientPickerArgs, any> {
     constructor(props: GradientPickerArgs) {

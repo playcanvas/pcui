@@ -3,7 +3,7 @@ import Element, { SpinnerArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
- * Represents a spinning icon
+ * Represents a spinning icon.
  */
 class Component extends BaseComponent <SpinnerArgs, any> {
     static defaultProps: SpinnerArgs;

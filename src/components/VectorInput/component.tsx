@@ -2,7 +2,7 @@ import Element, { VectorInputArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
- * A vector input
+ * A vector input.
  */
 class Component extends BaseComponent <VectorInputArgs, any> {
     constructor(props: VectorInputArgs) {

@@ -2,7 +2,7 @@ import Element, { GridViewItemArgs } from './index';
 import BaseComponent from '../Element/component';
 
 /**
- *  Represents a grid view item used in GridView.
+ * Represents a grid view item used in GridView.
  */
 class GridViewItem extends BaseComponent <GridViewItemArgs, any> {
     constructor(props: GridViewItemArgs) {

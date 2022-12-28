@@ -4,7 +4,6 @@ import Element, { ElementArgs } from './index';
 /**
  * The base class for all UI elements. Wraps a DOM element with the PCUI interface.
  */
-
 class Component <P extends ElementArgs, S> extends React.Component <P, S> {
     static defaultArgs = Element.defaultArgs;
 
