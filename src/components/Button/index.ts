@@ -41,8 +41,6 @@ class Button extends Element {
 
     protected _unsafe: boolean;
 
-    protected _domEventKeyDown: any;
-
     protected _text: string;
 
     protected _icon: string;
@@ -61,19 +59,24 @@ class Button extends Element {
         this.size = args.size;
         this.icon = args.icon;
 
-        this._domEventKeyDown = this._onKeyDown.bind(this);
-        this.dom.addEventListener('keydown', this._onKeyDown.bind(this));
+        this.dom.addEventListener('keydown', this._onKeyDown);
     }
 
-    // click on enter
-    // blur on escape
-    protected _onKeyDown(evt: KeyboardEvent) {
+    destroy() {
+        if (this._destroyed) return;
+
+        this.dom.removeEventListener('keydown', this._onKeyDown);
+
+        super.destroy();
+    }
+
+    protected _onKeyDown = (evt: KeyboardEvent) => {
         if (evt.key === 'Escape') {
             this.blur();
         } else if (evt.key === 'Enter') {
             this._onClick(evt);
         }
-    }
+    };
 
     protected _onClick(evt: Event) {
         this.blur();
@@ -88,13 +91,6 @@ class Button extends Element {
 
     blur() {
         this.dom.blur();
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-
-        this.dom.removeEventListener('keydown', this._domEventKeyDown);
-        super.destroy();
     }
 
     /**
