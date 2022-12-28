@@ -95,7 +95,6 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         if (args.value !== undefined) {
             this.value = args.value;
         }
-
     }
 
     protected _onInputChange() {
