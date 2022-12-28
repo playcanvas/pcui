@@ -343,7 +343,7 @@ class Element extends Events {
 
         if (typeof dom === 'string') {
             this._dom = document.createElement(dom);
-        } else if (dom instanceof HTMLElement) {
+        } else if (dom instanceof Node) {
             this._dom = dom;
         } else if (typeof args.dom === 'string') {
             this._dom = document.createElement(args.dom);
