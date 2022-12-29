@@ -27,7 +27,7 @@ export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
      * - `vec3`
      * - `vec4`
      */
-    type?: string;
+    type?: 'boolean' | 'number' | 'string' | 'vec2' | 'vec3' | 'vec4';
     /**
      * Arguments for each array Element.
      */
