@@ -103,7 +103,7 @@ class Container extends Element {
 
     protected _domResizeHandle: HTMLDivElement;
 
-    protected _resizeTouchId: any;
+    protected _resizeTouchId: number;
 
     protected _resizeData: any;
 
@@ -115,11 +115,11 @@ class Container extends Element {
 
     protected _draggedStartIndex: number;
 
-    protected _domContent: any;
+    protected _domContent: HTMLElement;
 
     protected _resizable: string;
 
-    protected _draggedHeight: any;
+    protected _draggedHeight: number;
 
     constructor(args: ContainerArgs = Container.defaultArgs) {
         args = { ...Container.defaultArgs, ...args };

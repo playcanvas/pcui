@@ -534,7 +534,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
     set binding(value) {
         super.binding = value;
 
-        this._arrayElements.forEach((entry: { element: { binding: any; }; }) => {
+        this._arrayElements.forEach((entry: { element: Element; }) => {
             entry.element.binding = value ? value.clone() : null;
         });
     }

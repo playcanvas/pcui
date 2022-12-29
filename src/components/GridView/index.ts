@@ -1,3 +1,5 @@
+import { EventHandle } from '@playcanvas/observer';
+
 import Element from '../Element/index';
 import Container, { ContainerArgs } from '../Container';
 import GridViewItem from '../GridViewItem';
@@ -86,14 +88,14 @@ class GridView extends Container {
     protected _onAppendGridViewItem(item: GridViewItem) {
         if (!(item instanceof GridViewItem)) return;
 
-        let evtClick: any;
+        let evtClick: EventHandle;
         if (this._clickFn)
             evtClick = item.on('click', evt => this._clickFn(evt, item));
         else
             evtClick = item.on('click', evt => this._onClickItem(evt, item));
         let evtSelect = item.on('select', () => this._onSelectItem(item));
 
-        let evtDeselect: any;
+        let evtDeselect: EventHandle;
         if (this._allowDeselect)
             evtDeselect = item.on('deselect', () => this._onDeselectItem(item));
 

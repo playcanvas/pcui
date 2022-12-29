@@ -321,7 +321,7 @@ class Element extends Events {
 
     protected _hasError: boolean;
 
-    protected _domContent: any;
+    protected _domContent: HTMLElement;
 
     protected _onClickEvt: () => void;
 
