@@ -288,6 +288,27 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._updateInputFieldsVisibility(false);
     }
 
+    destroy() {
+        if (this._destroyed) return;
+
+        this._labelValue.dom.removeEventListener('keydown', this._onKeyDown);
+        this._labelValue.dom.removeEventListener('mousedown', this._onMouseDown);
+        this._labelValue.dom.removeEventListener('focus', this._onFocus);
+        this._labelValue.dom.removeEventListener('blur', this._onBlur);
+
+        this._containerOptions.dom.removeEventListener('wheel', this._onWheel);
+
+        window.removeEventListener('keydown', this._onKeyDown);
+        window.removeEventListener('mousedown', this._onWindowMouseDown);
+
+        if (this._timeoutLabelValueTabIndex) {
+            cancelAnimationFrame(this._timeoutLabelValueTabIndex);
+            this._timeoutLabelValueTabIndex = null;
+        }
+
+        super.destroy();
+    }
+
     protected _initializeCreateLabel() {
         const container = new Container({
             class: CLASS_CREATE_NEW,
@@ -939,27 +960,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
         if (!this._containerOptions.hidden) {
             this.close();
         }
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-
-        this._labelValue.dom.removeEventListener('keydown', this._onKeyDown);
-        this._labelValue.dom.removeEventListener('mousedown', this._onMouseDown);
-        this._labelValue.dom.removeEventListener('focus', this._onFocus);
-        this._labelValue.dom.removeEventListener('blur', this._onBlur);
-
-        this._containerOptions.dom.removeEventListener('wheel', this._onWheel);
-
-        window.removeEventListener('keydown', this._onKeyDown);
-        window.removeEventListener('mousedown', this._onWindowMouseDown);
-
-        if (this._timeoutLabelValueTabIndex) {
-            cancelAnimationFrame(this._timeoutLabelValueTabIndex);
-            this._timeoutLabelValueTabIndex = null;
-        }
-
-        super.destroy();
     }
 
     set options(value) {
