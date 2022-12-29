@@ -400,11 +400,6 @@ class ColorPicker extends Element {
         this.focus();
     }
 
-    protected _getColorRect() {
-        // @ts-ignore rect not a property of Overlay
-        return this._overlay.rect;
-    }
-
     protected _setColorPickerPosition(x: number, y: number) {
         this._overlay.position(x, y);
     }
@@ -750,7 +745,7 @@ class ColorPicker extends Element {
         for (let i = 1; i < values.length; i++) {
             if (Array.isArray(value)) {
                 // @ts-ignore
-                if (!value.equals(values[i])) {
+                if (!value.equals(values[i])) { // TODO: check if this works
                     different = true;
                     break;
                 }

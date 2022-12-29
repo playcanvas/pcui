@@ -215,9 +215,7 @@ class NumericInput extends TextInput {
 
     protected _isScrolling() {
         if (!this._sliderControl) return false;
-        return (document.pointerLockElement === this._sliderControl.dom ||
-        // @ts-ignore
-            document.mozPointerLockElement === this._sliderControl.dom);
+        return document.pointerLockElement === this._sliderControl.dom;
     }
 
     protected _onPointerLockChange = () => {

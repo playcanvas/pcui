@@ -225,8 +225,9 @@ class SliderInput extends Element implements IBindable, IFocusable {
 
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
-            // @ts-ignore
-            if (!touch.target.ui || touch.target.ui !== this)
+            const node = touch.target as Node;
+
+            if (!node.ui || node.ui !== this)
                 continue;
 
             this._touchId = touch.identifier;
