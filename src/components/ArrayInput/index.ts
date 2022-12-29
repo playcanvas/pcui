@@ -147,9 +147,15 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             min: 0,
             readOnly: this._fixedSize
         });
-        this._inputSize.on('change', this._onSizeChange);
-        this._inputSize.on('focus', this._onFocus);
-        this._inputSize.on('blur', this._onBlur);
+        this._inputSize.on('change', (value: number) => {
+            this._onSizeChange(value);
+        });
+        this._inputSize.on('focus', () => {
+            this.emit('focus');
+        });
+        this._inputSize.on('blur', () => {
+            this.emit('blur');
+        });
         this._suspendSizeChangeEvt = false;
         this._container.append(this._inputSize);
 
@@ -203,7 +209,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         super.destroy();
     }
 
-    protected _onSizeChange = (size: number) => {
+    protected _onSizeChange(size: number) {
         // if size is explicitly 0 then add empty class
         // size can also be null with multi-select so do not
         // check just !size
@@ -284,15 +290,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         }
 
         this._updateValues(values, true);
-    };
-
-    protected _onFocus = () => {
-        this.emit('focus');
-    };
-
-    protected _onBlur = () => {
-        this.emit('blur');
-    };
+    }
 
     protected _createArrayElement() {
         const args = Object.assign({}, this._elementArgs);
