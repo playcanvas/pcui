@@ -323,6 +323,8 @@ class Element extends Events {
 
     protected _domContent: any;
 
+    protected _onClickEvt: () => void;
+
     constructor(dom: HTMLElement | string, args: ElementArgs = Element.defaultArgs) {
         args = { ...Element.defaultArgs, ...args };
         super();
@@ -351,8 +353,10 @@ class Element extends Events {
         // add ui reference
         this._dom.ui = this;
 
+        this._onClickEvt = this._onClick.bind(this);
+
         // add event listeners
-        this._dom.addEventListener('click', this._onClick);
+        this._dom.addEventListener('click', this._onClickEvt);
         this._dom.addEventListener('mouseover', this._onMouseOver);
         this._dom.addEventListener('mouseout', this._onMouseOut);
 
@@ -462,7 +466,7 @@ class Element extends Events {
         const dom = this._dom;
         if (dom) {
             // remove event listeners
-            dom.removeEventListener('click', this._onClick);
+            dom.removeEventListener('click', this._onClickEvt);
             dom.removeEventListener('mouseover', this._onMouseOver);
             dom.removeEventListener('mouseout', this._onMouseOut);
 
@@ -515,11 +519,11 @@ class Element extends Events {
         }, 200);
     }
 
-    protected _onClick = (evt: Event) => {
+    protected _onClick(evt: Event) {
         if (this.enabled) {
             this.emit('click', evt);
         }
-    };
+    }
 
     protected _onMouseOver = (evt: MouseEvent) => {
         this.emit('hover', evt);

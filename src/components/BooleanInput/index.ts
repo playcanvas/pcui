@@ -63,7 +63,7 @@ class BooleanInput extends Input implements IBindable, IFocusable {
         super.destroy();
     }
 
-    protected _onClick = (evt: MouseEvent) => {
+    protected _onClick(evt: MouseEvent) {
         if (this.enabled) {
             this.focus();
         }
@@ -73,7 +73,7 @@ class BooleanInput extends Input implements IBindable, IFocusable {
         }
 
         return super._onClick(evt);
-    };
+    }
 
     protected _onKeyDown = (evt: KeyboardEvent) => {
         if (evt.key === 'Escape') {
