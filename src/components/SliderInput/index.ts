@@ -293,15 +293,15 @@ class SliderInput extends Element implements IBindable, IFocusable {
         this._domHandle.style.left = `calc(${left}% + ${handleWidth / 2}px)`;
     }
 
-    protected _onValueChange(value: number) {	
-        this._updateHandle(value);	
-        if (!this._suppressChange) {	
-            this.emit('change', value);	
-        }	
+    protected _onValueChange(value: number) {
+        this._updateHandle(value);
+        if (!this._suppressChange) {
+            this.emit('change', value);
+        }
 
-        if (this._binding) {	
-            this._binding.setValue(value);	
-        }	
+        if (this._binding) {
+            this._binding.setValue(value);
+        }
     }
 
     // Calculates the distance in pixels between
