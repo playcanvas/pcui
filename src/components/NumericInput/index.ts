@@ -151,11 +151,11 @@ class NumericInput extends TextInput {
         super.destroy();
     }
 
-    protected _updatePosition = (movement: number, shiftKey: boolean) => {
+    protected _updatePosition(movement: number, shiftKey: boolean) {
         // move one step or stepPrecision every 100 pixels
         this._sliderMovement += movement / 100 * (shiftKey ? this._stepPrecision : this._step);
         this.value = this._sliderPrevValue + this._sliderMovement;
-    };
+    }
 
     protected _onSliderMouseWheel = (evt: WheelEvent) => {
         this._updatePosition(evt.deltaY, evt.shiftKey);

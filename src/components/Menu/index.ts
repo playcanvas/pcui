@@ -122,7 +122,7 @@ class Menu extends Container implements IFocusable {
         this._containerMenuItems.dom.childNodes.forEach((child) => {
             this._filterMenuItems(child.ui as MenuItem);
         });
-    };
+    }
 
     protected _onKeyDown = (evt: KeyboardEvent) => {
         if (this.hidden) return;
