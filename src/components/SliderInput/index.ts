@@ -133,14 +133,7 @@ class SliderInput extends Element implements IBindable, IFocusable {
 
         // propagate change event
         this._numericInput.on('change', (value: number) => {
-            this._updateHandle(value);
-            if (!this._suppressChange) {
-                this.emit('change', value);
-            }
-
-            if (this._binding) {
-                this._binding.setValue(value);
-            }
+            this._onValueChange(value);
         });
 
         // propagate focus / blur events
@@ -298,6 +291,17 @@ class SliderInput extends Element implements IBindable, IFocusable {
         const left = Math.max(0, Math.min(1, ((value || 0) - this._sliderMin) / (this._sliderMax - this._sliderMin))) * 100;
         const handleWidth = this._domHandle.getBoundingClientRect().width;
         this._domHandle.style.left = `calc(${left}% + ${handleWidth / 2}px)`;
+    }
+
+    protected _onValueChange(value: number) {	
+        this._updateHandle(value);	
+        if (!this._suppressChange) {	
+            this.emit('change', value);	
+        }	
+
+        if (this._binding) {	
+            this._binding.setValue(value);	
+        }	
     }
 
     // Calculates the distance in pixels between
