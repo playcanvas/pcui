@@ -18,9 +18,16 @@ const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
  */
 export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
     /**
-     * The type of values that the array can hold.
+     * The type of values that the array can hold. Can be one of the following:
+     *
+     * - `boolean`
+     * - `number`
+     * - `string`
+     * - `vec2`
+     * - `vec3`
+     * - `vec4`
      */
-    type?: string;
+    type?: 'boolean' | 'number' | 'string' | 'vec2' | 'vec3' | 'vec4';
     /**
      * Arguments for each array Element.
      */
@@ -93,7 +100,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     protected _suspendArrayElementEvts: boolean;
 
-    protected _arrayElementChangeTimeout: any;
+    protected _arrayElementChangeTimeout: number;
 
     protected _getDefaultFn: any;
 
@@ -140,9 +147,15 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             min: 0,
             readOnly: this._fixedSize
         });
-        this._inputSize.on('change', this._onSizeChange.bind(this));
-        this._inputSize.on('focus', this._onFocus.bind(this));
-        this._inputSize.on('blur', this._onBlur.bind(this));
+        this._inputSize.on('change', (value: number) => {
+            this._onSizeChange(value);
+        });
+        this._inputSize.on('focus', () => {
+            this.emit('focus');
+        });
+        this._inputSize.on('blur', () => {
+            this.emit('blur');
+        });
         this._suspendSizeChangeEvt = false;
         this._container.append(this._inputSize);
 
@@ -186,6 +199,14 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         }
 
         this.renderChanges = args.renderChanges || false;
+    }
+
+    destroy() {
+        if (this._destroyed) return;
+
+        this._arrayElements.length = 0;
+
+        super.destroy();
     }
 
     protected _onSizeChange(size: number) {
@@ -269,14 +290,6 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         }
 
         this._updateValues(values, true);
-    }
-
-    protected _onFocus() {
-        this.emit('focus');
-    }
-
-    protected _onBlur() {
-        this.emit('blur');
     }
 
     protected _createArrayElement() {
@@ -397,7 +410,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         // here when only the array element changed value and not the whole array so
         // wait a bit and fire the change event later otherwise the _updateValues function
         // will cancel this timeout and fire a change event for the whole array instead
-        this._arrayElementChangeTimeout = setTimeout(() => {
+        this._arrayElementChangeTimeout = window.setTimeout(() => {
             this._arrayElementChangeTimeout = null;
             this.emit('change', this.value);
         });
@@ -489,7 +502,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         this._suspendArrayElementEvts = false;
 
         if (this._arrayElementChangeTimeout) {
-            clearTimeout(this._arrayElementChangeTimeout);
+            window.clearTimeout(this._arrayElementChangeTimeout);
             this._arrayElementChangeTimeout = null;
         }
 
@@ -516,18 +529,12 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         });
     }
 
-    destroy() {
-        if (this._destroyed) return;
-        this._arrayElements.length = 0;
-        super.destroy();
-    }
-
     // override binding setter to create
     // the same type of binding on each array element too
     set binding(value) {
         super.binding = value;
 
-        this._arrayElements.forEach((entry: { element: { binding: any; }; }) => {
+        this._arrayElements.forEach((entry: { element: Element; }) => {
             entry.element.binding = value ? value.clone() : null;
         });
     }

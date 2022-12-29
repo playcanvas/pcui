@@ -67,8 +67,6 @@ class MenuItem extends Container implements IBindable {
 
     protected _containerItems: Container;
 
-    protected _domEvtMenuItemClick: any;
-
     protected _menu: any;
 
     protected _onSelect: any;
@@ -107,8 +105,7 @@ class MenuItem extends Container implements IBindable {
 
         this.text = args.text || 'Untitled';
 
-        this._domEvtMenuItemClick = this._onClickMenuItem.bind(this);
-        this.dom.addEventListener('click', this._domEvtMenuItemClick);
+        this.dom.addEventListener('click', this._onClickMenuItem);
 
         if (args.value) {
             this.value = args.value;
@@ -134,6 +131,14 @@ class MenuItem extends Container implements IBindable {
         }
     }
 
+    destroy() {
+        if (this.destroyed) return;
+
+        this.dom.removeEventListener('click', this._onClickMenuItem);
+
+        super.destroy();
+    }
+
     protected _onAppendChild(element: Element) {
         super._onAppendChild(element);
 
@@ -155,7 +160,7 @@ class MenuItem extends Container implements IBindable {
         super._onRemoveChild(element);
     }
 
-    protected _onClickMenuItem(evt: MouseEvent) {
+    protected _onClickMenuItem = (evt: MouseEvent) => {
         evt.preventDefault();
         evt.stopPropagation();
         if (this.enabled) {
@@ -166,7 +171,7 @@ class MenuItem extends Container implements IBindable {
                 this.menu.hidden = true;
             }
         }
-    }
+    };
 
     link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
@@ -192,14 +197,6 @@ class MenuItem extends Container implements IBindable {
         if (this.menu) {
             this.menu.hidden = true;
         }
-    }
-
-    destroy() {
-        if (this.destroyed) return;
-
-        this.dom.removeEventListener('click', this._domEvtMenuItemClick);
-
-        super.destroy();
     }
 
     /**

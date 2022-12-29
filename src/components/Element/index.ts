@@ -297,12 +297,6 @@ class Element extends Events {
 
     protected _parent: Element; // eslint-disable-line no-use-before-define
 
-    protected _domEventClick: any;
-
-    protected _domEventMouseOver: any;
-
-    protected _domEventMouseOut: any;
-
     protected _eventsParent: any[];
 
     protected _dom: HTMLElement;
@@ -327,7 +321,9 @@ class Element extends Events {
 
     protected _hasError: boolean;
 
-    protected _domContent: any;
+    protected _domContent: HTMLElement;
+
+    protected _onClickEvt: () => void;
 
     constructor(dom: HTMLElement | string, args: ElementArgs = Element.defaultArgs) {
         args = { ...Element.defaultArgs, ...args };
@@ -336,9 +332,6 @@ class Element extends Events {
         this._destroyed = false;
         this._parent = null;
 
-        this._domEventClick = this._onClick.bind(this);
-        this._domEventMouseOver = this._onMouseOver.bind(this);
-        this._domEventMouseOut = this._onMouseOut.bind(this);
         this._eventsParent = [];
 
         if (typeof dom === 'string') {
@@ -360,10 +353,12 @@ class Element extends Events {
         // add ui reference
         this._dom.ui = this;
 
+        this._onClickEvt = this._onClick.bind(this);
+
         // add event listeners
-        this._dom.addEventListener('click', this._domEventClick);
-        this._dom.addEventListener('mouseover', this._domEventMouseOver);
-        this._dom.addEventListener('mouseout', this._domEventMouseOut);
+        this._dom.addEventListener('click', this._onClickEvt);
+        this._dom.addEventListener('mouseover', this._onMouseOver);
+        this._dom.addEventListener('mouseout', this._onMouseOut);
 
         // add element class
         this._dom.classList.add(CLASS_ELEMENT);
@@ -422,6 +417,75 @@ class Element extends Events {
     }
 
     /**
+     * Destroys the Element and its events.
+     */
+    destroy() {
+        if (this._destroyed) return;
+
+        this._destroyed = true;
+
+        if (this.binding) {
+            this.binding = null;
+        } else {
+            this.unlink();
+        }
+
+        if (this.parent) {
+            const parent = this.parent;
+
+            for (let i = 0; i < this._eventsParent.length; i++) {
+                this._eventsParent[i].unbind();
+            }
+            this._eventsParent.length = 0;
+
+            // remove element from parent
+            // check if parent has been destroyed already
+            // because we do not want to be emitting events
+            // on a destroyed parent after it's been destroyed
+            // as it is easy to lead to null exceptions
+            // @ts-ignore
+            if (parent.remove && !parent._destroyed) {
+                // @ts-ignore
+                parent.remove(this);
+            }
+
+            // set parent to null and remove from
+            // parent dom just in case parent.remove above
+            // didn't work because of an override or other condition
+            this._parent = null;
+
+            // Do not manually call removeChild for elements whose parent has already been destroyed.
+            // For example when we destroy a TreeViewItem that has many child nodes, that will trigger every child Element to call dom.parentElement.removeChild(dom).
+            // But we don't need to remove all these DOM elements from their parents since the root DOM element is destroyed anyway.
+            // This has a big impact on destroy speed in certain cases.
+            if (!parent._destroyed && this._dom && this._dom.parentElement) {
+                this._dom.parentElement.removeChild(this._dom);
+            }
+        }
+
+        const dom = this._dom;
+        if (dom) {
+            // remove event listeners
+            dom.removeEventListener('click', this._onClickEvt);
+            dom.removeEventListener('mouseover', this._onMouseOver);
+            dom.removeEventListener('mouseout', this._onMouseOut);
+
+            // remove ui reference
+            delete dom.ui;
+
+            this._dom = null;
+        }
+
+        if (this._flashTimeout) {
+            window.clearTimeout(this._flashTimeout);
+        }
+
+        this.emit('destroy', dom, this);
+
+        this.unbind();
+    }
+
+    /**
      * Links the specified observers and paths to the Element's data binding.
      *
      * @param observers - An array of observers or a single observer.
@@ -461,13 +525,13 @@ class Element extends Events {
         }
     }
 
-    protected _onMouseOver(evt: MouseEvent) {
+    protected _onMouseOver = (evt: MouseEvent) => {
         this.emit('hover', evt);
-    }
+    };
 
-    protected _onMouseOut(evt: MouseEvent) {
+    protected _onMouseOut = (evt: MouseEvent) => {
         this.emit('hoverend', evt);
-    }
+    };
 
     protected _onHiddenToRootChange(hiddenToRoot: boolean) {
         if (hiddenToRoot) {
@@ -567,79 +631,6 @@ class Element extends Events {
         if (classList.contains(cls)) {
             classList.remove(cls);
         }
-    }
-
-    /**
-     * Destroys the Element and its events.
-     */
-    destroy() {
-        if (this._destroyed) return;
-
-        this._destroyed = true;
-
-        if (this.binding) {
-            this.binding = null;
-        } else {
-            this.unlink();
-        }
-
-        if (this.parent) {
-            const parent = this.parent;
-
-            for (let i = 0; i < this._eventsParent.length; i++) {
-                this._eventsParent[i].unbind();
-            }
-            this._eventsParent.length = 0;
-
-            // remove element from parent
-            // check if parent has been destroyed already
-            // because we do not want to be emitting events
-            // on a destroyed parent after it's been destroyed
-            // as it is easy to lead to null exceptions
-            // @ts-ignore
-            if (parent.remove && !parent._destroyed) {
-                // @ts-ignore
-                parent.remove(this);
-            }
-
-            // set parent to null and remove from
-            // parent dom just in case parent.remove above
-            // didn't work because of an override or other condition
-            this._parent = null;
-
-            // Do not manually call removeChild for elements whose parent has already been destroyed.
-            // For example when we destroy a TreeViewItem that has many child nodes, that will trigger every child Element to call dom.parentElement.removeChild(dom).
-            // But we don't need to remove all these DOM elements from their parents since the root DOM element is destroyed anyway.
-            // This has a big impact on destroy speed in certain cases.
-            if (!parent._destroyed && this._dom && this._dom.parentElement) {
-                this._dom.parentElement.removeChild(this._dom);
-            }
-        }
-
-        const dom = this._dom;
-        if (dom) {
-            // remove event listeners
-            dom.removeEventListener('click', this._domEventClick);
-            dom.removeEventListener('mouseover', this._domEventMouseOver);
-            dom.removeEventListener('mouseout', this._domEventMouseOut);
-
-            // remove ui reference
-            delete dom.ui;
-
-            this._dom = null;
-        }
-
-        this._domEventClick = null;
-        this._domEventMouseOver = null;
-        this._domEventMouseOut = null;
-
-        if (this._flashTimeout) {
-            window.clearTimeout(this._flashTimeout);
-        }
-
-        this.emit('destroy', dom, this);
-
-        this.unbind();
     }
 
     unbind(name?: string, fn?: any): Events {

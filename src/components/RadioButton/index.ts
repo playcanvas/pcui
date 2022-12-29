@@ -19,12 +19,6 @@ class RadioButton extends Element implements IBindable, IFocusable {
         tabIndex: 0
     };
 
-    protected _domEventKeyDown: any;
-
-    protected _domEventFocus: any;
-
-    protected _domEventBlur: any;
-
     protected _value: boolean;
 
     protected _renderChanges: boolean;
@@ -36,16 +30,22 @@ class RadioButton extends Element implements IBindable, IFocusable {
         this.class.add(CLASS_RADIO_BUTTON);
         this.class.add(pcuiClass.NOT_FLEXIBLE);
 
-        this._domEventKeyDown = this._onKeyDown.bind(this);
-        this._domEventFocus = this._onFocus.bind(this);
-        this._domEventBlur = this._onBlur.bind(this);
-
-        this.dom.addEventListener('keydown', this._domEventKeyDown);
-        this.dom.addEventListener('focus', this._domEventFocus);
-        this.dom.addEventListener('blur', this._domEventBlur);
+        this.dom.addEventListener('keydown', this._onKeyDown);
+        this.dom.addEventListener('focus', this._onFocus);
+        this.dom.addEventListener('blur', this._onBlur);
 
         this.value = args.value;
         this._renderChanges = args.renderChanges;
+    }
+
+    destroy() {
+        if (this._destroyed) return;
+
+        this.dom.removeEventListener('keydown', this._onKeyDown);
+        this.dom.removeEventListener('focus', this._onFocus);
+        this.dom.removeEventListener('blur', this._onBlur);
+
+        super.destroy();
     }
 
     protected _onClick(evt: MouseEvent) {
@@ -60,7 +60,7 @@ class RadioButton extends Element implements IBindable, IFocusable {
         return super._onClick(evt);
     }
 
-    protected _onKeyDown(evt: KeyboardEvent) {
+    protected _onKeyDown = (evt: KeyboardEvent) => {
         if (evt.key === 'Escape') {
             this.blur();
             return;
@@ -73,15 +73,15 @@ class RadioButton extends Element implements IBindable, IFocusable {
             evt.preventDefault();
             this.value = !this.value;
         }
-    }
+    };
 
-    protected _onFocus(evt: FocusEvent) {
+    protected _onFocus = (evt: FocusEvent) => {
         this.emit('focus');
-    }
+    };
 
-    protected _onBlur(evt: FocusEvent) {
+    protected _onBlur = (evt: FocusEvent) => {
         this.emit('blur');
-    }
+    };
 
     protected _updateValue(value: boolean) {
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
@@ -111,16 +111,6 @@ class RadioButton extends Element implements IBindable, IFocusable {
 
     blur() {
         this.dom.blur();
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-
-        this.dom.removeEventListener('keydown', this._domEventKeyDown);
-        this.dom.removeEventListener('focus', this._domEventFocus);
-        this.dom.removeEventListener('blur', this._domEventBlur);
-
-        super.destroy();
     }
 
     set value(value) {

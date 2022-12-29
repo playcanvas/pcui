@@ -44,18 +44,6 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
     protected _domInput: HTMLInputElement;
 
-    protected _domEvtChange: any;
-
-    protected _domEvtFocus: any;
-
-    protected _domEvtBlur: any;
-
-    protected _domEvtKeyDown: any;
-
-    protected _domEvtKeyUp: any;
-
-    protected _domEvtCtxMenu: any;
-
     protected _suspendInputChangeEvt: boolean;
 
     protected _prevValue: any;
@@ -69,6 +57,8 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
     protected _blurOnEnter: boolean;
 
     protected _blurOnEscape: boolean;
+
+    protected _onInputKeyDownEvt: (evt: KeyboardEvent) => void;
 
     constructor(args: TextInputArgs = TextInput.defaultArgs) {
         args = { ...TextInput.defaultArgs, ...args };
@@ -85,21 +75,18 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         input.ui = this;
         input.tabIndex = 0;
         input.autocomplete = "off";
+
+        this._onInputKeyDownEvt = this._onInputKeyDown.bind(this);
+
+        input.addEventListener('change', this._onInputChange);
+        input.addEventListener('focus', this._onInputFocus);
+        input.addEventListener('blur', this._onInputBlur);
+        input.addEventListener('keydown', this._onInputKeyDownEvt);
+        input.addEventListener('contextmenu', this._onInputCtxMenu, false);
+
+        this.dom.appendChild(input);
+
         this._domInput = input;
-
-        this._domEvtChange = this._onInputChange.bind(this);
-        this._domEvtFocus = this._onInputFocus.bind(this);
-        this._domEvtBlur = this._onInputBlur.bind(this);
-        this._domEvtKeyDown = this._onInputKeyDown.bind(this);
-        this._domEvtKeyUp = this._onInputKeyUp.bind(this);
-        this._domEvtCtxMenu = this._onInputCtxMenu.bind(this);
-
-        this._domInput.addEventListener('change', this._domEvtChange);
-        this._domInput.addEventListener('focus', this._domEvtFocus);
-        this._domInput.addEventListener('blur', this._domEvtBlur);
-        this._domInput.addEventListener('keydown', this._domEvtKeyDown);
-        this._domInput.addEventListener('contextmenu', this._domEvtCtxMenu, false);
-        this.dom.appendChild(this._domInput);
 
         this._suspendInputChangeEvt = false;
 
@@ -122,14 +109,30 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
                 this.flash();
             }
         });
-        this.on('disable', this._updateInputReadOnly.bind(this));
-        this.on('enable', this._updateInputReadOnly.bind(this));
-        this.on('readOnly', this._updateInputReadOnly.bind(this));
+        this.on('disable', this._updateInputReadOnly);
+        this.on('enable', this._updateInputReadOnly);
+        this.on('readOnly', this._updateInputReadOnly);
 
         this._updateInputReadOnly();
     }
 
-    protected _onInputChange(evt: Event) {
+    destroy() {
+        if (this._destroyed) return;
+
+        const input = this._domInput;
+        input.removeEventListener('change', this._onInputChange);
+        input.removeEventListener('focus', this._onInputFocus);
+        input.removeEventListener('blur', this._onInputBlur);
+        input.removeEventListener('keydown', this._onInputKeyDownEvt);
+        input.removeEventListener('keyup', this._onInputKeyUp);
+        input.removeEventListener('contextmenu', this._onInputCtxMenu);
+
+        this._domInput = null;
+
+        super.destroy();
+    }
+
+    protected _onInputChange = (evt: Event) => {
         if (this._suspendInputChangeEvt) return;
 
         if (this._onValidate) {
@@ -147,18 +150,18 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         if (this._binding) {
             this._binding.setValue(this.value);
         }
-    }
+    };
 
-    protected _onInputFocus(evt: FocusEvent) {
+    protected _onInputFocus = (evt: FocusEvent) => {
         this.class.add(pcuiClass.FOCUS);
         this.emit('focus', evt);
         this._prevValue = this.value;
-    }
+    };
 
-    protected _onInputBlur(evt: FocusEvent) {
+    protected _onInputBlur = (evt: FocusEvent) => {
         this.class.remove(pcuiClass.FOCUS);
         this.emit('blur', evt);
-    }
+    };
 
     protected _onInputKeyDown(evt: KeyboardEvent) {
         if (evt.key === 'Enter' && this.blurOnEnter) {
@@ -188,26 +191,26 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         this.emit('keydown', evt);
     }
 
-    protected _onInputKeyUp(evt: KeyboardEvent) {
+    protected _onInputKeyUp = (evt: KeyboardEvent) => {
         if (evt.key !== 'Escape') {
             this._onInputChange(evt);
         }
 
         this.emit('keyup', evt);
-    }
+    };
 
-    protected _onInputCtxMenu(evt: MouseEvent) {
+    protected _onInputCtxMenu = (evt: MouseEvent) => {
         this._domInput.select();
-    }
+    };
 
-    protected _updateInputReadOnly() {
+    protected _updateInputReadOnly = () => {
         const readOnly = !this.enabled || this.readOnly;
         if (readOnly) {
             this._domInput.setAttribute('readonly', 'true');
         } else {
             this._domInput.removeAttribute('readonly');
         }
-    }
+    };
 
     protected _updateValue(value: string | number | Array<string | number>) {
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
@@ -250,19 +253,6 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
     blur() {
         this._domInput.blur();
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-        this._domInput.removeEventListener('change', this._domEvtChange);
-        this._domInput.removeEventListener('focus', this._domEvtFocus);
-        this._domInput.removeEventListener('blur', this._domEvtBlur);
-        this._domInput.removeEventListener('keydown', this._domEvtKeyDown);
-        this._domInput.removeEventListener('keyup', this._domEvtKeyUp);
-        this._domInput.removeEventListener('contextmenu', this._domEvtCtxMenu);
-        this._domInput = null;
-
-        super.destroy();
     }
 
     set value(value: string | number | Array<string | number>) {
@@ -322,9 +312,9 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
         this._keyChange = value;
         if (value) {
-            this._domInput.addEventListener('keyup', this._domEvtKeyUp);
+            this._domInput.addEventListener('keyup', this._onInputKeyUp);
         } else {
-            this._domInput.removeEventListener('keyup', this._domEvtKeyUp);
+            this._domInput.removeEventListener('keyup', this._onInputKeyUp);
         }
     }
 

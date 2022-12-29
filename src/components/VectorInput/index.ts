@@ -61,7 +61,6 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
 
         const dimensions = Math.max(2, Math.min(4, args.dimensions));
 
-        const onInputChange = this._onInputChange.bind(this);
         this._inputs = new Array(dimensions);
         for (let i = 0; i < this._inputs.length; i++) {
             this._inputs[i] = new NumericInput({
@@ -73,7 +72,9 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
                 renderChanges: args.renderChanges,
                 placeholder: args.placeholder ? (Array.isArray(args.placeholder) ? args.placeholder[i] : args.placeholder) : null
             });
-            this._inputs[i].on('change', onInputChange);
+            this._inputs[i].on('change', () => {
+                this._onInputChange();
+            });
             this._inputs[i].on('focus', () => {
                 this.emit('focus');
             });

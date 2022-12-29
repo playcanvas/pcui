@@ -93,20 +93,6 @@ class SliderInput extends Element implements IBindable, IFocusable {
 
     protected _cursorHandleOffset: number;
 
-    protected _domMouseDown: any;
-
-    protected _domMouseMove: any;
-
-    protected _domMouseUp: any;
-
-    protected _domTouchStart: any;
-
-    protected _domTouchMove: any;
-
-    protected _domTouchEnd: any;
-
-    protected _domKeyDown: any;
-
     protected _touchId: number;
 
     /**
@@ -146,7 +132,10 @@ class SliderInput extends Element implements IBindable, IFocusable {
         }
 
         // propagate change event
-        this._numericInput.on('change', this._onValueChange.bind(this));
+        this._numericInput.on('change', (value: number) => {
+            this._onValueChange(value);
+        });
+
         // propagate focus / blur events
         this._numericInput.on('focus', () => {
             this.emit('focus');
@@ -178,19 +167,11 @@ class SliderInput extends Element implements IBindable, IFocusable {
         this._domBar.appendChild(this._domHandle);
         this._cursorHandleOffset = 0;
 
-        this._domMouseDown = this._onMouseDown.bind(this);
-        this._domMouseMove = this._onMouseMove.bind(this);
-        this._domMouseUp = this._onMouseUp.bind(this);
-        this._domTouchStart = this._onTouchStart.bind(this);
-        this._domTouchMove = this._onTouchMove.bind(this);
-        this._domTouchEnd = this._onTouchEnd.bind(this);
-        this._domKeyDown = this._onKeyDown.bind(this);
-
         this._touchId = null;
 
-        this._domSlider.addEventListener('mousedown', this._domMouseDown);
-        this._domSlider.addEventListener('touchstart', this._domTouchStart, { passive: true });
-        this._domHandle.addEventListener('keydown', this._domKeyDown);
+        this._domSlider.addEventListener('mousedown', this._onMouseDown);
+        this._domSlider.addEventListener('touchstart', this._onTouchStart, { passive: true });
+        this._domHandle.addEventListener('keydown', this._onKeyDown);
 
         if (args.value !== undefined) {
             this.value = args.value;
@@ -206,39 +187,56 @@ class SliderInput extends Element implements IBindable, IFocusable {
         }
     }
 
-    protected _onMouseDown(evt: MouseEvent) {
-        if (evt.button !== 0 || !this.enabled || this.readOnly) return;
-        this._onSlideStart(evt.pageX);
+    destroy() {
+        if (this._destroyed) return;
+
+        this._domSlider.removeEventListener('mousedown', this._onMouseDown);
+        this._domSlider.removeEventListener('touchstart', this._onTouchStart);
+
+        this._domHandle.removeEventListener('keydown', this._onKeyDown);
+
+        this.dom.removeEventListener('mouseup', this._onMouseUp);
+        this.dom.removeEventListener('mousemove', this._onMouseMove);
+        this.dom.removeEventListener('touchmove', this._onTouchMove);
+        this.dom.removeEventListener('touchend', this._onTouchEnd);
+
+        super.destroy();
     }
 
-    protected _onMouseMove(evt: MouseEvent) {
+    protected _onMouseDown = (evt: MouseEvent) => {
+        if (evt.button !== 0 || !this.enabled || this.readOnly) return;
+        this._onSlideStart(evt.pageX);
+    };
+
+    protected _onMouseMove = (evt: MouseEvent) => {
         evt.stopPropagation();
         evt.preventDefault();
         this._onSlideMove(evt.pageX);
-    }
+    };
 
-    protected _onMouseUp(evt: MouseEvent) {
+    protected _onMouseUp = (evt: MouseEvent) => {
         evt.stopPropagation();
         evt.preventDefault();
         this._onSlideEnd(evt.pageX);
-    }
+    };
 
-    protected _onTouchStart(evt: TouchEvent) {
+    protected _onTouchStart = (evt: TouchEvent) => {
         if (!this.enabled || this.readOnly) return;
 
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
-            // @ts-ignore
-            if (!touch.target.ui || touch.target.ui !== this)
+            const node = touch.target as Node;
+
+            if (!node.ui || node.ui !== this)
                 continue;
 
             this._touchId = touch.identifier;
             this._onSlideStart(touch.pageX);
             break;
         }
-    }
+    };
 
-    protected _onTouchMove(evt: TouchEvent) {
+    protected _onTouchMove = (evt: TouchEvent) => {
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
 
@@ -251,9 +249,9 @@ class SliderInput extends Element implements IBindable, IFocusable {
             this._onSlideMove(touch.pageX);
             break;
         }
-    }
+    };
 
-    protected _onTouchEnd(evt: TouchEvent) {
+    protected _onTouchEnd = (evt: TouchEvent) => {
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
 
@@ -267,9 +265,9 @@ class SliderInput extends Element implements IBindable, IFocusable {
             this._touchId = null;
             break;
         }
-    }
+    };
 
-    protected _onKeyDown(evt: KeyboardEvent) {
+    protected _onKeyDown = (evt: KeyboardEvent) => {
         if (evt.key === 'Escape') {
             this.blur();
             return;
@@ -288,7 +286,7 @@ class SliderInput extends Element implements IBindable, IFocusable {
         }
 
         this.value += x * this.step;
-    }
+    };
 
     protected _updateHandle(value: number) {
         const left = Math.max(0, Math.min(1, ((value || 0) - this._sliderMin) / (this._sliderMax - this._sliderMin))) * 100;
@@ -329,11 +327,11 @@ class SliderInput extends Element implements IBindable, IFocusable {
     protected _onSlideStart(pageX: number) {
         this._domHandle.focus();
         if (this._touchId === null) {
-            window.addEventListener('mousemove', this._domMouseMove);
-            window.addEventListener('mouseup', this._domMouseUp);
+            window.addEventListener('mousemove', this._onMouseMove);
+            window.addEventListener('mouseup', this._onMouseUp);
         } else {
-            window.addEventListener('touchmove', this._domTouchMove);
-            window.addEventListener('touchend', this._domTouchEnd);
+            window.addEventListener('touchmove', this._onTouchMove);
+            window.addEventListener('touchend', this._onTouchEnd);
         }
 
         this.class.add(CLASS_SLIDER_ACTIVE);
@@ -377,11 +375,11 @@ class SliderInput extends Element implements IBindable, IFocusable {
         this.class.remove(CLASS_SLIDER_ACTIVE);
 
         if (this._touchId === null) {
-            window.removeEventListener('mousemove', this._domMouseMove);
-            window.removeEventListener('mouseup', this._domMouseUp);
+            window.removeEventListener('mousemove', this._onMouseMove);
+            window.removeEventListener('mouseup', this._onMouseUp);
         } else {
-            window.removeEventListener('touchmove', this._domTouchMove);
-            window.removeEventListener('touchend', this._domTouchEnd);
+            window.removeEventListener('touchmove', this._onTouchMove);
+            window.removeEventListener('touchend', this._onTouchEnd);
         }
 
         if (this.binding) {
@@ -401,20 +399,6 @@ class SliderInput extends Element implements IBindable, IFocusable {
     blur() {
         this._domHandle.blur();
         this._numericInput.blur();
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-        this._domSlider.removeEventListener('mousedown', this._domMouseDown);
-        this._domSlider.removeEventListener('touchstart', this._domTouchStart);
-
-        this._domHandle.removeEventListener('keydown', this._domKeyDown);
-
-        this.dom.removeEventListener('mouseup', this._domMouseUp);
-        this.dom.removeEventListener('mousemove', this._domMouseMove);
-        this.dom.removeEventListener('touchmove', this._domTouchMove);
-        this.dom.removeEventListener('touchend', this._domTouchEnd);
-        super.destroy();
     }
 
     /**

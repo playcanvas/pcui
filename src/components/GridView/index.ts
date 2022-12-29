@@ -1,3 +1,6 @@
+import { EventHandle } from '@playcanvas/observer';
+
+import Element from '../Element/index';
 import Container, { ContainerArgs } from '../Container';
 import GridViewItem from '../GridViewItem';
 
@@ -64,8 +67,12 @@ class GridView extends Container {
             this.class.add(CLASS_ROOT);
         }
 
-        this.on('append', this._onAppendGridViewItem.bind(this));
-        this.on('remove', this._onRemoveGridViewItem.bind(this));
+        this.on('append', (element: Element) => {
+            this._onAppendGridViewItem(element as GridViewItem);
+        });
+        this.on('remove', (element: Element) => {
+            this._onRemoveGridViewItem(element as GridViewItem);
+        });
 
         this._filterFn = args.filterFn;
         this._filterAnimationFrame = null;
@@ -81,14 +88,14 @@ class GridView extends Container {
     protected _onAppendGridViewItem(item: GridViewItem) {
         if (!(item instanceof GridViewItem)) return;
 
-        let evtClick: any;
+        let evtClick: EventHandle;
         if (this._clickFn)
             evtClick = item.on('click', evt => this._clickFn(evt, item));
         else
             evtClick = item.on('click', evt => this._onClickItem(evt, item));
         let evtSelect = item.on('select', () => this._onSelectItem(item));
 
-        let evtDeselect: any;
+        let evtDeselect: EventHandle;
         if (this._allowDeselect)
             evtDeselect = item.on('deselect', () => this._onDeselectItem(item));
 

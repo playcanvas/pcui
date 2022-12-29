@@ -37,12 +37,6 @@ class ColorPicker extends Element {
 
     protected _domColor: HTMLDivElement;
 
-    protected _domEventKeyDown: any;
-
-    protected _domEventFocus: any;
-
-    protected _domEventBlur: any;
-
     protected _historyCombine: boolean;
 
     protected _historyPostfix: any;
@@ -131,10 +125,6 @@ class ColorPicker extends Element {
         this._domColor = document.createElement('div');
         this.dom.appendChild(this._domColor);
 
-        this._domEventKeyDown = this._onKeyDown.bind(this);
-        this._domEventFocus = this._onFocus.bind(this);
-        this._domEventBlur = this._onBlur.bind(this);
-
         this._pickRectMouseMove = this._pickRectMouseMove.bind(this);
         this._pickRectMouseUp = this._pickRectMouseUp.bind(this);
 
@@ -144,15 +134,14 @@ class ColorPicker extends Element {
         this._pickOpacityMouseMove = this._pickOpacityMouseMove.bind(this);
         this._pickOpacityMouseUp = this._pickOpacityMouseUp.bind(this);
 
-        this._closePicker = this._closePicker.bind(this);
-
-        this.dom.addEventListener('keydown', this._domEventKeyDown);
-        this.dom.addEventListener('focus', this._domEventFocus);
-        this.dom.addEventListener('blur', this._domEventBlur);
+        this.dom.addEventListener('keydown', this._onKeyDown);
+        this.dom.addEventListener('focus', this._onFocus);
+        this.dom.addEventListener('blur', this._onBlur);
 
         this.on('click', () => {
-            if (!this.enabled || this.readOnly) return;
-            this._openColorPicker();
+            if (this.enabled && !this.readOnly) {
+                this._openColorPicker();
+            }
         });
 
         this._historyCombine = false;
@@ -272,7 +261,7 @@ class ColorPicker extends Element {
         this._evtColorPickStart = null;
         this._evtColorPickEnd = null;
 
-        this._overlay.on('hide', function () {
+        this._overlay.on('hide', () => {
             this._evtColorPick.unbind();
             this._evtColorPick = null;
 
@@ -284,7 +273,7 @@ class ColorPicker extends Element {
 
             this._evtColorPickEnd.unbind();
             this._evtColorPickEnd = null;
-        }.bind(this));
+        });
 
         // R
         this._fieldR = new NumericInput({
@@ -300,7 +289,9 @@ class ColorPicker extends Element {
         // @ts-ignore
         this._fieldR.flexGrow = 1;
         this._fieldR.class.add('field', 'field-r');
-        this._fieldR.on('change', this._updateRects.bind(this));
+        this._fieldR.on('change', () => {
+            this._updateRects();
+        });
         this._panelFields.appendChild(this._fieldR.dom);
 
         // G
@@ -314,7 +305,9 @@ class ColorPicker extends Element {
         this._fieldG.renderChanges = false;
         this._fieldG.placeholder = 'g';
         this._fieldG.class.add('field', 'field-g');
-        this._fieldG.on('change', this._updateRects.bind(this));
+        this._fieldG.on('change', () => {
+            this._updateRects();
+        });
         this._panelFields.appendChild(this._fieldG.dom);
 
         // B
@@ -328,7 +321,9 @@ class ColorPicker extends Element {
         this._fieldB.renderChanges = false;
         this._fieldB.placeholder = 'b';
         this._fieldB.class.add('field', 'field-b');
-        this._fieldB.on('change', this._updateRects.bind(this));
+        this._fieldB.on('change', () => {
+            this._updateRects();
+        });
         this._panelFields.appendChild(this._fieldB.dom);
 
         this._fieldA = new NumericInput({
@@ -341,7 +336,9 @@ class ColorPicker extends Element {
         this._fieldA.renderChanges = false;
         this._fieldA.placeholder = 'a';
         this._fieldA.class.add('field', 'field-a');
-        this._fieldA.on('change', this._updateRectAlpha.bind(this));
+        this._fieldA.on('change', (value: number) => {
+            this._updateRectAlpha(value);
+        });
         this._panelFields.appendChild(this._fieldA.dom);
 
 
@@ -350,8 +347,20 @@ class ColorPicker extends Element {
         this._fieldHex.renderChanges = false;
         this._fieldHex.placeholder = '#';
         this._fieldHex.class.add('field', 'field-hex');
-        this._fieldHex.on('change', this._updateHex.bind(this));
+        this._fieldHex.on('change', () => {
+            this._updateHex();
+        });
         this._panelFields.appendChild(this._fieldHex.dom);
+    }
+
+    destroy() {
+        if (this._destroyed) return;
+
+        this.dom.removeEventListener('keydown', this._onKeyDown);
+        this.dom.removeEventListener('focus', this._onFocus);
+        this.dom.removeEventListener('blur', this._onBlur);
+
+        super.destroy();
     }
 
     focus() {
@@ -362,7 +371,7 @@ class ColorPicker extends Element {
         this.dom.blur();
     }
 
-    protected _onKeyDown(evt: KeyboardEvent) {
+    protected _onKeyDown = (evt: KeyboardEvent) => {
         // escape blurs the field
         if (evt.key === 'Escape') {
             this.blur();
@@ -375,25 +384,20 @@ class ColorPicker extends Element {
 
         evt.stopPropagation();
         evt.preventDefault();
-    }
+    };
 
-    protected _onFocus(evt: FocusEvent) {
+    protected _onFocus = (evt: FocusEvent) => {
         this.emit('focus');
-    }
+    };
 
-    protected _onBlur(evt: FocusEvent) {
+    protected _onBlur = (evt: FocusEvent) => {
         this.emit('blur');
-    }
+    };
 
     protected _closePicker() {
         this._overlay.hidden = true;
         this._isColorPickerOpen = false;
         this.focus();
-    }
-
-    protected _getColorRect() {
-        // @ts-ignore rect not a property of Overlay
-        return this._overlay.rect;
     }
 
     protected _setColorPickerPosition(x: number, y: number) {
@@ -497,7 +501,7 @@ class ColorPicker extends Element {
         // focus on hex field
         this._fieldHex.dom.focus();
 
-        setTimeout(() => {
+        window.setTimeout(() => {
             this._fieldHex.dom.focus();
         }, 100);
     }
@@ -717,15 +721,9 @@ class ColorPicker extends Element {
             return;
 
         this._callingCallback = true;
-        setTimeout(this.callbackHandle.bind(this), 1000 / 60);
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-        this.dom.removeEventListener('keydown', this._domEventKeyDown);
-        this.dom.removeEventListener('focus', this._domEventFocus);
-        this.dom.removeEventListener('blur', this._domEventBlur);
-        super.destroy();
+        window.setTimeout(() => {
+            this.callbackHandle();
+        }, 1000 / 60);
     }
 
     set value(value) {
@@ -747,7 +745,7 @@ class ColorPicker extends Element {
         for (let i = 1; i < values.length; i++) {
             if (Array.isArray(value)) {
                 // @ts-ignore
-                if (!value.equals(values[i])) {
+                if (!value.equals(values[i])) { // TODO: check if this works
                     different = true;
                     break;
                 }

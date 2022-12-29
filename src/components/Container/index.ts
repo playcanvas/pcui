@@ -95,29 +95,15 @@ class Container extends Element {
      */
     public static readonly EVENT_RESIZE = 'resize';
 
-    protected _domEventScroll: any;
-
     protected _scrollable: boolean;
 
     protected _flex: boolean;
 
     protected _grid: boolean;
 
-    protected _domResizeHandle: any;
+    protected _domResizeHandle: HTMLDivElement;
 
-    protected _domEventResizeStart: any;
-
-    protected _domEventResizeMove: any;
-
-    protected _domEventResizeEnd: any;
-
-    protected _domEventResizeTouchStart: any;
-
-    protected _domEventResizeTouchMove: any;
-
-    protected _domEventResizeTouchEnd: any;
-
-    protected _resizeTouchId: any;
+    protected _resizeTouchId: number;
 
     protected _resizeData: any;
 
@@ -129,11 +115,11 @@ class Container extends Element {
 
     protected _draggedStartIndex: number;
 
-    protected _domContent: any;
+    protected _domContent: HTMLElement;
 
     protected _resizable: string;
 
-    protected _draggedHeight: any;
+    protected _draggedHeight: number;
 
     constructor(args: ContainerArgs = Container.defaultArgs) {
         args = { ...Container.defaultArgs, ...args };
@@ -141,7 +127,6 @@ class Container extends Element {
 
         this.class.add(CLASS_CONTAINER);
 
-        this._domEventScroll = this._onScroll.bind(this);
         this.domContent = this._dom;
 
         // scroll
@@ -167,12 +152,6 @@ class Container extends Element {
 
         // resize related
         this._domResizeHandle = null;
-        this._domEventResizeStart = this._onResizeStart.bind(this);
-        this._domEventResizeMove = this._onResizeMove.bind(this);
-        this._domEventResizeEnd = this._onResizeEnd.bind(this);
-        this._domEventResizeTouchStart = this._onResizeTouchStart.bind(this);
-        this._domEventResizeTouchMove = this._onResizeTouchMove.bind(this);
-        this._domEventResizeTouchEnd = this._onResizeTouchEnd.bind(this);
         this._resizeTouchId = null;
         this._resizeData = null;
         this._resizeHorizontally = true;
@@ -189,6 +168,23 @@ class Container extends Element {
         }
 
         this._draggedStartIndex = -1;
+    }
+
+    destroy() {
+        if (this._destroyed) return;
+        this.domContent = null;
+
+        if (this._domResizeHandle) {
+            this._domResizeHandle.removeEventListener('mousedown', this._onResizeStart);
+            window.removeEventListener('mousemove', this._onResizeMove);
+            window.removeEventListener('mouseup', this._onResizeEnd);
+
+            this._domResizeHandle.removeEventListener('touchstart', this._onResizeTouchStart);
+            window.removeEventListener('touchmove', this._onResizeTouchMove);
+            window.removeEventListener('touchend', this._onResizeTouchEnd);
+        }
+
+        super.destroy();
     }
 
     /**
@@ -316,8 +312,8 @@ class Container extends Element {
         }
 
         if (this._domResizeHandle) {
-            this._domResizeHandle.removeEventListener('mousedown', this._domEventResizeStart);
-            this._domResizeHandle.removeEventListener('touchstart', this._domEventResizeTouchStart, { passive: false });
+            this._domResizeHandle.removeEventListener('mousedown', this._onResizeStart);
+            this._domResizeHandle.removeEventListener('touchstart', this._onResizeTouchStart);
             this._domResizeHandle = null;
         }
 
@@ -353,49 +349,49 @@ class Container extends Element {
         this.emit('remove', element);
     }
 
-    protected _onScroll(evt: Event) {
+    protected _onScroll = (evt: Event) => {
         this.emit('scroll', evt);
-    }
+    };
 
     protected _createResizeHandle() {
         const handle = document.createElement('div');
         handle.classList.add(CLASS_RESIZABLE_HANDLE);
         handle.ui = this;
 
-        handle.addEventListener('mousedown', this._domEventResizeStart);
-        handle.addEventListener('touchstart', this._domEventResizeTouchStart, { passive: false });
+        handle.addEventListener('mousedown', this._onResizeStart);
+        handle.addEventListener('touchstart', this._onResizeTouchStart, { passive: false });
 
         this._domResizeHandle = handle;
     }
 
-    protected _onResizeStart(evt: MouseEvent) {
+    protected _onResizeStart = (evt: MouseEvent) => {
         evt.preventDefault();
         evt.stopPropagation();
 
-        window.addEventListener('mousemove', this._domEventResizeMove);
-        window.addEventListener('mouseup', this._domEventResizeEnd);
+        window.addEventListener('mousemove', this._onResizeMove);
+        window.addEventListener('mouseup', this._onResizeEnd);
 
         this._resizeStart();
-    }
+    };
 
-    protected _onResizeMove(evt: MouseEvent) {
+    protected _onResizeMove = (evt: MouseEvent) => {
         evt.preventDefault();
         evt.stopPropagation();
 
         this._resizeMove(evt.clientX, evt.clientY);
-    }
+    };
 
-    protected _onResizeEnd(evt: MouseEvent) {
+    protected _onResizeEnd = (evt: MouseEvent) => {
         evt.preventDefault();
         evt.stopPropagation();
 
-        window.removeEventListener('mousemove', this._domEventResizeMove);
-        window.removeEventListener('mouseup', this._domEventResizeEnd);
+        window.removeEventListener('mousemove', this._onResizeMove);
+        window.removeEventListener('mouseup', this._onResizeEnd);
 
         this._resizeEnd();
-    }
+    };
 
-    protected _onResizeTouchStart(evt: TouchEvent) {
+    protected _onResizeTouchStart = (evt: TouchEvent) => {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -406,13 +402,13 @@ class Container extends Element {
             }
         }
 
-        window.addEventListener('touchmove', this._domEventResizeTouchMove);
-        window.addEventListener('touchend', this._domEventResizeTouchEnd);
+        window.addEventListener('touchmove', this._onResizeTouchMove);
+        window.addEventListener('touchend', this._onResizeTouchEnd);
 
         this._resizeStart();
-    }
+    };
 
-    protected _onResizeTouchMove(evt: TouchEvent) {
+    protected _onResizeTouchMove = (evt: TouchEvent) => {
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
             if (touch.identifier !== this._resizeTouchId) {
@@ -426,9 +422,9 @@ class Container extends Element {
 
             break;
         }
-    }
+    };
 
-    protected _onResizeTouchEnd(evt: TouchEvent) {
+    protected _onResizeTouchEnd = (evt: TouchEvent) => {
         for (let i = 0; i < evt.changedTouches.length; i++) {
             const touch = evt.changedTouches[i];
             if (touch.identifier === this._resizeTouchId) {
@@ -440,14 +436,14 @@ class Container extends Element {
             evt.preventDefault();
             evt.stopPropagation();
 
-            window.removeEventListener('touchmove', this._domEventResizeTouchMove);
-            window.removeEventListener('touchend', this._domEventResizeTouchEnd);
+            window.removeEventListener('touchmove', this._onResizeTouchMove);
+            window.removeEventListener('touchend', this._onResizeTouchEnd);
 
             this._resizeEnd();
 
             break;
         }
-    }
+    };
 
     protected _resizeStart() {
         this.class.add(CLASS_RESIZING);
@@ -681,32 +677,6 @@ class Container extends Element {
         });
     }
 
-    destroy() {
-        if (this._destroyed) return;
-        this.domContent = null;
-
-        if (this._domResizeHandle) {
-            this._domResizeHandle.removeEventListener('mousedown', this._domEventResizeStart);
-            window.removeEventListener('mousemove', this._domEventResizeMove);
-            window.removeEventListener('mouseup', this._domEventResizeEnd);
-
-            this._domResizeHandle.removeEventListener('touchstart', this._domEventResizeTouchStart);
-            window.removeEventListener('touchmove', this._domEventResizeTouchMove);
-            window.removeEventListener('touchend', this._domEventResizeTouchEnd);
-        }
-
-        this._domResizeHandle = null;
-        this._domEventResizeStart = null;
-        this._domEventResizeMove = null;
-        this._domEventResizeEnd = null;
-        this._domEventResizeTouchStart = null;
-        this._domEventResizeTouchMove = null;
-        this._domEventResizeTouchEnd = null;
-        this._domEventScroll = null;
-
-        super.destroy();
-    }
-
     /**
      * Gets / sets whether the Element supports flex layout.
      */
@@ -837,13 +807,13 @@ class Container extends Element {
         if (this._domContent === value) return;
 
         if (this._domContent) {
-            this._domContent.removeEventListener('scroll', this._domEventScroll);
+            this._domContent.removeEventListener('scroll', this._onScroll);
         }
 
         this._domContent = value;
 
         if (this._domContent) {
-            this._domContent.addEventListener('scroll', this._domEventScroll);
+            this._domContent.addEventListener('scroll', this._onScroll);
         }
     }
 

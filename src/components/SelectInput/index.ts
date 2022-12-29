@@ -127,18 +127,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _containerTags: Container;
 
-    protected _domEvtKeyDown: any;
-
-    protected _domEvtFocus: any;
-
-    protected _domEvtBlur: any;
-
-    protected _domEvtMouseDown: any;
-
-    protected _domEvtWindowMouseDown: any;
-
-    protected _domEvtWheel: any;
-
     protected _type: string;
 
     protected _optionsIndex: { [key: string]: string };
@@ -197,7 +185,12 @@ class SelectInput extends Element implements IBindable, IFocusable {
             class: CLASS_VALUE,
             tabIndex: 0
         });
-        this._labelValue.on('click', this._onValueClick.bind(this));
+        this._labelValue.on('click', () => {
+            if (this.enabled && !this.readOnly) {
+                // toggle dropdown list
+                this.toggle();
+            }
+        });
         this._containerValue.append(this._labelValue);
 
         this._timeoutLabelValueTabIndex = null;
@@ -219,10 +212,10 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         this._lastInputValue = '';
         this._suspendInputChange = false;
-        this._input.on('change', this._onInputChange.bind(this));
-        this._input.on('keydown', this._onInputKeyDown.bind(this));
-        this._input.on('focus', this._onFocus.bind(this));
-        this._input.on('blur', this._onBlur.bind(this));
+        this._input.on('change', this._onInputChange);
+        this._input.on('keydown', this._onInputKeyDown);
+        this._input.on('focus', this._onFocus);
+        this._input.on('blur', this._onBlur);
 
         if (args.placeholder) {
             this.placeholder = args.placeholder;
@@ -250,21 +243,16 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
 
         // events
-        this._domEvtKeyDown = this._onKeyDown.bind(this);
-        this._domEvtFocus = this._onFocus.bind(this);
-        this._domEvtBlur = this._onBlur.bind(this);
-        this._domEvtMouseDown = this._onMouseDown.bind(this);
-        this._domEvtWindowMouseDown = this._onWindowMouseDown.bind(this);
-        this._domEvtWheel = this._onWheel.bind(this);
+        this._labelValue.dom.addEventListener('keydown', this._onKeyDown);
+        this._labelValue.dom.addEventListener('focus', this._onFocus);
+        this._labelValue.dom.addEventListener('blur', this._onBlur);
+        this._labelValue.dom.addEventListener('mousedown', this._onMouseDown);
 
-        this._labelValue.dom.addEventListener('keydown', this._domEvtKeyDown);
-        this._labelValue.dom.addEventListener('focus', this._domEvtFocus);
-        this._labelValue.dom.addEventListener('blur', this._domEvtBlur);
-        this._labelValue.dom.addEventListener('mousedown', this._domEvtMouseDown);
+        this._containerOptions.dom.addEventListener('wheel', this._onWheel, { passive: true });
 
-        this._containerOptions.dom.addEventListener('wheel', this._domEvtWheel, { passive: true });
-
-        this.on('hide', this.close.bind(this));
+        this.on('hide', () => {
+            this.close();
+        });
 
         this._type = args.type;
 
@@ -298,6 +286,27 @@ class SelectInput extends Element implements IBindable, IFocusable {
         });
 
         this._updateInputFieldsVisibility(false);
+    }
+
+    destroy() {
+        if (this._destroyed) return;
+
+        this._labelValue.dom.removeEventListener('keydown', this._onKeyDown);
+        this._labelValue.dom.removeEventListener('mousedown', this._onMouseDown);
+        this._labelValue.dom.removeEventListener('focus', this._onFocus);
+        this._labelValue.dom.removeEventListener('blur', this._onBlur);
+
+        this._containerOptions.dom.removeEventListener('wheel', this._onWheel);
+
+        window.removeEventListener('keydown', this._onKeyDown);
+        window.removeEventListener('mousedown', this._onWindowMouseDown);
+
+        if (this._timeoutLabelValueTabIndex) {
+            cancelAnimationFrame(this._timeoutLabelValueTabIndex);
+            this._timeoutLabelValueTabIndex = null;
+        }
+
+        super.destroy();
     }
 
     protected _initializeCreateLabel() {
@@ -393,13 +402,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
 
         return this._convertSingleValue(value);
-    }
-
-    // toggle dropdown list
-    protected _onValueClick() {
-        if (!this.enabled || this.readOnly) return;
-
-        this.toggle();
     }
 
     // Update our value with the specified selected option
@@ -606,7 +608,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
     }
 
-    protected _onInputChange(value: any) {
+    protected _onInputChange = (value: any) => {
         if (this._suspendInputChange) return;
 
         if (this._lastInputValue === value) return;
@@ -616,7 +618,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._lastInputValue = value;
 
         this._filterOptions(value);
-    }
+    };
 
     protected _filterOptions(filter: any) {
         // first remove all options
@@ -654,7 +656,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._resizeShadow();
     }
 
-    protected _onInputKeyDown(evt: KeyboardEvent) {
+    protected _onInputKeyDown = (evt: KeyboardEvent) => {
         if (evt.key === 'Enter' && this.enabled && !this.readOnly) {
             evt.stopPropagation();
             evt.preventDefault();
@@ -687,14 +689,15 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
 
         this._onKeyDown(evt);
-    }
+    };
 
-    protected _onWindowMouseDown(evt: MouseEvent) {
-        if (this.dom.contains(evt.target as Node)) return;
-        this.close();
-    }
+    protected _onWindowMouseDown = (evt: MouseEvent) => {
+        if (!this.dom.contains(evt.target as Node)) {
+            this.close();
+        }
+    };
 
-    protected _onKeyDown(evt: KeyboardEvent) {
+    protected _onKeyDown = (evt: KeyboardEvent) => {
         // close options on ESC and blur
         if (evt.key === 'Escape') {
             this.close();
@@ -769,36 +772,36 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 }
             }
         }
-    }
+    };
 
     protected _resizeShadow() {
         this._domShadow.style.height = (this._containerValue.height + this._containerOptions.height) + 'px';
     }
 
-    protected _onMouseDown() {
+    protected _onMouseDown = () => {
         if (!this._allowInput) {
             this.focus();
         }
-    }
+    };
 
-    protected _onFocus() {
+    protected _onFocus = () => {
         this.class.add(pcuiClass.FOCUS);
         this.emit('focus');
         if (!this._input.hidden) {
             this.open();
         }
-    }
+    };
 
-    protected _onBlur() {
+    protected _onBlur = () => {
         this.class.remove(pcuiClass.FOCUS);
         this.emit('blur');
-    }
+    };
 
-    protected _onWheel(evt: WheelEvent) {
+    protected _onWheel = (evt: WheelEvent) => {
         // prevent scrolling on other stuff like the viewport
         // when we are scrolling on the select input
         evt.stopPropagation();
-    }
+    };
 
     protected _updateInputFieldsVisibility(focused?: boolean) {
         let showInput = false;
@@ -883,9 +886,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this.class.add(CLASS_OPEN);
 
         // register keydown on entire window
-        window.addEventListener('keydown', this._domEvtKeyDown);
+        window.addEventListener('keydown', this._onKeyDown);
         // register mousedown on entire window
-        window.addEventListener('mousedown', this._domEvtWindowMouseDown);
+        window.addEventListener('mousedown', this._onWindowMouseDown);
 
         // if the dropdown list goes below the window show it above the field
         const startField = this._allowInput ? this._input.dom : this._labelValue.dom;
@@ -936,8 +939,8 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._domShadow.style.height = '';
 
         this.class.remove(CLASS_OPEN);
-        window.removeEventListener('keydown', this._domEvtKeyDown);
-        window.removeEventListener('mousedown', this._domEvtWindowMouseDown);
+        window.removeEventListener('keydown', this._onKeyDown);
+        window.removeEventListener('mousedown', this._onWindowMouseDown);
     }
 
     /**
@@ -957,27 +960,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
         if (!this._containerOptions.hidden) {
             this.close();
         }
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-
-        this._labelValue.dom.removeEventListener('keydown', this._domEvtKeyDown);
-        this._labelValue.dom.removeEventListener('mousedown', this._domEvtMouseDown);
-        this._labelValue.dom.removeEventListener('focus', this._domEvtFocus);
-        this._labelValue.dom.removeEventListener('blur', this._domEvtBlur);
-
-        this._containerOptions.dom.removeEventListener('wheel', this._domEvtWheel);
-
-        window.removeEventListener('keydown', this._domEvtKeyDown);
-        window.removeEventListener('mousedown', this._domEvtWindowMouseDown);
-
-        if (this._timeoutLabelValueTabIndex) {
-            cancelAnimationFrame(this._timeoutLabelValueTabIndex);
-            this._timeoutLabelValueTabIndex = null;
-        }
-
-        super.destroy();
     }
 
     set options(value) {
@@ -1099,7 +1081,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     /* eslint accessor-pairs: 0 */
     set values(values: Array<any>) {
-        values = values.map(this._convertValue.bind(this));
+        values = values.map((value) => {
+            return this._convertValue(value);
+        });
 
         let different = false;
         const value = values[0];

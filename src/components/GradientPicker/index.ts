@@ -49,13 +49,7 @@ class GradientPicker extends Element {
 
     protected _checkerboardPattern: CanvasPattern;
 
-    protected _resizeInterval?: any;
-
-    protected _domEventKeyDown: any;
-
-    protected _domEventFocus: any;
-
-    protected _domEventBlur: any;
+    protected _resizeInterval: number;
 
     protected _panel: Panel;
 
@@ -136,23 +130,21 @@ class GradientPicker extends Element {
         this._canvas = new Canvas({ useDevicePixelRatio: true });
         this.dom.appendChild(this._canvas.dom);
         this._canvas.parent = this;
-        this._canvas.on('resize', this._renderGradient.bind(this));
+        this._canvas.on('resize', () => {
+            this._renderGradient();
+        });
         const canvasElement = this._canvas.dom as HTMLCanvasElement;
-        this._checkerboardPattern = this.createCheckerboardPattern(canvasElement.getContext('2d'));
+        this._checkerboardPattern = this._createCheckerboardPattern(canvasElement.getContext('2d'));
 
         // make sure canvas is the same size as the container element
         // 20 times a second
-        this._resizeInterval = setInterval(() => {
-            this._canvas.resize((this.width as number), (this.height as number));
+        this._resizeInterval = window.setInterval(() => {
+            this._canvas.resize(this.width, this.height);
         }, 1000 / 20);
 
-        this._domEventKeyDown = this._onKeyDown.bind(this);
-        this._domEventFocus = this._onFocus.bind(this);
-        this._domEventBlur = this._onBlur.bind(this);
-
-        this.dom.addEventListener('keydown', this._domEventKeyDown);
-        this.dom.addEventListener('focus', this._domEventFocus);
-        this.dom.addEventListener('blur', this._domEventBlur);
+        this.dom.addEventListener('keydown', this._onKeyDown);
+        this.dom.addEventListener('focus', this._onFocus);
+        this.dom.addEventListener('blur', this._onBlur);
 
         this.on('click', () => {
             if (!this.enabled || this.readOnly || this.class.contains(CLASS_MULTIPLE_VALUES)) return;
@@ -331,10 +323,6 @@ class GradientPicker extends Element {
             colorPicker: null
         };
 
-        this.doCopy = this.doCopy.bind(this);
-        this.doPaste = this.doPaste.bind(this);
-        this.doDelete = this.doDelete.bind(this);
-
         // current state
         this.STATE = {
             curves: [],            // holds all the gradient curves (either 3 or 4 of them)
@@ -386,7 +374,9 @@ class GradientPicker extends Element {
 
         this.UI.footer.append(this.UI.typeCombo);
         this.UI.typeCombo.value = -1;
-        this.UI.typeCombo.on('change', this.onTypeChanged.bind(this));
+        this.UI.typeCombo.on('change', (value: number) => {
+            this._onTypeChanged(value);
+        });
 
         // this.UI.footer.append(this.UI.positionLabel);
 
@@ -399,7 +389,9 @@ class GradientPicker extends Element {
             }
         });
 
-        this.UI.copyButton.on('click', this.doCopy);
+        this.UI.copyButton.on('click', () => {
+            this.doCopy();
+        });
         this.UI.copyButton.class.add('copy-curve-button');
         this.UI.footer.append(this.UI.copyButton);
         // Tooltip.attach({
@@ -409,11 +401,15 @@ class GradientPicker extends Element {
         //     root: this.UI.root
         // });
 
-        this.UI.pasteButton.on('click', this.doPaste);
+        this.UI.pasteButton.on('click', () => {
+            this.doPaste();
+        });
         this.UI.pasteButton.class.add('paste-curve-button');
         this.UI.footer.append(this.UI.pasteButton);
 
-        this.UI.deleteButton.on('click', this.doDelete);
+        this.UI.deleteButton.on('click', () => {
+            this.doDelete();
+        });
         this.UI.deleteButton.class.add('delete-curve-button');
         this.UI.footer.append(this.UI.deleteButton);
 
@@ -455,12 +451,6 @@ class GradientPicker extends Element {
             this.colorSelectedAnchor(color, true);
         });
 
-        this.anchorsOnMouseDown = this.anchorsOnMouseDown.bind(this);
-        this.anchorsOnMouseMove = this.anchorsOnMouseMove.bind(this);
-        this.anchorsOnMouseUp = this.anchorsOnMouseUp.bind(this);
-
-        this.emitCurveChange = this.emitCurveChange.bind(this);
-
         this._copiedData = null;
 
         this._channels = args.channels || 3;
@@ -471,7 +461,19 @@ class GradientPicker extends Element {
         }
     }
 
-    createCheckerboardPattern(context: CanvasRenderingContext2D) {
+    destroy() {
+        if (this._destroyed) return;
+
+        this.dom.removeEventListener('keydown', this._onKeyDown);
+        this.dom.removeEventListener('focus', this._onFocus);
+        this.dom.removeEventListener('blur', this._onBlur);
+
+        window.clearInterval(this._resizeInterval);
+
+        super.destroy();
+    }
+
+    protected _createCheckerboardPattern(context: CanvasRenderingContext2D) {
         // create checkerboard pattern
         const canvas = document.createElement('canvas');
         const size = 24;
@@ -491,7 +493,7 @@ class GradientPicker extends Element {
         return context.createPattern(canvas, 'repeat');
     }
 
-    protected _onKeyDown(evt: KeyboardEvent) {
+    protected _onKeyDown = (evt: KeyboardEvent) => {
         // escape blurs the field
         if (evt.key === 'Escape') {
             this.blur();
@@ -506,15 +508,15 @@ class GradientPicker extends Element {
         evt.preventDefault();
 
         this._openGradientPicker();
-    }
+    };
 
-    protected _onFocus(evt: FocusEvent) {
+    protected _onFocus = (evt: FocusEvent) => {
         this.emit('focus');
-    }
+    };
 
-    protected _onBlur(evt: FocusEvent) {
+    protected _onBlur = (evt: FocusEvent) => {
         this.emit('blur');
-    }
+    };
 
     protected _getDefaultValue() {
         return {
@@ -609,18 +611,6 @@ class GradientPicker extends Element {
 
     blur() {
         this.dom.blur();
-    }
-
-    destroy() {
-        if (this._destroyed) return;
-        this.dom.removeEventListener('keydown', this._domEventKeyDown);
-        this.dom.removeEventListener('focus', this._domEventFocus);
-        this.dom.removeEventListener('blur', this._domEventBlur);
-
-        clearInterval(this._resizeInterval);
-        delete this._resizeInterval;
-
-        super.destroy();
     }
 
     set channels(value) {
@@ -863,7 +853,7 @@ class GradientPicker extends Element {
         return this.editAlpha;
     }
 
-        // open the picker
+    // open the picker
     open() {
         this.UI.overlay.hidden = false;
     }
@@ -875,9 +865,9 @@ class GradientPicker extends Element {
 
     // handle the picker being opened
     onOpen() {
-        window.addEventListener('mousemove', this.anchorsOnMouseMove);
-        window.addEventListener('mouseup', this.anchorsOnMouseUp);
-        this.UI.anchors.dom.addEventListener('mousedown', this.anchorsOnMouseDown);
+        window.addEventListener('mousemove', this._onAnchorsMouseMove);
+        window.addEventListener('mouseup', this._onAnchorsMouseUp);
+        this.UI.anchors.dom.addEventListener('mousedown', this._onAnchorsMouseDown);
         // editor.emit('picker:gradient:open');
         // editor.emit('picker:open', 'gradient');
     }
@@ -885,9 +875,9 @@ class GradientPicker extends Element {
     // handle the picker being closed
     onClose() {
         this.STATE.hoveredAnchor = -1;
-        window.removeEventListener('mousemove', this.anchorsOnMouseMove);
-        window.removeEventListener('mouseup', this.anchorsOnMouseUp);
-        this.UI.anchors.dom.removeEventListener('mousedown', this.anchorsOnMouseDown);
+        window.removeEventListener('mousemove', this._onAnchorsMouseMove);
+        window.removeEventListener('mouseup', this._onAnchorsMouseUp);
+        this.UI.anchors.dom.removeEventListener('mousedown', this._onAnchorsMouseDown);
 
         this._evtRefreshPicker.unbind();
         this._evtRefreshPicker = null;
@@ -905,7 +895,7 @@ class GradientPicker extends Element {
         }
     }
 
-    onTypeChanged(value: string | number) {
+    protected _onTypeChanged(value: number) {
         value = this.STATE.typeMap[value];
         const paths: any = [];
         const values: any[] = [];
@@ -1080,7 +1070,7 @@ class GradientPicker extends Element {
                            rect.height - paddingTop - paddingBottom);
     }
 
-    anchorsOnMouseDown(e: MouseEvent) {
+    protected _onAnchorsMouseDown = (e: MouseEvent) => {
         if (this.STATE.hoveredAnchor === -1) {
             // user clicked in empty space, create new anchor and select it
             const coord = this.calcNormalizedCoord(e.clientX,
@@ -1100,9 +1090,9 @@ class GradientPicker extends Element {
         // drag the selected anchor
         this.dragStart();
         this.UI.draggingAnchor = true;
-    }
+    };
 
-    anchorsOnMouseMove(e: MouseEvent) {
+    protected _onAnchorsMouseMove = (e: MouseEvent) => {
         const coord = this.calcNormalizedCoord(e.clientX,
                                                e.clientY,
                                                this.getClientRect(this.UI.anchors.dom));
@@ -1149,16 +1139,16 @@ class GradientPicker extends Element {
         } else {
             this.UI.anchorAddCrossHair.style.visibility = 'hidden';
         }
-    }
+    };
 
-    anchorsOnMouseUp(evt: MouseEvent) {
+    protected _onAnchorsMouseUp = (evt: MouseEvent) => {
         if (this.UI.draggingAnchor) {
             this.dragEnd();
             this.UI.draggingAnchor = false;
         }
 
         this.UI.anchors.dom.style.cursor = 'pointer';
-    }
+    };
 
     selectHovered(index: number) {
         this.STATE.hoveredAnchor = index;
