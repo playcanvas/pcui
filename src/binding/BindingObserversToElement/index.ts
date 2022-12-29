@@ -43,10 +43,12 @@ class BindingObserversToElement extends BindingBase {
         if (this.applyingChange) return;
         this.applyingChange = true;
 
-        this._updateTimeout = window.setTimeout(this._updateElement);
+        this._updateTimeout = window.setTimeout(() => {
+            this._updateElement();
+        });
     };
 
-    private _updateElement = () => {
+    private _updateElement() {
         if (this._updateTimeout) {
             window.clearTimeout(this._updateTimeout);
             this._updateTimeout = null;
@@ -76,7 +78,7 @@ class BindingObserversToElement extends BindingBase {
         }
 
         this.applyingChange = false;
-    };
+    }
 
     link(observers: Observer|Observer[], paths: string|string[]) {
         super.link(observers, paths);
