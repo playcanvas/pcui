@@ -58,6 +58,8 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
     protected _blurOnEscape: boolean;
 
+    protected _onInputKeyDownEvt: (evt: KeyboardEvent) => void;
+
     constructor(args: TextInputArgs = TextInput.defaultArgs) {
         args = { ...TextInput.defaultArgs, ...args };
         super(args.dom, args);
@@ -74,10 +76,12 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         input.tabIndex = 0;
         input.autocomplete = "off";
 
+        this._onInputKeyDownEvt = this._onInputKeyDown.bind(this);
+
         input.addEventListener('change', this._onInputChange);
         input.addEventListener('focus', this._onInputFocus);
         input.addEventListener('blur', this._onInputBlur);
-        input.addEventListener('keydown', this._onInputKeyDown);
+        input.addEventListener('keydown', this._onInputKeyDownEvt);
         input.addEventListener('contextmenu', this._onInputCtxMenu, false);
 
         this.dom.appendChild(input);
@@ -119,7 +123,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         input.removeEventListener('change', this._onInputChange);
         input.removeEventListener('focus', this._onInputFocus);
         input.removeEventListener('blur', this._onInputBlur);
-        input.removeEventListener('keydown', this._onInputKeyDown);
+        input.removeEventListener('keydown', this._onInputKeyDownEvt);
         input.removeEventListener('keyup', this._onInputKeyUp);
         input.removeEventListener('contextmenu', this._onInputCtxMenu);
 
@@ -159,7 +163,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         this.emit('blur', evt);
     };
 
-    protected _onInputKeyDown = (evt: KeyboardEvent) => {
+    protected _onInputKeyDown(evt: KeyboardEvent) {
         if (evt.key === 'Enter' && this.blurOnEnter) {
             // do not fire input change event on blur
             // if keyChange is true (because a change event)
@@ -185,7 +189,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         }
 
         this.emit('keydown', evt);
-    };
+    }
 
     protected _onInputKeyUp = (evt: KeyboardEvent) => {
         if (evt.key !== 'Escape') {

@@ -53,13 +53,13 @@ class TextAreaInput extends TextInput {
         }
     }
 
-    protected _onInputKeyDown = (evt: KeyboardEvent) => {
+    protected _onInputKeyDown(evt: KeyboardEvent) {
         if ((evt.key === 'Escape' && this.blurOnEscape) || (evt.key === 'Enter' && this.blurOnEnter && !evt.shiftKey)) {
             this._domInput.blur();
         }
 
         this.emit('keydown', evt);
-    };
+    }
 }
 
 Element.register('text', TextAreaInput, { renderChanges: true });
