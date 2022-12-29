@@ -72,7 +72,9 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
                 renderChanges: args.renderChanges,
                 placeholder: args.placeholder ? (Array.isArray(args.placeholder) ? args.placeholder[i] : args.placeholder) : null
             });
-            this._inputs[i].on('change', this._onInputChange);
+            this._inputs[i].on('change', () => {
+                this._onInputChange();
+            });
             this._inputs[i].on('focus', () => {
                 this.emit('focus');
             });
@@ -96,7 +98,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         }
     }
 
-    protected _onInputChange = () => {
+    protected _onInputChange() {
         if (this._applyingChange) return;
 
         // check if any of our inputs have the multiple_values class
@@ -116,7 +118,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         }
 
         this.emit('change', this.value);
-    };
+    }
 
     protected _updateValue(value: number[]) {
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
