@@ -313,8 +313,7 @@ class Container extends Element {
 
         if (this._domResizeHandle) {
             this._domResizeHandle.removeEventListener('mousedown', this._onResizeStart);
-            // @ts-ignore removeEventListener shouldn't be passed the passive option
-            this._domResizeHandle.removeEventListener('touchstart', this._onResizeTouchStart, { passive: false });
+            this._domResizeHandle.removeEventListener('touchstart', this._onResizeTouchStart);
             this._domResizeHandle = null;
         }
 
