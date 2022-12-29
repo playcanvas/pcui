@@ -78,12 +78,12 @@ class Button extends Element {
         }
     };
 
-    protected _onClick(evt: Event) {
+    protected _onClick = (evt: Event) => {
         this.blur();
         if (this.readOnly) return;
 
         super._onClick(evt);
-    }
+    };
 
     focus() {
         this.dom.focus();
