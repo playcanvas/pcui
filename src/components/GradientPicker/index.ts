@@ -375,7 +375,7 @@ class GradientPicker extends Element {
         this.UI.footer.append(this.UI.typeCombo);
         this.UI.typeCombo.value = -1;
         this.UI.typeCombo.on('change', (value: number) => {
-            this.onTypeChanged(value);
+            this._onTypeChanged(value);
         });
 
         // this.UI.footer.append(this.UI.positionLabel);
@@ -895,7 +895,7 @@ class GradientPicker extends Element {
         }
     }
 
-    onTypeChanged(value: number) {
+    protected _onTypeChanged(value: number) {
         value = this.STATE.typeMap[value];
         const paths: any = [];
         const values: any[] = [];
