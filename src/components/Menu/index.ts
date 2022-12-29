@@ -48,7 +48,9 @@ class Menu extends Container implements IFocusable {
         this.domContent = this._containerMenuItems.dom;
 
         this.on('click', this._onClickMenu);
-        this.on('show', this._onShowMenu);
+        this.on('show', () => {
+            this._onShowMenu();
+        });
         this.dom.addEventListener('contextmenu', this._onClickMenu);
         this.dom.addEventListener('keydown', this._onKeyDown);
 
@@ -113,7 +115,7 @@ class Menu extends Container implements IFocusable {
         });
     }
 
-    protected _onShowMenu = () => {
+    protected _onShowMenu() {
         this.focus();
 
         // filter child menu items
