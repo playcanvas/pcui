@@ -100,7 +100,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     protected _suspendArrayElementEvts: boolean;
 
-    protected _arrayElementChangeTimeout: any;
+    protected _arrayElementChangeTimeout: number;
 
     protected _getDefaultFn: any;
 
@@ -412,7 +412,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         // here when only the array element changed value and not the whole array so
         // wait a bit and fire the change event later otherwise the _updateValues function
         // will cancel this timeout and fire a change event for the whole array instead
-        this._arrayElementChangeTimeout = setTimeout(() => {
+        this._arrayElementChangeTimeout = window.setTimeout(() => {
             this._arrayElementChangeTimeout = null;
             this.emit('change', this.value);
         });
@@ -504,7 +504,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         this._suspendArrayElementEvts = false;
 
         if (this._arrayElementChangeTimeout) {
-            clearTimeout(this._arrayElementChangeTimeout);
+            window.clearTimeout(this._arrayElementChangeTimeout);
             this._arrayElementChangeTimeout = null;
         }
 
