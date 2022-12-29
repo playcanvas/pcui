@@ -186,10 +186,10 @@ class SelectInput extends Element implements IBindable, IFocusable {
             tabIndex: 0
         });
         this._labelValue.on('click', () => {
-            if (!this.enabled || this.readOnly) return;
-
-            // toggle dropdown list
-            this.toggle();
+            if (this.enabled && !this.readOnly) {
+                // toggle dropdown list
+                this.toggle();
+            }
         });
         this._containerValue.append(this._labelValue);
 
