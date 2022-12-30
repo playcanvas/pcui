@@ -76,7 +76,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
      * @example
      * ```ts
      * arrayInput.on('unlinkElement', (element: Element, index: number) => {
-     *    console.log(`Element ${index} is now unlinked`);
+     *     console.log(`Element ${index} is now unlinked`);
      * });
      * ```
      */

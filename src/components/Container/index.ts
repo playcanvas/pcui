@@ -72,7 +72,7 @@ class Container extends Element {
      * ```ts
      * const container = new Container();
      * container.on('append', (element: Element) => {
-     *    console.log('Element added to container:', element);
+     *     console.log('Element added to container:', element);
      * });
      * ```
      */
@@ -86,7 +86,7 @@ class Container extends Element {
      * ```ts
      * const container = new Container();
      * container.on('remove', (element: Element) => {
-     *   console.log('Element removed from container:', element);
+     *     console.log('Element removed from container:', element);
      * });
      * ```
      */
@@ -114,7 +114,7 @@ class Container extends Element {
      * ```ts
      * const container = new Container();
      * container.on('resize', () => {
-     *    console.log('Container resized to:', container.width, container.height, 'px');
+     *     console.log('Container resized to:', container.width, container.height, 'px');
      * });
      * ```
      */
