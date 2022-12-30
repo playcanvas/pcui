@@ -74,7 +74,7 @@ class TreeViewItem extends Container {
      * @event
      * @example
      * ```ts
-     * treeViewItem.on('select', (item) => {
+     * treeViewItem.on('select', (item: TreeViewItem) => {
      *     console.log('TreeViewItem selected', item);
      * });
      * ```
@@ -87,7 +87,7 @@ class TreeViewItem extends Container {
      * @event
      * @example
      * ```ts
-     * treeViewItem.on('deselect', (item) => {
+     * treeViewItem.on('deselect', (item: TreeViewItem) => {
      *     console.log('TreeViewItem deselected', item);
      * });
      * ```
@@ -100,7 +100,7 @@ class TreeViewItem extends Container {
      * @event
      * @example
      * ```ts
-     * treeViewItem.on('open', (item) => {
+     * treeViewItem.on('open', (item: TreeViewItem) => {
      *    console.log('TreeViewItem opened', item);
      * });
      * ```
@@ -113,7 +113,7 @@ class TreeViewItem extends Container {
      * @event
      * @example
      * ```ts
-     * treeViewItem.on('close', (item) => {
+     * treeViewItem.on('close', (item: TreeViewItem) => {
      *     console.log('TreeViewItem closed', item);
      * });
      * ```
