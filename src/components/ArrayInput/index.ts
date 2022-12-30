@@ -57,21 +57,28 @@ class ArrayInput extends Element implements IFocusable, IBindable {
     };
 
     /**
+     * Fired when an array element is linked to observers.
+     *
      * @event
-     * @name linkElement
-     * @param {Element} element - The array element
-     * @param {number} index - The index of the array element
-     * @param {string} path - The path linked
-     * @description Fired when an array element is linked to observers
+     * @example
+     * ```ts
+     * arrayInput.on('linkElement', (element: Element, index: number, path: string) => {
+     *     console.log(`Element ${index} is now linked to ${path}`);
+     * });
+     * ```
      */
     public static readonly EVENT_LINK_ELEMENT: 'linkElement';
 
     /**
+     * Fired when an array element is unlinked from observers.
+     *
      * @event
-     * @name unlinkElement
-     * @param {Element} element - The array element
-     * @param {number} index - The index of the array element
-     * @description Fired when an array element is unlinked from observers
+     * @example
+     * ```ts
+     * arrayInput.on('unlinkElement', (element: Element, index: number) => {
+     *     console.log(`Element ${index} is now unlinked`);
+     * });
+     * ```
      */
     public static readonly EVENT_UNLINK_ELEMENT: 'unlinkElement';
 

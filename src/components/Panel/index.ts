@@ -65,16 +65,30 @@ export interface PanelArgs extends ContainerArgs {
  */
 class Panel extends Container {
     /**
+     * Fired when the panel gets collapsed.
+     *
      * @event
-     * @name collapse
-     * @description Fired when the panel gets collapsed
+     * @example
+     * ```ts
+     * const panel = new Panel();
+     * panel.on('collapse', () => {
+     *     console.log('Panel collapsed');
+     * });
+     * ```
      */
     public static readonly EVENT_COLLAPSE = 'collapse';
 
     /**
+     * Fired when the panel gets expanded.
+     *
      * @event
-     * @name expand
-     * @description Fired when the panel gets expanded
+     * @example
+     * ```ts
+     * const panel = new Panel();
+     * panel.on('expand', () => {
+     *     console.log('Panel expanded');
+     * });
+     * ```
      */
     public static readonly EVENT_EXPAND = 'expand';
 

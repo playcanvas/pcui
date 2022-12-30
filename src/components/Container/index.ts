@@ -65,33 +65,58 @@ class Container extends Element {
     };
 
     /**
+     * Fired when a child Element gets added to the Container.
+     *
      * @event
-     * @name append
-     * @description Fired when a child Element gets added to the Container
-     * @param {Element} element - The element that was added
+     * @example
+     * ```ts
+     * const container = new Container();
+     * container.on('append', (element: Element) => {
+     *     console.log('Element added to container:', element);
+     * });
+     * ```
      */
     public static readonly EVENT_APPEND = 'append';
 
     /**
+     * Fired when a child Element gets removed from the Container.
+     *
      * @event
-     * @name remove
-     * @description Fired when a child Element gets removed from the Container
-     * @param {Element} element - The element that was removed
+     * @example
+     * ```ts
+     * const container = new Container();
+     * container.on('remove', (element: Element) => {
+     *     console.log('Element removed from container:', element);
+     * });
+     * ```
      */
     public static readonly EVENT_REMOVE = 'remove';
 
     /**
+     * Fired when the container is scrolled. The native DOM scroll event is passed to the event handler.
+     *
      * @event
-     * @name scroll
-     * @description Fired when the container is scrolled.
-     * @param {Event} evt - The native scroll event.
+     * @example
+     * ```ts
+     * const container = new Container();
+     * container.on('scroll', (event: Event) => {
+     *     console.log('Container scrolled:', event);
+     * });
+     * ```
      */
     public static readonly EVENT_SCROLL = 'scroll';
 
     /**
+     * Fired when the container gets resized using the resize handle.
+     *
      * @event
-     * @name resize
-     * @description Fired when the container gets resized using the resize handle.
+     * @example
+     * ```ts
+     * const container = new Container();
+     * container.on('resize', () => {
+     *     console.log('Container resized to:', container.width, container.height, 'px');
+     * });
+     * ```
      */
     public static readonly EVENT_RESIZE = 'resize';
 

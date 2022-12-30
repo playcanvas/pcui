@@ -203,93 +203,173 @@ class Element extends Events {
     };
 
     /**
+     * Fired when the Element gets enabled.
+     *
      * @event
-     * @name enable
-     * @description Fired when the Element gets enabled
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('enable', () => {
+     *     console.log('Element enabled');
+     * });
+     * ```
      */
     public static readonly EVENT_ENABLE = 'enable';
 
     /**
+     * Fired when the Element gets disabled.
+     *
      * @event
-     * @name disable
-     * @description Fired when the Element gets disabled
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('disable', () => {
+     *     console.log('Element disabled');
+     * });
+     * ```
      */
     public static readonly EVENT_DISABLE = 'disable';
 
     /**
+     * Fired when the Element gets hidden.
+     *
      * @event
-     * @name hide
-     * @description Fired when the Element gets hidden
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('hide', () => {
+     *     console.log('Element hidden');
+     * });
+     * ```
      */
     public static readonly EVENT_HIDE = 'hide';
 
     /**
+     * Fired when the Element or any of its parent get hidden.
+     *
      * @event
-     * @name hideToRoot
-     * @description Fired when the Element or any of its parent get hidden
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('hideToRoot', () => {
+     *     console.log('Element or one of its parents hidden');
+     * });
+     * ```
      */
     public static readonly EVENT_HIDE_TO_ROOT = 'hideToRoot';
 
     /**
+     * Fired when the Element stops being hidden.
+     *
      * @event
-     * @name show
-     * @description Fired when the Element stops being hidden
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('show', () => {
+     *     console.log('Element shown');
+     * });
+     * ```
      */
     public static readonly EVENT_SHOW = 'show';
 
     /**
+     * Fired when the Element and all of its parents become visible.
+     *
      * @event
-     * @name showToRoot
-     * @description Fired when the Element and all of its parents become visible
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('showToRoot', () => {
+     *     console.log('Element and all of its parents shown');
+     * });
+     * ```
      */
     public static readonly EVENT_SHOW_TO_ROOT = 'showToRoot';
 
     /**
+     * Fired when the readOnly property of an Element changes.
+     *
      * @event
-     * @name readOnly
-     * @param {boolean} readOnly - Whether the Element is now read only
-     * @description Fired when the readOnly property of an Element changes
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('readOnly', (readOnly: boolean) => {
+     *     console.log(`Element is now ${readOnly ? 'read only' : 'editable'}`);
+     * });
+     * ```
      */
     public static readonly EVENT_READ_ONLY = 'readOnly';
 
     /**
+     * Fired when the Element's parent gets set.
+     *
      * @event
-     * @name parent
-     * @description Fired when the Element's parent gets set
-     * @param {Element} parent - The new parent
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('parent', (parent: Element) => {
+     *     console.log(`Element's parent is now ${parent}`);
+     * });
+     * ```
      */
     public static readonly EVENT_PARENT = 'parent';
 
     /**
+     * Fired when the mouse is clicked on the Element but only if the Element is enabled. The
+     * native DOM MouseEvent is passed as a parameter to the event handler.
+     *
      * @event
-     * @name click
-     * @description Fired when the mouse is clicked on the Element but only if the Element is enabled.
-     * @param {Event} evt - The native mouse event.
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('click', (evt: MouseEvent) => {
+     *     console.log('Element clicked');
+     * });
+     * ```
      */
     public static readonly EVENT_CLICK = 'click';
 
     /**
+     * Fired when the mouse starts hovering on the Element. The native DOM MouseEvent is passed as a
+     * parameter to the event handler.
+     *
      * @event
-     * @name hover
-     * @description Fired when the mouse starts hovering on the Element
-     * @param {Event} evt - The native mouse event.
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('hover', (evt: MouseEvent) => {
+     *     console.log('Element hovered');
+     * });
+     * ```
      */
     public static readonly EVENT_HOVER = 'hover';
 
     /**
+     * Fired when the mouse stops hovering on the Element. The native DOM MouseEvent is passed as a
+     * parameter to the event handler.
+     *
      * @event
-     * @name hoverend
-     * @description Fired when the mouse stops hovering on the Element
-     * @param {Event} evt - The native mouse event.
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('hoverend', (evt: MouseEvent) => {
+     *     console.log('Element hover ended');
+     * });
+     * ```
      */
     public static readonly EVENT_HOVER_END = 'hoverend';
 
     /**
+     * Fired after the element has been destroyed. Both the DOM element and the owner Element
+     * instance are passed as parameters to the event handler.
+     *
      * @event
-     * @name destroy
-     * @description Fired after the element has been destroyed.
-     * @param {HTMLElement} dom - The DOM element
-     * @param {Element} element - The element
+     * @example
+     * ```ts
+     * const element = new Element();
+     * element.on('destroy', (dom: HTMLElement, element: Element) => {
+     *     console.log('Element destroyed');
+     * });
      */
     public static readonly EVENT_DESTROY = 'destroy';
 
