@@ -113,15 +113,6 @@ class ColorPicker extends Element implements IBindable {
         this._domColor = document.createElement('div');
         this.dom.appendChild(this._domColor);
 
-        this._pickRectMouseMove = this._pickRectMouseMove.bind(this);
-        this._pickRectMouseUp = this._pickRectMouseUp.bind(this);
-
-        this._pickHueMouseMove = this._pickHueMouseMove.bind(this);
-        this._pickHueMouseUp = this._pickHueMouseUp.bind(this);
-
-        this._pickOpacityMouseMove = this._pickOpacityMouseMove.bind(this);
-        this._pickOpacityMouseUp = this._pickOpacityMouseUp.bind(this);
-
         this.dom.addEventListener('keydown', this._onKeyDown);
         this.dom.addEventListener('focus', this._onFocus);
         this.dom.addEventListener('blur', this._onBlur);
@@ -507,7 +498,7 @@ class ColorPicker extends Element implements IBindable {
     }
 
     // rect drag
-    protected _pickRectMouseMove(evt: MouseEvent) {
+    protected _pickRectMouseMove = (evt: MouseEvent) => {
         this._changing = true;
         const rect = this._pickRect.getBoundingClientRect();
         const x = Math.max(0, Math.min(this._size, Math.floor(evt.clientX - rect.left)));
@@ -527,18 +518,18 @@ class ColorPicker extends Element implements IBindable {
         this._pickRectHandle.style.left = Math.max(4, Math.min(this._size - 4, x)) + 'px';
         this._pickRectHandle.style.top = Math.max(4, Math.min(this._size - 4, y)) + 'px';
         this._changing = false;
-    }
+    };
 
     // rect drag stop
-    protected _pickRectMouseUp() {
+    protected _pickRectMouseUp = () => {
         window.removeEventListener('mousemove', this._pickRectMouseMove, false);
         window.removeEventListener('mouseup', this._pickRectMouseUp, false);
         this._dragging = false;
         this.emit('picker:color:end');
-    }
+    };
 
     // hue drag
-    protected _pickHueMouseMove(evt: MouseEvent) {
+    protected _pickHueMouseMove = (evt: MouseEvent) => {
         this._changing = true;
         const rect = this._pickHue.getBoundingClientRect();
         const y = Math.max(0, Math.min(this._size, Math.floor(evt.clientY - rect.top)));
@@ -555,18 +546,18 @@ class ColorPicker extends Element implements IBindable {
         this._updateRects();
         this._directInput = true;
         this._changing = false;
-    }
+    };
 
     // hue drag stop
-    protected _pickHueMouseUp() {
+    protected _pickHueMouseUp = () => {
         window.removeEventListener('mousemove', this._pickHueMouseMove, false);
         window.removeEventListener('mouseup', this._pickHueMouseUp, false);
         this._dragging = false;
         this.emit('picker:color:end');
-    }
+    };
 
     // opacity drag
-    protected _pickOpacityMouseMove(evt: MouseEvent) {
+    protected _pickOpacityMouseMove = (evt: MouseEvent) => {
         this._changing = true;
         const rect = this._pickOpacity.getBoundingClientRect();
         const y = Math.max(0, Math.min(this._size, Math.floor(evt.clientY - rect.top)));
@@ -577,14 +568,14 @@ class ColorPicker extends Element implements IBindable {
         this._fieldHex.value = this._getHex();
         this._directInput = true;
         this._changing = false;
-    }
+    };
 
-    protected _pickOpacityMouseUp() {
+    protected _pickOpacityMouseUp = () => {
         window.removeEventListener('mousemove', this._pickOpacityMouseMove, false);
         window.removeEventListener('mouseup', this._pickOpacityMouseUp, false);
         this._dragging = false;
         this.emit('picker:color:end');
-    }
+    };
 
     protected _updateHex() {
         if (!this._directInput)
