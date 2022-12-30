@@ -210,7 +210,7 @@ class Element extends Events {
      * ```ts
      * const element = new Element();
      * element.on('enable', () => {
-     *    console.log('Element enabled');
+     *     console.log('Element enabled');
      * });
      * ```
      */
@@ -252,7 +252,7 @@ class Element extends Events {
      * ```ts
      * const element = new Element();
      * element.on('hideToRoot', () => {
-     *    console.log('Element or one of its parents hidden');
+     *     console.log('Element or one of its parents hidden');
      * });
      * ```
      */
@@ -368,7 +368,7 @@ class Element extends Events {
      * ```ts
      * const element = new Element();
      * element.on('destroy', (dom: HTMLElement, element: Element) => {
-     *    console.log('Element destroyed');
+     *     console.log('Element destroyed');
      * });
      */
     public static readonly EVENT_DESTROY = 'destroy';

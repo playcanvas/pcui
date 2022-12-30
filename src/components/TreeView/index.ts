@@ -94,7 +94,7 @@ class TreeView extends Container {
      * ```ts
      * const treeView = new TreeView();
      * treeView.on('reparent', (reparented: { item: TreeViewItem; oldParent: Element; }[]) => {
-     *    console.log(`Reparented ${reparented.length} items`);
+     *     console.log(`Reparented ${reparented.length} items`);
      * });
      * ```
      */

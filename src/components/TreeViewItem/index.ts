@@ -101,7 +101,7 @@ class TreeViewItem extends Container {
      * @example
      * ```ts
      * treeViewItem.on('open', (item: TreeViewItem) => {
-     *    console.log('TreeViewItem opened', item);
+     *     console.log('TreeViewItem opened', item);
      * });
      * ```
      */
