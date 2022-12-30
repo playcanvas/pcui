@@ -56,7 +56,7 @@ export interface TreeViewItemArgs extends ContainerArgs {
 }
 
 /**
- * Represents a Tree View Item to be added to a {@link TreeView}.
+ * A TreeViewItem is a single node in a hierarchical {@link TreeView} control.
  */
 class TreeViewItem extends Container {
     static readonly defaultArgs: TreeViewItemArgs = {
