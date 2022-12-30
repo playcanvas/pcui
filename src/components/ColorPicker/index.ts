@@ -1,4 +1,4 @@
-import Element, { ElementArgs } from '../Element/index';
+import Element, { ElementArgs, IBindable, IBindableArgs } from '../Element/index';
 import Overlay from '../Overlay/index';
 import NumericInput from '../NumericInput/index';
 import TextInput from '../TextInput/index';
@@ -11,8 +11,7 @@ const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
 /**
  * The arguments for the {@link ColorPicker} constructor.
  */
-export interface ColorPickerArgs extends ElementArgs {
-    renderChanges?: boolean;
+export interface ColorPickerArgs extends ElementArgs, IBindableArgs {
     /**
      * An array of 4 integers containing the RGBA values the picker should be initialized to. Defaults to `[0, 0, 255, 1]`.
      */
@@ -26,13 +25,12 @@ export interface ColorPickerArgs extends ElementArgs {
 /**
  * Represents a color picker.
  */
-class ColorPicker extends Element {
+class ColorPicker extends Element implements IBindable {
     static readonly defaultArgs: ColorPickerArgs = {
         ...Element.defaultArgs,
         channels: 3,
         value: [0, 0, 255, 1],
-        renderChanges: false,
-        dom: 'div'
+        renderChanges: false
     };
 
     protected _domColor: HTMLDivElement;
@@ -44,8 +42,6 @@ class ColorPicker extends Element {
     protected _value: number[];
 
     protected _channels: number;
-
-    protected _isColorPickerOpen: boolean;
 
     protected _size: number;
 
@@ -91,17 +87,9 @@ class ColorPicker extends Element {
 
     protected _evtColorPickEnd: any;
 
-    protected _fieldR: NumericInput;
-
-    protected _fieldG: NumericInput;
-
-    protected _fieldB: NumericInput;
-
-    protected _fieldA: NumericInput;
-
     protected _fieldHex: TextInput;
 
-    renderChanges: any;
+    protected _renderChanges: boolean;
 
     constructor(args: ColorPickerArgs = ColorPicker.defaultArgs) {
         args = { ...ColorPicker.defaultArgs, ...args };
@@ -151,8 +139,6 @@ class ColorPicker extends Element {
         this._channels = args.channels;
         this._setValue(this._value);
 
-        this._isColorPickerOpen = false;
-
         this.renderChanges = args.renderChanges;
 
         this.on('change', () => {
@@ -162,13 +148,12 @@ class ColorPicker extends Element {
         });
 
         // overlay
-        this._overlay = new Overlay();
-        this._overlay.clickable = true;
-        this._overlay.class.add('picker-color');
-        // @ts-ignore center not a property of Overlay
-        this._overlay.center = false;
-        this._overlay.transparent = true;
-        this._overlay.hidden = true;
+        this._overlay = new Overlay({
+            class: 'picker-color',
+            clickable: true,
+            hidden: true,
+            transparent: true
+        });
         this.dom.appendChild(this._overlay.dom);
 
         // rectangular picker
@@ -226,7 +211,6 @@ class ColorPicker extends Element {
         this._pickHueHandle.classList.add('handle');
         this._pickHue.appendChild(this._pickHueHandle);
 
-
         // opacity (gradient) picker
         this._pickOpacity = document.createElement('div');
         this._pickOpacity.classList.add('pick-opacity');
@@ -249,7 +233,6 @@ class ColorPicker extends Element {
         this._pickOpacityHandle = document.createElement('div');
         this._pickOpacityHandle.classList.add('handle');
         this._pickOpacity.appendChild(this._pickOpacityHandle);
-
 
         // fields
         this._panelFields = document.createElement('div');
@@ -275,78 +258,54 @@ class ColorPicker extends Element {
             this._evtColorPickEnd = null;
         });
 
-        // R
-        this._fieldR = new NumericInput({
-            precision: 1,
-            step: 1,
-            min: 0,
-            max: 255
-        });
+        const createChannelInput = (channel: string) => {
+            return new NumericInput({
+                class: ['field', 'field-' + channel],
+                precision: 0,
+                step: 1,
+                min: 0,
+                max: 255,
+                placeholder: channel
+            });
+        };
 
-        this._pickerChannels.push(this._fieldR);
-        this._fieldR.renderChanges = false;
-        this._fieldR.placeholder = 'r';
-        // @ts-ignore
-        this._fieldR.flexGrow = 1;
-        this._fieldR.class.add('field', 'field-r');
-        this._fieldR.on('change', () => {
+        // R
+        const fieldR = createChannelInput('r');
+        fieldR.on('change', () => {
             this._updateRects();
         });
-        this._panelFields.appendChild(this._fieldR.dom);
+        this._pickerChannels.push(fieldR);
+        this._panelFields.appendChild(fieldR.dom);
 
         // G
-        this._fieldG = new NumericInput({
-            precision: 1,
-            step: 1,
-            min: 0,
-            max: 255
-        });
-        this._pickerChannels.push(this._fieldG);
-        this._fieldG.renderChanges = false;
-        this._fieldG.placeholder = 'g';
-        this._fieldG.class.add('field', 'field-g');
-        this._fieldG.on('change', () => {
+        const fieldG = createChannelInput('g');
+        fieldG.on('change', () => {
             this._updateRects();
         });
-        this._panelFields.appendChild(this._fieldG.dom);
+        this._pickerChannels.push(fieldG);
+        this._panelFields.appendChild(fieldG.dom);
 
         // B
-        this._fieldB = new NumericInput({
-            precision: 1,
-            step: 1,
-            min: 0,
-            max: 255
-        });
-        this._pickerChannels.push(this._fieldB);
-        this._fieldB.renderChanges = false;
-        this._fieldB.placeholder = 'b';
-        this._fieldB.class.add('field', 'field-b');
-        this._fieldB.on('change', () => {
+        const fieldB = createChannelInput('b');
+        fieldB.on('change', () => {
             this._updateRects();
         });
-        this._panelFields.appendChild(this._fieldB.dom);
+        this._pickerChannels.push(fieldB);
+        this._panelFields.appendChild(fieldB.dom);
 
-        this._fieldA = new NumericInput({
-            precision: 1,
-            step: 1,
-            min: 0,
-            max: 255
-        });
-        this._pickerChannels.push(this._fieldA);
-        this._fieldA.renderChanges = false;
-        this._fieldA.placeholder = 'a';
-        this._fieldA.class.add('field', 'field-a');
-        this._fieldA.on('change', (value: number) => {
+        // A
+        const fieldA = createChannelInput('a');
+        fieldA.on('change', (value: number) => {
             this._updateRectAlpha(value);
         });
-        this._panelFields.appendChild(this._fieldA.dom);
-
+        this._pickerChannels.push(fieldA);
+        this._panelFields.appendChild(fieldA.dom);
 
         // HEX
-        this._fieldHex = new TextInput({});
-        this._fieldHex.renderChanges = false;
-        this._fieldHex.placeholder = '#';
-        this._fieldHex.class.add('field', 'field-hex');
+        this._fieldHex = new TextInput({
+            class: ['field', 'field-hex'],
+            placeholder: '#'
+        });
         this._fieldHex.on('change', () => {
             this._updateHex();
         });
@@ -394,12 +353,6 @@ class ColorPicker extends Element {
         this.emit('blur');
     };
 
-    protected _closePicker() {
-        this._overlay.hidden = true;
-        this._isColorPickerOpen = false;
-        this.focus();
-    }
-
     protected _setColorPickerPosition(x: number, y: number) {
         this._overlay.position(x, y);
     }
@@ -425,8 +378,6 @@ class ColorPicker extends Element {
     }
 
     protected _openColorPicker() {
-        this._isColorPickerOpen = true;
-
         // open color picker
         this._callPicker(this.value.map(c => Math.floor(c * 255)));
 
@@ -509,7 +460,6 @@ class ColorPicker extends Element {
     protected _valueToColor(value: number) {
         value = Math.floor(value * 255);
         return Math.max(0, Math.min(value, 255));
-
     }
 
     protected _setValue(value: number[]) {
@@ -623,7 +573,7 @@ class ColorPicker extends Element {
         const o = 1.0 - y / this._size;
 
         this._directInput = false;
-        this._fieldA.value = Math.max(0, Math.min(255, Math.round(o * 255)));
+        this._pickerChannels[3].value = Math.max(0, Math.min(255, Math.round(o * 255)));
         this._fieldHex.value = this._getHex();
         this._directInput = true;
         this._changing = false;
@@ -707,7 +657,7 @@ class ColorPicker extends Element {
         this.callCallback();
     }
 
-
+    /** @ignore */
     callbackHandle() {
         this._callingCallback = false;
 
@@ -716,6 +666,7 @@ class ColorPicker extends Element {
         }).slice(0, this._channelsNumber));
     }
 
+    /** @ignore */
     callCallback() {
         if (this._callingCallback)
             return;
@@ -739,6 +690,7 @@ class ColorPicker extends Element {
         return this._value.slice(0, this._channels);
     }
 
+    /* eslint accessor-pairs: 0 */
     set values(values: Array<number>) {
         let different = false;
         const value = values[0];
@@ -767,10 +719,6 @@ class ColorPicker extends Element {
         }
     }
 
-    get values() {
-        return this.values;
-    }
-
     set channels(value) {
         if (this._channels === value) return;
         this._channels = Math.max(0, Math.min(value, 4));
@@ -779,6 +727,14 @@ class ColorPicker extends Element {
 
     get channels() {
         return this._channels;
+    }
+
+    set renderChanges(value: boolean) {
+        this._renderChanges = value;
+    }
+
+    get renderChanges() {
+        return this._renderChanges;
     }
 }
 
