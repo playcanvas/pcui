@@ -69,34 +69,54 @@ class TreeViewItem extends Container {
     };
 
     /**
+     * Fired when user selects the TreeViewItem.
+     *
      * @event
-     * @name select
-     * @description Fired when we select the TreeViewItem.
-     * @param {TreeViewItem} item - The item
+     * @example
+     * ```ts
+     * treeViewItem.on('select', (item) => {
+     *     console.log('TreeViewItem selected', item);
+     * });
+     * ```
      */
     public static readonly EVENT_SELECT = 'select';
 
     /**
+     * Fired when user deselects the TreeViewItem.
+     *
      * @event
-     * @name deselect
-     * @description Fired when we deselect the TreeViewItem.
-     * @param {TreeViewItem} item - The item
+     * @example
+     * ```ts
+     * treeViewItem.on('deselect', (item) => {
+     *     console.log('TreeViewItem deselected', item);
+     * });
+     * ```
      */
     public static readonly EVENT_DESELECT = 'deselect';
 
     /**
+     * Fired when user opens the TreeViewItem.
+     *
      * @event
-     * @name open
-     * @description Fired when we open a TreeViewItem
-     * @param {TreeViewItem} item - The item
+     * @example
+     * ```ts
+     * treeViewItem.on('open', (item) => {
+     *    console.log('TreeViewItem opened', item);
+     * });
+     * ```
      */
     public static readonly EVENT_OPEN = 'open';
 
     /**
+     * Fired when user closes the TreeViewItem.
+     *
      * @event
-     * @name close
-     * @description Fired when we close the TreeViewItem.
-     * @param {TreeViewItem} item - The item
+     * @example
+     * ```ts
+     * treeViewItem.on('close', (item) => {
+     *     console.log('TreeViewItem closed', item);
+     * });
+     * ```
      */
     public static readonly EVENT_CLOSE = 'close';
 

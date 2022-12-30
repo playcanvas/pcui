@@ -55,50 +55,90 @@ export interface TreeViewArgs extends ContainerArgs {
  */
 class TreeView extends Container {
     /**
+     * Fired when user starts dragging selected TreeViewItems.
+     *
      * @event
-     * @name dragstart
-     * @param {TreeViewItem[]} items - The dragged items
-     * @description Fired when we start dragging a TreeViewItem
+     * @example
+     * ```ts
+     * const treeView = new TreeView({
+     *     allowDrag: true // this is the default but we're showing it here for clarity
+     * });
+     * treeView.on('dragstart', (items) => {
+     *     console.log(`Drag started of ${items.length} items');
+     * });
+     * ```
      */
     public static readonly EVENT_DRAGSTART = 'dragstart';
 
     /**
+     * Fired when user stops dragging selected TreeViewItems.
+     *
      * @event
-     * @name dragend
-     * @description Fired when we stop dragging a TreeViewItem
+     * @example
+     * ```ts
+     * const treeView = new TreeView({
+     *     allowDrag: true // this is the default but we're showing it here for clarity
+     * });
+     * treeView.on('dragend', () => {
+     *     console.log('Drag ended');
+     * });
+     * ```
      */
     public static readonly EVENT_DRAGEND = 'dragend';
 
     /**
+     * Fired when user reparents TreeViewItems.
+     *
      * @event
-     * @name reparent
-     * @description Fired when we reparent TreeViewItems
-     * @param {object[]} items - An array of items we reparented. Each array element contains an object like so: \{item, newParent, newChildIndex, oldParent\}.
+     * @example
+     * ```ts
+     * const treeView = new TreeView();
+     * treeView.on('reparent', (reparented: { item: TreeViewItem; oldParent: Element; }[]) => {
+     *    console.log(`Reparented ${reparented.length} items`);
+     * });
+     * ```
      */
     public static readonly EVENT_REPARENT = 'reparent';
 
     /**
+     * Fired when user selects a TreeViewItem.
+     *
      * @event
-     * @name select
-     * @description Fired when we select a TreeViewItem
-     * @param {TreeViewItem} item - The item
+     * @example
+     * ```ts
+     * const treeView = new TreeView();
+     * treeView.on('select', (item: TreeViewItem) => {
+     *     console.log(`Selected item ${item.text}`);
+     * });
+     * ```
      */
     public static readonly EVENT_SELECT = 'select';
 
     /**
+     * Fired when user deselects a TreeViewItem.
+     *
      * @event
-     * @name deselect
-     * @description Fired when we deselect a TreeViewItem
-     * @param {TreeViewItem} item - The item
+     * @example
+     * ```ts
+     * const treeView = new TreeView();
+     * treeView.on('deselect', (item: TreeViewItem) => {
+     *     console.log(`Deselected item ${item.text}`);
+     * });
+     * ```
      */
     public static readonly EVENT_DESELECT = 'deselect';
 
     /**
+     * Fired when user renames a TreeViewItem.
+     *
      * @event
-     * @name rename
-     * @description Fired when we rename a TreeViewItem
-     * @param {TreeViewItem} item - The item
-     * @param {string} name - The new name
+     * @example
+     * ```ts
+     * const treeView = new TreeView();
+     * treeView.on('rename', (item: TreeViewItem, name: string) => {
+     *     console.log(`Renamed item to ${name}`);
+     * });
+     * ```
      */
     public static readonly EVENT_RENAME = 'rename';
 
