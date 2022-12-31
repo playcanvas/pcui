@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PCUI ColorPicker</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: #364346;
+        }
+
+        .font-regular, .font-bold, .font-thin, .font-light {
+            font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <style>
+        .pcui-label-group > .pcui-label:first-child {
+            font-size: 16px;
+        }
+    </style>
+    <title>PCUI VectorInput</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: #364346;
+        }
+
+        .font-regular, .font-bold, .font-thin, .font-light {
+            font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <script async src="https://unpkg.com/es-module-shims/dist/es-module-shims.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "@playcanvas/observer": "https://unpkg.com/@playcanvas/observer/dist/index.mjs",
+                "@playcanvas/pcui": "https://unpkg.com/@playcanvas/pcui/dist/module/src/index.mjs",
+                "@playcanvas/pcui/styles": "https://unpkg.com/@playcanvas/pcui/styles/dist/index.mjs"
+            }
+        }
+    </script>
+</head>
+<body>
+    <script type="module">
+        import { ColorPicker, LabelGroup } from '@playcanvas/pcui';
+        import '@playcanvas/pcui/styles'
+
+        const rgb = new ColorPicker();
+        const rgbGroup = new LabelGroup({
+            field: rgb,
+            text: 'RGB:'
+        });
+
+        const rgba = new ColorPicker({
+            channels: 4
+        });
+        const rgbaGroup = new LabelGroup({
+            field: rgba,
+            text: 'RGB + Alpha:'
+        });
+
+        document.body.appendChild(rgbGroup.dom);
+        document.body.appendChild(rgbaGroup.dom);
+    </script>
+</body>
+</html>
