@@ -13,10 +13,6 @@
         "scss/no-global-function-names": null,
         "scss/at-extend-no-missing-placeholder": null,
         "selector-class-pattern": null,
-        "string-quotes": "single",
-
-        "at-rule-no-vendor-prefix": null,
-        "property-no-vendor-prefix": null,
-        "value-no-vendor-prefix": null
+        "string-quotes": "single"
     }
 }
