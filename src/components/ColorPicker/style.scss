@@ -121,12 +121,7 @@
                 height: 144px;
                 top: 0;
                 left: 0;
-                background: -moz-linear-gradient(left, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 100%)), color-stop(100%, rgba(255, 255, 255, 1%))); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(left, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(left, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(left, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* IE10+ */
-                background: linear-gradient(to right, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%); /* W3C */
+                background: linear-gradient(to right, rgba(255, 255, 255, 100%) 0%, rgba(255, 255, 255, 1%) 100%);
             }
 
             > .black {
@@ -135,12 +130,7 @@
                 height: 144px;
                 top: 0;
                 left: 0;
-                background: -moz-linear-gradient(top, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 1%)), color-stop(100%, rgba(0, 0, 0, 100%))); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(top, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(top, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* IE10+ */
-                background: linear-gradient(to bottom, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%); /* W3C */
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 1%) 0%, rgba(0, 0, 0, 100%) 100%);
             }
 
             > .handle {
@@ -169,65 +159,8 @@
             cursor: crosshair;
             background: #000;
             background:
-                -moz-linear-gradient(
-                    top, /* FF3.6+ */
-                    rgba(255, 0, 0, 100%) 0%,
-                    rgba(255, 255, 0, 100%) 16.67%,
-                    rgba(0, 255, 0, 100%) 33.33%,
-                    rgba(0, 255, 255, 100%) 50%,
-                    rgba(0, 0, 255, 100%) 66.67%,
-                    rgba(255, 0, 255, 100%) 83.33%,
-                    rgba(255, 0, 0, 100%) 100%
-                );
-            background:
-                -webkit-gradient(
-                    linear, /* Chrome,Safari4+ */
-                    left top,
-                    left bottom,
-                    color-stop(0%, rgba(255, 0, 0, 100%)),
-                    color-stop(16.67%, rgba(255, 255, 0, 100%)),
-                    color-stop(33.33%, rgba(0, 255, 0, 100%)),
-                    color-stop(50%, rgba(0, 255, 255, 100%)),
-                    color-stop(66.67%, rgba(0, 0, 255, 100%)),
-                    color-stop(83.33%, rgba(255, 0, 255, 100%)),
-                    color-stop(100%, rgba(255, 0, 0, 100%))
-                );
-            background:
-                -webkit-linear-gradient(
-                    top, /* Chrome10+,Safari5.1+ */
-                    rgba(255, 0, 0, 100%) 0%,
-                    rgba(255, 255, 0, 100%) 16.67%,
-                    rgba(0, 255, 0, 100%) 33.33%,
-                    rgba(0, 255, 255, 100%) 50%,
-                    rgba(0, 0, 255, 100%) 66.67%,
-                    rgba(255, 0, 255, 100%) 83.33%,
-                    rgba(255, 0, 0, 100%) 100%
-                );
-            background:
-                -o-linear-gradient(
-                    top, /* Opera 11.10+ */
-                    rgba(255, 0, 0, 100%) 0%,
-                    rgba(255, 255, 0, 100%) 16.67%,
-                    rgba(0, 255, 0, 100%) 33.33%,
-                    rgba(0, 255, 255, 100%) 50%,
-                    rgba(0, 0, 255, 100%) 66.67%,
-                    rgba(255, 0, 255, 100%) 83.33%,
-                    rgba(255, 0, 0, 100%) 100%
-                );
-            background:
-                -ms-linear-gradient(
-                    top, /* IE10+ */
-                    rgba(255, 0, 0, 100%) 0%,
-                    rgba(255, 255, 0, 100%) 16.67%,
-                    rgba(0, 255, 0, 100%) 33.33%,
-                    rgba(0, 255, 255, 100%) 50%,
-                    rgba(0, 0, 255, 100%) 66.67%,
-                    rgba(255, 0, 255, 100%) 83.33%,
-                    rgba(255, 0, 0, 100%) 100%
-                );
-            background:
                 linear-gradient(
-                    to bottom, /* W3C */
+                    to bottom,
                     rgba(255, 0, 0, 100%) 0%,
                     rgba(255, 255, 0, 100%) 16.67%,
                     rgba(0, 255, 0, 100%) 33.33%,
@@ -261,12 +194,7 @@
             border: 1px solid #000;
             cursor: crosshair;
             background: #000;
-            background: -moz-linear-gradient(top, #fff 0%, #000 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #000)); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top, #fff 0%, #000 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top, #fff 0%, #000 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top, #fff 0%, #000 100%); /* IE10+ */
-            background: linear-gradient(to bottom, #fff 0%, #000 100%); /* W3C */
+            background: linear-gradient(to bottom, #fff 0%, #000 100%);
 
             > .handle {
                 position: absolute;
