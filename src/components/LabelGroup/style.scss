@@ -2,8 +2,7 @@
     @extend .pcui-flex;
 
     align-items: center;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-flow: row nowrap;
     margin: $element-margin;
 
     // set width for label and don't let it shrink

@@ -1,6 +1,6 @@
 // color input
 .pcui-color-input {
-    @extend .noSelect;
+    @extend .pcui-no-select;
 
     position: relative;
     display: inline-block;
@@ -102,7 +102,7 @@
         transition: none;
 
         > .pick-rect {
-            @extend .noSelect;
+            @extend .pcui-no-select;
 
             position: relative;
             display: none;
@@ -146,7 +146,7 @@
         }
 
         > .pick-hue {
-            @extend .noSelect;
+            @extend .pcui-no-select;
 
             position: relative;
             display: none;
@@ -183,7 +183,7 @@
         }
 
         > .pick-opacity {
-            @extend .noSelect;
+            @extend .pcui-no-select;
 
             position: relative;
             display: none;

@@ -7,14 +7,6 @@
     font-style: normal;
 }
 
-.font-smooth {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-smoothing: antialiased;
-}
-
 .font-icon {
     font-family: pc-icon;
-
-    @extend .font-smooth;
 }
