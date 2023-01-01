@@ -2,7 +2,6 @@
 .pcui-button {
     @extend .pcui-no-select;
 
-    font-family: inherit;
     display: inline-block;
     border: 1px solid $bcg-darkest;
     border-radius: 2px;
