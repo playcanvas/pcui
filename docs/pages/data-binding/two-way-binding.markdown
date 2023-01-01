@@ -8,7 +8,7 @@ nav_order: 2
 
 ## Two Way Binding Example
 
-Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in react to showcase binding with react components.
+Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in React to showcase binding with React components.
 
 <div class="highlighter-rouge example-background">
     <iframe src="../../storybook/iframe?id=examples-bindingtwoway--main&viewMode=story" style="width: 100%; border: none; height: 68px;"></iframe>
@@ -16,7 +16,7 @@ Observers can also be bound bi-directionally, in which case an element can both 
 
 ### How To
 
-First import the components, binding classes and pcui styles.
+First import the components, binding classes and PCUI styles.
 
 ```javascript
 import { Observer } from '@playcanvas/observer';
@@ -27,7 +27,9 @@ import '@playcanvas/pcui/styles';
 Then create a new observer for a an object which contains a text string.
 
 ```javascript
-const observer = new Observer({text: 'Hello World'});
+const observer = new Observer({
+    text: 'Hello World'
+});
 ```
 
 Create two text inputs, which can both send and receive updates through the linked observer. This style of binding is defined through the use of the `BindingTwoWay` object which is passed as a property.
