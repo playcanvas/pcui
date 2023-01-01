@@ -5,7 +5,8 @@ permalink: /react/
 nav_order: 3
 ---
 
-If you are more familar with react, you can import react elements into your own `.jsx` files and use them as follows:
+If you are more familiar with React, you can import React elements into your own `.jsx` files and use them as follows:
+
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';

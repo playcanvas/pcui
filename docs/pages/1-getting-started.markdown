@@ -7,29 +7,30 @@ nav_order: 1
 
 ## Getting Started
 
-To build the component library, run the following in the projects directory:
+To add PCUI to your `package.json`, run the following in the project's directory:
 
 ```
 npm install --save-dev @playcanvas/observer
 npm install --save-dev @playcanvas/pcui
 ```
 
-This will include the entire pcui library in your project. The various parts of the library will be available to import from that package at the following locations:
+This will include the entire PCUI library in your project. The various parts of the library will be available to import from that package at the following locations:
 
 - Observers: `@playcanvas/observer`
-- ES6 Components: `@playcanvas/pcui`
+- ES Module Components: `@playcanvas/pcui`
 - React Components: `@playcanvas/pcui/react`
 
-You can then import the ES6 components into your own `.js` files and use them as follows:
+You can then import the ES Module components into your own `.js` files and use them as follows:
+
 ```javascript
 import { Button } from '@playcanvas/pcui';
 import '@playcanvas/pcui/styles';
 
-const helloWorldButton = new Button({
+const button = new Button({
     text: 'Click Me'
 });
 
-document.body.appendChild(helloWorldButton.dom);
+document.body.appendChild(button.dom);
 ```
 
 This will result in your first component being appended to your document body!

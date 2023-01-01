@@ -1,5 +1,5 @@
 .pcui-treeview {
-    @extend .noSelect;
+    @extend .pcui-no-select;
 
     // make sure our width covers the largest visible tree item child
     // this does not work on Edge

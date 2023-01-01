@@ -1,4 +1,6 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import autoprefixer from 'autoprefixer';
+import postcss from 'postcss';
 import sass from 'rollup-plugin-sass';
 import typescript from 'rollup-plugin-typescript2';
 
@@ -55,7 +57,10 @@ const styles = {
         nodeResolve(),
         sass({
             insert: true,
-            output: false
+            output: false,
+            processor: css => postcss([autoprefixer])
+                .process(css)
+                .then(result => result.css)
         })
     ]
 }

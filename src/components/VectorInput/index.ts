@@ -36,7 +36,7 @@ export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindabl
 }
 
 /**
- * A vector input.
+ * A vector input. The vector can have 2 to 4 dimensions with each dimension being a {@link NumericInput}.
  */
 class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder {
     static readonly defaultArgs: VectorInputArgs = {
@@ -44,9 +44,9 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         dimensions: 3
     };
 
-    protected _inputs: NumericInput[];
+    protected _inputs: NumericInput[] = [];
 
-    protected _applyingChange: boolean;
+    protected _applyingChange = false;
 
     constructor(args: VectorInputArgs = VectorInput.defaultArgs) {
         args = { ...VectorInput.defaultArgs, ...args };
@@ -61,9 +61,8 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
 
         const dimensions = Math.max(2, Math.min(4, args.dimensions));
 
-        this._inputs = new Array(dimensions);
-        for (let i = 0; i < this._inputs.length; i++) {
-            this._inputs[i] = new NumericInput({
+        for (let i = 0; i < dimensions; i++) {
+            const input = new NumericInput({
                 min: args.min,
                 max: args.max,
                 precision: args.precision,
@@ -72,17 +71,19 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
                 renderChanges: args.renderChanges,
                 placeholder: args.placeholder ? (Array.isArray(args.placeholder) ? args.placeholder[i] : args.placeholder) : null
             });
-            this._inputs[i].on('change', () => {
+            input.on('change', () => {
                 this._onInputChange();
             });
-            this._inputs[i].on('focus', () => {
+            input.on('focus', () => {
                 this.emit('focus');
             });
-            this._inputs[i].on('blur', () => {
+            input.on('blur', () => {
                 this.emit('blur');
             });
-            this.dom.appendChild(this._inputs[i].dom);
-            this._inputs[i].parent = this;
+            this.dom.appendChild(input.dom);
+            input.parent = this;
+
+            this._inputs.push(input);
         }
 
         // set the binding after the inputs have been created
@@ -90,8 +91,6 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         if (binding) {
             this.binding = binding;
         }
-
-        this._applyingChange = false;
 
         if (args.value !== undefined) {
             this.value = args.value;
@@ -101,17 +100,10 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
     protected _onInputChange() {
         if (this._applyingChange) return;
 
-        // check if any of our inputs have the multiple_values class
-        // and if so inherit it for us as well
-        let showingMultipleValues = false;
-        for (let i = 0; i < this._inputs.length; i++) {
-            if (this._inputs[i].class.contains(pcuiClass.MULTIPLE_VALUES)) {
-                showingMultipleValues = true;
-                break;
-            }
-        }
+        // check if any of our inputs have the MULTIPLE_VALUES class and if so inherit it for us as well
+        const multipleValues = this._inputs.some(input => input.class.contains(pcuiClass.MULTIPLE_VALUES));
 
-        if (showingMultipleValues) {
+        if (multipleValues) {
             this.class.add(pcuiClass.MULTIPLE_VALUES);
         } else {
             this.class.remove(pcuiClass.MULTIPLE_VALUES);
@@ -127,22 +119,22 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
 
         this._applyingChange = true;
 
-        for (let i = 0; i < this._inputs.length; i++) {
+        this._inputs.forEach((input, i) => {
             // disable binding for each individual input when we use
             // the 'value' setter for the whole vector value. That is because
             // we do not want the individual inputs to emit their own binding events
             // since we are setting the whole vector value here
-            const binding = this._inputs[i].binding;
+            const binding = input.binding;
             let applyingChange = false;
             if (binding) {
                 applyingChange = binding.applyingChange;
                 binding.applyingChange = true;
             }
-            this._inputs[i].value = (value && value[i] !== undefined ? value[i] : null);
+            input.value = (value && value[i] !== undefined ? value[i] : null);
             if (binding) {
                 binding.applyingChange = applyingChange;
             }
-        }
+        });
 
         this.emit('change', this.value);
 
@@ -173,8 +165,8 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
 
     unlink() {
         super.unlink();
-        for (let i = 0; i < this._inputs.length; i++) {
-            this._inputs[i].unlink();
+        for (const input of this._inputs) {
+            input.unlink();
         }
     }
 
@@ -183,8 +175,8 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
     }
 
     blur() {
-        for (let i = 0; i < this._inputs.length; i++) {
-            this._inputs[i].blur();
+        for (const input of this._inputs) {
+            input.blur();
         }
     }
 
@@ -234,8 +226,8 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
     // each input
     set binding(value) {
         super.binding = value;
-        for (let i = 0; i < this._inputs.length; i++) {
-            this._inputs[i].binding = (value ? value.clone() : null);
+        for (const input of this._inputs) {
+            input.binding = value ? value.clone() : null;
         }
     }
 
@@ -255,39 +247,76 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         return this._inputs.map(input => input.placeholder);
     }
 
+    /**
+     * Get the array of number inputs owned by this vector.
+     */
     get inputs() {
         return this._inputs.slice();
     }
 
-    set renderChanges(value: boolean) {
-        for (let i = 0; i < this._inputs.length; i++) {
-            this._inputs[i].renderChanges = value;
+    set renderChanges(value) {
+        for (const input of this._inputs) {
+            input.renderChanges = value;
         }
     }
 
     get renderChanges() {
         return this._inputs[0].renderChanges;
     }
-}
 
-// add proxied properties
-[
-    'min',
-    'max',
-    'precision',
-    'step'
-].forEach((property) => {
-    Object.defineProperty(VectorInput.prototype, property, {
-        get: function () {
-            return this._inputs[0][property];
-        },
-        set: function (value) {
-            for (let i = 0; i < this._inputs.length; i++) {
-                this._inputs[i][property] = value;
-            }
+    /**
+     * Gets / sets the minimum value accepted by all inputs of the vector.
+     */
+    set min(value) {
+        for (const input of this._inputs) {
+            input.min = value;
         }
-    });
-});
+    }
+
+    get min() {
+        return this._inputs[0].min;
+    }
+
+    /**
+     * Gets / sets the maximum value accepted by all inputs of the vector.
+     */
+    set max(value) {
+        for (const input of this._inputs) {
+            input.max = value;
+        }
+    }
+
+    get max() {
+        return this._inputs[0].max;
+    }
+
+    /**
+     * Gets / sets the maximum number of decimal places supported by all inputs of the vector.
+     */
+    set precision(value) {
+        for (const input of this._inputs) {
+            input.precision = value;
+        }
+    }
+
+    get precision() {
+        return this._inputs[0].precision;
+    }
+
+    /**
+     * Gets / sets the amount that the value will be increased or decreased when using the arrow
+     * keys and the slider input for all inputs of the vector.
+     */
+    set step(value) {
+        for (const input of this._inputs) {
+            input.step = value;
+        }
+    }
+
+    get step() {
+        return this._inputs[0].step;
+    }
+}
 
 Element.register('vec2', VectorInput, { dimensions: 2, renderChanges: true });
 Element.register('vec3', VectorInput, { dimensions: 3, renderChanges: true });

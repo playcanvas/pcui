@@ -56,7 +56,7 @@ export interface TreeViewItemArgs extends ContainerArgs {
 }
 
 /**
- * Represents a Tree View Item to be added to a {@link TreeView}.
+ * A TreeViewItem is a single node in a hierarchical {@link TreeView} control.
  */
 class TreeViewItem extends Container {
     static readonly defaultArgs: TreeViewItemArgs = {
@@ -251,7 +251,7 @@ class TreeViewItem extends Container {
 
     protected _onContentKeyDown = (evt: KeyboardEvent) => {
         const element = evt.target as HTMLElement;
-        if (element.tagName.toLowerCase() === 'input') return;
+        if (element.tagName === 'INPUT') return;
 
         if (!this.allowSelect) return;
 
@@ -284,8 +284,7 @@ class TreeViewItem extends Container {
             this._treeView._onChildDragOver(evt, this);
         }
 
-        // allow hover event
-        super._onMouseOver(evt);
+        this.emit('hover', evt);
     };
 
     protected _onContentDragStart = (evt: DragEvent) => {
@@ -305,7 +304,7 @@ class TreeViewItem extends Container {
         if (!this.allowSelect || evt.button !== 0) return;
 
         const element = evt.target as HTMLElement;
-        if (element.tagName.toLowerCase() === 'input') return;
+        if (element.tagName === 'INPUT') return;
 
         evt.stopPropagation();
 
@@ -337,7 +336,7 @@ class TreeViewItem extends Container {
         if (!this._treeView || !this._treeView.allowRenaming || evt.button !== 0) return;
 
         const element = evt.target as HTMLElement;
-        if (element.tagName.toLowerCase() === 'input') return;
+        if (element.tagName === 'INPUT') return;
 
         evt.stopPropagation();
         const rect = this._containerContents.dom.getBoundingClientRect();
@@ -386,7 +385,7 @@ class TreeViewItem extends Container {
             this.focus();
         });
 
-        textInput.on('change', (value: any) => {
+        textInput.on('change', (value: string) => {
             value = value.trim();
             if (value) {
                 this.text = value;

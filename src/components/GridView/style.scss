@@ -1,8 +1,7 @@
 .pcui-gridview {
     @extend .pcui-flex;
 
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     align-content: flex-start;
 }
 

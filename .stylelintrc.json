@@ -2,21 +2,13 @@
     "extends": "stylelint-config-standard-scss",
     "rules": {
         "indentation": 4,
-        "color-function-notation": null,
-        "declaration-block-no-redundant-longhand-properties": null,
+        "color-function-notation": "legacy",
         "font-family-no-missing-generic-family-keyword": null,
-        "max-line-length": null,
         "no-descending-specificity": null,
         "no-duplicate-selectors": null,
-        "property-no-unknown": null,
         "scss/dollar-variable-pattern": null,
         "scss/no-global-function-names": null,
         "scss/at-extend-no-missing-placeholder": null,
-        "selector-class-pattern": null,
-        "string-quotes": "single",
-
-        "at-rule-no-vendor-prefix": null,
-        "property-no-vendor-prefix": null,
-        "value-no-vendor-prefix": null
+        "string-quotes": "single"
     }
 }

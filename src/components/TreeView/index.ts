@@ -18,15 +18,15 @@ const DRAG_AREA_AFTER = 'after';
  */
 export interface TreeViewArgs extends ContainerArgs {
     /**
-     * Whether dragging a {@link TreeViewItem} is allowed.
+     * Whether dragging a {@link TreeViewItem} is allowed. Defaults to `true`.
      */
     allowDrag?: boolean,
     /**
-     * Whether reordering {@link TreeViewItem}s is allowed.
+     * Whether reordering {@link TreeViewItem}s is allowed. Defaults to `true`.
      */
     allowReordering?: boolean,
     /**
-     * Whether renaming {@link TreeViewItem}s is allowed by double clicking on them.
+     * Whether renaming {@link TreeViewItem}s is allowed by double clicking on them. Defaults to `false`.
      */
     allowRenaming?: boolean,
     /**
@@ -182,7 +182,7 @@ class TreeView extends Container {
 
     protected _filter: string;
 
-    protected _filterResults: any[];
+    protected _filterResults: TreeViewItem[];
 
     protected _wasDraggingAllowedBeforeFiltering: boolean;
 
@@ -437,16 +437,16 @@ class TreeView extends Container {
     }
 
     // Called when a key is down on a child TreeViewItem.
-    protected _onChildKeyDown(evt: KeyboardEvent, element: any) {
+    protected _onChildKeyDown(evt: KeyboardEvent, item: TreeViewItem) {
         if (['Tab', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(evt.key) === -1) return;
 
         evt.preventDefault();
         evt.stopPropagation();
 
         if (evt.key === 'ArrowDown') {
-            // down - select next tree item
+            // select next tree item
             if (this._selectedItems.length) {
-                const next = this._findNextVisibleTreeItem(element);
+                const next = this._findNextVisibleTreeItem(item);
                 if (next) {
                     if (this._pressedShift || this._pressedCtrl) {
                         next.selected = true;
@@ -456,9 +456,9 @@ class TreeView extends Container {
                 }
             }
         } else if (evt.key === 'ArrowUp') {
-            // up - select previous tree item
+            // select previous tree item
             if (this._selectedItems.length) {
-                const prev = this._findPreviousVisibleTreeItem(element);
+                const prev = this._findPreviousVisibleTreeItem(item);
                 if (prev) {
                     if (this._pressedShift || this._pressedCtrl) {
                         prev.selected = true;
@@ -469,13 +469,13 @@ class TreeView extends Container {
             }
 
         } else if (evt.key === 'ArrowLeft') {
-            // left (close)
-            if (element.parent !== this) {
-                element.open = false;
+            // close selected tree item
+            if (item.parent !== this) {
+                item.open = false;
             }
         } else if (evt.key === 'ArrowRight') {
-            // right (open)
-            element.open = true;
+            // open selected tree item
+            item.open = true;
         } else if (evt.key === 'Tab') {
             // tab
             // skip
@@ -483,24 +483,24 @@ class TreeView extends Container {
     }
 
     // Called when we click on a child TreeViewItem
-    protected _onChildClick(evt: MouseEvent, element: TreeViewItem) {
+    protected _onChildClick(evt: MouseEvent, item: TreeViewItem) {
         if (evt.button !== 0) return;
-        if (!element.allowSelect) return;
+        if (!item.allowSelect) return;
 
         if (this._pressedCtrl) {
             // toggle selection when Ctrl is pressed
-            element.selected = !element.selected;
+            item.selected = !item.selected;
         } else if (this._pressedShift) {
             // on shift add to selection
-            if (!this._selectedItems.length || this._selectedItems.length === 1 && this._selectedItems[0] === element) {
-                element.selected = true;
+            if (!this._selectedItems.length || this._selectedItems.length === 1 && this._selectedItems[0] === item) {
+                item.selected = true;
                 return;
             }
 
             const selected = this._selectedItems[this._selectedItems.length - 1];
             this._openHierarchy(selected);
 
-            const children = this._getChildrenRange(selected, element);
+            const children = this._getChildrenRange(selected, item);
             children.forEach((child) => {
                 if (child.allowSelect) {
                     child.selected = true;
@@ -509,7 +509,7 @@ class TreeView extends Container {
 
         } else {
             // deselect other items
-            this._selectSingleItem(element);
+            this._selectSingleItem(item);
         }
     }
 
@@ -551,7 +551,7 @@ class TreeView extends Container {
         });
     }
 
-    protected _getChildIndex(item: { dom: any; }, parent: { dom: { childNodes: any; }; }) {
+    protected _getChildIndex(item: TreeViewItem, parent: TreeViewItem) {
         return Array.prototype.indexOf.call(parent.dom.childNodes, item.dom) - 1;
     }
 
@@ -810,14 +810,14 @@ class TreeView extends Container {
     };
 
     // Scroll treeview if we are dragging towards the edges
-    protected _scrollWhileDragging = () => {
+    protected _scrollWhileDragging() {
         if (!this._dragging) return;
         if (this._dragScroll === 0) return;
 
         this._dragScrollElement.dom.scrollTop += this._dragScroll * 8;
         this._dragOverItem = null;
         this._updateDragHandle();
-    };
+    }
 
     // Called while we drag the drag handle
     protected _onDragMove = (evt: MouseEvent) => {
@@ -995,7 +995,7 @@ class TreeView extends Container {
         const results = searchItems(searchArr, filter);
         if (!results.length) return;
 
-        results.forEach((item: any) => {
+        results.forEach((item: TreeViewItem) => {
             this._filterResults.push(item);
             item.class.add(CLASS_FILTER_RESULT);
         });
@@ -1128,7 +1128,9 @@ class TreeView extends Container {
                 window.removeEventListener('mousemove', this._onMouseMove);
                 window.addEventListener('mousemove', this._onMouseMove);
                 if (!this._dragScrollInterval) {
-                    this._dragScrollInterval = window.setInterval(this._scrollWhileDragging, 1000 / 60);
+                    this._dragScrollInterval = window.setInterval(() => {
+                        this._scrollWhileDragging();
+                    }, 1000 / 60);
                 }
             }
         } else {

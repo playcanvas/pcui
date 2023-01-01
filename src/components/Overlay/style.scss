@@ -16,7 +16,7 @@
 }
 
 .pcui-overlay-inner {
-    @extend .noSelect;
+    @extend .pcui-no-select;
 
     position: absolute;
     width: auto;
