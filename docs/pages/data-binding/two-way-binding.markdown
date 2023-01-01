@@ -8,7 +8,7 @@ nav_order: 2
 
 ## Two Way Binding Example
 
-Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in react to showcase binding with react components.
+Observers can also be bound bi-directionally, in which case an element can both send and receive updates through its observer. The following example shows a two way binding between two text inputs, where either input can update the value of the other. It's been written in React to showcase binding with React components.
 
 <div class="highlighter-rouge example-background">
     <iframe src="../../storybook/iframe?id=examples-bindingtwoway--main&viewMode=story" style="width: 100%; border: none; height: 68px;"></iframe>
