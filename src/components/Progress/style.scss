@@ -12,7 +12,18 @@
         $second: rgba(darken($text-active, 17%), 1);
 
         background: $text-active;
-        background: linear-gradient(135deg, $first 0%, $first 25%, $second 26%, $second 50%, $first 51%, $first 75%, $second 76%, $second 100%);
+        background:
+            linear-gradient(
+                135deg,
+                $first 0%,
+                $first 25%,
+                $second 26%,
+                $second 50%,
+                $first 51%,
+                $first 75%,
+                $second 76%,
+                $second 100%
+            );
         background-position: 0 0;
         background-size: 24px 24px;
         background-repeat: repeat;
@@ -28,7 +39,18 @@
         $second: rgba(darken(#f77, 17%), 1);
 
         background: $text-active;
-        background: linear-gradient(135deg, $first 0%, $first 25%, $second 26%, $second 50%, $first 51%, $first 75%, $second 76%, $second 100%);
+        background:
+            linear-gradient(
+                135deg,
+                $first 0%,
+                $first 25%,
+                $second 26%,
+                $second 50%,
+                $first 51%,
+                $first 75%,
+                $second 76%,
+                $second 100%
+            );
         background-position: 0 0;
         background-size: 24px 24px;
         background-repeat: repeat;
