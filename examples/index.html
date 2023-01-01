@@ -39,7 +39,7 @@
 </head>
 <body>
     <script type="module">
-        import { Container, Panel, TreeView, TreeViewItem } from '@playcanvas/pcui';
+        import { Container, Panel, TextInput, TreeView, TreeViewItem } from '@playcanvas/pcui';
         import '@playcanvas/pcui/styles'
 
         const root = new Container({
@@ -58,7 +58,6 @@
             width: 200,
             height: '100%'
         });
-        root.append(panel);
 
         const treeView = new TreeView({
             allowRenaming: false,
@@ -89,6 +88,7 @@
             'LabelGroup',
             'Menu',
             'NumericInput',
+            'Overlay',
             'Panel',
             'Progress',
             'RadioButton',
@@ -111,8 +111,17 @@
             treeRoot.append(item);
         }
 
-        panel.append(treeView);
+        const filter = new TextInput({
+            placeholder: 'Filter',
+            width: 'calc(100% - 14px)'
+        });
+        filter.on('change', (value) => {
+            treeView.filter = value;
+        });
 
+        root.append(panel);
+        panel.append(filter);
+        panel.append(treeView);
         root.dom.appendChild(iframe);
     </script>
 </body>

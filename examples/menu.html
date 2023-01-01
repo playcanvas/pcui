@@ -25,8 +25,13 @@
 </head>
 <body>
     <script type="module">
-        import { Menu } from '@playcanvas/pcui';
+        import { Label, Menu } from '@playcanvas/pcui';
         import '@playcanvas/pcui/styles'
+
+        const label = new Label({
+            text: 'Right click to open menu'
+        });
+        document.body.appendChild(label.dom);
 
         const menu = new Menu({
             items: [
