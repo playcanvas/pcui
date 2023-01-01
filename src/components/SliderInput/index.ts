@@ -1,7 +1,6 @@
 import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable } from '../Element/index';
-import NumericInput, { NumericInputArgs } from '../NumericInput';
+import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
-import * as utils from '../../helpers/utils';
 
 const CLASS_SLIDER = 'pcui-slider';
 const CLASS_SLIDER_CONTAINER = CLASS_SLIDER + '-container';
@@ -10,19 +9,6 @@ const CLASS_SLIDER_HANDLE = CLASS_SLIDER + '-handle';
 const CLASS_SLIDER_ACTIVE = CLASS_SLIDER + '-active';
 
 const IS_CHROME = /Chrome\//.test(navigator.userAgent);
-
-// fields that are proxied between the slider and the numeric input
-const PROXY_FIELDS = [
-    'allowNull',
-    'max',
-    'min',
-    'keyChange',
-    'placeholder',
-    'precision',
-    'renderChanges',
-    'step'
-];
-
 
 /**
  * The arguments for the {@link SliderInput} constructor.
@@ -44,11 +30,6 @@ export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
      * Gets / sets the maximum value that the slider field can take.
      */
     sliderMax?: number,
-    /**
-     * Gets / sets the maximum number of decimals a value can take. Here for backwards
-     * compatibility. Use the precision argument instead going forward.
-     */
-    pre?: number,
     /**
      * Gets / sets the maximum number of decimals a value can take.
      */
@@ -75,9 +56,9 @@ class SliderInput extends Element implements IBindable, IFocusable {
         max: 1
     };
 
-    protected _historyCombine: boolean;
+    protected _historyCombine = false;
 
-    protected _historyPostfix: any;
+    protected _historyPostfix: any = null;
 
     protected _numericInput: NumericInput;
 
@@ -91,9 +72,9 @@ class SliderInput extends Element implements IBindable, IFocusable {
 
     protected _domHandle: HTMLDivElement;
 
-    protected _cursorHandleOffset: number;
+    protected _cursorHandleOffset = 0;
 
-    protected _touchId: number;
+    protected _touchId: number = null;
 
     /**
      * Creates a new SliderInput.
@@ -102,54 +83,44 @@ class SliderInput extends Element implements IBindable, IFocusable {
      */
     constructor(args: SliderInputArgs = SliderInput.defaultArgs) {
         args = { ...SliderInput.defaultArgs, ...args };
-        const inputArgs: NumericInputArgs = {};
-        PROXY_FIELDS.forEach((field) => {
-            // @ts-ignore
-            inputArgs[field] = args[field];
-        });
-
-        if (inputArgs.precision === undefined) {
-            inputArgs.precision = 2;
-        }
-
-        // binding should only go to the slider
-        // and the slider will propagate changes to the numeric input
-        delete inputArgs.binding;
-
-        super(args.dom ? args.dom : document.createElement('div'), args);
+        super(args.dom, args);
 
         this.class.add(CLASS_SLIDER);
 
-        this._historyCombine = false;
-        this._historyPostfix = null;
-
-        this._numericInput = new NumericInput({ ...inputArgs, hideSlider: true });
-
-        if (args.precision) {
-            this.precision = args.precision;
-        } else if (args.pre) {
-            this.precision = args.pre;
-        }
+        const numericInput = new NumericInput({
+            allowNull: args.allowNull,
+            hideSlider: true,
+            max: args.max,
+            min: args.min,
+            // @ts-ignore
+            keyChange: args.keyChange,
+            // @ts-ignore
+            placeholder: args.placeholder,
+            precision: args.precision ?? 2,
+            renderChanges: args.renderChanges,
+            step: args.step
+        });
 
         // propagate change event
-        this._numericInput.on('change', (value: number) => {
+        numericInput.on('change', (value: number) => {
             this._onValueChange(value);
         });
 
         // propagate focus / blur events
-        this._numericInput.on('focus', () => {
+        numericInput.on('focus', () => {
             this.emit('focus');
         });
-
-        this._numericInput.on('blur', () => {
+        numericInput.on('blur', () => {
             this.emit('blur');
         });
 
-        this._sliderMin = (args.sliderMin !== undefined ? args.sliderMin : args.min);
-        this._sliderMax = (args.sliderMax !== undefined ? args.sliderMax : args.max);
+        numericInput.parent = this;
+        this.dom.appendChild(numericInput.dom);
 
-        this.dom.appendChild(this._numericInput.dom);
-        this._numericInput.parent = this;
+        this._numericInput = numericInput;
+
+        this._sliderMin = args.sliderMin ?? args.min;
+        this._sliderMax = args.sliderMax ?? args.max;
 
         this._domSlider = document.createElement('div');
         this._domSlider.classList.add(CLASS_SLIDER_CONTAINER);
@@ -165,9 +136,6 @@ class SliderInput extends Element implements IBindable, IFocusable {
         this._domHandle.tabIndex = 0;
         this._domHandle.classList.add(CLASS_SLIDER_HANDLE);
         this._domBar.appendChild(this._domHandle);
-        this._cursorHandleOffset = 0;
-
-        this._touchId = null;
 
         this._domSlider.addEventListener('mousedown', this._onMouseDown);
         this._domSlider.addEventListener('touchstart', this._onTouchStart, { passive: true });
@@ -452,10 +420,9 @@ class SliderInput extends Element implements IBindable, IFocusable {
         }
     }
 
-    set renderChanges(value: boolean) {
+    set renderChanges(value) {
         this._numericInput.renderChanges = value;
     }
-
 
     get renderChanges() {
         return this._numericInput.renderChanges;
@@ -464,7 +431,7 @@ class SliderInput extends Element implements IBindable, IFocusable {
     /**
      * Gets / sets the minimum value that the numeric input field can take.
      */
-    set min(value: number) {
+    set min(value) {
         this._numericInput.min = value;
     }
 
@@ -475,7 +442,7 @@ class SliderInput extends Element implements IBindable, IFocusable {
     /**
      * Gets / sets the maximum value that the numeric input field can take.
      */
-    set max(value: number) {
+    set max(value) {
         this._numericInput.max = value;
     }
 
@@ -486,8 +453,7 @@ class SliderInput extends Element implements IBindable, IFocusable {
     /**
      * Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
      */
-
-    set step(value: number) {
+    set step(value) {
         this._numericInput.step = value;
     }
 
@@ -498,16 +464,30 @@ class SliderInput extends Element implements IBindable, IFocusable {
     /**
      * Gets / sets the maximum number of decimals a value can take.
      */
-    set precision(value: number) {
+    set precision(value) {
         this._numericInput.precision = value;
     }
 
     get precision() {
         return this._numericInput.precision;
     }
-}
 
-utils.proxy(SliderInput, '_numericInput', PROXY_FIELDS);
+    set keyChange(value) {
+        this._numericInput.keyChange = value;
+    }
+
+    get keyChange() {
+        return this._numericInput.keyChange;
+    }
+
+    set placeholder(value) {
+        this._numericInput.placeholder = value;
+    }
+
+    get placeholder() {
+        return this._numericInput.placeholder;
+    }
+}
 
 Element.register('slider', SliderInput, { renderChanges: true });
 
