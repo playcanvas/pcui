@@ -50,7 +50,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
     protected _onValidate: any;
 
-    protected _keyChange: any;
+    protected _keyChange: boolean;
 
     protected _renderChanges: boolean;
 
