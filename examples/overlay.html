@@ -43,7 +43,7 @@
         const btnYes = new Button({
             text: 'Yes'
         });
-        btnYes.on('click', function () {
+        btnYes.on('click', () => {
             overlay.hidden = true;
             setTimeout(() => {
                 overlay.hidden = false;

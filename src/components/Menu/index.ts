@@ -166,10 +166,21 @@ class Menu extends Container implements IFocusable {
     }
 
     /**
-     * Positions the menu at the specified coordinates.
+     * Positions the top-left corner of the menu at the specified coordinates.
      *
      * @param x - The x coordinate.
      * @param y - The y coordinate.
+     * @example
+     * ```ts
+     * // open a context menu at the mouse position
+     * window.addEventListener('contextmenu', (event) => {
+     *     event.stopPropagation();
+     *     event.preventDefault();
+     *
+     *     menu.hidden = false;
+     *     menu.position(event.clientX, event.clientY);
+     * });
+     * ```
      */
     position(x: number, y: number) {
         const rect = this._containerMenuItems.dom.getBoundingClientRect();
