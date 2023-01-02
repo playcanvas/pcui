@@ -954,7 +954,6 @@ class Element extends Events {
         return this._dom.classList;
     }
 
-
     /**
      * Gets / sets the width of the Element in pixels. Can also be an empty string to remove it.
      */
@@ -1031,6 +1030,107 @@ class Element extends Events {
         return this._destroyed;
     }
 
+    // CSS proxy accessors
+
+    /**
+     * Gets / sets the flex-direction CSS property.
+     */
+    set flexDirection(value) {
+        this.style.flexDirection = value;
+    }
+
+    get flexDirection() {
+        return this.style.flexDirection;
+    }
+
+    /**
+     * Gets / sets the flex-grow CSS property.
+     */
+    set flexGrow(value) {
+        this.style.flexGrow = value;
+    }
+
+    get flexGrow() {
+        return this.style.flexGrow;
+    }
+
+    /**
+     * Gets / sets the flex-basis CSS property.
+     */
+    set flexBasis(value) {
+        this.style.flexBasis = value;
+    }
+
+    get flexBasis() {
+        return this.style.flexBasis;
+    }
+
+    /**
+     * Gets / sets the flex-shrink CSS property.
+     */
+    set flexShrink(value) {
+        this.style.flexShrink = value;
+    }
+
+    get flexShrink() {
+        return this.style.flexShrink;
+    }
+
+    /**
+     * Gets / sets the flex-wrap CSS property.
+     */
+    set flexWrap(value) {
+        this.style.flexWrap = value;
+    }
+
+    get flexWrap() {
+        return this.style.flexWrap;
+    }
+
+    /**
+     * Gets / sets the align-items CSS property.
+     */
+    set alignItems(value) {
+        this.style.alignItems = value;
+    }
+
+    get alignItems() {
+        return this.style.alignItems;
+    }
+
+    /**
+     * Gets / sets the align-self CSS property.
+     */
+    set alignSelf(value) {
+        this.style.alignSelf = value;
+    }
+
+    get alignSelf() {
+        return this.style.alignSelf;
+    }
+
+    /**
+     * Gets / sets the justify-content CSS property.
+     */
+    set justifyContent(value) {
+        this.style.justifyContent = value;
+    }
+
+    get justifyContent() {
+        return this.style.justifyContent;
+    }
+
+    /**
+     * Gets / sets the justify-self CSS property.
+     */
+    set justifySelf(value) {
+        this.style.justifySelf = value;
+    }
+
+    get justifySelf() {
+        return this.style.justifySelf;
+    }
+
     /*  Backwards Compatibility */
     // we should remove those after we migrate
 
@@ -1064,22 +1164,6 @@ class Element extends Events {
         return this._domContent;
     }
 }
-
-// utility function to expose a CSS property
-// via an Element.prototype property
-function exposeCssProperty(name: string) {
-    Object.defineProperty(Element.prototype, name, {
-        get: function () {
-            return this.style[name];
-        },
-        set: function (value) {
-            this.style[name] = value;
-        }
-    });
-}
-
-// expose rest of CSS properties
-SIMPLE_CSS_PROPERTIES.forEach(exposeCssProperty);
 
 // Declare an additional property on the base Node interface that references the owner Element
 declare global {
