@@ -26,6 +26,8 @@ export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
      * - `vec2`
      * - `vec3`
      * - `vec4`
+     *
+     * Defaults to `string`.
      */
     type?: 'boolean' | 'number' | 'string' | 'vec2' | 'vec3' | 'vec4';
     /**
@@ -191,7 +193,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         delete args.dom;
 
         this._valueType = valueType;
-        this._elementType = args.type;
+        this._elementType = args.type ?? 'string';
         this._elementArgs = args.elementArgs || args;
 
         this._arrayElements = [];
