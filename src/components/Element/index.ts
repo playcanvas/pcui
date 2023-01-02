@@ -370,6 +370,7 @@ class Element extends Events {
      * element.on('destroy', (dom: HTMLElement, element: Element) => {
      *     console.log('Element destroyed');
      * });
+     * ```
      */
     public static readonly EVENT_DESTROY = 'destroy';
 
