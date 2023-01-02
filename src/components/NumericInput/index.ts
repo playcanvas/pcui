@@ -143,7 +143,7 @@ class NumericInput extends TextInput {
             this._sliderControl.dom.removeEventListener('mouseup', this._onSliderMouseUp);
 
             this._sliderControl.dom.removeEventListener("mousemove", this._onSliderMouseMove, false);
-            this._sliderControl.dom.removeEventListener("wheel", this._onSliderMouseWheel, false);
+            this._sliderControl.dom.removeEventListener("wheel", this._onSliderMouseWheel);
 
             document.removeEventListener('pointerlockchange', this._onPointerLockChange, false);
         }
@@ -221,11 +221,11 @@ class NumericInput extends TextInput {
     protected _onPointerLockChange = () => {
         if (this._isScrolling()) {
             this._sliderControl.dom.addEventListener("mousemove", this._onSliderMouseMove, false);
-            this._sliderControl.dom.addEventListener("wheel", this._onSliderMouseWheel, false);
+            this._sliderControl.dom.addEventListener("wheel", this._onSliderMouseWheel, { passive: true });
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
         } else {
             this._sliderControl.dom.removeEventListener("mousemove", this._onSliderMouseMove, false);
-            this._sliderControl.dom.removeEventListener("wheel", this._onSliderMouseWheel, false);
+            this._sliderControl.dom.removeEventListener("wheel", this._onSliderMouseWheel);
             this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
         }
     };
