@@ -214,7 +214,7 @@ class GradientPicker extends Element {
             }
         };
 
-        this._panel = new Panel({});
+        this._panel = new Panel();
         this._panel.class.add('color-panel');
         this.dom.appendChild(this._panel.dom);
 
@@ -274,7 +274,7 @@ class GradientPicker extends Element {
         this._bField = numberField.call(this, 'b');
         this._aField = numberField.call(this, 'a');
 
-        this._hexField = new TextInput({});
+        this._hexField = new TextInput();
         this._hexField.renderChanges = false;
         this._hexField.placeholder = '#';
         this._hexField.on('change', this.hexChangeHandler);
@@ -301,12 +301,12 @@ class GradientPicker extends Element {
 
         this.UI = {
             root: this.dom,
-            overlay: new Overlay({}),
+            overlay: new Overlay(),
             panel: document.createElement('div'),
             gradient: new Canvas({ useDevicePixelRatio: true }),
             checkerPattern: this.createCheckerPattern(),
             anchors: new Canvas({ useDevicePixelRatio: true }),
-            footer: new Panel({}),
+            footer: new Panel(),
             typeLabel: new Label({ text: 'Type' }),
             typeCombo: new SelectInput({
                 options: [{ t: '0', v: 'placeholder' }],
@@ -314,9 +314,9 @@ class GradientPicker extends Element {
             }),
             positionLabel: new Label({ text: 'Position' }),
             positionEdit: new NumericInput({ min: 0, max: 100, step: 1 }),
-            copyButton: new Button({}),
-            pasteButton: new Button({}),
-            deleteButton: new Button({}),
+            copyButton: new Button(),
+            pasteButton: new Button(),
+            deleteButton: new Button(),
             showSelectedPosition: new NumericInput({ min: 0, max: 100, step: 1, hideSlider: true }),
             showCrosshairPosition: document.createElement('div'),
             anchorAddCrossHair: document.createElement('div'),

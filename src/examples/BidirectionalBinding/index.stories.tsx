@@ -22,8 +22,8 @@ const observer = new Observer({ text: 'Hello World' });
 export const Main = () => {
     return (
         <Container class="observer-container">
-            <TextInput link={{ observer, path: 'text' }} binding={new BindingTwoWay({})} value={observer.get('text')} />
-            <TextInput link={{ observer, path: 'text' }} binding={new BindingTwoWay({})} value={observer.get('text')} />
+            <TextInput link={{ observer, path: 'text' }} binding={new BindingTwoWay()} value={observer.get('text')} />
+            <TextInput link={{ observer, path: 'text' }} binding={new BindingTwoWay()} value={observer.get('text')} />
         </Container>
     );
 };
