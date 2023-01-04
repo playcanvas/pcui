@@ -198,7 +198,7 @@ class NumericInput extends TextInput {
         // get the content of the input and pass it
         // @ts-ignore through our value setter
         this.value = this._domInput.value;
-    };
+    }
 
     protected _onInputKeyDown = (evt: KeyboardEvent) => {
         if (!this.enabled || this.readOnly) return super._onInputKeyDown(evt);
