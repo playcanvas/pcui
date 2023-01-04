@@ -194,7 +194,7 @@ class NumericInput extends TextInput {
         }
     };
 
-    protected _onInputChange = (evt: any) => {
+    protected _onInputChange(evt: any) {
         // get the content of the input and pass it
         // @ts-ignore through our value setter
         this.value = this._domInput.value;

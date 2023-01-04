@@ -60,6 +60,8 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
     protected _onInputKeyDownEvt: (evt: KeyboardEvent) => void;
 
+    protected _onInputChangeEvt: (evt: Event) => void;
+
     constructor(args: TextInputArgs = TextInput.defaultArgs) {
         args = { ...TextInput.defaultArgs, ...args };
         super(args.dom, args);
@@ -77,8 +79,9 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         input.autocomplete = "off";
 
         this._onInputKeyDownEvt = this._onInputKeyDown.bind(this);
+        this._onInputChangeEvt = this._onInputChange.bind(this);
 
-        input.addEventListener('change', this._onInputChange);
+        input.addEventListener('change', this._onInputChangeEvt);
         input.addEventListener('focus', this._onInputFocus);
         input.addEventListener('blur', this._onInputBlur);
         input.addEventListener('keydown', this._onInputKeyDownEvt);
@@ -120,7 +123,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         if (this._destroyed) return;
 
         const input = this._domInput;
-        input.removeEventListener('change', this._onInputChange);
+        input.removeEventListener('change', this._onInputChangeEvt);
         input.removeEventListener('focus', this._onInputFocus);
         input.removeEventListener('blur', this._onInputBlur);
         input.removeEventListener('keydown', this._onInputKeyDownEvt);
@@ -132,7 +135,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         super.destroy();
     }
 
-    protected _onInputChange = (evt: Event) => {
+    protected _onInputChange(evt: Event) {
         if (this._suspendInputChangeEvt) return;
 
         if (this._onValidate) {
