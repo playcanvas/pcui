@@ -94,7 +94,7 @@ class MenuItem extends Container implements IBindable {
 
         this._icon = null;
 
-        this._labelText = new Label({});
+        this._labelText = new Label();
         this._containerContent.append(this._labelText);
 
         this._containerItems = new Container({

@@ -66,7 +66,7 @@ class GridViewItem extends Container implements IFocusable {
 
             this._radioButton = new RadioButton({
                 class: CLASS_RADIO_BUTTON,
-                binding: new BindingObserversToElement({})
+                binding: new BindingObserversToElement()
             });
 
             // @ts-ignore Remove radio button click event listener
@@ -80,7 +80,7 @@ class GridViewItem extends Container implements IFocusable {
 
         this._labelText = new Label({
             class: CLASS_TEXT,
-            binding: new BindingObserversToElement({})
+            binding: new BindingObserversToElement()
         });
 
         this.append(this._labelText);
