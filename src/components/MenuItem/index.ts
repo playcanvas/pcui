@@ -164,7 +164,8 @@ class MenuItem extends Container implements IBindable {
         evt.preventDefault();
         evt.stopPropagation();
         if (this.enabled) {
-            this._onSelect(evt);
+            if (this._onSelect)
+                this._onSelect(evt);
             this.emit('select');
 
             if (this.menu) {
