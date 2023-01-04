@@ -153,7 +153,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         if (this._binding) {
             this._binding.setValue(this.value);
         }
-    };
+    }
 
     protected _onInputFocus = (evt: FocusEvent) => {
         this.class.add(pcuiClass.FOCUS);
