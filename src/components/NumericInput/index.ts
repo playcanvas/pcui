@@ -322,25 +322,19 @@ class NumericInput extends TextInput {
 
     /* eslint accessor-pairs: 0 */
     set values(values: Array<number>) {
-        let different = false;
-        const value = this._normalizeValue(values[0]);
-        for (let i = 1; i < values.length; i++) {
-            if (value !== this._normalizeValue(values[i])) {
-                different = true;
-                break;
-            }
-        }
+        const normalizedValues = values.map(v => this._normalizeValue(v));
+        const allSame = normalizedValues.every(v => value === normalizedValues[0]);
 
-        if (different) {
+        if (allSame) {
+            this._updateValue(normalizedValues[0]);
+            if (this._sliderControl) {
+                this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
+            }
+        } else {
             this._updateValue(null);
             this.class.add(pcuiClass.MULTIPLE_VALUES);
             if (this._sliderControl) {
                 this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
-            }
-        } else {
-            this._updateValue(value);
-            if (this._sliderControl) {
-                this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN);
             }
         }
     }
