@@ -73,10 +73,14 @@
       "@typescript-eslint/no-empty-interface": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": "off",
-      "import/no-unresolved": "off",
       "jsdoc/require-returns": "off",
       "jsdoc/require-returns-type": "off",
       "jsdoc/require-param-type": "off"
+    },
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
     }
   },
   "devDependencies": {
@@ -105,6 +109,7 @@
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.2",
     "eslint": "^8.31.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
     "playcanvas": "^1.59.0",
     "postcss": "^8.4.19",
     "prop-types": "^15.8.1",
