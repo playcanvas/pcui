@@ -1,6 +1,5 @@
-import Element from '../Element/index';
+import Element, { IFocusable } from '../Element/index';
 import Container, { ContainerArgs } from '../Container';
-import { IFocusable } from '../Element';
 import MenuItem, { MenuItemArgs } from '../MenuItem';
 
 const CLASS_MENU = 'pcui-menu';
