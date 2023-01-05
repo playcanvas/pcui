@@ -1,5 +1,9 @@
 # PCUI - User Interface Component Library for the Web
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/playcanvas/pcui/blob/main/LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/@playcanvas/pcui.svg?style=flat?style=flat)](https://www.npmjs.com/package/@playcanvas/pcui)
+[![NPM Downloads](https://img.shields.io/npm/dw/@playcanvas/pcui)](https://npmtrends.com/@playcanvas/pcui)
+
 ![PCUI Banner](https://forum-files-playcanvas-com.s3.dualstack.eu-west-1.amazonaws.com/original/2X/7/7e51de8ae69fa499dcad292efd21d7722dcf2dbd.jpeg)
 
 This library enables the creation of reliable and visually pleasing user interfaces by providing fully styled components that you can use directly on your site. The components are useful in a wide range of use cases, from creating simple forms to building graphical user interfaces for complex web tools.
