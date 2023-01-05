@@ -1,3 +1,5 @@
+import { EventHandle } from '@playcanvas/observer';
+
 import Element, { ElementArgs, IBindable, IBindableArgs } from '../Element/index';
 import Overlay from '../Overlay/index';
 import NumericInput from '../NumericInput/index';
@@ -37,7 +39,7 @@ class ColorPicker extends Element implements IBindable {
 
     protected _historyCombine: boolean;
 
-    protected _historyPostfix: any;
+    protected _historyPostfix: string;
 
     protected _value: number[];
 
@@ -79,13 +81,13 @@ class ColorPicker extends Element implements IBindable {
 
     protected _panelFields: HTMLDivElement;
 
-    protected _evtColorPick: any;
+    protected _evtColorPick: EventHandle;
 
-    protected _evtColorToPicker: any;
+    protected _evtColorToPicker: EventHandle;
 
-    protected _evtColorPickStart: any;
+    protected _evtColorPickStart: EventHandle;
 
-    protected _evtColorPickEnd: any;
+    protected _evtColorPickEnd: EventHandle;
 
     protected _fieldHex: TextInput;
 
