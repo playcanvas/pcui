@@ -1,4 +1,4 @@
-import { Events, Observer } from '@playcanvas/observer';
+import { EventHandle, Events, Observer } from '@playcanvas/observer';
 import React from 'react';
 import * as pcuiClass from '../../class';
 
@@ -378,11 +378,11 @@ class Element extends Events {
 
     protected _parent: Element; // eslint-disable-line no-use-before-define
 
-    protected _eventsParent: any[];
+    protected _eventsParent: EventHandle[];
 
     protected _dom: HTMLElement;
 
-    protected _class: any[];
+    protected _class: string[];
 
     protected _hiddenParents: boolean;
 
