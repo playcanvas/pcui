@@ -125,15 +125,8 @@ class RadioButton extends Element implements IBindable, IFocusable {
     }
 
     /* eslint accessor-pairs: 0 */
-    set values(values: Array<boolean>) {
-        let different = false;
-        const value = values[0];
-        for (let i = 1; i < values.length; i++) {
-            if (values[i] !== value) {
-                different = true;
-                break;
-            }
-        }
+    set values(values: boolean[]) {
+        const different = values.some(v => v !== values[0]);
 
         if (different) {
             this._updateValue(null);
