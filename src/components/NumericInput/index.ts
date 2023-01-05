@@ -321,7 +321,7 @@ class NumericInput extends TextInput {
     }
 
     /* eslint accessor-pairs: 0 */
-    set values(values: Array<number>) {
+    set values(values: number[]) {
         const normalizedValues = values.map(v => this._normalizeValue(v));
         const different = normalizedValues.some(v => v !== normalizedValues[0]);
 
