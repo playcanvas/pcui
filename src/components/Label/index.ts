@@ -124,13 +124,13 @@ class Label extends Input implements IPlaceholder {
 
     /* eslint accessor-pairs: 0 */
     set values(values: string[]) {
-        const allSame = values.every(v => v === values[0]);
+        const different = values.some(v => v !== values[0]);
 
-        if (allSame) {
-            this._updateText(values[0]);
-        } else {
+        if (different) {
             this._updateText('');
             this.class.add(pcuiClass.MULTIPLE_VALUES);
+        } else {
+            this._updateText(values[0]);
         }
     }
 

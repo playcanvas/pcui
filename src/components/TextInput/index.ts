@@ -277,13 +277,13 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
     /* eslint accessor-pairs: 0 */
     set values(values: Array<string | number>) {
-        const allSame = values.every(v => v === values[0]);
+        const different = values.some(v => v !== values[0]);
 
-        if (allSame) {
-            this._updateValue(values[0]);
-        } else {
+        if (different) {
             this._updateValue(null);
             this.class.add(pcuiClass.MULTIPLE_VALUES);
+        } else {
+            this._updateValue(values[0]);
         }
     }
 
