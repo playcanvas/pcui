@@ -1,4 +1,4 @@
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholderArgs } from '../Element/index';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholderArgs } from '../Element';
 import Container from '../Container';
 import TextInput from '../TextInput';
 import Button from '../Button';

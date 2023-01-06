@@ -1,4 +1,4 @@
-import Element, { ElementArgs } from '../Element/index';
+import Element, { ElementArgs } from '../Element';
 
 /**
  * The arguments for the {@link Canvas} constructor.

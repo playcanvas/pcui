@@ -1,4 +1,4 @@
-import Element, { ElementArgs, IBindable } from '../Element/index';
+import Element, { ElementArgs, IBindable } from '../Element';
 
 /**
  * The arguments for the {@link Input} constructor.

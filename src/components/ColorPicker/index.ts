@@ -1,9 +1,9 @@
 import { EventHandle } from '@playcanvas/observer';
 
-import Element, { ElementArgs, IBindable, IBindableArgs } from '../Element/index';
-import Overlay from '../Overlay/index';
-import NumericInput from '../NumericInput/index';
-import TextInput from '../TextInput/index';
+import Element, { ElementArgs, IBindable, IBindableArgs } from '../Element';
+import Overlay from '../Overlay';
+import NumericInput from '../NumericInput';
+import TextInput from '../TextInput';
 import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
 
 const CLASS_COLOR_INPUT = 'pcui-color-input';

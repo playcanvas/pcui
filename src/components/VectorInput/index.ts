@@ -1,5 +1,5 @@
 import { Observer } from '@playcanvas/observer';
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element/index';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
 

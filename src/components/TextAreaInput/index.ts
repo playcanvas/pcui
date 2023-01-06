@@ -1,5 +1,5 @@
-import Element from '../Element/index';
-import TextInput, { TextInputArgs } from '../TextInput/index';
+import Element from '../Element';
+import TextInput, { TextInputArgs } from '../TextInput';
 
 const CLASS_TEXT_AREA_INPUT = 'pcui-text-area-input';
 const CLASS_TEXT_AREA_INPUT_RESIZABLE = CLASS_TEXT_AREA_INPUT + '-resizable';

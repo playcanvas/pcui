@@ -1,5 +1,5 @@
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element/index';
-import Input from '../Input/index';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import Input from '../Input';
 import * as pcuiClass from '../../class';
 
 const CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';

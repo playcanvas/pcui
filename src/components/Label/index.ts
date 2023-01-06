@@ -1,6 +1,6 @@
 import * as pcuiClass from '../../class';
-import Element, { ElementArgs, IBindableArgs, IFlexArgs, IPlaceholder, IPlaceholderArgs } from '../Element/index';
-import Input from '../Input/index';
+import Element, { ElementArgs, IBindableArgs, IFlexArgs, IPlaceholder, IPlaceholderArgs } from '../Element';
+import Input from '../Input';
 
 const CLASS_LABEL = 'pcui-label';
 

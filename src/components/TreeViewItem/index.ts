@@ -1,6 +1,6 @@
-import Label from '../Label/index';
-import Container, { ContainerArgs } from '../Container/index';
-import TextInput from '../TextInput/index';
+import Label from '../Label';
+import Container, { ContainerArgs } from '../Container';
+import TextInput from '../TextInput';
 import * as pcuiClass from '../../class';
 
 const CLASS_ROOT = 'pcui-treeview-item';

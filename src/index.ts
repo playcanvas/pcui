@@ -1,2 +1,2 @@
-export * from './binding/index';
-export * from './components/index';
+export * from './binding';
+export * from './components';
