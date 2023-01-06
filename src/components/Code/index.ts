@@ -1,4 +1,4 @@
-import Element from '../Element/index';
+import Element from '../Element';
 import Container, { ContainerArgs } from '../Container';
 import Label from '../Label';
 

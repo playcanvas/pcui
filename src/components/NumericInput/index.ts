@@ -1,4 +1,4 @@
-import Element from '../Element/index';
+import Element from '../Element';
 import TextInput, { TextInputArgs } from '../TextInput';
 import * as pcuiClass from '../../class';
 

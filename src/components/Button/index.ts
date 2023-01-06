@@ -1,4 +1,4 @@
-import Element, { ElementArgs } from '../Element/index';
+import Element, { ElementArgs } from '../Element';
 
 const CLASS_BUTTON = 'pcui-button';
 

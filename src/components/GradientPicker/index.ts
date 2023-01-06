@@ -1,4 +1,4 @@
-import Element, { ElementArgs } from '../Element/index';
+import Element, { ElementArgs } from '../Element';
 import Overlay from '../Overlay';
 import Button from '../Button';
 import SelectInput from '../SelectInput';

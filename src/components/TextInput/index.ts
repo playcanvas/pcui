@@ -1,5 +1,5 @@
-import Element, { IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element/index';
-import Input, { InputArgs } from '../Input/index';
+import Element, { IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
+import Input, { InputArgs } from '../Input';
 import * as pcuiClass from '../../class';
 
 const CLASS_TEXT_INPUT = 'pcui-text-input';

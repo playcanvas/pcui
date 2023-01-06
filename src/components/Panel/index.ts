@@ -1,8 +1,8 @@
 import * as pcuiClass from '../../class';
-import Element from '../Element/index';
-import Container, { ContainerArgs } from '../Container/index';
-import Label from '../Label/index';
-import Button from '../Button/index';
+import Element from '../Element';
+import Container, { ContainerArgs } from '../Container';
+import Label from '../Label';
+import Button from '../Button';
 
 const CLASS_PANEL = 'pcui-panel';
 const CLASS_PANEL_HEADER = CLASS_PANEL + '-header';

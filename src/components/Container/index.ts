@@ -1,4 +1,4 @@
-import Element, { ElementArgs, IFlexArgs, IParentArgs } from '../Element/index';
+import Element, { ElementArgs, IFlexArgs, IParentArgs } from '../Element';
 import * as pcuiClass from '../../class';
 
 const RESIZE_HANDLE_SIZE = 4;

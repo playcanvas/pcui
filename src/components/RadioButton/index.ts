@@ -1,4 +1,4 @@
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element/index';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
 import * as pcuiClass from '../../class';
 
 const CLASS_RADIO_BUTTON = 'pcui-radio-button';

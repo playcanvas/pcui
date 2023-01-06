@@ -1,4 +1,4 @@
-import Element, { IFocusable } from '../Element/index';
+import Element, { IFocusable } from '../Element';
 import Container, { ContainerArgs } from '../Container';
 import MenuItem, { MenuItemArgs } from '../MenuItem';
 

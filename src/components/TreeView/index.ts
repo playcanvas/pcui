@@ -1,5 +1,5 @@
 import Container, { ContainerArgs } from '../Container';
-import Element from '../Element/index';
+import Element from '../Element';
 import TreeViewItem from '../TreeViewItem';
 import { searchItems } from '../../helpers/search';
 

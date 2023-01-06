@@ -1,5 +1,5 @@
 import { Events, History, Observer } from '@playcanvas/observer';
-import { IBindable } from '../../components/Element/index';
+import { IBindable } from '../../components/Element';
 
 export interface BindingBaseArgs {
     /**

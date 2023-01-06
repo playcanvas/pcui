@@ -1,9 +1,9 @@
 import { Observer } from '@playcanvas/observer';
-import { IFocusable } from '../Element/index';
-import Container, { ContainerArgs } from '../Container/index';
-import Label from '../Label/index';
-import BindingObserversToElement from '../../binding/BindingObserversToElement/index';
-import RadioButton from '../RadioButton/index';
+import { IFocusable } from '../Element';
+import Container, { ContainerArgs } from '../Container';
+import Label from '../Label';
+import BindingObserversToElement from '../../binding/BindingObserversToElement';
+import RadioButton from '../RadioButton';
 
 const CLASS_ROOT = 'pcui-gridview-item';
 const CLASS_ROOT_RADIO = 'pcui-gridview-radio-container';

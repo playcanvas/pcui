@@ -1,4 +1,4 @@
-import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable } from '../Element/index';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable } from '../Element';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
 

@@ -1,4 +1,4 @@
-import Element, { ElementArgs } from '../Element/index';
+import Element, { ElementArgs } from '../Element';
 import Container from '../Container';
 
 const CLASS_OVERLAY = 'pcui-overlay';
