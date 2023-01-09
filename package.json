@@ -32,7 +32,8 @@
     "docsite:serve": "serve docs/_site -p 3497",
     "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types",
     "build:typedocs": "typedoc --tsconfig ./tsconfig.json",
-    "storybook": "start-storybook -p 9009 -s public"
+    "storybook": "start-storybook -p 9009 -s public",
+    "test": "node --test"
   },
   "files": [
     "dist",
