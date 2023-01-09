@@ -35,7 +35,7 @@
     "build:docsite:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook && cp -r ./typedocs ./docs/_site/typedocs",
     "build:docsite:production": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook && cp -r ./typedocs ./docs/_site/typedocs",
     "docsite:serve": "serve docs/_site -p 3497",
-    "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types",
+    "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types && tsc --project ./react/tsconfig.json --declaration --emitDeclarationOnly --outDir ./react/types",
     "build:typedocs": "typedoc --tsconfig ./tsconfig.json",
     "storybook": "start-storybook -p 9009 -s public"
   },
