@@ -48,8 +48,6 @@ class Label extends Input implements IPlaceholder {
 
     protected _text: string;
 
-    _optionValue: any;
-
     constructor(args: LabelArgs = Label.defaultArgs) {
         args = { ...Label.defaultArgs, ...args };
         super(args.dom, args);
