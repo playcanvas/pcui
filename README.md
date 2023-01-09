@@ -15,7 +15,6 @@ A full guide to using the PCUI library can be found [here](https://playcanvas.gi
 To install PCUI in your project, run the following npm commands:
 
 ```
-npm install --save @playcanvas/observer
 npm install --save @playcanvas/pcui
 ```
 

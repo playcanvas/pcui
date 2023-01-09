@@ -83,12 +83,14 @@
       }
     }
   },
+  "dependencies": {
+    "@playcanvas/observer": "^1.3.5"
+  },
   "devDependencies": {
     "@babel/core": "^7.20.7",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@playcanvas/eslint-config": "^1.0.16",
-    "@playcanvas/observer": "^1.3.5",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-replace": "^5.0.2",
