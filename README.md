@@ -12,10 +12,10 @@ A full guide to using the PCUI library can be found [here](https://playcanvas.gi
 
 ## Getting Started
 
-To install PCUI in your project, run the following npm commands:
+To install PCUI NPM module, run the following command:
 
 ```
-npm install --save @playcanvas/pcui
+npm install @playcanvas/pcui
 ```
 
 If you are using ESM, you can then import each individual element from PCUI. In the example below you can see how the PCUI `Label` component is imported from the PCUI library. The styles for PCUI are then imported into the example. Styles only need to be imported once per project.
