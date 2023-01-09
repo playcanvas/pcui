@@ -41,7 +41,8 @@ export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindabl
 class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder {
     static readonly defaultArgs: VectorInputArgs = {
         ...Element.defaultArgs,
-        dimensions: 3
+        dimensions: 3,
+        precision: 7
     };
 
     protected _inputs: NumericInput[] = [];
