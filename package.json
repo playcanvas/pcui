@@ -110,6 +110,8 @@
     "babel-loader": "^9.1.0",
     "eslint": "^8.31.0",
     "eslint-import-resolver-typescript": "^3.5.2",
+    "global-jsdom": "^8.6.0",
+    "jsdom": "^20.0.3",
     "playcanvas": "^1.59.0",
     "postcss": "^8.4.19",
     "prop-types": "^15.8.1",
