@@ -12,7 +12,7 @@ A full guide to using the PCUI library can be found [here](https://playcanvas.gi
 
 ## Getting Started
 
-To install PCUI NPM module, run the following command:
+To install the PCUI NPM module, run the following command:
 
 ```
 npm install @playcanvas/pcui
