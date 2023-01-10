@@ -89,7 +89,7 @@ class NumericInput extends TextInput {
 
         this._min = args.min ?? null;
         this._max = args.max ?? null;
-        this._allowNull = args.allowNull ?? null;
+        this._allowNull = args.allowNull ?? false;
         this._precision = args.precision ?? 7;
 
         if (Number.isFinite(args.step)) {
