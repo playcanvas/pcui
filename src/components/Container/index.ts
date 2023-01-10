@@ -24,7 +24,7 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
 export interface ContainerArgs extends ElementArgs, IParentArgs, IFlexArgs {
     /**
      * Sets whether the {@link Container} is resizable and where the resize handle is located. Can
-     * be one of 'top', 'bottom', 'right', 'left'. Defaults to null which disables resizing.
+     * be one of 'top', 'bottom', 'right', 'left'. Defaults to `null` which disables resizing.
      */
     resizable?: string,
     /**
