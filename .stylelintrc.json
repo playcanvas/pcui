@@ -6,7 +6,6 @@
         "font-family-no-missing-generic-family-keyword": null,
         "no-descending-specificity": null,
         "no-duplicate-selectors": null,
-        "scss/dollar-variable-pattern": null,
         "scss/no-global-function-names": null,
         "scss/at-extend-no-missing-placeholder": null,
         "string-quotes": "single"
