@@ -25,7 +25,7 @@ const CLASS_GRADIENT = 'pcui-gradient';
  */
 export interface GradientPickerArgs extends ElementArgs {
     /**
-     * If true, the picker will render changes to the gradient as they happen. Defaults to true.
+     * If true, the picker will render changes to the gradient as they happen. Defaults to `true`.
      */
     renderChanges?: boolean;
     /**
