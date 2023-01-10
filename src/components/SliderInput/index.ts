@@ -15,11 +15,11 @@ const IS_CHROME = /Chrome\//.test(navigator.userAgent);
  */
 export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
     /**
-     * Gets / sets the minimum value that the numeric input field can take. Defaults to 0.
+     * Gets / sets the minimum value that the numeric input field can take.
      */
     min?: number,
     /**
-     * Gets / sets the maximum value that the numeric input field can take. Defaults to 1.
+     * Gets / sets the maximum value that the numeric input field can take.
      */
     max?: number,
     /**
@@ -31,7 +31,7 @@ export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
      */
     sliderMax?: number,
     /**
-     * Gets / sets the maximum number of decimals a value can take.
+     * Gets / sets the maximum number of decimals a value can take. Defaults to 2.
      */
     precision?: number,
     /**
@@ -50,12 +50,6 @@ export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
  * NumericInput.
  */
 class SliderInput extends Element implements IBindable, IFocusable {
-    static readonly defaultArgs: SliderInputArgs = {
-        ...Element.defaultArgs,
-        min: 0,
-        max: 1
-    };
-
     protected _historyCombine = false;
 
     protected _historyPostfix: any = null;
@@ -81,8 +75,7 @@ class SliderInput extends Element implements IBindable, IFocusable {
      *
      * @param args - The arguments.
      */
-    constructor(args: SliderInputArgs = SliderInput.defaultArgs) {
-        args = { ...SliderInput.defaultArgs, ...args };
+    constructor(args: SliderInputArgs = {}) {
         super(args.dom, args);
 
         this.class.add(CLASS_SLIDER);

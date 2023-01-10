@@ -39,11 +39,11 @@ export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
      */
     fixedSize?: boolean;
     /**
-     * If `true` then the array will be rendered using panels.
+     * If `true` then the array will be rendered using panels. Defaults to false.
      */
     usePanels?: boolean;
     /**
-     * Used to specify the default values for each element in the array. Can be left null.
+     * Used to specify the default values for each element in the array. Defaults to null.
      */
     getDefaultFn?: () => any;
 }
@@ -52,12 +52,6 @@ export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
  * Element that allows editing an array of values.
  */
 class ArrayInput extends Element implements IFocusable, IBindable {
-    static readonly defaultArgs: ArrayInputArgs = {
-        ...Element.defaultArgs,
-        getDefaultFn: null,
-        usePanels: false
-    };
-
     /**
      * Fired when an array element is linked to observers.
      *
@@ -123,9 +117,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: ArrayInputArgs = ArrayInput.defaultArgs) {
-        args = { ...ArrayInput.defaultArgs, ...args };
-
+    constructor(args: ArrayInputArgs = {}) {
         // remove binding because we want to set it later
         const binding = args.binding;
         delete args.binding;
@@ -142,7 +134,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
         this.class.add(CLASS_ARRAY_INPUT, CLASS_ARRAY_EMPTY);
 
-        this._usePanels = args.usePanels;
+        this._usePanels = args.usePanels ?? false;
 
         this._fixedSize = !!args.fixedSize;
 
@@ -182,7 +174,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         this._suspendArrayElementEvts = false;
         this._arrayElementChangeTimeout = null;
 
-        this._getDefaultFn = args.getDefaultFn;
+        this._getDefaultFn = args.getDefaultFn ?? null;
 
         // @ts-ignore
         let valueType = args.elementArgs && args.elementArgs.type || args.type;

@@ -53,10 +53,6 @@ export interface MenuItemArgs extends ContainerArgs {
  * Menus.
  */
 class MenuItem extends Container implements IBindable {
-    static readonly defaultArgs: MenuItemArgs = {
-        ...Container.defaultArgs
-    };
-
     protected _containerContent: Container;
 
     protected _numChildren: number;
@@ -77,8 +73,7 @@ class MenuItem extends Container implements IBindable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: MenuItemArgs = MenuItem.defaultArgs) {
-        args = { ...MenuItem.defaultArgs, ...args };
+    constructor(args: MenuItemArgs = {}) {
         super(args);
 
         this.class.add(CLASS_MENU_ITEM);

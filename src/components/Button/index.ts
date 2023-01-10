@@ -30,15 +30,6 @@ export interface ButtonArgs extends ElementArgs {
  * User input with click interaction.
  */
 class Button extends Element {
-    static readonly defaultArgs: ButtonArgs = {
-        ...Element.defaultArgs,
-        text: '',
-        icon: '',
-        unsafe: false,
-        size: null,
-        dom: 'button'
-    };
-
     protected _unsafe: boolean;
 
     protected _text: string;
@@ -47,9 +38,8 @@ class Button extends Element {
 
     protected _size: string | null;
 
-    constructor(args: ButtonArgs = Button.defaultArgs) {
-        args = { ...Button.defaultArgs, ...args };
-        super(args.dom, args);
+    constructor(args: ButtonArgs = {}) {
+        super(args.dom ?? 'button', args);
 
         this.class.add(CLASS_BUTTON);
 

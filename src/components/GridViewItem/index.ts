@@ -31,19 +31,16 @@ export interface GridViewItemArgs extends ContainerArgs {
      * The text of the item. Defaults to ''.
      */
     text?: string;
+    /**
+     * Gets / sets the tabIndex of the {@link GridViewItem}. Defaults to 0.
+     */
+    tabIndex?: number;
 }
 
 /**
  *  Represents a grid view item used in {@link GridView}.
  */
 class GridViewItem extends Container implements IFocusable {
-    static readonly defaultArgs: GridViewItemArgs = {
-        ...Container.defaultArgs,
-        allowSelect: true,
-        text: '',
-        tabIndex: 0
-    };
-
     protected _selected: boolean;
 
     protected _radioButton: RadioButton;
@@ -54,11 +51,12 @@ class GridViewItem extends Container implements IFocusable {
 
     protected _allowSelect: boolean;
 
-    constructor(args: GridViewItemArgs = GridViewItem.defaultArgs) {
-        args = { ...GridViewItem.defaultArgs, ...args };
+    constructor(args: GridViewItemArgs = {}) {
+        args.tabIndex = args.tabIndex ?? 0;
         super(args);
 
-        this.allowSelect = args.allowSelect;
+        this.allowSelect = args.allowSelect ?? true;
+        this._type = args.type ?? null;
         this._selected = false;
 
         if (args.type === 'radio') {
@@ -80,13 +78,11 @@ class GridViewItem extends Container implements IFocusable {
 
         this._labelText = new Label({
             class: CLASS_TEXT,
-            binding: new BindingObserversToElement()
+            binding: new BindingObserversToElement(),
+            text: args.text ?? ''
         });
 
         this.append(this._labelText);
-
-        this.text = args.text;
-        this._type = args.type;
 
         this.dom.addEventListener('focus', this._onFocus);
         this.dom.addEventListener('blur', this._onBlur);

@@ -24,7 +24,7 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
 export interface ContainerArgs extends ElementArgs, IParentArgs, IFlexArgs {
     /**
      * Sets whether the {@link Container} is resizable and where the resize handle is located. Can
-     * be one of 'top', 'bottom', 'right', 'left'. Set to null to disable resizing.
+     * be one of 'top', 'bottom', 'right', 'left'. Defaults to null which disables resizing.
      */
     resizable?: string,
     /**
@@ -58,12 +58,6 @@ export interface ContainerArgs extends ElementArgs, IParentArgs, IFlexArgs {
  * container can contain any other element including other containers.
  */
 class Container extends Element {
-    static readonly defaultArgs: ContainerArgs = {
-        ...Element.defaultArgs,
-        resizable: null,
-        dom: 'div'
-    };
-
     /**
      * Fired when a child Element gets added to the Container.
      *
@@ -146,9 +140,8 @@ class Container extends Element {
 
     protected _draggedHeight: number;
 
-    constructor(args: ContainerArgs = Container.defaultArgs) {
-        args = { ...Container.defaultArgs, ...args };
-        super(args.dom, args);
+    constructor(args: ContainerArgs = {}) {
+        super(args.dom ?? 'div', args);
 
         this.class.add(CLASS_CONTAINER);
 
@@ -181,7 +174,7 @@ class Container extends Element {
         this._resizeData = null;
         this._resizeHorizontally = true;
 
-        this.resizable = args.resizable;
+        this.resizable = args.resizable ?? null;
         this._resizeMin = 100;
         this._resizeMax = 300;
 

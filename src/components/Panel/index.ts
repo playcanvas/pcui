@@ -92,11 +92,6 @@ class Panel extends Container {
      */
     public static readonly EVENT_EXPAND = 'expand';
 
-    static readonly defaultArgs: PanelArgs = {
-        ...Container.defaultArgs,
-        headerSize: 32
-    };
-
     protected _suspendReflow: boolean;
 
     protected _reflowTimeout: number;
@@ -133,8 +128,7 @@ class Panel extends Container {
      * @param args - The arguments. Extends the Container constructor arguments. All settable
      * properties can also be set through the constructor.
      */
-    constructor(args: PanelArgs = Panel.defaultArgs) {
-        args = { ...Panel.defaultArgs, ...args };
+    constructor(args: PanelArgs = {}) {
 
         const panelArgs = Object.assign({}, args);
         panelArgs.flex = true;
@@ -161,7 +155,7 @@ class Panel extends Container {
         this._initializeContent(args);
 
         // header size
-        this.headerSize = args.headerSize !== undefined ? args.headerSize : 32;
+        this.headerSize = args.headerSize ?? 32;
 
         // collapse related
         this._reflowTimeout = null;
