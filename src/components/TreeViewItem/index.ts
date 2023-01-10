@@ -52,11 +52,7 @@ export interface TreeViewItemArgs extends ContainerArgs {
     /**
      * Method to be called when the {@link TreeViewItem} is deselected.
      */
-    onDeselect?: () => void,
-    /**
-     * Use the flex layout type. Defaults to true.
-     */
-    flex?: boolean
+    onDeselect?: () => void
 }
 
 /**
@@ -147,7 +143,7 @@ class TreeViewItem extends Container {
 
         this._containerContents = new Container({
             class: CLASS_CONTENTS,
-            flex: args.flex ?? true,
+            flex: true,
             flexDirection: 'row',
             tabIndex: 0
         });
