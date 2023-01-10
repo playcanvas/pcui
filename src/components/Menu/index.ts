@@ -15,7 +15,7 @@ export interface MenuArgs extends ContainerArgs {
      */
     items?: MenuItemArgs[];
     /**
-     * Sets whether this {@link Menu} is hidden. Defaults to true.
+     * Sets whether this {@link Menu} is hidden. Defaults to `true`.
      */
     hidden?: boolean;
     /**
