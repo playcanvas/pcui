@@ -187,7 +187,7 @@ export interface ElementArgs {
      */
     style?: string,
     /**
-     * Whether this {@link Element} is read only or not. Defaults to false.
+     * Whether this {@link Element} is read only or not. Defaults to `false`.
      */
     readOnly?: boolean
 }
