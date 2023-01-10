@@ -6,7 +6,7 @@ import BaseComponent from '../Element/component';
  * The Label is a simple span element that displays some text.
  */
 class Component extends BaseComponent <LabelArgs, any> {
-    constructor(props: LabelArgs = Element.defaultArgs) {
+    constructor(props: LabelArgs = {}) {
         super(props);
         this.elementClass = Element;
     }

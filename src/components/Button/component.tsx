@@ -6,7 +6,7 @@ import BaseComponent from '../Element/component';
  * User input with click interaction
  */
 class Component extends BaseComponent <ButtonArgs, any> {
-    constructor(props: ButtonArgs = Element.defaultArgs) {
+    constructor(props: ButtonArgs = {}) {
         super(props);
         this.elementClass = Element;
     }

@@ -5,8 +5,6 @@ import Element, { ElementArgs } from './index';
  * The base class for all UI elements. Wraps a DOM element with the PCUI interface.
  */
 class Component <P extends ElementArgs, S> extends React.Component <P, S> {
-    static defaultArgs = Element.defaultArgs;
-
     static ctor: any;
 
     element: any;
@@ -46,7 +44,6 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
             this.element = new this.elementClass(
                 nodeElement,
                 {
-                    ...this.elementClass.defaultArgs,
                     ...this.props,
                     container: containerElement,
                     parent: undefined
@@ -54,7 +51,6 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
             );
         } else {
             this.element = new this.elementClass({
-                ...this.elementClass.defaultArgs,
                 ...this.props,
                 dom: nodeElement,
                 content: containerElement,
