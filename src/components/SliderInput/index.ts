@@ -15,32 +15,32 @@ const IS_CHROME = /Chrome\//.test(navigator.userAgent);
  */
 export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
     /**
-     * Gets / sets the minimum value that the numeric input field can take. Defaults to 0.
+     * Sets the minimum value that the numeric input field can take. Defaults to 0.
      */
     min?: number,
     /**
-     * Gets / sets the maximum value that the numeric input field can take. Defaults to 1.
+     * Sets the maximum value that the numeric input field can take. Defaults to 1.
      */
     max?: number,
     /**
-     * Gets / sets the minimum value that the slider field can take. Defaults to 0.
+     * Sets the minimum value that the slider field can take. Defaults to 0.
      */
     sliderMin?: number,
     /**
-     * Gets / sets the maximum value that the slider field can take. Defaults to 1.
+     * Sets the maximum value that the slider field can take. Defaults to 1.
      */
     sliderMax?: number,
     /**
-     * Gets / sets the maximum number of decimals a value can take. Defaults to 2.
+     * Sets the maximum number of decimals a value can take. Defaults to 2.
      */
     precision?: number,
     /**
-     * Gets / sets the amount that the value will be increased or decreased when using the arrow
+     * Sets the amount that the value will be increased or decreased when using the arrow
      * keys. Holding Shift will use 10x the step.
      */
     step?: number,
     /**
-     * Gets / sets whether the value can be null. If not then it will be 0 instead of null.
+     * Sets whether the value can be null. If not then it will be 0 instead of null.
      */
     allowNull?: boolean
 }

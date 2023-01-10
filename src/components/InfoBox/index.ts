@@ -16,11 +16,11 @@ export interface InfoBoxArgs extends ContainerArgs {
      */
     icon?: string;
     /**
-     * Gets / sets the 'title' of the {@link InfoBox}. Defaults to ''.
+     * Sets the 'title' of the {@link InfoBox}. Defaults to ''.
      */
     title?: string;
     /**
-     * Gets / sets the 'text' of the {@link InfoBox}. Defaults to ''.
+     * Sets the 'text' of the {@link InfoBox}. Defaults to ''.
      */
     text?: string;
     /**

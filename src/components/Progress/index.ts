@@ -9,7 +9,7 @@ const CLASS_INNER = CLASS_ROOT + '-inner';
  */
 export interface ProgressArgs extends ContainerArgs {
     /**
-     * Gets / sets the value of the progress bar (between 0 and 100).
+     * Sets the value of the progress bar (between 0 and 100).
      */
     value?: number
 }

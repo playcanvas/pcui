@@ -21,7 +21,7 @@ export interface ButtonArgs extends ElementArgs {
      */
     icon?: string,
     /**
-     * Gets / sets the 'size' type of the button. Can be 'small' or `null`. Defaults to `null`.
+     * Sets the 'size' type of the button. Can be 'small' or `null`. Defaults to `null`.
      */
     size?: 'small'
 }
