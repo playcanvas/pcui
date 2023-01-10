@@ -159,7 +159,7 @@ export interface ElementArgs {
      */
     enabled?: boolean,
     /**
-     * Sets whether this {@link Element} is hidden. Defaults to false.
+     * Sets whether this {@link Element} is hidden. Defaults to `false`.
      */
     hidden?: boolean,
     /**
