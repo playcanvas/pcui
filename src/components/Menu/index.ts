@@ -19,7 +19,7 @@ export interface MenuArgs extends ContainerArgs {
      */
     hidden?: boolean;
     /**
-     * Gets / sets the tabIndex of the {@link Menu}. Defaults to 1.
+     * Sets the tabIndex of the {@link Menu}. Defaults to 1.
      */
     tabIndex?: number;
 }

@@ -11,7 +11,7 @@ const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
  */
 export interface BooleanInputArgs extends ElementArgs, IBindableArgs {
     /**
-     * Gets / sets the tabIndex of the {@link BooleanInput}. Defaults to 0.
+     * Sets the tabIndex of the {@link BooleanInput}. Defaults to 0.
      */
     tabIndex?: number,
     /**

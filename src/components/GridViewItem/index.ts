@@ -32,7 +32,7 @@ export interface GridViewItemArgs extends ContainerArgs {
      */
     text?: string;
     /**
-     * Gets / sets the tabIndex of the {@link GridViewItem}. Defaults to 0.
+     * Sets the tabIndex of the {@link GridViewItem}. Defaults to 0.
      */
     tabIndex?: number;
 }

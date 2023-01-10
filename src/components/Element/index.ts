@@ -175,11 +175,11 @@ export interface ElementArgs {
      */
     height?: number | null,
     /**
-     * Gets / sets the tabIndex of the {@link Element}.
+     * Sets the tabIndex of the {@link Element}.
      */
     tabIndex?: number,
     /**
-     * Gets / sets whether the {@link Element} is in an error state.
+     * Sets whether the {@link Element} is in an error state.
      */
     error?: boolean,
     /**
