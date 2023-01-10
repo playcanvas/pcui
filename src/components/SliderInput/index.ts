@@ -15,19 +15,19 @@ const IS_CHROME = /Chrome\//.test(navigator.userAgent);
  */
 export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
     /**
-     * Gets / sets the minimum value that the numeric input field can take.
+     * Gets / sets the minimum value that the numeric input field can take. Defaults to 0.
      */
     min?: number,
     /**
-     * Gets / sets the maximum value that the numeric input field can take.
+     * Gets / sets the maximum value that the numeric input field can take. Defaults to 1.
      */
     max?: number,
     /**
-     * Gets / sets the minimum value that the slider field can take.
+     * Gets / sets the minimum value that the slider field can take. Defaults to 0.
      */
     sliderMin?: number,
     /**
-     * Gets / sets the maximum value that the slider field can take.
+     * Gets / sets the maximum value that the slider field can take. Defaults to 1.
      */
     sliderMax?: number,
     /**
@@ -83,8 +83,8 @@ class SliderInput extends Element implements IBindable, IFocusable {
         const numericInput = new NumericInput({
             allowNull: args.allowNull,
             hideSlider: true,
-            max: args.max,
-            min: args.min,
+            min: args.min ?? 0,
+            max: args.max ?? 1,
             // @ts-ignore
             keyChange: args.keyChange,
             // @ts-ignore
@@ -112,8 +112,8 @@ class SliderInput extends Element implements IBindable, IFocusable {
 
         this._numericInput = numericInput;
 
-        this._sliderMin = args.sliderMin ?? args.min;
-        this._sliderMax = args.sliderMax ?? args.max;
+        this._sliderMin = args.sliderMin ?? args.min ?? 0;
+        this._sliderMax = args.sliderMax ?? args.max ?? 1;
 
         this._domSlider = document.createElement('div');
         this._domSlider.classList.add(CLASS_SLIDER_CONTAINER);
