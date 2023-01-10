@@ -163,7 +163,7 @@ export interface ElementArgs {
      */
     hidden?: boolean,
     /**
-     * If `true`, this {@link Element} will ignore its parent's enabled value when determining whether this element is enabled. Defaults to false.
+     * If `true`, this {@link Element} will ignore its parent's enabled value when determining whether this element is enabled. Defaults to `false`.
      */
     ignoreParent?: boolean,
     /**
