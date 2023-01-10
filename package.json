@@ -31,7 +31,7 @@
     "build:es6": "rollup -c --environment target:es6",
     "build:react:es6": "rollup -c --environment target:react:es6",
     "build": "rollup -c && npm run bundle:styles",
-    "build:font:icons": "cd ./src/scss/fonts && node ./buildFontIcons.js",
+    "build:icons": "cd ./utils && node ./build-font-icons.mjs",
     "build:docsite:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook && cp -r ./typedocs ./docs/_site/typedocs",
     "build:docsite:production": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook && cp -r ./typedocs ./docs/_site/typedocs",
     "docsite:serve": "serve docs/_site -p 3497",
