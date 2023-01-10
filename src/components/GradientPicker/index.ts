@@ -119,7 +119,7 @@ class GradientPicker extends Element {
      * be set through the constructor.
      */
     constructor(args: GradientPickerArgs = {}) {
-        super(args.dom ?? 'div', args);
+        super(args.dom, args);
 
         this.class.add(CLASS_GRADIENT);
 

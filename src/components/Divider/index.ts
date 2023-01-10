@@ -12,7 +12,7 @@ export interface DividerArgs extends ElementArgs {}
  */
 class Divider extends Element {
     constructor(args: DividerArgs = {}) {
-        super(args.dom ?? 'div', args);
+        super(args.dom, args);
 
         this.class.add(CLASS_ROOT);
     }
