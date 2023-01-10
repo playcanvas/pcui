@@ -20,7 +20,7 @@ export interface GridViewArgs extends ContainerArgs {
      */
     multiSelect?: boolean;
     /**
-     * If `true` and `multiSelect` is set to `false`, the layout will allow options to be deselected. Defaults to true.
+     * If `true` and `multiSelect` is set to `false`, the layout will allow options to be deselected. Defaults to `true`.
      */
     allowDeselect?: boolean;
     /**
