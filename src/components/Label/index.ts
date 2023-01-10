@@ -27,7 +27,7 @@ export interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs,
      */
     allowTextSelection?: boolean,
     /**
-     * The dom element or its type to use for this component. Defaults to 'span'.
+     * The DOM element or its type to use for this component. Defaults to 'span'.
      */
     dom?: HTMLElement | string,
     /**
