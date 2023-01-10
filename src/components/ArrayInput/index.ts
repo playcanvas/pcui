@@ -39,7 +39,7 @@ export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
      */
     fixedSize?: boolean;
     /**
-     * If `true` then the array will be rendered using panels. Defaults to false.
+     * If `true` then the array will be rendered using panels. Defaults to `false`.
      */
     usePanels?: boolean;
     /**
