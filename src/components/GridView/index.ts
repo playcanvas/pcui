@@ -16,7 +16,7 @@ export interface GridViewArgs extends ContainerArgs {
      */
     vertical?: boolean;
     /**
-     * If `true`, the layout will allow for multiple options to be selected. Defaults to true.
+     * If `true`, the layout will allow for multiple options to be selected. Defaults to `true`.
      */
     multiSelect?: boolean;
     /**
