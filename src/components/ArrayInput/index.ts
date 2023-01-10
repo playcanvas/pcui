@@ -43,7 +43,7 @@ export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
      */
     usePanels?: boolean;
     /**
-     * Used to specify the default values for each element in the array. Defaults to null.
+     * Used to specify the default values for each element in the array. Defaults to `null`.
      */
     getDefaultFn?: () => any;
 }
