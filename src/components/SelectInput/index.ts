@@ -46,7 +46,7 @@ export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholde
     /**
      * The dropdown options of the input. Contains an array of objects with the following format \{v: Any, t: String\} where v is the value and t is the text of the option.
      */
-    options?: Array<{ v: any, t: string }>;
+    options?: { t: string, v: boolean | number | string }[];
     /**
      * An array of values against which new values are checked before they are created. If a value is in the array it will not be created.
      */
@@ -114,9 +114,11 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _type: string;
 
-    protected _optionsIndex: { [key: string]: string };
+    protected _valueToText: { [key: string]: string };
 
-    protected _labelsIndex: { [key: string]: Label };
+    protected _valueToLabel: { [key: string]: Label };
+
+    protected _labelToValue: Map<Label, any> = new Map();
 
     protected _labelHighlighted: Label;
 
@@ -240,8 +242,8 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         this._type = args.type ?? 'string';
 
-        this._optionsIndex = {};
-        this._labelsIndex = {};
+        this._valueToText = {};
+        this._valueToLabel = {};
         this._labelHighlighted = null;
         this.invalidOptions = args.invalidOptions ?? [];
         this.options = args.options ?? [];
@@ -465,14 +467,15 @@ class SelectInput extends Element implements IBindable, IFocusable {
     // when the value is changed show the correct title
     protected _onValueChange(value: any) {
         if (!this.multiSelect) {
-            this._labelValue.value = this._optionsIndex[value] || '';
+            this._labelValue.value = this._valueToText[value] || '';
 
             value = '' + value;
-            for (const key in this._labelsIndex) {
+            for (const key in this._valueToLabel) {
+                const label = this._valueToLabel[key];
                 if (key === value) {
-                    this._labelsIndex[key].class.add(CLASS_SELECTED);
+                    label.class.add(CLASS_SELECTED);
                 } else {
-                    this._labelsIndex[key].class.remove(CLASS_SELECTED);
+                    label.class.remove(CLASS_SELECTED);
                 }
             }
         } else {
@@ -481,18 +484,20 @@ class SelectInput extends Element implements IBindable, IFocusable {
             this._containerTags.class.add(CLASS_TAGS_EMPTY);
 
             if (value && Array.isArray(value)) {
-                value.forEach((val) => {
+                for (const val of value) {
                     this._addTag(val);
-                    if (this._labelsIndex[val]) {
-                        this._labelsIndex[val].class.add(CLASS_SELECTED);
+                    const label = this._valueToLabel[val];
+                    if (label) {
+                        label.class.add(CLASS_SELECTED);
                     }
-                });
+                }
 
-                for (const key in this._labelsIndex) {
+                for (const key in this._valueToLabel) {
+                    const label = this._valueToLabel[key];
                     if (value.indexOf(this._convertSingleValue(key)) !== -1) {
-                        this._labelsIndex[key].class.add(CLASS_SELECTED);
+                        label.class.add(CLASS_SELECTED);
                     } else {
-                        this._labelsIndex[key].class.remove(CLASS_SELECTED);
+                        label.class.remove(CLASS_SELECTED);
                     }
                 }
             }
@@ -522,8 +527,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
         for (const val in valueCounts) {
             if (valueCounts[val] !== values.length) {
                 tags[val].class.add(CLASS_TAG_NOT_EVERYWHERE);
-                if (this._labelsIndex[val]) {
-                    this._labelsIndex[val].class.remove(CLASS_SELECTED);
+                const label = this._valueToLabel[val];
+                if (label) {
+                    label.class.remove(CLASS_SELECTED);
                 }
             }
         }
@@ -537,7 +543,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         });
 
         container.append(new Label({
-            text: this._optionsIndex[value] || value
+            text: this._valueToText[value] || value
         }));
 
         const btnRemove = new Button({
@@ -553,8 +559,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._containerTags.append(container);
         this._containerTags.class.remove(CLASS_TAGS_EMPTY);
 
-        if (this._labelsIndex[value]) {
-            this._labelsIndex[value].class.add(CLASS_SELECTED);
+        const label = this._valueToLabel[value];
+        if (label) {
+            label.class.add(CLASS_SELECTED);
         }
 
         // @ts-ignore
@@ -566,8 +573,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
     protected _removeTag(tagElement: any, value: string) {
         tagElement.destroy();
 
-        if (this._labelsIndex[value]) {
-            this._labelsIndex[value].class.remove(CLASS_SELECTED);
+        const label = this._valueToLabel[value];
+        if (label) {
+            label.class.remove(CLASS_SELECTED);
         }
 
         if (this._values) {
@@ -619,13 +627,15 @@ class SelectInput extends Element implements IBindable, IFocusable {
             });
             const searchResults = searchItems(searchOptions, filter);
             searchResults.forEach((value: string) => {
-                containerDom.appendChild(this._labelsIndex[value].dom);
+                const label = this._valueToLabel[value];
+                containerDom.appendChild(label.dom);
             });
 
         } else {
-            this.options.forEach((option: any) => {
-                containerDom.appendChild(this._labelsIndex[option.v].dom);
-            });
+            for (const option of this._options) {
+                const label = this._valueToLabel[option.v];
+                containerDom.appendChild(label.dom);
+            }
         }
 
         // append create label in the end
@@ -648,8 +658,8 @@ class SelectInput extends Element implements IBindable, IFocusable {
             // on enter
             let value;
 
-            if (this._labelHighlighted && this._labelHighlighted._optionValue !== undefined) {
-                value = this._labelHighlighted._optionValue;
+            if (this._labelHighlighted && this._labelToValue.has(this._labelHighlighted)) {
+                value = this._labelToValue.get(this._labelHighlighted);
             } else {
                 value = this._input.value;
             }
@@ -658,7 +668,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 this.focus();
                 this.close();
 
-                if (this._optionsIndex[value]) {
+                if (this._valueToText[value]) {
                     this._onSelectValue(value);
                 } else if (this._allowCreate) {
                     if (this._createFn) {
@@ -696,8 +706,8 @@ class SelectInput extends Element implements IBindable, IFocusable {
         if (!this.enabled || this.readOnly) return;
 
         if (evt.key === 'Enter' && !this._allowInput) {
-            if (this._labelHighlighted && this._labelHighlighted._optionValue !== undefined) {
-                this._onSelectValue(this._labelHighlighted._optionValue);
+            if (this._labelHighlighted && this._labelToValue.has(this._labelHighlighted)) {
+                this._onSelectValue(this._labelToValue.get(this._labelHighlighted));
                 this.close();
             }
 
@@ -796,7 +806,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 showInput = true;
                 focusInput = true;
             } else {
-                showInput = this.multiSelect || !this._labelsIndex[this.value];
+                showInput = this.multiSelect || !this._valueToLabel[this.value];
             }
         }
 
@@ -857,7 +867,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         // highlight label that displays current value
         this._containerOptions.forEachChild((label: Label) => {
             label.hidden = false;
-            if (label._optionValue === this.value) {
+            if (this._labelToValue.get(label) === this.value) {
                 this._highlightLabel(label);
             }
         });
@@ -951,13 +961,13 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         this._containerOptions.clear();
         this._labelHighlighted = null;
-        this._optionsIndex = {};
-        this._labelsIndex = {};
+        this._valueToText = {};
+        this._valueToLabel = {};
         this._options = value;
 
         // store each option value -> title pair in the optionsIndex
-        this._options.forEach((option: any) => {
-            this._optionsIndex[option.v] = option.t;
+        for (const option of this._options) {
+            this._valueToText[option.v] = option.t;
             if (option.v === '') return;
 
             const label = new Label({
@@ -965,10 +975,10 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 tabIndex: -1
             });
 
-            label._optionValue = option.v;
+            this._labelToValue.set(label, option.v);
 
             // store labels in an index too
-            this._labelsIndex[option.v] = label;
+            this._valueToLabel[option.v] = label;
 
             // on clicking an option set it as the value and close the dropdown list
             label.on('click', (e) => {
@@ -977,7 +987,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 this.close();
             });
             this._containerOptions.append(label);
-        });
+        }
 
         this._createLabelContainer = null;
         if (this._createLabelText) {
