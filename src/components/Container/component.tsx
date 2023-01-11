@@ -7,7 +7,7 @@ import BaseComponent from '../Element/component';
  * A container can contain any other element including other containers.
  */
 class Component extends BaseComponent <ContainerArgs, any> {
-    constructor(props: ContainerArgs = Element.defaultArgs) {
+    constructor(props: ContainerArgs = {}) {
         super(props);
         this.elementClass = Element;
     }

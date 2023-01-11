@@ -10,7 +10,7 @@ const CLASS_LABEL_TOP = CLASS_LABEL_GROUP + '-align-top';
  */
 export interface LabelGroupArgs extends ContainerArgs {
     /**
-     * The label text.
+     * The label text. Defaults to 'Label'.
      */
     text?: string;
     /**
@@ -31,30 +31,22 @@ export interface LabelGroupArgs extends ContainerArgs {
  * Represents a group of an {@link Element} and a {@link Label}. Useful for rows of labeled fields.
  */
 class LabelGroup extends Container {
-    static readonly defaultArgs: LabelGroupArgs = {
-        ...Container.defaultArgs,
-        text: 'Label',
-        field: null,
-        labelAlignTop: false
-    };
-
     protected _label: Label;
 
     protected _field: Element;
 
-    constructor(args: LabelGroupArgs = LabelGroup.defaultArgs) {
-        args = { ...LabelGroup.defaultArgs, ...args };
+    constructor(args: LabelGroupArgs = {}) {
         super(args);
 
         this.class.add(CLASS_LABEL_GROUP);
 
         this._label = new Label({
-            text: args.text,
+            text: args.text ?? 'Label',
             nativeTooltip: args.nativeTooltip
         });
         this.append(this._label);
 
-        this._field = args.field;
+        this._field = args.field ?? null;
         if (this._field) {
             this.append(this._field);
         }

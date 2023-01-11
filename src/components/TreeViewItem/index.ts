@@ -59,15 +59,6 @@ export interface TreeViewItemArgs extends ContainerArgs {
  * A TreeViewItem is a single node in a hierarchical {@link TreeView} control.
  */
 class TreeViewItem extends Container {
-    static readonly defaultArgs: TreeViewItemArgs = {
-        ...Container.defaultArgs,
-        flex: true,
-        icon: 'E360',
-        allowSelect: true,
-        allowDrop: true,
-        allowDrag: true
-    };
-
     /**
      * Fired when user selects the TreeViewItem.
      *
@@ -145,8 +136,7 @@ class TreeViewItem extends Container {
      *
      * @param args - The arguments.
      */
-    constructor(args: TreeViewItemArgs = TreeViewItem.defaultArgs) {
-        args = { ...TreeViewItem.defaultArgs, ...args };
+    constructor(args: TreeViewItemArgs = {}) {
         super(args);
 
         this.class.add(CLASS_ROOT, CLASS_EMPTY);
@@ -166,16 +156,16 @@ class TreeViewItem extends Container {
         });
         this._containerContents.append(this._labelIcon);
 
-        this.icon = args.icon;
+        this.icon = args.icon ?? 'E360';
 
         this._labelText = new Label({
             class: CLASS_TEXT
         });
         this._containerContents.append(this._labelText);
 
-        this.allowSelect = args.allowSelect;
-        this.allowDrop = args.allowDrop;
-        this.allowDrag = args.allowDrag;
+        this.allowSelect = args.allowSelect ?? true;
+        this.allowDrop = args.allowDrop ?? true;
+        this.allowDrag = args.allowDrag ?? true;
 
         if (args.text) {
             this.text = args.text;

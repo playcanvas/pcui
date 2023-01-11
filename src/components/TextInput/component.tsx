@@ -7,7 +7,7 @@ import BaseComponent from '../Element/component';
 class TextInput extends BaseComponent <TextInputArgs, any> {
     onValidate: (value: string) => boolean;
 
-    constructor(props: TextInputArgs = Element.defaultArgs) {
+    constructor(props: TextInputArgs = {}) {
         super(props);
         this.elementClass = Element;
 

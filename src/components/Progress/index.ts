@@ -9,7 +9,7 @@ const CLASS_INNER = CLASS_ROOT + '-inner';
  */
 export interface ProgressArgs extends ContainerArgs {
     /**
-     * Gets / sets the value of the progress bar (between 0 and 100).
+     * Sets the value of the progress bar (between 0 and 100).
      */
     value?: number
 }
@@ -18,16 +18,11 @@ export interface ProgressArgs extends ContainerArgs {
  * Represents a bar that can highlight progress of an activity.
  */
 class Progress extends Container {
-    static readonly defaultArgs: ProgressArgs = {
-        ...Container.defaultArgs
-    };
-
     protected _inner: Element;
 
     protected _value: number;
 
-    constructor(args: ProgressArgs = Progress.defaultArgs) {
-        args = { ...Progress.defaultArgs, ...args };
+    constructor(args: ProgressArgs = {}) {
         super(args);
         this.class.add(CLASS_ROOT);
 

@@ -142,12 +142,6 @@ class TreeView extends Container {
      */
     public static readonly EVENT_RENAME = 'rename';
 
-    static defaultArgs : TreeViewArgs = {
-        ...Container.defaultArgs,
-        allowDrag: true,
-        allowReordering: true
-    };
-
     protected _selectedItems: TreeViewItem[];
 
     protected _dragItems: TreeViewItem[];
@@ -191,17 +185,16 @@ class TreeView extends Container {
      *
      * @param args - The arguments.
      */
-    constructor(args: TreeViewArgs = TreeView.defaultArgs) {
-        args = { ...TreeView.defaultArgs, ...args };
+    constructor(args: TreeViewArgs = {}) {
         super(args);
 
         this.class.add(CLASS_ROOT);
 
         this._selectedItems = [];
         this._dragItems = [];
-        this._allowDrag = (args.allowDrag !== undefined ? args.allowDrag : true);
-        this._allowReordering = (args.allowReordering !== undefined ? args.allowReordering : true);
-        this._allowRenaming = (args.allowRenaming !== undefined ? args.allowRenaming : false);
+        this._allowDrag = args.allowDrag ?? true;
+        this._allowReordering = args.allowReordering ?? true;
+        this._allowRenaming = args.allowRenaming ?? false;
         this._dragging = false;
         this._dragOverItem = null;
         this._dragArea = DRAG_AREA_INSIDE;

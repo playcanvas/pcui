@@ -26,7 +26,7 @@ export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindabl
      */
     step?: number;
     /**
-     * The decimal precision of each vector element.
+     * The decimal precision of each vector element. Defaults to 7.
      */
     precision?: number;
     /**
@@ -39,18 +39,11 @@ export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindabl
  * A vector input. The vector can have 2 to 4 dimensions with each dimension being a {@link NumericInput}.
  */
 class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder {
-    static readonly defaultArgs: VectorInputArgs = {
-        ...Element.defaultArgs,
-        dimensions: 3,
-        precision: 7
-    };
-
     protected _inputs: NumericInput[] = [];
 
     protected _applyingChange = false;
 
-    constructor(args: VectorInputArgs = VectorInput.defaultArgs) {
-        args = { ...VectorInput.defaultArgs, ...args };
+    constructor(args: VectorInputArgs = {}) {
 
         // set binding after inputs have been created
         const binding = args.binding;
@@ -60,13 +53,13 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
 
         this.class.add(CLASS_VECTOR_INPUT);
 
-        const dimensions = Math.max(2, Math.min(4, args.dimensions));
+        const dimensions = Math.max(2, Math.min(4, args.dimensions ?? 3));
 
         for (let i = 0; i < dimensions; i++) {
             const input = new NumericInput({
                 min: args.min,
                 max: args.max,
-                precision: args.precision,
+                precision: args.precision ?? 7,
                 step: args.step,
                 stepPrecision: args.stepPrecision,
                 renderChanges: args.renderChanges,

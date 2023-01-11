@@ -25,39 +25,34 @@ export interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs,
     /**
      * If `true` then the label can be clicked to select text. Defaults to `false`.
      */
-    allowTextSelection?: boolean
+    allowTextSelection?: boolean,
+    /**
+     * The DOM element or its type to use for this component. Defaults to 'span'.
+     */
+    dom?: HTMLElement | string,
+    /**
+     * Sets the value of the Label. Defaults to ''.
+     */
+    value?: any,
 }
 
 /**
  * The Label is a simple span element that displays some text.
  */
 class Label extends Input implements IPlaceholder {
-    static readonly defaultArgs: LabelArgs = {
-        ...Element.defaultArgs,
-        value: '',
-        text: '',
-        unsafe: false,
-        nativeTooltip: false,
-        allowTextSelection: false,
-        renderChanges: false,
-        placeholder: null,
-        dom: 'span'
-    };
-
     protected _unsafe: boolean;
 
     protected _text: string;
 
     _optionValue: any;
 
-    constructor(args: LabelArgs = Label.defaultArgs) {
-        args = { ...Label.defaultArgs, ...args };
-        super(args.dom, args);
+    constructor(args: LabelArgs = {}) {
+        super(args.dom ?? 'span', args);
 
         this.class.add(CLASS_LABEL);
 
-        this._unsafe = args.unsafe;
-        this.text = args.text || args.value;
+        this._unsafe = args.unsafe ?? false;
+        this.text = args.text ?? args.value ?? '';
 
         if (args.allowTextSelection) {
             this.class.add(pcuiClass.DEFAULT_MOUSEDOWN);

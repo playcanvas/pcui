@@ -18,27 +18,27 @@ export interface MenuItemArgs extends ContainerArgs {
      */
     hasChildren?: boolean;
     /**
-     * Gets / sets the text shown on the MenuItem.
+     * Sets the text shown on the MenuItem.
      */
     text?: string;
     /**
-     * Gets / sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
+     * Sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
      */
     icon?: string;
     /**
-     * Gets / sets the parent Menu Element.
+     * Sets the parent Menu Element.
      */
     menu?: any;
     /**
-     * Gets / sets the function called when we select the MenuItem.
+     * Sets the function called when we select the MenuItem.
      */
     onSelect?: (evt?: MouseEvent) => void;
     /**
-     * Gets / sets the function that determines whether the MenuItem should be enabled when the Menu is shown.
+     * Sets the function that determines whether the MenuItem should be enabled when the Menu is shown.
      */
     onIsEnabled?: () => boolean;
     /**
-     * Gets / sets the function that determines whether the MenuItem should be visible when the Menu is shown.
+     * Sets the function that determines whether the MenuItem should be visible when the Menu is shown.
      */
     onIsVisible?: () => boolean;
     /**
@@ -53,10 +53,6 @@ export interface MenuItemArgs extends ContainerArgs {
  * Menus.
  */
 class MenuItem extends Container implements IBindable {
-    static readonly defaultArgs: MenuItemArgs = {
-        ...Container.defaultArgs
-    };
-
     protected _containerContent: Container;
 
     protected _numChildren: number;
@@ -77,8 +73,7 @@ class MenuItem extends Container implements IBindable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: MenuItemArgs = MenuItem.defaultArgs) {
-        args = { ...MenuItem.defaultArgs, ...args };
+    constructor(args: MenuItemArgs = {}) {
         super(args);
 
         this.class.add(CLASS_MENU_ITEM);

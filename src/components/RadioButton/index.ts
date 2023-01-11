@@ -13,18 +13,12 @@ export interface RadioButtonArgs extends ElementArgs, IBindableArgs {}
  * A radio button element.
  */
 class RadioButton extends Element implements IBindable, IFocusable {
-    static readonly defaultArgs: RadioButtonArgs = {
-        ...Element.defaultArgs,
-        value: null,
-        tabIndex: 0
-    };
-
     protected _value: boolean;
 
     protected _renderChanges: boolean;
 
-    constructor(args: RadioButtonArgs = RadioButton.defaultArgs) {
-        args = { ...RadioButton.defaultArgs, ...args };
+    constructor(args: RadioButtonArgs = {}) {
+        args.tabIndex = args.tabIndex ?? 0;
         super(args.dom, args);
 
         this.class.add(CLASS_RADIO_BUTTON);

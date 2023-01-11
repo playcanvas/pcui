@@ -11,6 +11,10 @@ const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
  */
 export interface BooleanInputArgs extends ElementArgs, IBindableArgs {
     /**
+     * Sets the tabIndex of the {@link BooleanInput}. Defaults to 0.
+     */
+    tabIndex?: number,
+    /**
      * The type of checkbox. Currently can be `null` or 'toggle'.
      */
     type?: string
@@ -20,18 +24,10 @@ export interface BooleanInputArgs extends ElementArgs, IBindableArgs {
  * A checkbox element.
  */
 class BooleanInput extends Input implements IBindable, IFocusable {
-    static readonly defaultArgs: BooleanInputArgs = {
-        ...Element.defaultArgs,
-        renderChanges: false,
-        value: false,
-        tabIndex: 0,
-        dom: 'div'
-    };
-
     protected _value: boolean;
 
-    constructor(args: BooleanInputArgs = BooleanInput.defaultArgs) {
-        args = { ...BooleanInput.defaultArgs, ...args };
+    constructor(args: BooleanInputArgs = {}) {
+        args.tabIndex = args.tabIndex ?? 0;
         super(args.dom, args);
 
         if (args.type === 'toggle') {
@@ -50,7 +46,7 @@ class BooleanInput extends Input implements IBindable, IFocusable {
             this.value = args.value;
         }
 
-        this.renderChanges = args.renderChanges;
+        this.renderChanges = args.renderChanges ?? false;
     }
 
     destroy() {
