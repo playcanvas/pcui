@@ -95,8 +95,7 @@ Observers can also be bound bi-directionally, in which case an element can both 
 
 ```jsx
 import { Observer } from '@playcanvas/observer';
-import { BindingTwoWay } from '@playcanvas/pcui';
-import { TextInput } from '@playcanvas/pcui/react';
+import { BindingTwoWay, TextInput } from '@playcanvas/pcui/react';
 import '@playcanvas/pcui/styles';
 
 // create a new observer for a simple object which contains a text string

@@ -22,7 +22,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Observer } from '@playcanvas/observer';
 
-import { Container, TextInput, BooleanInput, Label, SelectInput, Button, BindingTwoWay } from '@playcanvas/pcui';
+import { Container, TextInput, BooleanInput, Label, SelectInput, Button, BindingTwoWay } from '@playcanvas/pcui/react';
 
 const observer = new Observer({ input: '', items: {} });
 
