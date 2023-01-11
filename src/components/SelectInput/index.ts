@@ -632,10 +632,10 @@ class SelectInput extends Element implements IBindable, IFocusable {
             });
 
         } else {
-            this.options.forEach((option: any) => {
+            for (const option of this._options) {
                 const label = this._valueToLabel[option.v];
                 containerDom.appendChild(label.dom);
-            });
+            }
         }
 
         // append create label in the end
