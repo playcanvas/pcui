@@ -12,7 +12,7 @@ class Component extends BaseComponent <PanelArgs, any> {
 
     containerElement: any;
 
-    constructor(props: PanelArgs = Element.defaultArgs) {
+    constructor(props: PanelArgs = {}) {
         super(props);
         this.elementClass = Element;
     }

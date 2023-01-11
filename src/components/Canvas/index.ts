@@ -15,20 +15,14 @@ export interface CanvasArgs extends ElementArgs {
  * Represents a Canvas.
  */
 class Canvas extends Element {
-    static readonly defaultArgs: CanvasArgs = {
-        ...Element.defaultArgs,
-        dom: 'canvas'
-    };
-
     protected _width: number;
 
     protected _height: number;
 
     protected _ratio: number;
 
-    constructor(args: CanvasArgs = Canvas.defaultArgs) {
-        args = { ...Canvas.defaultArgs, ...args };
-        super(args.dom, args);
+    constructor(args: CanvasArgs = {}) {
+        super(args.dom ?? 'canvas', args);
 
         const canvas = this._dom as HTMLCanvasElement;
         canvas.classList.add('pcui-canvas');

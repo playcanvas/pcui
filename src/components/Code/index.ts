@@ -19,16 +19,11 @@ export interface CodeArgs extends ContainerArgs {
  * Represents a code block.
  */
 class Code extends Container {
-    static readonly defaultArgs: CodeArgs = {
-        ...Container.defaultArgs
-    };
-
     protected _inner: Label;
 
     protected _text: string;
 
-    constructor(args: CodeArgs = Code.defaultArgs) {
-        args = { ...Code.defaultArgs, ...args };
+    constructor(args: CodeArgs = {}) {
         super(args);
         this.class.add(CLASS_ROOT);
 

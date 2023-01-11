@@ -82,21 +82,6 @@ export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholde
  * An input that allows selecting from a dropdown or entering tags.
  */
 class SelectInput extends Element implements IBindable, IFocusable {
-    static readonly defaultArgs: SelectInputArgs = {
-        ...Element.defaultArgs,
-        optionsFn: null,
-        defaultValue: null,
-        multiSelect: false,
-        options: [],
-        invalidOptions: [],
-        allowNull: false,
-        allowInput: false,
-        allowCreate: false,
-        createFn: null,
-        type: 'string',
-        renderChanges: false
-    };
-
     protected _container: Container;
 
     protected _containerValue: Container;
@@ -153,8 +138,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: SelectInputArgs = SelectInput.defaultArgs) {
-        args = { ...SelectInput.defaultArgs, ...args };
+    constructor(args: SelectInputArgs = {}) {
         // main container
         const container = new Container({ dom: args.dom });
         super(container.dom, args);
@@ -256,13 +240,13 @@ class SelectInput extends Element implements IBindable, IFocusable {
             this.close();
         });
 
-        this._type = args.type;
+        this._type = args.type ?? 'string';
 
         this._valueToText = {};
         this._valueToLabel = {};
         this._labelHighlighted = null;
-        this.invalidOptions = args.invalidOptions;
-        this.options = args.options || [];
+        this.invalidOptions = args.invalidOptions ?? [];
+        this.options = args.options ?? [];
         this._optionsFn = args.optionsFn;
 
         this._allowNull = args.allowNull;

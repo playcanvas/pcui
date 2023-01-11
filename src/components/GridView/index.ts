@@ -16,11 +16,11 @@ export interface GridViewArgs extends ContainerArgs {
      */
     vertical?: boolean;
     /**
-     * If `true`, the layout will allow for multiple options to be selected.
+     * If `true`, the layout will allow for multiple options to be selected. Defaults to `true`.
      */
     multiSelect?: boolean;
     /**
-     * If `true` and `multiSelect` is set to `false`, the layout will allow options to be deselected.
+     * If `true` and `multiSelect` is set to `false`, the layout will allow options to be deselected. Defaults to `true`.
      */
     allowDeselect?: boolean;
     /**
@@ -34,12 +34,6 @@ export interface GridViewArgs extends ContainerArgs {
  * Contains {@link GridViewItem}s.
  */
 class GridView extends Container {
-    static readonly defaultArgs: GridViewArgs = {
-        ...Container.defaultArgs,
-        multiSelect: true,
-        allowDeselect: true
-    };
-
     protected _vertical: boolean;
 
     protected _filterFn: (item: GridViewItem) => boolean;
@@ -56,8 +50,7 @@ class GridView extends Container {
 
     protected _clickFn: any;
 
-    constructor(args: GridViewArgs = GridView.defaultArgs) {
-        args = { ...GridView.defaultArgs, ...args };
+    constructor(args: GridViewArgs = {}) {
         super(args);
 
         this._vertical = !!args.vertical;
@@ -79,8 +72,8 @@ class GridView extends Container {
         this._filterCanceled = false;
 
         // Default options for GridView layout
-        this._multiSelect = args.multiSelect;
-        this._allowDeselect = args.allowDeselect;
+        this._multiSelect = args.multiSelect ?? true;
+        this._allowDeselect = args.allowDeselect ?? true;
 
         this._selected = [];
     }

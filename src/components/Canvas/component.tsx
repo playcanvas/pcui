@@ -6,7 +6,7 @@ import BaseComponent from '../Element/component';
  * Represents a Canvas
  */
 class Component extends BaseComponent <CanvasArgs, any> {
-    constructor(props: CanvasArgs = Element.defaultArgs) {
+    constructor(props: CanvasArgs = {}) {
         super(props);
         this.elementClass = Element;
     }

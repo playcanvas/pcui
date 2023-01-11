@@ -11,9 +11,17 @@ const CLASS_MENU_ITEMS = CLASS_MENU + '-items';
 export interface MenuArgs extends ContainerArgs {
     /**
      * An array of {@link MenuItemArgs}. If these are passed then new MenuItems will be created
-     * and appended to the menu. Defaults to an empty array.
+     * and appended to the menu.
      */
-    items: MenuItemArgs[];
+    items?: MenuItemArgs[];
+    /**
+     * Sets whether this {@link Menu} is hidden. Defaults to `true`.
+     */
+    hidden?: boolean;
+    /**
+     * Sets the tabIndex of the {@link Menu}. Defaults to 1.
+     */
+    tabIndex?: number;
 }
 
 /**
@@ -22,18 +30,13 @@ export interface MenuArgs extends ContainerArgs {
  * positioned accordingly.
  */
 class Menu extends Container implements IFocusable {
-    static readonly defaultArgs: MenuArgs = {
-        ...Container.defaultArgs,
-        hidden: true,
-        tabIndex: 1,
-        items: []
-    };
-
     protected _containerMenuItems: Container;
 
-    constructor(args: MenuArgs = Menu.defaultArgs) {
-        args = { ...Menu.defaultArgs, ...args };
+    constructor(args: MenuArgs = {}) {
+        args.tabIndex = args.tabIndex ?? 1;
         super(args);
+
+        this.hidden = args.hidden ?? true;
 
         this.class.add(CLASS_MENU);
 

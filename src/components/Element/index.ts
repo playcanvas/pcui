@@ -159,11 +159,11 @@ export interface ElementArgs {
      */
     enabled?: boolean,
     /**
-     * Sets whether this {@link Element} is hidden.
+     * Sets whether this {@link Element} is hidden. Defaults to `false`.
      */
     hidden?: boolean,
     /**
-     * If `true`, this {@link Element} will ignore its parent's enabled value when determining whether this element is enabled.
+     * If `true`, this {@link Element} will ignore its parent's enabled value when determining whether this element is enabled. Defaults to `false`.
      */
     ignoreParent?: boolean,
     /**
@@ -175,11 +175,11 @@ export interface ElementArgs {
      */
     height?: number | null,
     /**
-     * Gets / sets the tabIndex of the {@link Element}.
+     * Sets the tabIndex of the {@link Element}.
      */
     tabIndex?: number,
     /**
-     * Gets / sets whether the {@link Element} is in an error state.
+     * Sets whether the {@link Element} is in an error state.
      */
     error?: boolean,
     /**
@@ -187,7 +187,7 @@ export interface ElementArgs {
      */
     style?: string,
     /**
-     * Whether this {@link Element} is read only or not.
+     * Whether this {@link Element} is read only or not. Defaults to `false`.
      */
     readOnly?: boolean
 }
@@ -196,12 +196,6 @@ export interface ElementArgs {
  * The base class for all UI elements.
  */
 class Element extends Events {
-    public static defaultArgs: ElementArgs = {
-        hidden: false,
-        readOnly: false,
-        ignoreParent: false
-    };
-
     /**
      * Fired when the Element gets enabled.
      *
@@ -406,8 +400,7 @@ class Element extends Events {
 
     protected _onClickEvt: () => void;
 
-    constructor(dom: HTMLElement | string, args: ElementArgs = Element.defaultArgs) {
-        args = { ...Element.defaultArgs, ...args };
+    constructor(dom: HTMLElement | string, args: ElementArgs = {}) {
         super();
 
         this._destroyed = false;
@@ -463,9 +456,9 @@ class Element extends Events {
 
         this.enabled = args.enabled !== undefined ? args.enabled : true;
         this._hiddenParents = !args.isRoot;
-        this.hidden = args.hidden;
-        this.readOnly = args.readOnly;
-        this.ignoreParent = args.ignoreParent;
+        this.hidden = args.hidden ?? false;
+        this.readOnly = args.readOnly ?? false;
+        this.ignoreParent = args.ignoreParent ?? false;
 
         if (args.width !== undefined) {
             this.width = args.width;

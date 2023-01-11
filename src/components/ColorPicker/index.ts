@@ -28,13 +28,6 @@ export interface ColorPickerArgs extends ElementArgs, IBindableArgs {
  * Represents a color picker.
  */
 class ColorPicker extends Element implements IBindable {
-    static readonly defaultArgs: ColorPickerArgs = {
-        ...Element.defaultArgs,
-        channels: 3,
-        value: [0, 0, 255, 1],
-        renderChanges: false
-    };
-
     protected _domColor: HTMLDivElement;
 
     protected _historyCombine: boolean;
@@ -93,8 +86,7 @@ class ColorPicker extends Element implements IBindable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: ColorPickerArgs = ColorPicker.defaultArgs) {
-        args = { ...ColorPicker.defaultArgs, ...args };
+    constructor(args: ColorPickerArgs = {}) {
         super(args.dom, args);
 
         this._size = 144;
@@ -128,11 +120,11 @@ class ColorPicker extends Element implements IBindable {
         this._historyCombine = false;
         this._historyPostfix = null;
 
-        this._value = args.value;
-        this._channels = args.channels;
+        this._value = args.value ?? [0, 0, 255, 1];
+        this._channels = args.channels ?? 3;
         this._setValue(this._value);
 
-        this.renderChanges = args.renderChanges;
+        this.renderChanges = args.renderChanges ?? false;
 
         this.on('change', () => {
             if (this.renderChanges) {
