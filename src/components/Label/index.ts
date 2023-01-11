@@ -44,7 +44,7 @@ class Label extends Input implements IPlaceholder {
 
     protected _text: string;
 
-    _optionValue: any;
+    protected _optionValue: any;
 
     constructor(args: LabelArgs = {}) {
         super(args.dom ?? 'span', args);
