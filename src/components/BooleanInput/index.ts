@@ -27,8 +27,10 @@ class BooleanInput extends Input implements IBindable, IFocusable {
     protected _value: boolean;
 
     constructor(args: BooleanInputArgs = {}) {
-        args.tabIndex = args.tabIndex ?? 0;
-        super(args.dom, args);
+        // make copy of args
+        const booleanInputArgs = Object.assign({}, args);
+        booleanInputArgs.tabIndex = args.tabIndex ?? 0;
+        super(args.dom, booleanInputArgs);
 
         if (args.type === 'toggle') {
             this.class.add(CLASS_BOOLEAN_INPUT_TOGGLE);
