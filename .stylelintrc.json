@@ -2,7 +2,6 @@
     "extends": "stylelint-config-standard-scss",
     "rules": {
         "indentation": 4,
-        "color-function-notation": "legacy",
         "font-family-no-missing-generic-family-keyword": null,
         "no-descending-specificity": null,
         "no-duplicate-selectors": null,
