@@ -26,7 +26,7 @@ class LabelGroup extends BaseComponent <LabelGroupArgs, any> {
         if (!((child.type as JSXElementConstructor<any>).prototype instanceof BaseComponent)) {
             throw new Error(childrenErrorMessage);
         }
-        // it's safe to cast the ReactElement child as a BaseComponent as we have confirmed it is a BaseComponent above
+        // it's safe to cast the ReactElement type as a BaseComponent as we have confirmed it is a BaseComponent above
         const fieldClass = (child.type as unknown as typeof BaseComponent).ctor;
         const labelField = new fieldClass({ ...fieldProps });
         if (child.props.link) {
