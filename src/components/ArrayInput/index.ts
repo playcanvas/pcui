@@ -117,19 +117,17 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: ArrayInputArgs = {}) {
-        // remove binding because we want to set it later
-        const binding = args.binding;
-        delete args.binding;
-
+    constructor(args: Readonly<ArrayInputArgs> = {}) {
         const container = new Container({
             dom: args.dom,
             flex: true
         });
 
-        args = { ...args, dom: container.dom };
+        const elementArgs = { ...args, dom: container.dom };
+        // remove binding because we want to set it later
+        delete elementArgs.binding;
 
-        super(args);
+        super(elementArgs);
 
         this._container = container;
         this._container.parent = this;
@@ -184,16 +182,19 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             valueType = 'string';
         }
 
-        delete args.dom;
-
         this._valueType = valueType;
         this._elementType = args.type ?? 'string';
-        this._elementArgs = args.elementArgs || args;
+        if (args.elementArgs) {
+            this._elementArgs = args.elementArgs;
+        } else {
+            this._elementArgs = { ...args };
+            delete this._elementArgs.dom;
+        }
 
         this._arrayElements = [];
 
         // set binding now
-        this.binding = binding;
+        this.binding = args.binding;
 
         this._values = [];
 

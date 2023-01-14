@@ -43,13 +43,12 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
 
     protected _applyingChange = false;
 
-    constructor(args: VectorInputArgs = {}) {
-
+    constructor(args: Readonly<VectorInputArgs> = {}) {
+        const elementArgs = { ...args };
         // set binding after inputs have been created
-        const binding = args.binding;
-        delete args.binding;
+        delete elementArgs.binding;
 
-        super(args);
+        super(elementArgs);
 
         this.class.add(CLASS_VECTOR_INPUT);
 
@@ -82,8 +81,8 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
 
         // set the binding after the inputs have been created
         // because we rely on them in the overridden setter
-        if (binding) {
-            this.binding = binding;
+        if (args.binding) {
+            this.binding = args.binding;
         }
 
         if (args.value !== undefined) {

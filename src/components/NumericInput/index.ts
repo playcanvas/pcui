@@ -73,17 +73,13 @@ class NumericInput extends TextInput {
 
     protected _sliderUsed = false;
 
-    constructor(args: NumericInputArgs = {}) {
-        // make copy of args
-        args = Object.assign({}, args);
-        const value = args.value;
-        // delete value because we want to set it after
-        // the other arguments
-        delete args.value;
-        const renderChanges = args.renderChanges;
-        delete args.renderChanges;
+    constructor(args: Readonly<NumericInputArgs> = {}) {
+        const textInputArgs = { ...args };
+        // delete value because we want to set it after the other arguments
+        delete textInputArgs.value;
+        delete textInputArgs.renderChanges;
 
-        super(args);
+        super(textInputArgs);
 
         this.class.add(CLASS_NUMERIC_INPUT);
 
@@ -105,13 +101,13 @@ class NumericInput extends TextInput {
         }
 
         this._oldValue = undefined;
-        this.value = value;
+        this.value = args.value;
 
         this._historyCombine = false;
         this._historyPostfix = null;
         this._sliderPrevValue = 0;
 
-        this.renderChanges = renderChanges;
+        this.renderChanges = args.renderChanges;
 
         if (!args.hideSlider) {
             this._sliderControl = new Element();
