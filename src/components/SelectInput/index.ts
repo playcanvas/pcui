@@ -143,7 +143,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         const container = new Container({
             dom: args.dom
         });
-        args.dom = container.dom;
+        args = { ...args, dom: container.dom };
 
         super(args);
 
