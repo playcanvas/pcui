@@ -22,9 +22,10 @@ class Canvas extends Element {
     protected _ratio: number;
 
     constructor(args: Readonly<CanvasArgs> = {}) {
-        args = args.dom === undefined ? { ...args, dom: 'canvas' } : args;
+        const elementArgs = { ...args };
+        elementArgs.dom ??= 'canvas';
 
-        super(args);
+        super(elementArgs);
 
         const canvas = this._dom as HTMLCanvasElement;
         canvas.classList.add('pcui-canvas');
