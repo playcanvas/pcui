@@ -919,7 +919,8 @@ class Element extends Events {
     }
 
     /**
-     * Shortcut to Element.dom.classList.
+     * Get the `DOMTokenList` of the underlying DOM element. This is essentially a shortcut to
+     * `element.dom.classList`.
      */
     get class(): DOMTokenList {
         return this._dom.classList;
