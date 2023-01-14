@@ -39,7 +39,7 @@ class Button extends Element {
     protected _size: string | null;
 
     constructor(args: ButtonArgs = {}) {
-        args.dom ??= 'button';
+        args = args.dom === undefined ? { ...args, dom: 'button' } : args;
 
         super(args);
 
