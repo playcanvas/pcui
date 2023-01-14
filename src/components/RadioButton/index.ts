@@ -18,9 +18,10 @@ class RadioButton extends Element implements IBindable, IFocusable {
     protected _renderChanges: boolean;
 
     constructor(args: Readonly<RadioButtonArgs> = {}) {
-        args = args.tabIndex === undefined ? { ...args, tabIndex: 0 } : args;
+        const elementArgs = { ...args };
+        elementArgs.tabIndex ??= 0;
 
-        super(args);
+        super(elementArgs);
 
         this.class.add(CLASS_RADIO_BUTTON);
         this.class.add(pcuiClass.NOT_FLEXIBLE);
