@@ -40,7 +40,8 @@ class Spinner extends Element {
      */
     constructor(args: SpinnerArgs = {}) {
         if ((args.type ?? 'small-thick') === Spinner.TYPE_SMALL_THICK) {
-            args.dom = createSmallThick(args.size ?? 12, args.dom);
+            const dom = createSmallThick(args.size ?? 12, args.dom);
+            args = { ...args, dom };
         }
 
         super(args);
