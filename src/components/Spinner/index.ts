@@ -39,12 +39,11 @@ class Spinner extends Element {
      * @param args - The arguments.
      */
     constructor(args: SpinnerArgs = {}) {
-        let dom = null;
         if ((args.type ?? 'small-thick') === Spinner.TYPE_SMALL_THICK) {
-            dom = createSmallThick(args.size ?? 12, args.dom);
+            args.dom = createSmallThick(args.size ?? 12, args.dom);
         }
 
-        super(dom, args);
+        super(args);
 
         this.class.add(CLASS_ROOT);
     }

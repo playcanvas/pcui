@@ -52,7 +52,8 @@ class GridViewItem extends Container implements IFocusable {
     protected _allowSelect: boolean;
 
     constructor(args: GridViewItemArgs = {}) {
-        args.tabIndex = args.tabIndex ?? 0;
+        args.tabIndex ??= 0;
+
         super(args);
 
         this.allowSelect = args.allowSelect ?? true;

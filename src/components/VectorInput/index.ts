@@ -49,7 +49,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         const binding = args.binding;
         delete args.binding;
 
-        super(args.dom ? args.dom : document.createElement('div'), args);
+        super(args);
 
         this.class.add(CLASS_VECTOR_INPUT);
 

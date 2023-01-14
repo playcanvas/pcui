@@ -114,7 +114,7 @@ class NumericInput extends TextInput {
         this.renderChanges = renderChanges;
 
         if (!args.hideSlider) {
-            this._sliderControl = new Element(document.createElement('div'));
+            this._sliderControl = new Element();
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
             this.dom.append(this._sliderControl.dom);
 

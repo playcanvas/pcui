@@ -45,7 +45,9 @@ class Label extends Input implements IPlaceholder {
     protected _text: string;
 
     constructor(args: LabelArgs = {}) {
-        super(args.dom ?? 'span', args);
+        args.dom ??= 'span';
+
+        super(args);
 
         this.class.add(CLASS_LABEL);
 

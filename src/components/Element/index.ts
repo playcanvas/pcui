@@ -400,7 +400,7 @@ class Element extends Events {
 
     protected _onClickEvt: () => void;
 
-    constructor(dom: HTMLElement | string, args: ElementArgs = {}) {
+    constructor(args: ElementArgs = {}) {
         super();
 
         this._destroyed = false;
@@ -408,13 +408,9 @@ class Element extends Events {
 
         this._eventsParent = [];
 
-        if (typeof dom === 'string') {
-            this._dom = document.createElement(dom);
-        } else if (dom instanceof Node) {
-            this._dom = dom;
-        } else if (typeof args.dom === 'string') {
+        if (typeof args.dom === 'string') {
             this._dom = document.createElement(args.dom);
-        } else if (args.dom instanceof HTMLElement) {
+        } else if (args.dom instanceof Node) {
             this._dom = args.dom;
         } else {
             this._dom = document.createElement('div');

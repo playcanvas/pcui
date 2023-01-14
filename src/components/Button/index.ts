@@ -39,7 +39,9 @@ class Button extends Element {
     protected _size: string | null;
 
     constructor(args: ButtonArgs = {}) {
-        super(args.dom ?? 'button', args);
+        args.dom ??= 'button';
+
+        super(args);
 
         this.class.add(CLASS_BUTTON);
 

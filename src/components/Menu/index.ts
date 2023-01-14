@@ -33,7 +33,8 @@ class Menu extends Container implements IFocusable {
     protected _containerMenuItems: Container;
 
     constructor(args: MenuArgs = {}) {
-        args.tabIndex = args.tabIndex ?? 1;
+        args.tabIndex ??= 1;
+
         super(args);
 
         this.hidden = args.hidden ?? true;

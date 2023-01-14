@@ -141,7 +141,7 @@ class Container extends Element {
     protected _draggedHeight: number;
 
     constructor(args: ContainerArgs = {}) {
-        super(args.dom, args);
+        super(args);
 
         this.class.add(CLASS_CONTAINER);
 

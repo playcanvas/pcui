@@ -200,7 +200,7 @@ class TreeView extends Container {
         this._dragArea = DRAG_AREA_INSIDE;
         this._dragScroll = 0;
         this._dragScrollInterval = null;
-        this._dragHandle = new Element(document.createElement('div'), {
+        this._dragHandle = new Element({
             class: CLASS_DRAGGED_HANDLE
         });
         this._dragScrollElement = args.dragScrollElement || this;
