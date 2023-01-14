@@ -52,7 +52,7 @@ export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
 class SliderInput extends Element implements IBindable, IFocusable {
     protected _historyCombine = false;
 
-    protected _historyPostfix: any = null;
+    protected _historyPostfix: string = null;
 
     protected _numericInput: NumericInput;
 
