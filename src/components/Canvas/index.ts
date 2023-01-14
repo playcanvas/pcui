@@ -21,7 +21,7 @@ class Canvas extends Element {
 
     protected _ratio: number;
 
-    constructor(args: CanvasArgs = {}) {
+    constructor(args: Readonly<CanvasArgs> = {}) {
         args = args.dom === undefined ? { ...args, dom: 'canvas' } : args;
 
         super(args);

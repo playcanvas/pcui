@@ -26,7 +26,7 @@ export interface BooleanInputArgs extends ElementArgs, IBindableArgs {
 class BooleanInput extends Input implements IBindable, IFocusable {
     protected _value: boolean;
 
-    constructor(args: BooleanInputArgs = {}) {
+    constructor(args: Readonly<BooleanInputArgs> = {}) {
         args = args.tabIndex === undefined ? { ...args, tabIndex: 0 } : args;
 
         super(args);

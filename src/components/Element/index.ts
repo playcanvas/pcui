@@ -400,7 +400,7 @@ class Element extends Events {
 
     protected _onClickEvt: () => void;
 
-    constructor(args: ElementArgs = {}) {
+    constructor(args: Readonly<ElementArgs> = {}) {
         super();
 
         this._destroyed = false;

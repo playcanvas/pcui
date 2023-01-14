@@ -17,7 +17,7 @@ class RadioButton extends Element implements IBindable, IFocusable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: RadioButtonArgs = {}) {
+    constructor(args: Readonly<RadioButtonArgs> = {}) {
         args = args.tabIndex === undefined ? { ...args, tabIndex: 0 } : args;
 
         super(args);

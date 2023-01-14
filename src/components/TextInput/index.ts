@@ -55,7 +55,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
     protected _onInputChangeEvt: (evt: Event) => void;
 
-    constructor(args: TextInputArgs = {}) {
+    constructor(args: Readonly<TextInputArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_TEXT_INPUT);

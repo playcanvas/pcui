@@ -47,7 +47,7 @@ class InfoBox extends Container {
 
     protected _text: string;
 
-    constructor(args: InfoBoxArgs = {}) {
+    constructor(args: Readonly<InfoBoxArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_INFOBOX);

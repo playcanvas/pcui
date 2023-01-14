@@ -32,7 +32,7 @@ export interface MenuArgs extends ContainerArgs {
 class Menu extends Container implements IFocusable {
     protected _containerMenuItems: Container;
 
-    constructor(args: MenuArgs = {}) {
+    constructor(args: Readonly<MenuArgs> = {}) {
         args = args.tabIndex === undefined ? { ...args, tabIndex: 1 } : args;
 
         super(args);
