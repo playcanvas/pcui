@@ -127,7 +127,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             flex: true
         });
 
-        args.dom = container.dom;
+        args = { ...args, dom: container.dom };
 
         super(args);
 
