@@ -187,9 +187,8 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         if (args.elementArgs) {
             this._elementArgs = args.elementArgs;
         } else {
-            this._elementArgs = { ...args };
-            delete this._elementArgs.dom;
-            delete this._elementArgs.binding;
+            delete elementArgs.dom;
+            this._elementArgs = elementArgs;
         }
 
         this._arrayElements = [];
