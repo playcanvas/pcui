@@ -52,8 +52,7 @@ class GridViewItem extends Container implements IFocusable {
     protected _allowSelect: boolean;
 
     constructor(args: Readonly<GridViewItemArgs> = {}) {
-        const containerArgs = { ...args };
-        containerArgs.tabIndex ??= 0;
+        const containerArgs = { tabIndex: 0, ...args };
 
         super(containerArgs);
 

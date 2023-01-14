@@ -39,8 +39,7 @@ class Button extends Element {
     protected _size: string | null;
 
     constructor(args: Readonly<ButtonArgs> = {}) {
-        const elementArgs = { ...args };
-        elementArgs.dom ??= 'button';
+        const elementArgs = { dom: 'button', ...args };
 
         super(elementArgs);
 

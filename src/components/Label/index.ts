@@ -45,8 +45,7 @@ class Label extends Input implements IPlaceholder {
     protected _text: string;
 
     constructor(args: Readonly<LabelArgs> = {}) {
-        const elementArgs = { ...args };
-        elementArgs.dom ??= 'span';
+        const elementArgs = { dom: 'span', ...args };
 
         super(elementArgs);
 
