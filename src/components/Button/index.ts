@@ -42,7 +42,7 @@ class Button extends Element {
         const elementArgs = { ...args };
         elementArgs.dom ??= 'button';
 
-        super(args);
+        super(elementArgs);
 
         this.class.add(CLASS_BUTTON);
 
