@@ -586,10 +586,10 @@ class Element extends Events {
     flash() {
         if (this._flashTimeout) return;
 
-        this.classAdd(pcuiClass.FLASH);
+        this.class.add(pcuiClass.FLASH);
         this._flashTimeout = window.setTimeout(() => {
             this._flashTimeout = null;
-            this.classRemove(pcuiClass.FLASH);
+            this.class.remove(pcuiClass.FLASH);
         }, 200);
     }
 
@@ -617,9 +617,9 @@ class Element extends Events {
 
     protected _onEnabledChange(enabled: boolean) {
         if (enabled) {
-            this.classRemove(pcuiClass.DISABLED);
+            this.class.remove(pcuiClass.DISABLED);
         } else {
-            this.classAdd(pcuiClass.DISABLED);
+            this.class.add(pcuiClass.DISABLED);
         }
 
         this.emit(enabled ? 'enable' : 'disable');
@@ -661,9 +661,9 @@ class Element extends Events {
 
     protected _onReadOnlyChange(readOnly: boolean) {
         if (readOnly) {
-            this.classAdd(pcuiClass.READONLY);
+            this.class.add(pcuiClass.READONLY);
         } else {
-            this.classRemove(pcuiClass.READONLY);
+            this.class.remove(pcuiClass.READONLY);
         }
 
         this.emit('readOnly', readOnly);
@@ -679,31 +679,6 @@ class Element extends Events {
             if (!this._readOnly) {
                 this._onReadOnlyChange(false);
             }
-        }
-
-    }
-
-    /**
-     * Adds the specified class to the DOM element but checks if the classList contains it first.
-     *
-     * @param cls - The class to add.
-     */
-    classAdd(cls: string) {
-        const classList = this._dom.classList;
-        if (!classList.contains(cls)) {
-            classList.add(cls);
-        }
-    }
-
-    /**
-     * Removes the specified class from the DOM element but checks if the classList contains it first.
-     *
-     * @param cls - The class to remove.
-     */
-    classRemove(cls: string) {
-        const classList = this._dom.classList;
-        if (classList.contains(cls)) {
-            classList.remove(cls);
         }
     }
 
@@ -861,9 +836,9 @@ class Element extends Events {
         this._hidden = value;
 
         if (value) {
-            this.classAdd(pcuiClass.HIDDEN);
+            this.class.add(pcuiClass.HIDDEN);
         } else {
-            this.classRemove(pcuiClass.HIDDEN);
+            this.class.remove(pcuiClass.HIDDEN);
         }
 
         this.emit(value ? 'hide' : 'show');
@@ -909,9 +884,9 @@ class Element extends Events {
         if (this._hasError === value) return;
         this._hasError = value;
         if (value) {
-            this.classAdd(pcuiClass.ERROR);
+            this.class.add(pcuiClass.ERROR);
         } else {
-            this.classRemove(pcuiClass.ERROR);
+            this.class.remove(pcuiClass.ERROR);
         }
     }
 
@@ -934,11 +909,11 @@ class Element extends Events {
             value = [value];
         }
         value.forEach((cls: string) => {
-            this.classAdd(cls);
+            this.class.add(cls);
         });
         this._class.forEach((cls) => {
             if (!value.includes(cls)) {
-                this.classRemove(cls);
+                this.class.remove(cls);
             }
         });
         this._class = value;

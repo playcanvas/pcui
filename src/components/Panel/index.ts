@@ -367,9 +367,9 @@ class Panel extends Container {
         this._collapsible = value;
 
         if (value) {
-            this.classAdd(pcuiClass.COLLAPSIBLE);
+            this.class.add(pcuiClass.COLLAPSIBLE);
         } else {
-            this.classRemove(pcuiClass.COLLAPSIBLE);
+            this.class.remove(pcuiClass.COLLAPSIBLE);
         }
 
         this._reflow();
@@ -460,9 +460,9 @@ class Panel extends Container {
 
         this._collapseHorizontally = value;
         if (value) {
-            this.classAdd(CLASS_PANEL_HORIZONTAL);
+            this.class.add(CLASS_PANEL_HORIZONTAL);
         } else {
-            this.classRemove(CLASS_PANEL_HORIZONTAL);
+            this.class.remove(CLASS_PANEL_HORIZONTAL);
         }
 
         this._reflow();
