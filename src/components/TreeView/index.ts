@@ -142,9 +142,9 @@ class TreeView extends Container {
      */
     public static readonly EVENT_RENAME = 'rename';
 
-    protected _selectedItems: TreeViewItem[];
+    protected _selectedItems: TreeViewItem[] = [];
 
-    protected _dragItems: TreeViewItem[];
+    protected _dragItems: TreeViewItem[] = [];
 
     protected _allowDrag: boolean;
 
@@ -152,15 +152,15 @@ class TreeView extends Container {
 
     protected _allowRenaming: boolean;
 
-    protected _dragging: boolean;
+    protected _dragging = false;
 
-    protected _dragOverItem: TreeViewItem;
+    protected _dragOverItem: TreeViewItem = null;
 
-    protected _dragArea: string;
+    protected _dragArea = DRAG_AREA_INSIDE;
 
-    protected _dragScroll: number;
+    protected _dragScroll = 0;
 
-    protected _dragScrollInterval: number;
+    protected _dragScrollInterval: number = null;
 
     protected _dragHandle: Element;
 
@@ -170,13 +170,13 @@ class TreeView extends Container {
 
     protected _onReparentFn: any;
 
-    protected _pressedCtrl: boolean;
+    protected _pressedCtrl = false;
 
-    protected _pressedShift: boolean;
+    protected _pressedShift = false;
 
-    protected _filter: string;
+    protected _filter: string = null;
 
-    protected _filterResults: TreeViewItem[];
+    protected _filterResults: TreeViewItem[] = [];
 
     protected _wasDraggingAllowedBeforeFiltering: boolean;
 
@@ -190,16 +190,9 @@ class TreeView extends Container {
 
         this.class.add(CLASS_ROOT);
 
-        this._selectedItems = [];
-        this._dragItems = [];
         this._allowDrag = args.allowDrag ?? true;
         this._allowReordering = args.allowReordering ?? true;
         this._allowRenaming = args.allowRenaming ?? false;
-        this._dragging = false;
-        this._dragOverItem = null;
-        this._dragArea = DRAG_AREA_INSIDE;
-        this._dragScroll = 0;
-        this._dragScrollInterval = null;
         this._dragHandle = new Element(document.createElement('div'), {
             class: CLASS_DRAGGED_HANDLE
         });
@@ -209,11 +202,6 @@ class TreeView extends Container {
         this._onContextMenu = args.onContextMenu;
         this._onReparentFn = args.onReparent;
 
-        this._pressedCtrl = false;
-        this._pressedShift = false;
-
-        this._filter = null;
-        this._filterResults = [];
         this._wasDraggingAllowedBeforeFiltering = this._allowDrag;
 
         window.addEventListener('keydown', this._updateModifierKeys);

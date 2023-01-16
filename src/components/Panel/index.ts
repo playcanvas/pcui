@@ -94,15 +94,15 @@ class Panel extends Container {
 
     protected _suspendReflow: boolean;
 
-    protected _reflowTimeout: number;
+    protected _reflowTimeout: number = null;
 
-    protected _widthBeforeCollapse: string;
+    protected _widthBeforeCollapse: string = null;
 
-    protected _heightBeforeCollapse: string;
+    protected _heightBeforeCollapse: string = null;
 
-    protected _iconSort: Label;
+    protected _iconSort: Label = null;
 
-    protected _btnRemove: Button;
+    protected _btnRemove: Button = null;
 
     protected _containerContent: Container;
 
@@ -158,18 +158,11 @@ class Panel extends Container {
         this.headerSize = args.headerSize ?? 32;
 
         // collapse related
-        this._reflowTimeout = null;
-        this._widthBeforeCollapse = null;
-        this._heightBeforeCollapse = null;
-
         this.collapsible = args.collapsible || false;
         this.collapsed = args.collapsed || false;
         this.collapseHorizontally = args.collapseHorizontally || false;
 
-        this._iconSort = null;
         this.sortable = args.sortable || false;
-
-        this._btnRemove = null;
         this.removable = args.removable || !!args.onRemove || false;
 
         // Set the contents container to be the content DOM element. From now on, calling append

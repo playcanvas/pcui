@@ -117,9 +117,9 @@ class TreeViewItem extends Container {
 
     protected _labelText: Label;
 
-    protected _numChildren: number;
+    protected _numChildren = 0;
 
-    protected _treeOrder: number;
+    protected _treeOrder = -1;
 
     protected _treeView: any;
 
@@ -174,11 +174,6 @@ class TreeViewItem extends Container {
         if (args.selected) {
             this.selected = args.selected;
         }
-
-        this._numChildren = 0;
-
-        // used the the parent treeview
-        this._treeOrder = -1;
 
         const dom = this._containerContents.dom;
         dom.addEventListener('focus', this._onContentFocus);

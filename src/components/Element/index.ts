@@ -368,11 +368,11 @@ class Element extends Events {
      */
     public static readonly EVENT_DESTROY = 'destroy';
 
-    protected _destroyed: boolean;
+    protected _destroyed = false;
 
-    protected _parent: Element; // eslint-disable-line no-use-before-define
+    protected _parent: Element = null; // eslint-disable-line no-use-before-define
 
-    protected _eventsParent: EventHandle[];
+    protected _eventsParent: EventHandle[] = [];
 
     protected _dom: HTMLElement;
 
@@ -380,9 +380,9 @@ class Element extends Events {
 
     protected _hiddenParents: boolean;
 
-    protected _flashTimeout: number;
+    protected _flashTimeout: number = null;
 
-    protected _suppressChange: boolean;
+    protected _suppressChange = false;
 
     protected _binding: any;
 
@@ -402,11 +402,6 @@ class Element extends Events {
 
     constructor(dom: HTMLElement | string, args: ElementArgs = {}) {
         super();
-
-        this._destroyed = false;
-        this._parent = null;
-
-        this._eventsParent = [];
 
         if (typeof dom === 'string') {
             this._dom = document.createElement(dom);
@@ -434,11 +429,8 @@ class Element extends Events {
         this._dom.addEventListener('mouseover', this._onMouseOver);
         this._dom.addEventListener('mouseout', this._onMouseOut);
 
-        // add element class
-        this._dom.classList.add(CLASS_ELEMENT);
-
-        // add font regular class
-        this._dom.classList.add(pcuiClass.FONT_REGULAR);
+        // add css classes
+        this._dom.classList.add(CLASS_ELEMENT, pcuiClass.FONT_REGULAR);
 
         this._class = [];
         // add user classes
@@ -484,10 +476,6 @@ class Element extends Events {
         if (args.binding) {
             this.binding = args.binding;
         }
-
-        this._flashTimeout = null;
-
-        this._suppressChange = false;
     }
 
     /**
