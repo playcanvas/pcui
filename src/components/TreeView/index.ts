@@ -401,17 +401,17 @@ class TreeView extends Container {
         super._onRemoveChild(element);
     }
 
-    protected _onAppendTreeViewItem(element: TreeViewItem) {
-        element.treeView = this;
+    protected _onAppendTreeViewItem(item: TreeViewItem) {
+        item.treeView = this;
 
         if (this._filter) {
             // add new item to filtered results if it
             // satisfies the current filter
-            this._searchItems([[element.text, element]], this._filter);
+            this._searchItems([[item.text, item]], this._filter);
         }
 
         // do the same for all children of the element
-        element.forEachChild((child) => {
+        item.forEachChild((child) => {
             if (child instanceof TreeViewItem) {
                 this._onAppendTreeViewItem(child);
             }
