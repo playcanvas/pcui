@@ -984,7 +984,7 @@ class TreeView extends Container {
         this.emit('rename', item, newName);
     }
 
-    protected _searchItems(searchArr: any, filter: string) {
+    protected _searchItems(searchArr: [string, TreeViewItem][], filter: string) {
         const results = searchItems(searchArr, filter);
         if (!results.length) return;
 
@@ -1007,7 +1007,7 @@ class TreeView extends Container {
 
         this.class.add(CLASS_FILTERING);
 
-        const search: any[][] = [];
+        const search: [string, TreeViewItem][] = [];
         this._traverseDepthFirst((item) => {
             search.push([item.text, item]);
         });
