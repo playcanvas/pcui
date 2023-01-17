@@ -83,12 +83,21 @@ type SearchRecord<Type> = {
 };
 
 type SearchArgs = {
+    /**
+     * Tolerance for how many characters of the search string must be contained in the item name. Default is 0.5.
+     */
     containsCharsTolerance?: number;
+    /**
+     * Tolerance for how many edits are allowed between the search string and the item name. Default is 0.5.
+     */
     editsDistanceTolerance?: number;
+    /**
+     * Limit the number of results. If not set, all results will be returned.
+     */
     limitResults?: number;
 };
 
-const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: Readonly<SearchArgs>) => {
+const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: Readonly<SearchArgs>): SearchRecord<Type>[] => {
     const results: SearchRecord<Type>[] = [];
 
     for (const item of items) {
@@ -168,11 +177,6 @@ const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: R
  * second value is an object to be found.
  * @param search - String to search for.
  * @param args - Search arguments.
- * @param args.containsCharsTolerance - Tolerance for how many characters of the search string
- * must be contained in the item name. Default is 0.5.
- * @param args.editsDistanceTolerance - Tolerance for how many edits are allowed between the
- * search string and the item name. Default is 0.5.
- * @param args.limitResults - Limit the number of results. Default is 0 (no limit).
  * @returns Array of found items.
  * @example
  * const items = [
