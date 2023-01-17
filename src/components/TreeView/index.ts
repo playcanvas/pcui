@@ -418,11 +418,11 @@ class TreeView extends Container {
         });
     }
 
-    protected _onRemoveTreeViewItem(element: TreeViewItem) {
-        element.selected = false;
+    protected _onRemoveTreeViewItem(item: TreeViewItem) {
+        item.selected = false;
 
         // do the same for all children of the element
-        element.forEachChild((child) => {
+        item.forEachChild((child) => {
             if (child instanceof TreeViewItem) {
                 this._onRemoveTreeViewItem(child);
             }
