@@ -2,11 +2,16 @@
     "extends": "stylelint-config-standard-scss",
     "rules": {
         "indentation": 4,
-        "color-function-notation": "legacy",
-        "font-family-no-missing-generic-family-keyword": null,
+        "font-family-no-missing-generic-family-keyword": [
+            true,
+            {
+                "ignoreFontFamilies": [
+                    "pc-icon"
+                ]
+            }
+        ],
         "no-descending-specificity": null,
         "no-duplicate-selectors": null,
-        "scss/dollar-variable-pattern": null,
         "scss/no-global-function-names": null,
         "scss/at-extend-no-missing-placeholder": null,
         "string-quotes": "single"

@@ -15,32 +15,32 @@ const IS_CHROME = /Chrome\//.test(navigator.userAgent);
  */
 export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
     /**
-     * Gets / sets the minimum value that the numeric input field can take. Defaults to 0.
+     * Sets the minimum value that the numeric input field can take. Defaults to 0.
      */
     min?: number,
     /**
-     * Gets / sets the maximum value that the numeric input field can take. Defaults to 1.
+     * Sets the maximum value that the numeric input field can take. Defaults to 1.
      */
     max?: number,
     /**
-     * Gets / sets the minimum value that the slider field can take.
+     * Sets the minimum value that the slider field can take. Defaults to 0.
      */
     sliderMin?: number,
     /**
-     * Gets / sets the maximum value that the slider field can take.
+     * Sets the maximum value that the slider field can take. Defaults to 1.
      */
     sliderMax?: number,
     /**
-     * Gets / sets the maximum number of decimals a value can take.
+     * Sets the maximum number of decimals a value can take. Defaults to 2.
      */
     precision?: number,
     /**
-     * Gets / sets the amount that the value will be increased or decreased when using the arrow
+     * Sets the amount that the value will be increased or decreased when using the arrow
      * keys. Holding Shift will use 10x the step.
      */
     step?: number,
     /**
-     * Gets / sets whether the value can be null. If not then it will be 0 instead of null.
+     * Sets whether the value can be null. If not then it will be 0 instead of null.
      */
     allowNull?: boolean
 }
@@ -50,15 +50,9 @@ export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
  * NumericInput.
  */
 class SliderInput extends Element implements IBindable, IFocusable {
-    static readonly defaultArgs: SliderInputArgs = {
-        ...Element.defaultArgs,
-        min: 0,
-        max: 1
-    };
-
     protected _historyCombine = false;
 
-    protected _historyPostfix: any = null;
+    protected _historyPostfix: string = null;
 
     protected _numericInput: NumericInput;
 
@@ -81,17 +75,16 @@ class SliderInput extends Element implements IBindable, IFocusable {
      *
      * @param args - The arguments.
      */
-    constructor(args: SliderInputArgs = SliderInput.defaultArgs) {
-        args = { ...SliderInput.defaultArgs, ...args };
-        super(args.dom, args);
+    constructor(args: Readonly<SliderInputArgs> = {}) {
+        super(args);
 
         this.class.add(CLASS_SLIDER);
 
         const numericInput = new NumericInput({
             allowNull: args.allowNull,
             hideSlider: true,
-            max: args.max,
-            min: args.min,
+            min: args.min ?? 0,
+            max: args.max ?? 1,
             // @ts-ignore
             keyChange: args.keyChange,
             // @ts-ignore
@@ -119,8 +112,8 @@ class SliderInput extends Element implements IBindable, IFocusable {
 
         this._numericInput = numericInput;
 
-        this._sliderMin = args.sliderMin ?? args.min;
-        this._sliderMax = args.sliderMax ?? args.max;
+        this._sliderMin = args.sliderMin ?? args.min ?? 0;
+        this._sliderMax = args.sliderMax ?? args.max ?? 1;
 
         this._domSlider = document.createElement('div');
         this._domSlider.classList.add(CLASS_SLIDER_CONTAINER);

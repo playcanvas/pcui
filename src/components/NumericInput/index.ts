@@ -22,7 +22,7 @@ export interface NumericInputArgs extends TextInputArgs {
      */
     max?: number,
     /**
-     * Sets the maximum value this field can take.
+     * Sets the decimal precision of this field. Defaults to 7.
      */
     precision?: number,
     /**
@@ -47,15 +47,6 @@ export interface NumericInputArgs extends TextInputArgs {
  * The NumericInput represents an input element that holds numbers.
  */
 class NumericInput extends TextInput {
-    static readonly defaultArgs: NumericInputArgs = {
-        ...TextInput.defaultArgs,
-        precision: 7,
-        min: null,
-        max: null,
-        renderChanges: false,
-        allowNull: false
-    };
-
     protected _min: number;
 
     protected _max: number;
@@ -82,25 +73,20 @@ class NumericInput extends TextInput {
 
     protected _sliderUsed = false;
 
-    constructor(args: NumericInputArgs = NumericInput.defaultArgs) {
-        args = { ...NumericInput.defaultArgs, ...args };
-        // make copy of args
-        args = Object.assign({}, args);
-        const value = args.value;
-        // delete value because we want to set it after
-        // the other arguments
-        delete args.value;
-        const renderChanges = args.renderChanges;
-        delete args.renderChanges;
+    constructor(args: Readonly<NumericInputArgs> = {}) {
+        const textInputArgs = { ...args };
+        // delete value because we want to set it after the other arguments
+        delete textInputArgs.value;
+        delete textInputArgs.renderChanges;
 
-        super(args);
+        super(textInputArgs);
 
         this.class.add(CLASS_NUMERIC_INPUT);
 
-        this._min = args.min;
-        this._max = args.max;
-        this._allowNull = args.allowNull;
-        this._precision = args.precision;
+        this._min = args.min ?? null;
+        this._max = args.max ?? null;
+        this._allowNull = args.allowNull ?? false;
+        this._precision = args.precision ?? 7;
 
         if (Number.isFinite(args.step)) {
             this._step = args.step;
@@ -115,16 +101,16 @@ class NumericInput extends TextInput {
         }
 
         this._oldValue = undefined;
-        this.value = value;
+        this.value = args.value;
 
         this._historyCombine = false;
         this._historyPostfix = null;
         this._sliderPrevValue = 0;
 
-        this.renderChanges = renderChanges;
+        this.renderChanges = args.renderChanges;
 
         if (!args.hideSlider) {
-            this._sliderControl = new Element(document.createElement('div'));
+            this._sliderControl = new Element();
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
             this.dom.append(this._sliderControl.dom);
 
@@ -200,7 +186,7 @@ class NumericInput extends TextInput {
         this.value = this._domInput.value;
     }
 
-    protected _onInputKeyDown = (evt: KeyboardEvent) => {
+    protected _onInputKeyDown(evt: KeyboardEvent) {
         if (!this.enabled || this.readOnly) return super._onInputKeyDown(evt);
 
         // increase / decrease value with arrow keys
@@ -211,7 +197,7 @@ class NumericInput extends TextInput {
         }
 
         super._onInputKeyDown(evt);
-    };
+    }
 
     protected _isScrolling() {
         if (!this._sliderControl) return false;

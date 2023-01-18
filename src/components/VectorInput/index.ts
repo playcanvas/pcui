@@ -26,7 +26,7 @@ export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindabl
      */
     step?: number;
     /**
-     * The decimal precision of each vector element.
+     * The decimal precision of each vector element. Defaults to 7.
      */
     precision?: number;
     /**
@@ -39,33 +39,26 @@ export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindabl
  * A vector input. The vector can have 2 to 4 dimensions with each dimension being a {@link NumericInput}.
  */
 class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder {
-    static readonly defaultArgs: VectorInputArgs = {
-        ...Element.defaultArgs,
-        dimensions: 3
-    };
-
     protected _inputs: NumericInput[] = [];
 
     protected _applyingChange = false;
 
-    constructor(args: VectorInputArgs = VectorInput.defaultArgs) {
-        args = { ...VectorInput.defaultArgs, ...args };
-
+    constructor(args: Readonly<VectorInputArgs> = {}) {
+        const elementArgs = { ...args };
         // set binding after inputs have been created
-        const binding = args.binding;
-        delete args.binding;
+        delete elementArgs.binding;
 
-        super(args.dom ? args.dom : document.createElement('div'), args);
+        super(elementArgs);
 
         this.class.add(CLASS_VECTOR_INPUT);
 
-        const dimensions = Math.max(2, Math.min(4, args.dimensions));
+        const dimensions = Math.max(2, Math.min(4, args.dimensions ?? 3));
 
         for (let i = 0; i < dimensions; i++) {
             const input = new NumericInput({
                 min: args.min,
                 max: args.max,
-                precision: args.precision,
+                precision: args.precision ?? 7,
                 step: args.step,
                 stepPrecision: args.stepPrecision,
                 renderChanges: args.renderChanges,
@@ -88,8 +81,8 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
 
         // set the binding after the inputs have been created
         // because we rely on them in the overridden setter
-        if (binding) {
-            this.binding = binding;
+        if (args.binding) {
+            this.binding = args.binding;
         }
 
         if (args.value !== undefined) {

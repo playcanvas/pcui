@@ -10,7 +10,6 @@ nav_order: 1
 To add PCUI to your `package.json`, run the following in the project's directory:
 
 ```
-npm install --save-dev @playcanvas/observer
 npm install --save-dev @playcanvas/pcui
 ```
 

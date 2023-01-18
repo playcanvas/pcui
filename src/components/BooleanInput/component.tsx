@@ -5,7 +5,7 @@ import BaseComponent from '../Element/component';
  * A checkbox element.
  */
 class Component extends BaseComponent <BooleanInputArgs, any> {
-    constructor(props: BooleanInputArgs = Element.defaultArgs) {
+    constructor(props: BooleanInputArgs = {}) {
         super(props);
         this.elementClass = Element;
     }

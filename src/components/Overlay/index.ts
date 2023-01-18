@@ -25,14 +25,9 @@ export interface OverlayArgs extends ElementArgs {
  * An overlay element.
  */
 class Overlay extends Container {
-    static readonly defaultArgs: OverlayArgs = {
-        ...Element.defaultArgs
-    };
-
     protected _domClickableOverlay: HTMLDivElement;
 
-    constructor(args: OverlayArgs = Overlay.defaultArgs) {
-        args = { ...Overlay.defaultArgs, ...args };
+    constructor(args: Readonly<OverlayArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_OVERLAY);

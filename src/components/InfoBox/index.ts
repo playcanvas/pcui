@@ -16,11 +16,11 @@ export interface InfoBoxArgs extends ContainerArgs {
      */
     icon?: string;
     /**
-     * Gets / sets the 'title' of the {@link InfoBox}. Defaults to ''.
+     * Sets the 'title' of the {@link InfoBox}. Defaults to ''.
      */
     title?: string;
     /**
-     * Gets / sets the 'text' of the {@link InfoBox}. Defaults to ''.
+     * Sets the 'text' of the {@link InfoBox}. Defaults to ''.
      */
     text?: string;
     /**
@@ -35,17 +35,9 @@ export interface InfoBoxArgs extends ContainerArgs {
  * Represents an information box.
  */
 class InfoBox extends Container {
-    static readonly defaultArgs: InfoBoxArgs = {
-        ...Container.defaultArgs,
-        unsafe: false,
-        icon: '',
-        title: '',
-        text: ''
-    };
+    protected _titleElement = new Element();
 
-    protected _titleElement: Element;
-
-    protected _textElement: Element;
+    protected _textElement = new Element();
 
     protected _unsafe: boolean;
 
@@ -55,21 +47,18 @@ class InfoBox extends Container {
 
     protected _text: string;
 
-    constructor(args: InfoBoxArgs = InfoBox.defaultArgs) {
-        args = { ...InfoBox.defaultArgs, ...args };
+    constructor(args: Readonly<InfoBoxArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_INFOBOX);
-        this._titleElement = new Element(document.createElement('div'));
-        this._textElement = new Element(document.createElement('div'));
+
         this.append(this._titleElement);
         this.append(this._textElement);
 
-        this._unsafe = args.unsafe;
-
-        this.icon = args.icon;
-        this.title = args.title;
-        this.text = args.text;
+        this._unsafe = args.unsafe ?? false;
+        this.icon = args.icon ?? '';
+        this.title = args.title ?? '';
+        this.text = args.text ?? '';
     }
 
     /**

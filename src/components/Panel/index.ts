@@ -92,22 +92,17 @@ class Panel extends Container {
      */
     public static readonly EVENT_EXPAND = 'expand';
 
-    static readonly defaultArgs: PanelArgs = {
-        ...Container.defaultArgs,
-        headerSize: 32
-    };
-
     protected _suspendReflow: boolean;
 
-    protected _reflowTimeout: number;
+    protected _reflowTimeout: number = null;
 
-    protected _widthBeforeCollapse: string;
+    protected _widthBeforeCollapse: string = null;
 
-    protected _heightBeforeCollapse: string;
+    protected _heightBeforeCollapse: string = null;
 
-    protected _iconSort: Label;
+    protected _iconSort: Label = null;
 
-    protected _btnRemove: Button;
+    protected _btnRemove: Button = null;
 
     protected _containerContent: Container;
 
@@ -133,16 +128,13 @@ class Panel extends Container {
      * @param args - The arguments. Extends the Container constructor arguments. All settable
      * properties can also be set through the constructor.
      */
-    constructor(args: PanelArgs = Panel.defaultArgs) {
-        args = { ...Panel.defaultArgs, ...args };
+    constructor(args: Readonly<PanelArgs> = {}) {
+        const containerArgs = { ...args, flex: true };
+        delete containerArgs.grid;
+        delete containerArgs.flexDirection;
+        delete containerArgs.scrollable;
 
-        const panelArgs = Object.assign({}, args);
-        panelArgs.flex = true;
-        delete panelArgs.grid;
-        delete panelArgs.flexDirection;
-        delete panelArgs.scrollable;
-
-        super(panelArgs);
+        super(containerArgs);
 
         this.class.add(CLASS_PANEL);
 
@@ -161,21 +153,14 @@ class Panel extends Container {
         this._initializeContent(args);
 
         // header size
-        this.headerSize = args.headerSize !== undefined ? args.headerSize : 32;
+        this.headerSize = args.headerSize ?? 32;
 
         // collapse related
-        this._reflowTimeout = null;
-        this._widthBeforeCollapse = null;
-        this._heightBeforeCollapse = null;
-
         this.collapsible = args.collapsible || false;
         this.collapsed = args.collapsed || false;
         this.collapseHorizontally = args.collapseHorizontally || false;
 
-        this._iconSort = null;
         this.sortable = args.sortable || false;
-
-        this._btnRemove = null;
         this.removable = args.removable || !!args.onRemove || false;
 
         // Set the contents container to be the content DOM element. From now on, calling append
@@ -373,9 +358,9 @@ class Panel extends Container {
         this._collapsible = value;
 
         if (value) {
-            this.classAdd(pcuiClass.COLLAPSIBLE);
+            this.class.add(pcuiClass.COLLAPSIBLE);
         } else {
-            this.classRemove(pcuiClass.COLLAPSIBLE);
+            this.class.remove(pcuiClass.COLLAPSIBLE);
         }
 
         this._reflow();
@@ -466,9 +451,9 @@ class Panel extends Container {
 
         this._collapseHorizontally = value;
         if (value) {
-            this.classAdd(CLASS_PANEL_HORIZONTAL);
+            this.class.add(CLASS_PANEL_HORIZONTAL);
         } else {
-            this.classRemove(CLASS_PANEL_HORIZONTAL);
+            this.class.remove(CLASS_PANEL_HORIZONTAL);
         }
 
         this._reflow();

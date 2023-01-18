@@ -35,13 +35,6 @@ export interface TextInputArgs extends InputArgs, IBindableArgs, IPlaceholderArg
  * The TextInput is an input element of type text.
  */
 class TextInput extends Input implements IFocusable, IPlaceholder {
-    static readonly defaultArgs: TextInputArgs = {
-        ...Input.defaultArgs,
-        blurOnEnter: true,
-        blurOnEscape: true,
-        dom: 'div'
-    };
-
     protected _domInput: HTMLInputElement;
 
     protected _suspendInputChangeEvt: boolean;
@@ -62,9 +55,8 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
     protected _onInputChangeEvt: (evt: Event) => void;
 
-    constructor(args: TextInputArgs = TextInput.defaultArgs) {
-        args = { ...TextInput.defaultArgs, ...args };
-        super(args.dom, args);
+    constructor(args: Readonly<TextInputArgs> = {}) {
+        super(args);
 
         this.class.add(CLASS_TEXT_INPUT);
 
@@ -96,11 +88,11 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         if (args.value !== undefined) {
             this.value = args.value;
         }
-        this.placeholder = args.placeholder || null;
-        this.renderChanges = args.renderChanges || false;
-        this.blurOnEnter = (args.blurOnEnter !== undefined ? args.blurOnEnter : true);
-        this.blurOnEscape = (args.blurOnEscape !== undefined ? args.blurOnEscape : true);
-        this.keyChange = args.keyChange || false;
+        this.placeholder = args.placeholder ?? null;
+        this.renderChanges = args.renderChanges ?? false;
+        this.blurOnEnter = args.blurOnEnter ?? true;
+        this.blurOnEscape = args.blurOnEscape ?? true;
+        this.keyChange = args.keyChange ?? false;
         this._prevValue = null;
 
         if (args.onValidate) {

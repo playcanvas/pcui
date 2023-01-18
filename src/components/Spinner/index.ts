@@ -33,25 +33,18 @@ export interface SpinnerArgs extends ElementArgs {
 class Spinner extends Element {
     static TYPE_SMALL_THICK = 'small-thick';
 
-    static readonly defaultArgs: SpinnerArgs = {
-        ...Element.defaultArgs,
-        type: 'small-thick'
-    };
-
     /**
      * Sets the pixel size of the spinner
      *
      * @param args - The arguments.
      */
-    constructor(args: SpinnerArgs = Spinner.defaultArgs) {
-        args = { ...Spinner.defaultArgs, ...args };
-        let dom = null;
-
-        if (args.type === Spinner.TYPE_SMALL_THICK) {
-            dom = createSmallThick(args.size || 12, args.dom);
+    constructor(args: Readonly<SpinnerArgs> = {}) {
+        if ((args.type ?? 'small-thick') === Spinner.TYPE_SMALL_THICK) {
+            const dom = createSmallThick(args.size ?? 12, args.dom);
+            args = { ...args, dom };
         }
 
-        super(dom, args);
+        super(args);
 
         this.class.add(CLASS_ROOT);
     }

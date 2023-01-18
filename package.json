@@ -1,11 +1,29 @@
 {
   "name": "@playcanvas/pcui",
-  "version": "3.0.0",
+  "version": "3.3.1",
   "author": "PlayCanvas <support@playcanvas.com>",
   "homepage": "https://playcanvas.github.io/pcui",
-  "description": "This library enables the creation of reliable and visually pleasing user interfaces by providing fully styled components that you can use directly on your site. The components are useful in a wide range of use cases, from creating simple forms to building graphical user interfaces for complex web tools.",
+  "description": "User interface component library for the web",
+  "keywords": [
+    "components",
+    "css",
+    "dom",
+    "html",
+    "javascript",
+    "pcui",
+    "playcanvas",
+    "react",
+    "sass",
+    "typescript",
+    "ui"
+  ],
   "license": "MIT",
   "main": "dist/module/src/index.mjs",
+  "exports": {
+    ".": "./dist/module/src/index.mjs",
+    "./react": "./react/dist/module/src/index.mjs",
+    "./styles": "./styles/dist/index.mjs"
+  },
   "types": "types/index.d.ts",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"
@@ -26,11 +44,11 @@
     "build:es6": "rollup -c --environment target:es6",
     "build:react:es6": "rollup -c --environment target:react:es6",
     "build": "rollup -c && npm run bundle:styles",
-    "build:font:icons": "cd ./src/scss/fonts && node ./buildFontIcons.js",
+    "build:icons": "cd ./utils && node ./build-font-icons.mjs",
     "build:docsite:local": "cd docs && bundle exec jekyll build --config _config_local.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook && cp -r ./typedocs ./docs/_site/typedocs",
     "build:docsite:production": "cd docs && bundle exec jekyll build --config _config.yml && mkdir _site/storybook && cd .. && ENVIRONMENT=production build-storybook --no-dll -o ./docs/_site/storybook && cp -r ./typedocs ./docs/_site/typedocs",
     "docsite:serve": "serve docs/_site -p 3497",
-    "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types",
+    "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types && tsc --project ./react/tsconfig.json --declaration --emitDeclarationOnly --outDir ./react/types",
     "build:typedocs": "typedoc --tsconfig ./tsconfig.json",
     "storybook": "start-storybook -p 9009 -s public",
     "test": "node --test"
@@ -84,12 +102,14 @@
       }
     }
   },
+  "dependencies": {
+    "@playcanvas/observer": "^1.3.6"
+  },
   "devDependencies": {
-    "@babel/core": "^7.20.7",
+    "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@playcanvas/eslint-config": "^1.0.16",
-    "@playcanvas/observer": "^1.3.5",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-replace": "^5.0.2",
@@ -105,8 +125,8 @@
     "@storybook/react": "^6.5.15",
     "@types/estree": "^1.0.0",
     "@types/react": "^18.0.26",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "@typescript-eslint/parser": "^5.48.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.2",
+    "@typescript-eslint/parser": "^5.48.2",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.0",
     "eslint": "^8.31.0",
@@ -122,7 +142,7 @@
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "react-scripts": "^5.0.0",
-    "rollup": "^3.9.1",
+    "rollup": "^3.10.0",
     "rollup-plugin-rename": "^1.0.1",
     "rollup-plugin-sass": "^1.12.17",
     "rollup-plugin-typescript2": "^0.34.1",
@@ -130,7 +150,7 @@
     "serve": "^14.1.2",
     "stylelint": "^14.16.1",
     "stylelint-config-standard-scss": "^6.1.0",
-    "typedoc": "^0.23.23",
+    "typedoc": "^0.23.24",
     "typedoc-plugin-mdn-links": "^2.0.2",
     "typescript": "^4.9.4"
   },

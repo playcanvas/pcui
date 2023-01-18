@@ -28,40 +28,33 @@ export interface ColorPickerArgs extends ElementArgs, IBindableArgs {
  * Represents a color picker.
  */
 class ColorPicker extends Element implements IBindable {
-    static readonly defaultArgs: ColorPickerArgs = {
-        ...Element.defaultArgs,
-        channels: 3,
-        value: [0, 0, 255, 1],
-        renderChanges: false
-    };
+    protected _historyCombine = false;
 
-    protected _domColor: HTMLDivElement;
-
-    protected _historyCombine: boolean;
-
-    protected _historyPostfix: string;
+    protected _historyPostfix: string = null;
 
     protected _value: number[];
 
     protected _channels: number;
 
-    protected _size: number;
+    protected _size = 144;
 
-    protected _directInput: boolean;
+    protected _directInput = true;
 
-    protected _colorHSV: number[];
+    protected _colorHSV = [0, 0, 0];
 
-    protected _pickerChannels: NumericInput[];
+    protected _pickerChannels: NumericInput[] = [];
 
-    protected _channelsNumber: number;
+    protected _channelsNumber = 4;
 
-    protected _changing: boolean;
+    protected _changing = false;
 
-    protected _dragging: boolean;
+    protected _dragging = false;
 
-    protected _callingCallback: boolean;
+    protected _callingCallback = false;
 
     protected _overlay: Overlay;
+
+    protected _domColor: HTMLDivElement;
 
     protected _pickRect: HTMLDivElement;
 
@@ -81,34 +74,22 @@ class ColorPicker extends Element implements IBindable {
 
     protected _panelFields: HTMLDivElement;
 
-    protected _evtColorPick: EventHandle;
+    protected _evtColorPick: EventHandle = null;
 
-    protected _evtColorToPicker: EventHandle;
+    protected _evtColorToPicker: EventHandle = null;
 
-    protected _evtColorPickStart: EventHandle;
+    protected _evtColorPickStart: EventHandle = null;
 
-    protected _evtColorPickEnd: EventHandle;
+    protected _evtColorPickEnd: EventHandle = null;
 
     protected _fieldHex: TextInput;
 
     protected _renderChanges: boolean;
 
-    constructor(args: ColorPickerArgs = ColorPicker.defaultArgs) {
-        args = { ...ColorPicker.defaultArgs, ...args };
-        super(args.dom, args);
+    constructor(args: Readonly<ColorPickerArgs> = {}) {
+        super(args);
 
-        this._size = 144;
-        this._directInput = true;
-        this._colorHSV = [0, 0, 0];
-        this._pickerChannels = [];
-        this._channelsNumber = 4;
-        this._changing = false;
-        this._dragging = false;
-
-        this._callingCallback = false;
-
-        this.dom.classList.add(CLASS_COLOR_INPUT);
-        this.dom.classList.add(CLASS_NOT_FLEXIBLE);
+        this.dom.classList.add(CLASS_COLOR_INPUT, CLASS_NOT_FLEXIBLE);
 
         // this element shows the actual color. The
         // parent element shows the checkerboard pattern
@@ -125,14 +106,11 @@ class ColorPicker extends Element implements IBindable {
             }
         });
 
-        this._historyCombine = false;
-        this._historyPostfix = null;
-
-        this._value = args.value;
-        this._channels = args.channels;
+        this._value = args.value ?? [0, 0, 255, 1];
+        this._channels = args.channels ?? 3;
         this._setValue(this._value);
 
-        this.renderChanges = args.renderChanges;
+        this.renderChanges = args.renderChanges ?? false;
 
         this.on('change', () => {
             if (this.renderChanges) {
@@ -231,11 +209,6 @@ class ColorPicker extends Element implements IBindable {
         this._panelFields = document.createElement('div');
         this._panelFields.classList.add('fields');
         this._overlay.append(this._panelFields);
-
-        this._evtColorPick = null;
-        this._evtColorToPicker = null;
-        this._evtColorPickStart = null;
-        this._evtColorPickEnd = null;
 
         this._overlay.on('hide', () => {
             this._evtColorPick.unbind();

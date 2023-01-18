@@ -31,19 +31,16 @@ export interface GridViewItemArgs extends ContainerArgs {
      * The text of the item. Defaults to ''.
      */
     text?: string;
+    /**
+     * Sets the tabIndex of the {@link GridViewItem}. Defaults to 0.
+     */
+    tabIndex?: number;
 }
 
 /**
  *  Represents a grid view item used in {@link GridView}.
  */
 class GridViewItem extends Container implements IFocusable {
-    static readonly defaultArgs: GridViewItemArgs = {
-        ...Container.defaultArgs,
-        allowSelect: true,
-        text: '',
-        tabIndex: 0
-    };
-
     protected _selected: boolean;
 
     protected _radioButton: RadioButton;
@@ -54,11 +51,11 @@ class GridViewItem extends Container implements IFocusable {
 
     protected _allowSelect: boolean;
 
-    constructor(args: GridViewItemArgs = GridViewItem.defaultArgs) {
-        args = { ...GridViewItem.defaultArgs, ...args };
-        super(args);
+    constructor(args: Readonly<GridViewItemArgs> = {}) {
+        super({ tabIndex: 0, ...args });
 
-        this.allowSelect = args.allowSelect;
+        this.allowSelect = args.allowSelect ?? true;
+        this._type = args.type ?? null;
         this._selected = false;
 
         if (args.type === 'radio') {
@@ -80,13 +77,11 @@ class GridViewItem extends Container implements IFocusable {
 
         this._labelText = new Label({
             class: CLASS_TEXT,
-            binding: new BindingObserversToElement()
+            binding: new BindingObserversToElement(),
+            text: args.text ?? ''
         });
 
         this.append(this._labelText);
-
-        this.text = args.text;
-        this._type = args.type;
 
         this.dom.addEventListener('focus', this._onFocus);
         this.dom.addEventListener('blur', this._onBlur);
@@ -157,7 +152,7 @@ class GridViewItem extends Container implements IFocusable {
             if (this._radioButton)
                 this._radioButton.value = value;
             else
-                this.classAdd(CLASS_SELECTED);
+                this.class.add(CLASS_SELECTED);
 
             this.emit('select', this);
         } else {
@@ -165,7 +160,7 @@ class GridViewItem extends Container implements IFocusable {
             if (this._radioButton)
                 this._radioButton.value = false;
             else
-                this.classRemove(CLASS_SELECTED);
+                this.class.remove(CLASS_SELECTED);
 
             this.emit('deselect', this);
         }

@@ -21,7 +21,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { Observer, History } from '@playcanvas/observer';
-import { Container, Button, SliderInput, Progress, Label, BindingTwoWay } from '@playcanvas/pcui';
+import { Container, Button, SliderInput, Progress, Label, BindingTwoWay } from '@playcanvas/pcui/react';
 
 const observer = new Observer({ progress: 0 });
 const history = new History();

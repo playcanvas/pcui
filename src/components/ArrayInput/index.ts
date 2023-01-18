@@ -39,11 +39,11 @@ export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
      */
     fixedSize?: boolean;
     /**
-     * If `true` then the array will be rendered using panels.
+     * If `true` then the array will be rendered using panels. Defaults to `false`.
      */
     usePanels?: boolean;
     /**
-     * Used to specify the default values for each element in the array. Can be left null.
+     * Used to specify the default values for each element in the array. Defaults to `null`.
      */
     getDefaultFn?: () => any;
 }
@@ -52,12 +52,6 @@ export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
  * Element that allows editing an array of values.
  */
 class ArrayInput extends Element implements IFocusable, IBindable {
-    static readonly defaultArgs: ArrayInputArgs = {
-        ...Element.defaultArgs,
-        getDefaultFn: null,
-        usePanels: false
-    };
-
     /**
      * Fired when an array element is linked to observers.
      *
@@ -101,15 +95,15 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     protected _inputSize: NumericInput;
 
-    protected _suspendSizeChangeEvt: boolean;
+    protected _suspendSizeChangeEvt = false;
 
     protected _containerArray: Container;
 
     protected _arrayElements: any;
 
-    protected _suspendArrayElementEvts: boolean;
+    protected _suspendArrayElementEvts = false;
 
-    protected _arrayElementChangeTimeout: number;
+    protected _arrayElementChangeTimeout: number = null;
 
     protected _getDefaultFn: any;
 
@@ -123,26 +117,24 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: ArrayInputArgs = ArrayInput.defaultArgs) {
-        args = { ...ArrayInput.defaultArgs, ...args };
-
-        // remove binding because we want to set it later
-        const binding = args.binding;
-        delete args.binding;
-
+    constructor(args: Readonly<ArrayInputArgs> = {}) {
         const container = new Container({
             dom: args.dom,
             flex: true
         });
 
-        super(container.dom, args);
+        const elementArgs = { ...args, dom: container.dom };
+        // remove binding because we want to set it later
+        delete elementArgs.binding;
+
+        super(elementArgs);
 
         this._container = container;
         this._container.parent = this;
 
         this.class.add(CLASS_ARRAY_INPUT, CLASS_ARRAY_EMPTY);
 
-        this._usePanels = args.usePanels;
+        this._usePanels = args.usePanels ?? false;
 
         this._fixedSize = !!args.fixedSize;
 
@@ -165,7 +157,6 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         this._inputSize.on('blur', () => {
             this.emit('blur');
         });
-        this._suspendSizeChangeEvt = false;
         this._container.append(this._inputSize);
 
         this._containerArray = new Container({
@@ -179,10 +170,8 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             this._containerArray.hidden = this._arrayElements.length === 0;
         });
         this._container.append(this._containerArray);
-        this._suspendArrayElementEvts = false;
-        this._arrayElementChangeTimeout = null;
 
-        this._getDefaultFn = args.getDefaultFn;
+        this._getDefaultFn = args.getDefaultFn ?? null;
 
         // @ts-ignore
         let valueType = args.elementArgs && args.elementArgs.type || args.type;
@@ -190,16 +179,19 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             valueType = 'string';
         }
 
-        delete args.dom;
-
         this._valueType = valueType;
         this._elementType = args.type ?? 'string';
-        this._elementArgs = args.elementArgs || args;
+        if (args.elementArgs) {
+            this._elementArgs = args.elementArgs;
+        } else {
+            delete elementArgs.dom;
+            this._elementArgs = elementArgs;
+        }
 
         this._arrayElements = [];
 
         // set binding now
-        this.binding = binding;
+        this.binding = args.binding;
 
         this._values = [];
 
