@@ -128,15 +128,13 @@ class Panel extends Container {
      * @param args - The arguments. Extends the Container constructor arguments. All settable
      * properties can also be set through the constructor.
      */
-    constructor(args: PanelArgs = {}) {
+    constructor(args: Readonly<PanelArgs> = {}) {
+        const containerArgs = { ...args, flex: true };
+        delete containerArgs.grid;
+        delete containerArgs.flexDirection;
+        delete containerArgs.scrollable;
 
-        const panelArgs = Object.assign({}, args);
-        panelArgs.flex = true;
-        delete panelArgs.grid;
-        delete panelArgs.flexDirection;
-        delete panelArgs.scrollable;
-
-        super(panelArgs);
+        super(containerArgs);
 
         this.class.add(CLASS_PANEL);
 

@@ -52,7 +52,7 @@ export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
 class SliderInput extends Element implements IBindable, IFocusable {
     protected _historyCombine = false;
 
-    protected _historyPostfix: any = null;
+    protected _historyPostfix: string = null;
 
     protected _numericInput: NumericInput;
 
@@ -75,8 +75,8 @@ class SliderInput extends Element implements IBindable, IFocusable {
      *
      * @param args - The arguments.
      */
-    constructor(args: SliderInputArgs = {}) {
-        super(args.dom, args);
+    constructor(args: Readonly<SliderInputArgs> = {}) {
+        super(args);
 
         this.class.add(CLASS_SLIDER);
 

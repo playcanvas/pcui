@@ -137,7 +137,7 @@ class TreeViewItem extends Container {
      *
      * @param args - The arguments.
      */
-    constructor(args: TreeViewItemArgs = {}) {
+    constructor(args: Readonly<TreeViewItemArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_ROOT, CLASS_EMPTY);

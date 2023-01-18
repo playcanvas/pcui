@@ -23,7 +23,7 @@ export interface TextAreaInputArgs extends TextInputArgs {
  * The TextAreaInput wraps a textarea element. It has the same interface as {@link TextInput}.
  */
 class TextAreaInput extends TextInput {
-    constructor(args: TextAreaInputArgs = {}) {
+    constructor(args: Readonly<TextAreaInputArgs> = {}) {
         args = Object.assign({
             input: document.createElement('textarea')
         }, args);

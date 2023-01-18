@@ -73,7 +73,7 @@ class MenuItem extends Container implements IBindable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: MenuItemArgs = {}) {
+    constructor(args: Readonly<MenuItemArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_MENU_ITEM);
