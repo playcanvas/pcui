@@ -9,5 +9,5 @@ test('BooleanInput defaults', () => {
     const booleanInput = new BooleanInput();
 
     assert.strictEqual(booleanInput.type, undefined);
-    assert.strictEqual(booleanInput.value, false);
+    assert.strictEqual(booleanInput.value, null);
 });
