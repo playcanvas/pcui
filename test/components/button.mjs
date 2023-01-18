@@ -1,5 +1,5 @@
 import test from 'node:test';
-import { strictEqual } from 'node:assert';
+import { strictEqual } from 'assert';
 
 import 'global-jsdom/register'
 
