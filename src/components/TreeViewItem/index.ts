@@ -1,3 +1,4 @@
+import Element from '../Element';
 import Label from '../Label';
 import Container, { ContainerArgs } from '../Container';
 import TextInput from '../TextInput';
@@ -211,20 +212,22 @@ class TreeViewItem extends Container {
         super.destroy();
     }
 
-    protected _onAppendChild(element: any) {
+    protected _onAppendChild(element: Element) {
         super._onAppendChild(element);
 
-        if (!(element instanceof TreeViewItem)) return;
+        if (element instanceof TreeViewItem) {
+            this._numChildren++;
+            if (this._parent !== this._treeView) {
+                this.class.remove(CLASS_EMPTY);
+            }
 
-        this._numChildren++;
-        if (this._parent !== this._treeView) this.class.remove(CLASS_EMPTY);
-
-        if (this._treeView) {
-            this._treeView._onAppendTreeViewItem(element);
+            if (this._treeView) {
+                this._treeView._onAppendTreeViewItem(element);
+            }
         }
     }
 
-    protected _onRemoveChild(element: any) {
+    protected _onRemoveChild(element: Element) {
         if (element instanceof TreeViewItem) {
             this._numChildren--;
             if (this._numChildren === 0) {
