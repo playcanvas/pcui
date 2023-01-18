@@ -114,31 +114,29 @@ class Container extends Element {
      */
     public static readonly EVENT_RESIZE = 'resize';
 
-    protected _scrollable: boolean;
+    protected _scrollable = false;
 
-    protected _flex: boolean;
+    protected _flex = false;
 
-    protected _grid: boolean;
+    protected _grid = false;
 
-    protected _domResizeHandle: HTMLDivElement;
+    protected _domResizeHandle: HTMLDivElement = null;
 
-    protected _resizeTouchId: number;
+    protected _resizeTouchId: number = null;
 
-    protected _resizeData: any;
+    protected _resizeData: any = null;
 
-    protected _resizeHorizontally: boolean;
+    protected _resizeHorizontally = true;
 
-    protected _resizeMin: number;
+    protected _resizeMin = 100;
 
-    protected _resizeMax: number;
+    protected _resizeMax = 300;
 
-    protected _draggedStartIndex: number;
+    protected _draggedStartIndex = -1;
 
     protected _domContent: HTMLElement;
 
     protected _resizable: string;
-
-    protected _draggedHeight: number;
 
     constructor(args: Readonly<ContainerArgs> = {}) {
         super(args);
@@ -148,17 +146,14 @@ class Container extends Element {
         this.domContent = this._dom;
 
         // scroll
-        this._scrollable = false;
         if (args.scrollable) {
             this.scrollable = true;
         }
 
         // flex
-        this._flex = false;
         this.flex = !!args.flex;
 
         // grid
-        this._grid = false;
         let grid = !!args.grid;
         if (grid) {
             if (this.flex) {
@@ -169,14 +164,7 @@ class Container extends Element {
         this.grid = grid;
 
         // resize related
-        this._domResizeHandle = null;
-        this._resizeTouchId = null;
-        this._resizeData = null;
-        this._resizeHorizontally = true;
-
         this.resizable = args.resizable ?? null;
-        this._resizeMin = 100;
-        this._resizeMax = 300;
 
         if (args.resizeMin !== undefined) {
             this.resizeMin = args.resizeMin;
@@ -184,8 +172,6 @@ class Container extends Element {
         if (args.resizeMax !== undefined) {
             this.resizeMax = args.resizeMax;
         }
-
-        this._draggedStartIndex = -1;
     }
 
     destroy() {
@@ -540,8 +526,6 @@ class Container extends Element {
         this._draggedStartIndex = this._getDraggedChildIndex(childPanel);
 
         childPanel.class.add(CLASS_DRAGGED);
-
-        this._draggedHeight = childPanel.height;
 
         this.emit('child:dragstart', childPanel, this._draggedStartIndex);
     }

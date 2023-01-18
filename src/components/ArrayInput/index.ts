@@ -95,15 +95,15 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     protected _inputSize: NumericInput;
 
-    protected _suspendSizeChangeEvt: boolean;
+    protected _suspendSizeChangeEvt = false;
 
     protected _containerArray: Container;
 
     protected _arrayElements: any;
 
-    protected _suspendArrayElementEvts: boolean;
+    protected _suspendArrayElementEvts = false;
 
-    protected _arrayElementChangeTimeout: number;
+    protected _arrayElementChangeTimeout: number = null;
 
     protected _getDefaultFn: any;
 
@@ -157,7 +157,6 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         this._inputSize.on('blur', () => {
             this.emit('blur');
         });
-        this._suspendSizeChangeEvt = false;
         this._container.append(this._inputSize);
 
         this._containerArray = new Container({
@@ -171,8 +170,6 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             this._containerArray.hidden = this._arrayElements.length === 0;
         });
         this._container.append(this._containerArray);
-        this._suspendArrayElementEvts = false;
-        this._arrayElementChangeTimeout = null;
 
         this._getDefaultFn = args.getDefaultFn ?? null;
 
