@@ -19,9 +19,7 @@ export interface CodeArgs extends ContainerArgs {
  * Represents a code block.
  */
 class Code extends Container {
-    protected _inner = new Label({
-        class: CLASS_INNER
-    });
+    protected _inner: Label;
 
     protected _text: string;
 
@@ -30,6 +28,9 @@ class Code extends Container {
 
         this.class.add(CLASS_ROOT);
 
+        this._inner = new Label({
+            class: CLASS_INNER
+        });
         this.append(this._inner);
 
         if (args.text) {
