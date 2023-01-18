@@ -73,13 +73,34 @@ const searchStringTokenize = (name: string): string[] => {
     return tokens;
 };
 
+type SearchRecord<Type> = {
+    name: string;
+    item: Type;
+    tokens: string[];
+    edits: number;
+    subFull: number;
+    sub: number;
+};
 
-const _searchItems = (items: any, search: string, args: any) => {
-    const results: any = [];
+type SearchArgs = {
+    /**
+     * Tolerance for how many characters of the search string must be contained in the item name. Default is 0.5.
+     */
+    containsCharsTolerance?: number;
+    /**
+     * Tolerance for how many edits are allowed between the search string and the item name. Default is 0.5.
+     */
+    editsDistanceTolerance?: number;
+    /**
+     * Limit the number of results. If not set, all results will be returned.
+     */
+    limitResults?: number;
+};
 
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
+const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: Readonly<SearchArgs>): SearchRecord<Type>[] => {
+    const results: SearchRecord<Type>[] = [];
 
+    for (const item of items) {
         // direct hit
         if (item.subFull !== Infinity) {
             results.push(item);
@@ -149,21 +170,25 @@ const _searchItems = (items: any, search: string, args: any) => {
     return results;
 };
 
-// perform search through items
-// items is an array with arrays of two values
-// where first value is a string to be searched by
-// and second value is an object to be found
-//
-// [
-//     [ 'camera', {object} ],
-//     [ 'New Entity', {object} ],
-//     [ 'Sun', {object} ]
-// ]
-//
-export const searchItems = (items: any, search: string, args?: any) => {
-    let i;
-
-    search = (search || '').toLowerCase().trim();
+/**
+ * Perform search through items.
+ *
+ * @param items - Array of tuples where the first value is a string to be searched by and the
+ * second value is an object to be found.
+ * @param search - String to search for.
+ * @param args - Search arguments.
+ * @returns Array of found items.
+ * @example
+ * const items = [
+ *     ['Item 1', { id: 1 }],
+ *     ['Item 2', { id: 2 }],
+ *     ['Item 3', { id: 3 }],
+ * ];
+ * const results = searchItems(items, 'item');
+ * // results = [{ id: 1 }, { id: 2 }, { id: 3 }]
+ */
+export const searchItems = <Type>(items: [string, Type][], search = '', args: SearchArgs = {}): Type[] => {
+    search = search.toLowerCase().trim();
 
     if (!search)
         return [];
@@ -172,19 +197,18 @@ export const searchItems = (items: any, search: string, args?: any) => {
     if (!searchTokens.length)
         return [];
 
-    args = args || { };
     args.containsCharsTolerance = args.containsCharsTolerance || 0.5;
     args.editsDistanceTolerance = args.editsDistanceTolerance || 0.5;
 
-    let records: any = [];
+    let records: SearchRecord<Type>[] = [];
 
-    for (i = 0; i < items.length; i++) {
-        const subInd = items[i][0].toLowerCase().trim().indexOf(search);
+    for (const item of items) {
+        const subInd = item[0].toLowerCase().trim().indexOf(search);
 
         records.push({
-            name: items[i][0],
-            item: items[i][1],
-            tokens: searchStringTokenize(items[i][0]),
+            name: item[0],
+            item: item[1],
+            tokens: searchStringTokenize(item[0]),
             edits: Infinity,
             subFull: (subInd !== -1) ? subInd : Infinity,
             sub: Infinity
@@ -192,11 +216,11 @@ export const searchItems = (items: any, search: string, args?: any) => {
     }
 
     // search each token
-    for (i = 0; i < searchTokens.length; i++)
+    for (let i = 0; i < searchTokens.length; i++)
         records = _searchItems(records, searchTokens[i], args);
 
     // sort result first by substring? then by edits number
-    records.sort((a: any, b: any) => {
+    records.sort((a: SearchRecord<Type>, b: SearchRecord<Type>) => {
         if (a.subFull !== b.subFull) {
             return a.subFull - b.subFull;
         } else if (a.sub !== b.sub) {
@@ -208,13 +232,12 @@ export const searchItems = (items: any, search: string, args?: any) => {
     });
 
     // return only items without match information
-    for (i = 0; i < records.length; i++)
-        records[i] = records[i].item;
+    let recordItems = records.map((record: SearchRecord<Type>) => record.item);
 
     // limit number of results
-    if (args.hasOwnProperty('limitResults') && records.length > args.limitResults) {
-        records = records.slice(0, args.limitResults);
+    if (args.hasOwnProperty('limitResults') && recordItems.length > args.limitResults) {
+        recordItems = recordItems.slice(0, args.limitResults);
     }
 
-    return records;
+    return recordItems;
 };

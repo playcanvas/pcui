@@ -376,8 +376,6 @@ class Element extends Events {
 
     protected _dom: HTMLElement;
 
-    protected _class: string[];
-
     protected _hiddenParents: boolean;
 
     protected _flashTimeout: number = null;
@@ -400,16 +398,12 @@ class Element extends Events {
 
     protected _onClickEvt: () => void;
 
-    constructor(dom: HTMLElement | string, args: ElementArgs = {}) {
+    constructor(args: Readonly<ElementArgs> = {}) {
         super();
 
-        if (typeof dom === 'string') {
-            this._dom = document.createElement(dom);
-        } else if (dom instanceof Node) {
-            this._dom = dom;
-        } else if (typeof args.dom === 'string') {
+        if (typeof args.dom === 'string') {
             this._dom = document.createElement(args.dom);
-        } else if (args.dom instanceof HTMLElement) {
+        } else if (args.dom instanceof Node) {
             this._dom = args.dom;
         } else {
             this._dom = document.createElement('div');
@@ -432,17 +426,11 @@ class Element extends Events {
         // add css classes
         this._dom.classList.add(CLASS_ELEMENT, pcuiClass.FONT_REGULAR);
 
-        this._class = [];
         // add user classes
         if (args.class) {
-            if (Array.isArray(args.class)) {
-                for (let i = 0; i < args.class.length; i++) {
-                    this._dom.classList.add(args.class[i]);
-                    this._class.push(args.class[i]);
-                }
-            } else {
-                this._dom.classList.add(args.class);
-                this._class.push(args.class);
+            const classes = Array.isArray(args.class) ? args.class : [args.class];
+            for (const cls of classes) {
+                this._dom.classList.add(cls);
             }
         }
 
@@ -574,10 +562,10 @@ class Element extends Events {
     flash() {
         if (this._flashTimeout) return;
 
-        this.classAdd(pcuiClass.FLASH);
+        this.class.add(pcuiClass.FLASH);
         this._flashTimeout = window.setTimeout(() => {
             this._flashTimeout = null;
-            this.classRemove(pcuiClass.FLASH);
+            this.class.remove(pcuiClass.FLASH);
         }, 200);
     }
 
@@ -605,9 +593,9 @@ class Element extends Events {
 
     protected _onEnabledChange(enabled: boolean) {
         if (enabled) {
-            this.classRemove(pcuiClass.DISABLED);
+            this.class.remove(pcuiClass.DISABLED);
         } else {
-            this.classAdd(pcuiClass.DISABLED);
+            this.class.add(pcuiClass.DISABLED);
         }
 
         this.emit(enabled ? 'enable' : 'disable');
@@ -649,9 +637,9 @@ class Element extends Events {
 
     protected _onReadOnlyChange(readOnly: boolean) {
         if (readOnly) {
-            this.classAdd(pcuiClass.READONLY);
+            this.class.add(pcuiClass.READONLY);
         } else {
-            this.classRemove(pcuiClass.READONLY);
+            this.class.remove(pcuiClass.READONLY);
         }
 
         this.emit('readOnly', readOnly);
@@ -667,31 +655,6 @@ class Element extends Events {
             if (!this._readOnly) {
                 this._onReadOnlyChange(false);
             }
-        }
-
-    }
-
-    /**
-     * Adds the specified class to the DOM element but checks if the classList contains it first.
-     *
-     * @param cls - The class to add.
-     */
-    classAdd(cls: string) {
-        const classList = this._dom.classList;
-        if (!classList.contains(cls)) {
-            classList.add(cls);
-        }
-    }
-
-    /**
-     * Removes the specified class from the DOM element but checks if the classList contains it first.
-     *
-     * @param cls - The class to remove.
-     */
-    classRemove(cls: string) {
-        const classList = this._dom.classList;
-        if (classList.contains(cls)) {
-            classList.remove(cls);
         }
     }
 
@@ -849,9 +812,9 @@ class Element extends Events {
         this._hidden = value;
 
         if (value) {
-            this.classAdd(pcuiClass.HIDDEN);
+            this.class.add(pcuiClass.HIDDEN);
         } else {
-            this.classRemove(pcuiClass.HIDDEN);
+            this.class.remove(pcuiClass.HIDDEN);
         }
 
         this.emit(value ? 'hide' : 'show');
@@ -897,9 +860,9 @@ class Element extends Events {
         if (this._hasError === value) return;
         this._hasError = value;
         if (value) {
-            this.classAdd(pcuiClass.ERROR);
+            this.class.add(pcuiClass.ERROR);
         } else {
-            this.classRemove(pcuiClass.ERROR);
+            this.class.remove(pcuiClass.ERROR);
         }
     }
 
@@ -915,23 +878,9 @@ class Element extends Events {
     }
 
     /**
-     * Shortcut to Element.dom.classList.
+     * Get the `DOMTokenList` of the underlying DOM element. This is essentially a shortcut to
+     * `element.dom.classList`.
      */
-    set class(value: any) {
-        if (!Array.isArray(value)) {
-            value = [value];
-        }
-        value.forEach((cls: string) => {
-            this.classAdd(cls);
-        });
-        this._class.forEach((cls) => {
-            if (!value.includes(cls)) {
-                this.classRemove(cls);
-            }
-        });
-        this._class = value;
-    }
-
     get class(): DOMTokenList {
         return this._dom.classList;
     }

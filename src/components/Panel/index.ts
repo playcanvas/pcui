@@ -128,15 +128,13 @@ class Panel extends Container {
      * @param args - The arguments. Extends the Container constructor arguments. All settable
      * properties can also be set through the constructor.
      */
-    constructor(args: PanelArgs = {}) {
+    constructor(args: Readonly<PanelArgs> = {}) {
+        const containerArgs = { ...args, flex: true };
+        delete containerArgs.grid;
+        delete containerArgs.flexDirection;
+        delete containerArgs.scrollable;
 
-        const panelArgs = Object.assign({}, args);
-        panelArgs.flex = true;
-        delete panelArgs.grid;
-        delete panelArgs.flexDirection;
-        delete panelArgs.scrollable;
-
-        super(panelArgs);
+        super(containerArgs);
 
         this.class.add(CLASS_PANEL);
 
@@ -360,9 +358,9 @@ class Panel extends Container {
         this._collapsible = value;
 
         if (value) {
-            this.classAdd(pcuiClass.COLLAPSIBLE);
+            this.class.add(pcuiClass.COLLAPSIBLE);
         } else {
-            this.classRemove(pcuiClass.COLLAPSIBLE);
+            this.class.remove(pcuiClass.COLLAPSIBLE);
         }
 
         this._reflow();
@@ -453,9 +451,9 @@ class Panel extends Container {
 
         this._collapseHorizontally = value;
         if (value) {
-            this.classAdd(CLASS_PANEL_HORIZONTAL);
+            this.class.add(CLASS_PANEL_HORIZONTAL);
         } else {
-            this.classRemove(CLASS_PANEL_HORIZONTAL);
+            this.class.remove(CLASS_PANEL_HORIZONTAL);
         }
 
         this._reflow();

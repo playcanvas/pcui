@@ -21,8 +21,8 @@ class Canvas extends Element {
 
     protected _ratio = 1;
 
-    constructor(args: CanvasArgs = {}) {
-        super(args.dom ?? 'canvas', args);
+    constructor(args: Readonly<CanvasArgs> = {}) {
+        super({ dom: 'canvas', ...args });
 
         const canvas = this._dom as HTMLCanvasElement;
         canvas.classList.add('pcui-canvas');
