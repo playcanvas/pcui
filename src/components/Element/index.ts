@@ -376,8 +376,6 @@ class Element extends Events {
 
     protected _dom: HTMLElement;
 
-    protected _class: string[];
-
     protected _hiddenParents: boolean;
 
     protected _flashTimeout: number;
@@ -440,17 +438,11 @@ class Element extends Events {
         // add font regular class
         this._dom.classList.add(pcuiClass.FONT_REGULAR);
 
-        this._class = [];
         // add user classes
         if (args.class) {
-            if (Array.isArray(args.class)) {
-                for (let i = 0; i < args.class.length; i++) {
-                    this._dom.classList.add(args.class[i]);
-                    this._class.push(args.class[i]);
-                }
-            } else {
-                this._dom.classList.add(args.class);
-                this._class.push(args.class);
+            const classes = Array.isArray(args.class) ? args.class : [args.class];
+            for (const cls of classes) {
+                this._dom.classList.add(cls);
             }
         }
 
@@ -927,23 +919,9 @@ class Element extends Events {
     }
 
     /**
-     * Shortcut to Element.dom.classList.
+     * Get the `DOMTokenList` of the underlying DOM element. This is essentially a shortcut to
+     * `element.dom.classList`.
      */
-    set class(value: any) {
-        if (!Array.isArray(value)) {
-            value = [value];
-        }
-        value.forEach((cls: string) => {
-            this.classAdd(cls);
-        });
-        this._class.forEach((cls) => {
-            if (!value.includes(cls)) {
-                this.classRemove(cls);
-            }
-        });
-        this._class = value;
-    }
-
     get class(): DOMTokenList {
         return this._dom.classList;
     }
