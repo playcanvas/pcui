@@ -1,13 +1,19 @@
 import test from 'node:test';
-import assert from 'node:assert';
+import { strictEqual } from 'node:assert';
 
 import 'global-jsdom/register'
 
 import BooleanInput from '../../dist/module/src/components/booleaninput/index.mjs';
 
-test('BooleanInput defaults', () => {
+test('BooleanInput constructor: no args', () => {
     const booleanInput = new BooleanInput();
 
-    assert.strictEqual(booleanInput.type, undefined);
-    assert.strictEqual(booleanInput.value, null);
+    strictEqual(booleanInput.class.length, 4);
+    strictEqual(booleanInput.class.contains('font-regular'), true);
+    strictEqual(booleanInput.class.contains('pcui-boolean-input'), true);
+    strictEqual(booleanInput.class.contains('pcui-element'), true);
+    strictEqual(booleanInput.class.contains('pcui-not-flexible'), true);
+
+    strictEqual(booleanInput.type, undefined);
+    strictEqual(booleanInput.value, null);
 });
