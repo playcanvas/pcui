@@ -50,7 +50,7 @@ class GridView extends Container {
 
     protected _clickFn: any;
 
-    constructor(args: GridViewArgs = {}) {
+    constructor(args: Readonly<GridViewArgs> = {}) {
         super(args);
 
         this._vertical = !!args.vertical;

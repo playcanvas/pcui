@@ -25,7 +25,7 @@ class Code extends Container {
 
     protected _text: string;
 
-    constructor(args: CodeArgs = {}) {
+    constructor(args: Readonly<CodeArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_ROOT);
