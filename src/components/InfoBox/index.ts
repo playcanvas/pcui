@@ -35,9 +35,9 @@ export interface InfoBoxArgs extends ContainerArgs {
  * Represents an information box.
  */
 class InfoBox extends Container {
-    protected _titleElement: Element;
+    protected _titleElement = new Element();
 
-    protected _textElement: Element;
+    protected _textElement = new Element();
 
     protected _unsafe: boolean;
 
@@ -47,12 +47,11 @@ class InfoBox extends Container {
 
     protected _text: string;
 
-    constructor(args: InfoBoxArgs = {}) {
+    constructor(args: Readonly<InfoBoxArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_INFOBOX);
-        this._titleElement = new Element(document.createElement('div'));
-        this._textElement = new Element(document.createElement('div'));
+
         this.append(this._titleElement);
         this.append(this._textElement);
 

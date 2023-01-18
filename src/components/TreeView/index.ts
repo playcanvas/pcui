@@ -142,9 +142,9 @@ class TreeView extends Container {
      */
     public static readonly EVENT_RENAME = 'rename';
 
-    protected _selectedItems: TreeViewItem[];
+    protected _selectedItems: TreeViewItem[] = [];
 
-    protected _dragItems: TreeViewItem[];
+    protected _dragItems: TreeViewItem[] = [];
 
     protected _allowDrag: boolean;
 
@@ -152,15 +152,15 @@ class TreeView extends Container {
 
     protected _allowRenaming: boolean;
 
-    protected _dragging: boolean;
+    protected _dragging = false;
 
-    protected _dragOverItem: TreeViewItem;
+    protected _dragOverItem: TreeViewItem = null;
 
-    protected _dragArea: string;
+    protected _dragArea = DRAG_AREA_INSIDE;
 
-    protected _dragScroll: number;
+    protected _dragScroll = 0;
 
-    protected _dragScrollInterval: number;
+    protected _dragScrollInterval: number = null;
 
     protected _dragHandle: Element;
 
@@ -170,13 +170,13 @@ class TreeView extends Container {
 
     protected _onReparentFn: any;
 
-    protected _pressedCtrl: boolean;
+    protected _pressedCtrl = false;
 
-    protected _pressedShift: boolean;
+    protected _pressedShift = false;
 
-    protected _filter: string;
+    protected _filter: string = null;
 
-    protected _filterResults: TreeViewItem[];
+    protected _filterResults: TreeViewItem[] = [];
 
     protected _wasDraggingAllowedBeforeFiltering: boolean;
 
@@ -185,22 +185,15 @@ class TreeView extends Container {
      *
      * @param args - The arguments.
      */
-    constructor(args: TreeViewArgs = {}) {
+    constructor(args: Readonly<TreeViewArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_ROOT);
 
-        this._selectedItems = [];
-        this._dragItems = [];
         this._allowDrag = args.allowDrag ?? true;
         this._allowReordering = args.allowReordering ?? true;
         this._allowRenaming = args.allowRenaming ?? false;
-        this._dragging = false;
-        this._dragOverItem = null;
-        this._dragArea = DRAG_AREA_INSIDE;
-        this._dragScroll = 0;
-        this._dragScrollInterval = null;
-        this._dragHandle = new Element(document.createElement('div'), {
+        this._dragHandle = new Element({
             class: CLASS_DRAGGED_HANDLE
         });
         this._dragScrollElement = args.dragScrollElement || this;
@@ -209,11 +202,6 @@ class TreeView extends Container {
         this._onContextMenu = args.onContextMenu;
         this._onReparentFn = args.onReparent;
 
-        this._pressedCtrl = false;
-        this._pressedShift = false;
-
-        this._filter = null;
-        this._filterResults = [];
         this._wasDraggingAllowedBeforeFiltering = this._allowDrag;
 
         window.addEventListener('keydown', this._updateModifierKeys);
@@ -401,28 +389,28 @@ class TreeView extends Container {
         super._onRemoveChild(element);
     }
 
-    protected _onAppendTreeViewItem(element: TreeViewItem) {
-        element.treeView = this;
+    protected _onAppendTreeViewItem(item: TreeViewItem) {
+        item.treeView = this;
 
         if (this._filter) {
             // add new item to filtered results if it
             // satisfies the current filter
-            this._searchItems([[element.text, element]], this._filter);
+            this._searchItems([[item.text, item]], this._filter);
         }
 
         // do the same for all children of the element
-        element.forEachChild((child) => {
+        item.forEachChild((child) => {
             if (child instanceof TreeViewItem) {
                 this._onAppendTreeViewItem(child);
             }
         });
     }
 
-    protected _onRemoveTreeViewItem(element: TreeViewItem) {
-        element.selected = false;
+    protected _onRemoveTreeViewItem(item: TreeViewItem) {
+        item.selected = false;
 
         // do the same for all children of the element
-        element.forEachChild((child) => {
+        item.forEachChild((child) => {
             if (child instanceof TreeViewItem) {
                 this._onRemoveTreeViewItem(child);
             }
@@ -984,7 +972,7 @@ class TreeView extends Container {
         this.emit('rename', item, newName);
     }
 
-    protected _searchItems(searchArr: any, filter: string) {
+    protected _searchItems(searchArr: [string, TreeViewItem][], filter: string) {
         const results = searchItems(searchArr, filter);
         if (!results.length) return;
 
@@ -1007,7 +995,7 @@ class TreeView extends Container {
 
         this.class.add(CLASS_FILTERING);
 
-        const search: any[][] = [];
+        const search: [string, TreeViewItem][] = [];
         this._traverseDepthFirst((item) => {
             search.push([item.text, item]);
         });

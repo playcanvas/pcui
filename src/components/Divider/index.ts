@@ -11,8 +11,8 @@ export interface DividerArgs extends ElementArgs {}
  * Represents a vertical division between two elements.
  */
 class Divider extends Element {
-    constructor(args: DividerArgs = {}) {
-        super(args.dom, args);
+    constructor(args: Readonly<DividerArgs> = {}) {
+        super(args);
 
         this.class.add(CLASS_ROOT);
     }

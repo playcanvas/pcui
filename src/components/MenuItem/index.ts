@@ -55,15 +55,15 @@ export interface MenuItemArgs extends ContainerArgs {
 class MenuItem extends Container implements IBindable {
     protected _containerContent: Container;
 
-    protected _numChildren: number;
+    protected _numChildren = 0;
 
-    protected _icon: string;
+    protected _icon: string = null;
 
     protected _labelText: Label;
 
     protected _containerItems: Container;
 
-    protected _menu: any;
+    protected _menu: any = null;
 
     protected _onSelect: any;
 
@@ -73,7 +73,7 @@ class MenuItem extends Container implements IBindable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: MenuItemArgs = {}) {
+    constructor(args: Readonly<MenuItemArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_MENU_ITEM);
@@ -84,10 +84,6 @@ class MenuItem extends Container implements IBindable {
             flexDirection: 'row'
         });
         this.append(this._containerContent);
-
-        this._numChildren = 0;
-
-        this._icon = null;
 
         this._labelText = new Label();
         this._containerContent.append(this._labelText);
@@ -115,8 +111,6 @@ class MenuItem extends Container implements IBindable {
         this.onIsEnabled = args.onIsEnabled;
         this.onSelect = args.onSelect;
         this.onIsVisible = args.onIsVisible;
-
-        this._menu = null;
 
         if (args.items) {
             args.items.forEach((item) => {

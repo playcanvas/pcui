@@ -11,6 +11,7 @@ import GradientPicker, { GradientPickerArgs } from './GradientPicker';
 import GridView, { GridViewArgs } from './GridView';
 import GridViewItem, { GridViewItemArgs } from './GridViewItem';
 import InfoBox, { InfoBoxArgs } from './InfoBox';
+import InputField, { InputFieldArgs } from './InputField';
 import Label, { LabelArgs } from './Label';
 import LabelGroup, { LabelGroupArgs } from './LabelGroup';
 import Menu, { MenuArgs } from './Menu';
@@ -57,6 +58,8 @@ export {
     GridViewItemArgs,
     InfoBox,
     InfoBoxArgs,
+    InputField,
+    InputFieldArgs,
     Label,
     LabelArgs,
     LabelGroup,

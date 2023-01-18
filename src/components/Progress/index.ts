@@ -18,17 +18,17 @@ export interface ProgressArgs extends ContainerArgs {
  * Represents a bar that can highlight progress of an activity.
  */
 class Progress extends Container {
-    protected _inner: Element;
+    protected _inner = new Element({
+        class: CLASS_INNER
+    });
 
     protected _value: number;
 
-    constructor(args: ProgressArgs = {}) {
+    constructor(args: Readonly<ProgressArgs> = {}) {
         super(args);
         this.class.add(CLASS_ROOT);
 
-        this._inner = new Element(document.createElement('div'));
         this.append(this._inner);
-        this._inner.class.add(CLASS_INNER);
 
         if (args.value !== undefined) {
             this.value = args.value;

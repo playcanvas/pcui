@@ -15,21 +15,20 @@ export interface CanvasArgs extends ElementArgs {
  * Represents a Canvas.
  */
 class Canvas extends Element {
-    protected _width: number;
+    protected _width = 300;
 
-    protected _height: number;
+    protected _height = 150;
 
-    protected _ratio: number;
+    protected _ratio = 1;
 
-    constructor(args: CanvasArgs = {}) {
-        super(args.dom ?? 'canvas', args);
+    constructor(args: Readonly<CanvasArgs> = {}) {
+        super({ dom: 'canvas', ...args });
 
         const canvas = this._dom as HTMLCanvasElement;
         canvas.classList.add('pcui-canvas');
 
-        this._width = 300;
-        this._height = 150;
-        this._ratio = (args.useDevicePixelRatio !== undefined && args.useDevicePixelRatio) ? window.devicePixelRatio : 1;
+        const { useDevicePixelRatio = false } = args;
+        this._ratio = useDevicePixelRatio ? window.devicePixelRatio : 1;
 
         // Disable I-bar cursor on click+drag
         canvas.onselectstart = (evt: Event) => {

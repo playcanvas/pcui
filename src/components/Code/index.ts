@@ -23,13 +23,16 @@ class Code extends Container {
 
     protected _text: string;
 
-    constructor(args: CodeArgs = {}) {
+    constructor(args: Readonly<CodeArgs> = {}) {
         super(args);
+
         this.class.add(CLASS_ROOT);
 
-        this._inner = new Label();
+        this._inner = new Label({
+            class: CLASS_INNER
+        });
         this.append(this._inner);
-        this._inner.class.add(CLASS_INNER);
+
         if (args.text) {
             this.text = args.text;
         }

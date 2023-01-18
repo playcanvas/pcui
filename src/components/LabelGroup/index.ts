@@ -35,7 +35,7 @@ class LabelGroup extends Container {
 
     protected _field: Element;
 
-    constructor(args: LabelGroupArgs = {}) {
+    constructor(args: Readonly<LabelGroupArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_LABEL_GROUP);

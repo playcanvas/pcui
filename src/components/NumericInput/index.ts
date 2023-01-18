@@ -1,5 +1,5 @@
 import Element from '../Element';
-import TextInput, { TextInputArgs } from '../TextInput';
+import InputField, { InputFieldArgs } from '../InputField';
 import * as pcuiClass from '../../class';
 
 const CLASS_NUMERIC_INPUT = 'pcui-numeric-input';
@@ -12,7 +12,7 @@ const REGEX_COMMA = /,/g;
 /**
  * The arguments for the {@link NumericInput} constructor.
  */
-export interface NumericInputArgs extends TextInputArgs {
+export interface NumericInputArgs extends InputFieldArgs {
     /**
      * Sets the minimum value this field can take.
      */
@@ -22,7 +22,7 @@ export interface NumericInputArgs extends TextInputArgs {
      */
     max?: number,
     /**
-     * Sets the decimal precision of this field. Defaults to 7.
+     * Sets the decimal precision of this field. Defaults to 2.
      */
     precision?: number,
     /**
@@ -46,7 +46,7 @@ export interface NumericInputArgs extends TextInputArgs {
 /**
  * The NumericInput represents an input element that holds numbers.
  */
-class NumericInput extends TextInput {
+class NumericInput extends InputField {
     protected _min: number;
 
     protected _max: number;
@@ -73,29 +73,27 @@ class NumericInput extends TextInput {
 
     protected _sliderUsed = false;
 
-    constructor(args: NumericInputArgs = {}) {
-        // make copy of args
-        args = Object.assign({}, args);
-        const value = args.value;
-        // delete value because we want to set it after
-        // the other arguments
-        delete args.value;
-        const renderChanges = args.renderChanges;
-        delete args.renderChanges;
+    constructor(args: Readonly<NumericInputArgs> = {}) {
+        const textInputArgs = { ...args };
+        // delete value because we want to set it after the other arguments
+        delete textInputArgs.value;
+        delete textInputArgs.renderChanges;
 
-        super(args);
+        super(textInputArgs);
 
         this.class.add(CLASS_NUMERIC_INPUT);
 
         this._min = args.min ?? null;
         this._max = args.max ?? null;
         this._allowNull = args.allowNull ?? false;
-        this._precision = args.precision ?? 7;
+        this._precision = args.precision ?? 2;
 
         if (Number.isFinite(args.step)) {
             this._step = args.step;
-        } else {
+        } else if (args.precision) {
             this._step = 10 / Math.pow(10, args.precision);
+        } else {
+            this._step = 1;
         }
 
         if (Number.isFinite(args.stepPrecision)) {
@@ -105,16 +103,16 @@ class NumericInput extends TextInput {
         }
 
         this._oldValue = undefined;
-        this.value = value;
+        this.value = args.value;
 
         this._historyCombine = false;
         this._historyPostfix = null;
         this._sliderPrevValue = 0;
 
-        this.renderChanges = renderChanges;
+        this.renderChanges = args.renderChanges;
 
         if (!args.hideSlider) {
-            this._sliderControl = new Element(document.createElement('div'));
+            this._sliderControl = new Element();
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
             this.dom.append(this._sliderControl.dom);
 
@@ -190,18 +188,15 @@ class NumericInput extends TextInput {
         this.value = this._domInput.value;
     }
 
-    protected _onInputKeyDown = (evt: KeyboardEvent) => {
+    protected _onInputKeyDown(evt: KeyboardEvent) {
         if (!this.enabled || this.readOnly) return super._onInputKeyDown(evt);
 
         // increase / decrease value with arrow keys
         if (evt.key === 'ArrowUp' || evt.key === 'ArrowDown') {
             const inc = evt.key === 'ArrowDown' ? -1 : 1;
             this.value += (evt.shiftKey ? this._stepPrecision : this._step) * inc;
-            return;
         }
-
-        super._onInputKeyDown(evt);
-    };
+    }
 
     protected _isScrolling() {
         if (!this._sliderControl) return false;
@@ -273,13 +268,13 @@ class NumericInput extends TextInput {
         return value;
     }
 
-    protected _updateValue(value: any, force?: boolean) {
+    protected _updateValue(value: number | string, force?: boolean) {
         const different = (value !== this._oldValue || force);
 
         // always set the value to the input because
         // we always want it to show an actual number or nothing
         this._oldValue = value;
-        this._domInput.value = value;
+        this._domInput.value = String(value);
 
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
 
@@ -290,7 +285,7 @@ class NumericInput extends TextInput {
         return different;
     }
 
-    set value(value) {
+    set value(value: number) {
         value = this._normalizeValue(value);
 
         const forceUpdate = this.class.contains(pcuiClass.MULTIPLE_VALUES) && value === null && this._allowNull;
@@ -304,8 +299,8 @@ class NumericInput extends TextInput {
         }
     }
 
-    get value() {
-        const val = super.value;
+    get value() : number {
+        const val = this._domInput.value;
         // @ts-ignore
         return val !== '' ? parseFloat(val) : null;
     }

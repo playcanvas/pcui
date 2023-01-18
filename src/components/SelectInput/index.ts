@@ -98,7 +98,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _labelValue: Label;
 
-    protected _timeoutLabelValueTabIndex: number;
+    protected _timeoutLabelValueTabIndex: number = null;
 
     protected _labelIcon: Label;
 
@@ -114,13 +114,13 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _type: string;
 
-    protected _valueToText: { [key: string]: string };
+    protected _valueToText: { [key: string]: string } = {};
 
-    protected _valueToLabel: { [key: string]: Label };
+    protected _valueToLabel: { [key: string]: Label } = {};
 
     protected _labelToValue: Map<Label, any> = new Map();
 
-    protected _labelHighlighted: Label;
+    protected _labelHighlighted: Label = null;
 
     protected _optionsFn: any;
 
@@ -138,10 +138,16 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _renderChanges: boolean;
 
-    constructor(args: SelectInputArgs = {}) {
+    constructor(args: Readonly<SelectInputArgs> = {}) {
         // main container
-        const container = new Container({ dom: args.dom });
-        super(container.dom, args);
+        const container = new Container({
+            dom: args.dom
+        });
+
+        const elementArgs = { ...args, dom: container.dom };
+
+        super(elementArgs);
+
         this._container = container;
         this._container.parent = this;
 
@@ -178,8 +184,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
             }
         });
         this._containerValue.append(this._labelValue);
-
-        this._timeoutLabelValueTabIndex = null;
 
         // dropdown icon
         this._labelIcon = new Label({
@@ -242,9 +246,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         this._type = args.type ?? 'string';
 
-        this._valueToText = {};
-        this._valueToLabel = {};
-        this._labelHighlighted = null;
         this.invalidOptions = args.invalidOptions ?? [];
         this.options = args.options ?? [];
         this._optionsFn = args.optionsFn;
