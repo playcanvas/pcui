@@ -190,7 +190,7 @@ class NumericInput extends TextInput {
         this.value = this._domInput.value;
     }
 
-    protected _onInputKeyDown = (evt: KeyboardEvent) => {
+    protected _onInputKeyDown(evt: KeyboardEvent) {
         if (!this.enabled || this.readOnly) return super._onInputKeyDown(evt);
 
         // increase / decrease value with arrow keys
@@ -201,7 +201,7 @@ class NumericInput extends TextInput {
         }
 
         super._onInputKeyDown(evt);
-    };
+    }
 
     protected _isScrolling() {
         if (!this._sliderControl) return false;
