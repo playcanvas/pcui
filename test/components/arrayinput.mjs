@@ -3,7 +3,7 @@ import { strictEqual } from 'node:assert';
 
 import 'global-jsdom/register'
 
-import ArrayInput from '../../dist/module/src/components/arrayinput/index.mjs';
+import ArrayInput from '../../dist/module/src/components/ArrayInput/index.mjs';
 
 test('ArrayInput constructor: no args', () => {
     const arrayInput = new ArrayInput();
