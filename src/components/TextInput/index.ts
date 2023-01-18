@@ -55,7 +55,7 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
 
     protected _onInputChangeEvt: (evt: Event) => void;
 
-    constructor(args: TextInputArgs = {}) {
+    constructor(args: TextInputArgs = {}, numericInput = false) {
         super(args.dom, args);
 
         this.class.add(CLASS_TEXT_INPUT);
@@ -70,13 +70,15 @@ class TextInput extends Input implements IFocusable, IPlaceholder {
         input.tabIndex = 0;
         input.autocomplete = "off";
 
-        this._onInputKeyDownEvt = this._onInputKeyDown.bind(this);
-        this._onInputChangeEvt = this._onInputChange.bind(this);
+        if (!numericInput) {
+            this._onInputKeyDownEvt = this._onInputKeyDown.bind(this);
+            this._onInputChangeEvt = this._onInputChange.bind(this);
+            input.addEventListener('keydown', this._onInputKeyDownEvt);
+            input.addEventListener('change', this._onInputChangeEvt);
+        }
 
-        input.addEventListener('change', this._onInputChangeEvt);
         input.addEventListener('focus', this._onInputFocus);
         input.addEventListener('blur', this._onInputBlur);
-        input.addEventListener('keydown', this._onInputKeyDownEvt);
         input.addEventListener('contextmenu', this._onInputCtxMenu, false);
 
         this.dom.appendChild(input);

@@ -83,7 +83,7 @@ class NumericInput extends TextInput {
         const renderChanges = args.renderChanges;
         delete args.renderChanges;
 
-        super(args);
+        super(args, true);
 
         this.class.add(CLASS_NUMERIC_INPUT);
 
@@ -123,6 +123,11 @@ class NumericInput extends TextInput {
 
             document.addEventListener('pointerlockchange', this._onPointerLockChange, false);
         }
+
+        this._onInputKeyDownEvt = this._onInputKeyDown.bind(this);
+        this._onInputChangeEvt = this._onInputChange.bind(this);
+        this._domInput.addEventListener('keydown', this._onInputKeyDownEvt);
+        this._domInput.addEventListener('change', this._onInputChangeEvt);
     }
 
     destroy() {
