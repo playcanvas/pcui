@@ -15,8 +15,10 @@ test('NumericInput: constructor: no args', () => {
     strictEqual(numericInput.class.contains('pcui-text-input'), true);
 });
 
-test('NumericInput: up arrow increments value', () => {
-    const numericInput = new NumericInput();
+test('NumericInput: up/down arrow keys step value', () => {
+    const numericInput = new NumericInput({
+        step: 0.1
+    });
 
     document.body.appendChild(numericInput.dom);
 
@@ -24,7 +26,21 @@ test('NumericInput: up arrow increments value', () => {
 
     strictEqual(numericInput.value, 0);
 
-    numericInput._domInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+    const upEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowUp'
+    });
+    numericInput.input.dispatchEvent(upEvent);
 
     strictEqual(numericInput.value, 0.1);
+
+    const downEvent = new KeyboardEvent('keydown', {
+        key: 'ArrowDown'
+    });
+    numericInput.input.dispatchEvent(downEvent);
+
+    strictEqual(numericInput.value, 0);
+
+    document.body.removeChild(numericInput.dom);
+
+    numericInput.destroy();
 });
