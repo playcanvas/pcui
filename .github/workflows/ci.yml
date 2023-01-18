@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-esm:
+  build:
     name: Build
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +22,7 @@ jobs:
     - name: Build PCUI
       run: npm run build
 
-  test-esm:
+  test:
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
