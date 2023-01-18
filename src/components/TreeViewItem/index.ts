@@ -218,7 +218,7 @@ class TreeViewItem extends Container {
         if (element instanceof TreeViewItem) {
             this._numChildren++;
             if (this._parent !== this._treeView) {
-                this.classRemove(CLASS_EMPTY);
+                this.class.remove(CLASS_EMPTY);
             }
 
             if (this._treeView) {
@@ -231,7 +231,7 @@ class TreeViewItem extends Container {
         if (element instanceof TreeViewItem) {
             this._numChildren--;
             if (this._numChildren === 0) {
-                this.classAdd(CLASS_EMPTY);
+                this.class.add(CLASS_EMPTY);
             }
 
             if (this._treeView) {
@@ -360,7 +360,7 @@ class TreeViewItem extends Container {
     };
 
     rename() {
-        this.classAdd(CLASS_RENAME);
+        this.class.add(CLASS_RENAME);
 
         // show text input to enter new text
         const textInput = new TextInput({
@@ -374,7 +374,7 @@ class TreeViewItem extends Container {
         });
 
         textInput.on('destroy', () => {
-            this.classRemove(CLASS_RENAME);
+            this.class.remove(CLASS_RENAME);
             this.focus();
         });
 
@@ -418,7 +418,7 @@ class TreeViewItem extends Container {
         }
 
         if (value) {
-            this._containerContents.classAdd(CLASS_SELECTED);
+            this._containerContents.class.add(CLASS_SELECTED);
             this.emit('select', this);
             if (this._treeView) {
                 this._treeView._onChildSelected(this);
@@ -426,7 +426,7 @@ class TreeViewItem extends Container {
 
             this.focus();
         } else {
-            this._containerContents.classRemove(CLASS_SELECTED);
+            this._containerContents.class.remove(CLASS_SELECTED);
             this.blur();
             this.emit('deselect', this);
             if (this._treeView) {
@@ -477,10 +477,10 @@ class TreeViewItem extends Container {
         if (value) {
             if (!this.numChildren) return;
 
-            this.classAdd(CLASS_OPEN);
+            this.class.add(CLASS_OPEN);
             this.emit('open', this);
         } else {
-            this.classRemove(CLASS_OPEN);
+            this.class.remove(CLASS_OPEN);
             this.emit('close', this);
         }
     }

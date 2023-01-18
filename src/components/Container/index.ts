@@ -704,9 +704,9 @@ class Container extends Element {
         this._flex = value;
 
         if (value) {
-            this.classAdd(pcuiClass.FLEX);
+            this.class.add(pcuiClass.FLEX);
         } else {
-            this.classRemove(pcuiClass.FLEX);
+            this.class.remove(pcuiClass.FLEX);
         }
     }
 
@@ -723,9 +723,9 @@ class Container extends Element {
         this._grid = value;
 
         if (value) {
-            this.classAdd(pcuiClass.GRID);
+            this.class.add(pcuiClass.GRID);
         } else {
-            this.classRemove(pcuiClass.GRID);
+            this.class.remove(pcuiClass.GRID);
         }
     }
 
@@ -742,9 +742,9 @@ class Container extends Element {
         this._scrollable = value;
 
         if (value) {
-            this.classAdd(pcuiClass.SCROLLABLE);
+            this.class.add(pcuiClass.SCROLLABLE);
         } else {
-            this.classRemove(pcuiClass.SCROLLABLE);
+            this.class.remove(pcuiClass.SCROLLABLE);
         }
 
     }
@@ -767,7 +767,7 @@ class Container extends Element {
 
         // remove old class
         if (this._resizable) {
-            this.classRemove(`${pcuiClass.RESIZABLE}-${this._resizable}`);
+            this.class.remove(`${pcuiClass.RESIZABLE}-${this._resizable}`);
         }
 
         this._resizable = value;
@@ -775,8 +775,8 @@ class Container extends Element {
 
         if (value) {
             // add resize class and create / append resize handle
-            this.classAdd(pcuiClass.RESIZABLE);
-            this.classAdd(`${pcuiClass.RESIZABLE}-${value}`);
+            this.class.add(pcuiClass.RESIZABLE);
+            this.class.add(`${pcuiClass.RESIZABLE}-${value}`);
 
             if (!this._domResizeHandle) {
                 this._createResizeHandle();
@@ -784,7 +784,7 @@ class Container extends Element {
             this._dom.appendChild(this._domResizeHandle);
         } else {
             // remove resize class and resize handle
-            this.classRemove(pcuiClass.RESIZABLE);
+            this.class.remove(pcuiClass.RESIZABLE);
             if (this._domResizeHandle) {
                 this._dom.removeChild(this._domResizeHandle);
             }
