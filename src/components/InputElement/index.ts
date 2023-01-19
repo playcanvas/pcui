@@ -247,21 +247,13 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
         return this._blurOnEnter;
     }
 
-    set value(value: any) {
-        throw new Error('Not implemented!');
-    }
+    abstract set value(value: any);
 
-    get value(): any {
-        throw new Error('Not implemented!');
-    }
+    abstract get value(): any;
 
-    set values(value: Array<any>) {
-        throw new Error('Not implemented!');
-    }
+    abstract set values(value: Array<any>);
 
-    get values(): Array<any> {
-        throw new Error('Not implemented!');
-    }
+    abstract get values(): Array<any>;
 
     set renderChanges(value: boolean) {
         this._renderChanges = value;
