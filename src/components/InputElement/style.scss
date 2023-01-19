@@ -1,4 +1,4 @@
-.pcui-text-input {
+.pcui-input-element {
     display: inline-block;
     border: 1px solid $bcg-darker;
     border-radius: 2px;
@@ -31,7 +31,7 @@
     }
 }
 
-.pcui-text-input.pcui-multiple-values {
+.pcui-input-element.pcui-multiple-values {
     &::before {
         position: absolute;
         padding: 0 8px;
@@ -46,7 +46,7 @@
 }
 
 // focus / hover states
-.pcui-text-input:not(.pcui-disabled, .pcui-readonly) {
+.pcui-input-element:not(.pcui-disabled, .pcui-readonly) {
     &:hover {
         background-color: $bcg-darker;
         color: $text-primary;
@@ -62,7 +62,7 @@
     }
 }
 
-.pcui-text-input {
+.pcui-input-element {
     &.pcui-focus,
     &:hover {
         &::after,
@@ -73,24 +73,24 @@
 }
 
 // readonly state
-.pcui-text-input.pcui-readonly {
+.pcui-input-element.pcui-readonly {
     background-color: transparentize($color: $bcg-dark, $amount: 1 - $element-opacity-readonly);
     border-color: transparent;
 }
 
 // disabled state
-.pcui-text-input.pcui-disabled {
+.pcui-input-element.pcui-disabled {
     color: $text-darkest;
 }
 
 // error state
-.pcui-text-input.pcui-error {
+.pcui-input-element.pcui-error {
     color: $text-secondary;
     box-shadow: $element-shadow-error;
 }
 
 // placeholder
-.pcui-text-input[placeholder] {
+.pcui-input-element[placeholder] {
     position: relative;
 
     &::after {

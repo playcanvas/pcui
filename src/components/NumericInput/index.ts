@@ -1,5 +1,5 @@
 import Element from '../Element';
-import TextInput, { TextInputArgs } from '../TextInput';
+import InputElement, { InputElementArgs } from '../InputElement';
 import * as pcuiClass from '../../class';
 
 const CLASS_NUMERIC_INPUT = 'pcui-numeric-input';
@@ -12,7 +12,7 @@ const REGEX_COMMA = /,/g;
 /**
  * The arguments for the {@link NumericInput} constructor.
  */
-export interface NumericInputArgs extends TextInputArgs {
+export interface NumericInputArgs extends InputElementArgs {
     /**
      * Sets the minimum value this field can take.
      */
@@ -22,7 +22,7 @@ export interface NumericInputArgs extends TextInputArgs {
      */
     max?: number,
     /**
-     * Sets the decimal precision of this field. Defaults to 7.
+     * Sets the decimal precision of this field. Defaults to 2.
      */
     precision?: number,
     /**
@@ -46,7 +46,7 @@ export interface NumericInputArgs extends TextInputArgs {
 /**
  * The NumericInput represents an input element that holds numbers.
  */
-class NumericInput extends TextInput {
+class NumericInput extends InputElement {
     protected _min: number;
 
     protected _max: number;
@@ -103,7 +103,11 @@ class NumericInput extends TextInput {
         }
 
         this._oldValue = undefined;
-        this.value = args.value;
+        if (Number.isFinite(args.value)) {
+            this.value = args.value;
+        } else if (!this._allowNull) {
+            this.value = 0;
+        }
 
         this._historyCombine = false;
         this._historyPostfix = null;
@@ -183,9 +187,8 @@ class NumericInput extends TextInput {
     };
 
     protected _onInputChange(evt: any) {
-        // get the content of the input and pass it
-        // @ts-ignore through our value setter
-        this.value = this._domInput.value;
+        // get the content of the input, normalize it and set it as the current value
+        this.value = this._normalizeValue(this._domInput.value);
     }
 
     protected _onInputKeyDown(evt: KeyboardEvent) {
@@ -195,10 +198,7 @@ class NumericInput extends TextInput {
         if (evt.key === 'ArrowUp' || evt.key === 'ArrowDown') {
             const inc = evt.key === 'ArrowDown' ? -1 : 1;
             this.value += (evt.shiftKey ? this._stepPrecision : this._step) * inc;
-            return;
         }
-
-        super._onInputKeyDown(evt);
     }
 
     protected _isScrolling() {
@@ -221,6 +221,9 @@ class NumericInput extends TextInput {
     protected _normalizeValue(value: any) {
         try {
             if (typeof value === 'string') {
+                // check for 0
+                if (value === '0') return 0;
+
                 // replace commas with dots (for some international keyboards)
                 value = value.replace(REGEX_COMMA, '.');
 
@@ -271,13 +274,17 @@ class NumericInput extends TextInput {
         return value;
     }
 
-    protected _updateValue(value: any, force?: boolean) {
+    protected _updateValue(value: number, force?: boolean) {
         const different = (value !== this._oldValue || force);
 
         // always set the value to the input because
         // we always want it to show an actual number or nothing
         this._oldValue = value;
-        this._domInput.value = value;
+        if (value === null) {
+            this._domInput.value = '';
+        } else {
+            this._domInput.value = String(value);
+        }
 
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
 
@@ -288,9 +295,7 @@ class NumericInput extends TextInput {
         return different;
     }
 
-    set value(value) {
-        value = this._normalizeValue(value);
-
+    set value(value: number) {
         const forceUpdate = this.class.contains(pcuiClass.MULTIPLE_VALUES) && value === null && this._allowNull;
         const changed = this._updateValue(value, forceUpdate);
 
@@ -302,8 +307,8 @@ class NumericInput extends TextInput {
         }
     }
 
-    get value() {
-        const val = super.value;
+    get value() : number {
+        const val = this._domInput.value;
         // @ts-ignore
         return val !== '' ? parseFloat(val) : null;
     }
