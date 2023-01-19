@@ -86,7 +86,7 @@ class NumericInput extends InputElement {
         this._min = args.min ?? null;
         this._max = args.max ?? null;
         this._allowNull = args.allowNull ?? false;
-        this._precision = args.precision ?? 2;
+        this._precision = args.precision ?? 7;
 
         if (Number.isFinite(args.step)) {
             this._step = args.step;
@@ -103,7 +103,11 @@ class NumericInput extends InputElement {
         }
 
         this._oldValue = undefined;
-        this.value = args.value;
+        if (Number.isFinite(args.value)) {
+            this.value = args.value;
+        } else if (!this._allowNull) {
+            this.value = 0;
+        }
 
         this._historyCombine = false;
         this._historyPostfix = null;
@@ -183,9 +187,8 @@ class NumericInput extends InputElement {
     };
 
     protected _onInputChange(evt: any) {
-        // get the content of the input and pass it
-        // @ts-ignore through our value setter
-        this.value = this._domInput.value;
+        // get the content of the input, normalize it and set it as the current value
+        this.value = this._normalizeValue(this._domInput.value);
     }
 
     protected _onInputKeyDown(evt: KeyboardEvent) {
@@ -218,6 +221,9 @@ class NumericInput extends InputElement {
     protected _normalizeValue(value: any) {
         try {
             if (typeof value === 'string') {
+                // check for 0
+                if (value === '0') return 0;
+
                 // replace commas with dots (for some international keyboards)
                 value = value.replace(REGEX_COMMA, '.');
 
@@ -268,13 +274,17 @@ class NumericInput extends InputElement {
         return value;
     }
 
-    protected _updateValue(value: number | string, force?: boolean) {
+    protected _updateValue(value: number, force?: boolean) {
         const different = (value !== this._oldValue || force);
 
         // always set the value to the input because
         // we always want it to show an actual number or nothing
         this._oldValue = value;
-        this._domInput.value = String(value);
+        if (value === null) {
+            this._domInput.value = '';
+        } else {
+            this._domInput.value = String(value);
+        }
 
         this.class.remove(pcuiClass.MULTIPLE_VALUES);
 
@@ -286,8 +296,6 @@ class NumericInput extends InputElement {
     }
 
     set value(value: number) {
-        value = this._normalizeValue(value);
-
         const forceUpdate = this.class.contains(pcuiClass.MULTIPLE_VALUES) && value === null && this._allowNull;
         const changed = this._updateValue(value, forceUpdate);
 
