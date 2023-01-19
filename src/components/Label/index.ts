@@ -1,6 +1,5 @@
 import * as pcuiClass from '../../class';
-import Element, { ElementArgs, IBindableArgs, IFlexArgs, IPlaceholder, IPlaceholderArgs } from '../Element';
-import Input from '../Input';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IPlaceholder, IPlaceholderArgs } from '../Element';
 
 const CLASS_LABEL = 'pcui-label';
 
@@ -39,10 +38,12 @@ export interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs,
 /**
  * The Label is a simple span element that displays some text.
  */
-class Label extends Input implements IPlaceholder {
+class Label extends Element implements IPlaceholder, IBindable {
     protected _unsafe: boolean;
 
     protected _text: string;
+
+    protected _renderChanges: boolean;
 
     constructor(args: Readonly<LabelArgs> = {}) {
         super({ dom: 'span', ...args });
@@ -137,6 +138,14 @@ class Label extends Input implements IPlaceholder {
 
     get placeholder(): string {
         return this.dom.getAttribute('placeholder');
+    }
+
+    set renderChanges(value: boolean) {
+        this._renderChanges = value;
+    }
+
+    get renderChanges(): boolean {
+        return this._renderChanges;
     }
 }
 

@@ -1,5 +1,5 @@
 import Element from '../Element';
-import InputField, { InputFieldArgs } from '../InputField';
+import InputElement, { InputElementArgs } from '../InputElement';
 import * as pcuiClass from '../../class';
 
 const CLASS_NUMERIC_INPUT = 'pcui-numeric-input';
@@ -12,7 +12,7 @@ const REGEX_COMMA = /,/g;
 /**
  * The arguments for the {@link NumericInput} constructor.
  */
-export interface NumericInputArgs extends InputFieldArgs {
+export interface NumericInputArgs extends InputElementArgs {
     /**
      * Sets the minimum value this field can take.
      */
@@ -46,7 +46,7 @@ export interface NumericInputArgs extends InputFieldArgs {
 /**
  * The NumericInput represents an input element that holds numbers.
  */
-class NumericInput extends InputField {
+class NumericInput extends InputElement {
     protected _min: number;
 
     protected _max: number;

@@ -1,13 +1,12 @@
-import { IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
-import Input, { InputArgs } from '../Input';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
 import * as pcuiClass from '../../class';
 
-const CLASS_INPUT_FIELD = 'pcui-input-field';
+const CLASS_INPUT_FIELD = 'pcui-input-element';
 
 /**
- * The arguments for the {@link InputField} constructor.
+ * The arguments for the {@link InputElement} constructor.
  */
-export interface InputFieldArgs extends InputArgs, IBindableArgs, IPlaceholderArgs {
+export interface InputElementArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * Sets whether pressing Enter will blur (unfocus) the field. Defaults to `true`.
      */
@@ -21,15 +20,15 @@ export interface InputFieldArgs extends InputArgs, IBindableArgs, IPlaceholderAr
      */
     keyChange?: boolean,
     /**
-     * The input element to associate this {@link InputField} with. If not supplied one will be created instead.
+     * The input element to associate this {@link InputElement} with. If not supplied one will be created instead.
      */
     input?: HTMLInputElement
 }
 
 /**
- * The InputField is an input element with a text field.
+ * The InputElement is an input element with a text field.
  */
-class InputField extends Input implements IFocusable, IPlaceholder {
+abstract class InputElement extends Element implements IBindable, IFocusable, IPlaceholder {
     protected _domInput: HTMLInputElement;
 
     protected _suspendInputChangeEvt: boolean;
@@ -48,7 +47,7 @@ class InputField extends Input implements IFocusable, IPlaceholder {
 
     protected _onInputChangeEvt: (evt: Event) => void;
 
-    constructor(args: InputFieldArgs = {}) {
+    constructor(args: InputElementArgs = {}) {
         super(args);
 
         this.class.add(CLASS_INPUT_FIELD);
@@ -247,6 +246,30 @@ class InputField extends Input implements IFocusable, IPlaceholder {
     get blurOnEscape(): boolean {
         return this._blurOnEnter;
     }
+
+    set value(value: any) {
+        throw new Error('Not implemented!');
+    }
+
+    get value(): any {
+        throw new Error('Not implemented!');
+    }
+
+    set values(value: Array<any>) {
+        throw new Error('Not implemented!');
+    }
+
+    get values(): Array<any> {
+        throw new Error('Not implemented!');
+    }
+
+    set renderChanges(value: boolean) {
+        this._renderChanges = value;
+    }
+
+    get renderChanges(): boolean {
+        return this._renderChanges;
+    }
 }
 
-export default InputField;
+export default InputElement;

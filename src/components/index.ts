@@ -11,7 +11,7 @@ import GradientPicker, { GradientPickerArgs } from './GradientPicker';
 import GridView, { GridViewArgs } from './GridView';
 import GridViewItem, { GridViewItemArgs } from './GridViewItem';
 import InfoBox, { InfoBoxArgs } from './InfoBox';
-import InputField, { InputFieldArgs } from './InputField';
+import InputElement, { InputElementArgs } from './InputElement';
 import Label, { LabelArgs } from './Label';
 import LabelGroup, { LabelGroupArgs } from './LabelGroup';
 import Menu, { MenuArgs } from './Menu';
@@ -28,7 +28,6 @@ import TextAreaInput, { TextAreaInputArgs } from './TextAreaInput';
 import TextInput, { TextInputArgs } from './TextInput';
 import TreeView, { TreeViewArgs } from './TreeView';
 import TreeViewItem, { TreeViewItemArgs } from './TreeViewItem';
-import Input, { InputArgs } from './Input';
 import VectorInput, { VectorInputArgs } from './VectorInput';
 
 export {
@@ -58,8 +57,8 @@ export {
     GridViewItemArgs,
     InfoBox,
     InfoBoxArgs,
-    InputField,
-    InputFieldArgs,
+    InputElement,
+    InputElementArgs,
     Label,
     LabelArgs,
     LabelGroup,
@@ -94,8 +93,6 @@ export {
     TreeViewItemArgs,
     VectorInput,
     VectorInputArgs,
-    Input,
-    InputArgs,
     IBindable,
     IBindableArgs,
     IPlaceholder,

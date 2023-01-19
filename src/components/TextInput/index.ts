@@ -1,5 +1,5 @@
 import Element, { IBindableArgs, IPlaceholderArgs } from '../Element';
-import InputField, { InputFieldArgs } from '../InputField';
+import InputElement, { InputElementArgs } from '../InputElement';
 import * as pcuiClass from '../../class';
 
 const CLASS_TEXT_INPUT = 'pcui-text-input';
@@ -7,7 +7,7 @@ const CLASS_TEXT_INPUT = 'pcui-text-input';
 /**
  * The arguments for the {@link TextInput} constructor.
  */
-export interface TextInputArgs extends InputFieldArgs, IBindableArgs, IPlaceholderArgs {
+export interface TextInputArgs extends InputElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * A function that validates the value that is entered into the input and returns `true` if it is valid or `false` otherwise.
      * If `false` then the input will be set in an error state and the value will not propagate to the binding.
@@ -18,7 +18,7 @@ export interface TextInputArgs extends InputFieldArgs, IBindableArgs, IPlacehold
 /**
  * The TextInput is an input element of type text.
  */
-class TextInput extends InputField {
+class TextInput extends InputElement {
     protected _onValidate: any;
 
     constructor(args: Readonly<TextInputArgs> = {}) {

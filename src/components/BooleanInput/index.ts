@@ -1,5 +1,4 @@
 import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
-import Input from '../Input';
 import * as pcuiClass from '../../class';
 
 const CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
@@ -23,8 +22,10 @@ export interface BooleanInputArgs extends ElementArgs, IBindableArgs {
 /**
  * A checkbox element.
  */
-class BooleanInput extends Input implements IBindable, IFocusable {
+class BooleanInput extends Element implements IBindable, IFocusable {
     protected _value: boolean;
+
+    protected _renderChanges: boolean;
 
     constructor(args: Readonly<BooleanInputArgs> = {}) {
         super({ tabIndex: 0, ...args });
@@ -144,6 +145,14 @@ class BooleanInput extends Input implements IBindable, IFocusable {
         } else {
             this._updateValue(values[0]);
         }
+    }
+
+    set renderChanges(value: boolean) {
+        this._renderChanges = value;
+    }
+
+    get renderChanges(): boolean {
+        return this._renderChanges;
     }
 }
 
