@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Component from './component';
 import '../../scss/index.js';
 import { action } from '@storybook/addon-actions';

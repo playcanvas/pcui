@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import TreeViewElement, { TreeViewArgs } from './index';
 import TreeViewItemElement from '../TreeViewItem/index';
 import BaseComponent from '../Element/component';
