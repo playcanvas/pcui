@@ -265,14 +265,14 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._renderChanges = args.renderChanges;
 
         this.on('change', () => {
-            this._updateInputElementsVisibility();
+            this._updateInputFieldsVisibility();
 
             if (this.renderChanges && !this.multiSelect) {
                 this._labelValue.flash();
             }
         });
 
-        this._updateInputElementsVisibility(false);
+        this._updateInputFieldsVisibility(false);
     }
 
     destroy() {
@@ -798,7 +798,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         evt.stopPropagation();
     };
 
-    protected _updateInputElementsVisibility(focused?: boolean) {
+    protected _updateInputFieldsVisibility(focused?: boolean) {
         let showInput = false;
         let focusInput = false;
 
@@ -856,7 +856,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
     open() {
         if (!this._containerOptions.hidden || !this.enabled || this.readOnly) return;
 
-        this._updateInputElementsVisibility(true);
+        this._updateInputFieldsVisibility(true);
 
         // auto-update options if necessary
         if (this._optionsFn) {
@@ -917,7 +917,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         this._highlightLabel(null);
 
-        this._updateInputElementsVisibility(false);
+        this._updateInputFieldsVisibility(false);
 
         this._suspendInputChange = true;
         this._input.value = '';
