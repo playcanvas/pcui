@@ -1,7 +1,7 @@
 import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
 import * as pcuiClass from '../../class';
 
-const CLASS_INPUT_FIELD = 'pcui-input-element';
+const CLASS_INPUT_ELEMENT = 'pcui-input-element';
 
 /**
  * The arguments for the {@link InputElement} constructor.
