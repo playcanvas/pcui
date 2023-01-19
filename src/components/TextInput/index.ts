@@ -9,8 +9,9 @@ const CLASS_TEXT_INPUT = 'pcui-text-input';
  */
 export interface TextInputArgs extends InputElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
-     * A function that validates the value that is entered into the input and returns `true` if it is valid or `false` otherwise.
-     * If `false` then the input will be set in an error state and the value will not propagate to the binding.
+     * A function that validates the value that is entered into the input and returns `true` if it
+     * is valid or `false` otherwise. If `false` then the input will be set in an error state and
+     * the value will not propagate to the binding.
      */
     onValidate?: (value: string) => boolean,
 }
@@ -19,7 +20,7 @@ export interface TextInputArgs extends InputElementArgs, IBindableArgs, IPlaceho
  * The TextInput is an input element of type text.
  */
 class TextInput extends InputElement {
-    protected _onValidate: any;
+    protected _onValidate: (value: string) => boolean;
 
     constructor(args: Readonly<TextInputArgs> = {}) {
         super(args);

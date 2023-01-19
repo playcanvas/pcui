@@ -130,7 +130,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _value: any;
 
-    protected _createLabelContainer: any;
+    protected _createLabelContainer: Container;
 
     protected _options: any;
 
@@ -571,7 +571,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         return container;
     }
 
-    protected _removeTag(tagElement: any, value: string) {
+    protected _removeTag(tagElement: Container, value: string) {
         tagElement.destroy();
 
         const label = this._valueToLabel[value];
