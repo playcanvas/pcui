@@ -26,7 +26,8 @@ export interface InputElementArgs extends ElementArgs, IBindableArgs, IPlacehold
 }
 
 /**
- * The InputElement is an input element with a text field.
+ * The InputElement is an abstract class that manages an input DOM element. It is the superclass of
+ * {@link TextInput} and {@link NumericInput}. It is not intended to be used directly.
  */
 abstract class InputElement extends Element implements IBindable, IFocusable, IPlaceholder {
     protected _domInput: HTMLInputElement;
