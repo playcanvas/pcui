@@ -51,7 +51,7 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
     constructor(args: InputElementArgs = {}) {
         super(args);
 
-        this.class.add(CLASS_INPUT_FIELD);
+        this.class.add(CLASS_INPUT_ELEMENT);
 
         let input = args.input;
         if (!input) {
