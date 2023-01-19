@@ -1,5 +1,5 @@
 import { EventHandle, Events, Observer } from '@playcanvas/observer';
-import React from 'react';
+import * as React from 'react';
 import * as pcuiClass from '../../class';
 
 import { BindingBase } from '../../binding';

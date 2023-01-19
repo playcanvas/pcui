@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import GridViewElement, { GridViewArgs } from './index';
 import GridViewItemElement from '../GridViewItem/index';
 import BaseComponent from '../Element/component';
