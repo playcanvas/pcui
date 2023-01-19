@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import Container from './component';
 import Label from '../Label/component';

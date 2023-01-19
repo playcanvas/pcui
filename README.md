@@ -33,7 +33,7 @@ document.body.appendChild(label.dom);
 If you'd like to include PCUI in your React project, you can import the individual components as follows:
 
 ```javascript
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { TextInput } from '@playcanvas/pcui/react';
 import '@playcanvas/pcui/styles';
