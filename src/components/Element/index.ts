@@ -1,4 +1,4 @@
-import { EventHandle, Events, Observer } from '@playcanvas/observer';
+import { EventHandle, Events, HandleEvent, Observer } from '@playcanvas/observer';
 import * as React from 'react';
 import * as pcuiClass from '../../class';
 
@@ -382,7 +382,7 @@ class Element extends Events {
 
     protected _suppressChange = false;
 
-    protected _binding: any;
+    protected _binding: BindingBase;
 
     protected _ignoreParent: boolean;
 
@@ -483,8 +483,8 @@ class Element extends Events {
         if (this.parent) {
             const parent = this.parent;
 
-            for (let i = 0; i < this._eventsParent.length; i++) {
-                this._eventsParent[i].unbind();
+            for (const event of this._eventsParent) {
+                event.unbind();
             }
             this._eventsParent.length = 0;
 
@@ -584,11 +584,7 @@ class Element extends Events {
     };
 
     protected _onHiddenToRootChange(hiddenToRoot: boolean) {
-        if (hiddenToRoot) {
-            this.emit('hideToRoot');
-        } else {
-            this.emit('showToRoot');
-        }
+        this.emit(hiddenToRoot ? 'hideToRoot' : 'showToRoot');
     }
 
     protected _onEnabledChange(enabled: boolean) {
@@ -658,7 +654,7 @@ class Element extends Events {
         }
     }
 
-    unbind(name?: string, fn?: any): Events {
+    unbind(name?: string, fn?: HandleEvent): Events {
         return super.unbind(name, fn);
     }
 
@@ -667,7 +663,7 @@ class Element extends Events {
      * @param cls - The actual class of the Element.
      * @param defaultArguments - Default arguments when creating this type.
      */
-    static register(type: string, cls: any, defaultArguments?: any) {
+    static register<Type>(type: string, cls: new () => Type, defaultArguments?: any) {
         ELEMENT_REGISTRY[type] = { cls, defaultArguments };
     }
 
@@ -928,7 +924,7 @@ class Element extends Events {
     /**
      * Gets / sets the Binding object for the element.
      */
-    set binding(value: any) {
+    set binding(value: BindingBase) {
         if (this._binding === value) return;
 
         let prevObservers;
@@ -946,6 +942,7 @@ class Element extends Events {
         this._binding = value;
 
         if (this._binding) {
+            // @ts-ignore
             this._binding.element = this;
             if (prevObservers && prevPaths) {
                 this.link(prevObservers, prevPaths);
@@ -953,7 +950,7 @@ class Element extends Events {
         }
     }
 
-    get binding(): any {
+    get binding(): BindingBase {
         return this._binding;
     }
 

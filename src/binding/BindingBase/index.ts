@@ -116,7 +116,7 @@ class BindingBase extends Events {
     /**
      * Clones the binding. To be implemented by derived classes.
      */
-    clone() {
+    clone(): BindingBase {
         throw new Error('BindingBase#clone: Not implemented');
     }
 

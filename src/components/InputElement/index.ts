@@ -34,7 +34,7 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
 
     protected _suspendInputChangeEvt: boolean;
 
-    protected _prevValue: any;
+    protected _prevValue: string;
 
     protected _keyChange: boolean;
 
