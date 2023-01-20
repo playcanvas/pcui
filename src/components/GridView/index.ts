@@ -48,7 +48,7 @@ class GridView extends Container {
 
     protected _selected: GridViewItem[];
 
-    protected _clickFn: any;
+    protected _clickFn: (evt: MouseEvent, item: GridViewItem) => void;
 
     constructor(args: Readonly<GridViewArgs> = {}) {
         super(args);
