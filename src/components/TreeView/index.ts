@@ -36,7 +36,7 @@ export interface TreeViewArgs extends ContainerArgs {
     /**
      * A function to be called when we right click on a {@link TreeViewItem}.
      */
-    onContextMenu?: any,
+    onContextMenu?: (evt: MouseEvent, item: TreeViewItem) => void,
     /**
      * A function to be called when we try to reparent tree items. If a function is provided then the
      * tree items will not be reparented by the {@link TreeView} but instead will rely on the function to
@@ -166,7 +166,7 @@ class TreeView extends Container {
 
     protected _dragScrollElement: any;
 
-    protected _onContextMenu: any;
+    protected _onContextMenu: (evt: MouseEvent, item: TreeViewItem) => void;
 
     protected _onReparentFn: any;
 

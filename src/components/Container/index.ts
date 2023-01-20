@@ -626,9 +626,9 @@ class Container extends Element {
      * @returns The recursively appended element node.
      *
      */
-    protected _buildDomNode(node: { [x: string]: any; root?: any; children?: any; }) {
+    protected _buildDomNode(node: { [x: string]: any; root?: any; children?: any; }): Container {
         const keys = Object.keys(node);
-        let rootNode: { append: (arg0: any) => void; };
+        let rootNode: Container;
         if (keys.includes('root')) {
             rootNode = this._buildDomNode(node.root);
             node.children.forEach((childNode: any) => {

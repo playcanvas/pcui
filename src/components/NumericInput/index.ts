@@ -59,7 +59,7 @@ class NumericInput extends InputElement {
 
     protected _stepPrecision: number;
 
-    protected _oldValue: any;
+    protected _oldValue: number;
 
     protected _historyCombine: boolean;
 
@@ -184,9 +184,10 @@ class NumericInput extends InputElement {
             this._historyCombine = false;
             this._historyPostfix = null;
         }
+        this.focus();
     };
 
-    protected _onInputChange(evt: any) {
+    protected _onInputChange(evt: Event) {
         // get the content of the input, normalize it and set it as the current value
         this.value = this._normalizeValue(this._domInput.value);
     }
@@ -309,7 +310,6 @@ class NumericInput extends InputElement {
 
     get value() : number {
         const val = this._domInput.value;
-        // @ts-ignore
         return val !== '' ? parseFloat(val) : null;
     }
 
