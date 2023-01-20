@@ -184,6 +184,7 @@ class NumericInput extends InputElement {
             this._historyCombine = false;
             this._historyPostfix = null;
         }
+        this.focus();
     };
 
     protected _onInputChange(evt: Event) {
