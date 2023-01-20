@@ -36,6 +36,8 @@ export interface GridViewArgs extends ContainerArgs {
 class GridView extends Container {
     protected _vertical: boolean;
 
+    protected _clickFn: (evt: MouseEvent, item: GridViewItem) => void;
+
     protected _filterFn: (item: GridViewItem) => boolean;
 
     protected _filterAnimationFrame: number;
@@ -47,8 +49,6 @@ class GridView extends Container {
     protected _allowDeselect: boolean;
 
     protected _selected: GridViewItem[];
-
-    protected _clickFn: any;
 
     constructor(args: Readonly<GridViewArgs> = {}) {
         super(args);

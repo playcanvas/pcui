@@ -558,7 +558,6 @@ class ColorPicker extends Element implements IBindable {
 
         this._changing = true;
 
-        // @ts-ignore
         const hex = this._fieldHex.value.trim().toLowerCase();
         if (/^([0-9a-f]{2}){3,4}$/.test(hex)) {
             for (let i = 0; i < this._channelsNumber; i++) {
@@ -676,7 +675,6 @@ class ColorPicker extends Element implements IBindable {
         }
 
         if (different) {
-            // @ts-ignore
             this.value = null;
             this.dom.classList.add(CLASS_MULTIPLE_VALUES);
         } else {

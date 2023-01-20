@@ -10,7 +10,7 @@ export interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs,
     /**
      * Sets the text of the Label. Defaults to ''.
      */
-    text?: string | number,
+    text?: string,
     /**
      * If `true`, the {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML} property will be
      * used to set the text. Otherwise, {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
@@ -32,7 +32,7 @@ export interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs,
     /**
      * Sets the value of the Label. Defaults to ''.
      */
-    value?: any,
+    value?: string
 }
 
 /**
