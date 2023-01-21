@@ -76,7 +76,6 @@ class BindingElementToObservers extends BindingBase {
                     this.emit('history:undo', context);
                 }
             });
-
         }
 
         execute();
