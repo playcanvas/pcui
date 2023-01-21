@@ -33,11 +33,11 @@ export interface BindingBaseArgs {
  * Base class for data binding between {@link IBindable} {@link Element}s and Observers.
  */
 class BindingBase extends Events {
-    protected _observers: Observer[];
+    protected _observers: Observer[] = [];
 
-    protected _paths: string[];
+    protected _paths: string[] = [];
 
-    protected _applyingChange: boolean;
+    protected _applyingChange = false;
 
     protected _element?: IBindable;
 
@@ -51,22 +51,16 @@ class BindingBase extends Events {
 
     protected _historyCombine: boolean;
 
-    protected _linked: boolean;
+    protected _linked = false;
 
     /**
      * Creates a new binding.
      *
      * @param args - The arguments.
      */
-    constructor(args: BindingBaseArgs) {
+    constructor(args: Readonly<BindingBaseArgs>) {
         super();
 
-        // the observers we are binding to
-        this._observers = [];
-        // the paths to use for the observers
-        this._paths = [];
-
-        this._applyingChange = false;
         this._element = args.element;
 
         this._history = args.history;
@@ -74,8 +68,6 @@ class BindingBase extends Events {
         this._historyPostfix = args.historyPostfix;
         this._historyName = args.historyName;
         this._historyCombine = args.historyCombine || false;
-
-        this._linked = false;
     }
 
     // Returns the path at the specified index

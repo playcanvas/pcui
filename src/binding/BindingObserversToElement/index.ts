@@ -16,21 +16,19 @@ export interface BindingObserversToElementArgs extends BindingBaseArgs {
 class BindingObserversToElement extends BindingBase {
     _customUpdate: (element: IBindable, observers: Observer[], paths: string[]) => void;
 
-    _events: EventHandle[];
+    _events: EventHandle[] = [];
 
-    _updateTimeout: number;
+    _updateTimeout: number = null;
 
     /**
      * Creates a new BindingObserversToElement instance.
      *
      * @param args - The arguments.
      */
-    constructor(args: BindingObserversToElementArgs = {}) {
+    constructor(args: Readonly<BindingObserversToElementArgs> = {}) {
         super(args);
 
         this._customUpdate = args.customUpdate;
-        this._events = [];
-        this._updateTimeout = null;
     }
 
     private _linkObserver(observer: Observer, path: string) {

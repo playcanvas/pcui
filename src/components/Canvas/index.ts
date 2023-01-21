@@ -1,5 +1,7 @@
 import Element, { ElementArgs } from '../Element';
 
+const CLASS_ROOT = 'pcui-canvas';
+
 /**
  * The arguments for the {@link Canvas} constructor.
  */
@@ -24,14 +26,13 @@ class Canvas extends Element {
     constructor(args: Readonly<CanvasArgs> = {}) {
         super({ dom: 'canvas', ...args });
 
-        const canvas = this._dom as HTMLCanvasElement;
-        canvas.classList.add('pcui-canvas');
+        this.class.add(CLASS_ROOT);
 
         const { useDevicePixelRatio = false } = args;
         this._ratio = useDevicePixelRatio ? window.devicePixelRatio : 1;
 
         // Disable I-bar cursor on click+drag
-        canvas.onselectstart = (evt: Event) => {
+        this.dom.onselectstart = (evt: Event) => {
             return false;
         };
     }
