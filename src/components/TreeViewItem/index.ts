@@ -120,8 +120,6 @@ class TreeViewItem extends Container {
 
     protected _numChildren = 0;
 
-    protected _treeOrder = -1;
-
     protected _treeView: any;
 
     protected _allowDrag: boolean;
