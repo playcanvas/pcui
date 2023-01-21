@@ -21,9 +21,9 @@ export interface BindingTwoWayArgs extends BindingBaseArgs {
  * when the value of the Observers changes the IBindable will be updated and vice versa.
  */
 class BindingTwoWay extends BindingBase {
-    _bindingElementToObservers: any;
+    _bindingElementToObservers: BindingElementToObservers;
 
-    _bindingObserversToElement: any;
+    _bindingObserversToElement: BindingObserversToElement;
 
     /**
      * Creates a new BindingTwoWay instance.

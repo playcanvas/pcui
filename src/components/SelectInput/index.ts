@@ -304,12 +304,12 @@ class SelectInput extends Element implements IBindable, IFocusable {
         });
 
         const label = new Label({
-            text: (this._input.value as string),
+            text: this._input.value,
             tabIndex: -1
         });
         container.append(label);
 
-        let evtChange: any = this._input.on('change', (value) => {
+        let evtChange = this._input.on('change', (value) => {
             // check if label is destroyed
             // during change event
             if (label.destroyed) return;
