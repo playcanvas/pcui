@@ -523,13 +523,15 @@ class TreeView extends Container {
      * is above the other. Performance wise this means it traverses
      * all tree items every time however seems to be pretty fast even with 15 - 20 K entities.
      */
-    protected _updateTreeOrder() {
+    protected _getTreeOrder(): Map<TreeViewItem, number> {
+        const treeOrder = new Map<TreeViewItem, number>();
         let order = 0;
 
         this._traverseDepthFirst((item: TreeViewItem) => {
-            // @ts-ignore
-            item._treeOrder = order++;
+            treeOrder.set(item, order++);
         });
+
+        return treeOrder;
     }
 
     protected _getChildIndex(item: TreeViewItem, parent: TreeViewItem) {
@@ -613,10 +615,9 @@ class TreeView extends Container {
         if (!isRootDragged && this._dragOverItem) {
             if (this._dragItems.length > 1) {
                 // sort items based on order in the hierarchy
-                this._updateTreeOrder();
+                const treeOrder = this._getTreeOrder();
                 this._dragItems.sort((a, b) => {
-                    // @ts-ignore
-                    return a._treeOrder - b._treeOrder;
+                    return treeOrder.get(a) - treeOrder.get(b);
                 });
             }
 
