@@ -1,13 +1,6 @@
 import { Observer } from '@playcanvas/observer';
 import BindingBase from '../BindingBase';
 
-type BindingRecord = {
-    observer: Observer,
-    path: string,
-    value: any,
-    index?: number
-}
-
 /**
  * Provides one way binding between an {@link IBindable} element and Observers. Any changes from
  * the element will be propagated to the observers.
