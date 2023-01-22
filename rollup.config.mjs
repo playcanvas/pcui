@@ -16,6 +16,7 @@ const module = {
     plugins: [
         nodeResolve(),
         typescript({
+            noEmitOnError: true,
             tsconfig: 'tsconfig.json'
         })
     ],
@@ -38,6 +39,7 @@ const react_module = {
     plugins: [
         nodeResolve(),
         typescript({
+            noEmitOnError: true,
             tsconfig: 'react/tsconfig.json'
         })
     ],
