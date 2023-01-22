@@ -30,13 +30,12 @@ class BindingTwoWay extends BindingBase {
      *
      * @param args - The arguments.
      */
-    constructor(args: BindingTwoWayArgs = {}) {
+    constructor(args: Readonly<BindingTwoWayArgs> = {}) {
         super(args);
 
         this._bindingElementToObservers = args.bindingElementToObservers || new BindingElementToObservers(args);
         this._bindingObserversToElement = args.bindingObserversToElement || new BindingObserversToElement(args);
 
-        this._applyingChange = false;
         this._bindingElementToObservers.on('applyingChange', (value: any) => {
             this.applyingChange = value;
         });

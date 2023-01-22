@@ -69,7 +69,6 @@ class BindingElementToObservers extends BindingBase {
                     this.emit('history:undo', context);
                 }
             });
-
         }
 
         execute();
@@ -176,11 +175,11 @@ class BindingElementToObservers extends BindingBase {
         }
 
         const execute = () => {
-            for (let i = 0; i < records.length; i++) {
-                const latest = records[i].observer.latest();
+            for (const record of records) {
+                const latest = record.observer.latest();
                 if (!latest) continue;
 
-                const path = records[i].path;
+                const path = record.path;
 
                 let history = false;
                 if (latest.history) {
@@ -188,7 +187,7 @@ class BindingElementToObservers extends BindingBase {
                     latest.history.enabled = false;
                 }
 
-                latest.insert(path, records[i].value);
+                latest.insert(path, record.value);
 
                 if (history) {
                     latest.history.enabled = true;
@@ -202,11 +201,11 @@ class BindingElementToObservers extends BindingBase {
                 redo: execute,
                 combine: this._historyCombine,
                 undo: () => {
-                    for (let i = 0; i < records.length; i++) {
-                        const latest = records[i].observer.latest();
+                    for (const record of records) {
+                        const latest = record.observer.latest();
                         if (!latest) continue;
 
-                        const path = records[i].path;
+                        const path = record.path;
 
                         let history = false;
                         if (latest.history) {
@@ -214,7 +213,7 @@ class BindingElementToObservers extends BindingBase {
                             latest.history.enabled = false;
                         }
 
-                        latest.removeValue(path, records[i].value);
+                        latest.removeValue(path, record.value);
 
                         if (history) {
                             latest.history.enabled = true;
@@ -259,11 +258,11 @@ class BindingElementToObservers extends BindingBase {
         }
 
         const execute = () => {
-            for (let i = 0; i < records.length; i++) {
-                const latest = records[i].observer.latest();
+            for (const record of records) {
+                const latest = record.observer.latest();
                 if (!latest) continue;
 
-                const path = records[i].path;
+                const path = record.path;
 
                 let history = false;
                 if (latest.history) {
@@ -271,7 +270,7 @@ class BindingElementToObservers extends BindingBase {
                     latest.history.enabled = false;
                 }
 
-                latest.removeValue(path, records[i].value);
+                latest.removeValue(path, record.value);
 
                 if (history) {
                     latest.history.enabled = true;
@@ -285,11 +284,11 @@ class BindingElementToObservers extends BindingBase {
                 redo: execute,
                 combine: this._historyCombine,
                 undo: () => {
-                    for (let i = 0; i < records.length; i++) {
-                        const latest = records[i].observer.latest();
+                    for (const record of records) {
+                        const latest = record.observer.latest();
                         if (!latest) continue;
 
-                        const path = records[i].path;
+                        const path = record.path;
 
                         let history = false;
                         if (latest.history) {
@@ -297,8 +296,8 @@ class BindingElementToObservers extends BindingBase {
                             latest.history.enabled = false;
                         }
 
-                        if (latest.get(path).indexOf(records[i].value) === -1) {
-                            latest.insert(path, records[i].value, records[i].index);
+                        if (latest.get(path).indexOf(record.value) === -1) {
+                            latest.insert(path, record.value, record.index);
                         }
 
                         if (history) {
