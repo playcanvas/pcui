@@ -1,8 +1,8 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
 import autoprefixer from 'autoprefixer';
 import postcss from 'postcss';
 import sass from 'rollup-plugin-sass';
-import typescript from 'rollup-plugin-typescript2';
 
 const module = {
     input: 'src/index.ts',
@@ -16,8 +16,7 @@ const module = {
     plugins: [
         nodeResolve(),
         typescript({
-            tsconfig: 'tsconfig.json',
-            clean: true
+            tsconfig: 'tsconfig.json'
         })
     ],
     treeshake: 'smallest',
@@ -39,8 +38,7 @@ const react_module = {
     plugins: [
         nodeResolve(),
         typescript({
-            tsconfig: 'react/tsconfig.json',
-            clean: true
+            tsconfig: 'react/tsconfig.json'
         })
     ],
     treeshake: 'smallest',
