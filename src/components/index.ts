@@ -5,7 +5,7 @@ import Canvas, { CanvasArgs } from './Canvas';
 import Code, { CodeArgs } from './Code';
 import ColorPicker, { ColorPickerArgs } from './ColorPicker';
 import Container, { ContainerArgs } from './Container';
-import Divider, { DividerArgs } from './Divider';
+import Divider from './Divider';
 import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable, IParentArgs, IPlaceholder, IPlaceholderArgs } from './Element';
 import GradientPicker, { GradientPickerArgs } from './GradientPicker';
 import GridView, { GridViewArgs } from './GridView';
@@ -46,7 +46,6 @@ export {
     Container,
     ContainerArgs,
     Divider,
-    DividerArgs,
     Element,
     ElementArgs,
     GradientPicker,
