@@ -60,7 +60,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
                 min: args.min,
                 max: args.max,
                 precision: args.precision ?? 7,
-                step: args.step,
+                step: args.step ?? 1,
                 stepPrecision: args.stepPrecision,
                 renderChanges: args.renderChanges,
                 placeholder: args.placeholder ? (Array.isArray(args.placeholder) ? args.placeholder[i] : args.placeholder) : null
