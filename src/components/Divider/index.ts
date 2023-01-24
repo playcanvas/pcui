@@ -3,15 +3,10 @@ import Element, { ElementArgs } from '../Element';
 const CLASS_ROOT = 'pcui-divider';
 
 /**
- * The arguments for the {@link Divider} constructor.
- */
-export interface DividerArgs extends ElementArgs {}
-
-/**
  * Represents a vertical division between two elements.
  */
 class Divider extends Element {
-    constructor(args: Readonly<DividerArgs> = {}) {
+    constructor(args: Readonly<ElementArgs> = {}) {
         super(args);
 
         this.class.add(CLASS_ROOT);

@@ -124,7 +124,7 @@ class Container extends Element {
 
     protected _resizeTouchId: number = null;
 
-    protected _resizeData: any = null;
+    protected _resizeData: { x: number, y: number, width: number, height: number } = null;
 
     protected _resizeHorizontally = true;
 
@@ -566,7 +566,7 @@ class Container extends Element {
                     break;
                 }
             } else if (i > childPanelIndex) {
-                if (y + (childPanel.height as number) >= otherTop + otherPanel.height) {
+                if (y + childPanel.height >= otherTop + otherPanel.height) {
                     ind = i;
                     break;
                 }
