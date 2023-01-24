@@ -27,7 +27,7 @@ class BindingElementToObservers extends BindingBase {
     // to the observers
     private _setValue(value: any, isArrayOfValues: boolean) {
         if (this.applyingChange) return;
-        if (!this._observers) return;
+        if (!this._observers.length) return;
 
         this.applyingChange = true;
 
