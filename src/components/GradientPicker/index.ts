@@ -712,7 +712,6 @@ class GradientPicker extends Element {
 
     protected _onHexChanged() {
         if (!this._changing) {
-            // @ts-ignore
             const hex = this._hexField.value.trim().toLowerCase();
             if (/^([0-9a-f]{2}){3,4}$/.test(hex)) {
                 const rgb = [parseInt(hex.substring(0, 2), 16),

@@ -1,4 +1,4 @@
-import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable } from '../Element';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
 import NumericInput from '../NumericInput';
 import * as pcuiClass from '../../class';
 
@@ -13,7 +13,11 @@ const IS_CHROME = /Chrome\//.test(navigator.userAgent);
 /**
  * The arguments for the {@link SliderInput} constructor.
  */
-export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
+export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs, IPlaceholderArgs {
+    /**
+     * Sets whether any key up event will cause a change event to be fired.
+     */
+    keyChange?: boolean,
     /**
      * Sets the minimum value that the numeric input field can take.
      */
@@ -49,7 +53,7 @@ export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs {
  * The SliderInput shows a NumericInput and a slider widget next to it. It acts as a proxy of the
  * NumericInput.
  */
-class SliderInput extends Element implements IBindable, IFocusable {
+class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder {
     protected _historyCombine = false;
 
     protected _historyPostfix: string = null;
@@ -85,9 +89,7 @@ class SliderInput extends Element implements IBindable, IFocusable {
             hideSlider: true,
             min: args.min,
             max: args.max,
-            // @ts-ignore
             keyChange: args.keyChange,
-            // @ts-ignore
             placeholder: args.placeholder,
             precision: args.precision ?? 2,
             renderChanges: args.renderChanges,
