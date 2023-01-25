@@ -21,6 +21,8 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
 
     onAttach?: any;
 
+    class: Array<string>;
+
     constructor(props: P) {
         super(props);
         this.elementClass = Element;
@@ -57,6 +59,19 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
                 parent: undefined
             });
         }
+
+        this.class = [];
+        const classProp = this.props.class;
+        if (classProp) {
+            if (Array.isArray(classProp)) {
+                for (let i = 0; i < classProp.length; i++) {
+                    this.class.push(classProp[i]);
+                }
+            } else {
+                this.class.push(classProp);
+            }
+        }
+
         if (this.onClick) {
             this.element.on('click', this.onClick);
         }
@@ -101,6 +116,25 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
                     // @ts-ignore
                     this.element[prop] = this.props[prop];
                 }
+            } else if (prop === 'class') {
+                let classProp: Array<string> | string = this.props[prop] ?? [];
+                if (!Array.isArray(classProp)) {
+                    classProp = [classProp];
+                }
+                classProp.forEach((cls: string) => {
+                    this.element.class.add(cls);
+                });
+                if (!this.class) {
+                    this.class = [];
+                    this.element.class.forEach((cls: string) => {
+                        this.class.push(cls);
+                    });
+                }
+                this.class.forEach((cls: string) => {
+                    if (!classProp.includes(cls)) {
+                        this.element.class.remove(cls);
+                    }
+                });
             }
         });
         if (prevProps.link !== this.props.link && this.props.link) {
