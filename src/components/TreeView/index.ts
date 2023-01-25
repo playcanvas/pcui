@@ -643,21 +643,19 @@ class TreeView extends Container {
                     reparented.forEach((r, i) => {
                         if (this._dragArea === DRAG_AREA_BEFORE) {
                             // If dragged before a TreeViewItem...
-                            r.newParent = this._dragOverItem.parent;
-                            // @ts-ignore
-                            this._dragOverItem.parent.appendBefore(r.item, this._dragOverItem);
+                            r.newParent = this._dragOverItem.parent as Container;
+                            r.newParent.appendBefore(r.item, this._dragOverItem);
                             r.newChildIndex = this._getChildIndex(r.item, r.newParent);
                         } else if (this._dragArea === DRAG_AREA_INSIDE) {
                             // If dragged inside a TreeViewItem...
                             r.newParent = this._dragOverItem;
-                            this._dragOverItem.append(r.item);
-                            this._dragOverItem.open = true;
+                            r.newParent.append(r.item);
+                            r.newParent.open = true;
                             r.newChildIndex = this._getChildIndex(r.item, r.newParent);
                         } else if (this._dragArea === DRAG_AREA_AFTER) {
                             // If dragged after a TreeViewItem...
-                            r.newParent = this._dragOverItem.parent;
-                            // @ts-ignore
-                            this._dragOverItem.parent.appendAfter(r.item, i > 0 ? reparented[i - 1].item : this._dragOverItem);
+                            r.newParent = this._dragOverItem.parent as Container;
+                            r.newParent.appendAfter(r.item, i > 0 ? reparented[i - 1].item : this._dragOverItem);
                             r.newChildIndex = this._getChildIndex(r.item, r.newParent);
                         }
                     });
