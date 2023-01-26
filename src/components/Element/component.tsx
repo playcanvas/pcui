@@ -124,12 +124,6 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
                 classProp.forEach((cls: string) => {
                     this.element.class.add(cls);
                 });
-                if (!this.class) {
-                    this.class = [];
-                    this.element.class.forEach((cls: string) => {
-                        this.class.push(cls);
-                    });
-                }
                 this.class.forEach((cls: string) => {
                     if (!classProp.includes(cls)) {
                         this.element.class.remove(cls);
