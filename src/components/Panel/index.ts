@@ -217,7 +217,7 @@ class Panel extends Container {
         this.collapsed = !this.collapsed;
     };
 
-    protected _onClickRemove = (evt: MouseEvent) => {
+    protected _onClickRemove(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -431,7 +431,7 @@ class Panel extends Container {
                 icon: 'E289',
                 class: CLASS_PANEL_REMOVE
             });
-            this._btnRemove.on('click', this._onClickRemove);
+            this._btnRemove.on('click', this._onClickRemove.bind(this));
             this.header.append(this._btnRemove);
         } else {
             this._btnRemove.destroy();
