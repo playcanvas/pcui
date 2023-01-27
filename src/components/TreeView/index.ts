@@ -506,14 +506,14 @@ class TreeView extends Container {
             fn(item);
 
             if (item.numChildren) {
-                for (let i = 0; i < item.dom.childNodes.length; i++) {
-                    traverse(item.dom.childNodes[i].ui);
+                for (const child of item.dom.childNodes) {
+                    traverse(child.ui);
                 }
             }
         }
 
-        for (let i = 0; i < this.dom.childNodes.length; i++) {
-            traverse(this.dom.childNodes[i].ui);
+        for (const child of this.dom.childNodes) {
+            traverse(child.ui);
         }
     }
 
@@ -665,9 +665,9 @@ class TreeView extends Container {
                     // but will instead calculate the new indexes and pass that data to the reparent function
                     // to perform the reparenting
 
-                    const fakeDom: { parent: any; children: any; }[] = [];
+                    const fakeDom: { parent: TreeViewItem; children: ChildNode[]; }[] = [];
 
-                    const getChildren = (treeviewItem: { dom: { childNodes: any; }; }) => {
+                    const getChildren = (treeviewItem: TreeViewItem) => {
                         let idx = fakeDom.findIndex(entry => entry.parent === treeviewItem);
                         if (idx === -1) {
                             fakeDom.push({ parent: treeviewItem, children: [...treeviewItem.dom.childNodes] });
@@ -686,7 +686,7 @@ class TreeView extends Container {
                         });
 
                         // add array of parent's child nodes to fakeDom array
-                        const parentChildren = getChildren(item.parent);
+                        const parentChildren = getChildren(item.parent as TreeViewItem);
 
                         // remove this item from the children array in fakeDom
                         const childIdx = parentChildren.indexOf(item.dom);
@@ -698,7 +698,7 @@ class TreeView extends Container {
                         if (this._dragArea === DRAG_AREA_BEFORE) {
                             // If dragged before a TreeViewItem...
                             r.newParent = this._dragOverItem.parent;
-                            const parentChildren = getChildren(this._dragOverItem.parent);
+                            const parentChildren = getChildren(this._dragOverItem.parent as TreeViewItem);
                             const index = parentChildren.indexOf(this._dragOverItem.dom);
                             parentChildren.splice(index, 0, r.item.dom);
                             r.newChildIndex = index;
@@ -711,7 +711,7 @@ class TreeView extends Container {
                         } else if (this._dragArea === DRAG_AREA_AFTER) {
                             // If dragged after a TreeViewItem...
                             r.newParent = this._dragOverItem.parent;
-                            const parentChildren = getChildren(this._dragOverItem.parent);
+                            const parentChildren = getChildren(this._dragOverItem.parent as TreeViewItem);
                             const after = i > 0 ? reparented[i - 1].item : this._dragOverItem;
                             const index = parentChildren.indexOf(after.dom);
                             parentChildren.splice(index + 1, 0, r.item.dom);
