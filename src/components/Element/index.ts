@@ -22,7 +22,7 @@ const SIMPLE_CSS_PROPERTIES = [
 ];
 
 // Stores Element types by name and default arguments
-const ELEMENT_REGISTRY: any = {};
+const elementRegistry: Map<string, any> = new Map();
 
 export interface IBindable {
     /**
@@ -664,14 +664,14 @@ class Element extends Events {
      * @param defaultArguments - Default arguments when creating this type.
      */
     static register<Type>(type: string, cls: new () => Type, defaultArguments?: any) {
-        ELEMENT_REGISTRY[type] = { cls, defaultArguments };
+        elementRegistry.set(type, { cls, defaultArguments });
     }
 
     /**
      * @param type - The type we want to unregister.
      */
     static unregister(type: string) {
-        delete ELEMENT_REGISTRY[type];
+        elementRegistry.delete(type);
     }
 
     /**
@@ -679,23 +679,17 @@ class Element extends Events {
      *
      * @param type - The type of the Element (registered by Element#register).
      * @param args - Arguments for the Element.
+     * @returns The new Element.
      */
     static create(type: string, args: ElementArgs): any {
-        const entry = ELEMENT_REGISTRY[type];
+        const entry = elementRegistry.get(type);
         if (!entry) {
             console.error('Invalid type passed to Element.create:', type);
             return;
         }
 
         const cls = entry.cls;
-        const clsArgs = {};
-
-        if (entry.defaultArguments) {
-            Object.assign(clsArgs, entry.defaultArguments);
-        }
-        if (args) {
-            Object.assign(clsArgs, args);
-        }
+        const clsArgs = { ...entry.defaultArguments, ...args };
 
         return new cls(clsArgs);
     }
