@@ -685,7 +685,7 @@ class Element extends Events {
         const entry = elementRegistry.get(type);
         if (!entry) {
             console.error('Invalid type passed to Element.create:', type);
-            return;
+            return undefined;
         }
 
         const cls = entry.cls;
