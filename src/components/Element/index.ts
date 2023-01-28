@@ -675,11 +675,11 @@ class Element extends Events {
     }
 
     /**
-     * Creates a new Element of the desired type. Returns undefined if type not found.
+     * Creates a new Element of the desired type.
      *
      * @param type - The type of the Element (registered by Element#register).
      * @param args - Arguments for the Element.
-     * @returns The new Element.
+     * @returns The new Element or undefined if type is not found.
      */
     static create(type: string, args: ElementArgs): any {
         const entry = elementRegistry.get(type);
