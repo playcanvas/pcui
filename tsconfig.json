@@ -6,7 +6,8 @@
         "jsx": "react",
         "lib": [
             "es2019",
-            "dom"
+            "dom",
+            "dom.iterable"
         ],
         "esModuleInterop" : true,
         "sourceMap": true,
