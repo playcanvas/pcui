@@ -222,7 +222,7 @@ class Panel extends Container {
         evt.stopPropagation();
 
         this.emit('click:remove');
-    };
+    }
 
     protected _initializeContent(args: PanelArgs) {
         // containers container

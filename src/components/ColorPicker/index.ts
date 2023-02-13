@@ -4,11 +4,10 @@ import Element, { ElementArgs, IBindable, IBindableArgs } from '../Element';
 import Overlay from '../Overlay';
 import NumericInput from '../NumericInput';
 import TextInput from '../TextInput';
+import * as pcuiClass from '../../class';
 import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
 
-const CLASS_COLOR_INPUT = 'pcui-color-input';
-const CLASS_NOT_FLEXIBLE = 'pcui-not-flexible';
-const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
+const CLASS_ROOT = 'pcui-color-input';
 
 /**
  * The arguments for the {@link ColorPicker} constructor.
@@ -89,7 +88,7 @@ class ColorPicker extends Element implements IBindable {
     constructor(args: Readonly<ColorPickerArgs> = {}) {
         super(args);
 
-        this.dom.classList.add(CLASS_COLOR_INPUT, CLASS_NOT_FLEXIBLE);
+        this.class.add(CLASS_ROOT, pcuiClass.NOT_FLEXIBLE);
 
         // this element shows the actual color. The
         // parent element shows the checkerboard pattern
@@ -238,7 +237,7 @@ class ColorPicker extends Element implements IBindable {
         // R
         const fieldR = createChannelInput('r');
         fieldR.on('change', () => {
-            this._updateRects();
+            this._onChangeRgb();
         });
         this._pickerChannels.push(fieldR);
         this._panelFields.appendChild(fieldR.dom);
@@ -246,7 +245,7 @@ class ColorPicker extends Element implements IBindable {
         // G
         const fieldG = createChannelInput('g');
         fieldG.on('change', () => {
-            this._updateRects();
+            this._onChangeRgb();
         });
         this._pickerChannels.push(fieldG);
         this._panelFields.appendChild(fieldG.dom);
@@ -254,7 +253,7 @@ class ColorPicker extends Element implements IBindable {
         // B
         const fieldB = createChannelInput('b');
         fieldB.on('change', () => {
-            this._updateRects();
+            this._onChangeRgb();
         });
         this._pickerChannels.push(fieldB);
         this._panelFields.appendChild(fieldB.dom);
@@ -262,7 +261,7 @@ class ColorPicker extends Element implements IBindable {
         // A
         const fieldA = createChannelInput('a');
         fieldA.on('change', (value: number) => {
-            this._updateRectAlpha(value);
+            this._onChangeAlpha(value);
         });
         this._pickerChannels.push(fieldA);
         this._panelFields.appendChild(fieldA.dom);
@@ -273,7 +272,7 @@ class ColorPicker extends Element implements IBindable {
             placeholder: '#'
         });
         this._fieldHex.on('change', () => {
-            this._updateHex();
+            this._onChangeHex();
         });
         this._panelFields.appendChild(this._fieldHex.dom);
     }
@@ -452,7 +451,7 @@ class ColorPicker extends Element implements IBindable {
             }
         }
 
-        this.dom.classList.remove(CLASS_MULTIPLE_VALUES);
+        this.class.remove(pcuiClass.MULTIPLE_VALUES);
 
         if (dirty) {
             this._setValue(value);
@@ -483,7 +482,7 @@ class ColorPicker extends Element implements IBindable {
         this._colorHSV[2] = 1.0 - (y / this._size);
 
         this._directInput = false;
-        const rgb = _hsv2rgb([this._colorHSV[0], this._colorHSV[1], this._colorHSV[2]]);
+        const rgb = _hsv2rgb(this._colorHSV);
         for (let i = 0; i < 3; i++) {
             this._pickerChannels[i].value = rgb[i];
         }
@@ -518,7 +517,7 @@ class ColorPicker extends Element implements IBindable {
             this._pickerChannels[i].value = rgb[i];
         }
         this._fieldHex.value = this._getHex();
-        this._updateRects();
+        this._onChangeRgb();
         this._directInput = true;
         this._changing = false;
     };
@@ -552,7 +551,7 @@ class ColorPicker extends Element implements IBindable {
         this.emit('picker:color:end');
     };
 
-    protected _updateHex() {
+    protected _onChangeHex() {
         if (!this._directInput)
             return;
 
@@ -564,10 +563,11 @@ class ColorPicker extends Element implements IBindable {
                 this._pickerChannels[i].value = parseInt(hex.slice(i * 2, i * 2 + 2), 16);
             }
         }
+
         this._changing = false;
     }
 
-    protected _updateRects() {
+    protected _onChangeRgb() {
         const color = this._pickerChannels.map(function (channel) {
             return channel.value || 0;
         }).slice(0, this._channelsNumber);
@@ -609,7 +609,7 @@ class ColorPicker extends Element implements IBindable {
     }
 
     // update alpha handle
-    protected _updateRectAlpha(value: number) {
+    protected _onChangeAlpha(value: number) {
         if (this._channelsNumber !== 4)
             return;
 
@@ -617,7 +617,7 @@ class ColorPicker extends Element implements IBindable {
         this._pickOpacityHandle.style.top = Math.floor(this._size * (1.0 - (Math.max(0, Math.min(255, value)) / 255))) + 'px';
 
         // color
-        this._pickOpacityHandle.style.backgroundColor = 'rgb(' + [value, value, value].join(',') + ')';
+        this._pickOpacityHandle.style.backgroundColor = `rgb(${value}, ${value}, ${value})`;
 
         this.callCallback();
     }
@@ -676,7 +676,7 @@ class ColorPicker extends Element implements IBindable {
 
         if (different) {
             this.value = null;
-            this.dom.classList.add(CLASS_MULTIPLE_VALUES);
+            this.class.add(pcuiClass.MULTIPLE_VALUES);
         } else {
             // @ts-ignore
             this.value = values[0];
@@ -702,6 +702,7 @@ class ColorPicker extends Element implements IBindable {
     }
 }
 
-Element.register('div', ColorPicker);
+Element.register('rgb', ColorPicker);
+Element.register('rgba', ColorPicker, { channels: 4 });
 
 export default ColorPicker;
