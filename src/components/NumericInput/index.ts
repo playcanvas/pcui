@@ -297,6 +297,7 @@ class NumericInput extends InputElement {
     }
 
     set value(value: number) {
+        value = this._normalizeValue(value);
         const forceUpdate = this.class.contains(pcuiClass.MULTIPLE_VALUES) && value === null && this._allowNull;
         const changed = this._updateValue(value, forceUpdate);
 
