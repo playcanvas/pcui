@@ -5,7 +5,7 @@ import BaseComponent from '../Element/component';
  * An input that allows selecting from a dropdown or entering tags.
  */
 class Component extends BaseComponent <SelectInputArgs, any> {
-    onSelect?: () => void;
+    onSelect?: (value: string) => void;
 
     constructor(props: SelectInputArgs) {
         super(props);
