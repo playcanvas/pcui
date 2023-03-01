@@ -80,7 +80,7 @@ export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholde
     /**
      * The order that the options should be checked in to find a valid fallback option that isn't included in the disabledOptions object.
      */
-    fallbackOrder?: any;
+    fallbackOrder?: Array<string>;
     /**
      * All the option values that should be disabled. The keys of the object are the values of the options and the values are the text to show when the option is disabled.
      */
@@ -92,7 +92,7 @@ export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholde
     /**
      * Text to display in the SelectInput before the selected option.
      */
-    pretext?: string;
+    prefix?: string;
 }
 
 
@@ -164,7 +164,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _onSelect: (value: string) => void;
 
-    protected _pretext: string;
+    protected _prefix: string;
 
     constructor(args: Readonly<SelectInputArgs> = {}) {
         // main container
@@ -305,7 +305,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._onSelect = args.onSelect;
         this.fallbackOrder = args.fallbackOrder;
         this.disabledOptions = args.disabledOptions;
-        this._pretext = args.pretext ?? '';
+        this._prefix = args.prefix ?? '';
     }
 
     destroy() {
@@ -501,7 +501,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
     // when the value is changed show the correct title
     protected _onValueChange(value: any) {
         if (!this.multiSelect) {
-            this._labelValue.value = this._pretext + (this._valueToText[value] || '');
+            this._labelValue.value = this._prefix + (this._valueToText[value] || '');
 
             value = '' + value;
             for (const key in this._valueToLabel) {
