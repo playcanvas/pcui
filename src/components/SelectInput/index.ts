@@ -9,6 +9,8 @@ import { searchItems } from '../../helpers/search';
 const CLASS_SELECT_INPUT = 'pcui-select-input';
 const CLASS_SELECT_INPUT_CONTAINER_VALUE = CLASS_SELECT_INPUT + '-container-value';
 const CLASS_MULTI_SELECT = CLASS_SELECT_INPUT + '-multi';
+const CLASS_DISABLED_VALUE = CLASS_SELECT_INPUT + '-disabled-value';
+const CLASS_HAS_DISABLED_VALUE = CLASS_SELECT_INPUT + '-has-disabled-value';
 const CLASS_ALLOW_INPUT = 'pcui-select-input-allow-input';
 const CLASS_VALUE = CLASS_SELECT_INPUT + '-value';
 const CLASS_ICON = CLASS_SELECT_INPUT + '-icon';
@@ -75,6 +77,22 @@ export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholde
      * The type of each value. Can be one of 'string', 'number' or 'boolean'. Defaults to 'string'.
      */
     type?: 'string' | 'number' | 'boolean';
+    /**
+     * The order that the options should be checked in to find a valid fallback option that isn't included in the disabledOptions object.
+     */
+    fallbackOrder?: any;
+    /**
+     * All the option values that should be disabled. The keys of the object are the values of the options and the values are the text to show when the option is disabled.
+     */
+    disabledOptions?: Record<string, string>;
+    /**
+     * If provided, this function will be called each time an option is selected.
+     */
+    onSelect?: (value: string) => void;
+    /**
+     * Text to display in the SelectInput before the selected option.
+     */
+    pretext?: string;
 }
 
 
@@ -137,6 +155,16 @@ class SelectInput extends Element implements IBindable, IFocusable {
     protected _invalidOptions: any;
 
     protected _renderChanges: boolean;
+
+    protected _disabledOptions: Record<string, string> = {};
+
+    protected _fallbackOrder: Array<string>;
+
+    protected _disabledValue: string;
+
+    protected _onSelect: (value: string) => void;
+
+    protected _pretext: string;
 
     constructor(args: Readonly<SelectInputArgs> = {}) {
         // main container
@@ -273,6 +301,11 @@ class SelectInput extends Element implements IBindable, IFocusable {
         });
 
         this._updateInputFieldsVisibility(false);
+
+        this._onSelect = args.onSelect;
+        this.fallbackOrder = args.fallbackOrder;
+        this.disabledOptions = args.disabledOptions;
+        this._pretext = args.pretext ?? '';
     }
 
     destroy() {
@@ -468,7 +501,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
     // when the value is changed show the correct title
     protected _onValueChange(value: any) {
         if (!this.multiSelect) {
-            this._labelValue.value = this._valueToText[value] || '';
+            this._labelValue.value = this._pretext + (this._valueToText[value] || '');
 
             value = '' + value;
             for (const key in this._valueToLabel) {
@@ -957,6 +990,56 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
     }
 
+    _updateValue(value: string) {
+        if (value === this._value) return;
+        this._value = value;
+        this._onValueChange(value);
+
+        if (!this._suppressChange) {
+            this.emit('change', value);
+        }
+
+        if (this._binding) {
+            this._binding.setValue(value);
+        }
+    }
+
+    _updateDisabledValue(value: string) {
+        const labels: Record<string, Label> = {};
+        this._containerOptions.forEachChild((label: Label) => {
+            labels[label.dom.id] = label;
+            if (this._disabledOptions[label.dom.id]) {
+                label.enabled = false;
+                label.text = this._disabledOptions[label.dom.id];
+            } else {
+                label.enabled = true;
+                label.text = this._valueToText[label.dom.id];
+            }
+            label.class.remove(CLASS_DISABLED_VALUE);
+        });
+
+        const disabledValue = this._disabledOptions[value] ? value : null;
+        let newValue = null;
+        if (disabledValue) {
+            if (this._fallbackOrder) {
+                for (let i = 0; i < this._fallbackOrder.length; i++) {
+                    if (this._fallbackOrder[i] === value) continue;
+                    newValue = this._fallbackOrder[i];
+                    break;
+                }
+            }
+            this.disabledValue = disabledValue;
+            labels[disabledValue].class.add(CLASS_DISABLED_VALUE);
+        } else if (this._disabledValue) {
+            newValue = this._disabledValue;
+            this.disabledValue = null;
+        } else {
+            newValue = value;
+            this.disabledValue = null;
+        }
+        return newValue;
+    }
+
     set options(value) {
         if (this._options && this._options === value) return;
 
@@ -973,7 +1056,8 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
             const label = new Label({
                 text: option.t,
-                tabIndex: -1
+                tabIndex: -1,
+                id: option.v
             });
 
             this._labelToValue.set(label, option.v);
@@ -986,6 +1070,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 e.stopPropagation();
                 this._onSelectValue(option.v);
                 this.close();
+                if (this._onSelect) {
+                    this._onSelect(this.value);
+                }
             });
             this._containerOptions.append(label);
         }
@@ -1018,6 +1105,26 @@ class SelectInput extends Element implements IBindable, IFocusable {
         return this._invalidOptions;
     }
 
+    set disabledValue(value: string | null) {
+        this._disabledValue = value;
+        if (this._disabledValue !== null) {
+            this.class.add(CLASS_HAS_DISABLED_VALUE);
+        } else {
+            this.class.remove(CLASS_HAS_DISABLED_VALUE);
+        }
+    }
+
+    set disabledOptions(value: any) {
+        if (this._disabledOptions === value) return;
+        this._disabledOptions = value || {};
+        const newValue = this._updateDisabledValue(this._value);
+        this._updateValue(newValue);
+    }
+
+    set fallbackOrder(value: string[]) {
+        this._fallbackOrder = value || null;
+    }
+
     get multiSelect() {
         return this.class.contains(CLASS_MULTI_SELECT);
     }
@@ -1046,16 +1153,8 @@ class SelectInput extends Element implements IBindable, IFocusable {
             }
         }
 
-        this._value = value;
-        this._onValueChange(value);
-
-        if (!this._suppressChange) {
-            this.emit('change', value);
-        }
-
-        if (this._binding) {
-            this._binding.setValue(value);
-        }
+        this.disabledValue = null;
+        this._updateValue(value);
     }
 
     get value() {
