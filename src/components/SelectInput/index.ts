@@ -164,7 +164,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _onSelect: (value: string) => void;
 
-    protected _prefix: string;
+    protected _prefix = '';
 
     constructor(args: Readonly<SelectInputArgs> = {}) {
         // main container
