@@ -1,6 +1,7 @@
 import * as utils from '../../helpers/utils';
 
 import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import { Observer } from '@playcanvas/observer';
 import Container from '../Container';
 import Panel from '../Panel';
 import NumericInput from '../NumericInput';
@@ -512,6 +513,20 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     blur() {
         this._inputSize.blur();
+    }
+
+    unlink() {
+        super.unlink();
+        this._arrayElements.forEach((entry: { element: Element; }) => {
+            entry.element.unlink();
+        });
+    }
+
+    link(observers: Observer|Observer[], paths: string|string[]) {
+        super.link(observers, paths);
+        this._arrayElements.forEach((entry: { element: Element; }, index: number) => {
+            this._linkArrayElement(entry.element, index);
+        });
     }
 
     /**
