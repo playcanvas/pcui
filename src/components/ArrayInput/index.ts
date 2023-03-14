@@ -1,7 +1,6 @@
-import * as utils from '../../helpers/utils';
-
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
 import { Observer } from '@playcanvas/observer';
+import * as utils from '../../helpers/utils';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
 import Container from '../Container';
 import Panel from '../Panel';
 import NumericInput from '../NumericInput';
