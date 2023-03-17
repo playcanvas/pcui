@@ -93,21 +93,29 @@ export interface IParentArgs {
 
 export interface IFlexArgs {
     /**
-     * Sets whether the Element supports flex layout.
+     * Sets whether the element supports flex layout.
      */
     flex?: boolean,
     /**
-     * Sets whether the Element supports the flex shrink property.
+     * Sets the element's `flexBasis` CSS property.
      */
-    flexShrink?: number,
+    flexBasis?: string,
     /**
-     * Sets whether the Element supports the flex grow property.
-     */
-    flexGrow?: number,
-    /**
-     * Sets the Elements flex direction property.
+     * Sets the element's `flexDirection` CSS property.
      */
     flexDirection?: string,
+    /**
+     * Sets the element's `flexGrow` CSS property.
+     */
+    flexGrow?: string,
+    /**
+     * Sets the element's `flexShrink` CSS property.
+     */
+    flexShrink?: string,
+    /**
+     * Sets the element's `flexWrap` CSS property.
+     */
+    flexWrap?: string
 }
 
 /**
