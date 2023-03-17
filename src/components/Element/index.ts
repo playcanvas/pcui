@@ -93,7 +93,7 @@ export interface IParentArgs {
 
 export interface IFlexArgs {
     /**
-     * Sets whether the element supports flex layout.
+     * Sets whether the element uses flex layout.
      */
     flex?: boolean,
     /**
