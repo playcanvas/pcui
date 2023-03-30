@@ -1041,7 +1041,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
     }
 
     set options(value) {
-        if (this._options && this._options === value) return;
+        if (this._options && JSON.stringify(this._options) === JSON.stringify(value)) return;
 
         this._containerOptions.clear();
         this._labelHighlighted = null;
@@ -1115,7 +1115,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
     }
 
     set disabledOptions(value: any) {
-        if (this._disabledOptions === value) return;
+        if (JSON.stringify(this._disabledOptions) === JSON.stringify(value)) return;
         this._disabledOptions = value || {};
         const newValue = this._updateDisabledValue(this._value);
         this._updateValue(newValue);
