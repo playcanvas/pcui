@@ -21,7 +21,7 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
 
     onAttach?: any;
 
-    class: Array<string>;
+    class: Set<string>;
 
     constructor(props: P) {
         super(props);
@@ -60,17 +60,8 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
             });
         }
 
-        this.class = [];
-        const classProp = this.props.class;
-        if (classProp) {
-            if (Array.isArray(classProp)) {
-                for (let i = 0; i < classProp.length; i++) {
-                    this.class.push(classProp[i]);
-                }
-            } else {
-                this.class.push(classProp);
-            }
-        }
+        const c = this.props.class;
+        this.class = new Set(c ? (Array.isArray(c) ? c.slice() : [c]) : undefined);
 
         if (this.onClick) {
             this.element.on('click', this.onClick);
@@ -117,16 +108,18 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
                     this.element[prop] = this.props[prop];
                 }
             } else if (prop === 'class') {
-                let classProp: Array<string> | string = this.props[prop] ?? [];
-                if (!Array.isArray(classProp)) {
-                    classProp = [classProp];
-                }
+                const c = this.props[prop];
+                const classProp = new Set(c ? (Array.isArray(c) ? c.slice() : [c]) : undefined);
                 classProp.forEach((cls: string) => {
-                    this.element.class.add(cls);
+                    if (!this.class.has(cls)) {
+                        this.element.class.add(cls);
+                        this.class.add(cls);
+                    }
                 });
                 this.class.forEach((cls: string) => {
-                    if (!classProp.includes(cls)) {
+                    if (!classProp.has(cls)) {
                         this.element.class.remove(cls);
+                        this.class.delete(cls);
                     }
                 });
             }
