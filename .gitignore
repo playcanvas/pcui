@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.storybook/utils/
 
 # testing
 /coverage
@@ -16,6 +17,8 @@
 /react/dist/
 /react/types/
 /styles/dist/
+/react/unstyled/dist/
+/unstyled/dist/
 
 # misc
 .DS_Store
