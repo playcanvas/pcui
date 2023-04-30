@@ -241,11 +241,11 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
      * Gets / sets whether the input should blur when the escape key is pressed.
      */
     set blurOnEscape(value: boolean) {
-        this._blurOnEnter = value;
+        this._blurOnEscape = value;
     }
 
     get blurOnEscape(): boolean {
-        return this._blurOnEnter;
+        return this._blurOnEscape;
     }
 
     abstract set value(value: any);
