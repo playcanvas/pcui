@@ -1,7 +1,6 @@
 {
     "extends": "stylelint-config-standard-scss",
     "rules": {
-        "indentation": 4,
         "font-family-no-missing-generic-family-keyword": [
             true,
             {
@@ -13,7 +12,6 @@
         "no-descending-specificity": null,
         "no-duplicate-selectors": null,
         "scss/no-global-function-names": null,
-        "scss/at-extend-no-missing-placeholder": null,
-        "string-quotes": "single"
+        "scss/at-extend-no-missing-placeholder": null
     }
 }

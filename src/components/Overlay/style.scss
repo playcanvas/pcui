@@ -1,10 +1,7 @@
 .pcui-overlay {
     width: auto;
     height: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     z-index: 101;
     transition: opacity 100ms, visibility 100ms;
 
@@ -21,10 +18,7 @@
     position: absolute;
     width: auto;
     height: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     background-color: rgba($bcg-darkest, 0.7);
 }
 
