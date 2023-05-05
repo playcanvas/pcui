@@ -98,6 +98,7 @@
 .pcui-label.pcui-select-input-disabled-value {
     &::after {
         @extend .font-icon;
+
         content: '\e133' !important;
         position: absolute;
         right: 6px;
