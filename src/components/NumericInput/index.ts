@@ -193,13 +193,15 @@ class NumericInput extends InputElement {
     }
 
     protected _onInputKeyDown(evt: KeyboardEvent) {
-        if (!this.enabled || this.readOnly) return super._onInputKeyDown(evt);
+        if (!this.enabled || this.readOnly) return;
 
         // increase / decrease value with arrow keys
         if (evt.key === 'ArrowUp' || evt.key === 'ArrowDown') {
             const inc = evt.key === 'ArrowDown' ? -1 : 1;
             this.value += (evt.shiftKey ? this._stepPrecision : this._step) * inc;
         }
+
+        super._onInputKeyDown(evt);
     }
 
     protected _isScrolling() {
