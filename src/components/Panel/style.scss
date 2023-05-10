@@ -40,11 +40,9 @@
 
         // expanded icon
         &::before {
-            left: 0;
-            content: '\E179';
-
             @extend .font-icon;
 
+            content: '\E179';
             font-size: 14px;
             margin-right: 10px;
             text-align: center;
