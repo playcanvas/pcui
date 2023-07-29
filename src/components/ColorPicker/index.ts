@@ -489,12 +489,8 @@ class ColorPicker extends Element implements IBindable {
 
         // Get the pointer position relative to the element
         const rect = this._pickRect.getBoundingClientRect();
-        let x = event.clientX - rect.left;
-        let y = event.clientY - rect.top;
-
-        // Clamp x and y to the size of the element
-        x = Math.max(0, Math.min(this._size, x));
-        y = Math.max(0, Math.min(this._size, y));
+        const x = Math.max(0, Math.min(this._size, Math.floor(event.clientX - rect.left)));
+        const y = Math.max(0, Math.min(this._size, Math.floor(event.clientY - rect.top)));
 
         this._colorHSV[1] = x / this._size;
         this._colorHSV[2] = 1.0 - (y / this._size);
