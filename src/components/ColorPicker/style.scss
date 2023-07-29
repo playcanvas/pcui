@@ -110,6 +110,7 @@
             box-sizing: border-box;
             margin: 8px 0 8px 8px;
             background-color: #f00;
+            touch-action: none;
             cursor: crosshair;
 
             > .white {
@@ -153,6 +154,7 @@
             margin: 8px 0 8px 8px;
             border: 1px solid #000;
             box-sizing: border-box;
+            touch-action: none;
             cursor: crosshair;
             background: #000;
             background:
@@ -189,6 +191,7 @@
             height: 144px;
             margin: 8px 0 8px 8px;
             border: 1px solid #000;
+            touch-action: none;
             cursor: crosshair;
             background: #000;
             background: linear-gradient(to bottom, #fff 0%, #000 100%);
