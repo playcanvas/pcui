@@ -57,6 +57,8 @@ class ColorPicker extends Element implements IBindable {
 
     protected _pickRect: HTMLDivElement;
 
+    protected _pickRectPointerId: number = null;
+
     protected _pickRectWhite: HTMLDivElement;
 
     protected _pickRectBlack: HTMLDivElement;
@@ -65,9 +67,13 @@ class ColorPicker extends Element implements IBindable {
 
     protected _pickHue: HTMLDivElement;
 
+    protected _pickHuePointerId: number = null;
+
     protected _pickHueHandle: HTMLDivElement;
 
     protected _pickOpacity: HTMLDivElement;
+
+    protected _pickOpacityPointerId: number = null;
 
     protected _pickOpacityHandle: HTMLDivElement;
 
@@ -131,17 +137,10 @@ class ColorPicker extends Element implements IBindable {
         this._pickRect.classList.add('pick-rect');
         this._overlay.append(this._pickRect);
 
-        this._pickRect.addEventListener('mousedown', function (evt: MouseEvent) {
-            this._pickRectMouseMove(evt);
-
-            window.addEventListener('mousemove', this._pickRectMouseMove, false);
-            window.addEventListener('mouseup', this._pickRectMouseUp, false);
-
-            evt.stopPropagation();
-            evt.preventDefault();
-            this.dragging = true;
-            this.emit('picker:color:start');
-        }.bind(this));
+        // color drag events
+        this._pickRect.addEventListener('pointerdown', this._pickRectPointerDown);
+        this._pickRect.addEventListener('pointermove', this._pickRectPointerMove);
+        this._pickRect.addEventListener('pointerup', this._pickRectPointerUp);
 
         // white
         this._pickRectWhite = document.createElement('div');
@@ -163,18 +162,10 @@ class ColorPicker extends Element implements IBindable {
         this._pickHue.classList.add('pick-hue');
         this._overlay.append(this._pickHue);
 
-        // hue drag start
-        this._pickHue.addEventListener('mousedown', function (evt: MouseEvent) {
-            this._pickHueMouseMove(evt);
-
-            window.addEventListener('mousemove', this._pickHueMouseMove, false);
-            window.addEventListener('mouseup', this._pickHueMouseUp, false);
-
-            evt.stopPropagation();
-            evt.preventDefault();
-            this.dragging = true;
-            this.emit('picker:color:start');
-        }.bind(this));
+        // hue drag events
+        this._pickHue.addEventListener('pointerdown', this._pickHuePointerDown);
+        this._pickHue.addEventListener('pointermove', this._pickHuePointerMove);
+        this._pickHue.addEventListener('pointerup', this._pickHuePointerUp);
 
         // handle
         this._pickHueHandle = document.createElement('div');
@@ -186,18 +177,10 @@ class ColorPicker extends Element implements IBindable {
         this._pickOpacity.classList.add('pick-opacity');
         this._overlay.append(this._pickOpacity);
 
-        // opacity drag start
-        this._pickOpacity.addEventListener('mousedown', function (evt: MouseEvent) {
-            this._pickOpacityMouseMove(evt);
-
-            window.addEventListener('mousemove', this._pickOpacityMouseMove, false);
-            window.addEventListener('mouseup', this._pickOpacityMouseUp, false);
-
-            evt.stopPropagation();
-            evt.preventDefault();
-            this.dragging = true;
-            this.emit('picker:color:start');
-        }.bind(this));
+        // opacity drag events
+        this._pickOpacity.addEventListener('pointerdown', this._pickOpacityPointerDown);
+        this._pickOpacity.addEventListener('pointermove', this._pickOpacityPointerMove);
+        this._pickOpacity.addEventListener('pointerup', this._pickOpacityPointerUp);
 
         // handle
         this._pickOpacityHandle = document.createElement('div');
@@ -283,6 +266,18 @@ class ColorPicker extends Element implements IBindable {
         this.dom.removeEventListener('keydown', this._onKeyDown);
         this.dom.removeEventListener('focus', this._onFocus);
         this.dom.removeEventListener('blur', this._onBlur);
+
+        this._pickRect.removeEventListener('pointerdown', this._pickRectPointerDown);
+        this._pickRect.removeEventListener('pointermove', this._pickRectPointerMove);
+        this._pickRect.removeEventListener('pointerup', this._pickRectPointerUp);
+
+        this._pickHue.removeEventListener('pointerdown', this._pickHuePointerDown);
+        this._pickHue.removeEventListener('pointermove', this._pickHuePointerMove);
+        this._pickHue.removeEventListener('pointerup', this._pickHuePointerUp);
+
+        this._pickOpacity.removeEventListener('pointerdown', this._pickOpacityPointerDown);
+        this._pickOpacity.removeEventListener('pointermove', this._pickOpacityPointerMove);
+        this._pickOpacity.removeEventListener('pointerup', this._pickOpacityPointerUp);
 
         super.destroy();
     }
@@ -471,12 +466,35 @@ class ColorPicker extends Element implements IBindable {
         return hex;
     }
 
+    // rect drag start
+    protected _pickRectPointerDown = (event: PointerEvent) => {
+        if (this._pickRectPointerId !== null) return;
+
+        this._pickRect.setPointerCapture(event.pointerId);
+        this._pickRectPointerId = event.pointerId;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.emit('picker:color:start');
+
+        this._pickRectPointerMove(event);
+    };
+
     // rect drag
-    protected _pickRectMouseMove = (evt: MouseEvent) => {
+    protected _pickRectPointerMove = (event: PointerEvent) => {
+        if (this._pickRectPointerId !== event.pointerId) return;
+
         this._changing = true;
+
+        // Get the pointer position relative to the element
         const rect = this._pickRect.getBoundingClientRect();
-        const x = Math.max(0, Math.min(this._size, Math.floor(evt.clientX - rect.left)));
-        const y = Math.max(0, Math.min(this._size, Math.floor(evt.clientY - rect.top)));
+        let x = event.clientX - rect.left;
+        let y = event.clientY - rect.top;
+
+        // Clamp x and y to the size of the element
+        x = Math.max(0, Math.min(this._size, x));
+        y = Math.max(0, Math.min(this._size, y));
 
         this._colorHSV[1] = x / this._size;
         this._colorHSV[2] = 1.0 - (y / this._size);
@@ -491,22 +509,44 @@ class ColorPicker extends Element implements IBindable {
 
         this._pickRectHandle.style.left = Math.max(4, Math.min(this._size - 4, x)) + 'px';
         this._pickRectHandle.style.top = Math.max(4, Math.min(this._size - 4, y)) + 'px';
+
         this._changing = false;
     };
 
     // rect drag stop
-    protected _pickRectMouseUp = () => {
-        window.removeEventListener('mousemove', this._pickRectMouseMove, false);
-        window.removeEventListener('mouseup', this._pickRectMouseUp, false);
-        this._dragging = false;
+    protected _pickRectPointerUp = (event: PointerEvent) => {
+        if (this._pickRectPointerId !== event.pointerId) return;
+
         this.emit('picker:color:end');
+
+        // Release the pointer
+        this._pickRect.releasePointerCapture(event.pointerId);
+        this._pickRectPointerId = null;
+    };
+
+    // hue drag start
+    protected _pickHuePointerDown = (event: PointerEvent) => {
+        if (this._pickHuePointerId !== null) return;
+
+        this._pickHue.setPointerCapture(event.pointerId);
+        this._pickHuePointerId = event.pointerId;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.emit('picker:color:start');
+
+        this._pickHuePointerMove(event);
     };
 
     // hue drag
-    protected _pickHueMouseMove = (evt: MouseEvent) => {
+    protected _pickHuePointerMove = (event: PointerEvent) => {
+        if (this._pickHuePointerId !== event.pointerId) return;
+
         this._changing = true;
+
         const rect = this._pickHue.getBoundingClientRect();
-        const y = Math.max(0, Math.min(this._size, Math.floor(evt.clientY - rect.top)));
+        const y = Math.max(0, Math.min(this._size, Math.floor(event.clientY - rect.top)));
         const h = y / this._size;
 
         const rgb = _hsv2rgb([h, this._colorHSV[1], this._colorHSV[2]]);
@@ -519,36 +559,63 @@ class ColorPicker extends Element implements IBindable {
         this._fieldHex.value = this._getHex();
         this._onChangeRgb();
         this._directInput = true;
+
         this._changing = false;
     };
 
     // hue drag stop
-    protected _pickHueMouseUp = () => {
-        window.removeEventListener('mousemove', this._pickHueMouseMove, false);
-        window.removeEventListener('mouseup', this._pickHueMouseUp, false);
-        this._dragging = false;
+    protected _pickHuePointerUp = (event: PointerEvent) => {
+        if (this._pickHuePointerId !== event.pointerId) return;
+
         this.emit('picker:color:end');
+
+        // Release the pointer
+        this._pickHue.releasePointerCapture(event.pointerId);
+        this._pickHuePointerId = null;
+    };
+
+    // opacity drag start
+    protected _pickOpacityPointerDown = (event: PointerEvent) => {
+        if (this._pickOpacityPointerId !== null) return;
+
+        this._pickOpacity.setPointerCapture(event.pointerId);
+        this._pickOpacityPointerId = event.pointerId;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.emit('picker:color:start');
+
+        this._pickOpacityPointerMove(event);
     };
 
     // opacity drag
-    protected _pickOpacityMouseMove = (evt: MouseEvent) => {
+    protected _pickOpacityPointerMove = (event: PointerEvent) => {
+        if (this._pickOpacityPointerId !== event.pointerId) return;
+
         this._changing = true;
+
         const rect = this._pickOpacity.getBoundingClientRect();
-        const y = Math.max(0, Math.min(this._size, Math.floor(evt.clientY - rect.top)));
+        const y = Math.max(0, Math.min(this._size, Math.floor(event.clientY - rect.top)));
         const o = 1.0 - y / this._size;
 
         this._directInput = false;
         this._pickerChannels[3].value = Math.max(0, Math.min(255, Math.round(o * 255)));
         this._fieldHex.value = this._getHex();
         this._directInput = true;
+
         this._changing = false;
     };
 
-    protected _pickOpacityMouseUp = () => {
-        window.removeEventListener('mousemove', this._pickOpacityMouseMove, false);
-        window.removeEventListener('mouseup', this._pickOpacityMouseUp, false);
-        this._dragging = false;
+    // opacity drag stop
+    protected _pickOpacityPointerUp = (event: PointerEvent) => {
+        if (this._pickOpacityPointerId !== event.pointerId) return;
+
         this.emit('picker:color:end');
+
+        // Release the pointer
+        this._pickOpacity.releasePointerCapture(event.pointerId);
+        this._pickOpacityPointerId = null;
     };
 
     protected _onChangeHex() {
