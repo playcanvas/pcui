@@ -450,7 +450,7 @@ class Container extends Element {
      * @param x - The number of pixels to resize the width. Default is 0.
      * @param y - The number of pixels to resize the height. Default is 0.
      */
-    resize(x: number = 0, y: number = 0) {
+    resize(x = 0, y = 0) {
         this._resizeStart();
         this._resizeMove(0, 0);
         this._resizeMove(-x + RESIZE_HANDLE_SIZE, -y);
