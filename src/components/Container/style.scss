@@ -14,6 +14,7 @@
         z-index: 1;
         opacity: 0;
         background-color: transparent;
+        touch-action: none;
 
         &:hover {
             opacity: 1;
