@@ -36,29 +36,25 @@ export interface GridViewArgs extends ContainerArgs {
 class GridView extends Container {
     protected _vertical: boolean;
 
+    protected _clickFn: (evt: MouseEvent, item: GridViewItem) => void;
+
     protected _filterFn: (item: GridViewItem) => boolean;
 
-    protected _filterAnimationFrame: number;
+    protected _filterAnimationFrame: number = null;
 
-    protected _filterCanceled: boolean;
+    protected _filterCanceled = false;
 
     protected _multiSelect: boolean;
 
     protected _allowDeselect: boolean;
 
-    protected _selected: GridViewItem[];
-
-    protected _clickFn: any;
+    protected _selected: GridViewItem[] = [];
 
     constructor(args: Readonly<GridViewArgs> = {}) {
         super(args);
 
         this._vertical = !!args.vertical;
-        if (this._vertical) {
-            this.class.add(CLASS_VERTICAL);
-        } else {
-            this.class.add(CLASS_ROOT);
-        }
+        this.class.add(this._vertical ? CLASS_VERTICAL : CLASS_ROOT);
 
         this.on('append', (element: Element) => {
             this._onAppendGridViewItem(element as GridViewItem);
@@ -68,14 +64,10 @@ class GridView extends Container {
         });
 
         this._filterFn = args.filterFn;
-        this._filterAnimationFrame = null;
-        this._filterCanceled = false;
 
         // Default options for GridView layout
         this._multiSelect = args.multiSelect ?? true;
         this._allowDeselect = args.allowDeselect ?? true;
-
-        this._selected = [];
     }
 
     protected _onAppendGridViewItem(item: GridViewItem) {

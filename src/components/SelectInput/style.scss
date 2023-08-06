@@ -84,6 +84,27 @@
     }
 }
 
+.pcui-select-input-has-disabled-value .pcui-container.pcui-select-input-list .pcui-label.pcui-selected {
+    &::after {
+        font-family: inherit;
+        content: 'fallback';
+        color: $text-primary;
+        font-size: 10px;
+        position: absolute;
+        right: 6px;
+    }
+}
+
+.pcui-label.pcui-select-input-disabled-value {
+    &::after {
+        @extend .font-icon;
+
+        content: '\e133' !important;
+        position: absolute;
+        right: 6px;
+    }
+}
+
 .pcui-select-input.pcui-open {
     .pcui-select-input-shadow {
         box-shadow: $element-shadow-hover;
@@ -262,6 +283,12 @@
 
 .pcui-select-input.pcui-disabled {
     opacity: $element-opacity-disabled;
+}
+
+.pcui-select-input {
+    .pcui-label.pcui-disabled {
+        opacity: $element-opacity-disabled;
+    }
 }
 
 .pcui-select-input.pcui-readonly {

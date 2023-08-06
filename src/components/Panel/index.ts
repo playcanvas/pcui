@@ -122,6 +122,8 @@ class Panel extends Container {
 
     protected _headerSize: number;
 
+    protected _onDragEndEvt: (event: MouseEvent) => void;
+
     /**
      * Creates a new Panel.
      *
@@ -170,6 +172,8 @@ class Panel extends Container {
         // execute reflow now after all fields have been initialized
         this._suspendReflow = false;
         this._reflow();
+
+        this._onDragEndEvt = this._onDragEnd.bind(this);
     }
 
     destroy() {
@@ -180,8 +184,8 @@ class Panel extends Container {
             this._reflowTimeout = null;
         }
 
-        window.removeEventListener('mouseup', this._onDragEnd);
-        window.removeEventListener('mouseleave', this._onDragEnd);
+        window.removeEventListener('mouseup', this._onDragEndEvt);
+        window.removeEventListener('mouseleave', this._onDragEndEvt);
         window.removeEventListener('mousemove', this._onDragMove);
 
         super.destroy();
@@ -217,12 +221,12 @@ class Panel extends Container {
         this.collapsed = !this.collapsed;
     };
 
-    protected _onClickRemove = (evt: MouseEvent) => {
+    protected _onClickRemove(evt: MouseEvent) {
         evt.preventDefault();
         evt.stopPropagation();
 
         this.emit('click:remove');
-    };
+    }
 
     protected _initializeContent(args: PanelArgs) {
         // containers container
@@ -311,8 +315,8 @@ class Panel extends Container {
         evt.stopPropagation();
         evt.preventDefault();
 
-        window.addEventListener('mouseup', this._onDragEnd);
-        window.addEventListener('mouseleave', this._onDragEnd);
+        window.addEventListener('mouseup', this._onDragEndEvt);
+        window.addEventListener('mouseleave', this._onDragEndEvt);
         window.addEventListener('mousemove', this._onDragMove);
 
         this.emit('dragstart');
@@ -332,9 +336,9 @@ class Panel extends Container {
         }
     };
 
-    protected _onDragEnd = (evt: MouseEvent) => {
-        window.removeEventListener('mouseup', this._onDragEnd);
-        window.removeEventListener('mouseleave', this._onDragEnd);
+    protected _onDragEnd(evt: MouseEvent) {
+        window.removeEventListener('mouseup', this._onDragEndEvt);
+        window.removeEventListener('mouseleave', this._onDragEndEvt);
         window.removeEventListener('mousemove', this._onDragMove);
 
         if (this._draggedChild === this) {
@@ -347,7 +351,7 @@ class Panel extends Container {
             // @ts-ignore accessing protected methods
             this.parent._onChildDragEnd(evt, this);
         }
-    };
+    }
 
     /**
      * Gets / sets whether the Element is collapsible.
@@ -431,7 +435,7 @@ class Panel extends Container {
                 icon: 'E289',
                 class: CLASS_PANEL_REMOVE
             });
-            this._btnRemove.on('click', this._onClickRemove);
+            this._btnRemove.on('click', this._onClickRemove.bind(this));
             this.header.append(this._btnRemove);
         } else {
             this._btnRemove.destroy();

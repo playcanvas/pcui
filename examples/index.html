@@ -64,50 +64,66 @@
             allowDragging: false
         });
 
-        const treeRoot = new TreeViewItem({
-            allowSelect: false,
-            text: 'Elements'
-        });
-        treeView.append(treeRoot);
-
         const iframe = document.createElement('iframe');
 
-        const examples = [
-            'ArrayInput',
-            'BooleanInput',
-            'Button',
-            'Canvas',
-            'Code',
-            'ColorPicker',
-            'Divider',
-            'GradientPicker',
-            'GridView',
-            'InfoBox',
-            'Label',
-            'LabelGroup',
-            'Menu',
-            'NumericInput',
-            'Overlay',
-            'Panel',
-            'Progress',
-            'RadioButton',
-            'SelectInput',
-            'SliderInput',
-            'Spinner',
-            'TextAreaInput',
-            'TextInput',
-            'TreeView',
-            'VectorInput'
+        const categories = [
+            {
+                categoryName: 'Elements',
+                examples: [
+                    'ArrayInput',
+                    'BooleanInput',
+                    'Button',
+                    'Canvas',
+                    'Code',
+                    'ColorPicker',
+                    'Divider',
+                    'GradientPicker',
+                    'GridView',
+                    'InfoBox',
+                    'Label',
+                    'LabelGroup',
+                    'Menu',
+                    'NumericInput',
+                    'Overlay',
+                    'Panel',
+                    'Progress',
+                    'RadioButton',
+                    'SelectInput',
+                    'SliderInput',
+                    'Spinner',
+                    'TextAreaInput',
+                    'TextInput',
+                    'TreeView',
+                    'VectorInput'
+                ]
+            },
+            {
+                categoryName: 'Utilities',
+                examples: [
+                    'Icon Browser',
+                ]
+            }
         ];
-        for (const example of examples) {
-            const item = new TreeViewItem({
-                text: example
-            });
-            item.on('select', () => {
-                iframe.src = example.toLowerCase() + '.html';
-            });
 
-            treeRoot.append(item);
+        for (const category of categories) {
+            const categoryItem = new TreeViewItem({
+                allowSelect: false,
+                text: category.categoryName
+            });
+            treeView.append(categoryItem);
+
+            for (const example of category.examples) {
+                const item = new TreeViewItem({
+                    text: example
+                });
+                item.on('select', () => {
+                    const path = category.categoryName.toLowerCase();
+                    const name = example.toLowerCase().replace(/ /g, '-');
+                    iframe.src = `${path}/${name}.html`;
+                });
+
+                categoryItem.append(item);
+            }
         }
 
         const filter = new TextInput({

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Element, { ElementArgs } from './index';
 
 /**
@@ -20,6 +20,8 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
     link: ElementArgs["link"];
 
     onAttach?: any;
+
+    class: Set<string>;
 
     constructor(props: P) {
         super(props);
@@ -57,6 +59,10 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
                 parent: undefined
             });
         }
+
+        const c = this.props.class;
+        this.class = new Set(c ? (Array.isArray(c) ? c.slice() : [c]) : undefined);
+
         if (this.onClick) {
             this.element.on('click', this.onClick);
         }
@@ -101,6 +107,21 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
                     // @ts-ignore
                     this.element[prop] = this.props[prop];
                 }
+            } else if (prop === 'class') {
+                const c = this.props[prop];
+                const classProp = new Set(c ? (Array.isArray(c) ? c.slice() : [c]) : undefined);
+                classProp.forEach((cls: string) => {
+                    if (!this.class.has(cls)) {
+                        this.element.class.add(cls);
+                        this.class.add(cls);
+                    }
+                });
+                this.class.forEach((cls: string) => {
+                    if (!classProp.has(cls)) {
+                        this.element.class.remove(cls);
+                        this.class.delete(cls);
+                    }
+                });
             }
         });
         if (prevProps.link !== this.props.link && this.props.link) {

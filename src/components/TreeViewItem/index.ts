@@ -120,8 +120,6 @@ class TreeViewItem extends Container {
 
     protected _numChildren = 0;
 
-    protected _treeOrder = -1;
-
     protected _treeView: any;
 
     protected _allowDrag: boolean;
@@ -561,9 +559,9 @@ class TreeViewItem extends Container {
      */
     get firstChild() {
         if (this._numChildren) {
-            for (let i = 0; i < this.dom.childNodes.length; i++) {
-                if (this.dom.childNodes[i].ui instanceof TreeViewItem) {
-                    return this.dom.childNodes[i].ui as TreeViewItem;
+            for (const child of this.dom.childNodes) {
+                if (child.ui instanceof TreeViewItem) {
+                    return child.ui as TreeViewItem;
                 }
             }
         }

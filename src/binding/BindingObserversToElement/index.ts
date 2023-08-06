@@ -1,11 +1,12 @@
-import { Observer } from '@playcanvas/observer';
+import { EventHandle, Observer } from '@playcanvas/observer';
+import { IBindable } from '../../components';
 import BindingBase, { BindingBaseArgs } from '../BindingBase';
 
 export interface BindingObserversToElementArgs extends BindingBaseArgs {
     /**
      * Custom update function.
      */
-    customUpdate?: any
+    customUpdate?: (element: IBindable, observers: Observer[], paths: string[]) => void;
 }
 
 /**
@@ -13,23 +14,21 @@ export interface BindingObserversToElementArgs extends BindingBaseArgs {
  * changes from the observers will be propagated to the element.
  */
 class BindingObserversToElement extends BindingBase {
-    _customUpdate: any;
+    _customUpdate: (element: IBindable, observers: Observer[], paths: string[]) => void;
 
-    _events: any[];
+    _events: EventHandle[] = [];
 
-    _updateTimeout: number;
+    _updateTimeout: number = null;
 
     /**
      * Creates a new BindingObserversToElement instance.
      *
      * @param args - The arguments.
      */
-    constructor(args: BindingObserversToElementArgs = {}) {
+    constructor(args: Readonly<BindingObserversToElementArgs> = {}) {
         super(args);
 
         this._customUpdate = args.customUpdate;
-        this._events = [];
-        this._updateTimeout = null;
     }
 
     private _linkObserver(observer: Observer, path: string) {
@@ -109,8 +108,8 @@ class BindingObserversToElement extends BindingBase {
      * Unlink the binding from its set of observers.
      */
     unlink() {
-        for (let i = 0; i < this._events.length; i++) {
-            this._events[i].unbind();
+        for (const event of this._events) {
+            event.unbind();
         }
         this._events.length = 0;
 

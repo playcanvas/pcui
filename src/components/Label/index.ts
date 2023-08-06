@@ -1,6 +1,5 @@
 import * as pcuiClass from '../../class';
-import Element, { ElementArgs, IBindableArgs, IFlexArgs, IPlaceholder, IPlaceholderArgs } from '../Element';
-import Input from '../Input';
+import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IPlaceholder, IPlaceholderArgs } from '../Element';
 
 const CLASS_LABEL = 'pcui-label';
 
@@ -11,7 +10,7 @@ export interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs,
     /**
      * Sets the text of the Label. Defaults to ''.
      */
-    text?: string | number,
+    text?: string,
     /**
      * If `true`, the {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML} property will be
      * used to set the text. Otherwise, {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
@@ -33,16 +32,18 @@ export interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs,
     /**
      * Sets the value of the Label. Defaults to ''.
      */
-    value?: any,
+    value?: string
 }
 
 /**
  * The Label is a simple span element that displays some text.
  */
-class Label extends Input implements IPlaceholder {
+class Label extends Element implements IPlaceholder, IBindable {
     protected _unsafe: boolean;
 
     protected _text: string;
+
+    protected _renderChanges: boolean;
 
     constructor(args: Readonly<LabelArgs> = {}) {
         super({ dom: 'span', ...args });
@@ -137,6 +138,14 @@ class Label extends Input implements IPlaceholder {
 
     get placeholder(): string {
         return this.dom.getAttribute('placeholder');
+    }
+
+    set renderChanges(value: boolean) {
+        this._renderChanges = value;
+    }
+
+    get renderChanges(): boolean {
+        return this._renderChanges;
     }
 }
 

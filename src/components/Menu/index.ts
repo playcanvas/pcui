@@ -111,18 +111,18 @@ class Menu extends Container implements IFocusable {
         }
 
         // @ts-ignore
-        item._containerItems.dom.childNodes.forEach((child) => {
+        for (const child of item._containerItems.dom.childNodes) {
             this._filterMenuItems(child.ui as MenuItem);
-        });
+        }
     }
 
     protected _onShowMenu() {
         this.focus();
 
         // filter child menu items
-        this._containerMenuItems.dom.childNodes.forEach((child) => {
+        for (const child of this._containerMenuItems.dom.childNodes) {
             this._filterMenuItems(child.ui as MenuItem);
-        });
+        }
     }
 
     protected _onKeyDown = (evt: KeyboardEvent) => {
@@ -153,9 +153,9 @@ class Menu extends Container implements IFocusable {
             containerItems.style.right = '100%';
         }
 
-        containerItems.dom.childNodes.forEach((child) => {
+        for (const child of containerItems.dom.childNodes) {
             this._limitSubmenuAtScreenEdges(child.ui as MenuItem);
-        });
+        }
     }
 
     focus() {
@@ -204,9 +204,9 @@ class Menu extends Container implements IFocusable {
         this._containerMenuItems.style.left = left + 'px';
         this._containerMenuItems.style.top = top + 'px';
 
-        this._containerMenuItems.dom.childNodes.forEach((child) => {
+        for (const child of this._containerMenuItems.dom.childNodes) {
             this._limitSubmenuAtScreenEdges(child.ui as MenuItem);
-        });
+        }
     }
 
     /**

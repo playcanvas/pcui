@@ -1,5 +1,5 @@
+import { Observer } from '@playcanvas/observer';
 import * as utils from '../../helpers/utils';
-
 import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
 import Container from '../Container';
 import Panel from '../Panel';
@@ -229,8 +229,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             if (this._getDefaultFn) {
                 defaultValue = this._getDefaultFn();
             } else {
-                // @ts-ignore
-                defaultValue = ArrayInput.DEFAULTS[this._valueType];
+                defaultValue = ArrayInput.DEFAULTS[this._valueType as keyof typeof ArrayInput.DEFAULTS];
                 if (this._valueType === 'curveset') {
                     defaultValue = utils.deepCopy(defaultValue);
                     if (Array.isArray(this._elementArgs.curves)) {
@@ -254,16 +253,14 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             if (!array) {
                 array = new Array(size);
                 for (let i = 0; i < size; i++) {
-                    // @ts-ignore
-                    array[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType]);
+                    array[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType as keyof typeof ArrayInput.DEFAULTS]);
                     if (defaultValue === undefined) initDefaultValue();
                     array[i] = utils.deepCopy(defaultValue);
                 }
             } else if (array.length < size) {
                 const newArray = new Array(size - array.length);
                 for (let i = 0; i < newArray.length; i++) {
-                    // @ts-ignore
-                    newArray[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType]);
+                    newArray[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType as keyof typeof ArrayInput.DEFAULTS]);
                     if (defaultValue === undefined) initDefaultValue();
                     newArray[i] = utils.deepCopy(defaultValue);
                 }
@@ -282,8 +279,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         if (!values.length) {
             const array = new Array(size);
             for (let i = 0; i < size; i++) {
-                // @ts-ignore
-                array[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType]);
+                array[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType as keyof typeof ArrayInput.DEFAULTS]);
                 if (defaultValue === undefined) initDefaultValue();
                 array[i] = utils.deepCopy(defaultValue);
             }
@@ -516,6 +512,20 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     blur() {
         this._inputSize.blur();
+    }
+
+    unlink() {
+        super.unlink();
+        this._arrayElements.forEach((entry: { element: Element; }) => {
+            entry.element.unlink();
+        });
+    }
+
+    link(observers: Observer|Observer[], paths: string|string[]) {
+        super.link(observers, paths);
+        this._arrayElements.forEach((entry: { element: Element; }, index: number) => {
+            this._linkArrayElement(entry.element, index);
+        });
     }
 
     /**

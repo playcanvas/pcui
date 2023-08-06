@@ -1,5 +1,5 @@
-import { EventHandle, Events, Observer } from '@playcanvas/observer';
-import React from 'react';
+import { EventHandle, Events, HandleEvent, Observer } from '@playcanvas/observer';
+import * as React from 'react';
 import * as pcuiClass from '../../class';
 
 import { BindingBase } from '../../binding';
@@ -22,7 +22,7 @@ const SIMPLE_CSS_PROPERTIES = [
 ];
 
 // Stores Element types by name and default arguments
-const ELEMENT_REGISTRY: any = {};
+const elementRegistry: Map<string, any> = new Map();
 
 export interface IBindable {
     /**
@@ -93,21 +93,29 @@ export interface IParentArgs {
 
 export interface IFlexArgs {
     /**
-     * Sets whether the Element supports flex layout.
+     * Sets whether the element uses flex layout.
      */
     flex?: boolean,
     /**
-     * Sets whether the Element supports the flex shrink property.
+     * Sets the element's `flexBasis` CSS property.
      */
-    flexShrink?: number,
+    flexBasis?: string,
     /**
-     * Sets whether the Element supports the flex grow property.
-     */
-    flexGrow?: number,
-    /**
-     * Sets the Elements flex direction property.
+     * Sets the element's `flexDirection` CSS property.
      */
     flexDirection?: string,
+    /**
+     * Sets the element's `flexGrow` CSS property.
+     */
+    flexGrow?: string,
+    /**
+     * Sets the element's `flexShrink` CSS property.
+     */
+    flexShrink?: string,
+    /**
+     * Sets the element's `flexWrap` CSS property.
+     */
+    flexWrap?: string
 }
 
 /**
@@ -382,7 +390,7 @@ class Element extends Events {
 
     protected _suppressChange = false;
 
-    protected _binding: any;
+    protected _binding: BindingBase;
 
     protected _ignoreParent: boolean;
 
@@ -483,8 +491,8 @@ class Element extends Events {
         if (this.parent) {
             const parent = this.parent;
 
-            for (let i = 0; i < this._eventsParent.length; i++) {
-                this._eventsParent[i].unbind();
+            for (const event of this._eventsParent) {
+                event.unbind();
             }
             this._eventsParent.length = 0;
 
@@ -584,11 +592,7 @@ class Element extends Events {
     };
 
     protected _onHiddenToRootChange(hiddenToRoot: boolean) {
-        if (hiddenToRoot) {
-            this.emit('hideToRoot');
-        } else {
-            this.emit('showToRoot');
-        }
+        this.emit(hiddenToRoot ? 'hideToRoot' : 'showToRoot');
     }
 
     protected _onEnabledChange(enabled: boolean) {
@@ -658,7 +662,7 @@ class Element extends Events {
         }
     }
 
-    unbind(name?: string, fn?: any): Events {
+    unbind(name?: string, fn?: HandleEvent): Events {
         return super.unbind(name, fn);
     }
 
@@ -667,39 +671,33 @@ class Element extends Events {
      * @param cls - The actual class of the Element.
      * @param defaultArguments - Default arguments when creating this type.
      */
-    static register(type: string, cls: any, defaultArguments?: any) {
-        ELEMENT_REGISTRY[type] = { cls, defaultArguments };
+    static register<Type>(type: string, cls: new () => Type, defaultArguments?: any) {
+        elementRegistry.set(type, { cls, defaultArguments });
     }
 
     /**
      * @param type - The type we want to unregister.
      */
     static unregister(type: string) {
-        delete ELEMENT_REGISTRY[type];
+        elementRegistry.delete(type);
     }
 
     /**
-     * Creates a new Element of the desired type. Returns undefined if type not found.
+     * Creates a new Element of the desired type.
      *
      * @param type - The type of the Element (registered by Element#register).
      * @param args - Arguments for the Element.
+     * @returns The new Element or undefined if type is not found.
      */
     static create(type: string, args: ElementArgs): any {
-        const entry = ELEMENT_REGISTRY[type];
+        const entry = elementRegistry.get(type);
         if (!entry) {
             console.error('Invalid type passed to Element.create:', type);
-            return;
+            return undefined;
         }
 
         const cls = entry.cls;
-        const clsArgs = {};
-
-        if (entry.defaultArguments) {
-            Object.assign(clsArgs, entry.defaultArguments);
-        }
-        if (args) {
-            Object.assign(clsArgs, args);
-        }
+        const clsArgs = { ...entry.defaultArguments, ...args };
 
         return new cls(clsArgs);
     }
@@ -928,7 +926,7 @@ class Element extends Events {
     /**
      * Gets / sets the Binding object for the element.
      */
-    set binding(value: any) {
+    set binding(value: BindingBase) {
         if (this._binding === value) return;
 
         let prevObservers;
@@ -946,6 +944,7 @@ class Element extends Events {
         this._binding = value;
 
         if (this._binding) {
+            // @ts-ignore
             this._binding.element = this;
             if (prevObservers && prevPaths) {
                 this.link(prevObservers, prevPaths);
@@ -953,7 +952,7 @@ class Element extends Events {
         }
     }
 
-    get binding(): any {
+    get binding(): BindingBase {
         return this._binding;
     }
 

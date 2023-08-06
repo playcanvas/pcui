@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Element, { PanelArgs } from './index';
 import BaseComponent from '../Element/component';
 

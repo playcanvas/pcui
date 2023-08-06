@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import { Observer } from '@playcanvas/observer';
 import Container from '../../components/Container/component';

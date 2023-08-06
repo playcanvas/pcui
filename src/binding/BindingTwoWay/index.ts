@@ -21,22 +21,21 @@ export interface BindingTwoWayArgs extends BindingBaseArgs {
  * when the value of the Observers changes the IBindable will be updated and vice versa.
  */
 class BindingTwoWay extends BindingBase {
-    _bindingElementToObservers: any;
+    _bindingElementToObservers: BindingElementToObservers;
 
-    _bindingObserversToElement: any;
+    _bindingObserversToElement: BindingObserversToElement;
 
     /**
      * Creates a new BindingTwoWay instance.
      *
      * @param args - The arguments.
      */
-    constructor(args: BindingTwoWayArgs = {}) {
+    constructor(args: Readonly<BindingTwoWayArgs> = {}) {
         super(args);
 
         this._bindingElementToObservers = args.bindingElementToObservers || new BindingElementToObservers(args);
         this._bindingObserversToElement = args.bindingObserversToElement || new BindingObserversToElement(args);
 
-        this._applyingChange = false;
         this._bindingElementToObservers.on('applyingChange', (value: any) => {
             this.applyingChange = value;
         });

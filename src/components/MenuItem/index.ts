@@ -65,11 +65,11 @@ class MenuItem extends Container implements IBindable {
 
     protected _menu: any = null;
 
-    protected _onSelect: any;
+    protected _onSelect: (evt?: MouseEvent) => void;
 
-    protected _onIsEnabled: any;
+    protected _onIsEnabled: () => boolean;
 
-    protected _onIsVisible: any;
+    protected _onIsVisible: () => boolean;
 
     protected _renderChanges: boolean;
 
@@ -250,11 +250,11 @@ class MenuItem extends Container implements IBindable {
 
         // set menu on child menu items
         if (!this._containerItems.destroyed) {
-            this._containerItems.dom.childNodes.forEach((child) => {
+            for (const child of this._containerItems.dom.childNodes) {
                 if (child.ui instanceof MenuItem) {
                     child.ui.menu = value;
                 }
-            });
+            }
         }
     }
 

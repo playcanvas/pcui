@@ -5,12 +5,13 @@ import Canvas, { CanvasArgs } from './Canvas';
 import Code, { CodeArgs } from './Code';
 import ColorPicker, { ColorPickerArgs } from './ColorPicker';
 import Container, { ContainerArgs } from './Container';
-import Divider, { DividerArgs } from './Divider';
+import Divider from './Divider';
 import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable, IParentArgs, IPlaceholder, IPlaceholderArgs } from './Element';
 import GradientPicker, { GradientPickerArgs } from './GradientPicker';
 import GridView, { GridViewArgs } from './GridView';
 import GridViewItem, { GridViewItemArgs } from './GridViewItem';
 import InfoBox, { InfoBoxArgs } from './InfoBox';
+import InputElement, { InputElementArgs } from './InputElement';
 import Label, { LabelArgs } from './Label';
 import LabelGroup, { LabelGroupArgs } from './LabelGroup';
 import Menu, { MenuArgs } from './Menu';
@@ -27,7 +28,6 @@ import TextAreaInput, { TextAreaInputArgs } from './TextAreaInput';
 import TextInput, { TextInputArgs } from './TextInput';
 import TreeView, { TreeViewArgs } from './TreeView';
 import TreeViewItem, { TreeViewItemArgs } from './TreeViewItem';
-import Input, { InputArgs } from './Input';
 import VectorInput, { VectorInputArgs } from './VectorInput';
 
 export {
@@ -46,7 +46,6 @@ export {
     Container,
     ContainerArgs,
     Divider,
-    DividerArgs,
     Element,
     ElementArgs,
     GradientPicker,
@@ -57,6 +56,8 @@ export {
     GridViewItemArgs,
     InfoBox,
     InfoBoxArgs,
+    InputElement,
+    InputElementArgs,
     Label,
     LabelArgs,
     LabelGroup,
@@ -91,8 +92,6 @@ export {
     TreeViewItemArgs,
     VectorInput,
     VectorInputArgs,
-    Input,
-    InputArgs,
     IBindable,
     IBindableArgs,
     IPlaceholder,

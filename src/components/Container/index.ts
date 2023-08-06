@@ -122,9 +122,9 @@ class Container extends Element {
 
     protected _domResizeHandle: HTMLDivElement = null;
 
-    protected _resizeTouchId: number = null;
+    protected _resizePointerId: number = null;
 
-    protected _resizeData: any = null;
+    protected _resizeData: { x: number, y: number, width: number, height: number } = null;
 
     protected _resizeHorizontally = true;
 
@@ -179,13 +179,9 @@ class Container extends Element {
         this.domContent = null;
 
         if (this._domResizeHandle) {
-            this._domResizeHandle.removeEventListener('mousedown', this._onResizeStart);
-            window.removeEventListener('mousemove', this._onResizeMove);
-            window.removeEventListener('mouseup', this._onResizeEnd);
-
-            this._domResizeHandle.removeEventListener('touchstart', this._onResizeTouchStart);
-            window.removeEventListener('touchmove', this._onResizeTouchMove);
-            window.removeEventListener('touchend', this._onResizeTouchEnd);
+            this._domResizeHandle.removeEventListener('pointerdown', this._onResizeStart);
+            this._domResizeHandle.removeEventListener('pointermove', this._onResizeMove);
+            this._domResizeHandle.removeEventListener('pointerup', this._onResizeEnd);
         }
 
         super.destroy();
@@ -316,8 +312,9 @@ class Container extends Element {
         }
 
         if (this._domResizeHandle) {
-            this._domResizeHandle.removeEventListener('mousedown', this._onResizeStart);
-            this._domResizeHandle.removeEventListener('touchstart', this._onResizeTouchStart);
+            this._domResizeHandle.removeEventListener('pointerdown', this._onResizeStart);
+            this._domResizeHandle.removeEventListener('pointermove', this._onResizeMove);
+            this._domResizeHandle.removeEventListener('pointerup', this._onResizeEnd);
             this._domResizeHandle = null;
         }
 
@@ -362,91 +359,44 @@ class Container extends Element {
         handle.classList.add(CLASS_RESIZABLE_HANDLE);
         handle.ui = this;
 
-        handle.addEventListener('mousedown', this._onResizeStart);
-        handle.addEventListener('touchstart', this._onResizeTouchStart, { passive: false });
+        handle.addEventListener('pointerdown', this._onResizeStart);
+        handle.addEventListener('pointermove', this._onResizeMove);
+        handle.addEventListener('pointerup', this._onResizeEnd);
 
         this._domResizeHandle = handle;
     }
 
-    protected _onResizeStart = (evt: MouseEvent) => {
+    protected _onResizeStart = (evt: PointerEvent) => {
+        if (this._resizePointerId !== null) return;
+
         evt.preventDefault();
         evt.stopPropagation();
 
-        window.addEventListener('mousemove', this._onResizeMove);
-        window.addEventListener('mouseup', this._onResizeEnd);
+        this._domResizeHandle.setPointerCapture(evt.pointerId);
+        this._resizePointerId = evt.pointerId;
 
         this._resizeStart();
     };
 
-    protected _onResizeMove = (evt: MouseEvent) => {
+    protected _onResizeMove = (evt: PointerEvent) => {
+        if (this._resizePointerId !== evt.pointerId) return;
+
         evt.preventDefault();
         evt.stopPropagation();
 
         this._resizeMove(evt.clientX, evt.clientY);
     };
 
-    protected _onResizeEnd = (evt: MouseEvent) => {
+    protected _onResizeEnd = (evt: PointerEvent) => {
+        if (this._resizePointerId !== evt.pointerId) return;
+
         evt.preventDefault();
         evt.stopPropagation();
-
-        window.removeEventListener('mousemove', this._onResizeMove);
-        window.removeEventListener('mouseup', this._onResizeEnd);
 
         this._resizeEnd();
-    };
 
-    protected _onResizeTouchStart = (evt: TouchEvent) => {
-        evt.preventDefault();
-        evt.stopPropagation();
-
-        for (let i = 0; i < evt.changedTouches.length; i++) {
-            const touch = evt.changedTouches[i];
-            if (touch.target === this._domResizeHandle) {
-                this._resizeTouchId = touch.identifier;
-            }
-        }
-
-        window.addEventListener('touchmove', this._onResizeTouchMove);
-        window.addEventListener('touchend', this._onResizeTouchEnd);
-
-        this._resizeStart();
-    };
-
-    protected _onResizeTouchMove = (evt: TouchEvent) => {
-        for (let i = 0; i < evt.changedTouches.length; i++) {
-            const touch = evt.changedTouches[i];
-            if (touch.identifier !== this._resizeTouchId) {
-                continue;
-            }
-
-            evt.stopPropagation();
-            evt.preventDefault();
-
-            this._resizeMove(touch.clientX, touch.clientY);
-
-            break;
-        }
-    };
-
-    protected _onResizeTouchEnd = (evt: TouchEvent) => {
-        for (let i = 0; i < evt.changedTouches.length; i++) {
-            const touch = evt.changedTouches[i];
-            if (touch.identifier === this._resizeTouchId) {
-                continue;
-            }
-
-            this._resizeTouchId = null;
-
-            evt.preventDefault();
-            evt.stopPropagation();
-
-            window.removeEventListener('touchmove', this._onResizeTouchMove);
-            window.removeEventListener('touchend', this._onResizeTouchEnd);
-
-            this._resizeEnd();
-
-            break;
-        }
+        this._domResizeHandle.releasePointerCapture(evt.pointerId);
+        this._resizePointerId = null;
     };
 
     protected _resizeStart() {
@@ -566,7 +516,7 @@ class Container extends Element {
                     break;
                 }
             } else if (i > childPanelIndex) {
-                if (y + (childPanel.height as number) >= otherTop + otherPanel.height) {
+                if (y + childPanel.height >= otherTop + otherPanel.height) {
                     ind = i;
                     break;
                 }
@@ -626,9 +576,9 @@ class Container extends Element {
      * @returns The recursively appended element node.
      *
      */
-    protected _buildDomNode(node: { [x: string]: any; root?: any; children?: any; }) {
+    protected _buildDomNode(node: { [x: string]: any; root?: any; children?: any; }): Container {
         const keys = Object.keys(node);
-        let rootNode: { append: (arg0: any) => void; };
+        let rootNode: Container;
         if (keys.includes('root')) {
             rootNode = this._buildDomNode(node.root);
             node.children.forEach((childNode: any) => {

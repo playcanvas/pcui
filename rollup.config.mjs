@@ -1,8 +1,41 @@
+import fs from 'fs';
+import { execSync } from 'child_process';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
+import typescript from '@rollup/plugin-typescript';
 import autoprefixer from 'autoprefixer';
 import postcss from 'postcss';
 import sass from 'rollup-plugin-sass';
-import typescript from 'rollup-plugin-typescript2';
+
+/**
+ * @returns {string} Version string like `1.58.0-dev`
+ */
+const getVersion = () => {
+    const text = fs.readFileSync('./package.json', 'utf8');
+    const json = JSON.parse(text);
+    return json.version;
+}
+
+/**
+ * @returns {string} Revision string like `644d08d39` (9 digits/chars).
+ */
+const getRevision = () => {
+    let revision;
+    try {
+        revision = execSync('git rev-parse --short HEAD').toString().trim();
+    } catch (e) {
+        revision = 'unknown';
+    }
+    return revision;
+}
+
+const replacements = {
+    values: {
+        'PACKAGE_VERSION': getVersion(),
+        'PACKAGE_REVISION': getRevision()
+    },
+    preventAssignment: true
+};
 
 const module = {
     input: 'src/index.ts',
@@ -15,9 +48,10 @@ const module = {
     },
     plugins: [
         nodeResolve(),
+        replace(replacements),
         typescript({
-            tsconfig: 'tsconfig.json',
-            clean: true
+            noEmitOnError: true,
+            tsconfig: 'tsconfig.json'
         })
     ],
     treeshake: 'smallest',
@@ -38,9 +72,10 @@ const react_module = {
     },
     plugins: [
         nodeResolve(),
+        replace(replacements),
         typescript({
-            tsconfig: 'react/tsconfig.json',
-            clean: true
+            noEmitOnError: true,
+            tsconfig: 'react/tsconfig.json'
         })
     ],
     treeshake: 'smallest',
