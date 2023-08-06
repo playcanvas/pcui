@@ -11,8 +11,8 @@ test('NumericInput: constructor: no args', () => {
     strictEqual(numericInput.class.length, 4);
     strictEqual(numericInput.class.contains('font-regular'), true);
     strictEqual(numericInput.class.contains('pcui-element'), true);
+    strictEqual(numericInput.class.contains('pcui-input-element'), true);
     strictEqual(numericInput.class.contains('pcui-numeric-input'), true);
-    strictEqual(numericInput.class.contains('pcui-text-input'), true);
 });
 
 test('NumericInput: up/down arrow keys step value', () => {
