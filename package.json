@@ -50,8 +50,7 @@
     "docsite:serve": "serve docs/_site -p 3497",
     "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types && tsc --project ./react/tsconfig.json --declaration --emitDeclarationOnly --outDir ./react/types",
     "build:typedocs": "typedoc --tsconfig ./tsconfig.json",
-    "storybook": "start-storybook -p 9009 -s public",
-    "test": "node --test"
+    "storybook": "start-storybook -p 9009 -s public"
   },
   "files": [
     "dist",
@@ -131,8 +130,6 @@
     "babel-loader": "^9.1.2",
     "eslint": "^8.32.0",
     "eslint-import-resolver-typescript": "^3.5.3",
-    "global-jsdom": "^8.7.0",
-    "jsdom": "^21.0.0",
     "playcanvas": "^1.60.0",
     "postcss": "^8.4.21",
     "prop-types": "^15.8.1",
