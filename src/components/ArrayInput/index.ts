@@ -395,7 +395,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             if (array && array.length > index) {
                 if (this._valueType === 'curveset') {
                     // curveset is passing the value in an array
-                    array[index] = value ? value[0] : value;
+                    array[index] = Array.isArray(value) ? value[0] : value;
                 } else {
                     array[index] = value;
                 }
