@@ -253,14 +253,12 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             if (!array) {
                 array = new Array(size);
                 for (let i = 0; i < size; i++) {
-                    array[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType as keyof typeof ArrayInput.DEFAULTS]);
                     if (defaultValue === undefined) initDefaultValue();
                     array[i] = utils.deepCopy(defaultValue);
                 }
             } else if (array.length < size) {
                 const newArray = new Array(size - array.length);
                 for (let i = 0; i < newArray.length; i++) {
-                    newArray[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType as keyof typeof ArrayInput.DEFAULTS]);
                     if (defaultValue === undefined) initDefaultValue();
                     newArray[i] = utils.deepCopy(defaultValue);
                 }
@@ -279,7 +277,6 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         if (!values.length) {
             const array = new Array(size);
             for (let i = 0; i < size; i++) {
-                array[i] = utils.deepCopy(ArrayInput.DEFAULTS[this._valueType as keyof typeof ArrayInput.DEFAULTS]);
                 if (defaultValue === undefined) initDefaultValue();
                 array[i] = utils.deepCopy(defaultValue);
             }
@@ -396,7 +393,12 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         // Set the value to the same row of every array in values.
         this._values.forEach((array) => {
             if (array && array.length > index) {
-                array[index] = value;
+                if (this._valueType === 'curveset') {
+                    // curveset is passing the value in an array
+                    array[index] = value ? value[0] : value;
+                } else {
+                    array[index] = value;
+                }
             }
         });
 
