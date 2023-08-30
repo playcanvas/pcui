@@ -8,7 +8,7 @@ const CLASS_SLIDER_BAR = CLASS_SLIDER + '-bar';
 const CLASS_SLIDER_HANDLE = CLASS_SLIDER + '-handle';
 const CLASS_SLIDER_ACTIVE = CLASS_SLIDER + '-active';
 
-const IS_CHROME = /Chrome\//.test(navigator.userAgent);
+const IS_CHROME = /Chrome\//.test(globalThis.navigator?.userAgent);
 
 /**
  * The arguments for the {@link SliderInput} constructor.
