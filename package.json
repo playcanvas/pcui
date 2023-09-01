@@ -105,7 +105,7 @@
     "@playcanvas/observer": "^1.4.0"
   },
   "devDependencies": {
-    "@playcanvas/eslint-config": "^1.4.1",
+    "@playcanvas/eslint-config": "^1.7.1",
     "@rollup/plugin-node-resolve": "^15.2.1",
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-typescript": "^11.1.3",
