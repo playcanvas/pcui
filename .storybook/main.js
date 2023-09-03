@@ -1,11 +1,10 @@
 const config = {
     stories: ['../src/**/*.stories.tsx', '../src/examples/**/*.stories.tsx'],
+
     addons: [
-        '@storybook/addon-actions/register',
-        '@storybook/addon-links',
-        '@storybook/addon-docs',
-        '@storybook/addon-backgrounds/register'
+        '@storybook/addon-essentials'
     ],
+
     webpackFinal: async (config, { configType }) => {
         // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
         // You can change the configuration based on that.
@@ -30,8 +29,17 @@ const config = {
         // Return the altered config
         return config;
     },
-    core: {
-        builder: "webpack5"
+
+    core: {},
+
+    framework: {
+        name: '@storybook/react-webpack5',
+        options: {}
+    },
+
+    docs: {
+        autodocs: true
     }
 };
-module.exports = config;
+
+export default config;

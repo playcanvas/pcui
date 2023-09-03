@@ -16,7 +16,7 @@ export interface BindingObserversToElementArgs extends BindingBaseArgs {
 class BindingObserversToElement extends BindingBase {
     _customUpdate: (element: IBindable, observers: Observer[], paths: string[]) => void;
 
-    _events: EventHandle[] = [];
+    _eventHandles: EventHandle[] = [];
 
     _updateTimeout: number = null;
 
@@ -32,10 +32,10 @@ class BindingObserversToElement extends BindingBase {
     }
 
     private _linkObserver(observer: Observer, path: string) {
-        this._events.push(observer.on(path + ':set', this._deferUpdateElement));
-        this._events.push(observer.on(path + ':unset', this._deferUpdateElement));
-        this._events.push(observer.on(path + ':insert', this._deferUpdateElement));
-        this._events.push(observer.on(path + ':remove', this._deferUpdateElement));
+        this._eventHandles.push(observer.on(path + ':set', this._deferUpdateElement));
+        this._eventHandles.push(observer.on(path + ':unset', this._deferUpdateElement));
+        this._eventHandles.push(observer.on(path + ':insert', this._deferUpdateElement));
+        this._eventHandles.push(observer.on(path + ':remove', this._deferUpdateElement));
     }
 
     private _deferUpdateElement = () => {
@@ -108,10 +108,10 @@ class BindingObserversToElement extends BindingBase {
      * Unlink the binding from its set of observers.
      */
     unlink() {
-        for (const event of this._events) {
+        for (const event of this._eventHandles) {
             event.unbind();
         }
-        this._events.length = 0;
+        this._eventHandles.length = 0;
 
         if (this._updateTimeout) {
             window.clearTimeout(this._updateTimeout);
