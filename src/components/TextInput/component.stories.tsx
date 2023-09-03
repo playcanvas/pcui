@@ -1,12 +1,19 @@
 import * as React from 'react';
-
-import Component from './component';
-import '../../scss/index.js';
+import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-export default {
+import TextInput from './component';
+
+import '../../scss/index.js';
+
+const meta: Meta<typeof TextInput> = {
     title: 'Components/TextInput',
-    component: Component
+    component: TextInput
 };
 
-export const Main = args => <Component onChange={action('value-change')} {...args} />;
+export default meta;
+type Story = StoryObj<typeof TextInput>;
+
+export const Main: Story = {
+    render: (args) => <TextInput onChange={action('value-change')} {...args} />
+};

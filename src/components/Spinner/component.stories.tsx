@@ -1,10 +1,18 @@
 import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import SpinnerComponent from './component';
+import Spinner from './component';
 
-export default {
+import '../../scss/index.js';
+
+const meta: Meta<typeof Spinner> = {
     title: 'Components/Spinner',
-    component: SpinnerComponent
+    component: Spinner
 };
 
-export const Main = args => <SpinnerComponent {...args} />;
+export default meta;
+type Story = StoryObj<typeof Spinner>;
+
+export const Main: Story = {
+    render: (args) => <Spinner {...args} />
+};

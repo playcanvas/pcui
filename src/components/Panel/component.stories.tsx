@@ -1,14 +1,22 @@
 import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import Component from './component';
-import '../../scss/index.js';
+import Panel from './component';
 import Label from '../Label/component';
 
-export default {
+import '../../scss/index.js';
+
+const meta: Meta<typeof Panel> = {
     title: 'Components/Panel',
-    component: Component
+    component: Panel
 };
 
-export const Main = args => <Component headerText='Foo Bar' collapsible {...args}>
-    <Label text='Hello World' />
-</Component>;
+export default meta;
+type Story = StoryObj<typeof Panel>;
+
+export const Main: Story = {
+    render: (args) =>
+        <Panel headerText='Foo Bar' collapsible {...args}>
+            <Label text='Hello World' />
+        </Panel>
+};

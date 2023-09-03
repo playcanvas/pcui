@@ -1,11 +1,18 @@
 import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import Component from './component';
+import Divider from './component';
+
 import '../../scss/index.js';
 
-export default {
+const meta: Meta<typeof Divider> = {
     title: 'Components/Divider',
-    component: Component
+    component: Divider
 };
 
-export const Main = args => <Component {...args} />;
+export default meta;
+type Story = StoryObj<typeof Divider>;
+
+export const Main: Story = {
+    render: (args) => <Divider {...args} />
+};

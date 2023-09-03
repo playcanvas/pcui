@@ -1,17 +1,23 @@
 import * as React from 'react';
-import Component from './component';
-import '../../scss/index.js';
+import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-export default {
+import Button from './component';
+
+import '../../scss/index.js';
+
+const meta: Meta<typeof Button> = {
     title: 'Components/Button',
-    component: Component
+    component: Button
 };
 
-export const Text = (args) => {
-    return <Component text='Hello World' onClick={action('button-click')} {...args} />;
+export default meta;
+type Story = StoryObj<typeof Button>;
+
+export const Text: Story = {
+    render: (args) => <Button text='Hello World' onClick={action('button-click')} {...args} />
 };
 
-export const IconAndText = (args) => {
-    return <Component icon="E401" text='Hello World' onClick={action('button-click')} {...args} />;
+export const TextAndIcon: Story = {
+    render: (args) => <Button text='Hello World' icon='E401' onClick={action('button-click')} {...args} />
 };

@@ -1,12 +1,19 @@
 import * as React from 'react';
-
-import Component from './component';
-import '../../scss/index.js';
+import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-export default {
+import NumericInput from './component';
+
+import '../../scss/index.js';
+
+const meta: Meta<typeof NumericInput> = {
     title: 'Components/NumericInput',
-    component: Component
+    component: NumericInput
 };
 
-export const Main = args => <Component onChange={action('value-change')} {...args} />;
+export default meta;
+type Story = StoryObj<typeof NumericInput>;
+
+export const Main: Story = {
+    render: (args) => <NumericInput onChange={action('value-change')} {...args} />
+};

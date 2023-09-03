@@ -1,11 +1,18 @@
 import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import Component from './component';
+import Label from './component';
+
 import '../../scss/index.js';
 
-export default {
+const meta: Meta<typeof Label> = {
     title: 'Components/Label',
-    component: Component
+    component: Label
 };
 
-export const Main = args => <Component {...args} text='Foo Bar' />;
+export default meta;
+type Story = StoryObj<typeof Label>;
+
+export const Main: Story = {
+    render: (args) => <Label {...args} text='Foo Bar' />
+};
