@@ -1,5 +1,5 @@
 const config = {
-    stories: ['../src/**/*.stories.tsx', '../src/examples/**/*.stories.tsx'],
+    stories: ['../src/**/*.stories.tsx'],
 
     addons: [
         '@storybook/addon-essentials'
