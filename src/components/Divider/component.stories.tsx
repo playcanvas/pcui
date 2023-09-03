@@ -14,5 +14,5 @@ export default meta;
 type Story = StoryObj<typeof Divider>;
 
 export const Main: Story = {
-    render: (args) => <Divider {...args} />
+    render: args => <Divider {...args} />
 };

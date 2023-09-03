@@ -15,5 +15,5 @@ export default meta;
 type Story = StoryObj<typeof SliderInput>;
 
 export const Main: Story = {
-    render: (args) => <SliderInput onChange={action('value-change')} {...args} />
+    render: args => <SliderInput onChange={action('value-change')} {...args} />
 };

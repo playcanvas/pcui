@@ -15,8 +15,7 @@ export default meta;
 type Story = StoryObj<typeof Panel>;
 
 export const Main: Story = {
-    render: (args) =>
-        <Panel headerText='Foo Bar' collapsible {...args}>
-            <Label text='Hello World' />
-        </Panel>
+    render: args => <Panel headerText='Foo Bar' collapsible {...args}>
+        <Label text='Hello World' />
+    </Panel>
 };

@@ -14,5 +14,5 @@ export default meta;
 type Story = StoryObj<typeof GradientPicker>;
 
 export const Main: Story = {
-    render: (args) => <GradientPicker {...args} />
+    render: args => <GradientPicker {...args} />
 };

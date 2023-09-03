@@ -14,5 +14,5 @@ export default meta;
 type Story = StoryObj<typeof Progress>;
 
 export const Main: Story = {
-    render: (args) => <Progress value={50} {...args} />
+    render: args => <Progress value={50} {...args} />
 };

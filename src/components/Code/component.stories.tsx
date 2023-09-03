@@ -14,5 +14,5 @@ export default meta;
 type Story = StoryObj<typeof Code>;
 
 export const Main: Story = {
-    render: (args) => <Code {...args} />
+    render: args => <Code {...args} />
 };

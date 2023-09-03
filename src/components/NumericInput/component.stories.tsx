@@ -15,5 +15,5 @@ export default meta;
 type Story = StoryObj<typeof NumericInput>;
 
 export const Main: Story = {
-    render: (args) => <NumericInput onChange={action('value-change')} {...args} />
+    render: args => <NumericInput onChange={action('value-change')} {...args} />
 };

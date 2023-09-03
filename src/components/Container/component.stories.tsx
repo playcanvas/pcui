@@ -15,9 +15,8 @@ export default meta;
 type Story = StoryObj<typeof Container>;
 
 export const Main: Story = {
-    render: (args) =>
-        <Container {...args}>
-            <Label text="This is a container with..." />
-            <Label text="two labels inside" />
-        </Container>
+    render: args => <Container {...args}>
+        <Label text="This is a container with..." />
+        <Label text="two labels inside" />
+    </Container>
 };

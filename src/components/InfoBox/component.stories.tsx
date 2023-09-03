@@ -14,5 +14,5 @@ export default meta;
 type Story = StoryObj<typeof InfoBox>;
 
 export const Main: Story = {
-    render: (args) => <InfoBox {...args} icon='E401' title='Foo' text='Bar' />
+    render: args => <InfoBox {...args} icon='E401' title='Foo' text='Bar' />
 };

@@ -34,16 +34,15 @@ window.addEventListener('contextmenu', (evt: MouseEvent) => {
 });
 
 export const Main: Story = {
-    render: (args) =>
-        <Container>
-            <Menu {...args} hidden={true} items={[
-                { text: 'Hello', onSelect: action('Hello') },
-                { text: 'World',
-                    items: [
-                        { text: 'Foo', onSelect: action('World -> Foo') },
-                        { text: 'Bar', onSelect: action('World -> Bar'), onIsEnabled: () => false }
-                    ] }
-            ]}/>
-            <Label text='This label can be right clicked to show a context menu'/>
-        </Container>
+    render: args => <Container>
+        <Menu {...args} hidden={true} items={[
+            { text: 'Hello', onSelect: action('Hello') },
+            { text: 'World',
+                items: [
+                    { text: 'Foo', onSelect: action('World -> Foo') },
+                    { text: 'Bar', onSelect: action('World -> Bar'), onIsEnabled: () => false }
+                ] }
+        ]}/>
+        <Label text='This label can be right clicked to show a context menu'/>
+    </Container>
 };

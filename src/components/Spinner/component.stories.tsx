@@ -14,5 +14,5 @@ export default meta;
 type Story = StoryObj<typeof Spinner>;
 
 export const Main: Story = {
-    render: (args) => <Spinner {...args} />
+    render: args => <Spinner {...args} />
 };

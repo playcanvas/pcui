@@ -15,5 +15,5 @@ export default meta;
 type Story = StoryObj<typeof TextAreaInput>;
 
 export const Main: Story = {
-    render: (args) => <TextAreaInput onChange={action('value-change')} {...args} />
+    render: args => <TextAreaInput onChange={action('value-change')} {...args} />
 };

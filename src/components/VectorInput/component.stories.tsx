@@ -15,13 +15,13 @@ export default meta;
 type Story = StoryObj<typeof VectorInput>;
 
 export const Vec2: Story = {
-    render: (args) => <VectorInput dimensions={2} onChange={action('value-change')} {...args} />
+    render: args => <VectorInput dimensions={2} onChange={action('value-change')} {...args} />
 };
 
 export const Vec3: Story = {
-    render: (args) => <VectorInput onChange={action('value-change')} {...args} />
+    render: args => <VectorInput onChange={action('value-change')} {...args} />
 };
 
 export const Vec4: Story = {
-    render: (args) => <VectorInput dimensions={4} onChange={action('value-change')} {...args} />
+    render: args => <VectorInput dimensions={4} onChange={action('value-change')} {...args} />
 };

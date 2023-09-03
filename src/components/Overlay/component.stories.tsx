@@ -14,5 +14,5 @@ export default meta;
 type Story = StoryObj<typeof Overlay>;
 
 export const Main: Story = {
-    render: (args) => <Overlay {...args} />
+    render: args => <Overlay {...args} />
 };

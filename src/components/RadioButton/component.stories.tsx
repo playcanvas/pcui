@@ -15,5 +15,5 @@ export default meta;
 type Story = StoryObj<typeof RadioButton>;
 
 export const Main: Story = {
-    render: (args) => <RadioButton onChange={action('value-change')} {...args} />
+    render: args => <RadioButton onChange={action('value-change')} {...args} />
 };

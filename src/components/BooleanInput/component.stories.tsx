@@ -15,5 +15,5 @@ export default meta;
 type Story = StoryObj<typeof BooleanInput>;
 
 export const Main: Story = {
-    render: (args) => <BooleanInput onChange={action('toggle')} {...args} />
+    render: args => <BooleanInput onChange={action('toggle')} {...args} />
 };

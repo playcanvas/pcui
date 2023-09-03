@@ -15,9 +15,9 @@ export default meta;
 type Story = StoryObj<typeof Button>;
 
 export const Text: Story = {
-    render: (args) => <Button text='Hello World' onClick={action('button-click')} {...args} />
+    render: args => <Button text='Hello World' onClick={action('button-click')} {...args} />
 };
 
 export const TextAndIcon: Story = {
-    render: (args) => <Button text='Hello World' icon='E401' onClick={action('button-click')} {...args} />
+    render: args => <Button text='Hello World' icon='E401' onClick={action('button-click')} {...args} />
 };

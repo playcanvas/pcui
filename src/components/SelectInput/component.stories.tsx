@@ -15,5 +15,5 @@ export default meta;
 type Story = StoryObj<typeof SelectInput>;
 
 export const Main: Story = {
-    render: (args) => <SelectInput onChange={action('value-change')} {...args} />
+    render: args => <SelectInput onChange={action('value-change')} {...args} />
 };

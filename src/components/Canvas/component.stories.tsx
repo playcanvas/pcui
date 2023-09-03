@@ -14,5 +14,5 @@ export default meta;
 type Story = StoryObj<typeof Canvas>;
 
 export const Main: Story = {
-    render: (args) => <Canvas {...args} />
+    render: args => <Canvas {...args} />
 };

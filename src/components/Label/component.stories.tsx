@@ -14,5 +14,5 @@ export default meta;
 type Story = StoryObj<typeof Label>;
 
 export const Main: Story = {
-    render: (args) => <Label {...args} text='Foo Bar' />
+    render: args => <Label {...args} text='Foo Bar' />
 };

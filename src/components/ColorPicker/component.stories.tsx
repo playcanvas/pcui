@@ -14,9 +14,9 @@ export default meta;
 type Story = StoryObj<typeof ColorPicker>;
 
 export const RGB: Story = {
-    render: (args) => <ColorPicker value={[255, 0, 0]} {...args} />
+    render: args => <ColorPicker value={[255, 0, 0]} {...args} />
 };
 
 export const RGBA: Story = {
-    render: (args) => <ColorPicker channels={4} value={[0, 255, 0, 1]} {...args} />
+    render: args => <ColorPicker channels={4} value={[0, 255, 0, 1]} {...args} />
 };
