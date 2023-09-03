@@ -1,12 +1,20 @@
-import { addParameters } from '@storybook/react'; // <- or your storybook framework
+const preview = {
+    parameters: {
+        backgrounds: {
+            default: 'playcanvas',
+            values: [
+                {
+                    name: 'playcanvas',
+                    value: '#374346'
+                },
+                {
+                    name: 'white',
+                    value: '#FFFFFF'
+                }
+            ]
+        },
+        controls: { expanded: true }
+    }
+};
 
-addParameters({
-  backgrounds: {
-    default: 'playcanvas',
-    values: [
-      { name: 'playcanvas', value: '#374346', default: true },
-      { name: 'white', value: '#FFFFFF' },
-    ],
-    controls: { expanded: true },
-  }
-});
+export default preview;
