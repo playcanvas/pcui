@@ -4,6 +4,7 @@ import Component from './component';
 import '../../scss/index.js';
 
 export default {
+    title: 'Components/Label',
     component: Component
 };
 

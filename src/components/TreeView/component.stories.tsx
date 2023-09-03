@@ -4,6 +4,7 @@ import TreeView from './component';
 import TreeViewItem from '../TreeViewItem/component';
 
 export default {
+    title: 'Components/TreeView',
     component: TreeView
 };
 

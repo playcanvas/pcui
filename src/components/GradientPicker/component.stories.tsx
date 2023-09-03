@@ -22,6 +22,7 @@ const defaultValue = {
 };
 
 export default {
+    title: 'Components/GradientPicker',
     component: GradientPickerComponent
 };
 

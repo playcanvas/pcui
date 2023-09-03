@@ -5,6 +5,7 @@ import '../../scss/index.js';
 import { action } from '@storybook/addon-actions';
 
 export default {
+    title: 'Components/RadioButton',
     component: Component
 };
 

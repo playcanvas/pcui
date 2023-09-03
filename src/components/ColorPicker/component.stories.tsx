@@ -3,6 +3,7 @@ import * as React from 'react';
 import ColorPickerComponent from './component';
 
 export default {
+    title: 'Components/ColorPicker',
     component: ColorPickerComponent
 };
 

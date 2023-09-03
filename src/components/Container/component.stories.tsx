@@ -4,6 +4,7 @@ import Container from './component';
 import Label from '../Label/component';
 
 export default {
+    title: 'Components/Container',
     component: Container
 };
 

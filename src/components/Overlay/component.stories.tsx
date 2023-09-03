@@ -3,6 +3,7 @@ import Component from './component';
 import '../../scss/index.js';
 
 export default {
+    title: 'Components/Overlay',
     component: Component
 };
 

@@ -4,6 +4,7 @@ import GridView from './component';
 import GridViewItem from '../GridViewItem/component';
 
 export default {
+    title: 'Components/GridView',
     component: GridView
 };
 
