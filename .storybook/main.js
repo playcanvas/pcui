@@ -10,7 +10,7 @@ const config = {
         // You can change the configuration based on that.
         // 'PRODUCTION' is used when building the static version of storybook.
 
-        config.module.rules = config.module.rules.filter(rule => {
+        config.module.rules = config.module.rules.filter((rule) => {
             if (!rule.test) return true;
             return !rule.test.test(".scss");
         });
@@ -22,7 +22,7 @@ const config = {
                     options: {
                         additionalData: `@import '${__dirname}/../src/scss/pcui-storybook.scss';`
                     }
-                }],
+                }]
             }
         );
 
