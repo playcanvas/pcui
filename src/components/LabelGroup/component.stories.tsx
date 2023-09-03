@@ -5,6 +5,7 @@ import '../../scss/index.js';
 import TextInput from '../TextInput/component';
 
 export default {
+    title: 'Components/LabelGroup',
     component: Component
 };
 

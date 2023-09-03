@@ -9,6 +9,7 @@ import Menu from '../Menu';
 import { action } from '@storybook/addon-actions';
 
 export default {
+    title: 'Components/Menu',
     component: Component
 };
 

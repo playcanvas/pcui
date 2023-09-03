@@ -5,7 +5,8 @@ import '../../scss/index.js';
 import { action } from '@storybook/addon-actions';
 
 export default {
+    title: 'Components/BooleanInput',
     component: Component
 };
 
-export const Main = args => <Component onChange={action('select')} {...args} />;
+export const Main = args => <Component onChange={action('toggle')} {...args} />;

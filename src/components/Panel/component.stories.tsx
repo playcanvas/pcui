@@ -5,6 +5,7 @@ import '../../scss/index.js';
 import Label from '../Label/component';
 
 export default {
+    title: 'Components/Panel',
     component: Component
 };
 

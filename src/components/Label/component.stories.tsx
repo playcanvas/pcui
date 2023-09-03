@@ -4,7 +4,8 @@ import Component from './component';
 import '../../scss/index.js';
 
 export default {
+    title: 'Components/Label',
     component: Component
 };
 
-export const Main = args => <Component {...args} icon='E401' title='Foo' text='Bar' />;
+export const Main = args => <Component {...args} text='Foo Bar' />;
