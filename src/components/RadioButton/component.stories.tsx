@@ -1,12 +1,19 @@
 import * as React from 'react';
-
-import Component from './component';
-import '../../scss/index.js';
+import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-export default {
+import RadioButton from './component';
+
+import '../../scss/index.js';
+
+const meta: Meta<typeof RadioButton> = {
     title: 'Components/RadioButton',
-    component: Component
+    component: RadioButton
 };
 
-export const Main = args => <Component onChange={action('select')} {...args} />;
+export default meta;
+type Story = StoryObj<typeof RadioButton>;
+
+export const Main: Story = {
+    render: args => <RadioButton onChange={action('value-change')} {...args} />
+};

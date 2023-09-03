@@ -1,14 +1,21 @@
 import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import Component from './component';
-import '../../scss/index.js';
+import LabelGroup from './component';
 import TextInput from '../TextInput/component';
 
-export default {
+import '../../scss/index.js';
+
+const meta: Meta<typeof LabelGroup> = {
     title: 'Components/LabelGroup',
-    component: Component
+    component: LabelGroup
 };
 
-export const Main = args => <Component {...args} text='A field: '>
-    <TextInput placeholder='foobar' />
-</Component>;
+export default meta;
+type Story = StoryObj<typeof LabelGroup>;
+
+export const Main: Story = {
+    render: args => <LabelGroup {...args} text='A field:'>
+        <TextInput placeholder='foobar' />
+    </LabelGroup>
+};

@@ -1,12 +1,19 @@
 import * as React from 'react';
-
-import Component from './component';
-import '../../scss/index.js';
+import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-export default {
+import SliderInput from './component';
+
+import '../../scss/index.js';
+
+const meta: Meta<typeof SliderInput> = {
     title: 'Components/SliderInput',
-    component: Component
+    component: SliderInput
 };
 
-export const Main = args => <Component onChange={action('value-change')} {...args} />;
+export default meta;
+type Story = StoryObj<typeof SliderInput>;
+
+export const Main: Story = {
+    render: args => <SliderInput onChange={action('value-change')} {...args} />
+};

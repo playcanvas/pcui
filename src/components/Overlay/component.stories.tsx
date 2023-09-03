@@ -1,10 +1,18 @@
 import * as React from 'react';
-import Component from './component';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import Overlay from './component';
+
 import '../../scss/index.js';
 
-export default {
+const meta: Meta<typeof Overlay> = {
     title: 'Components/Overlay',
-    component: Component
+    component: Overlay
 };
 
-export const Main = args => <Component {...args} />;
+export default meta;
+type Story = StoryObj<typeof Overlay>;
+
+export const Main: Story = {
+    render: args => <Overlay {...args} />
+};

@@ -1,10 +1,22 @@
 import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import ColorPickerComponent from './component';
+import ColorPicker from './component';
 
-export default {
+import '../../scss/index.js';
+
+const meta: Meta<typeof ColorPicker> = {
     title: 'Components/ColorPicker',
-    component: ColorPickerComponent
+    component: ColorPicker
 };
 
-export const Main = args => <ColorPickerComponent value={[255, 0, 0, 1]} {...args} />;
+export default meta;
+type Story = StoryObj<typeof ColorPicker>;
+
+export const RGB: Story = {
+    render: args => <ColorPicker value={[255, 0, 0]} {...args} />
+};
+
+export const RGBA: Story = {
+    render: args => <ColorPicker channels={4} value={[0, 255, 0, 1]} {...args} />
+};

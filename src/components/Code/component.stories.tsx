@@ -1,11 +1,18 @@
 import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import Component from './component';
+import Code from './component';
+
 import '../../scss/index.js';
 
-export default {
+const meta: Meta<typeof Code> = {
     title: 'Components/Code',
-    component: Component
+    component: Code
 };
 
-export const Main = args => <Component {...args} />;
+export default meta;
+type Story = StoryObj<typeof Code>;
+
+export const Main: Story = {
+    render: args => <Code {...args} />
+};

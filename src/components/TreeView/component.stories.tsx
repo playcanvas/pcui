@@ -1,15 +1,21 @@
 import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import TreeView from './component';
 import TreeViewItem from '../TreeViewItem/component';
 
-export default {
+import '../../scss/index.js';
+
+const meta: Meta<typeof TreeView> = {
     title: 'Components/TreeView',
     component: TreeView
 };
 
-export const Main = args => (
-    <TreeView {...args}>
+export default meta;
+type Story = StoryObj<typeof TreeView>;
+
+export const Main: Story = {
+    render: args => <TreeView {...args}>
         <TreeViewItem text='Item 1'>
             <TreeViewItem text='Item 11' icon='E401' />
             <TreeViewItem text='Item 12' />
@@ -22,4 +28,4 @@ export const Main = args => (
             </TreeViewItem>
         </TreeViewItem>
     </TreeView>
-);
+};

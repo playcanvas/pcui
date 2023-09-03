@@ -1,11 +1,18 @@
 import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import Component from './component';
+import InfoBox from './component';
+
 import '../../scss/index.js';
 
-export default {
+const meta: Meta<typeof InfoBox> = {
     title: 'Components/InfoBox',
-    component: Component
+    component: InfoBox
 };
 
-export const Main = args => <Component {...args} icon='E401' title='Foo' text='Bar' />;
+export default meta;
+type Story = StoryObj<typeof InfoBox>;
+
+export const Main: Story = {
+    render: args => <InfoBox {...args} icon='E401' title='Foo' text='Bar' />
+};

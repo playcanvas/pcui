@@ -1,12 +1,19 @@
 import * as React from 'react';
-
-import Component from './component';
-import '../../scss/index.js';
+import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-export default {
+import BooleanInput from './component';
+
+import '../../scss/index.js';
+
+const meta: Meta<typeof BooleanInput> = {
     title: 'Components/BooleanInput',
-    component: Component
+    component: BooleanInput
 };
 
-export const Main = args => <Component onChange={action('toggle')} {...args} />;
+export default meta;
+type Story = StoryObj<typeof BooleanInput>;
+
+export const Main: Story = {
+    render: args => <BooleanInput onChange={action('toggle')} {...args} />
+};

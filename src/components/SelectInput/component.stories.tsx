@@ -1,12 +1,19 @@
 import * as React from 'react';
-
-import Component from './component';
-import '../../scss/index.js';
+import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-export default {
+import SelectInput from './component';
+
+import '../../scss/index.js';
+
+const meta: Meta<typeof SelectInput> = {
     title: 'Components/SelectInput',
-    component: Component
+    component: SelectInput
 };
 
-export const Main = args => <Component onChange={action('value-change')} {...args} />;
+export default meta;
+type Story = StoryObj<typeof SelectInput>;
+
+export const Main: Story = {
+    render: args => <SelectInput onChange={action('value-change')} {...args} />
+};
