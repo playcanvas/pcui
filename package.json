@@ -33,8 +33,8 @@
     "url": "git+https://github.com/playcanvas/pcui.git"
   },
   "scripts": {
-    "lint:styles": "stylelint src/**/*.scss",
     "lint": "eslint --ext .ts --ext .tsx src",
+    "lint:styles": "stylelint src/**/*.scss",
     "watch:styles": "rollup -c -w --environment target:styles",
     "watch:es6": "rollup -c -w --environment target:es6",
     "watch:react:es6": "rollup -c -w --environment target:react:es6",
@@ -45,12 +45,13 @@
     "build:react:es6": "rollup -c --environment target:react:es6",
     "build": "rollup -c && npm run bundle:styles",
     "build:icons": "cd ./utils && node ./build-font-icons.mjs",
-    "build:docsite:local": "cd docs && bundle exec jekyll build --config _config_local.yml && shx mkdir _site/storybook && cd .. && cross-env ENVIRONMENT=production storybook build -o ./docs/_site/storybook && shx cp -r ./typedocs ./docs/_site/typedocs",
-    "build:docsite:production": "cd docs && bundle exec jekyll build --config _config.yml && shx mkdir _site/storybook && cd .. && cross-env ENVIRONMENT=production storybook build -o ./docs/_site/storybook && shx cp -r ./typedocs ./docs/_site/typedocs",
-    "docsite:serve": "serve docs/_site -p 3497",
+    "build:docsite:local": "cd docs && bundle exec jekyll build --config _config_local.yml && cd .. && npm run build:storybook && npm run build:typedocs && shx cp -r ./typedocs ./docs/_site/typedocs",
+    "build:docsite:production": "cd docs && bundle exec jekyll build --config _config.yml && cd .. && npm run build:storybook && npm run build:typedocs && shx cp -r ./typedocs ./docs/_site/typedocs",
+    "build:storybook": "cross-env ENVIRONMENT=production storybook build -o ./docs/_site/storybook",
+    "build:typedocs": "typedoc",
     "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types && tsc --project ./react/tsconfig.json --declaration --emitDeclarationOnly --outDir ./react/types",
-    "build:typedocs": "typedoc --tsconfig ./tsconfig.json",
-    "storybook": "storybook dev -p 9009",
+    "serve:docs": "serve docs/_site",
+    "storybook": "storybook dev",
     "test": "node --test"
   },
   "files": [
