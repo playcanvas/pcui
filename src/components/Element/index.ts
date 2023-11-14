@@ -61,8 +61,8 @@ export interface IPlaceholder {
     /**
      * Gets / sets the placeholder text of the input.
      */
-    set placeholder(value: string),
-    get placeholder(): string
+    set placeholder(value: string | string[]),
+    get placeholder(): string | string[]
 }
 
 export interface IPlaceholderArgs {
