@@ -69,7 +69,7 @@ export interface IPlaceholderArgs {
     /**
      * Sets the placeholder label that appears on the right of the input.
      */
-    placeholder?: string,
+    placeholder?: string | string[],
 }
 
 export interface IFocusable {
