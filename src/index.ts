@@ -12,8 +12,14 @@
 export * from './binding';
 export * from './components';
 
-// these strings are set by the build script
+/**
+ * The version of the PCUI library. This is a string in semantic version format of `major.minor.patch`.
+ */
 const version = 'PACKAGE_VERSION';
+
+/**
+ * The git revision of the PCUI library. This is a string of the git commit hash.
+ */
 const revision = 'PACKAGE_REVISION';
 
 export { version };
