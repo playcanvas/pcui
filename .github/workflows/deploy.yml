@@ -25,6 +25,8 @@ jobs:
           ruby-version: '3.0'
       # Install Bundler
       - run: gem install bundler
+      # Install Jekyll and other gems
+      - run: bundle install 
       # Now run your original command
       - run: npm run build:docsite:production
       # https://github.com/actions/upload-pages-artifact
