@@ -22,9 +22,9 @@ You are now able to build the site:
 
 To view the built site, run:
 
-    npm run docsite:serve
+    npm run serve:docs
 
-Open your browser and visit: http://localhost:3497/
+Open your browser and visit: http://localhost:3000/
 
 ### Publishing Docs
 
