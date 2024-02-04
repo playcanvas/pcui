@@ -19,7 +19,11 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v3
       - run: npm ci
-      # Generate your TypeDoc documentation
+      # Add a step to set up Ruby
+      - uses: ruby/setup-ruby@v1
+      # Install Bundler
+      - run: gem install bundler
+      # Now run your original command
       - run: npm run build:docsite:production
       # https://github.com/actions/upload-pages-artifact
       - uses: actions/upload-pages-artifact@v2
