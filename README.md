@@ -46,7 +46,7 @@ ReactDOM.render(
 
 ## Building a UMD bundle
 
-If you need a UMD version of the library so that you for example, it can useed with a PlayCanvas Editor project, please refer to our [build guide](BUILDGUIDE.md).
+If you need a UMD version of the library so that you for example, it can used with a PlayCanvas Editor project, please refer to our [build guide](BUILDGUIDE.md).
 
 ## Including your own font
 
