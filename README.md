@@ -64,7 +64,7 @@ The PCUI library offers a data binding layer that can be used to synchronize dat
 
 ```javascript
 import { Observer } from '@playcanvas/observer';
-import { Label, TextInput, BindingObserversToElement, BindingElementToObservers } from '@playcanvs/pcui';
+import { Label, TextInput, BindingObserversToElement, BindingElementToObservers } from '@playcanvas/pcui';
 import '@playcanvas/pcui/styles';
 
 // create a new observer for a simple object which contains a text string
