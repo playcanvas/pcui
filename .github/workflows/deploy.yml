@@ -21,6 +21,8 @@ jobs:
       - run: npm ci
       # Add a step to set up Ruby
       - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
       # Install Bundler
       - run: gem install bundler
       # Now run your original command
