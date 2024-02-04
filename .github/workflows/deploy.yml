@@ -26,7 +26,10 @@ jobs:
       # Install Bundler
       - run: gem install bundler
       # Install Jekyll and other gems
-      - run: bundle install 
+      - run: |
+          cd docs
+          bundle install
+          cd ..
       # Now run your original command
       - run: npm run build:docsite:production
       # https://github.com/actions/upload-pages-artifact
