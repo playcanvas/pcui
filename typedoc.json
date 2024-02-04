@@ -1,0 +1,16 @@
+{
+    "entryPoints": ["./src/index.ts"],
+    "githubPages": false,
+    "name": "PCUI API",
+    "navigationLinks": {
+        "Developer Site": "https://developer.playcanvas.com/",
+        "Discord": "https://discord.gg/RSaMRzg",
+        "Forum": "https://forum.playcanvas.com/",
+        "GitHub": "https://github.com/playcanvas/pcui"
+    },
+    "out": "typedocs",
+    "plugin": [
+        "typedoc-plugin-mdn-links"
+    ],
+    "readme": "none"
+}

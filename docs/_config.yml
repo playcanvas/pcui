@@ -18,14 +18,14 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: PCUI 
+title: PCUI
 email: support@playcanvas.com
 description: >- # this means to ignore newlines until "baseurl:"
   PCUI - User interface components for the web
 baseurl: "/pcui" # the subpath of your site, e.g. /blog
 url: "https://playcanvas.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: playcanvas
-github_username:  playcanvas
+github_username: playcanvas
 
 # Build settings
 theme: "just-the-docs"
