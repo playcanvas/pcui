@@ -1,4 +1,4 @@
-name: "typedoc"
+name: "docs"
 
 on:
   workflow_dispatch:
@@ -20,11 +20,11 @@ jobs:
       - uses: actions/setup-node@v3
       - run: npm ci
       # Generate your TypeDoc documentation
-      - run: npx typedoc
+      - run: npm run build:docsite:production
       # https://github.com/actions/upload-pages-artifact
       - uses: actions/upload-pages-artifact@v2
         with:
-          path: ./docs  # This should be your TypeDoc "out" path.
+          path: ./docs/_site
   deploy:
     runs-on: ubuntu-latest
     environment:
