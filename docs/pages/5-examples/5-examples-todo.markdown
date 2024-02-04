@@ -16,8 +16,7 @@ The todo list below allows you to add items to the list, toggle their 'done' sta
 
 ### Code
 
-```javascript
-
+```jsx
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Observer } from '@playcanvas/observer';
@@ -47,10 +46,9 @@ export const TodoList = (props) => {
         items[key].done = !items[key].done;
         observer.set('items', items);
     };
-    const textInputLink = { observer, path: 'input' };
     return (
         <Container class='todo'>
-            <TextInput blurOnEnter={false} placeholder='enter item' binding={new BindingTwoWay()} link={textInputLink} onChange={addItem}/>
+            <TextInput blurOnEnter={false} placeholder='enter item' binding={new BindingTwoWay()} link={{ observer, path: 'input' }} onChange={addItem}/>
             <SelectInput type="number" options={[{v: 0, t: 'Show all items'}, {v: 1, t: 'Show active items'}, {v: 2, t: 'Show done items'}]} onChange={setListFilter} />
             <Container>
                 {Object.keys(items).map(key => {
@@ -71,5 +69,5 @@ export const TodoList = (props) => {
     );
 };
 
-ReactDOM.render(<Todolist />, document.body);
+ReactDOM.render(<TodoList />, document.body);
 ```
