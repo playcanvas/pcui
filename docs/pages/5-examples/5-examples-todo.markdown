@@ -46,9 +46,10 @@ export const TodoList = (props) => {
         items[key].done = !items[key].done;
         observer.set('items', items);
     };
+    const textInputLink = { observer, path: 'input' };
     return (
         <Container class='todo'>
-            <TextInput blurOnEnter={false} placeholder='enter item' binding={new BindingTwoWay()} link={{ observer, path: 'input' }} onChange={addItem}/>
+            <TextInput blurOnEnter={false} placeholder='enter item' binding={new BindingTwoWay()} link={textInputLink} onChange={addItem}/>
             <SelectInput type="number" options={[{v: 0, t: 'Show all items'}, {v: 1, t: 'Show active items'}, {v: 2, t: 'Show done items'}]} onChange={setListFilter} />
             <Container>
                 {Object.keys(items).map(key => {
