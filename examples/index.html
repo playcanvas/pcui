@@ -140,7 +140,7 @@
                 item.on('select', () => {
                     const path = category.categoryName.toLowerCase();
                     const name = example.toLowerCase().replace(/ /g, '-');
-                    iframe.src = `./${path}/${name}.html`;
+                    iframe.src = `${path}/${name}.html`;
                 });
 
                 categoryItem.append(item);
