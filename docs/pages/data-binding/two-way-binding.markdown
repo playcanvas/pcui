@@ -34,7 +34,7 @@ const observer = new Observer({
 
 Create two text inputs, which can both send and receive updates through the linked observer. This style of binding is defined through the use of the `BindingTwoWay` object which is passed as a property.
 
-```javascript
+```jsx
 const link = { observer, path: 'text' };
 const TextInput1 = () => <TextInput binding={new BindingTwoWay()} link={link} />
 const TextInput2 = () => <TextInput binding={new BindingTwoWay()} link={link} />
