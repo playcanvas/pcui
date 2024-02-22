@@ -30,7 +30,9 @@ const config = {
         return config;
     },
 
-    core: {},
+    features: {
+        storyStoreV7: false,
+    },
 
     framework: {
         name: '@storybook/react-webpack5',
