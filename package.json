@@ -51,7 +51,7 @@
     "lint": "eslint --ext .ts,.tsx src",
     "lint:styles": "stylelint src/**/*.scss",
     "serve:docs": "serve docs/_site",
-    "storybook": "storybook dev",
+    "storybook": "storybook dev -p 9000",
     "test": "node --test",
     "watch": "rollup -c -w",
     "watch:es6": "rollup -c -w --environment target:es6",
