@@ -673,7 +673,6 @@ class Element extends Events {
      */
     static register<Type>(type: string, cls: new () => Type, defaultArguments?: any) {
         elementRegistry.set(type, { cls, defaultArguments });
-        console.log('REGISTERED', type);
     }
 
     /**
