@@ -157,7 +157,7 @@ class NumericInput extends InputElement {
         this._updatePosition(evt.movementX, evt.shiftKey);
     };
 
-    protected _onSliderMouseDown = () => {
+    protected _onSliderMouseDown = (evt: MouseEvent) => {
         this._sliderControl.dom.requestPointerLock();
         this._sliderMovement = 0.0;
         this._sliderPrevValue = this.value;
@@ -169,6 +169,8 @@ class NumericInput extends InputElement {
             this.binding.historyCombine = true;
             this.binding.historyPostfix = `(${Date.now()})`;
         }
+
+        this.emit('slider:mousedown', evt);
     };
 
     protected _onSliderMouseUp = () => {
@@ -185,6 +187,8 @@ class NumericInput extends InputElement {
             this._historyPostfix = null;
         }
         this.focus();
+
+        this.emit('slider:mouseup');
     };
 
     protected _onInputChange(evt: Event) {

@@ -43,6 +43,8 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
 
     protected _applyingChange = false;
 
+    protected _bindAllInputs = false;
+
     constructor(args: Readonly<VectorInputArgs> = {}) {
         const elementArgs = { ...args };
         // set binding after inputs have been created
@@ -64,8 +66,24 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
                 renderChanges: args.renderChanges,
                 placeholder: args.placeholder ? (Array.isArray(args.placeholder) ? args.placeholder[i] : args.placeholder) : null
             });
+            input.on('slider:mousedown', (evt: MouseEvent) => {
+                this._bindAllInputs = !!evt.altKey;
+                if (this._bindAllInputs) {
+                    input.focus();
+                    for (let i = 0; i < this._inputs.length; i++) {
+                        this._inputs[i].class.add(pcuiClass.FOCUS);
+                    }
+                }
+            });
+            input.on('slider:mouseup', () => {
+                this._onInputChange(input);
+                this._bindAllInputs = false;
+                for (let i = 0; i < this._inputs.length; i++) {
+                    this._inputs[i].class.remove(pcuiClass.FOCUS);
+                }
+            });
             input.on('change', () => {
-                this._onInputChange();
+                this._onInputChange(input);
             });
             input.on('focus', () => {
                 this.emit('focus');
@@ -90,7 +108,8 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         }
     }
 
-    protected _onInputChange() {
+
+    protected _onInputChange(input: NumericInput) {
         if (this._applyingChange) return;
 
         // check if any of our inputs have the MULTIPLE_VALUES class and if so inherit it for us as well
@@ -102,7 +121,17 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
             this.class.remove(pcuiClass.MULTIPLE_VALUES);
         }
 
-        this.emit('change', this.value);
+        if (this._bindAllInputs) {
+            const value = Array(this._inputs.length).fill(input.value);
+            const changed = this._updateValue(value);
+
+            if (changed && this._binding) {
+                this._binding.setValue(value);
+            }
+        } else {
+            this.emit('change', this.value);
+        }
+
     }
 
     protected _updateValue(value: number[]) {
