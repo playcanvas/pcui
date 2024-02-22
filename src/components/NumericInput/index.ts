@@ -189,7 +189,6 @@ class NumericInput extends InputElement {
         this.focus();
 
         this.emit('slider:mouseup');
-
     };
 
     protected _onInputChange(evt: Event) {
