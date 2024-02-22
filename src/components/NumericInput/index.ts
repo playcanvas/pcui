@@ -157,7 +157,8 @@ class NumericInput extends InputElement {
         this._updatePosition(evt.movementX, evt.shiftKey);
     };
 
-    protected _onSliderMouseDown = () => {
+    protected _onSliderMouseDown = (evt: MouseEvent) => {
+        this.emit('slider:mousedown', evt);
         this._sliderControl.dom.requestPointerLock();
         this._sliderMovement = 0.0;
         this._sliderPrevValue = this.value;
@@ -172,6 +173,7 @@ class NumericInput extends InputElement {
     };
 
     protected _onSliderMouseUp = () => {
+        this.emit('slider:mouseup');
         document.exitPointerLock();
         if (!this._sliderUsed) return;
         this._sliderUsed = false;
