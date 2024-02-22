@@ -69,8 +69,8 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
             input.on('slider:mousedown', (evt: MouseEvent) => {
                 this._bindAllInputs = !!evt.altKey;
                 if (this._bindAllInputs) {
+                    input.focus();
                     for (let i = 0; i < this._inputs.length; i++) {
-                        if (this._inputs[i] === input) continue;
                         this._inputs[i].class.add(pcuiClass.FOCUS);
                     }
                 }
@@ -79,7 +79,6 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
                 this._onInputChange(input);
                 this._bindAllInputs = false;
                 for (let i = 0; i < this._inputs.length; i++) {
-                    if (this._inputs[i] === input) continue;
                     this._inputs[i].class.remove(pcuiClass.FOCUS);
                 }
             });
