@@ -68,9 +68,20 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
             });
             input.on('slider:mousedown', (evt: MouseEvent) => {
                 this._bindAllInputs = !!evt.altKey;
+                if (this._bindAllInputs) {
+                    for (let i = 0; i < this._inputs.length; i++) {
+                        if (this._inputs[i] === input) continue;
+                        this._inputs[i].class.add(pcuiClass.FOCUS);
+                    }
+                }
             });
             input.on('slider:mouseup', () => {
+                this._onInputChange(input);
                 this._bindAllInputs = false;
+                for (let i = 0; i < this._inputs.length; i++) {
+                    if (this._inputs[i] === input) continue;
+                    this._inputs[i].class.remove(pcuiClass.FOCUS);
+                }
             });
             input.on('change', () => {
                 this._onInputChange(input);
@@ -112,13 +123,16 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         }
 
         if (this._bindAllInputs) {
-            for (let i = 0; i < this._inputs.length; i++) {
-                if (this._inputs[i] === input) continue;
-                this._inputs[i].value = input.value;
+            const value = Array(this._inputs.length).fill(input.value);
+            const changed = this._updateValue(value);
+
+            if (changed && this._binding) {
+                this._binding.setValue(value);
             }
+        } else {
+            this.emit('change', this.value);
         }
 
-        this.emit('change', this.value);
     }
 
     protected _updateValue(value: number[]) {
