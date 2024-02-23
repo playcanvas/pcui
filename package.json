@@ -21,7 +21,10 @@
   "main": "dist/module/src/index.mjs",
   "exports": {
     ".": "./dist/module/src/index.mjs",
-    "./react": "./react/dist/module/src/index.mjs",
+    "./react": {
+      "import": "./react/dist/module/src/index.mjs",
+      "types": "./react/types/index.d.ts"
+    },
     "./styles": "./styles/dist/index.mjs"
   },
   "types": "types/index.d.ts",
