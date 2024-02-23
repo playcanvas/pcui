@@ -22,7 +22,7 @@
   "exports": {
     ".": "./dist/module/src/index.mjs",
     "./react": {
-      "main": "./react/dist/module/src/index.mjs",
+      "import": "./react/dist/module/src/index.mjs",
       "types": "./react/types/index.d.ts"
     },
     "./styles": "./styles/dist/index.mjs"
