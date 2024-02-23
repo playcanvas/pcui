@@ -73,6 +73,10 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
                     for (let i = 0; i < this._inputs.length; i++) {
                         this._inputs[i].class.add(pcuiClass.FOCUS);
                     }
+
+                    if (this.binding) {
+                        this.binding.historyCombine = true;
+                    }
                 }
             });
             input.on('slider:mouseup', () => {
@@ -80,6 +84,11 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
                 this._bindAllInputs = false;
                 for (let i = 0; i < this._inputs.length; i++) {
                     this._inputs[i].class.remove(pcuiClass.FOCUS);
+                }
+                input.blur();
+
+                if (this.binding) {
+                    this.binding.historyCombine = false;
                 }
             });
             input.on('change', () => {
