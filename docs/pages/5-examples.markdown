@@ -10,6 +10,4 @@ has_children: true
 
 Here are some simple examples demonstrating the various PCUI elements:
 
-<div class="highlighter-rouge">
-    <iframe src="examples.html" width="100%" height="500px"></iframe>
-</div>
+<iframe src="examples.html" width="100%" height="500px"></iframe>
