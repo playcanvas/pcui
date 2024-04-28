@@ -144,8 +144,8 @@
     "shx": "^0.3.4",
     "storybook": "^7.6.12",
     "style-loader": "^3.3.4",
-    "stylelint": "^16.2.1",
-    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint": "^16.4.0",
+    "stylelint-config-standard-scss": "^13.1.0",
     "typedoc": "^0.25.13",
     "typedoc-plugin-mdn-links": "^3.1.23",
     "typescript": "^5.3.3"
