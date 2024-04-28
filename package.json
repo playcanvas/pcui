@@ -146,8 +146,8 @@
     "style-loader": "^3.3.4",
     "stylelint": "^16.2.1",
     "stylelint-config-standard-scss": "^13.0.0",
-    "typedoc": "^0.25.12",
-    "typedoc-plugin-mdn-links": "^3.1.18",
+    "typedoc": "^0.25.13",
+    "typedoc-plugin-mdn-links": "^3.1.23",
     "typescript": "^5.3.3"
   },
   "directories": {
