@@ -5,6 +5,7 @@
     height: 24px;
     margin: $element-margin;
     align-items: center;
+    touch-action: none; // Prevents gestures and touch event interference.
 
     > .pcui-numeric-input {
         flex: 1;
