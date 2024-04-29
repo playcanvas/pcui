@@ -162,8 +162,6 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
         if (evt.button !== 0 || !this.enabled || this.readOnly || this._pointerId !== null) return;
         this._domSlider.setPointerCapture(evt.pointerId);
         this._pointerId = evt.pointerId;
-        window.addEventListener('pointermove', this._onPointerMove);
-        window.addEventListener('pointerup', this._onPointerUp);
         this._onSlideStart(evt.pageX);
     };
 
@@ -177,8 +175,6 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
         if (evt.pointerId !== this._pointerId || this._pointerId === null) return;
         this._domSlider.releasePointerCapture(evt.pointerId);
         this._onSlideEnd(evt.pageX);
-        window.removeEventListener('pointermove', this._onPointerMove);
-        window.removeEventListener('pointerup', this._onPointerUp);
         this._pointerId = null;  // Reset the pointer ID
     };
 
@@ -241,6 +237,10 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
 
     protected _onSlideStart(pageX: number) {
         this._domHandle.focus();
+
+        window.addEventListener('pointermove', this._onPointerMove);
+        window.addEventListener('pointerup', this._onPointerUp);
+
         this.class.add(CLASS_SLIDER_ACTIVE);
 
         // Calculate the cursor - handle offset. If there is an offset,
@@ -278,6 +278,9 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
         }
 
         this.class.remove(CLASS_SLIDER_ACTIVE);
+
+        window.removeEventListener('pointermove', this._onPointerMove);
+        window.removeEventListener('pointerup', this._onPointerUp);
 
         if (this.binding) {
             this.binding.historyCombine = this._historyCombine;
