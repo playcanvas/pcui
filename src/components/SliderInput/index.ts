@@ -242,10 +242,12 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
 
         this.class.add(CLASS_SLIDER_ACTIVE);
 
-        // Calculate the cursor - handle offset. If there is an offset,
+        // calculate the cursor - handle offset. If there is
+        // an offset that means the cursor is on the handle so
         // do not move the handle until the cursor moves.
-        this._calculateCursorHandleOffset(pageX);
-        this._onSlideMove(pageX);
+        if (!this._calculateCursorHandleOffset(pageX)) {
+            this._onSlideMove(pageX);
+        }
 
         if (this.binding) {
             this._historyCombine = this.binding.historyCombine;
