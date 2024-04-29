@@ -173,21 +173,12 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
         this._onSlideMove(evt.pageX);
     };
 
-    protected _endPointerInteraction = (evt: PointerEvent, pageX: number) => {
-        evt.stopPropagation();
-        this._domSlider.releasePointerCapture(evt.pointerId);
-        this._onSlideEnd(pageX);
-        this._pointerId = null;
-    };
-
     protected _onPointerUp = (evt: PointerEvent) => {
         if (evt.pointerId !== this._pointerId || this._pointerId === null) return;
-        this._endPointerInteraction(evt, evt.pageX);
-    };
-
-    protected _onPointerCancel = (evt: PointerEvent) => {
-        if (evt.pointerId !== this._pointerId || this._pointerId === null) return;
-        this._endPointerInteraction(evt, evt.pageX);
+        evt.stopPropagation();
+        this._domSlider.releasePointerCapture(evt.pointerId);
+        this._onSlideEnd(evt.pageX);
+        this._pointerId = null;
     };
 
     protected _onKeyDown = (evt: KeyboardEvent) => {
@@ -251,7 +242,6 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
         this._domHandle.focus();
         window.addEventListener('pointermove', this._onPointerMove);
         window.addEventListener('pointerup', this._onPointerUp);
-        window.addEventListener('pointercancel', this._onPointerCancel);
 
         this.class.add(CLASS_SLIDER_ACTIVE);
 
@@ -295,7 +285,6 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
 
         window.removeEventListener('pointermove', this._onPointerMove);
         window.removeEventListener('pointerup', this._onPointerUp);
-        window.removeEventListener('pointercancel', this._onPointerCancel);
 
         if (this.binding) {
             this.binding.historyCombine = this._historyCombine;
