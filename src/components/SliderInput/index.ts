@@ -159,7 +159,7 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
     }
 
     protected _onPointerDown = (evt: PointerEvent) => {
-        if (evt.button !== 0 || !this.enabled || this.readOnly || this._pointerId !== null) return;
+        if ((evt.pointerType === 'mouse' && evt.button !== 0) || !this.enabled || this.readOnly || this._pointerId !== null) return;
         this._domSlider.setPointerCapture(evt.pointerId);
         this._pointerId = evt.pointerId;
         this._onSlideStart(evt.pageX);
