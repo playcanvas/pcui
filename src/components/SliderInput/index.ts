@@ -259,7 +259,7 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
 
     protected _onSlideMove(pageX: number) {
         const rect = this._domBar.getBoundingClientRect();
-        // Reduce pageX by the initial cursor - handle offset
+        // reduce pageX by the initial cursor - handle offset
         pageX -= this._cursorHandleOffset;
         const x = Math.max(0, Math.min(1, (pageX - rect.left) / rect.width));
 
@@ -271,7 +271,7 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
     }
 
     protected _onSlideEnd(pageX: number) {
-        // When slide ends only move the handle if the cursor is no longer
+        // when slide ends only move the handle if the cursor is no longer
         // on the handle
         if (!this._calculateCursorHandleOffset(pageX)) {
             this._onSlideMove(pageX);
