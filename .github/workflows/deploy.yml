@@ -1,0 +1,49 @@
+name: "docs"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: actions/setup-node@v3
+      - run: npm ci
+      # Add a step to set up Ruby
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+      # Install Bundler
+      - run: gem install bundler
+      # Install Jekyll and other gems
+      - run: |
+          cd docs
+          bundle install
+          cd ..
+      # Now run your original command
+      - run: npm run build:docsite:production
+      # https://github.com/actions/upload-pages-artifact
+      - uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./docs/_site
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        # https://github.com/actions/deploy-pages
+        uses: actions/deploy-pages@v2

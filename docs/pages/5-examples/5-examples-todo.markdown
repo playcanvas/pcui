@@ -16,8 +16,7 @@ The todo list below allows you to add items to the list, toggle their 'done' sta
 
 ### Code
 
-```javascript
-
+```jsx
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Observer } from '@playcanvas/observer';
@@ -71,5 +70,5 @@ export const TodoList = (props) => {
     );
 };
 
-ReactDOM.render(<Todolist />, document.body);
+ReactDOM.render(<TodoList />, document.body);
 ```

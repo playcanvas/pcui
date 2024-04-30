@@ -14,11 +14,9 @@ A full guide to using the PCUI library can be found [here](https://playcanvas.gi
 
 To install the PCUI NPM module, run the following command:
 
-```
-npm install @playcanvas/pcui
-```
+    npm install @playcanvas/pcui --save-dev
 
-If you are using ESM, you can then import each individual element from PCUI. In the example below you can see how the PCUI `Label` component is imported from the PCUI library. The styles for PCUI are then imported into the example. Styles only need to be imported once per project.
+You can then import each individual element from PCUI. In the example below, you can see how the PCUI `Label` component is imported from the PCUI library. The styles for PCUI are then imported into the example. Styles only need to be imported once per project.
 
 ```javascript
 import { Label } from '@playcanvas/pcui';
@@ -46,7 +44,7 @@ ReactDOM.render(
 
 ## Building a UMD bundle
 
-If you need a UMD version of the library so that you for example, it can useed with a PlayCanvas Editor project, please refer to our [build guide](BUILDGUIDE.md).
+If you need a UMD version of the PCUI library (say, to use it in a PlayCanvas Editor project), please refer to our [build guide](BUILDGUIDE.md).
 
 ## Including your own font
 
@@ -64,7 +62,7 @@ The PCUI library offers a data binding layer that can be used to synchronize dat
 
 ```javascript
 import { Observer } from '@playcanvas/observer';
-import { Label, TextInput, BindingObserversToElement, BindingElementToObservers } from '@playcanvs/pcui';
+import { Label, TextInput, BindingObserversToElement, BindingElementToObservers } from '@playcanvas/pcui';
 import '@playcanvas/pcui/styles';
 
 // create a new observer for a simple object which contains a text string
@@ -127,10 +125,8 @@ If you wish to view all components available to you in the library, you can run 
 
 Run Storybook as follows:
 
-```
-npm install
-npm run storybook
-```
+    npm install
+    npm run storybook
 
 ## Documentation
 

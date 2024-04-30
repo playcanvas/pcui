@@ -16,7 +16,7 @@ In this example you can interact with the input slider to update the progress ba
 
 ### Code
 
-```javascript
+```jsx
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
