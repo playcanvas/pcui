@@ -166,6 +166,11 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _prefix = '';
 
+    /**
+     * Creates a new SelectInput.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<SelectInputArgs> = {}) {
         // main container
         const container = new Container({

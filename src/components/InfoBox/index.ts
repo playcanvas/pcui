@@ -47,6 +47,11 @@ class InfoBox extends Container {
 
     protected _text: string;
 
+    /**
+     * Creates a new InfoBox.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<InfoBoxArgs> = {}) {
         super(args);
 

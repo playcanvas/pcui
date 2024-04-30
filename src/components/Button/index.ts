@@ -38,6 +38,11 @@ class Button extends Element {
 
     protected _size: string | null;
 
+    /**
+     * Creates a new Button.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<ButtonArgs> = {}) {
         super({ dom: 'button', ...args });
 

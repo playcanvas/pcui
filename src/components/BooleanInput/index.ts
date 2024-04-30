@@ -27,6 +27,11 @@ class BooleanInput extends Element implements IBindable, IFocusable {
 
     protected _renderChanges: boolean;
 
+    /**
+     * Creates a new BooleanInput.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<BooleanInputArgs> = {}) {
         super({ tabIndex: 0, ...args });
 

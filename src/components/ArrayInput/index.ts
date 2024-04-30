@@ -117,6 +117,11 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     protected _renderChanges: boolean;
 
+    /**
+     * Creates a new ArrayInput.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<ArrayInputArgs> = {}) {
         const container = new Container({
             dom: args.dom,

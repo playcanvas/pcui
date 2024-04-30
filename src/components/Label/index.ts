@@ -45,6 +45,11 @@ class Label extends Element implements IPlaceholder, IBindable {
 
     protected _renderChanges: boolean;
 
+    /**
+     * Creates a new Label.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<LabelArgs> = {}) {
         super({ dom: 'span', ...args });
 

@@ -23,6 +23,11 @@ class Code extends Container {
 
     protected _text: string;
 
+    /**
+     * Creates a new Code.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<CodeArgs> = {}) {
         super(args);
 

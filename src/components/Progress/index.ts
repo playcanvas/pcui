@@ -24,6 +24,11 @@ class Progress extends Container {
 
     protected _value: number;
 
+    /**
+     * Creates a new Progress.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<ProgressArgs> = {}) {
         super(args);
         this.class.add(CLASS_ROOT);

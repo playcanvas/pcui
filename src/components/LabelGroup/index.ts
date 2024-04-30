@@ -35,6 +35,11 @@ class LabelGroup extends Container {
 
     protected _field: Element;
 
+     /**
+      * Creates a new LabelGroup.
+      *
+      * @param args - The arguments.
+      */
     constructor(args: Readonly<LabelGroupArgs> = {}) {
         super(args);
 

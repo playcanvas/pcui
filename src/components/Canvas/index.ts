@@ -23,6 +23,11 @@ class Canvas extends Element {
 
     protected _ratio = 1;
 
+    /**
+     * Creates a new Canvas.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<CanvasArgs> = {}) {
         super({ dom: 'canvas', ...args });
 

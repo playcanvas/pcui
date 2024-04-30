@@ -138,6 +138,11 @@ class Container extends Element {
 
     protected _resizable: string;
 
+    /**
+     * Creates a new Container.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<ContainerArgs> = {}) {
         super(args);
 

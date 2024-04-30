@@ -34,7 +34,7 @@ class Spinner extends Element {
     static TYPE_SMALL_THICK = 'small-thick';
 
     /**
-     * Sets the pixel size of the spinner
+     * Creates a new Spinner.
      *
      * @param args - The arguments.
      */
