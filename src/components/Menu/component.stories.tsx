@@ -19,8 +19,8 @@ export default meta;
 type Story = StoryObj<typeof Menu>;
 
 window.addEventListener('contextmenu', (evt: MouseEvent) => {
-    // @ts-ignore
-    if (evt.target.ui instanceof LabelElement) {
+    const target = evt.target as HTMLElement;
+    if (target.ui instanceof LabelElement) {
         const element = document.querySelector('.pcui-menu');
         if (element) {
             const menu = element.ui as MenuElement;

@@ -10,7 +10,6 @@ import BaseComponent from '../Element/component';
 class GridView extends BaseComponent <GridViewArgs, any> {
     constructor(props: GridViewArgs) {
         super(props);
-        // @ts-ignore
         this.element = new GridViewElement({ ...props });
         this.loadChildren(this.props.children, this.element);
     }
@@ -21,8 +20,7 @@ class GridView extends BaseComponent <GridViewArgs, any> {
             children = [children];
         }
         children.forEach((child: any) => {
-            // @ts-ignore
-            const childElement = new GridViewItemElement({ text: child.props.text, open: false });
+            const childElement = new GridViewItemElement({ text: child.props.text });
             element.append(childElement);
             this.loadChildren(child.props.children, childElement);
         });
