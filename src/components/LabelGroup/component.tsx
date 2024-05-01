@@ -8,7 +8,6 @@ import { JSXElementConstructor, ReactElement } from 'react';
 class LabelGroup extends BaseComponent <LabelGroupArgs, any> {
     constructor(props: LabelGroupArgs) {
         super(props);
-        // @ts-ignore
         this.elementClass = Element;
     }
 

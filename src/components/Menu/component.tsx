@@ -14,7 +14,6 @@ class Menu extends BaseComponent <MenuArgs, any> {
     }
 
     onDivLoaded = (element: any) => {
-        // @ts-ignore
         this.element = new Element({ ...this.props, dom: element });
     };
 
