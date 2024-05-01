@@ -45,6 +45,11 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
 
     protected _bindAllInputs = false;
 
+    /**
+     * Creates a new VectorInput.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<VectorInputArgs> = {}) {
         const elementArgs = { ...args };
         // set binding after inputs have been created

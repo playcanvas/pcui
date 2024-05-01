@@ -51,6 +51,11 @@ class GridViewItem extends Container implements IFocusable {
 
     protected _allowSelect: boolean;
 
+    /**
+     * Creates a new GridViewItem.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<GridViewItemArgs> = {}) {
         super({ tabIndex: 0, ...args });
 

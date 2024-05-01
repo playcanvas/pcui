@@ -22,6 +22,11 @@ export interface TextInputArgs extends InputElementArgs, IBindableArgs, IPlaceho
 class TextInput extends InputElement {
     protected _onValidate: (value: string) => boolean;
 
+    /**
+     * Creates a new TextInput.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<TextInputArgs> = {}) {
         super(args);
 

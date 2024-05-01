@@ -73,6 +73,11 @@ class NumericInput extends InputElement {
 
     protected _sliderUsed = false;
 
+    /**
+     * Creates a new NumericInput.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<NumericInputArgs> = {}) {
         const textInputArgs = { ...args };
         // delete value because we want to set it after the other arguments

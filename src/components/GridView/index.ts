@@ -50,6 +50,11 @@ class GridView extends Container {
 
     protected _selected: GridViewItem[] = [];
 
+    /**
+     * Creates a new GridView.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<GridViewArgs> = {}) {
         super(args);
 

@@ -406,6 +406,11 @@ class Element extends Events {
 
     protected _onClickEvt: () => void;
 
+    /**
+     * Creates a new Element.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<ElementArgs> = {}) {
         super();
 

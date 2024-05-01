@@ -6,6 +6,11 @@ const CLASS_ROOT = 'pcui-divider';
  * Represents a vertical division between two elements.
  */
 class Divider extends Element {
+    /**
+     * Creates a new Divider.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<ElementArgs> = {}) {
         super(args);
 

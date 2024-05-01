@@ -27,6 +27,11 @@ export interface OverlayArgs extends ElementArgs {
 class Overlay extends Container {
     protected _domClickableOverlay: HTMLDivElement;
 
+    /**
+     * Creates a new Overlay.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<OverlayArgs> = {}) {
         super(args);
 

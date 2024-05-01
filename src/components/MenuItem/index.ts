@@ -73,6 +73,11 @@ class MenuItem extends Container implements IBindable {
 
     protected _renderChanges: boolean;
 
+     /**
+      * Creates a new MenuItem.
+      *
+      * @param args - The arguments.
+      */
     constructor(args: Readonly<MenuItemArgs> = {}) {
         super(args);
 

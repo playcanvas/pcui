@@ -91,6 +91,11 @@ class ColorPicker extends Element implements IBindable {
 
     protected _renderChanges: boolean;
 
+    /**
+     * Creates a new ColorPicker.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<ColorPickerArgs> = {}) {
         super(args);
 
