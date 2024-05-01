@@ -113,7 +113,7 @@ Each component exists in its own folder within the `./src/components` directory.
 - `index.ts`: The PCUI element itself.
 - `style.scss`: The SASS styles for the component.
 - `component.tsx`: A React wrapper for the element, currently used to display the element in Storybook.
-- `index.stories.tsx`: The Storybook entry for this component.
+- `component.stories.tsx`: The Storybook entry for this component.
 
 Locally developed components can be viewed & tested by running the Storybook app, as mentioned in the following section.
 
