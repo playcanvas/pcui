@@ -1,5 +1,5 @@
+import { CLASS_MULTIPLE_VALUES, CLASS_NOT_FLEXIBLE } from '../../class';
 import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
-import * as pcuiClass from '../../class';
 
 const CLASS_RADIO_BUTTON = 'pcui-radio-button';
 const CLASS_RADIO_BUTTON_SELECTED = CLASS_RADIO_BUTTON + '-selected';
@@ -26,7 +26,7 @@ class RadioButton extends Element implements IBindable, IFocusable {
         super({ tabIndex: 0, ...args });
 
         this.class.add(CLASS_RADIO_BUTTON);
-        this.class.add(pcuiClass.NOT_FLEXIBLE);
+        this.class.add(CLASS_NOT_FLEXIBLE);
 
         this.dom.addEventListener('keydown', this._onKeyDown);
         this.dom.addEventListener('focus', this._onFocus);
@@ -82,7 +82,7 @@ class RadioButton extends Element implements IBindable, IFocusable {
     };
 
     protected _updateValue(value: boolean) {
-        this.class.remove(pcuiClass.MULTIPLE_VALUES);
+        this.class.remove(CLASS_MULTIPLE_VALUES);
 
         if (value === this.value) return false;
 
@@ -128,7 +128,7 @@ class RadioButton extends Element implements IBindable, IFocusable {
 
         if (different) {
             this._updateValue(null);
-            this.class.add(pcuiClass.MULTIPLE_VALUES);
+            this.class.add(CLASS_MULTIPLE_VALUES);
         } else {
             this._updateValue(values[0]);
         }

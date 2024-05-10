@@ -1,9 +1,9 @@
+import { CLASS_FOCUS, CLASS_MULTIPLE_VALUES } from '../../class';
 import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholderArgs } from '../Element';
 import Container from '../Container';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import Label from '../Label';
-import * as pcuiClass from '../../class';
 import { searchItems } from '../../helpers/search';
 
 const CLASS_SELECT_INPUT = 'pcui-select-input';
@@ -818,7 +818,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
     };
 
     protected _onFocus = () => {
-        this.class.add(pcuiClass.FOCUS);
+        this.class.add(CLASS_FOCUS);
         this.emit('focus');
         if (!this._input.hidden) {
             this.open();
@@ -826,7 +826,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
     };
 
     protected _onBlur = () => {
-        this.class.remove(pcuiClass.FOCUS);
+        this.class.remove(CLASS_FOCUS);
         this.emit('blur');
     };
 
@@ -1145,7 +1145,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
         this._suspendInputChange = false;
 
-        this.class.remove(pcuiClass.MULTIPLE_VALUES);
+        this.class.remove(CLASS_MULTIPLE_VALUES);
 
         value = this._convertValue(value);
 
@@ -1153,7 +1153,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
             // if the value is null because we are showing multiple values
             // but someone wants to actually set the value of all observers to null
             // then make sure we do not return early
-            if (value !== null || !this._allowNull || !this.class.contains(pcuiClass.MULTIPLE_VALUES)) {
+            if (value !== null || !this._allowNull || !this.class.contains(CLASS_MULTIPLE_VALUES)) {
                 return;
             }
         }
@@ -1213,7 +1213,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 }
             }
 
-            this.class.add(pcuiClass.MULTIPLE_VALUES);
+            this.class.add(CLASS_MULTIPLE_VALUES);
         } else {
             this.value = values[0];
         }

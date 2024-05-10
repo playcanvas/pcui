@@ -1,7 +1,7 @@
 import { EventHandle, Events, HandleEvent, Observer } from '@playcanvas/observer';
 import * as React from 'react';
-import * as pcuiClass from '../../class';
 
+import { CLASS_DISABLED, CLASS_ERROR, CLASS_FLASH, CLASS_FONT_REGULAR, CLASS_HIDDEN, CLASS_READONLY } from '../../class';
 import { BindingBase } from '../../binding';
 
 const CLASS_ELEMENT = 'pcui-element';
@@ -437,7 +437,7 @@ class Element extends Events {
         this._dom.addEventListener('mouseout', this._onMouseOut);
 
         // add css classes
-        this._dom.classList.add(CLASS_ELEMENT, pcuiClass.FONT_REGULAR);
+        this._dom.classList.add(CLASS_ELEMENT, CLASS_FONT_REGULAR);
 
         // add user classes
         if (args.class) {
@@ -575,10 +575,10 @@ class Element extends Events {
     flash() {
         if (this._flashTimeout) return;
 
-        this.class.add(pcuiClass.FLASH);
+        this.class.add(CLASS_FLASH);
         this._flashTimeout = window.setTimeout(() => {
             this._flashTimeout = null;
-            this.class.remove(pcuiClass.FLASH);
+            this.class.remove(CLASS_FLASH);
         }, 200);
     }
 
@@ -602,9 +602,9 @@ class Element extends Events {
 
     protected _onEnabledChange(enabled: boolean) {
         if (enabled) {
-            this.class.remove(pcuiClass.DISABLED);
+            this.class.remove(CLASS_DISABLED);
         } else {
-            this.class.add(pcuiClass.DISABLED);
+            this.class.add(CLASS_DISABLED);
         }
 
         this.emit(enabled ? 'enable' : 'disable');
@@ -646,9 +646,9 @@ class Element extends Events {
 
     protected _onReadOnlyChange(readOnly: boolean) {
         if (readOnly) {
-            this.class.add(pcuiClass.READONLY);
+            this.class.add(CLASS_READONLY);
         } else {
-            this.class.remove(pcuiClass.READONLY);
+            this.class.remove(CLASS_READONLY);
         }
 
         this.emit('readOnly', readOnly);
@@ -815,9 +815,9 @@ class Element extends Events {
         this._hidden = value;
 
         if (value) {
-            this.class.add(pcuiClass.HIDDEN);
+            this.class.add(CLASS_HIDDEN);
         } else {
-            this.class.remove(pcuiClass.HIDDEN);
+            this.class.remove(CLASS_HIDDEN);
         }
 
         this.emit(value ? 'hide' : 'show');
@@ -863,9 +863,9 @@ class Element extends Events {
         if (this._hasError === value) return;
         this._hasError = value;
         if (value) {
-            this.class.add(pcuiClass.ERROR);
+            this.class.add(CLASS_ERROR);
         } else {
-            this.class.remove(pcuiClass.ERROR);
+            this.class.remove(CLASS_ERROR);
         }
     }
 

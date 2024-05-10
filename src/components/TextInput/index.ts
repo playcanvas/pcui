@@ -1,6 +1,6 @@
+import { CLASS_MULTIPLE_VALUES } from '../../class';
 import Element, { IBindableArgs, IPlaceholderArgs } from '../Element';
 import InputElement, { InputElementArgs } from '../InputElement';
-import * as pcuiClass from '../../class';
 
 const CLASS_TEXT_INPUT = 'pcui-text-input';
 
@@ -58,7 +58,7 @@ class TextInput extends InputElement {
     }
 
     protected _updateValue(value: string | Array<string>) {
-        this.class.remove(pcuiClass.MULTIPLE_VALUES);
+        this.class.remove(CLASS_MULTIPLE_VALUES);
 
         if (value && typeof (value) === 'object') {
             if (Array.isArray(value)) {
@@ -112,7 +112,7 @@ class TextInput extends InputElement {
 
         if (different) {
             this._updateValue(null);
-            this.class.add(pcuiClass.MULTIPLE_VALUES);
+            this.class.add(CLASS_MULTIPLE_VALUES);
         } else {
             this._updateValue(values[0]);
         }

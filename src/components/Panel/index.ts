@@ -1,4 +1,4 @@
-import * as pcuiClass from '../../class';
+import { CLASS_COLLAPSED, CLASS_COLLAPSIBLE, CLASS_FONT_BOLD } from '../../class';
 import Element from '../Element';
 import Container, { ContainerArgs } from '../Container';
 import Label from '../Label';
@@ -196,13 +196,13 @@ class Panel extends Container {
         this._containerHeader = new Container({
             flex: true,
             flexDirection: 'row',
-            class: [CLASS_PANEL_HEADER, pcuiClass.FONT_BOLD]
+            class: [CLASS_PANEL_HEADER, CLASS_FONT_BOLD]
         });
 
         // header title
         this._labelTitle = new Label({
             text: args.headerText,
-            class: [CLASS_PANEL_HEADER_TITLE, pcuiClass.FONT_BOLD]
+            class: [CLASS_PANEL_HEADER_TITLE, CLASS_FONT_BOLD]
         });
         this._containerHeader.append(this._labelTitle);
 
@@ -285,11 +285,11 @@ class Panel extends Container {
                 // add collapsed class after getting the width and height
                 // because if we add it before then because of overflow:hidden
                 // we might get inaccurate width/heights.
-                this.class.add(pcuiClass.COLLAPSED);
+                this.class.add(CLASS_COLLAPSED);
             } else {
                 // remove collapsed class first and the restore width and height
                 // (opposite order of collapsing)
-                this.class.remove(pcuiClass.COLLAPSED);
+                this.class.remove(CLASS_COLLAPSED);
 
                 if (this._collapseHorizontally) {
                     this.height = '';
@@ -362,9 +362,9 @@ class Panel extends Container {
         this._collapsible = value;
 
         if (value) {
-            this.class.add(pcuiClass.COLLAPSIBLE);
+            this.class.add(CLASS_COLLAPSIBLE);
         } else {
-            this.class.remove(pcuiClass.COLLAPSIBLE);
+            this.class.remove(CLASS_COLLAPSIBLE);
         }
 
         this._reflow();

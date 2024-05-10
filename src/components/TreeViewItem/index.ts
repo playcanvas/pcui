@@ -1,8 +1,8 @@
+import { CLASS_FONT_REGULAR } from '../../class';
 import Element from '../Element';
 import Label from '../Label';
 import Container, { ContainerArgs } from '../Container';
 import TextInput from '../TextInput';
-import * as pcuiClass from '../../class';
 
 const CLASS_ROOT = 'pcui-treeview-item';
 const CLASS_ICON = CLASS_ROOT + '-icon';
@@ -359,7 +359,7 @@ class TreeViewItem extends Container {
         const textInput = new TextInput({
             renderChanges: false,
             value: this.text,
-            class: pcuiClass.FONT_REGULAR
+            class: CLASS_FONT_REGULAR
         });
 
         textInput.on('blur', () => {

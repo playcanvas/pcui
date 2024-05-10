@@ -1,10 +1,10 @@
 import { EventHandle } from '@playcanvas/observer';
 
+import { CLASS_MULTIPLE_VALUES, CLASS_NOT_FLEXIBLE } from '../../class';
 import Element, { ElementArgs, IBindable, IBindableArgs } from '../Element';
 import Overlay from '../Overlay';
 import NumericInput from '../NumericInput';
 import TextInput from '../TextInput';
-import * as pcuiClass from '../../class';
 import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
 
 const CLASS_ROOT = 'pcui-color-input';
@@ -99,7 +99,7 @@ class ColorPicker extends Element implements IBindable {
     constructor(args: Readonly<ColorPickerArgs> = {}) {
         super(args);
 
-        this.class.add(CLASS_ROOT, pcuiClass.NOT_FLEXIBLE);
+        this.class.add(CLASS_ROOT, CLASS_NOT_FLEXIBLE);
 
         // this element shows the actual color. The
         // parent element shows the checkerboard pattern
@@ -451,7 +451,7 @@ class ColorPicker extends Element implements IBindable {
             }
         }
 
-        this.class.remove(pcuiClass.MULTIPLE_VALUES);
+        this.class.remove(CLASS_MULTIPLE_VALUES);
 
         if (dirty) {
             this._setValue(value);
@@ -744,7 +744,7 @@ class ColorPicker extends Element implements IBindable {
 
         if (different) {
             this.value = null;
-            this.class.add(pcuiClass.MULTIPLE_VALUES);
+            this.class.add(CLASS_MULTIPLE_VALUES);
         } else {
             // @ts-ignore
             this.value = values[0];
