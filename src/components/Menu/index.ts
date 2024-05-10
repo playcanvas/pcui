@@ -32,11 +32,11 @@ export interface MenuArgs extends ContainerArgs {
 class Menu extends Container implements IFocusable {
     protected _containerMenuItems: Container;
 
-     /**
-      * Creates a new Menu.
-      *
-      * @param args - The arguments.
-      */
+    /**
+     * Creates a new Menu.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<MenuArgs> = {}) {
         super({ tabIndex: 1, ...args });
 

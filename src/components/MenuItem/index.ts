@@ -73,11 +73,11 @@ class MenuItem extends Container implements IBindable {
 
     protected _renderChanges: boolean;
 
-     /**
-      * Creates a new MenuItem.
-      *
-      * @param args - The arguments.
-      */
+    /**
+     * Creates a new MenuItem.
+     *
+     * @param args - The arguments.
+     */
     constructor(args: Readonly<MenuItemArgs> = {}) {
         super(args);
 
@@ -179,8 +179,7 @@ class MenuItem extends Container implements IBindable {
     }
 
     /**
-     * Selects the MenuItem which also happens automatically
-     * when the user clicks on the MenuItem.
+     * Selects the MenuItem which also happens automatically when the user clicks on the MenuItem.
      */
     select() {
         if (!this.enabled) return;
