@@ -1,5 +1,5 @@
+import { CLASS_NOT_FLEXIBLE, CLASS_MULTIPLE_VALUES } from '../../class';
 import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
-import * as pcuiClass from '../../class';
 
 const CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
 const CLASS_BOOLEAN_INPUT_TICKED = CLASS_BOOLEAN_INPUT + '-ticked';
@@ -40,7 +40,7 @@ class BooleanInput extends Element implements IBindable, IFocusable {
         } else {
             this.class.add(CLASS_BOOLEAN_INPUT);
         }
-        this.class.add(pcuiClass.NOT_FLEXIBLE);
+        this.class.add(CLASS_NOT_FLEXIBLE);
 
         this.dom.addEventListener('keydown', this._onKeyDown);
         this.dom.addEventListener('focus', this._onFocus);
@@ -100,7 +100,7 @@ class BooleanInput extends Element implements IBindable, IFocusable {
     };
 
     protected _updateValue(value: boolean) {
-        this.class.remove(pcuiClass.MULTIPLE_VALUES);
+        this.class.remove(CLASS_MULTIPLE_VALUES);
 
         if (value === this.value) return false;
 
@@ -146,7 +146,7 @@ class BooleanInput extends Element implements IBindable, IFocusable {
 
         if (different) {
             this._updateValue(null);
-            this.class.add(pcuiClass.MULTIPLE_VALUES);
+            this.class.add(CLASS_MULTIPLE_VALUES);
         } else {
             this._updateValue(values[0]);
         }

@@ -1,6 +1,6 @@
+import { CLASS_MULTIPLE_VALUES } from '../../class';
 import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
 import NumericInput from '../NumericInput';
-import * as pcuiClass from '../../class';
 
 const CLASS_SLIDER = 'pcui-slider';
 const CLASS_SLIDER_CONTAINER = CLASS_SLIDER + '-container';
@@ -334,10 +334,10 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
 
     set value(value) {
         this._numericInput.value = value;
-        if (this._numericInput.class.contains(pcuiClass.MULTIPLE_VALUES)) {
-            this.class.add(pcuiClass.MULTIPLE_VALUES);
+        if (this._numericInput.class.contains(CLASS_MULTIPLE_VALUES)) {
+            this.class.add(CLASS_MULTIPLE_VALUES);
         } else {
-            this.class.remove(pcuiClass.MULTIPLE_VALUES);
+            this.class.remove(CLASS_MULTIPLE_VALUES);
         }
     }
 
@@ -348,10 +348,10 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
     /* eslint accessor-pairs: 0 */
     set values(values: Array<number>) {
         this._numericInput.values = values;
-        if (this._numericInput.class.contains(pcuiClass.MULTIPLE_VALUES)) {
-            this.class.add(pcuiClass.MULTIPLE_VALUES);
+        if (this._numericInput.class.contains(CLASS_MULTIPLE_VALUES)) {
+            this.class.add(CLASS_MULTIPLE_VALUES);
         } else {
-            this.class.remove(pcuiClass.MULTIPLE_VALUES);
+            this.class.remove(CLASS_MULTIPLE_VALUES);
         }
     }
 

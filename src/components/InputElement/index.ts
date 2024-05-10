@@ -1,5 +1,5 @@
+import { CLASS_FOCUS } from '../../class';
 import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
-import * as pcuiClass from '../../class';
 
 const CLASS_INPUT_ELEMENT = 'pcui-input-element';
 
@@ -116,13 +116,13 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
     }
 
     protected _onInputFocus = (evt: FocusEvent) => {
-        this.class.add(pcuiClass.FOCUS);
+        this.class.add(CLASS_FOCUS);
         this.emit('focus', evt);
         this._prevValue = this._domInput.value;
     };
 
     protected _onInputBlur = (evt: FocusEvent) => {
-        this.class.remove(pcuiClass.FOCUS);
+        this.class.remove(CLASS_FOCUS);
         this.emit('blur', evt);
     };
 
