@@ -375,7 +375,7 @@ class ColorPicker extends Element implements IBindable {
         // position picker
         const rectPicker = this._overlay.dom.getBoundingClientRect();
         const rectElement = this.dom.getBoundingClientRect();
-        this._setColorPickerPosition(rectElement.left - rectPicker.width, rectElement.top + 25);
+        this._setColorPickerPosition(rectElement.left - rectElement.width, rectElement.top + 25);
 
         // color changed, update picker
         this._evtColorToPicker = this.on('change', () => {
