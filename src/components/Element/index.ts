@@ -892,10 +892,7 @@ class Element extends Events {
      * Gets / sets the width of the Element in pixels. Can also be an empty string to remove it.
      */
     set width(value: number | string) {
-        if (typeof value === 'number') {
-            value = String(value) + 'px';
-        }
-        this.style.width = value;
+        this.style.width = typeof value === 'number' ? `${value}px` : value;
     }
 
     get width(): number {
@@ -906,10 +903,7 @@ class Element extends Events {
      * Gets / sets the height of the Element in pixels. Can also be an empty string to remove it.
      */
     set height(value: number | string) {
-        if (typeof value === 'number') {
-            value = String(value) + 'px';
-        }
-        this.style.height = value;
+        this.style.height = typeof value === 'number' ? `${value}px` : value;
     }
 
     get height(): number {
@@ -1102,7 +1096,7 @@ class Element extends Events {
 
 // Declare an additional property on the base Node interface that references the owner Element
 declare global {
-    interface Node { // eslint-disable-line no-unused-vars
+    interface Node {
         ui: Element;
     }
 }

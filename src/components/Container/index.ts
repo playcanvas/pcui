@@ -282,13 +282,7 @@ class Container extends Element {
      * @param index - The index to move the element to.
      */
     move(element: Element, index: number) {
-        let idx = -1;
-        for (let i = 0; i < this.dom.childNodes.length; i++) {
-            if (this.dom.childNodes[i].ui === element) {
-                idx = i;
-                break;
-            }
-        }
+        const idx = Array.prototype.indexOf.call(this.dom.childNodes, element.dom);
 
         if (idx === -1) {
             this.appendBefore(element, this.dom.childNodes[index]);
@@ -579,7 +573,6 @@ class Container extends Element {
      * @param node.root - The root node of the dom structure.
      * @param node.children - The children of the root node.
      * @returns The recursively appended element node.
-     *
      */
     protected _buildDomNode(node: { [x: string]: any; root?: any; children?: any; }): Container {
         const keys = Object.keys(node);
