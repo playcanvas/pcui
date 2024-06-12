@@ -26,19 +26,28 @@ const elementRegistry: Map<string, any> = new Map();
 
 export interface IBindable {
     /**
-     * Gets / sets the value of the Element.
+     * Sets the value of the Element.
      */
     set value(values: any),
+    /**
+     * Gets the value of the Element.
+     */
     get value(): any,
     /**
-     * Gets / sets multiple values to the Element. It is up to the Element to determine how to display them.
+     * Sets multiple values on the Element. It is up to the Element to determine how to display them.
      */
     set values(values: Array<any>),
+    /**
+     * Gets multiple values on the Element.
+     */
     get values(): Array<any>,
     /**
-     * Gets / sets whether the input should flash on changes.
+     * Sets whether the input should flash on changes.
      */
     set renderChanges(value: boolean),
+    /**
+     * Gets whether the input should flash on changes.
+     */
     get renderChanges(): boolean,
 }
 
@@ -59,9 +68,12 @@ export interface IBindableArgs {
 
 export interface IPlaceholder {
     /**
-     * Gets / sets the placeholder text of the input.
+     * Sets the placeholder text of the input.
      */
     set placeholder(value: string),
+    /**
+     * Gets the placeholder text of the input.
+     */
     get placeholder(): string
 }
 
@@ -709,7 +721,7 @@ class Element extends Events {
 
 
     /**
-     * Gets / sets whether the Element or its parent chain is enabled or not. Defaults to `true`.
+     * Sets whether the Element or its parent chain is enabled or not. Defaults to `true`.
      */
     set enabled(value: boolean) {
         if (this._enabled === value) return;
@@ -725,13 +737,16 @@ class Element extends Events {
         }
     }
 
+    /**
+     * Gets whether the Element or its parent chain is enabled or not.
+     */
     get enabled(): boolean {
         if (this._ignoreParent) return this._enabled;
         return this._enabled && (!this._parent || this._parent.enabled);
     }
 
     /**
-     * Gets / sets whether the Element will ignore parent events & variable states.
+     * Sets whether the Element will ignore parent events & variable states.
      */
     set ignoreParent(value) {
         this._ignoreParent = value;
@@ -739,6 +754,9 @@ class Element extends Events {
         this._onReadOnlyChange(this.readOnly);
     }
 
+    /**
+     * Gets whether the Element will ignore parent events & variable states.
+     */
     get ignoreParent() {
         return this._ignoreParent;
     }
@@ -751,7 +769,7 @@ class Element extends Events {
     }
 
     /**
-     * Gets / sets the parent Element.
+     * Sets the parent Element.
      */
     set parent(value: Element) {
         if (value === this._parent) return;
@@ -800,12 +818,15 @@ class Element extends Events {
         }
     }
 
+    /**
+     * Gets the parent Element.
+     */
     get parent(): Element {
         return this._parent;
     }
 
     /**
-     * Gets / sets whether the Element is hidden.
+     * Sets whether the Element is hidden.
      */
     set hidden(value: boolean) {
         if (value === this._hidden) return;
@@ -827,6 +848,9 @@ class Element extends Events {
         }
     }
 
+    /**
+     * Gets whether the Element is hidden.
+     */
     get hidden(): boolean {
         return this._hidden;
     }
@@ -841,7 +865,7 @@ class Element extends Events {
 
 
     /**
-     * Gets / sets whether the Element is read only.
+     * Sets whether the Element is read only.
      */
     set readOnly(value: boolean) {
         if (this._readOnly === value) return;
@@ -850,6 +874,9 @@ class Element extends Events {
         this._onReadOnlyChange(value);
     }
 
+    /**
+     * Gets whether the Element is read only.
+     */
     get readOnly(): boolean {
         if (this._ignoreParent) return this._readOnly;
         return this._readOnly || !!(this._parent && this._parent.readOnly);
@@ -857,7 +884,7 @@ class Element extends Events {
 
 
     /**
-     * Gets / sets whether the Element is in an error state.
+     * Sets whether the Element is in an error state.
      */
     set error(value: boolean) {
         if (this._hasError === value) return;
@@ -869,6 +896,9 @@ class Element extends Events {
         }
     }
 
+    /**
+     * Gets whether the Element is in an error state.
+     */
     get error(): boolean {
         return this._hasError;
     }
@@ -889,41 +919,50 @@ class Element extends Events {
     }
 
     /**
-     * Gets / sets the width of the Element in pixels. Can also be an empty string to remove it.
+     * Sets the width of the Element in pixels. Can also be an empty string to remove it.
      */
     set width(value: number | string) {
         this.style.width = typeof value === 'number' ? `${value}px` : value;
     }
 
+    /**
+     * Gets the width of the Element in pixels.
+     */
     get width(): number {
         return this._dom.clientWidth;
     }
 
     /**
-     * Gets / sets the height of the Element in pixels. Can also be an empty string to remove it.
+     * Sets the height of the Element in pixels. Can also be an empty string to remove it.
      */
     set height(value: number | string) {
         this.style.height = typeof value === 'number' ? `${value}px` : value;
     }
 
+    /**
+     * Gets the height of the Element in pixels.
+     */
     get height(): number {
         return this._dom.clientHeight;
     }
 
 
     /**
-     * Gets / sets the tabIndex of the Element.
+     * Sets the tabIndex of the Element.
      */
     set tabIndex(value: number) {
         this._dom.tabIndex = value;
     }
 
+    /**
+     * Gets the tabIndex of the Element.
+     */
     get tabIndex(): number {
         return this._dom.tabIndex;
     }
 
     /**
-     * Gets / sets the Binding object for the element.
+     * Sets the Binding object for the element.
      */
     set binding(value: BindingBase) {
         if (this._binding === value) return;
@@ -951,6 +990,9 @@ class Element extends Events {
         }
     }
 
+    /**
+     * Gets the Binding object for the element.
+     */
     get binding(): BindingBase {
         return this._binding;
     }
@@ -962,100 +1004,127 @@ class Element extends Events {
     // CSS proxy accessors
 
     /**
-     * Gets / sets the flex-direction CSS property.
+     * Sets the flex-direction CSS property.
      */
     set flexDirection(value) {
         this.style.flexDirection = value;
     }
 
+    /**
+     * Gets the flex-direction CSS property.
+     */
     get flexDirection() {
         return this.style.flexDirection;
     }
 
     /**
-     * Gets / sets the flex-grow CSS property.
+     * Sets the flex-grow CSS property.
      */
     set flexGrow(value) {
         this.style.flexGrow = value;
     }
 
+    /**
+     * Gets the flex-grow CSS property.
+     */
     get flexGrow() {
         return this.style.flexGrow;
     }
 
     /**
-     * Gets / sets the flex-basis CSS property.
+     * Sets the flex-basis CSS property.
      */
     set flexBasis(value) {
         this.style.flexBasis = value;
     }
 
+    /**
+     * Gets the flex-basis CSS property.
+     */
     get flexBasis() {
         return this.style.flexBasis;
     }
 
     /**
-     * Gets / sets the flex-shrink CSS property.
+     * Sets the flex-shrink CSS property.
      */
     set flexShrink(value) {
         this.style.flexShrink = value;
     }
 
+    /**
+     * Gets the flex-shrink CSS property.
+     */
     get flexShrink() {
         return this.style.flexShrink;
     }
 
     /**
-     * Gets / sets the flex-wrap CSS property.
+     * Sets the flex-wrap CSS property.
      */
     set flexWrap(value) {
         this.style.flexWrap = value;
     }
 
+    /**
+     * Gets the flex-wrap CSS property.
+     */
     get flexWrap() {
         return this.style.flexWrap;
     }
 
     /**
-     * Gets / sets the align-items CSS property.
+     * Sets the align-items CSS property.
      */
     set alignItems(value) {
         this.style.alignItems = value;
     }
 
+    /**
+     * Gets the align-items CSS property.
+     */
     get alignItems() {
         return this.style.alignItems;
     }
 
     /**
-     * Gets / sets the align-self CSS property.
+     * Sets the align-self CSS property.
      */
     set alignSelf(value) {
         this.style.alignSelf = value;
     }
 
+    /**
+     * Gets the align-self CSS property.
+     */
     get alignSelf() {
         return this.style.alignSelf;
     }
 
     /**
-     * Gets / sets the justify-content CSS property.
+     * Sets the justify-content CSS property.
      */
     set justifyContent(value) {
         this.style.justifyContent = value;
     }
 
+    /**
+     * Gets the justify-content CSS property.
+     */
     get justifyContent() {
         return this.style.justifyContent;
     }
 
     /**
-     * Gets / sets the justify-self CSS property.
+     * Sets the justify-self CSS property.
      */
     set justifySelf(value) {
         this.style.justifySelf = value;
     }
 
+    /**
+     * Gets the justify-self CSS property.
+     */
     get justifySelf() {
         return this.style.justifySelf;
     }

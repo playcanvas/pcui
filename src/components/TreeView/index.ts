@@ -1058,7 +1058,7 @@ class TreeView extends Container {
     }
 
     /**
-     * Whether dragging a TreeViewItem is allowed.
+     * Sets whether dragging a TreeViewItem is allowed.
      */
     set allowDrag(value: boolean) {
         this._allowDrag = value;
@@ -1067,34 +1067,43 @@ class TreeView extends Container {
         }
     }
 
+    /**
+     * Gets whether dragging a TreeViewItem is allowed.
+     */
     get allowDrag(): boolean {
         return this._allowDrag;
     }
 
     /**
-     * Whether reordering TreeViewItems is allowed.
+     * Sets whether reordering TreeViewItems is allowed.
      */
     set allowReordering(value: boolean) {
         this._allowReordering = value;
     }
 
+    /**
+     * Gets whether reordering TreeViewItems is allowed.
+     */
     get allowReordering(): boolean {
         return this._allowReordering;
     }
 
     /**
-     * Whether renaming TreeViewItems is allowed by double clicking on them.
+     * Sets whether renaming TreeViewItems is allowed by double clicking on them.
      */
     set allowRenaming(value: boolean) {
         this._allowRenaming = value;
     }
 
+    /**
+     * Gets whether renaming TreeViewItems is allowed by double clicking on them.
+     */
     get allowRenaming(): boolean {
         return this._allowRenaming;
     }
 
     /**
-     * Whether a TreeViewItem is currently being dragged.
+     * Sets whether a TreeViewItem is currently being dragged.
      */
     set isDragging(value: boolean) {
         if (this._dragging === value) return;
@@ -1127,19 +1136,22 @@ class TreeView extends Container {
         }
     }
 
+    /**
+     * Gets whether a TreeViewItem is currently being dragged.
+     */
     get isDragging(): boolean {
         return this._dragging;
     }
 
     /**
-     * Returns all of the currently selected TreeViewItems.
+     * Gets all of the currently selected TreeViewItems.
      */
     get selected(): Array<TreeViewItem> {
         return this._selectedItems.slice();
     }
 
     /**
-     * A filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
+     * Sets the filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
      */
     set filter(value) {
         if (this._filter === value) return;
@@ -1153,19 +1165,22 @@ class TreeView extends Container {
         }
     }
 
+    /**
+     * Gets the filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
+     */
     get filter() {
         return this._filter;
     }
 
     /**
-     * Whether Ctrl is currently pressed.
+     * Gets whether Ctrl is currently pressed.
      */
     get pressedCtrl(): boolean {
         return this._pressedCtrl;
     }
 
     /**
-     * Whether Shift is currently pressed.
+     * Gets whether Shift is currently pressed.
      */
     get pressedShift(): boolean {
         return this._pressedShift;

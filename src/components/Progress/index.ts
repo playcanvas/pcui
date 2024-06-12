@@ -41,7 +41,7 @@ class Progress extends Container {
     }
 
     /**
-     * Gets / sets the value of the progress bar (between 0 and 100).
+     * Sets the value of the progress bar. The range is from 0 to 100.
      */
     set value(val) {
         if (this._value === val) return;
@@ -51,6 +51,9 @@ class Progress extends Container {
         this.emit('change', val);
     }
 
+    /**
+     * Gets the value of the progress bar.
+     */
     get value() {
         return this._value;
     }

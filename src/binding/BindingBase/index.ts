@@ -161,18 +161,21 @@ class BindingBase extends Events {
     }
 
     /**
-     * The element
+     * Sets the element.
      */
     set element(value: IBindable | undefined) {
         this._element = value;
     }
 
+    /**
+     * Gets the element.
+     */
     get element(): IBindable | undefined {
         return this._element;
     }
 
     /**
-     * Whether the binding is currently applying a change either to the observers or the element.
+     * Sets whether the binding is currently applying a change, either to the observers or the element.
      */
     set applyingChange(value) {
         if (this._applyingChange === value) return;
@@ -181,63 +184,79 @@ class BindingBase extends Events {
         this.emit('applyingChange', value);
     }
 
+    /**
+     * Gets whether the binding is currently applying a change, either to the observers or the element.
+     */
     get applyingChange() {
         return this._applyingChange;
     }
 
     /**
-     * Whether the binding is linked to observers.
+     * Gets whether the binding is linked to observers.
      */
     get linked() {
         return this._linked;
     }
 
     /**
-     * If a history module is used whether to combine history actions when applying changes to observers.
+     * Sets whether to combine history actions when applying changes to observers. This is assuming
+     * a history module is being used.
      */
     set historyCombine(value) {
         this._historyCombine = value;
     }
 
+    /**
+     * Gets whether to combine history actions when applying changes to observers.
+     */
     get historyCombine() {
         return this._historyCombine;
     }
 
     /**
-     * The name of the history action when applying changes to observers.
+     * Sets the name of the history action when applying changes to observers.
      */
     set historyName(value) {
         this._historyName = value;
     }
 
+    /**
+     * Gets the name of the history action when applying changes to observers.
+     */
     get historyName() {
         return this._historyName;
     }
 
     /**
-     * A string to prefix the historyName with.
+     * Sets the string to prefix {@link historyName} with.
      */
     set historyPrefix(value) {
         this._historyPrefix = value;
     }
 
+    /**
+     * Gets the string to prefix {@link historyName} with.
+     */
     get historyPrefix() {
         return this._historyPrefix;
     }
 
     /**
-     * A string to postfix the historyName with.
+     * Sets the string to postfix {@link historyName} with.
      */
     set historyPostfix(value) {
         this._historyPostfix = value;
     }
 
+    /**
+     * Gets the string to postfix {@link historyName} with.
+     */
     get historyPostfix() {
         return this._historyPostfix;
     }
 
     /**
-     * Whether history is enabled for the binding. A valid history object must have been provided first.
+     * Sets whether history is enabled for the binding. A valid history object must have been provided first.
      */
     set historyEnabled(value) {
         if (this._history) {
@@ -246,20 +265,23 @@ class BindingBase extends Events {
         }
     }
 
+    /**
+     * Gets whether history is enabled for the binding.
+     */
     get historyEnabled() {
         // @ts-ignore
         return this._history && this._history.enabled;
     }
 
     /**
-     * The linked observers.
+     * Gets the linked observers.
      */
     get observers() {
         return this._observers;
     }
 
     /**
-     * The linked paths.
+     * Gets the linked paths.
      */
     get paths() {
         return this._paths;

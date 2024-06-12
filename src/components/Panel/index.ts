@@ -354,7 +354,7 @@ class Panel extends Container {
     }
 
     /**
-     * Gets / sets whether the Element is collapsible.
+     * Sets whether the Element is collapsible.
      */
     set collapsible(value) {
         if (value === this._collapsible) return;
@@ -375,12 +375,15 @@ class Panel extends Container {
 
     }
 
+    /**
+     * Gets whether the Element is collapsible.
+     */
     get collapsible() {
         return this._collapsible;
     }
 
     /**
-     * Gets / sets whether the Element should be collapsed.
+     * Sets whether the Element should be collapsed.
      */
     set collapsed(value) {
         if (this._collapsed === value) return;
@@ -394,12 +397,15 @@ class Panel extends Container {
         }
     }
 
+    /**
+     * Gets whether the Element should be collapsed.
+     */
     get collapsed() {
         return this._collapsed;
     }
 
     /**
-     * Gets / sets whether the panel can be reordered.
+     * Sets whether the panel can be reordered.
      */
     set sortable(value) {
         if (this._sortable === value) return;
@@ -420,12 +426,15 @@ class Panel extends Container {
         }
     }
 
+    /**
+     * Gets whether the panel can be reordered.
+     */
     get sortable() {
         return this._sortable;
     }
 
     /**
-     * Gets / sets whether the panel can be removed
+     * Sets whether the panel can be removed
      */
     set removable(value) {
         if (this.removable === value) return;
@@ -443,12 +452,15 @@ class Panel extends Container {
         }
     }
 
+    /**
+     * Gets whether the panel can be removed
+     */
     get removable() {
         return !!this._btnRemove;
     }
 
     /**
-     * Gets / sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to `false`.
+     * Sets whether the panel collapses horizontally. This would be the case for side panels. Defaults to `false`.
      */
     set collapseHorizontally(value) {
         if (this._collapseHorizontally === value) return;
@@ -463,6 +475,9 @@ class Panel extends Container {
         this._reflow();
     }
 
+    /**
+     * Gets whether the panel collapses horizontally.
+     */
     get collapseHorizontally() {
         return this._collapseHorizontally;
     }
@@ -482,18 +497,21 @@ class Panel extends Container {
     }
 
     /**
-     * The header text of the panel. Defaults to the empty string.
+     * Sets the header text of the panel. Defaults to the empty string.
      */
     set headerText(value) {
         this._labelTitle.text = value;
     }
 
+    /**
+     * Gets the header text of the panel.
+     */
     get headerText() {
         return this._labelTitle.text;
     }
 
     /**
-     * The height of the header in pixels. Defaults to 32.
+     * Sets the height of the header in pixels. Defaults to 32.
      */
     set headerSize(value) {
         this._headerSize = value;
@@ -503,6 +521,9 @@ class Panel extends Container {
         this._reflow();
     }
 
+    /**
+     * Gets the height of the header in pixels.
+     */
     get headerSize() {
         return this._headerSize;
     }

@@ -94,7 +94,7 @@ class Overlay extends Container {
     }
 
     /**
-     * Whether the overlay can be hidden by clicking on it.
+     * Sets whether the overlay can be hidden by clicking on it.
      */
     set clickable(value) {
         if (value) {
@@ -104,12 +104,15 @@ class Overlay extends Container {
         }
     }
 
+    /**
+     * Gets whether the overlay can be hidden by clicking on it.
+     */
     get clickable() {
         return this.class.contains(CLASS_OVERLAY_CLICKABLE);
     }
 
     /**
-     * Whether the overlay is transparent or not.
+     * Sets whether the overlay is transparent or not.
      */
     set transparent(value) {
         if (value) {
@@ -119,6 +122,9 @@ class Overlay extends Container {
         }
     }
 
+    /**
+     * Gets whether the overlay is transparent or not.
+     */
     get transparent() {
         return this.class.contains(CLASS_OVERLAY_TRANSPARENT);
     }

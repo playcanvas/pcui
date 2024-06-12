@@ -130,18 +130,21 @@ class GridViewItem extends Container implements IFocusable {
     }
 
     /**
-     * If `true` allow selecting the item. Defaults to `true`.
+     * Sets whether the item can be selected. Defaults to `true`.
      */
     set allowSelect(value) {
         this._allowSelect = value;
     }
 
+    /**
+     * Gets whether the item can be selected. Defaults to `true`.
+     */
     get allowSelect() {
         return this._allowSelect;
     }
 
     /**
-     * Whether the item is selected.
+     * Sets whether the item is selected.
      */
     set selected(value) {
         if (value) {
@@ -171,23 +174,29 @@ class GridViewItem extends Container implements IFocusable {
         }
     }
 
+    /**
+     * Gets whether the item is selected.
+     */
     get selected() {
         return this._selected;
     }
 
     /**
-     * The text of the item.
+     * Sets the text of the item.
      */
     set text(value) {
         this._labelText.text = value;
     }
 
+    /**
+     * Gets the text of the item.
+     */
     get text() {
         return this._labelText.text;
     }
 
     /**
-     * Returns the next visible sibling grid view item.
+     * Gets the next visible sibling grid view item.
      */
     get nextSibling() {
         let sibling = this.dom.nextSibling;
@@ -203,7 +212,7 @@ class GridViewItem extends Container implements IFocusable {
     }
 
     /**
-     * Returns the previous visible sibling grid view item.
+     * Gets the previous visible sibling grid view item.
      */
     get previousSibling() {
         let sibling = this.dom.previousSibling;

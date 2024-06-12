@@ -194,12 +194,15 @@ class MenuItem extends Container implements IBindable {
     }
 
     /**
-     * Gets / sets the text shown on the MenuItem.
+     * Sets the text shown on the MenuItem.
      */
     set text(value) {
         this._labelText.text = value;
     }
 
+    /**
+     * Gets the text shown on the MenuItem.
+     */
     get text() {
         return this._labelText.text;
     }
@@ -218,7 +221,7 @@ class MenuItem extends Container implements IBindable {
     }
 
     /**
-     * Gets / sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
+     * Sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
      */
     set icon(value) {
         if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
@@ -231,23 +234,29 @@ class MenuItem extends Container implements IBindable {
         }
     }
 
+    /**
+     * Gets the CSS code for an icon for the MenuItem.
+     */
     get icon() {
         return this._icon;
     }
 
     /**
-     * Gets / sets the binding for the MenuItem label.
+     * Sets the binding for the MenuItem label.
      */
     set binding(value) {
         this._labelText.binding = value;
     }
 
+    /**
+     * Gets the binding for the MenuItem label.
+     */
     get binding() {
         return this._labelText.binding;
     }
 
     /**
-     * Gets / sets the menu.
+     * Sets the menu.
      */
     set menu(value) {
         this._menu = value;
@@ -262,39 +271,51 @@ class MenuItem extends Container implements IBindable {
         }
     }
 
+    /**
+     * Gets the menu.
+     */
     get menu() {
         return this._menu;
     }
 
     /**
-     * Gets / sets the function that is called when the MenuItem is selected.
+     * Sets the function that is called when the MenuItem is selected.
      */
     set onSelect(value) {
         this._onSelect = value;
     }
 
+    /**
+     * Gets the function that is called when the MenuItem is selected.
+     */
     get onSelect() {
         return this._onSelect;
     }
 
     /**
-     * Gets / sets the function that is called when the MenuItem is enabled or disabled.
+     * Sets the function that is called when the MenuItem is enabled or disabled.
      */
     set onIsEnabled(value) {
         this._onIsEnabled = value;
     }
 
+    /**
+     * Gets the function that is called when the MenuItem is enabled or disabled.
+     */
     get onIsEnabled() {
         return this._onIsEnabled;
     }
 
     /**
-     * Gets / sets the function that is called when the MenuItem is visible or hidden.
+     * Sets the function that is called when the MenuItem is visible or hidden.
      */
     set onIsVisible(value) {
         this._onIsVisible = value;
     }
 
+    /**
+     * Gets the function that is called when the MenuItem is visible or hidden.
+     */
     get onIsVisible() {
         return this._onIsVisible;
     }

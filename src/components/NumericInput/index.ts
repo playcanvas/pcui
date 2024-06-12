@@ -345,7 +345,7 @@ class NumericInput extends InputElement {
     }
 
     /**
-     * Gets / sets the minimum value this field can take.
+     * Sets the minimum value this field can take.
      */
     set min(value) {
         if (this._min === value) return;
@@ -357,12 +357,15 @@ class NumericInput extends InputElement {
         }
     }
 
+    /**
+     * Gets the minimum value this field can take.
+     */
     get min() {
         return this._min;
     }
 
     /**
-     * Gets / sets the maximum value this field can take.
+     * Sets the maximum value this field can take.
      */
     set max(value) {
         if (this._max === value) return;
@@ -374,12 +377,15 @@ class NumericInput extends InputElement {
         }
     }
 
+    /**
+     * Gets the maximum value this field can take.
+     */
     get max() {
         return this._max;
     }
 
     /**
-     * Gets / sets the precision of the input.
+     * Sets the precision of the input.
      */
     set precision(value) {
         if (this._precision === value) return;
@@ -391,17 +397,23 @@ class NumericInput extends InputElement {
         }
     }
 
+    /**
+     * Gets the precision of the input.
+     */
     get precision() {
         return this._precision;
     }
 
     /**
-     * Gets / sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
+     * Sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
      */
     set step(value) {
         this._step = value;
     }
 
+    /**
+     * Gets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
+     */
     get step() {
         return this._step;
     }
