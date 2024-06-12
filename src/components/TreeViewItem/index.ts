@@ -399,7 +399,7 @@ class TreeViewItem extends Container {
     }
 
     /**
-     * Whether the item is selected.
+     * Sets whether the item is selected.
      */
     set selected(value) {
         if (value === this.selected) {
@@ -428,12 +428,15 @@ class TreeViewItem extends Container {
         }
     }
 
+    /**
+     * Gets whether the item is selected.
+     */
     get selected() {
         return this._containerContents.class.contains(CLASS_SELECTED);
     }
 
     /**
-     * The text shown by the TreeViewItem.
+     * Sets the text shown by the TreeViewItem.
      */
     set text(value) {
         if (this._labelText.value !== value) {
@@ -444,6 +447,9 @@ class TreeViewItem extends Container {
         }
     }
 
+    /**
+     * Gets the text shown by the TreeViewItem.
+     */
     get text() {
         return this._labelText.value;
     }
@@ -463,7 +469,7 @@ class TreeViewItem extends Container {
     }
 
     /**
-     * Whether the item is open meaning showing its children.
+     * Sets whether the item is expanded and showing its children.
      */
     set open(value) {
         if (this.open === value) return;
@@ -478,12 +484,15 @@ class TreeViewItem extends Container {
         }
     }
 
+    /**
+     * Gets whether the item is expanded and showing its children.
+     */
     get open() {
         return this.class.contains(CLASS_OPEN) || this.parent === this._treeView;
     }
 
     /**
-     * Whether the parents of the item are open or closed.
+     * Sets whether the ancestors of the item are open or closed.
      */
     set parentsOpen(value) {
         let parent = this.parent;
@@ -493,6 +502,9 @@ class TreeViewItem extends Container {
         }
     }
 
+    /**
+     * Gets whether the ancestors of the item are open or closed.
+     */
     get parentsOpen() {
         let parent = this.parent;
         while (parent && parent instanceof TreeViewItem) {
@@ -504,51 +516,64 @@ class TreeViewItem extends Container {
     }
 
     /**
-     * Whether dropping is allowed on the tree item.
+     * Sets whether dropping is allowed on the tree item.
      */
     set allowDrop(value) {
         this._allowDrop = value;
     }
 
+    /**
+     * Gets whether dropping is allowed on the tree item.
+     */
     get allowDrop() {
         return this._allowDrop;
     }
 
     /**
-     * Whether this tree item can be dragged. Only considered if the parent treeview has allowDrag true.
+     * Sets whether this tree item can be dragged. Only considered if the parent {@link TreeView}
+     * has {@link TreeView#allowDrag} set to `true`.
      */
     set allowDrag(value) {
         this._allowDrag = value;
     }
 
+    /**
+     * Gets whether this tree item can be dragged.
+     */
     get allowDrag() {
         return this._allowDrag;
     }
 
     /**
-     * Whether the item can be selected.
+     * Sets whether the item can be selected.
      */
     set allowSelect(value) {
         this._allowSelect = value;
     }
 
+    /**
+     * Gets whether the item can be selected.
+     */
     get allowSelect() {
         return this._allowSelect;
     }
 
     /**
-     * Gets / sets the parent TreeView.
+     * Sets the parent {@link TreeView}.
      */
     set treeView(value) {
         this._treeView = value;
     }
 
+    /**
+     * Gets the parent {@link TreeView}.
+     */
     get treeView() {
         return this._treeView;
     }
 
     /**
-     * The number of direct children.
+     * Gets the number of direct children.
      */
     get numChildren() {
         return this._numChildren;
@@ -609,7 +634,7 @@ class TreeViewItem extends Container {
     }
 
     /**
-     * The icon shown before the text in the TreeViewItem.
+     * Sets the icon shown before the text in the TreeViewItem.
      */
     set icon(value) {
         if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
@@ -622,6 +647,9 @@ class TreeViewItem extends Container {
         }
     }
 
+    /**
+     * Gets the icon shown before the text in the TreeViewItem.
+     */
     get icon() {
         return this._icon;
     }

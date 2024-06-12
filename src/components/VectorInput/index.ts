@@ -301,7 +301,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
     }
 
     /**
-     * Gets / sets the minimum value accepted by all inputs of the vector.
+     * Sets the minimum value accepted by all inputs of the vector.
      */
     set min(value) {
         for (const input of this._inputs) {
@@ -309,12 +309,15 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         }
     }
 
+    /**
+     * Gets the minimum value accepted by all inputs of the vector.
+     */
     get min() {
         return this._inputs[0].min;
     }
 
     /**
-     * Gets / sets the maximum value accepted by all inputs of the vector.
+     * Sets the maximum value accepted by all inputs of the vector.
      */
     set max(value) {
         for (const input of this._inputs) {
@@ -322,12 +325,15 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         }
     }
 
+    /**
+     * Gets the maximum value accepted by all inputs of the vector.
+     */
     get max() {
         return this._inputs[0].max;
     }
 
     /**
-     * Gets / sets the maximum number of decimal places supported by all inputs of the vector.
+     * Sets the maximum number of decimal places supported by all inputs of the vector.
      */
     set precision(value) {
         for (const input of this._inputs) {
@@ -335,13 +341,16 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         }
     }
 
+    /**
+     * Gets the maximum number of decimal places supported by all inputs of the vector.
+     */
     get precision() {
         return this._inputs[0].precision;
     }
 
     /**
-     * Gets / sets the amount that the value will be increased or decreased when using the arrow
-     * keys and the slider input for all inputs of the vector.
+     * Sets the amount that the value will be increased or decreased when using the arrow keys and
+     * the slider input for all inputs of the vector.
      */
     set step(value) {
         for (const input of this._inputs) {
@@ -349,6 +358,10 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         }
     }
 
+    /**
+     * Gets the amount that the value will be increased or decreased when using the arrow keys and
+     * the slider input for all inputs of the vector.
+     */
     get step() {
         return this._inputs[0].step;
     }

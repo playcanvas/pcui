@@ -202,7 +202,7 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
 
 
     /**
-     * Gets / sets the method to call when keyup is called on the input DOM element.
+     * Sets the method to call when keyup is called on the input DOM element.
      */
     set keyChange(value) {
         if (this._keyChange === value) return;
@@ -215,6 +215,9 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
         }
     }
 
+    /**
+     * Gets the method to call when keyup is called on the input DOM element.
+     */
     get keyChange() {
         return this._keyChange;
     }
@@ -227,23 +230,29 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
     }
 
     /**
-     * Gets / sets whether the input should blur when the enter key is pressed.
+     * Sets whether the input should blur when the enter key is pressed.
      */
     set blurOnEnter(value: boolean) {
         this._blurOnEnter = value;
     }
 
+    /**
+     * Gets whether the input should blur when the enter key is pressed.
+     */
     get blurOnEnter(): boolean {
         return this._blurOnEnter;
     }
 
     /**
-     * Gets / sets whether the input should blur when the escape key is pressed.
+     * Sets whether the input should blur when the escape key is pressed.
      */
     set blurOnEscape(value: boolean) {
         this._blurOnEscape = value;
     }
 
+    /**
+     * Gets whether the input should blur when the escape key is pressed.
+     */
     get blurOnEscape(): boolean {
         return this._blurOnEscape;
     }

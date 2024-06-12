@@ -95,7 +95,7 @@ class Label extends Element implements IPlaceholder, IBindable {
     }
 
     /**
-     * Gets / sets the text of the Label.
+     * Sets the text of the Label.
      */
     set text(value: string) {
         if (value === undefined || value === null) {
@@ -109,6 +109,9 @@ class Label extends Element implements IPlaceholder, IBindable {
         }
     }
 
+    /**
+     * Gets the text of the Label.
+     */
     get text(): string {
         return this._text;
     }

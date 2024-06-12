@@ -305,7 +305,7 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
     }
 
     /**
-     * Gets / sets the minimum value that the slider field can take.
+     * Sets the minimum value that the slider field can take.
      */
     set sliderMin(value) {
         if (this._sliderMin === value) return;
@@ -314,12 +314,15 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
         this._updateHandle(this.value);
     }
 
+    /**
+     * Gets the minimum value that the slider field can take.
+     */
     get sliderMin() {
         return this._sliderMin;
     }
 
     /**
-     * Gets / sets the maximum value that the slider field can take.
+     * Sets the maximum value that the slider field can take.
      */
     set sliderMax(value) {
         if (this._sliderMax === value) return;
@@ -328,6 +331,9 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
         this._updateHandle(this.value);
     }
 
+    /**
+     * Gets the maximum value that the slider field can take.
+     */
     get sliderMax() {
         return this._sliderMax;
     }
@@ -364,45 +370,57 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
     }
 
     /**
-     * Gets / sets the minimum value that the numeric input field can take.
+     * Sets the minimum value that the numeric input field can take.
      */
     set min(value) {
         this._numericInput.min = value;
     }
 
+    /**
+     * Gets the minimum value that the numeric input field can take.
+     */
     get min() {
         return this._numericInput.min;
     }
 
     /**
-     * Gets / sets the maximum value that the numeric input field can take.
+     * Sets the maximum value that the numeric input field can take.
      */
     set max(value) {
         this._numericInput.max = value;
     }
 
+    /**
+     * Gets the maximum value that the numeric input field can take.
+     */
     get max() {
         return this._numericInput.max;
     }
 
     /**
-     * Gets / sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
+     * Sets the amount that the value will be increased or decreased when using the arrow keys. Holding Shift will use 10x the step.
      */
     set step(value) {
         this._numericInput.step = value;
     }
 
+    /**
+     * Gets the amount that the value will be increased or decreased when using the arrow keys.
+     */
     get step() {
         return this._numericInput.step;
     }
 
     /**
-     * Gets / sets the maximum number of decimals a value can take.
+     * Sets the maximum number of decimals a value can take.
      */
     set precision(value) {
         this._numericInput.precision = value;
     }
 
+    /**
+     * Gets the maximum number of decimals a value can take.
+     */
     get precision() {
         return this._numericInput.precision;
     }
