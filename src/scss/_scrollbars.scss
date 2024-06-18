@@ -1,0 +1,31 @@
+/* Apply scrollbar styles globally */
+* {
+    /* Webkit-based browsers */
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $bcg-darkest;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $text-darkest;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: $text-active;
+    }
+
+    &::-webkit-scrollbar-corner {
+        background: $bcg-dark;
+    }
+
+    /* Standardized Properties */
+    @supports not selector(::-webkit-scrollbar) {
+        /* Firefox */
+        scrollbar-width: thin;
+        scrollbar-color: $text-darkest $bcg-darkest;
+    }
+}
