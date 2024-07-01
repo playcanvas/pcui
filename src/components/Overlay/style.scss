@@ -35,6 +35,7 @@
 }
 
 .pcui-overlay-content {
+    position: absolute;
     background-color: $bcg-primary;
     transition: width 100ms, height 100ms, margin-left 100ms, margin-top 100ms;
     box-shadow: 7px 7px 7px rgb(0 0 0 / 15%);
