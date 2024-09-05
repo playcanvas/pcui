@@ -725,7 +725,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
     };
 
     protected _onWindowMouseDown = (evt: MouseEvent) => {
-        if (!this.dom.contains(evt.target as Node)) {
+        if (!this.dom.contains(evt.composedPath()[0] as Node)) {
             this.close();
         }
     };
