@@ -19,7 +19,7 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
 
     link: ElementArgs["link"];
 
-    onAttach?: any;
+    onAttach?: () => void;
 
     class: Set<string>;
 
@@ -42,23 +42,13 @@ class Component <P extends ElementArgs, S> extends React.Component <P, S> {
 
     attachElement = (nodeElement: HTMLElement, containerElement: any) => {
         if (!nodeElement) return;
-        if (this.elementClass === Element) {
-            this.element = new this.elementClass(
-                nodeElement,
-                {
-                    ...this.props,
-                    container: containerElement,
-                    parent: undefined
-                }
-            );
-        } else {
-            this.element = new this.elementClass({
-                ...this.props,
-                dom: nodeElement,
-                content: containerElement,
-                parent: undefined
-            });
-        }
+
+        this.element = new this.elementClass({
+            ...this.props,
+            dom: nodeElement,
+            content: containerElement,
+            parent: undefined
+        });
 
         const c = this.props.class;
         this.class = new Set(c ? (Array.isArray(c) ? c.slice() : [c]) : undefined);
