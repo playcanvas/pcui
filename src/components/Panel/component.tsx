@@ -43,4 +43,4 @@ class Panel extends Element<PanelArgs, any> {
 
 Panel.ctor = PanelClass;
 
-export { Panel};
+export { Panel };

@@ -125,4 +125,4 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
     }
 }
 
-export { Element};
+export { Element };

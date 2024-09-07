@@ -17,4 +17,4 @@ class Overlay extends Element<OverlayArgs, any> {
 
 Overlay.ctor = OverlayClass;
 
-export { Overlay};
+export { Overlay };

@@ -18,4 +18,4 @@ class SliderInput extends Element<SliderInputArgs, any> {
 
 SliderInput.ctor = SliderInputClass;
 
-export { SliderInput};
+export { SliderInput };
