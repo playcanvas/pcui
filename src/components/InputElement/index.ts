@@ -1,12 +1,12 @@
 import { CLASS_FOCUS } from '../../class';
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
+import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
 
 const CLASS_INPUT_ELEMENT = 'pcui-input-element';
 
 /**
  * The arguments for the {@link InputElement} constructor.
  */
-export interface InputElementArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
+interface InputElementArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * Sets whether pressing Enter will blur (unfocus) the field. Defaults to `true`.
      */
@@ -274,4 +274,4 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
     }
 }
 
-export default InputElement;
+export { InputElement, InputElementArgs };

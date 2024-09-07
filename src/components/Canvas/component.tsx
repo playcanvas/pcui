@@ -1,14 +1,14 @@
 import * as React from 'react';
-import Element, { CanvasArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Canvas as CanvasClass, CanvasArgs } from './index';
+import { Element } from '../Element/component';
 
 /**
  * Represents a Canvas
  */
-class Component extends BaseComponent <CanvasArgs, any> {
+class Canvas extends Element<CanvasArgs, any> {
     constructor(props: CanvasArgs = {}) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = CanvasClass;
     }
 
     render() {
@@ -17,6 +17,6 @@ class Component extends BaseComponent <CanvasArgs, any> {
     }
 }
 
-Component.ctor = Element;
+Canvas.ctor = CanvasClass;
 
-export default Component;
+export { Canvas };

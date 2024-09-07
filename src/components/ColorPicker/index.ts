@@ -1,18 +1,18 @@
 import { EventHandle } from '@playcanvas/observer';
 
 import { CLASS_MULTIPLE_VALUES, CLASS_NOT_FLEXIBLE } from '../../class';
-import Element, { ElementArgs, IBindable, IBindableArgs } from '../Element';
-import Overlay from '../Overlay';
-import NumericInput from '../NumericInput';
-import TextInput from '../TextInput';
 import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
+import { Element, ElementArgs, IBindable, IBindableArgs } from '../Element';
+import { NumericInput } from '../NumericInput';
+import { Overlay } from '../Overlay';
+import { TextInput } from '../TextInput';
 
 const CLASS_ROOT = 'pcui-color-input';
 
 /**
  * The arguments for the {@link ColorPicker} constructor.
  */
-export interface ColorPickerArgs extends ElementArgs, IBindableArgs {
+interface ColorPickerArgs extends ElementArgs, IBindableArgs {
     /**
      * An array of 4 integers containing the RGBA values the picker should be initialized to. Defaults to `[0, 0, 255, 1]`.
      */
@@ -773,4 +773,4 @@ class ColorPicker extends Element implements IBindable {
 Element.register('rgb', ColorPicker);
 Element.register('rgba', ColorPicker, { channels: 4 });
 
-export default ColorPicker;
+export { ColorPicker, ColorPickerArgs };

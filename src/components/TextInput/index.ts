@@ -1,13 +1,13 @@
 import { CLASS_MULTIPLE_VALUES } from '../../class';
-import Element, { IBindableArgs, IPlaceholderArgs } from '../Element';
-import InputElement, { InputElementArgs } from '../InputElement';
+import { Element, IBindableArgs, IPlaceholderArgs } from '../Element';
+import { InputElement, InputElementArgs } from '../InputElement';
 
 const CLASS_TEXT_INPUT = 'pcui-text-input';
 
 /**
  * The arguments for the {@link TextInput} constructor.
  */
-export interface TextInputArgs extends InputElementArgs, IBindableArgs, IPlaceholderArgs {
+interface TextInputArgs extends InputElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * A function that validates the value that is entered into the input and returns `true` if it
      * is valid or `false` otherwise. If `false` then the input will be set in an error state and
@@ -132,4 +132,4 @@ class TextInput extends InputElement {
 
 Element.register('string', TextInput, { renderChanges: true });
 
-export default TextInput;
+export { TextInput, TextInputArgs };

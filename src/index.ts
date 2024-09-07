@@ -15,12 +15,9 @@ export * from './components';
 /**
  * The version of the PCUI library. This is a string in semantic version format of `major.minor.patch`.
  */
-const version = 'PACKAGE_VERSION';
+export const version = 'PACKAGE_VERSION';
 
 /**
  * The git revision of the PCUI library. This is a string of the git commit hash.
  */
-const revision = 'PACKAGE_REVISION';
-
-export { version };
-export { revision };
+export const revision = 'PACKAGE_REVISION';

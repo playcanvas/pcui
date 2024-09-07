@@ -1,6 +1,6 @@
-import Element, { IFocusable } from '../Element';
-import Container, { ContainerArgs } from '../Container';
-import MenuItem, { MenuItemArgs } from '../MenuItem';
+import { Container, ContainerArgs } from '../Container';
+import { Element, IFocusable } from '../Element';
+import { MenuItem, MenuItemArgs } from '../MenuItem';
 
 const CLASS_MENU = 'pcui-menu';
 const CLASS_MENU_ITEMS = CLASS_MENU + '-items';
@@ -8,7 +8,7 @@ const CLASS_MENU_ITEMS = CLASS_MENU + '-items';
 /**
  * The arguments for the {@link Menu} constructor.
  */
-export interface MenuArgs extends ContainerArgs {
+interface MenuArgs extends ContainerArgs {
     /**
      * An array of {@link MenuItemArgs}. If these are passed then new MenuItems will be created
      * and appended to the menu.
@@ -222,4 +222,4 @@ class Menu extends Container implements IFocusable {
     }
 }
 
-export default Menu;
+export { Menu, MenuArgs };

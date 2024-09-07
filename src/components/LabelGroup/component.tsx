@@ -1,14 +1,14 @@
-import Element, { LabelGroupArgs } from './index';
-import BaseComponent from '../Element/component';
 import { JSXElementConstructor, ReactElement } from 'react';
+import { Element } from '../Element/component';
+import { LabelGroup as LabelGroupClass, LabelGroupArgs } from './index';
 
 /**
  * Represents a group of a Label and a Element. Useful for rows of labeled fields.
  */
-class LabelGroup extends BaseComponent <LabelGroupArgs, any> {
+class LabelGroup extends Element<LabelGroupArgs, any> {
     constructor(props: LabelGroupArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = LabelGroupClass;
     }
 
     attachElement = (nodeElement: HTMLElement, containerElement: any) => {
@@ -21,12 +21,12 @@ class LabelGroup extends BaseComponent <LabelGroupArgs, any> {
         // casting child as a single ReactElement as we have confirmed it is above
         const child = this.props.children as ReactElement;
         const fieldProps = child.props as Record<any, any>;
-        // check if the ReactElement contains an instance of a BaseComponent as its type, confirming it is a PCUI react component
-        if (!((child.type as JSXElementConstructor<any>).prototype instanceof BaseComponent)) {
+        // check if the ReactElement contains an instance of an Element as its type, confirming it is a PCUI react component
+        if (!((child.type as JSXElementConstructor<any>).prototype instanceof Element)) {
             throw new Error(childrenErrorMessage);
         }
-        // it's safe to cast the ReactElement type as a BaseComponent as we have confirmed it is a BaseComponent above
-        const fieldClass = (child.type as typeof BaseComponent).ctor;
+        // it's safe to cast the ReactElement type as a BaseComponent as we have confirmed it is an Element above
+        const fieldClass = (child.type as typeof Element).ctor;
         const labelField = new fieldClass({ ...fieldProps });
         if (child.props.link) {
             labelField.link(fieldProps.link.observer, fieldProps.link.path);
@@ -45,6 +45,6 @@ class LabelGroup extends BaseComponent <LabelGroupArgs, any> {
     }
 }
 
-LabelGroup.ctor = Element;
+LabelGroup.ctor = LabelGroupClass;
 
-export default LabelGroup;
+export { LabelGroup };

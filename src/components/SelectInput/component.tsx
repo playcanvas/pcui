@@ -1,15 +1,15 @@
-import Element, { SelectInputArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { SelectInput as SelectInputClass, SelectInputArgs } from './index';
 
 /**
  * An input that allows selecting from a dropdown or entering tags.
  */
-class Component extends BaseComponent <SelectInputArgs, any> {
+class SelectInput extends Element<SelectInputArgs, any> {
     onSelect?: (value: string) => void;
 
     constructor(props: SelectInputArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = SelectInputClass;
 
         this.onSelect = props.onSelect;
 
@@ -28,6 +28,6 @@ class Component extends BaseComponent <SelectInputArgs, any> {
     }
 }
 
-Component.ctor = Element;
+SelectInput.ctor = SelectInputClass;
 
-export default Component;
+export { SelectInput };

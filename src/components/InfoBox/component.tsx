@@ -1,14 +1,14 @@
 import * as React from 'react';
-import Element, { InfoBoxArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { InfoBox as InfoBoxClass, InfoBoxArgs } from './index';
 
 /**
  * Represents an information box.
  */
-class InfoBox extends BaseComponent <InfoBoxArgs, any> {
+class InfoBox extends Element<InfoBoxArgs, any> {
     constructor(props: InfoBoxArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = InfoBoxClass;
     }
 
     render() {
@@ -17,6 +17,6 @@ class InfoBox extends BaseComponent <InfoBoxArgs, any> {
     }
 }
 
-InfoBox.ctor = Element;
+InfoBox.ctor = InfoBoxClass;
 
-export default InfoBox;
+export { InfoBox };

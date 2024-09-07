@@ -1,16 +1,16 @@
 import * as React from 'react';
-import GridViewElement, { GridViewArgs } from './index';
-import GridViewItemElement from '../GridViewItem/index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { GridView as GridViewClass, GridViewArgs } from './index';
+import { GridViewItem } from '../GridViewItem/index';
 
 /**
- * Represents a container that shows a flexible wrappable
- * list of items that looks like a grid. Contains GridViewItem's.
+ * Represents a container that shows a flexible wrappable list of items that looks like a grid.
+ * Contains GridViewItems.
  */
-class GridView extends BaseComponent <GridViewArgs, any> {
+class GridView extends Element<GridViewArgs, any> {
     constructor(props: GridViewArgs) {
         super(props);
-        this.element = new GridViewElement({ ...props });
+        this.element = new GridViewClass({ ...props });
         this.loadChildren(this.props.children, this.element);
     }
 
@@ -20,7 +20,7 @@ class GridView extends BaseComponent <GridViewArgs, any> {
             children = [children];
         }
         children.forEach((child: any) => {
-            const childElement = new GridViewItemElement({ text: child.props.text });
+            const childElement = new GridViewItem({ text: child.props.text });
             element.append(childElement);
             this.loadChildren(child.props.children, childElement);
         });
@@ -35,6 +35,6 @@ class GridView extends BaseComponent <GridViewArgs, any> {
     }
 }
 
-GridView.ctor = GridViewElement;
+GridView.ctor = GridViewClass;
 
-export default GridView;
+export { GridView };

@@ -1,7 +1,7 @@
 import { Observer } from '@playcanvas/observer';
-import Element, { IBindable } from '../Element';
-import Container, { ContainerArgs } from '../Container';
-import Label from '../Label';
+import { Container, ContainerArgs } from '../Container';
+import { Element, IBindable } from '../Element';
+import { Label } from '../Label';
 
 const CLASS_MENU_ITEM = 'pcui-menu-item';
 const CLASS_MENU_ITEM_CONTENT = CLASS_MENU_ITEM + '-content';
@@ -11,7 +11,7 @@ const CLASS_MENU_ITEM_HAS_CHILDREN = CLASS_MENU_ITEM + '-has-children';
 /**
  * The arguments for the {@link MenuItem} constructor.
  */
-export interface MenuItemArgs extends ContainerArgs {
+interface MenuItemArgs extends ContainerArgs {
     value?: any;
     /**
      * Whether the MenuItem has any child MenuItems.
@@ -336,4 +336,4 @@ class MenuItem extends Container implements IBindable {
     }
 }
 
-export default MenuItem;
+export { MenuItem, MenuItemArgs };

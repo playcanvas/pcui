@@ -1,6 +1,6 @@
-import BindingBase, { BindingBaseArgs } from '../BindingBase';
-import BindingElementToObservers from '../BindingElementToObservers';
-import BindingObserversToElement from '../BindingObserversToElement';
+import { BindingBase, BindingBaseArgs } from '../BindingBase';
+import { BindingElementToObservers } from '../BindingElementToObservers';
+import { BindingObserversToElement } from '../BindingObserversToElement';
 import { Observer } from '@playcanvas/observer';
 import { IBindable } from '../../components/Element';
 
@@ -153,4 +153,4 @@ class BindingTwoWay extends BindingBase {
     }
 }
 
-export default BindingTwoWay;
+export { BindingTwoWay };

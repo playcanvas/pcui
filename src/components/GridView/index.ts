@@ -1,8 +1,8 @@
 import { EventHandle } from '@playcanvas/observer';
 
-import Element from '../Element';
-import Container, { ContainerArgs } from '../Container';
-import GridViewItem from '../GridViewItem';
+import { Container, ContainerArgs } from '../Container';
+import { Element } from '../Element';
+import { GridViewItem } from '../GridViewItem';
 
 const CLASS_ROOT = 'pcui-gridview';
 const CLASS_VERTICAL = CLASS_ROOT + '-vertical';
@@ -10,7 +10,7 @@ const CLASS_VERTICAL = CLASS_ROOT + '-vertical';
 /**
  * The arguments for the {@link GridView} constructor.
  */
-export interface GridViewArgs extends ContainerArgs {
+interface GridViewArgs extends ContainerArgs {
     /**
      * If `true` the {@link GridView} layout will be vertical.
      */
@@ -287,4 +287,4 @@ class GridView extends Container {
     }
 }
 
-export default GridView;
+export { GridView, GridViewArgs };

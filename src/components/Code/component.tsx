@@ -1,15 +1,15 @@
-import Element, { CodeArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Code as CodeClass, CodeArgs } from './index';
+import { Element } from '../Element/component';
 
 /**
  * Represents a code block.
  */
-class Component extends BaseComponent <CodeArgs, any> {
+class Code extends Element<CodeArgs, any> {
     static defaultProps: CodeArgs;
 
     constructor(props: CodeArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = CodeClass;
     }
 
     render() {
@@ -17,6 +17,6 @@ class Component extends BaseComponent <CodeArgs, any> {
     }
 }
 
-Component.ctor = Element;
+Code.ctor = CodeClass;
 
-export default Component;
+export { Code };

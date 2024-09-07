@@ -1,10 +1,10 @@
 import { Observer } from '@playcanvas/observer';
 import * as utils from '../../helpers/utils';
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
-import Container from '../Container';
-import Panel from '../Panel';
-import NumericInput from '../NumericInput';
-import Button from '../Button';
+import { Button } from '../Button';
+import { Container } from '../Container';
+import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import { NumericInput } from '../NumericInput';
+import { Panel } from '../Panel';
 
 const CLASS_ARRAY_INPUT = 'pcui-array-input';
 const CLASS_ARRAY_EMPTY = 'pcui-array-empty';
@@ -16,7 +16,7 @@ const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
 /**
  * The arguments for the {@link ArrayInput} constructor.
  */
-export interface ArrayInputArgs extends ElementArgs, IBindableArgs {
+interface ArrayInputArgs extends ElementArgs, IBindableArgs {
     /**
      * The type of values that the array can hold. Can be one of the following:
      *
@@ -602,4 +602,4 @@ for (const type in ArrayInput.DEFAULTS) {
 }
 Element.register('array:select', ArrayInput, { type: 'select', renderChanges: true });
 
-export default ArrayInput;
+export { ArrayInput, ArrayInputArgs };

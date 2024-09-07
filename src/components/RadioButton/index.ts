@@ -1,5 +1,5 @@
 import { CLASS_MULTIPLE_VALUES, CLASS_NOT_FLEXIBLE } from '../../class';
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
 
 const CLASS_RADIO_BUTTON = 'pcui-radio-button';
 const CLASS_RADIO_BUTTON_SELECTED = CLASS_RADIO_BUTTON + '-selected';
@@ -7,7 +7,7 @@ const CLASS_RADIO_BUTTON_SELECTED = CLASS_RADIO_BUTTON + '-selected';
 /**
  * The arguments for the {@link RadioButton} constructor.
  */
-export interface RadioButtonArgs extends ElementArgs, IBindableArgs {}
+interface RadioButtonArgs extends ElementArgs, IBindableArgs {}
 
 /**
  * A radio button element.
@@ -145,4 +145,4 @@ class RadioButton extends Element implements IBindable, IFocusable {
 
 Element.register('radio', RadioButton, { renderChanges: true });
 
-export default RadioButton;
+export { RadioButton, RadioButtonArgs };

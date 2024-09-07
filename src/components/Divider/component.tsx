@@ -1,14 +1,14 @@
-import Element from './index';
+import { Divider as DividerClass } from './index';
+import { Element } from '../Element/component';
 import { ElementArgs } from '../Element/index';
-import BaseComponent from '../Element/component';
 
 /**
  * Represents a vertical division between two elements
  */
-class Component extends BaseComponent <ElementArgs, any> {
+class Divider extends Element<ElementArgs, any> {
     constructor(props: ElementArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = DividerClass;
     }
 
     render() {
@@ -16,6 +16,6 @@ class Component extends BaseComponent <ElementArgs, any> {
     }
 }
 
-Component.ctor = Element;
+Divider.ctor = DividerClass;
 
-export default Component;
+export { Divider };

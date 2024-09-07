@@ -1,14 +1,14 @@
 import * as React from 'react';
-import Element, { ButtonArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Button as ButtonClass, ButtonArgs } from './index';
+import { Element } from '../Element/component';
 
 /**
  * User input with click interaction
  */
-class Component extends BaseComponent <ButtonArgs, any> {
+class Button extends Element<ButtonArgs, any> {
     constructor(props: ButtonArgs = {}) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = ButtonClass;
     }
 
     render() {
@@ -17,6 +17,6 @@ class Component extends BaseComponent <ButtonArgs, any> {
     }
 }
 
-Component.ctor = Element;
+Button.ctor = ButtonClass;
 
-export default Component;
+export { Button };

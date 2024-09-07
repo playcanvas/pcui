@@ -1,15 +1,15 @@
-import Element, { NumericInputArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { NumericInput as NumericInputClass, NumericInputArgs } from './index';
 
 /**
  * The NumericInput represents an input element that holds numbers.
  */
-class Component extends BaseComponent <NumericInputArgs, any> {
+class NumericInput extends Element<NumericInputArgs, any> {
     onValidate: (value: string) => boolean;
 
     constructor(props: NumericInputArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = NumericInputClass;
     }
 
     render() {
@@ -17,6 +17,6 @@ class Component extends BaseComponent <NumericInputArgs, any> {
     }
 }
 
-Component.ctor = Element;
+NumericInput.ctor = NumericInputClass;
 
-export default Component;
+export { NumericInput };
