@@ -1,14 +1,14 @@
 import * as React from 'react';
-import Element, { ColorPickerArgs } from './index';
-import BaseComponent from '../Element/component';
+import { ColorPicker as ColorPickerClass, ColorPickerArgs } from './index';
+import { Element } from '../Element/component';
 
 /**
  * Represents a color picker
  */
-class ColorPicker extends BaseComponent <ColorPickerArgs, any> {
+class ColorPicker extends Element<ColorPickerArgs, any> {
     constructor(props: ColorPickerArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = ColorPickerClass;
     }
 
     render() {
@@ -17,7 +17,6 @@ class ColorPicker extends BaseComponent <ColorPickerArgs, any> {
     }
 }
 
+ColorPicker.ctor = ColorPickerClass;
 
-ColorPicker.ctor = Element;
-
-export default ColorPicker;
+export { ColorPicker };

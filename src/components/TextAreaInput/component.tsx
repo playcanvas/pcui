@@ -1,13 +1,13 @@
-import Element, { TextAreaInputArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { TextAreaInput as TextAreaInputClass, TextAreaInputArgs } from './index';
 
 /**
  * The TextAreaInput wraps a textarea element. It has the same interface as TextInput.
  */
-class Component extends BaseComponent <TextAreaInputArgs, any> {
+class TextAreaInput extends Element<TextAreaInputArgs, any> {
     constructor(props: TextAreaInputArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = TextAreaInputClass;
     }
 
     render() {
@@ -15,6 +15,6 @@ class Component extends BaseComponent <TextAreaInputArgs, any> {
     }
 }
 
-Component.ctor = Element;
+TextAreaInput.ctor = TextAreaInputClass;
 
-export default Component;
+export { TextAreaInput };

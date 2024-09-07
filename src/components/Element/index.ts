@@ -1,5 +1,5 @@
-import { EventHandle, Events, HandleEvent, Observer } from '@playcanvas/observer';
 import * as React from 'react';
+import { EventHandle, Events, HandleEvent, Observer } from '@playcanvas/observer';
 
 import { CLASS_DISABLED, CLASS_ERROR, CLASS_FLASH, CLASS_FONT_REGULAR, CLASS_HIDDEN, CLASS_READONLY } from '../../class';
 import { BindingBase } from '../../binding';
@@ -24,7 +24,7 @@ const SIMPLE_CSS_PROPERTIES = [
 // Stores Element types by name and default arguments
 const elementRegistry: Map<string, any> = new Map();
 
-export interface IBindable {
+interface IBindable {
     /**
      * Sets the value of the Element.
      */
@@ -51,7 +51,7 @@ export interface IBindable {
     get renderChanges(): boolean,
 }
 
-export interface IBindableArgs {
+interface IBindableArgs {
     /**
      * Sets the value of the Element.
      */
@@ -66,7 +66,7 @@ export interface IBindableArgs {
     renderChanges?: boolean
 }
 
-export interface IPlaceholder {
+interface IPlaceholder {
     /**
      * Sets the placeholder text of the input.
      */
@@ -77,14 +77,14 @@ export interface IPlaceholder {
     get placeholder(): string
 }
 
-export interface IPlaceholderArgs {
+interface IPlaceholderArgs {
     /**
      * Sets the placeholder label that appears on the right of the input.
      */
     placeholder?: string,
 }
 
-export interface IFocusable {
+interface IFocusable {
     /**
      * Focus on the element. If the input contains text and select is provided, the text will be selected on focus.
      */
@@ -96,14 +96,14 @@ export interface IFocusable {
     blur(): void
 }
 
-export interface IParentArgs {
+interface IParentArgs {
     /**
      * The children of the current component.
      */
     children?: React.ReactNode
 }
 
-export interface IFlexArgs {
+interface IFlexArgs {
     /**
      * Sets whether the element uses flex layout.
      */
@@ -133,7 +133,7 @@ export interface IFlexArgs {
 /**
  * The arguments for the {@link Element} constructor.
  */
-export interface ElementArgs {
+interface ElementArgs {
     /**
      * The HTMLElement to create this {@link Element} with. If not provided this Element will create one.
      */
@@ -1170,4 +1170,4 @@ declare global {
     }
 }
 
-export default Element;
+export { Element, ElementArgs, IBindable, IBindableArgs, IPlaceholder, IPlaceholderArgs, IFocusable, IParentArgs, IFlexArgs };

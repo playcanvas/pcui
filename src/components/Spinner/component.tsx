@@ -1,16 +1,16 @@
 import * as React from 'react';
-import Element, { SpinnerArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { Spinner as SpinnerClass, SpinnerArgs } from './index';
 
 /**
  * Represents a spinning icon.
  */
-class Component extends BaseComponent <SpinnerArgs, any> {
+class Spinner extends Element<SpinnerArgs, any> {
     static defaultProps: SpinnerArgs;
 
     constructor(props: SpinnerArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = SpinnerClass;
     }
 
     render() {
@@ -19,6 +19,6 @@ class Component extends BaseComponent <SpinnerArgs, any> {
     }
 }
 
-Component.ctor = Element;
+Spinner.ctor = SpinnerClass;
 
-export default Component;
+export { Spinner };

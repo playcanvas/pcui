@@ -1,13 +1,13 @@
-import Element, { ProgressArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { Progress as ProgressClass, ProgressArgs } from './index';
 
 /**
  * Represents a bar that can highlight progress of an activity.
  */
-class Component extends BaseComponent <ProgressArgs, any> {
+class Progress extends Element<ProgressArgs, any> {
     constructor(props: ProgressArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = ProgressClass;
     }
 
     render() {
@@ -15,6 +15,6 @@ class Component extends BaseComponent <ProgressArgs, any> {
     }
 }
 
-Component.ctor = Element;
+Progress.ctor = ProgressClass;
 
-export default Component;
+export { Progress };

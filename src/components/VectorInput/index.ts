@@ -1,14 +1,14 @@
 import { Observer } from '@playcanvas/observer';
 import { CLASS_FOCUS, CLASS_MULTIPLE_VALUES } from '../../class';
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
-import NumericInput from '../NumericInput';
+import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
+import { NumericInput } from '../NumericInput';
 
 const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 
 /**
  * The arguments for the {@link VectorInput} constructor.
  */
-export interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindableArgs {
+interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindableArgs {
     /**
      * The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
      */
@@ -371,4 +371,4 @@ Element.register('vec2', VectorInput, { dimensions: 2, renderChanges: true });
 Element.register('vec3', VectorInput, { dimensions: 3, renderChanges: true });
 Element.register('vec4', VectorInput, { dimensions: 4, renderChanges: true });
 
-export default VectorInput;
+export { VectorInput, VectorInputArgs };

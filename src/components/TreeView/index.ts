@@ -1,7 +1,7 @@
-import Container, { ContainerArgs } from '../Container';
-import Element from '../Element';
-import TreeViewItem from '../TreeViewItem';
 import { searchItems } from '../../helpers/search';
+import { Container, ContainerArgs } from '../Container';
+import { Element } from '../Element';
+import { TreeViewItem } from '../TreeViewItem';
 
 const CLASS_ROOT = 'pcui-treeview';
 const CLASS_DRAGGED_ITEM = CLASS_ROOT + '-item-dragged';
@@ -16,7 +16,7 @@ const DRAG_AREA_AFTER = 'after';
 /**
  * The arguments for the {@link TreeView} constructor.
  */
-export interface TreeViewArgs extends ContainerArgs {
+interface TreeViewArgs extends ContainerArgs {
     /**
      * Whether dragging a {@link TreeViewItem} is allowed. Defaults to `true`.
      */
@@ -1187,4 +1187,4 @@ class TreeView extends Container {
     }
 }
 
-export default TreeView;
+export { TreeView, TreeViewArgs };

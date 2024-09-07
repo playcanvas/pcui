@@ -1,5 +1,5 @@
 import { CLASS_NOT_FLEXIBLE, CLASS_MULTIPLE_VALUES } from '../../class';
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
 
 const CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
 const CLASS_BOOLEAN_INPUT_TICKED = CLASS_BOOLEAN_INPUT + '-ticked';
@@ -8,7 +8,7 @@ const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
 /**
  * The arguments for the {@link BooleanInput} constructor.
  */
-export interface BooleanInputArgs extends ElementArgs, IBindableArgs {
+interface BooleanInputArgs extends ElementArgs, IBindableArgs {
     /**
      * Sets the tabIndex of the {@link BooleanInput}. Defaults to 0.
      */
@@ -163,4 +163,4 @@ class BooleanInput extends Element implements IBindable, IFocusable {
 
 Element.register('boolean', BooleanInput, { renderChanges: true });
 
-export default BooleanInput;
+export { BooleanInput, BooleanInputArgs };

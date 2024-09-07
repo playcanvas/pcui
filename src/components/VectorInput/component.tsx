@@ -1,13 +1,13 @@
-import Element, { VectorInputArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { VectorInput as VectorInputClass, VectorInputArgs } from './index';
 
 /**
  * A vector input.
  */
-class Component extends BaseComponent <VectorInputArgs, any> {
+class VectorInput extends Element<VectorInputArgs, any> {
     constructor(props: VectorInputArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = VectorInputClass;
     }
 
     render() {
@@ -15,6 +15,6 @@ class Component extends BaseComponent <VectorInputArgs, any> {
     }
 }
 
-Component.ctor = Element;
+VectorInput.ctor = VectorInputClass;
 
-export default Component;
+export { VectorInput };

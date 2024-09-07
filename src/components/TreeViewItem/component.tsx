@@ -1,17 +1,17 @@
-import Element, { TreeViewItemArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { TreeViewItem as TreeViewItemClass, TreeViewItemArgs } from './index';
 
 /**
  * Represents a Tree View Item to be added to a TreeView.
  */
-class Component extends BaseComponent <TreeViewItemArgs, any> {
+class TreeViewItem extends Element<TreeViewItemArgs, any> {
     onSelect: () => void;
 
     onDeselect: () => void;
 
     constructor(props: TreeViewItemArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = TreeViewItemClass;
 
         this.onSelect = () => {
             if (props.onSelect) {
@@ -41,6 +41,6 @@ class Component extends BaseComponent <TreeViewItemArgs, any> {
     }
 }
 
-Component.ctor = Element;
+TreeViewItem.ctor = TreeViewItemClass;
 
-export default Component;
+export { TreeViewItem };

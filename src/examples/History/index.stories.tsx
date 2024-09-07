@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 import { Observer, History } from '@playcanvas/observer';
-import Container from '../../components/Container/component';
-import Button from '../../components/Button/component';
-import SliderInput from '../../components/SliderInput/component';
-import Progress from '../../components/Progress/component';
-import Label from '../../components/Label/component';
-import BindingTwoWay from '../../binding/BindingTwoWay';
+import { Container } from '../../components/Container/component';
+import { Button } from '../../components/Button/component';
+import { SliderInput } from '../../components/SliderInput/component';
+import { Progress } from '../../components/Progress/component';
+import { Label } from '../../components/Label/component';
+import { BindingTwoWay } from '../../binding/BindingTwoWay';
 
 export default {
     title: 'Examples/History',
@@ -32,7 +32,7 @@ export const Main = (props) => {
     history.on('redo', name => setHistoryLabel(`redo action: ${name}`));
     return (
         <Container onResize={() => console.log('here!')} flex>
-            <Progress binding={new BindingTwoWay({ history })} link={{ observer, path: 'progress' }}/>
+            <Progress binding={new BindingTwoWay({ history })} link={{ observer, path: 'progress' }} />
             <Container>
             </Container>
             <Container>

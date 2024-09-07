@@ -1,8 +1,8 @@
 import { CLASS_FONT_REGULAR } from '../../class';
-import Element from '../Element';
-import Label from '../Label';
-import Container, { ContainerArgs } from '../Container';
-import TextInput from '../TextInput';
+import { Container, ContainerArgs } from '../Container';
+import { Element } from '../Element';
+import { Label } from '../Label';
+import { TextInput } from '../TextInput';
 
 const CLASS_ROOT = 'pcui-treeview-item';
 const CLASS_ICON = CLASS_ROOT + '-icon';
@@ -16,7 +16,7 @@ const CLASS_RENAME = CLASS_ROOT + '-rename';
 /**
  * The arguments for the {@link TreeViewItem} constructor.
  */
-export interface TreeViewItemArgs extends ContainerArgs {
+interface TreeViewItemArgs extends ContainerArgs {
     /**
      * Whether the item is selected.
      */
@@ -655,4 +655,4 @@ class TreeViewItem extends Container {
     }
 }
 
-export default TreeViewItem;
+export { TreeViewItem, TreeViewItemArgs };

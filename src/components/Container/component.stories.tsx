@@ -1,8 +1,8 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Container from './component';
-import Label from '../Label/component';
+import { Container } from './component';
+import { Label } from '../Label/component';
 
 import '../../scss/index.js';
 

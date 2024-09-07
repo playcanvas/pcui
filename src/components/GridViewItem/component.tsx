@@ -1,13 +1,13 @@
-import Element, { GridViewItemArgs } from './index';
-import BaseComponent from '../Element/component';
+import { GridViewItem as GridViewItemClass, GridViewItemArgs } from './index';
+import { Element } from '../Element/component';
 
 /**
  * Represents a grid view item used in GridView.
  */
-class GridViewItem extends BaseComponent <GridViewItemArgs, any> {
+class GridViewItem extends Element<GridViewItemArgs, any> {
     constructor(props: GridViewItemArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = GridViewItemClass;
     }
 
     render() {
@@ -15,6 +15,6 @@ class GridViewItem extends BaseComponent <GridViewItemArgs, any> {
     }
 }
 
-GridViewItem.ctor = Element;
+GridViewItem.ctor = GridViewItemClass;
 
-export default GridViewItem;
+export { GridViewItem };

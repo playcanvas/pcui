@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import InfoBox from './component';
+import { InfoBox } from './component';
 
 import '../../scss/index.js';
 

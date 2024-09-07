@@ -1,13 +1,13 @@
-import Element, { OverlayArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { Overlay as OverlayClass, OverlayArgs } from './index';
 
 /**
  * An overlay element.
  */
-class Component extends BaseComponent <OverlayArgs, any> {
+class Overlay extends Element<OverlayArgs, any> {
     constructor(props: OverlayArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = OverlayClass;
     }
 
     render() {
@@ -15,6 +15,6 @@ class Component extends BaseComponent <OverlayArgs, any> {
     }
 }
 
-Component.ctor = Element;
+Overlay.ctor = OverlayClass;
 
-export default Component;
+export { Overlay};

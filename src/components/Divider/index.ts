@@ -1,4 +1,4 @@
-import Element, { ElementArgs } from '../Element';
+import { Element, ElementArgs } from '../Element';
 
 const CLASS_ROOT = 'pcui-divider';
 
@@ -20,4 +20,4 @@ class Divider extends Element {
 
 Element.register('divider', Divider);
 
-export default Divider;
+export { Divider };

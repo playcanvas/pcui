@@ -1,13 +1,13 @@
-import Element, { RadioButtonArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { RadioButton as RadioButtonClass, RadioButtonArgs } from './index';
 
 /**
  * A radio button element.
  */
-class Component extends BaseComponent <RadioButtonArgs, any> {
+class RadioButton extends Element<RadioButtonArgs, any> {
     constructor(props: RadioButtonArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = RadioButtonClass;
     }
 
     render() {
@@ -15,6 +15,6 @@ class Component extends BaseComponent <RadioButtonArgs, any> {
     }
 }
 
-Component.ctor = Element;
+RadioButton.ctor = RadioButtonClass;
 
-export default Component;
+export { RadioButton };

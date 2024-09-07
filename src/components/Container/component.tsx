@@ -1,15 +1,15 @@
 import * as React from 'react';
-import Element, { ContainerArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Container as ContainerClass, ContainerArgs } from './index';
+import { Element } from '../Element/component';
 
 /**
  * A container is the basic building block for Elements that are grouped together.
  * A container can contain any other element including other containers.
  */
-class Component extends BaseComponent <ContainerArgs, any> {
+class Container extends Element<ContainerArgs, any> {
     constructor(props: ContainerArgs = {}) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = ContainerClass;
     }
 
     componentDidMount() {
@@ -37,6 +37,6 @@ class Component extends BaseComponent <ContainerArgs, any> {
     }
 }
 
-Component.ctor = Element;
+Container.ctor = ContainerClass;
 
-export default Component;
+export { Container };

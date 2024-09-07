@@ -1,19 +1,19 @@
 import * as React from 'react';
-import TreeViewElement, { TreeViewArgs } from './index';
-import TreeViewItemElement from '../TreeViewItem/index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { TreeView as TreeViewClass, TreeViewArgs } from './index';
+import { TreeViewItem } from '../TreeViewItem/index';
 
 /**
  * A container that can show a TreeView like a hierarchy. The TreeView contains
  * TreeViewItems.
  */
-class Component extends BaseComponent <TreeViewArgs, any> {
+class TreeView extends Element<TreeViewArgs, any> {
     parentElement: any;
 
     constructor(props: TreeViewArgs) {
         super(props);
 
-        this.element = new TreeViewElement({ ...props });
+        this.element = new TreeViewClass({ ...props });
         this.loadChildren(this.props.children, this.element);
     }
 
@@ -23,7 +23,7 @@ class Component extends BaseComponent <TreeViewArgs, any> {
             children = [children];
         }
         children.forEach((child: any) => {
-            const childElement: any = new TreeViewItemElement({ text: child.props.text, icon: child.props.icon, open: false });
+            const childElement: any = new TreeViewItem({ text: child.props.text, icon: child.props.icon, open: false });
             if (child.props.onSelect) {
                 childElement.on('select', child.props.onSelect);
             }
@@ -37,7 +37,7 @@ class Component extends BaseComponent <TreeViewArgs, any> {
 
     componentDidUpdate() {
         this.parentElement.removeChild(this.element.dom);
-        this.element = new TreeViewElement({ ...this.props });
+        this.element = new TreeViewClass({ ...this.props });
         this.loadChildren(this.props.children, this.element);
         this.parentElement.appendChild(this.element.dom);
     }
@@ -53,6 +53,6 @@ class Component extends BaseComponent <TreeViewArgs, any> {
     }
 }
 
-Component.ctor = TreeViewElement;
+TreeView.ctor = TreeViewClass;
 
-export default Component;
+export { TreeView };

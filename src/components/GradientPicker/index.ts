@@ -1,14 +1,14 @@
-import Element, { ElementArgs } from '../Element';
-import Overlay from '../Overlay';
-import Button from '../Button';
-import SelectInput from '../SelectInput';
-import NumericInput from '../NumericInput';
-import TextInput from '../TextInput';
-import Panel from '../Panel';
-import Canvas from '../Canvas';
-import Label from '../Label';
 import { CurveSet, Curve, math } from 'playcanvas';
 import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
+import { Button } from '../Button';
+import { Canvas } from '../Canvas';
+import { Element, ElementArgs } from '../Element';
+import { Label } from '../Label';
+import { NumericInput } from '../NumericInput';
+import { Overlay } from '../Overlay';
+import { Panel } from '../Panel';
+import { SelectInput } from '../SelectInput';
+import { TextInput } from '../TextInput';
 
 const CLASS_MULTIPLE_VALUES = 'pcui-multiple-values';
 
@@ -23,7 +23,7 @@ const CLASS_GRADIENT = 'pcui-gradient';
 /**
  * The arguments for the {@link GradientPicker} constructor.
  */
-export interface GradientPickerArgs extends ElementArgs {
+interface GradientPickerArgs extends ElementArgs {
     /**
      * If `true`, the picker will render changes to the gradient as they happen. Defaults to `true`.
      */
@@ -1444,4 +1444,4 @@ class GradientPicker extends Element {
 
 Element.register('div', GradientPicker);
 
-export default GradientPicker;
+export { GradientPicker, GradientPickerArgs };

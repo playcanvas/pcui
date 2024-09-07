@@ -2,11 +2,11 @@ import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Menu from './component';
-import MenuElement from '../Menu';
-import Container from '../Container/component';
-import Label from '../Label/component';
-import LabelElement from '../Label';
+import { Menu } from './component';
+import { Menu as MenuClass } from '../Menu';
+import { Container } from '../Container/component';
+import { Label } from '../Label/component';
+import { Label as LabelClass } from '../Label';
 
 import '../../scss/index.js';
 
@@ -20,10 +20,10 @@ type Story = StoryObj<typeof Menu>;
 
 window.addEventListener('contextmenu', (evt: MouseEvent) => {
     const target = evt.target as HTMLElement;
-    if (target.ui instanceof LabelElement) {
+    if (target.ui instanceof LabelClass) {
         const element = document.querySelector('.pcui-menu');
         if (element) {
-            const menu = element.ui as MenuElement;
+            const menu = element.ui as MenuClass;
             evt.stopPropagation();
             evt.preventDefault();
 
@@ -43,6 +43,6 @@ export const Main: Story = {
                     { text: 'Bar', onSelect: action('World -> Bar'), onIsEnabled: () => false }
                 ] }
         ]}/>
-        <Label text='This label can be right clicked to show a context menu'/>
+        <Label text='This label can be right clicked to show a context menu' />
     </Container>
 };

@@ -1,5 +1,5 @@
 import { CLASS_FLEX, CLASS_GRID, CLASS_RESIZABLE, CLASS_SCROLLABLE } from '../../class';
-import Element, { ElementArgs, IFlexArgs, IParentArgs } from '../Element';
+import { Element, ElementArgs, IFlexArgs, IParentArgs } from '../Element';
 
 const RESIZE_HANDLE_SIZE = 4;
 
@@ -21,7 +21,7 @@ const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
 /**
  * The arguments for the {@link Container} constructor.
  */
-export interface ContainerArgs extends ElementArgs, IParentArgs, IFlexArgs {
+interface ContainerArgs extends ElementArgs, IParentArgs, IFlexArgs {
     /**
      * Sets whether the {@link Container} is resizable and where the resize handle is located. Can
      * be one of 'top', 'bottom', 'right', 'left'. Defaults to `null` which disables resizing.
@@ -795,4 +795,4 @@ class Container extends Element {
 
 Element.register('container', Container);
 
-export default Container;
+export { Container, ContainerArgs };
