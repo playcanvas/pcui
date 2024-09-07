@@ -3,7 +3,7 @@ import { strictEqual } from 'assert';
 
 import 'global-jsdom/register'
 
-import NumericInput from '../../dist/module/src/components/NumericInput/index.mjs';
+import { NumericInput } from '../../dist/module/src/components/NumericInput/index.mjs';
 
 test('NumericInput: constructor: no args', () => {
     const numericInput = new NumericInput();
