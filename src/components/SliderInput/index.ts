@@ -240,8 +240,9 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
 
     protected _onSlideStart(pageX: number) {
         this._domHandle.focus();
-        window.addEventListener('pointermove', this._onPointerMove);
-        window.addEventListener('pointerup', this._onPointerUp);
+        console.log('adding slider pointer move handler');
+        window.addEventListener('pointermove', this._onPointerMove, true);
+        window.addEventListener('pointerup', this._onPointerUp, true);
 
         this.class.add(CLASS_SLIDER_ACTIVE);
 
@@ -283,8 +284,8 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
 
         this.class.remove(CLASS_SLIDER_ACTIVE);
 
-        window.removeEventListener('pointermove', this._onPointerMove);
-        window.removeEventListener('pointerup', this._onPointerUp);
+        window.removeEventListener('pointermove', this._onPointerMove, true);
+        window.removeEventListener('pointerup', this._onPointerUp, true);
 
         if (this.binding) {
             this.binding.historyCombine = this._historyCombine;
