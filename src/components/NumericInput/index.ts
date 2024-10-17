@@ -213,8 +213,20 @@ class NumericInput extends InputElement {
         super._onInputKeyDown(evt);
     }
 
+    protected _getPointerLockElementByShadowRoot(pointerLockElement: any): boolean {
+        const shadowRoot = pointerLockElement.shadowRoot;
+        if (shadowRoot) {
+            const pointerLockElement = shadowRoot.pointerLockElement;
+            return this._getPointerLockElementByShadowRoot(pointerLockElement);
+        }
+        return pointerLockElement === this._sliderControl.dom;
+    }
+
     protected _isScrolling() {
         if (!this._sliderControl) return false;
+        if (document.pointerLockElement && document.pointerLockElement.shadowRoot) {
+            return this._getPointerLockElementByShadowRoot(document.pointerLockElement);
+        }
         return document.pointerLockElement === this._sliderControl.dom;
     }
 
