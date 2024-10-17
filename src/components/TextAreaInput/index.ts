@@ -1,5 +1,5 @@
-import Element from '../Element';
-import TextInput, { TextInputArgs } from '../TextInput';
+import { Element } from '../Element';
+import { TextInput, TextInputArgs } from '../TextInput';
 
 const CLASS_TEXT_AREA_INPUT = 'pcui-text-area-input';
 const CLASS_TEXT_AREA_INPUT_RESIZABLE = CLASS_TEXT_AREA_INPUT + '-resizable';
@@ -11,7 +11,7 @@ const CLASS_TEXT_AREA_INPUT_RESIZABLE_VERTICAL = CLASS_TEXT_AREA_INPUT_RESIZABLE
 /**
  * The arguments for the {@link TextAreaInput} constructor.
  */
-export interface TextAreaInputArgs extends TextInputArgs {
+interface TextAreaInputArgs extends TextInputArgs {
     /**
      * Sets which directions the text area can be resized in. One of 'both', 'horizontal',
      * 'vertical' or 'none'. Defaults to 'none'.
@@ -64,4 +64,4 @@ class TextAreaInput extends TextInput {
 
 Element.register('text', TextAreaInput, { renderChanges: true });
 
-export default TextAreaInput;
+export { TextAreaInput, TextAreaInputArgs };

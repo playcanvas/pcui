@@ -1,12 +1,12 @@
 import { CLASS_DEFAULT_MOUSEDOWN, CLASS_MULTIPLE_VALUES } from '../../class';
-import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IPlaceholder, IPlaceholderArgs } from '../Element';
+import { Element, ElementArgs, IBindable, IBindableArgs, IFlexArgs, IPlaceholder, IPlaceholderArgs } from '../Element';
 
 const CLASS_LABEL = 'pcui-label';
 
 /**
  * The arguments for the {@link Label} constructor.
  */
-export interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs, IFlexArgs {
+interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs, IFlexArgs {
     /**
      * Sets the text of the Label. Defaults to ''.
      */
@@ -159,4 +159,4 @@ class Label extends Element implements IPlaceholder, IBindable {
 
 Element.register('label', Label);
 
-export default Label;
+export { Label, LabelArgs };

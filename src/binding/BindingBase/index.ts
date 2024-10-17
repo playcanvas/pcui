@@ -288,4 +288,4 @@ class BindingBase extends Events {
     }
 }
 
-export default BindingBase;
+export { BindingBase };

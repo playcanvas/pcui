@@ -3,7 +3,7 @@ import { strictEqual } from 'assert';
 
 import 'global-jsdom/register'
 
-import Button from '../../dist/module/src/components/Button/index.mjs';
+import { Button } from '../../dist/module/src/components/Button/index.mjs';
 
 test('Button: constructor: no args', () => {
     const button = new Button();

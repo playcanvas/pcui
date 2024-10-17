@@ -1,6 +1,6 @@
-import Element from '../Element';
-import Container, { ContainerArgs } from '../Container';
-import Label from '../Label';
+import { Container, ContainerArgs } from '../Container';
+import { Element } from '../Element';
+import { Label } from '../Label';
 
 const CLASS_ROOT = 'pcui-code';
 const CLASS_INNER = CLASS_ROOT + '-inner';
@@ -8,7 +8,7 @@ const CLASS_INNER = CLASS_ROOT + '-inner';
 /**
  * The arguments for the {@link Code} constructor.
  */
-export interface CodeArgs extends ContainerArgs {
+interface CodeArgs extends ContainerArgs {
     /**
      * Sets the text to display in the code block.
      */
@@ -61,4 +61,4 @@ class Code extends Container {
 
 Element.register('code', Code);
 
-export default Code;
+export { Code, CodeArgs };

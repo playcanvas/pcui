@@ -1,5 +1,5 @@
 import { Observer } from '@playcanvas/observer';
-import BindingBase from '../BindingBase';
+import { BindingBase } from '../BindingBase';
 
 /**
  * Provides one way binding between an {@link IBindable} element and Observers. Any changes from
@@ -340,4 +340,4 @@ class BindingElementToObservers extends BindingBase {
     }
 }
 
-export default BindingElementToObservers;
+export { BindingElementToObservers };

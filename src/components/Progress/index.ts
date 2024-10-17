@@ -1,5 +1,5 @@
-import Element from '../Element';
-import Container, { ContainerArgs } from '../Container';
+import { Container, ContainerArgs } from '../Container';
+import { Element } from '../Element';
 
 const CLASS_ROOT = 'pcui-progress';
 const CLASS_INNER = CLASS_ROOT + '-inner';
@@ -7,7 +7,7 @@ const CLASS_INNER = CLASS_ROOT + '-inner';
 /**
  * The arguments for the {@link Progress} constructor.
  */
-export interface ProgressArgs extends ContainerArgs {
+interface ProgressArgs extends ContainerArgs {
     /**
      * Sets the value of the progress bar (between 0 and 100).
      */
@@ -61,4 +61,4 @@ class Progress extends Container {
 
 Element.register('progress', Progress);
 
-export default Progress;
+export { Progress, ProgressArgs };

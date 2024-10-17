@@ -45,8 +45,6 @@
 
 // active state
 .pcui-slider-active {
-    cursor: ew-resize;
-
     .pcui-slider-bar {
         border-color: $bcg-darkest;
         background-color: $bcg-darkest;
@@ -61,10 +59,6 @@
 
 // hover state
 .pcui-slider:not(.pcui-disabled, .pcui-readonly) {
-    &:hover {
-        cursor: pointer;
-    }
-
     .pcui-slider-handle {
         &:focus,
         &:hover {
@@ -76,6 +70,12 @@
     }
 }
 
+.pcui-slider {
+    cursor: pointer;
+    &.pcui-slider-active {
+        cursor: ew-resize;
+    }
+}
 // readonly state (hide slider)
 .pcui-slider.pcui-readonly {
     .pcui-numeric-input {

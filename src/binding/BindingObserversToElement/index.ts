@@ -1,6 +1,6 @@
 import { EventHandle, Observer } from '@playcanvas/observer';
 import { IBindable } from '../../components';
-import BindingBase, { BindingBaseArgs } from '../BindingBase';
+import { BindingBase, BindingBaseArgs } from '../BindingBase';
 
 export interface BindingObserversToElementArgs extends BindingBaseArgs {
     /**
@@ -131,4 +131,4 @@ class BindingObserversToElement extends BindingBase {
     }
 }
 
-export default BindingObserversToElement;
+export { BindingObserversToElement };

@@ -1,14 +1,14 @@
 import * as React from 'react';
-import Element, { GradientPickerArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { GradientPicker as GradientPickerClass, GradientPickerArgs } from './index';
 
 /**
  * Represents a gradient picker.
  */
-class GradientPicker extends BaseComponent <GradientPickerArgs, any> {
+class GradientPicker extends Element<GradientPickerArgs, any> {
     constructor(props: GradientPickerArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = GradientPickerClass;
     }
 
     render() {
@@ -17,6 +17,6 @@ class GradientPicker extends BaseComponent <GradientPickerArgs, any> {
     }
 }
 
-GradientPicker.ctor = Element;
+GradientPicker.ctor = GradientPickerClass;
 
-export default GradientPicker;
+export { GradientPicker };

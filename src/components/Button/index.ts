@@ -1,11 +1,11 @@
-import Element, { ElementArgs } from '../Element';
+import { Element, ElementArgs } from '../Element';
 
 const CLASS_BUTTON = 'pcui-button';
 
 /**
  * The arguments for the {@link Button} constructor.
  */
-export interface ButtonArgs extends ElementArgs {
+interface ButtonArgs extends ElementArgs {
     /**
      * If `true`, the {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML} property will be
      * used to set the text. Otherwise, {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
@@ -156,4 +156,4 @@ class Button extends Element {
 
 Element.register('button', Button);
 
-export default Button;
+export { Button, ButtonArgs };

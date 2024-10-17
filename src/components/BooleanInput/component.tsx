@@ -1,13 +1,13 @@
-import Element, { BooleanInputArgs } from './index';
-import BaseComponent from '../Element/component';
+import { BooleanInput as BooleanInputClass, BooleanInputArgs } from './index';
+import { Element } from '../Element/component';
 
 /**
  * A checkbox element.
  */
-class Component extends BaseComponent <BooleanInputArgs, any> {
+class BooleanInput extends Element<BooleanInputArgs, any> {
     constructor(props: BooleanInputArgs = {}) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = BooleanInputClass;
     }
 
     render() {
@@ -15,6 +15,6 @@ class Component extends BaseComponent <BooleanInputArgs, any> {
     }
 }
 
-Component.ctor = Element;
+BooleanInput.ctor = BooleanInputClass;
 
-export default Component;
+export { BooleanInput };

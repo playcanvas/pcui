@@ -1,6 +1,6 @@
 import { CLASS_MULTIPLE_VALUES } from '../../class';
-import Element, { ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
-import NumericInput from '../NumericInput';
+import { Element, ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
+import { NumericInput } from '../NumericInput';
 
 const CLASS_SLIDER = 'pcui-slider';
 const CLASS_SLIDER_CONTAINER = CLASS_SLIDER + '-container';
@@ -13,7 +13,7 @@ const IS_CHROME = /Chrome\//.test(globalThis.navigator?.userAgent);
 /**
  * The arguments for the {@link SliderInput} constructor.
  */
-export interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs, IPlaceholderArgs {
+interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs, IPlaceholderArgs {
     /**
      * Sets whether any key up event will cause a change event to be fired.
      */
@@ -240,8 +240,8 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
 
     protected _onSlideStart(pageX: number) {
         this._domHandle.focus();
-        window.addEventListener('pointermove', this._onPointerMove);
-        window.addEventListener('pointerup', this._onPointerUp);
+        this._domSlider.addEventListener('pointermove', this._onPointerMove);
+        this._domSlider.addEventListener('pointerup', this._onPointerUp);
 
         this.class.add(CLASS_SLIDER_ACTIVE);
 
@@ -283,8 +283,8 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
 
         this.class.remove(CLASS_SLIDER_ACTIVE);
 
-        window.removeEventListener('pointermove', this._onPointerMove);
-        window.removeEventListener('pointerup', this._onPointerUp);
+        this._domSlider.removeEventListener('pointermove', this._onPointerMove);
+        this._domSlider.removeEventListener('pointerup', this._onPointerUp);
 
         if (this.binding) {
             this.binding.historyCombine = this._historyCombine;
@@ -444,4 +444,4 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
 
 Element.register('slider', SliderInput, { renderChanges: true });
 
-export default SliderInput;
+export { SliderInput, SliderInputArgs };

@@ -1,20 +1,20 @@
 import * as React from 'react';
-import Element, { PanelArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { Panel as PanelClass, PanelArgs } from './index';
 
 /**
  * The Panel is a Container that itself contains a header container and a content container. The
  * respective Container functions work using the content container. One can also append elements to
  * the header of the Panel.
  */
-class Component extends BaseComponent <PanelArgs, any> {
+class Panel extends Element<PanelArgs, any> {
     nodeElement: any;
 
     containerElement: any;
 
     constructor(props: PanelArgs = {}) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = PanelClass;
     }
 
     componentDidMount() {
@@ -41,6 +41,6 @@ class Component extends BaseComponent <PanelArgs, any> {
     }
 }
 
-Component.ctor = Element;
+Panel.ctor = PanelClass;
 
-export default Component;
+export { Panel };

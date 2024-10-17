@@ -1,6 +1,6 @@
-import Element from '../Element';
-import Container, { ContainerArgs } from '../Container';
-import Label from '../Label';
+import { Container, ContainerArgs } from '../Container';
+import { Element } from '../Element';
+import { Label } from '../Label';
 
 const CLASS_LABEL_GROUP = 'pcui-label-group';
 const CLASS_LABEL_TOP = CLASS_LABEL_GROUP + '-align-top';
@@ -8,7 +8,7 @@ const CLASS_LABEL_TOP = CLASS_LABEL_GROUP + '-align-top';
 /**
  * The arguments for the {@link LabelGroup} constructor.
  */
-export interface LabelGroupArgs extends ContainerArgs {
+interface LabelGroupArgs extends ContainerArgs {
     /**
      * The label text. Defaults to 'Label'.
      */
@@ -108,4 +108,4 @@ class LabelGroup extends Container {
 
 Element.register('labelgroup', LabelGroup);
 
-export default LabelGroup;
+export { LabelGroup, LabelGroupArgs };

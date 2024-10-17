@@ -3,7 +3,7 @@ import { strictEqual } from 'assert';
 
 import 'global-jsdom/register'
 
-import BooleanInput from '../../dist/module/src/components/BooleanInput/index.mjs';
+import { BooleanInput } from '../../dist/module/src/components/BooleanInput/index.mjs';
 
 test('BooleanInput constructor: no args', () => {
     const booleanInput = new BooleanInput();

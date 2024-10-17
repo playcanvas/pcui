@@ -1,14 +1,14 @@
 import * as React from 'react';
-import Element, { LabelArgs } from './index';
-import BaseComponent from '../Element/component';
+import { Element } from '../Element/component';
+import { Label as LabelClass, LabelArgs } from './index';
 
 /**
  * The Label is a simple span element that displays some text.
  */
-class Component extends BaseComponent <LabelArgs, any> {
+class Label extends Element<LabelArgs, any> {
     constructor(props: LabelArgs = {}) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = LabelClass;
     }
 
     render() {
@@ -17,6 +17,6 @@ class Component extends BaseComponent <LabelArgs, any> {
     }
 }
 
-Component.ctor = Element;
+Label.ctor = LabelClass;
 
-export default Component;
+export { Label };

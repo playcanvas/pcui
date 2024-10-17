@@ -1,8 +1,8 @@
 import { CLASS_COLLAPSED, CLASS_COLLAPSIBLE, CLASS_FONT_BOLD } from '../../class';
-import Element from '../Element';
-import Container, { ContainerArgs } from '../Container';
-import Label from '../Label';
-import Button from '../Button';
+import { Button } from '../Button';
+import { Container, ContainerArgs } from '../Container';
+import { Element } from '../Element';
+import { Label } from '../Label';
 
 const CLASS_PANEL = 'pcui-panel';
 const CLASS_PANEL_HEADER = CLASS_PANEL + '-header';
@@ -15,7 +15,7 @@ const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
 /**
  * The arguments for the {@link Panel} constructor.
  */
-export interface PanelArgs extends ContainerArgs {
+interface PanelArgs extends ContainerArgs {
     /**
      * Sets whether the Element is collapsible.
      */
@@ -531,4 +531,4 @@ class Panel extends Container {
 
 Element.register('panel', Panel);
 
-export default Panel;
+export { Panel, PanelArgs };

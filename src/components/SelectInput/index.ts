@@ -1,10 +1,10 @@
 import { CLASS_FOCUS, CLASS_MULTIPLE_VALUES } from '../../class';
-import Element, { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholderArgs } from '../Element';
-import Container from '../Container';
-import TextInput from '../TextInput';
-import Button from '../Button';
-import Label from '../Label';
 import { searchItems } from '../../helpers/search';
+import { Button } from '../Button';
+import { Container } from '../Container';
+import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholderArgs } from '../Element';
+import { Label } from '../Label';
+import { TextInput } from '../TextInput';
 
 const CLASS_SELECT_INPUT = 'pcui-select-input';
 const CLASS_SELECT_INPUT_CONTAINER_VALUE = CLASS_SELECT_INPUT + '-container-value';
@@ -32,7 +32,7 @@ const DEFAULT_BOTTOM_OFFSET = 25;
 /**
  * The arguments for the {@link SelectInput} constructor.
  */
-export interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
+interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * Used to map the options.
      */
@@ -1240,4 +1240,4 @@ Element.register('select', SelectInput, { renderChanges: true });
 Element.register('multiselect', SelectInput, { multiSelect: true, renderChanges: true });
 Element.register('tags', SelectInput, { allowInput: true, allowCreate: true, multiSelect: true, renderChanges: true });
 
-export default SelectInput;
+export { SelectInput, SelectInputArgs };

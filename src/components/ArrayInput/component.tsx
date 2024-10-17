@@ -1,13 +1,13 @@
-import Element, { ArrayInputArgs } from './index';
-import BaseComponent from '../Element/component';
+import { ArrayInput as ArrayInputClass, ArrayInputArgs } from './index';
+import { Element } from '../Element/component';
 
 /**
  * Element that allows editing an array of values.
  */
-class Component extends BaseComponent <ArrayInputArgs, any> {
+class ArrayInput extends Element<ArrayInputArgs, any> {
     constructor(props: ArrayInputArgs) {
         super(props);
-        this.elementClass = Element;
+        this.elementClass = ArrayInputClass;
     }
 
     render() {
@@ -15,6 +15,6 @@ class Component extends BaseComponent <ArrayInputArgs, any> {
     }
 }
 
-Component.ctor = Element;
+ArrayInput.ctor = ArrayInputClass;
 
-export default Component;
+export { ArrayInput };
