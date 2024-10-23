@@ -194,7 +194,8 @@ class TreeView extends Container {
         this._allowReordering = args.allowReordering ?? true;
         this._allowRenaming = args.allowRenaming ?? false;
         this._dragHandle = new Element({
-            class: CLASS_DRAGGED_HANDLE
+            class: CLASS_DRAGGED_HANDLE,
+            hidden: true
         });
         this._dragScrollElement = args.dragScrollElement || this;
         this.append(this._dragHandle);
