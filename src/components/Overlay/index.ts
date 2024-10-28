@@ -42,7 +42,7 @@ class Overlay extends Container {
         this._domClickableOverlay.classList.add(CLASS_OVERLAY_INNER);
         this.dom.appendChild(this._domClickableOverlay);
 
-        this._domClickableOverlay.addEventListener('mousedown', this._onMouseDown);
+        this._domClickableOverlay.addEventListener('pointerdown', this._onPointerDown);
 
         this.domContent = document.createElement('div');
         this.domContent.ui = this;
@@ -56,12 +56,12 @@ class Overlay extends Container {
     destroy() {
         if (this._destroyed) return;
 
-        this._domClickableOverlay.removeEventListener('mousedown', this._onMouseDown);
+        this._domClickableOverlay.removeEventListener('pointerdown', this._onPointerDown);
 
         super.destroy();
     }
 
-    protected _onMouseDown = (evt: MouseEvent) => {
+    protected _onPointerDown = (evt: MouseEvent) => {
         if (!this.clickable) return;
 
         // some field might be in focus
@@ -73,6 +73,7 @@ class Overlay extends Container {
         });
 
         evt.preventDefault();
+        evt.stopPropagation();
     };
 
     /**

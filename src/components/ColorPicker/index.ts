@@ -110,9 +110,12 @@ class ColorPicker extends Element implements IBindable {
         this.dom.addEventListener('focus', this._onFocus);
         this.dom.addEventListener('blur', this._onBlur);
 
-        this.on('click', () => {
+        this.dom.addEventListener('pointerdown', (evt) => {
             if (this.enabled && !this.readOnly) {
                 this._openColorPicker();
+
+                evt.stopPropagation();
+                evt.preventDefault();
             }
         });
 
@@ -375,7 +378,7 @@ class ColorPicker extends Element implements IBindable {
         // position picker
         const rectPicker = this._overlay.dom.getBoundingClientRect();
         const rectElement = this.dom.getBoundingClientRect();
-        this._setColorPickerPosition(rectElement.left - rectElement.width, rectElement.top + 25);
+        this._setColorPickerPosition(rectElement.left - rectPicker.left, rectElement.bottom - rectPicker.top + 1);
 
         // color changed, update picker
         this._evtColorToPicker = this.on('change', () => {
