@@ -421,46 +421,65 @@ class TreeView extends Container {
     // Called when a key is down on a child TreeViewItem.
     protected _onChildKeyDown(evt: KeyboardEvent, item: TreeViewItem) {
         if (['Tab', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(evt.key) === -1) return;
-
+    
         evt.preventDefault();
         evt.stopPropagation();
-
-        if (evt.key === 'ArrowDown') {
-            // select next tree item
-            if (this._selectedItems.length) {
-                const next = this._findNextVisibleTreeItem(item);
-                if (next) {
-                    if (this._pressedShift || this._pressedCtrl) {
-                        next.selected = true;
-                    } else {
-                        this._selectSingleItem(next);
+    
+        switch (evt.key) {
+            case 'ArrowLeft': {
+                if (item.numChildren > 0 && item.open) {
+                    // If item has children and is expanded, fold it
+                    item.open = false;
+                } else {
+                    // If item is a leaf or already folded, select parent
+                    const parent = item.parent;
+                    if (parent instanceof TreeViewItem) {
+                        this._selectSingleItem(parent);
                     }
                 }
+                break;
             }
-        } else if (evt.key === 'ArrowUp') {
-            // select previous tree item
-            if (this._selectedItems.length) {
-                const prev = this._findPreviousVisibleTreeItem(item);
-                if (prev) {
-                    if (this._pressedShift || this._pressedCtrl) {
-                        prev.selected = true;
+            case 'ArrowRight': {
+                if (item.numChildren > 0) {
+                    if (!item.open) {
+                        // If item is folded, unfold it
+                        item.open = true;
                     } else {
-                        this._selectSingleItem(prev);
+                        // If item is already unfolded, select first child
+                        const firstChild = item.firstChild;
+                        if (firstChild instanceof TreeViewItem) {
+                            this._selectSingleItem(firstChild);
+                        }
                     }
                 }
+                break;
             }
-
-        } else if (evt.key === 'ArrowLeft') {
-            // close selected tree item
-            if (item.parent !== this) {
-                item.open = false;
+            case 'ArrowDown': {
+                if (this._selectedItems.length) {
+                    const next = this._findNextVisibleTreeItem(item);
+                    if (next) {
+                        if (this._pressedShift || this._pressedCtrl) {
+                            next.selected = true;
+                        } else {
+                            this._selectSingleItem(next);
+                        }
+                    }
+                }
+                break;
             }
-        } else if (evt.key === 'ArrowRight') {
-            // open selected tree item
-            item.open = true;
-        } else if (evt.key === 'Tab') {
-            // tab
-            // skip
+            case 'ArrowUp': {
+                if (this._selectedItems.length) {
+                    const prev = this._findPreviousVisibleTreeItem(item);
+                    if (prev) {
+                        if (this._pressedShift || this._pressedCtrl) {
+                            prev.selected = true;
+                        } else {
+                            this._selectSingleItem(prev);
+                        }
+                    }
+                }
+                break;
+            }
         }
     }
 
