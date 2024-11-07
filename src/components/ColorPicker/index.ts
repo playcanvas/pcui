@@ -111,7 +111,7 @@ class ColorPicker extends Element implements IBindable {
         this.dom.addEventListener('blur', this._onBlur);
 
         this.dom.addEventListener('pointerdown', (evt) => {
-            if (this.enabled && !this.readOnly) {
+            if (this.enabled && !this.readOnly && this._overlay.hidden) {
                 this._openColorPicker();
 
                 evt.stopPropagation();
