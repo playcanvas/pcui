@@ -1,5 +1,6 @@
-import { Code as CodeClass, CodeArgs } from './index';
 import { Element } from '../Element/component';
+
+import { Code as CodeClass, CodeArgs } from './index';
 
 /**
  * Represents a code block.

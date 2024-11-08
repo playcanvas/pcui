@@ -1,4 +1,5 @@
 import { Observer } from '@playcanvas/observer';
+
 import { BindingObserversToElement } from '../../binding/BindingObserversToElement';
 import { Container, ContainerArgs } from '../Container';
 import { IFocusable } from '../Element';
@@ -7,8 +8,8 @@ import { RadioButton } from '../RadioButton';
 
 const CLASS_ROOT = 'pcui-gridview-item';
 const CLASS_ROOT_RADIO = 'pcui-gridview-radio-container';
-const CLASS_SELECTED = CLASS_ROOT + '-selected';
-const CLASS_TEXT = CLASS_ROOT + '-text';
+const CLASS_SELECTED = `${CLASS_ROOT}-selected`;
+const CLASS_TEXT = `${CLASS_ROOT}-text`;
 const CLASS_RADIO_BUTTON = 'pcui-gridview-radiobtn';
 
 /**
@@ -157,18 +158,20 @@ class GridViewItem extends Container implements IFocusable {
 
         if (value) {
             // Update radio button if it exists
-            if (this._radioButton)
+            if (this._radioButton) {
                 this._radioButton.value = value;
-            else
+            } else {
                 this.class.add(CLASS_SELECTED);
+            }
 
             this.emit('select', this);
         } else {
             // Update radio button if it exists
-            if (this._radioButton)
+            if (this._radioButton) {
                 this._radioButton.value = false;
-            else
+            } else {
                 this.class.remove(CLASS_SELECTED);
+            }
 
             this.emit('deselect', this);
         }

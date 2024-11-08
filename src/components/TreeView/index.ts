@@ -4,10 +4,10 @@ import { Element } from '../Element';
 import { TreeViewItem } from '../TreeViewItem';
 
 const CLASS_ROOT = 'pcui-treeview';
-const CLASS_DRAGGED_ITEM = CLASS_ROOT + '-item-dragged';
-const CLASS_DRAGGED_HANDLE = CLASS_ROOT + '-drag-handle';
-const CLASS_FILTERING = CLASS_ROOT + '-filtering';
-const CLASS_FILTER_RESULT = CLASS_FILTERING + '-result';
+const CLASS_DRAGGED_ITEM = `${CLASS_ROOT}-item-dragged`;
+const CLASS_DRAGGED_HANDLE = `${CLASS_ROOT}-drag-handle`;
+const CLASS_FILTERING = `${CLASS_ROOT}-filtering`;
+const CLASS_FILTER_RESULT = `${CLASS_FILTERING}-result`;
 
 const DRAG_AREA_INSIDE = 'inside';
 const DRAG_AREA_BEFORE = 'before';
@@ -872,8 +872,9 @@ class TreeView extends Container {
                         }
                     }
                 }
-                if (!parent)
+                if (!parent) {
                     this._dragArea = DRAG_AREA_INSIDE;
+                }
             }
         }
 
@@ -909,9 +910,9 @@ class TreeView extends Container {
                 width = Math.min(width, this.dom.parentElement.clientWidth - left + parentRect.left);
             }
 
-            this._dragHandle.style.top = top  + 'px';
-            this._dragHandle.style.left = left + 'px';
-            this._dragHandle.style.width = (width - 7) + 'px';
+            this._dragHandle.style.top = `${top}px`;
+            this._dragHandle.style.left = `${left}px`;
+            this._dragHandle.style.width = `${width - 7}px`;
         }
     }
 

@@ -1,4 +1,5 @@
 import { Observer } from '@playcanvas/observer';
+
 import * as utils from '../../helpers/utils';
 import { Button } from '../Button';
 import { Container } from '../Container';
@@ -8,10 +9,10 @@ import { Panel } from '../Panel';
 
 const CLASS_ARRAY_INPUT = 'pcui-array-input';
 const CLASS_ARRAY_EMPTY = 'pcui-array-empty';
-const CLASS_ARRAY_SIZE = CLASS_ARRAY_INPUT + '-size';
-const CLASS_ARRAY_CONTAINER = CLASS_ARRAY_INPUT + '-items';
-const CLASS_ARRAY_ELEMENT = CLASS_ARRAY_INPUT + '-item';
-const CLASS_ARRAY_DELETE = CLASS_ARRAY_ELEMENT + '-delete';
+const CLASS_ARRAY_SIZE = `${CLASS_ARRAY_INPUT}-size`;
+const CLASS_ARRAY_CONTAINER = `${CLASS_ARRAY_INPUT}-items`;
+const CLASS_ARRAY_ELEMENT = `${CLASS_ARRAY_INPUT}-item`;
+const CLASS_ARRAY_DELETE = `${CLASS_ARRAY_ELEMENT}-delete`;
 
 /**
  * The arguments for the {@link ArrayInput} constructor.
@@ -309,14 +310,14 @@ class ArrayInput extends Element implements IFocusable, IBindable {
                 headerText: `[${this._arrayElements.length}]`,
                 removable: !this._fixedSize,
                 collapsible: true,
-                class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
+                class: [CLASS_ARRAY_ELEMENT, `${CLASS_ARRAY_ELEMENT}-${this._elementType}`]
             });
         } else {
             container = new Container({
                 flex: true,
                 flexDirection: 'row',
                 alignItems: 'center',
-                class: [CLASS_ARRAY_ELEMENT, CLASS_ARRAY_ELEMENT + '-' + this._elementType]
+                class: [CLASS_ARRAY_ELEMENT, `${CLASS_ARRAY_ELEMENT}-${this._elementType}`]
             });
         }
 
@@ -429,7 +430,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
         this.emit('unlinkElement', element, index);
 
-        const path = (useSinglePath ? paths[0] + `.${index}` : paths.map((path: string) => `${path}.${index}`));
+        const path = (useSinglePath ? `${paths[0]}.${index}` : paths.map((path: string) => `${path}.${index}`));
         element.link(observers, path);
 
         this.emit('linkElement', element, index, path);

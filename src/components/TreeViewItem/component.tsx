@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+
 import { TreeViewItem as TreeViewItemClass, TreeViewItemArgs } from './index';
 
 /**

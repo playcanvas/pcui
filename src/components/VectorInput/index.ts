@@ -1,4 +1,5 @@
 import { Observer } from '@playcanvas/observer';
+
 import { CLASS_FOCUS, CLASS_MULTIPLE_VALUES } from '../../class';
 import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
 import { NumericInput } from '../NumericInput';
@@ -188,7 +189,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         if (useSinglePath) {
             for (let i = 0; i < this._inputs.length; i++) {
                 // link observers to path.i for each dimension
-                this._inputs[i].link(observers, paths[0] + `.${i}`);
+                this._inputs[i].link(observers, `${paths[0]}.${i}`);
             }
         } else {
             for (let i = 0; i < this._inputs.length; i++) {

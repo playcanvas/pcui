@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+
 import { NumericInput as NumericInputClass, NumericInputArgs } from './index';
 
 /**

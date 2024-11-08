@@ -2,10 +2,10 @@ import { Container } from '../Container';
 import { Element, ElementArgs } from '../Element';
 
 const CLASS_OVERLAY = 'pcui-overlay';
-const CLASS_OVERLAY_INNER = CLASS_OVERLAY + '-inner';
-const CLASS_OVERLAY_CLICKABLE = CLASS_OVERLAY + '-clickable';
-const CLASS_OVERLAY_TRANSPARENT = CLASS_OVERLAY + '-transparent';
-const CLASS_OVERLAY_CONTENT = CLASS_OVERLAY + '-content';
+const CLASS_OVERLAY_INNER = `${CLASS_OVERLAY}-inner`;
+const CLASS_OVERLAY_CLICKABLE = `${CLASS_OVERLAY}-clickable`;
+const CLASS_OVERLAY_TRANSPARENT = `${CLASS_OVERLAY}-transparent`;
+const CLASS_OVERLAY_CONTENT = `${CLASS_OVERLAY}-content`;
 
 /**
  * The arguments for the {@link Overlay} constructor.

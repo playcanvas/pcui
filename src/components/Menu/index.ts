@@ -3,7 +3,7 @@ import { Element, IFocusable } from '../Element';
 import { MenuItem, MenuItemArgs } from '../MenuItem';
 
 const CLASS_MENU = 'pcui-menu';
-const CLASS_MENU_ITEMS = CLASS_MENU + '-items';
+const CLASS_MENU_ITEMS = `${CLASS_MENU}-items`;
 
 /**
  * The arguments for the {@link Menu} constructor.
@@ -151,7 +151,7 @@ class Menu extends Container implements IFocusable {
         const rect = containerItems.dom.getBoundingClientRect();
         // limit to bottom / top of screen
         if (rect.bottom > window.innerHeight) {
-            containerItems.style.top = -(rect.bottom - window.innerHeight) + 'px';
+            containerItems.style.top = `${-(rect.bottom - window.innerHeight)}px`;
         }
         if (rect.right > window.innerWidth) {
             containerItems.style.left = 'auto';
@@ -206,8 +206,8 @@ class Menu extends Container implements IFocusable {
             left = 0;
         }
 
-        this._containerMenuItems.style.left = left + 'px';
-        this._containerMenuItems.style.top = top + 'px';
+        this._containerMenuItems.style.left = `${left}px`;
+        this._containerMenuItems.style.top = `${top}px`;
 
         for (const child of this._containerMenuItems.dom.childNodes) {
             this._limitSubmenuAtScreenEdges(child.ui as MenuItem);

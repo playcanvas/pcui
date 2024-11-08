@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+
 import { Progress as ProgressClass, ProgressArgs } from './index';
 
 /**

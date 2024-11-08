@@ -2,8 +2,8 @@ import { CLASS_NOT_FLEXIBLE, CLASS_MULTIPLE_VALUES } from '../../class';
 import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
 
 const CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
-const CLASS_BOOLEAN_INPUT_TICKED = CLASS_BOOLEAN_INPUT + '-ticked';
-const CLASS_BOOLEAN_INPUT_TOGGLE = CLASS_BOOLEAN_INPUT + '-toggle';
+const CLASS_BOOLEAN_INPUT_TICKED = `${CLASS_BOOLEAN_INPUT}-ticked`;
+const CLASS_BOOLEAN_INPUT_TOGGLE = `${CLASS_BOOLEAN_INPUT}-toggle`;
 
 /**
  * The arguments for the {@link BooleanInput} constructor.

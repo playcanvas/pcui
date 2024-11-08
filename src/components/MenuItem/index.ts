@@ -1,12 +1,13 @@
 import { Observer } from '@playcanvas/observer';
+
 import { Container, ContainerArgs } from '../Container';
 import { Element, IBindable } from '../Element';
 import { Label } from '../Label';
 
 const CLASS_MENU_ITEM = 'pcui-menu-item';
-const CLASS_MENU_ITEM_CONTENT = CLASS_MENU_ITEM + '-content';
-const CLASS_MENU_ITEM_CHILDREN = CLASS_MENU_ITEM + '-children';
-const CLASS_MENU_ITEM_HAS_CHILDREN = CLASS_MENU_ITEM + '-has-children';
+const CLASS_MENU_ITEM_CONTENT = `${CLASS_MENU_ITEM}-content`;
+const CLASS_MENU_ITEM_CHILDREN = `${CLASS_MENU_ITEM}-children`;
+const CLASS_MENU_ITEM_HAS_CHILDREN = `${CLASS_MENU_ITEM}-has-children`;
 
 /**
  * The arguments for the {@link MenuItem} constructor.
@@ -158,8 +159,9 @@ class MenuItem extends Container implements IBindable {
         evt.preventDefault();
         evt.stopPropagation();
         if (this.enabled) {
-            if (this._onSelect)
+            if (this._onSelect) {
                 this._onSelect(evt);
+            }
             this.emit('select');
 
             if (this.menu) {
@@ -224,7 +226,7 @@ class MenuItem extends Container implements IBindable {
      * Sets the CSS code for an icon for the MenuItem. e.g. 'E401' (notice we omit the '\\' character).
      */
     set icon(value) {
-        if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
+        if (this._icon === value || !value.match(/^E\d{0,4}$/)) return;
         this._icon = value;
         if (value) {
             // set data-icon attribute but first convert the value to a code point

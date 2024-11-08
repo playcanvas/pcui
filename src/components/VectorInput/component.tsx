@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+
 import { VectorInput as VectorInputClass, VectorInputArgs } from './index';
 
 /**

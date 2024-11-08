@@ -1,4 +1,5 @@
 import { EventHandle, Observer } from '@playcanvas/observer';
+
 import { IBindable } from '../../components';
 import { BindingBase, BindingBaseArgs } from '../BindingBase';
 
@@ -32,10 +33,10 @@ class BindingObserversToElement extends BindingBase {
     }
 
     private _linkObserver(observer: Observer, path: string) {
-        this._eventHandles.push(observer.on(path + ':set', this._deferUpdateElement));
-        this._eventHandles.push(observer.on(path + ':unset', this._deferUpdateElement));
-        this._eventHandles.push(observer.on(path + ':insert', this._deferUpdateElement));
-        this._eventHandles.push(observer.on(path + ':remove', this._deferUpdateElement));
+        this._eventHandles.push(observer.on(`${path}:set`, this._deferUpdateElement));
+        this._eventHandles.push(observer.on(`${path}:unset`, this._deferUpdateElement));
+        this._eventHandles.push(observer.on(`${path}:insert`, this._deferUpdateElement));
+        this._eventHandles.push(observer.on(`${path}:remove`, this._deferUpdateElement));
     }
 
     private _deferUpdateElement = () => {

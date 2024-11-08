@@ -3,7 +3,7 @@ import { Element } from '../Element';
 import { Label } from '../Label';
 
 const CLASS_LABEL_GROUP = 'pcui-label-group';
-const CLASS_LABEL_TOP = CLASS_LABEL_GROUP + '-align-top';
+const CLASS_LABEL_TOP = `${CLASS_LABEL_GROUP}-align-top`;
 
 /**
  * The arguments for the {@link LabelGroup} constructor.

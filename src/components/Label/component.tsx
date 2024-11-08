@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import { Element } from '../Element/component';
+
 import { Label as LabelClass, LabelArgs } from './index';
 
 /**

@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { Container as ContainerClass, ContainerArgs } from './index';
+
 import { Element } from '../Element/component';
+
+import { Container as ContainerClass, ContainerArgs } from './index';
 
 /**
  * A container is the basic building block for Elements that are grouped together.
