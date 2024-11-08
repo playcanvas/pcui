@@ -1,4 +1,3 @@
-/* eslint-disable-next-line import/named */
 import { EventHandle, Events, HandleEvent, Observer } from '@playcanvas/observer';
 import * as React from 'react';
 
