@@ -20,7 +20,7 @@ const config = {
                 use: ['style-loader', 'css-loader', {
                     loader: 'sass-loader',
                     options: {
-                        additionalData: `@import '${__dirname.replace(/\\/g, "/")}/../src/scss/pcui-storybook.scss';`
+                        additionalData: `@import '${__dirname}/../src/scss/pcui-storybook.scss';`
                     }
                 }]
             }
