@@ -1,3 +1,5 @@
+import path from 'path';
+
 const config = {
     stories: ['../src/**/*.stories.tsx'],
 
@@ -17,12 +19,24 @@ const config = {
         config.module.rules.unshift(
             {
                 test: /\.s[ac]ss$/i,
-                use: ['style-loader', 'css-loader', {
-                    loader: 'sass-loader',
-                    options: {
-                        additionalData: `@import '${__dirname}/../src/scss/pcui-storybook.scss';`
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                includePaths: [
+                                    path.resolve(__dirname, '../src/scss')
+                                ]
+                            },
+                            additionalData: (content, loaderContext) => {
+                                const relativePath = path.relative(path.dirname(loaderContext.resourcePath), path.resolve(__dirname, '../src/scss/pcui-storybook.scss')).replace(/\\/g, '/');
+                                return `@import '${relativePath}';\n${content}`;
+                            }
+                        }
                     }
-                }]
+                ]
             }
         );
 
