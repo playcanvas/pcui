@@ -11,14 +11,8 @@
         ],
         "esModuleInterop": true,
         "sourceMap": true,
-        "moduleResolution": "node",
-        "rootDir": ".",
-        "baseUrl": "."
+        "moduleResolution": "node"
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "src/index.tsx"
-    ],
-    "exclude": ["node_modules"]
+    "include": ["./src/index.ts"],
+    "exclude": ["node_modules", "./src/scss"]
 }
