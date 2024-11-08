@@ -61,7 +61,7 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
 
         input.ui = this;
         input.tabIndex = 0;
-        input.autocomplete = "off";
+        input.autocomplete = 'off';
 
         this._onInputKeyDownEvt = this._onInputKeyDown.bind(this);
         this._onInputChangeEvt = this._onInputChange.bind(this);

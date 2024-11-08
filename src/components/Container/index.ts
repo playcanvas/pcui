@@ -11,12 +11,12 @@ const VALID_RESIZABLE_VALUES = [
     'left'
 ];
 
-const CLASS_RESIZING = CLASS_RESIZABLE + '-resizing';
+const CLASS_RESIZING = `${CLASS_RESIZABLE}-resizing`;
 const CLASS_RESIZABLE_HANDLE = 'pcui-resizable-handle';
 const CLASS_CONTAINER = 'pcui-container';
 
-const CLASS_DRAGGED = CLASS_CONTAINER + '-dragged';
-const CLASS_DRAGGED_CHILD = CLASS_DRAGGED + '-child';
+const CLASS_DRAGGED = `${CLASS_CONTAINER}-dragged`;
+const CLASS_DRAGGED_CHILD = `${CLASS_DRAGGED}-child`;
 
 /**
  * The arguments for the {@link Container} constructor.
@@ -702,7 +702,7 @@ class Container extends Element {
         if (value === this._resizable) return;
 
         if (VALID_RESIZABLE_VALUES.indexOf(value) === -1) {
-            console.error('Invalid resizable value: must be one of ' + VALID_RESIZABLE_VALUES.join(','));
+            console.error(`Invalid resizable value: must be one of ${VALID_RESIZABLE_VALUES.join(',')}`);
             return;
         }
 

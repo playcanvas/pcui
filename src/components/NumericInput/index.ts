@@ -3,9 +3,9 @@ import { Element } from '../Element';
 import { InputElement, InputElementArgs } from '../InputElement';
 
 const CLASS_NUMERIC_INPUT = 'pcui-numeric-input';
-const CLASS_NUMERIC_INPUT_SLIDER_CONTROL = CLASS_NUMERIC_INPUT + '-slider-control';
-const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-active';
-const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = CLASS_NUMERIC_INPUT_SLIDER_CONTROL + '-hidden';
+const CLASS_NUMERIC_INPUT_SLIDER_CONTROL = `${CLASS_NUMERIC_INPUT}-slider-control`;
+const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE = `${CLASS_NUMERIC_INPUT_SLIDER_CONTROL}-active`;
+const CLASS_NUMERIC_INPUT_SLIDER_CONTROL_HIDDEN = `${CLASS_NUMERIC_INPUT_SLIDER_CONTROL}-hidden`;
 
 const REGEX_COMMA = /,/g;
 
@@ -139,8 +139,8 @@ class NumericInput extends InputElement {
             this._sliderControl.dom.removeEventListener('mousedown', this._onSliderMouseDown);
             this._sliderControl.dom.removeEventListener('mouseup', this._onSliderMouseUp);
 
-            this._sliderControl.dom.removeEventListener("mousemove", this._onSliderMouseMove, false);
-            this._sliderControl.dom.removeEventListener("wheel", this._onSliderMouseWheel);
+            this._sliderControl.dom.removeEventListener('mousemove', this._onSliderMouseMove, false);
+            this._sliderControl.dom.removeEventListener('wheel', this._onSliderMouseWheel);
 
             document.removeEventListener('pointerlockchange', this._onPointerLockChange, false);
         }
@@ -232,12 +232,12 @@ class NumericInput extends InputElement {
 
     protected _onPointerLockChange = () => {
         if (this._isScrolling()) {
-            this._sliderControl.dom.addEventListener("mousemove", this._onSliderMouseMove, false);
-            this._sliderControl.dom.addEventListener("wheel", this._onSliderMouseWheel, { passive: true });
+            this._sliderControl.dom.addEventListener('mousemove', this._onSliderMouseMove, false);
+            this._sliderControl.dom.addEventListener('wheel', this._onSliderMouseWheel, { passive: true });
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
         } else {
-            this._sliderControl.dom.removeEventListener("mousemove", this._onSliderMouseMove, false);
-            this._sliderControl.dom.removeEventListener("wheel", this._onSliderMouseWheel);
+            this._sliderControl.dom.removeEventListener('mousemove', this._onSliderMouseMove, false);
+            this._sliderControl.dom.removeEventListener('wheel', this._onSliderMouseWheel);
             this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
         }
     };

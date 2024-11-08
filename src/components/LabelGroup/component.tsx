@@ -1,5 +1,7 @@
 import { JSXElementConstructor, ReactElement } from 'react';
+
 import { Element } from '../Element/component';
+
 import { LabelGroup as LabelGroupClass, LabelGroupArgs } from './index';
 
 /**

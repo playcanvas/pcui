@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+
 import { Overlay as OverlayClass, OverlayArgs } from './index';
 
 /**

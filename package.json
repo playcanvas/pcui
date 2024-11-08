@@ -48,7 +48,7 @@
     "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types && tsc --project ./react/tsconfig.json --declaration --emitDeclarationOnly --outDir ./react/types",
     "bundle:styles": "scss-bundle -e ./src/scss/themes/grey/colors.scss -o ./dist/theme-colors-grey.scss && scss-bundle -e ./src/scss/themes/green/colors.scss -o ./dist/theme-colors-green.scss && scss-bundle -e ./src/scss/themes/grey/style.scss -o ./dist/pcui-theme-grey.scss && scss-bundle -e ./src/scss/themes/green/style.scss -o ./dist/pcui-theme-green.scss && scss-bundle -e ./src/scss/variables.scss -o ./dist/variables.scss && scss-bundle -e ./src/scss/fonts.scss -o ./dist/fonts.scss",
     "copy:examples": "shx cp examples/index.html docs/_site/ui-examples/examples.html && shx cp -fr examples/elements docs/_site/ui-examples/ && shx cp -fr examples/utilities docs/_site/ui-examples/",
-    "lint": "eslint --ext .ts,.tsx src",
+    "lint": "eslint src",
     "lint:styles": "stylelint src/**/*.scss",
     "serve:docs": "serve docs/_site",
     "storybook": "storybook dev -p 9000",
@@ -81,31 +81,6 @@
       "last 1 safari version"
     ]
   },
-  "eslintConfig": {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "extends": [
-      "@playcanvas/eslint-config",
-      "plugin:@typescript-eslint/recommended"
-    ],
-    "rules": {
-      "@typescript-eslint/ban-ts-comment": "off",
-      "@typescript-eslint/no-empty-function": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unused-vars": "off",
-      "jsdoc/require-returns": "off",
-      "jsdoc/require-returns-type": "off",
-      "jsdoc/require-param-type": "off"
-    },
-    "settings": {
-      "import/resolver": {
-        "typescript": {}
-      }
-    }
-  },
   "dependencies": {
     "@playcanvas/observer": "^1.5.1"
   },
@@ -113,7 +88,7 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.26.0",
-    "@playcanvas/eslint-config": "^1.7.1",
+    "@playcanvas/eslint-config": "^2.0.6",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-replace": "^6.0.1",
     "@rollup/plugin-typescript": "^12.1.1",
@@ -122,14 +97,15 @@
     "@storybook/react-webpack5": "^7.6.12",
     "@types/estree": "^1.0.6",
     "@types/react": "^18.3.12",
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
-    "@typescript-eslint/parser": "^7.13.1",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
-    "eslint": "^8.56.0",
+    "eslint": "^9.14.0",
     "eslint-import-resolver-typescript": "^3.6.3",
     "global-jsdom": "^25.0.0",
+    "globals": "^15.12.0",
     "jsdom": "^25.0.1",
     "playcanvas": "^2.2.2",
     "postcss": "^8.4.47",

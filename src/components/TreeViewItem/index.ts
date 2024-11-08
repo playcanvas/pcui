@@ -5,13 +5,13 @@ import { Label } from '../Label';
 import { TextInput } from '../TextInput';
 
 const CLASS_ROOT = 'pcui-treeview-item';
-const CLASS_ICON = CLASS_ROOT + '-icon';
-const CLASS_TEXT = CLASS_ROOT + '-text';
-const CLASS_SELECTED = CLASS_ROOT + '-selected';
-const CLASS_OPEN = CLASS_ROOT + '-open';
-const CLASS_CONTENTS = CLASS_ROOT + '-contents';
-const CLASS_EMPTY = CLASS_ROOT + '-empty';
-const CLASS_RENAME = CLASS_ROOT + '-rename';
+const CLASS_ICON = `${CLASS_ROOT}-icon`;
+const CLASS_TEXT = `${CLASS_ROOT}-text`;
+const CLASS_SELECTED = `${CLASS_ROOT}-selected`;
+const CLASS_OPEN = `${CLASS_ROOT}-open`;
+const CLASS_CONTENTS = `${CLASS_ROOT}-contents`;
+const CLASS_EMPTY = `${CLASS_ROOT}-empty`;
+const CLASS_RENAME = `${CLASS_ROOT}-rename`;
 
 /**
  * The arguments for the {@link TreeViewItem} constructor.
@@ -637,7 +637,7 @@ class TreeViewItem extends Container {
      * Sets the icon shown before the text in the TreeViewItem.
      */
     set icon(value) {
-        if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
+        if (this._icon === value || !value.match(/^E\d{0,4}$/)) return;
         this._icon = value;
         if (value) {
             // set data-icon attribute but first convert the value to a code point

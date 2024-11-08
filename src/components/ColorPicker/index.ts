@@ -216,7 +216,7 @@ class ColorPicker extends Element implements IBindable {
 
         const createChannelInput = (channel: string) => {
             return new NumericInput({
-                class: ['field', 'field-' + channel],
+                class: ['field', `field-${channel}`],
                 precision: 0,
                 step: 1,
                 min: 0,
@@ -326,8 +326,9 @@ class ColorPicker extends Element implements IBindable {
     }
 
     protected _setPickerColor(color: number[]) {
-        if (this._changing || this._dragging)
+        if (this._changing || this._dragging) {
             return;
+        }
 
         if (this._channelsNumber >= 3) {
             const hsv = _rgb2hsv(color);
@@ -390,9 +391,9 @@ class ColorPicker extends Element implements IBindable {
         // class for channels
         for (let i = 0; i < 4; i++) {
             if (color.length - 1 < i) {
-                this._overlay.class.remove('c-' + (i + 1));
+                this._overlay.class.remove(`c-${i + 1}`);
             } else {
-                this._overlay.class.add('c-' + (i + 1));
+                this._overlay.class.add(`c-${i + 1}`);
             }
         }
 
@@ -469,7 +470,7 @@ class ColorPicker extends Element implements IBindable {
     protected _getHex() {
         let hex = '';
         for (let i = 0; i < this._channelsNumber; i++) {
-            hex += ('00' + this._pickerChannels[i].value.toString(16)).slice(-2).toUpperCase();
+            hex += (`00${this._pickerChannels[i].value.toString(16)}`).slice(-2).toUpperCase();
         }
         return hex;
     }
@@ -511,8 +512,8 @@ class ColorPicker extends Element implements IBindable {
         this._fieldHex.value = this._getHex();
         this._directInput = true;
 
-        this._pickRectHandle.style.left = Math.max(4, Math.min(this._size - 4, x)) + 'px';
-        this._pickRectHandle.style.top = Math.max(4, Math.min(this._size - 4, y)) + 'px';
+        this._pickRectHandle.style.left = `${Math.max(4, Math.min(this._size - 4, x))}px`;
+        this._pickRectHandle.style.top = `${Math.max(4, Math.min(this._size - 4, y))}px`;
 
         this._changing = false;
     };
@@ -623,12 +624,14 @@ class ColorPicker extends Element implements IBindable {
     };
 
     protected _onChangeHex() {
-        if (!this._directInput)
+        if (!this._directInput) {
             return;
+        }
 
         this._changing = true;
 
         const hex = this._fieldHex.value.trim().toLowerCase();
+        /* eslint-disable-next-line regexp/no-unused-capturing-group */
         if (/^([0-9a-f]{2}){3,4}$/.test(hex)) {
             for (let i = 0; i < this._channelsNumber; i++) {
                 this._pickerChannels[i].value = parseInt(hex.slice(i * 2, i * 2 + 2), 16);
@@ -639,15 +642,16 @@ class ColorPicker extends Element implements IBindable {
     }
 
     protected _onChangeRgb() {
-        const color = this._pickerChannels.map(function (channel) {
+        const color = this._pickerChannels.map((channel) => {
             return channel.value || 0;
         }).slice(0, this._channelsNumber);
 
         const hsv = _rgb2hsv(color);
         if (this._directInput) {
             const sum = color[0] + color[1] + color[2];
-            if (sum !== 765 && sum !== 0)
+            if (sum !== 765 && sum !== 0) {
                 this._colorHSV[0] = hsv[0];
+            }
 
             this._colorHSV[1] = hsv[1];
             this._colorHSV[2] = hsv[2];
@@ -657,23 +661,23 @@ class ColorPicker extends Element implements IBindable {
         }
 
         // hue position
-        this._pickHueHandle.style.top = Math.floor(this._size * this._colorHSV[0]) + 'px'; // h
+        this._pickHueHandle.style.top = `${Math.floor(this._size * this._colorHSV[0])}px`; // h
 
         // rect position
-        this._pickRectHandle.style.left = Math.max(4, Math.min(this._size - 4, this._size * this._colorHSV[1])) + 'px'; // s
-        this._pickRectHandle.style.top = Math.max(4, Math.min(this._size - 4, this._size * (1.0 - this._colorHSV[2]))) + 'px'; // v
+        this._pickRectHandle.style.left = `${Math.max(4, Math.min(this._size - 4, this._size * this._colorHSV[1]))}px`; // s
+        this._pickRectHandle.style.top = `${Math.max(4, Math.min(this._size - 4, this._size * (1.0 - this._colorHSV[2])))}px`; // v
 
         if (this._channelsNumber >= 3) {
             const plainColor = _hsv2rgb([this._colorHSV[0], 1, 1]).join(',');
 
             // rect background color
-            this._pickRect.style.backgroundColor = 'rgb(' + plainColor + ')';
+            this._pickRect.style.backgroundColor = `rgb(${plainColor})`;
 
             // rect handle color
-            this._pickRectHandle.style.backgroundColor = 'rgb(' + color.slice(0, 3).join(',') + ')';
+            this._pickRectHandle.style.backgroundColor = `rgb(${color.slice(0, 3).join(',')})`;
 
             // hue handle color
-            this._pickHueHandle.style.backgroundColor = 'rgb(' + plainColor + ')';
+            this._pickHueHandle.style.backgroundColor = `rgb(${plainColor})`;
         }
 
         this.callCallback();
@@ -681,11 +685,12 @@ class ColorPicker extends Element implements IBindable {
 
     // update alpha handle
     protected _onChangeAlpha(value: number) {
-        if (this._channelsNumber !== 4)
+        if (this._channelsNumber !== 4) {
             return;
+        }
 
         // position
-        this._pickOpacityHandle.style.top = Math.floor(this._size * (1.0 - (Math.max(0, Math.min(255, value)) / 255))) + 'px';
+        this._pickOpacityHandle.style.top = `${Math.floor(this._size * (1.0 - (Math.max(0, Math.min(255, value)) / 255)))}px`;
 
         // color
         this._pickOpacityHandle.style.backgroundColor = `rgb(${value}, ${value}, ${value})`;
@@ -697,15 +702,16 @@ class ColorPicker extends Element implements IBindable {
     callbackHandle() {
         this._callingCallback = false;
 
-        this.emit('picker:color', this._pickerChannels.map(function (channel) {
+        this.emit('picker:color', this._pickerChannels.map((channel) => {
             return channel.value || 0;
         }).slice(0, this._channelsNumber));
     }
 
     /** @ignore */
     callCallback() {
-        if (this._callingCallback)
+        if (this._callingCallback) {
             return;
+        }
 
         this._callingCallback = true;
         window.setTimeout(() => {

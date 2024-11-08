@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { Canvas as CanvasClass, CanvasArgs } from './index';
+
 import { Element } from '../Element/component';
+
+import { Canvas as CanvasClass, CanvasArgs } from './index';
 
 /**
  * Represents a Canvas

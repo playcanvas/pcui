@@ -1,12 +1,12 @@
-import * as React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/react';
+import * as React from 'react';
 
 import { Menu } from './component';
-import { Menu as MenuClass } from '../Menu';
 import { Container } from '../Container/component';
-import { Label } from '../Label/component';
 import { Label as LabelClass } from '../Label';
+import { Label } from '../Label/component';
+import { Menu as MenuClass } from '../Menu';
 
 import '../../scss/index.js';
 

@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+
 import { TextInput as TextInputClass, TextInputArgs } from './index';
 
 /**

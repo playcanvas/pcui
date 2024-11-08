@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import * as React from 'react';
 
 import { LabelGroup } from './component';
 import { TextInput } from '../TextInput/component';

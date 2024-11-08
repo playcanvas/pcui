@@ -112,7 +112,7 @@ class Button extends Element {
      * Sets the CSS code for an icon for the button. e.g. 'E401' (notice we omit the '\\' character).
      */
     set icon(value: string) {
-        if (this._icon === value || !value.match(/^E[0-9]{0,4}$/)) return;
+        if (this._icon === value || !value.match(/^E\d{0,4}$/)) return;
         this._icon = value;
         if (value) {
             // set data-icon attribute but first convert the value to a code point
@@ -135,14 +135,14 @@ class Button extends Element {
     set size(value: string) {
         if (this._size === value) return;
         if (this._size) {
-            this.class.remove('pcui-' + this._size);
+            this.class.remove(`pcui-${this._size}`);
             this._size = null;
         }
 
         this._size = value;
 
         if (this._size) {
-            this.class.add('pcui-' + this._size);
+            this.class.add(`pcui-${this._size}`);
         }
     }
 

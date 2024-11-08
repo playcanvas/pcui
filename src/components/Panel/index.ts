@@ -5,12 +5,12 @@ import { Element } from '../Element';
 import { Label } from '../Label';
 
 const CLASS_PANEL = 'pcui-panel';
-const CLASS_PANEL_HEADER = CLASS_PANEL + '-header';
-const CLASS_PANEL_HEADER_TITLE = CLASS_PANEL_HEADER + '-title';
-const CLASS_PANEL_CONTENT = CLASS_PANEL + '-content';
-const CLASS_PANEL_HORIZONTAL = CLASS_PANEL + '-horizontal';
-const CLASS_PANEL_SORTABLE_ICON = CLASS_PANEL + '-sortable-icon';
-const CLASS_PANEL_REMOVE = CLASS_PANEL + '-remove';
+const CLASS_PANEL_HEADER = `${CLASS_PANEL}-header`;
+const CLASS_PANEL_HEADER_TITLE = `${CLASS_PANEL_HEADER}-title`;
+const CLASS_PANEL_CONTENT = `${CLASS_PANEL}-content`;
+const CLASS_PANEL_HORIZONTAL = `${CLASS_PANEL}-horizontal`;
+const CLASS_PANEL_SORTABLE_ICON = `${CLASS_PANEL}-sortable-icon`;
+const CLASS_PANEL_REMOVE = `${CLASS_PANEL}-remove`;
 
 /**
  * The arguments for the {@link Panel} constructor.
@@ -141,7 +141,7 @@ class Panel extends Container {
         this.class.add(CLASS_PANEL);
 
         if (args.panelType) {
-            this.class.add(CLASS_PANEL + '-' + args.panelType);
+            this.class.add(`${CLASS_PANEL}-${args.panelType}`);
         }
 
         // do not call reflow on every update while
@@ -256,7 +256,7 @@ class Panel extends Container {
         if (this.hidden || !this.collapsible) return;
 
         if (this.collapsed && this.collapseHorizontally) {
-            this._containerHeader.style.top = -this.headerSize + 'px';
+            this._containerHeader.style.top = `${-this.headerSize}px`;
         } else {
             this._containerHeader.style.top = '';
         }
@@ -516,7 +516,7 @@ class Panel extends Container {
     set headerSize(value) {
         this._headerSize = value;
         const style = this._containerHeader.dom.style;
-        style.height = Math.max(0, value) + 'px';
+        style.height = `${Math.max(0, value)}px`;
         style.lineHeight = style.height;
         this._reflow();
     }

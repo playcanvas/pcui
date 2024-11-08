@@ -1,5 +1,6 @@
-import { BooleanInput as BooleanInputClass, BooleanInputArgs } from './index';
 import { Element } from '../Element/component';
+
+import { BooleanInput as BooleanInputClass, BooleanInputArgs } from './index';
 
 /**
  * A checkbox element.

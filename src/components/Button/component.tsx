@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { Button as ButtonClass, ButtonArgs } from './index';
+
 import { Element } from '../Element/component';
+
+import { Button as ButtonClass, ButtonArgs } from './index';
 
 /**
  * User input with click interaction

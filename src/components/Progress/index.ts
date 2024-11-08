@@ -2,7 +2,7 @@ import { Container, ContainerArgs } from '../Container';
 import { Element } from '../Element';
 
 const CLASS_ROOT = 'pcui-progress';
-const CLASS_INNER = CLASS_ROOT + '-inner';
+const CLASS_INNER = `${CLASS_ROOT}-inner`;
 
 /**
  * The arguments for the {@link Progress} constructor.

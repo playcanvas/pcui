@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { ColorPicker as ColorPickerClass, ColorPickerArgs } from './index';
+
 import { Element } from '../Element/component';
+
+import { ColorPicker as ColorPickerClass, ColorPickerArgs } from './index';
 
 /**
  * Represents a color picker

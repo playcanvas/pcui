@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import { Element } from '../Element/component';
+
 import { GradientPicker as GradientPickerClass, GradientPickerArgs } from './index';
 
 /**

@@ -49,8 +49,9 @@ class Canvas extends Element {
      * @param height - The new height of the canvas.
      */
     resize(width: number, height: number) {
-        if (this._width === width && this._height === height)
+        if (this._width === width && this._height === height) {
             return;
+        }
 
         this._width = width;
         this._height = height;
@@ -58,8 +59,8 @@ class Canvas extends Element {
         const canvas = this._dom as HTMLCanvasElement;
         canvas.width = this.pixelWidth;
         canvas.height = this.pixelHeight;
-        canvas.style.width = width + 'px';
-        canvas.style.height = height + 'px';
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
 
         this.emit('resize', width, height);
     }
@@ -68,14 +69,15 @@ class Canvas extends Element {
      * Sets the width of the canvas.
      */
     set width(value: number) {
-        if (this._width === value)
+        if (this._width === value) {
             return;
+        }
 
         this._width = value;
 
         const canvas = this._dom as HTMLCanvasElement;
         canvas.width = this.pixelWidth;
-        canvas.style.width = value + 'px';
+        canvas.style.width = `${value}px`;
 
         this.emit('resize', this._width, this._height);
     }
@@ -92,14 +94,15 @@ class Canvas extends Element {
      * Sets the height of the canvas.
      */
     set height(value: number) {
-        if (this._height === value)
+        if (this._height === value) {
             return;
+        }
 
         this._height = value;
 
         const canvas = this._dom as HTMLCanvasElement;
         canvas.height = this.pixelHeight;
-        canvas.style.height = value + 'px';
+        canvas.style.height = `${value}px`;
 
         this.emit('resize', this._width, this._height);
     }

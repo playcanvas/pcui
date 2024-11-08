@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+
 import { SelectInput as SelectInputClass, SelectInputArgs } from './index';
 
 /**

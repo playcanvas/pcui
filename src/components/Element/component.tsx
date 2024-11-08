@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { Element as ElementClass, ElementArgs } from './index';
 
 /**
@@ -17,7 +18,7 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
 
     onRemove: () => void;
 
-    link: ElementArgs["link"];
+    link: ElementArgs['link'];
 
     onAttach?: () => void;
 

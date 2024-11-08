@@ -1,13 +1,13 @@
+import { Observer } from '@playcanvas/observer';
 import React, { useState } from 'react';
 
-import { Observer } from '@playcanvas/observer';
-import { Container } from '../../components/Container/component';
-import { TextInput } from '../../components/TextInput/component';
+import { BindingTwoWay } from '../../binding/BindingTwoWay';
 import { BooleanInput } from '../../components/BooleanInput/component';
+import { Button } from '../../components/Button/component';
+import { Container } from '../../components/Container/component';
 import { Label } from '../../components/Label/component';
 import { SelectInput } from '../../components/SelectInput/component';
-import { Button } from '../../components/Button/component';
-import { BindingTwoWay } from '../../binding/BindingTwoWay';
+import { TextInput } from '../../components/TextInput/component';
 
 import './style.scss';
 

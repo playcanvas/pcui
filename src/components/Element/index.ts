@@ -1,8 +1,9 @@
-import * as React from 'react';
+/* eslint-disable-next-line import/named */
 import { EventHandle, Events, HandleEvent, Observer } from '@playcanvas/observer';
+import * as React from 'react';
 
-import { CLASS_DISABLED, CLASS_ERROR, CLASS_FLASH, CLASS_FONT_REGULAR, CLASS_HIDDEN, CLASS_READONLY } from '../../class';
 import { BindingBase } from '../../binding';
+import { CLASS_DISABLED, CLASS_ERROR, CLASS_FLASH, CLASS_FONT_REGULAR, CLASS_HIDDEN, CLASS_READONLY } from '../../class';
 
 const CLASS_ELEMENT = 'pcui-element';
 

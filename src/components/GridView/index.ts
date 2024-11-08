@@ -5,7 +5,7 @@ import { Element } from '../Element';
 import { GridViewItem } from '../GridViewItem';
 
 const CLASS_ROOT = 'pcui-gridview';
-const CLASS_VERTICAL = CLASS_ROOT + '-vertical';
+const CLASS_VERTICAL = `${CLASS_ROOT}-vertical`;
 
 /**
  * The arguments for the {@link GridView} constructor.
@@ -79,15 +79,17 @@ class GridView extends Container {
         if (!(item instanceof GridViewItem)) return;
 
         let evtClick: EventHandle;
-        if (this._clickFn)
+        if (this._clickFn) {
             evtClick = item.on('click', evt => this._clickFn(evt, item));
-        else
+        } else {
             evtClick = item.on('click', evt => this._onClickItem(evt, item));
+        }
         let evtSelect = item.on('select', () => this._onSelectItem(item));
 
         let evtDeselect: EventHandle;
-        if (this._allowDeselect)
+        if (this._allowDeselect) {
             evtDeselect = item.on('deselect', () => this._onDeselectItem(item));
+        }
 
         if (this._filterFn && !this._filterFn(item)) {
             item.hidden = true;

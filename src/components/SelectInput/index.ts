@@ -7,24 +7,24 @@ import { Label } from '../Label';
 import { TextInput } from '../TextInput';
 
 const CLASS_SELECT_INPUT = 'pcui-select-input';
-const CLASS_SELECT_INPUT_CONTAINER_VALUE = CLASS_SELECT_INPUT + '-container-value';
-const CLASS_MULTI_SELECT = CLASS_SELECT_INPUT + '-multi';
-const CLASS_DISABLED_VALUE = CLASS_SELECT_INPUT + '-disabled-value';
-const CLASS_HAS_DISABLED_VALUE = CLASS_SELECT_INPUT + '-has-disabled-value';
+const CLASS_SELECT_INPUT_CONTAINER_VALUE = `${CLASS_SELECT_INPUT}-container-value`;
+const CLASS_MULTI_SELECT = `${CLASS_SELECT_INPUT}-multi`;
+const CLASS_DISABLED_VALUE = `${CLASS_SELECT_INPUT}-disabled-value`;
+const CLASS_HAS_DISABLED_VALUE = `${CLASS_SELECT_INPUT}-has-disabled-value`;
 const CLASS_ALLOW_INPUT = 'pcui-select-input-allow-input';
-const CLASS_VALUE = CLASS_SELECT_INPUT + '-value';
-const CLASS_ICON = CLASS_SELECT_INPUT + '-icon';
-const CLASS_INPUT = CLASS_SELECT_INPUT + '-textinput';
-const CLASS_LIST = CLASS_SELECT_INPUT + '-list';
-const CLASS_TAGS = CLASS_SELECT_INPUT + '-tags';
-const CLASS_TAGS_EMPTY = CLASS_SELECT_INPUT + '-tags-empty';
-const CLASS_TAG = CLASS_SELECT_INPUT + '-tag';
-const CLASS_TAG_NOT_EVERYWHERE = CLASS_SELECT_INPUT + '-tag-not-everywhere';
-const CLASS_SHADOW = CLASS_SELECT_INPUT + '-shadow';
-const CLASS_FIT_HEIGHT = CLASS_SELECT_INPUT + '-fit-height';
+const CLASS_VALUE = `${CLASS_SELECT_INPUT}-value`;
+const CLASS_ICON = `${CLASS_SELECT_INPUT}-icon`;
+const CLASS_INPUT = `${CLASS_SELECT_INPUT}-textinput`;
+const CLASS_LIST = `${CLASS_SELECT_INPUT}-list`;
+const CLASS_TAGS = `${CLASS_SELECT_INPUT}-tags`;
+const CLASS_TAGS_EMPTY = `${CLASS_SELECT_INPUT}-tags-empty`;
+const CLASS_TAG = `${CLASS_SELECT_INPUT}-tag`;
+const CLASS_TAG_NOT_EVERYWHERE = `${CLASS_SELECT_INPUT}-tag-not-everywhere`;
+const CLASS_SHADOW = `${CLASS_SELECT_INPUT}-shadow`;
+const CLASS_FIT_HEIGHT = `${CLASS_SELECT_INPUT}-fit-height`;
 const CLASS_SELECTED = 'pcui-selected';
-const CLASS_HIGHLIGHTED = CLASS_SELECT_INPUT + '-label-highlighted';
-const CLASS_CREATE_NEW = CLASS_SELECT_INPUT + '-create-new';
+const CLASS_HIGHLIGHTED = `${CLASS_SELECT_INPUT}-label-highlighted`;
+const CLASS_CREATE_NEW = `${CLASS_SELECT_INPUT}-create-new`;
 const CLASS_OPEN = 'pcui-open';
 
 const DEFAULT_BOTTOM_OFFSET = 25;
@@ -492,7 +492,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         if (this._labelHighlighted) {
             this._labelHighlighted.class.add(CLASS_HIGHLIGHTED);
 
-                // scroll into view if necessary
+            // scroll into view if necessary
             const labelTop = this._labelHighlighted.dom.offsetTop;
             const scrollTop = this._containerOptions.dom.scrollTop;
             if (labelTop < scrollTop) {
@@ -508,7 +508,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         if (!this.multiSelect) {
             this._labelValue.value = this._prefix + (this._valueToText[value] || '');
 
-            value = '' + value;
+            value = `${value}`;
             for (const key in this._valueToLabel) {
                 const label = this._valueToLabel[key];
                 if (key === value) {
@@ -808,7 +808,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
     };
 
     protected _resizeShadow() {
-        this._domShadow.style.height = (this._containerValue.height + this._containerOptions.height) + 'px';
+        this._domShadow.style.height = `${this._containerValue.height + this._containerOptions.height}px`;
     }
 
     protected _onMouseDown = () => {
@@ -931,7 +931,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
             // if showing it above the field means that some of it will not be visible
             // then show it below instead and adjust the max height to the maximum available space
             fitHeight = false;
-            this._containerOptions.style.maxHeight = (window.innerHeight - rect.bottom - DEFAULT_BOTTOM_OFFSET) + 'px';
+            this._containerOptions.style.maxHeight = `${window.innerHeight - rect.bottom - DEFAULT_BOTTOM_OFFSET}px`;
         }
 
         if (fitHeight) {

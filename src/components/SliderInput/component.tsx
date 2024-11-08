@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+
 import { SliderInput as SliderInputClass, SliderInputArgs } from './index';
 
 /**

@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+
 import { RadioButton as RadioButtonClass, RadioButtonArgs } from './index';
 
 /**

@@ -1,7 +1,9 @@
 import * as React from 'react';
+
 import { Element } from '../Element/component';
-import { GridView as GridViewClass, GridViewArgs } from './index';
 import { GridViewItem } from '../GridViewItem/index';
+
+import { GridView as GridViewClass, GridViewArgs } from './index';
 
 /**
  * Represents a container that shows a flexible wrappable list of items that looks like a grid.

@@ -3,10 +3,10 @@ import { Element, ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable, 
 import { NumericInput } from '../NumericInput';
 
 const CLASS_SLIDER = 'pcui-slider';
-const CLASS_SLIDER_CONTAINER = CLASS_SLIDER + '-container';
-const CLASS_SLIDER_BAR = CLASS_SLIDER + '-bar';
-const CLASS_SLIDER_HANDLE = CLASS_SLIDER + '-handle';
-const CLASS_SLIDER_ACTIVE = CLASS_SLIDER + '-active';
+const CLASS_SLIDER_CONTAINER = `${CLASS_SLIDER}-container`;
+const CLASS_SLIDER_BAR = `${CLASS_SLIDER}-bar`;
+const CLASS_SLIDER_HANDLE = `${CLASS_SLIDER}-handle`;
+const CLASS_SLIDER_ACTIVE = `${CLASS_SLIDER}-active`;
 
 const IS_CHROME = /Chrome\//.test(globalThis.navigator?.userAgent);
 

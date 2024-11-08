@@ -9,11 +9,13 @@ const searchStringEditDistance = (a: string, b: string): number => {
 
     const matrix: number[][] = [];
 
-    for (let i = 0; i <= b.length; i++)
+    for (let i = 0; i <= b.length; i++) {
         matrix[i] = [i];
+    }
 
-    for (let j = 0; j <= a.length; j++)
+    for (let j = 0; j <= a.length; j++) {
         matrix[0][j] = j;
+    }
 
     for (let i = 1; i <= b.length; i++) {
         for (let j = 1; j <= a.length; j++) {
@@ -32,18 +34,21 @@ const searchStringEditDistance = (a: string, b: string): number => {
 // calculate, how many characters string `b`
 // contains of a string `a`
 const searchCharsContains = (a: string, b: string): number => {
-    if (a === b)
+    if (a === b) {
         return a.length;
+    }
 
     let contains = 0;
     const ind = new Set<string>();
 
-    for (let i = 0; i < b.length; i++)
+    for (let i = 0; i < b.length; i++) {
         ind.add(b.charAt(i));
+    }
 
     for (let i = 0; i < a.length; i++) {
-        if (ind.has(a.charAt(i)))
+        if (ind.has(a.charAt(i))) {
             contains++;
+        }
     }
 
     return contains;
@@ -61,13 +66,14 @@ const searchStringTokenize = (name: string): string[] => {
     // space notation
     // dash-notation
     // underscore_notation
-    const parts = string.split(/(\s|\-|_)/g);
+    const parts = string.split(/([\s\-_])/);
 
     // filter valid tokens
     for (let i = 0; i < parts.length; i++) {
         parts[i] = parts[i].toLowerCase().trim();
-        if (parts[i] && parts[i] !== '-' && parts[i] !== '_')
+        if (parts[i] && parts[i] !== '-' && parts[i] !== '_') {
             tokens.push(parts[i]);
+        }
     }
 
     return tokens;
@@ -105,29 +111,34 @@ const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: R
         if (item.subFull !== Infinity) {
             results.push(item);
 
-            if (item.edits === Infinity)
+            if (item.edits === Infinity) {
                 item.edits = 0;
+            }
 
-            if (item.sub === Infinity)
+            if (item.sub === Infinity) {
                 item.sub = item.subFull;
+            }
 
             continue;
         } else if (item.name === search || item.name.indexOf(search) === 0) {
             results.push(item);
 
-            if (item.edits === Infinity)
+            if (item.edits === Infinity) {
                 item.edits = 0;
+            }
 
-            if (item.sub === Infinity)
+            if (item.sub === Infinity) {
                 item.sub = 0;
+            }
 
             continue;
         }
 
         // check if name contains enough of search characters
         const contains = searchCharsContains(search, item.name);
-        if (contains / search.length < args.containsCharsTolerance)
+        if (contains / search.length < args.containsCharsTolerance) {
             continue;
+        }
 
         let editsCandidate = Infinity;
         let subCandidate = Infinity;
@@ -158,8 +169,9 @@ const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: R
         }
 
         // no match candidate
-        if (editsCandidate === Infinity)
+        if (editsCandidate === Infinity) {
             continue;
+        }
 
         // add new result
         results.push(item);
@@ -190,12 +202,14 @@ const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: R
 export const searchItems = <Type>(items: [string, Type][], search = '', args: SearchArgs = {}): Type[] => {
     search = search.toLowerCase().trim();
 
-    if (!search)
+    if (!search) {
         return [];
+    }
 
     const searchTokens = searchStringTokenize(search);
-    if (!searchTokens.length)
+    if (!searchTokens.length) {
         return [];
+    }
 
     args.containsCharsTolerance = args.containsCharsTolerance || 0.5;
     args.editsDistanceTolerance = args.editsDistanceTolerance || 0.5;
@@ -216,8 +230,9 @@ export const searchItems = <Type>(items: [string, Type][], search = '', args: Se
     }
 
     // search each token
-    for (let i = 0; i < searchTokens.length; i++)
+    for (let i = 0; i < searchTokens.length; i++) {
         records = _searchItems(records, searchTokens[i], args);
+    }
 
     // sort result first by substring? then by edits number
     records.sort((a: SearchRecord<Type>, b: SearchRecord<Type>) => {
