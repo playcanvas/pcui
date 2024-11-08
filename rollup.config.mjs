@@ -44,14 +44,16 @@ const module = {
         dir: `dist/module`,
         entryFileNames: '[name].mjs',
         format: 'esm',
-        preserveModules: true
+        preserveModules: true,
+        sourcemap: true
     },
     plugins: [
         nodeResolve(),
         replace(replacements),
         typescript({
             noEmitOnError: true,
-            tsconfig: 'tsconfig.json'
+            tsconfig: 'tsconfig.json',
+            sourceMap: true
         })
     ],
     treeshake: 'smallest',
@@ -68,14 +70,16 @@ const react_module = {
         globals: {
             'react': 'React'
         },
-        preserveModules: true
+        preserveModules: true,
+        sourcemap: true
     },
     plugins: [
         nodeResolve(),
         replace(replacements),
         typescript({
             noEmitOnError: true,
-            tsconfig: 'react/tsconfig.json'
+            tsconfig: 'react/tsconfig.json',
+            sourceMap: true
         })
     ],
     treeshake: 'smallest',
@@ -94,7 +98,9 @@ const styles = {
             insert: true,
             output: false,
             processor: css => postcss([autoprefixer])
-                .process(css)
+                .process(css, {
+                    from: undefined
+                })
                 .then(result => result.css)
         })
     ]
