@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
       - run: npm ci
       # Add a step to set up Ruby
       - uses: ruby/setup-ruby@v1
