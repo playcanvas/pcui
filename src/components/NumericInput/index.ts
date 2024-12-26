@@ -254,11 +254,12 @@ class NumericInput extends InputElement {
                 // remove spaces
                 value = value.replace(/\s/g, '');
 
-                // Handle percentages by replacing them with their calculated values
                 const currentValue = this._oldValue || 0;
 
-                value = value.replace(/(\d+(?:\.\d+)?)%/g, (match: string, percent: string) => {
-                    const calculatedValue = (parseFloat(percent) / 100) * currentValue;
+                // handle percentages by replacing them with their calculated values
+                value = value.replace(/(\d+(?:\.\d+)?(?=%)%)/g, (match: string) => {
+                    const percent = parseFloat(match.slice(0, -1));
+                    const calculatedValue = (percent / 100) * currentValue;
                     return calculatedValue.toString();
                 });
 
