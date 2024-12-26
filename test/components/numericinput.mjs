@@ -88,8 +88,8 @@ describe('NumericInput', () => {
             numericInput.value = "(2 + 2) * 3";
             strictEqual(numericInput.value, 12);
             
-            numericInput.value = "2 + (3 * 4)";
-            strictEqual(numericInput.value, 14);
+            numericInput.value = "10 / (4 - 2)";
+            strictEqual(numericInput.value, 5);
         });
 
         it('invalid inputs', () => {
