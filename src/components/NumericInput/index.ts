@@ -254,7 +254,15 @@ class NumericInput extends InputElement {
                 // remove spaces
                 value = value.replace(/\s/g, '');
 
-                // sanitize input to only allow short mathematical expressions to be evaluated
+                // Handle percentages by replacing them with their calculated values
+                const currentValue = this.value || 0;
+
+                value = value.replace(/(\d+(?:\.\d+)?)%/g, (match: string, percent: string) => {
+                    const calculatedValue = (parseFloat(percent) / 100) * currentValue;
+                    return calculatedValue.toString();
+                });
+
+                // sanitize input to only allow short mathematical expressions
                 value = value.match(/^[*/+\-0-9().]+$/);
                 if (value !== null && value[0].length < 20) {
                     let expression = value[0];
@@ -267,35 +275,46 @@ class NumericInput extends InputElement {
                         expression = expressionArr.join(operator);
                     });
                     // eslint-disable-next-line
-                    value = Function('"use strict";return (' + expression + ')')();
+                    value = Function(`"use strict";return (${expression})`)();
                 }
             }
-        } catch (error) {
-            value = null;
-        }
 
-        if (value === null || isNaN(value)) {
+            if (value === null || value === undefined || value === '') {
+                if (this._allowNull) {
+                    return null;
+                }
+                value = 0;
+            }
+
+            value = Number(value);
+
+            if (isNaN(value)) {
+                if (this._allowNull) {
+                    return null;
+                }
+                value = 0;
+            }
+
+            // clamp between min max
+            if (this.min !== null && value < this.min) {
+                value = this.min;
+            }
+            if (this.max !== null && value > this.max) {
+                value = this.max;
+            }
+
+            // fix precision
+            if (this.precision !== null) {
+                value = parseFloat(Number(value).toFixed(this.precision));
+            }
+
+            return value;
+        } catch (error) {
             if (this._allowNull) {
                 return null;
             }
-
-            value = 0;
+            return 0;
         }
-
-        // clamp between min max
-        if (this.min !== null && value < this.min) {
-            value = this.min;
-        }
-        if (this.max !== null && value > this.max) {
-            value = this.max;
-        }
-
-        // fix precision
-        if (this.precision !== null) {
-            value = parseFloat(Number(value).toFixed(this.precision));
-        }
-
-        return value;
     }
 
     protected _updateValue(value: number, force?: boolean) {

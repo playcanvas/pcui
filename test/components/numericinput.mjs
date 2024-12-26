@@ -116,5 +116,83 @@ describe('NumericInput', () => {
             numericInput.value = "1+1+1+1+1+1+1+1+1+10";
             strictEqual(numericInput.value, 0);
         });
+
+        describe('percentages', () => {
+            it('basic percentage', () => {
+                const numericInput = new NumericInput();
+                
+                numericInput.value = 200;
+                numericInput.value = "50%";
+                strictEqual(numericInput.value, 100);  // 50% of 200
+                
+                numericInput.value = 200;
+                numericInput.value = "150%";
+                strictEqual(numericInput.value, 300);  // 150% of 200
+            });
+
+            it('percentage in expressions', () => {
+                const numericInput = new NumericInput();
+                
+                numericInput.value = 100;
+                numericInput.value = "50% + 10";
+                strictEqual(numericInput.value, 60);   // (50% of 100) + 10
+                
+                numericInput.value = 100;
+                numericInput.value = "25% * 2";
+                strictEqual(numericInput.value, 50);   // (25% of 100) * 2
+            });
+
+            it('multiple percentages', () => {
+                const numericInput = new NumericInput();
+                
+                numericInput.value = 100;
+                numericInput.value = "25% + 50%";
+                strictEqual(numericInput.value, 75);   // (25% of 100) + (50% of 100)
+            });
+
+            it('invalid percentages', () => {
+                const numericInput = new NumericInput();
+                
+                numericInput.value = 100;
+                numericInput.value = "abc%";
+                strictEqual(numericInput.value, 0);
+                
+                numericInput.value = 100;
+                numericInput.value = "%50";
+                strictEqual(numericInput.value, 0);
+                
+                numericInput.value = 100;
+                numericInput.value = "50%%";
+                strictEqual(numericInput.value, 0);
+            });
+
+            it('percentage with zero base value', () => {
+                const numericInput = new NumericInput();
+                
+                numericInput.value = 0;
+                numericInput.value = "50%";
+                strictEqual(numericInput.value, 0);  // 50% of 0 is 0
+            });
+
+            it('percentage with negative base value', () => {
+                const numericInput = new NumericInput();
+                
+                numericInput.value = -100;
+                numericInput.value = "50%";
+                strictEqual(numericInput.value, -50);  // 50% of -100
+                
+                numericInput.value = -100;
+                numericInput.value = "150%";
+                strictEqual(numericInput.value, -150);  // 150% of -100
+            });
+
+            it('percentage with decimal base value', () => {
+                const numericInput = new NumericInput();
+                
+                numericInput.value = 0.5;
+                numericInput.value = "200%";
+                strictEqual(numericInput.value, 1);  // 200% of 0.5
+            });
+        });
     });
 });
