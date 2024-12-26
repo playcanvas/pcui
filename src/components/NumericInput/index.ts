@@ -256,7 +256,7 @@ class NumericInput extends InputElement {
 
                 const currentValue = this._oldValue || 0;
 
-                // Handle percentages with a simple, non-backtracking regex
+                // handle percentages with a simple, non-backtracking regex
                 value = value.replace(/(\d+(?:\.\d+)?%)/g, (match: string) => {
                     const percent = parseFloat(match.slice(0, -1));
                     const calculatedValue = (percent / 100) * currentValue;
