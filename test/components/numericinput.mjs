@@ -109,11 +109,11 @@ describe('NumericInput', () => {
             const numericInput = new NumericInput();
             
             // Expression with 19 chars works
-            numericInput.value = "1+1+1+1+1+1+1+1+1+1";  // 19 chars
+            numericInput.value = "1+1+1+1+1+1+1+1+1+1";
             strictEqual(numericInput.value, 10);
             
             // Expression with 20 chars fails
-            numericInput.value = "1+1+1+1+1+1+1+1+1+10";  // 20 chars
+            numericInput.value = "1+1+1+1+1+1+1+1+1+10";
             strictEqual(numericInput.value, 0);
         });
     });
