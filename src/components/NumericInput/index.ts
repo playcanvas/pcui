@@ -26,11 +26,13 @@ interface NumericInputArgs extends InputElementArgs {
      */
     precision?: number,
     /**
-     * Sets the amount that the value will be increased or decreased when using the arrow keys and the slider input.
+     * Sets the amount that the value will be increased or decreased when using the arrow keys and
+     * the slider input.
      */
     step?: number,
     /**
-     * Sets the amount that the value will be increased or decreased when holding shift using the arrow keys and the slider input. Defaults to {@link NumericInput#step} * 0.1.
+     * Sets the amount that the value will be increased or decreased when holding shift using the
+     * arrow keys and the slider input. Defaults to {@link NumericInput#step} * 0.1.
      */
     stepPrecision?: number,
     /**
@@ -45,6 +47,28 @@ interface NumericInputArgs extends InputElementArgs {
 
 /**
  * The NumericInput represents an input element that holds numbers.
+ *
+ * NumericInput accepts `number` values. It also accepts strings that contain numbers, percentages,
+ * and mathematical expressions which are then evaluated to a number. Here are some examples:
+ *
+ * | Input String       | Evaluated Number Value |
+ * | ------------------ | ---------------------- |
+ * | `"10"`             | `10`                   |
+ * | `"10 + 20"`        | `30`                   |
+ * | `"10 * 20"`        | `200`                  |
+ * | `"10 - 20"`        | `-10`                  |
+ * | `"10 / 20"`        | `0.5`                  |
+ * | `"10 * (20 + 30)"` | `500`                  |
+ *
+ * When using percentages, the value is calculated based on the current value of the input. For example:
+ *
+ * | Current Value | Input String | Evaluated Number Value |
+ * | ------------- | ------------ | ---------------------- |
+ * | `10`          | `"10%"`      | `1`                    |
+ * | `10`          | `"50% + 10"` | `15`                   |
+ *
+ * By default, a NumericInput displays a slider input that can be used to quickly change the value
+ * via a click and drag. The slider can be disabled by setting the `hideSlider` argument to `true`.
  */
 class NumericInput extends InputElement {
     protected _min: number;
