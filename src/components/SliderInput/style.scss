@@ -72,10 +72,12 @@
 
 .pcui-slider {
     cursor: pointer;
+
     &.pcui-slider-active {
         cursor: ew-resize;
     }
 }
+
 // readonly state (hide slider)
 .pcui-slider.pcui-readonly {
     .pcui-numeric-input {
