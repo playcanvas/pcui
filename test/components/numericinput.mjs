@@ -108,7 +108,12 @@ describe('NumericInput', () => {
         it('length limit', () => {
             const numericInput = new NumericInput();
             
-            numericInput.value = "1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1+1";  // > 20 chars
+            // Expression with 19 chars works
+            numericInput.value = "1+1+1+1+1+1+1+1+1+1";  // 19 chars
+            strictEqual(numericInput.value, 10);
+            
+            // Expression with 20 chars fails
+            numericInput.value = "1+1+1+1+1+1+1+1+1+10";  // 20 chars
             strictEqual(numericInput.value, 0);
         });
     });
