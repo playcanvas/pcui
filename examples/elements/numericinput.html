@@ -23,22 +23,24 @@
 </head>
 <body>
     <script type="module">
-        import { LabelGroup, NumericInput } from '@playcanvas/pcui';
+        import { InfoBox, LabelGroup, NumericInput } from '@playcanvas/pcui';
         import '@playcanvas/pcui/styles'
 
-        const numericInput = new NumericInput({
-            step: 0.1,
-            min: 0,
-            max: 1,
-            value: 0.5
-        });
+        const numericInput = new NumericInput();
 
         const labelGroup = new LabelGroup({
             field: numericInput,
-            text: 'NumericInput'
+            text: 'Enter a number:'
         });
+        labelGroup.dom.querySelector('.pcui-label').style.width = '125px';
 
         document.body.appendChild(labelGroup.dom);
+
+        const infoBox = new InfoBox({
+            icon: 'E400',
+            text: 'NumericInput supports expressions and percentages. For example, you can enter "10 * (2 + 3)" to get a value of 50. You can also enter "50%" to calculate the percentage of the current value. You can even use percentages in expressions.'
+        });
+        document.body.appendChild(infoBox.dom);
     </script>
 </body>
 </html>

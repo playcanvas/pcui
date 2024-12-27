@@ -29,8 +29,9 @@
     <script type="importmap">
         {
             "imports": {
-                "@playcanvas/pcui": "https://cdn.jsdelivr.net/npm/@playcanvas/pcui/+esm",
-                "@playcanvas/pcui/styles": "https://cdn.jsdelivr.net/npm/@playcanvas/pcui/styles/+esm"
+                "@playcanvas/observer": "https://cdn.jsdelivr.net/npm/@playcanvas/observer/+esm",
+                "@playcanvas/pcui": "/dist/module/src/index.mjs",
+                "@playcanvas/pcui/styles": "/styles/dist/index.mjs"
             }
         }
     </script>
@@ -60,7 +61,7 @@
         const treeView = new TreeView({
             allowRenaming: false,
             allowReordering: false,
-            allowDragging: false
+            allowDrag: false
         });
 
         const iframe = document.createElement('iframe');
