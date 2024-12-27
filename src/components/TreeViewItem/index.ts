@@ -480,9 +480,9 @@ class TreeViewItem extends Container {
      */
     set open(value) {
         if (this._open === value) return;
-        
+
         this._open = value;
-        
+
         if (value) {
             if (!this.numChildren) return;
             this.class.add(CLASS_OPEN);
