@@ -480,10 +480,10 @@ class TreeViewItem extends Container {
      */
     set open(value) {
         if (this.open === value) return;
-        
+
         // Store intended state
         this._intendedOpenState = value;
-        
+
         if (value) {
             if (!this.numChildren) return;
             this.class.add(CLASS_OPEN);
