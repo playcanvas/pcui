@@ -134,49 +134,10 @@
     }
 }
 
-.pcui-treeview {
-    // direct children of tree
-    > .pcui-treeview-item {
-        padding-left: 0;
-
-        &::before {
-            content: none;
-        }
-
-        > .pcui-treeview-item-contents {
-            margin-left: 0;
-
-            > .pcui-treeview-item-icon {
-                &::before {
-                    content: none;
-                }
-
-                &::after {
-                    margin-left: 0;
-                }
-            }
-        }
-
-        > .pcui-treeview-item {
-            padding-left: 21px;
-
-            // top line
-            &::before {
-                left: 11px;
-            }
-        }
-    }
-}
-
 .pcui-treeview:not(.pcui-treeview-filtering) {
-    // direct children of tree
-    > .pcui-treeview-item {
-        .pcui-treeview-item {
-            &:not(.pcui-treeview-item-open, .pcui-treeview-item-empty) {
-                > .pcui-treeview-item {
-                    display: none;
-                }
-            }
+    .pcui-treeview-item:not(.pcui-treeview-item-open, .pcui-treeview-item-empty) {
+        > .pcui-treeview-item {
+            display: none;
         }
     }
 }
