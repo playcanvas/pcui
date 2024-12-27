@@ -36,15 +36,20 @@
         });
 
         const root = new TreeViewItem({
-            text: 'Root'
+            open: true,
+            text: 'My Drive',
+            icon: 'E229' // Drive icon
         });
         treeView.append(root);
 
         const generateChildren = (parent, depth) => {
             if (depth > 0) {
                 for (let i = 0; i < 5; i++) {
+                    const isFolder = depth > 1;
                     const item = new TreeViewItem({
-                        text: 'Item ' + i
+                        allowDrop: isFolder,
+                        text: (isFolder ? 'Folder ' : 'File ') + i,
+                        icon: isFolder ? 'E139' : 'E208'  // Folder or file icon
                     });
                     parent.append(item);
 

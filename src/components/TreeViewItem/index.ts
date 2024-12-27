@@ -26,7 +26,7 @@ interface TreeViewItemArgs extends ContainerArgs {
      */
     allowSelect?: boolean,
     /**
-     * Whether the item is open meaning showing its children.
+     * Whether the item is open (showing its children). Defaults to `false`.
      */
     open?: boolean,
     /**
@@ -130,6 +130,8 @@ class TreeViewItem extends Container {
 
     protected _icon: string;
 
+    protected _open = false;
+
     /**
      * Creates a new TreeViewItem.
      *
@@ -174,6 +176,8 @@ class TreeViewItem extends Container {
             this.selected = args.selected;
         }
 
+        this._open = args.open ?? false;
+
         const dom = this._containerContents.dom;
         dom.addEventListener('focus', this._onContentFocus);
         dom.addEventListener('blur', this._onContentBlur);
@@ -210,8 +214,11 @@ class TreeViewItem extends Container {
 
         if (element instanceof TreeViewItem) {
             this._numChildren++;
-            if (this._parent !== this._treeView) {
-                this.class.remove(CLASS_EMPTY);
+            this.class.remove(CLASS_EMPTY);
+
+            // Apply intended open state now that we have children
+            if (this._open) {
+                this.class.add(CLASS_OPEN);
             }
 
             if (this._treeView) {
@@ -472,7 +479,10 @@ class TreeViewItem extends Container {
      * Sets whether the item is expanded and showing its children.
      */
     set open(value) {
-        if (this.open === value) return;
+        if (this._open === value) return;
+
+        this._open = value;
+
         if (value) {
             if (!this.numChildren) return;
 
@@ -488,7 +498,7 @@ class TreeViewItem extends Container {
      * Gets whether the item is expanded and showing its children.
      */
     get open() {
-        return this.class.contains(CLASS_OPEN) || this.parent === this._treeView;
+        return this._open;
     }
 
     /**
