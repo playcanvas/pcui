@@ -485,6 +485,7 @@ class TreeViewItem extends Container {
 
         if (value) {
             if (!this.numChildren) return;
+
             this.class.add(CLASS_OPEN);
             this.emit('open', this);
         } else {
