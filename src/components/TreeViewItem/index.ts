@@ -499,7 +499,7 @@ class TreeViewItem extends Container {
      * Gets whether the item is expanded and showing its children.
      */
     get open() {
-        return this.class.contains(CLASS_OPEN);
+        return this._intendedOpenState;
     }
 
     /**
