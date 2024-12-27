@@ -107,6 +107,7 @@
         for (const category of categories) {
             const categoryItem = new TreeViewItem({
                 allowSelect: false,
+                open: true,
                 text: category.categoryName
             });
             treeView.append(categoryItem);
