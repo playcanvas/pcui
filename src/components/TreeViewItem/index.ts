@@ -130,7 +130,7 @@ class TreeViewItem extends Container {
 
     protected _icon: string;
 
-    protected _intendedOpenState = false;
+    protected _open = false;
 
     /**
      * Creates a new TreeViewItem.
@@ -176,7 +176,7 @@ class TreeViewItem extends Container {
             this.selected = args.selected;
         }
 
-        this._intendedOpenState = args.open ?? false;
+        this._open = args.open ?? false;
 
         const dom = this._containerContents.dom;
         dom.addEventListener('focus', this._onContentFocus);
@@ -217,7 +217,7 @@ class TreeViewItem extends Container {
             this.class.remove(CLASS_EMPTY);
 
             // Apply intended open state now that we have children
-            if (this._intendedOpenState) {
+            if (this._open) {
                 this.class.add(CLASS_OPEN);
             }
 
@@ -479,14 +479,12 @@ class TreeViewItem extends Container {
      * Sets whether the item is expanded and showing its children.
      */
     set open(value) {
-        if (this.open === value) return;
-
-        // Store intended state
-        this._intendedOpenState = value;
-
+        if (this._open === value) return;
+        
+        this._open = value;
+        
         if (value) {
             if (!this.numChildren) return;
-
             this.class.add(CLASS_OPEN);
             this.emit('open', this);
         } else {
@@ -499,7 +497,7 @@ class TreeViewItem extends Container {
      * Gets whether the item is expanded and showing its children.
      */
     get open() {
-        return this._intendedOpenState;
+        return this._open;
     }
 
     /**
