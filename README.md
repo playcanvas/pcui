@@ -46,13 +46,21 @@ ReactDOM.render(
 
 If you need a UMD version of the PCUI library (say, to use it in a PlayCanvas Editor project), please refer to our [build guide](BUILDGUIDE.md).
 
-## Including your own font
+## Fonts in PCUI
 
-PCUI uses four CSS classes to add styled fonts to the various components. These are `.font-regular`, `.font-bold`, `.font-thin` and `.font-light`. You can use your own font with PCUI by adding `font-family` CSS rules to these classes on your webpage. For example:
+PCUI uses four CSS classes for fonts across its components: `.font-regular`, `.font-bold`, `.font-thin` and `.font-light`. By default, these use the Helvetica Neue font stack:
+
+```css
+    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+```
+
+### Using your own Font
+
+You can override PCUI's default font by adding your own `font-family` CSS rules to these classes on your webpage:
 
 ```css
 .font-regular, .font-bold, .font-thin, .font-light {
-    font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-family: 'Your Font', sans-serif;
 }
 ```
 
