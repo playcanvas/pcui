@@ -166,9 +166,7 @@ class MenuItem extends Container implements IBindable {
         evt.preventDefault();
         evt.stopPropagation();
         if (this.enabled) {
-            if (this.onSelect) {
-                this.onSelect(evt);
-            }
+            this.onSelect?.(evt);
             this.emit('select');
 
             if (this.menu) {
@@ -192,9 +190,7 @@ class MenuItem extends Container implements IBindable {
      */
     select() {
         if (!this.enabled) return;
-        if (this.onSelect) {
-            this.onSelect();
-        }
+        this.onSelect?.();
         this.emit('select');
 
         if (this.menu) {
