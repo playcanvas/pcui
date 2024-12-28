@@ -58,10 +58,12 @@ class MenuItem extends Container implements IBindable {
      * The function called when the MenuItem is selected.
      */
     public onSelect: (evt?: MouseEvent) => void;
+
     /**
      * The function that determines whether the MenuItem should be enabled when the Menu is shown.
      */
     public onIsEnabled: () => boolean;
+
     /**
      * The function that determines whether the MenuItem should be visible when the Menu is shown.
      */
