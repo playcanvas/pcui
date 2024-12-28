@@ -54,6 +54,19 @@ interface MenuItemArgs extends ContainerArgs {
  * Menus.
  */
 class MenuItem extends Container implements IBindable {
+    /**
+     * The function called when the MenuItem is selected.
+     */
+    public onSelect: (evt?: MouseEvent) => void;
+    /**
+     * The function that determines whether the MenuItem should be enabled when the Menu is shown.
+     */
+    public onIsEnabled: () => boolean;
+    /**
+     * The function that determines whether the MenuItem should be visible when the Menu is shown.
+     */
+    public onIsVisible: () => boolean;
+
     protected _containerContent: Container;
 
     protected _numChildren = 0;
@@ -65,12 +78,6 @@ class MenuItem extends Container implements IBindable {
     protected _containerItems: Container;
 
     protected _menu: any = null;
-
-    protected _onSelect: (evt?: MouseEvent) => void;
-
-    protected _onIsEnabled: () => boolean;
-
-    protected _onIsVisible: () => boolean;
 
     protected _renderChanges: boolean;
 
@@ -114,8 +121,8 @@ class MenuItem extends Container implements IBindable {
             this.binding = args.binding;
         }
 
-        this.onIsEnabled = args.onIsEnabled;
         this.onSelect = args.onSelect;
+        this.onIsEnabled = args.onIsEnabled;
         this.onIsVisible = args.onIsVisible;
 
         if (args.items) {
@@ -159,8 +166,8 @@ class MenuItem extends Container implements IBindable {
         evt.preventDefault();
         evt.stopPropagation();
         if (this.enabled) {
-            if (this._onSelect) {
-                this._onSelect(evt);
+            if (this.onSelect) {
+                this.onSelect(evt);
             }
             this.emit('select');
 
@@ -185,8 +192,8 @@ class MenuItem extends Container implements IBindable {
      */
     select() {
         if (!this.enabled) return;
-        if (this._onSelect) {
-            this._onSelect();
+        if (this.onSelect) {
+            this.onSelect();
         }
         this.emit('select');
 
@@ -278,48 +285,6 @@ class MenuItem extends Container implements IBindable {
      */
     get menu() {
         return this._menu;
-    }
-
-    /**
-     * Sets the function that is called when the MenuItem is selected.
-     */
-    set onSelect(value) {
-        this._onSelect = value;
-    }
-
-    /**
-     * Gets the function that is called when the MenuItem is selected.
-     */
-    get onSelect() {
-        return this._onSelect;
-    }
-
-    /**
-     * Sets the function that is called when the MenuItem is enabled or disabled.
-     */
-    set onIsEnabled(value) {
-        this._onIsEnabled = value;
-    }
-
-    /**
-     * Gets the function that is called when the MenuItem is enabled or disabled.
-     */
-    get onIsEnabled() {
-        return this._onIsEnabled;
-    }
-
-    /**
-     * Sets the function that is called when the MenuItem is visible or hidden.
-     */
-    set onIsVisible(value) {
-        this._onIsVisible = value;
-    }
-
-    /**
-     * Gets the function that is called when the MenuItem is visible or hidden.
-     */
-    get onIsVisible() {
-        return this._onIsVisible;
     }
 
     /**
