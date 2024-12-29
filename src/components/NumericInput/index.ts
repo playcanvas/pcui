@@ -48,24 +48,16 @@ interface NumericInputArgs extends InputElementArgs {
 /**
  * The NumericInput represents an input element that holds numbers.
  *
- * NumericInput accepts `number` values. It also accepts strings that contain numbers, percentages,
- * and mathematical expressions which are then evaluated to a number. Here are some examples:
+ * NumericInput accepts `number` values. It also accepts strings that contain mathematical
+ * expressions which are then evaluated to a number. Here are some examples:
  *
  * | Input String       | Evaluated Number Value |
  * | ------------------ | ---------------------- |
- * | `"10"`             | `10`                   |
  * | `"10 + 20"`        | `30`                   |
- * | `"10 * 20"`        | `200`                  |
  * | `"10 - 20"`        | `-10`                  |
+ * | `"10 * 20"`        | `200`                  |
  * | `"10 / 20"`        | `0.5`                  |
  * | `"10 * (20 + 30)"` | `500`                  |
- *
- * When using percentages, the value is calculated based on the current value of the input. For example:
- *
- * | Current Value | Input String | Evaluated Number Value |
- * | ------------- | ------------ | ---------------------- |
- * | `10`          | `"10%"`      | `1`                    |
- * | `10`          | `"50% + 10"` | `15`                   |
  *
  * By default, a NumericInput displays a slider input that can be used to quickly change the value
  * via a click and drag. The slider can be disabled by setting the `hideSlider` argument to `true`.
@@ -277,15 +269,6 @@ class NumericInput extends InputElement {
 
                 // remove spaces
                 value = value.replace(/\s/g, '');
-
-                const currentValue = this._oldValue || 0;
-
-                // handle percentages with a simple, non-backtracking regex
-                value = value.replace(/(\d+(?:\.\d+)?%)/g, (match: string) => {
-                    const percent = parseFloat(match.slice(0, -1));
-                    const calculatedValue = (percent / 100) * currentValue;
-                    return calculatedValue.toString();
-                });
 
                 // sanitize input to only allow short mathematical expressions
                 value = value.match(/^[*/+\-0-9().]+$/);
