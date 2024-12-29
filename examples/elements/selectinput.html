@@ -7,12 +7,17 @@
         body {
             background-color: #364346;
         }
+
+        .pcui-element.pcui-label-group > .pcui-label:first-child {
+            width: 175px;
+        }
     </style>
     <script type="importmap">
         {
             "imports": {
-                "@playcanvas/pcui": "https://cdn.jsdelivr.net/npm/@playcanvas/pcui/+esm",
-                "@playcanvas/pcui/styles": "https://cdn.jsdelivr.net/npm/@playcanvas/pcui/styles/+esm"
+                "@playcanvas/observer": "https://cdn.jsdelivr.net/npm/@playcanvas/observer/+esm",
+                "@playcanvas/pcui": "/dist/module/src/index.mjs",
+                "@playcanvas/pcui/styles": "/styles/dist/index.mjs"
             }
         }
     </script>
@@ -52,9 +57,6 @@
             text: 'SelectInput with Filter:',
             field: selectWithFilter
         });
-
-        labelGroup1.dom.querySelector('.pcui-label').style.width = '175px';
-        labelGroup2.dom.querySelector('.pcui-label').style.width = '175px';
 
         document.body.appendChild(labelGroup1.dom);
         document.body.appendChild(labelGroup2.dom);
