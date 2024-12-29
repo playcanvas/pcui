@@ -661,10 +661,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
 
         if (filter) {
-            // Search options directly using the 't' property
             const searchResults = searchItems(this._options, 't', filter);
-
-            // Add matching options back in order
             searchResults.forEach((result) => {
                 const label = this._valueToLabel[String(result.v)];
                 containerDom.appendChild(label.dom);
