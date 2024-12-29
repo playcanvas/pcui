@@ -269,7 +269,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._labelValue.dom.addEventListener('keydown', this._onKeyDown);
         this._labelValue.dom.addEventListener('focus', this._onFocus);
         this._labelValue.dom.addEventListener('blur', this._onBlur);
-        this._labelValue.dom.addEventListener('mousedown', this._onMouseDown);
+        this._labelValue.dom.addEventListener('pointerdown', this._onPointerDown);
 
         this._containerOptions.dom.addEventListener('wheel', this._onWheel, { passive: true });
 
@@ -317,14 +317,14 @@ class SelectInput extends Element implements IBindable, IFocusable {
         if (this._destroyed) return;
 
         this._labelValue.dom.removeEventListener('keydown', this._onKeyDown);
-        this._labelValue.dom.removeEventListener('mousedown', this._onMouseDown);
+        this._labelValue.dom.removeEventListener('pointerdown', this._onPointerDown);
         this._labelValue.dom.removeEventListener('focus', this._onFocus);
         this._labelValue.dom.removeEventListener('blur', this._onBlur);
 
         this._containerOptions.dom.removeEventListener('wheel', this._onWheel);
 
         window.removeEventListener('keydown', this._onKeyDown);
-        window.removeEventListener('mousedown', this._onWindowMouseDown);
+        window.removeEventListener('pointerdown', this._onWindowPointerDown);
 
         if (this._timeoutLabelValueTabIndex) {
             cancelAnimationFrame(this._timeoutLabelValueTabIndex);
@@ -720,7 +720,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._onKeyDown(evt);
     };
 
-    protected _onWindowMouseDown = (evt: MouseEvent) => {
+    protected _onWindowPointerDown = (evt: PointerEvent) => {
         if (!this.dom.contains(evt.composedPath()[0] as Node)) {
             this.close();
         }
@@ -807,7 +807,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._domShadow.style.height = `${this._containerValue.height + this._containerOptions.height}px`;
     }
 
-    protected _onMouseDown = () => {
+    protected _onPointerDown = () => {
         if (!this._allowInput) {
             this.focus();
         }
@@ -916,8 +916,8 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         // register keydown on entire window
         window.addEventListener('keydown', this._onKeyDown);
-        // register mousedown on entire window
-        window.addEventListener('mousedown', this._onWindowMouseDown);
+        // register pointerdown on entire window
+        window.addEventListener('pointerdown', this._onWindowPointerDown);
 
         // if the dropdown list goes below the window show it above the field
         const startField = this._allowInput ? this._input.dom : this._labelValue.dom;
@@ -969,7 +969,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         this.class.remove(CLASS_OPEN);
         window.removeEventListener('keydown', this._onKeyDown);
-        window.removeEventListener('mousedown', this._onWindowMouseDown);
+        window.removeEventListener('pointerdown', this._onWindowPointerDown);
     }
 
     /**
