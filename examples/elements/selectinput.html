@@ -19,7 +19,7 @@
 </head>
 <body>
     <script type="module">
-        import { SelectInput } from '@playcanvas/pcui';
+        import { LabelGroup, SelectInput } from '@playcanvas/pcui';
         import '@playcanvas/pcui/styles'
 
         const select = new SelectInput({
@@ -32,8 +32,32 @@
             defaultValue: 4,
             type: 'number'
         });
+        const labelGroup1 = new LabelGroup({
+            text: 'SelectInput:',
+            field: select
+        });
 
-        document.body.appendChild(select.dom);
+        const selectWithFilter = new SelectInput({
+            allowInput: true,
+            options: [
+                { t: 'Option 1', v: 1 },
+                { t: 'Option 2', v: 2 },
+                { t: 'Option 3', v: 3 },
+                { t: 'Default', v: 4 }
+            ],
+            defaultValue: 4,
+            type: 'number'
+        });
+        const labelGroup2 = new LabelGroup({
+            text: 'SelectInput with Filter:',
+            field: selectWithFilter
+        });
+
+        labelGroup1.dom.querySelector('.pcui-label').style.width = '175px';
+        labelGroup2.dom.querySelector('.pcui-label').style.width = '175px';
+
+        document.body.appendChild(labelGroup1.dom);
+        document.body.appendChild(labelGroup2.dom);
     </script>
 </body>
 </html>
