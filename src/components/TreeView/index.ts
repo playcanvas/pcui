@@ -396,7 +396,7 @@ class TreeView extends Container {
         if (this._filter) {
             // add new item to filtered results if it
             // satisfies the current filter
-            this._searchItems([[item.text, item]], this._filter);
+            this._searchItems([item], this._filter);
         }
 
         // do the same for all children of the element
@@ -987,13 +987,13 @@ class TreeView extends Container {
             }
 
             // see if we can include it in the current filter
-            this._searchItems([[item.text, item]], this._filter);
+            this._searchItems([item], this._filter);
         }
         this.emit('rename', item, newName);
     }
 
-    protected _searchItems(searchArr: [string, TreeViewItem][], filter: string) {
-        const results = searchItems(searchArr, filter);
+    protected _searchItems(items: TreeViewItem[], filter: string) {
+        const results = searchItems(items, 'text', filter);
         if (!results.length) return;
 
         results.forEach((item: TreeViewItem) => {
@@ -1015,12 +1015,12 @@ class TreeView extends Container {
 
         this.class.add(CLASS_FILTERING);
 
-        const search: [string, TreeViewItem][] = [];
+        const items: TreeViewItem[] = [];
         this._traverseDepthFirst((item) => {
-            search.push([item.text, item]);
+            items.push(item);
         });
 
-        this._searchItems(search, filter);
+        this._searchItems(items, filter);
     }
 
     /**

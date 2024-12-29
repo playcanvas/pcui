@@ -185,49 +185,44 @@ const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: R
 /**
  * Perform search through items.
  *
- * @param items - Array of tuples where the first value is a string to be searched by and the
- * second value is an object to be found.
- * @param search - String to search for.
- * @param args - Search arguments.
- * @returns Array of found items.
+ * @param items - Array of objects to search through
+ * @param searchKey - The property name to search within each item
+ * @param search - String to search for
+ * @param args - Search arguments
+ * @returns Array of found items
  * @example
  * const items = [
- *     ['Item 1', { id: 1 }],
- *     ['Item 2', { id: 2 }],
- *     ['Item 3', { id: 3 }],
+ *     { text: 'Item 1', id: 1 },
+ *     { text: 'Item 2', id: 2 }
  * ];
- * const results = searchItems(items, 'item');
- * // results = [{ id: 1 }, { id: 2 }, { id: 3 }]
+ * const results = searchItems(items, 'text', 'item');
  */
-export const searchItems = <Type>(items: [string, Type][], search = '', args: SearchArgs = {}): Type[] => {
+export const searchItems = <K extends string, T extends Record<K, string>>(
+    items: T[],
+    searchKey: K,
+    search = '',
+    args: SearchArgs = {}
+): T[] => {
     search = search.toLowerCase().trim();
-
-    if (!search) {
-        return [];
-    }
+    if (!search) return [];
 
     const searchTokens = searchStringTokenize(search);
-    if (!searchTokens.length) {
-        return [];
-    }
+    if (!searchTokens.length) return [];
 
     args.containsCharsTolerance = args.containsCharsTolerance || 0.5;
     args.editsDistanceTolerance = args.editsDistanceTolerance || 0.5;
 
-    let records: SearchRecord<Type>[] = [];
-
-    for (const item of items) {
-        const subInd = item[0].toLowerCase().trim().indexOf(search);
-
-        records.push({
-            name: item[0],
-            item: item[1],
-            tokens: searchStringTokenize(item[0]),
+    let records: SearchRecord<T>[] = items.map((item) => {
+        const subInd = item[searchKey].toLowerCase().trim().indexOf(search);
+        return {
+            name: item[searchKey],
+            item: item,
+            tokens: searchStringTokenize(item[searchKey]),
             edits: Infinity,
             subFull: (subInd !== -1) ? subInd : Infinity,
             sub: Infinity
-        });
-    }
+        };
+    });
 
     // search each token
     for (let i = 0; i < searchTokens.length; i++) {
@@ -235,7 +230,7 @@ export const searchItems = <Type>(items: [string, Type][], search = '', args: Se
     }
 
     // sort result first by substring? then by edits number
-    records.sort((a: SearchRecord<Type>, b: SearchRecord<Type>) => {
+    records.sort((a: SearchRecord<T>, b: SearchRecord<T>) => {
         if (a.subFull !== b.subFull) {
             return a.subFull - b.subFull;
         } else if (a.sub !== b.sub) {
@@ -247,7 +242,7 @@ export const searchItems = <Type>(items: [string, Type][], search = '', args: Se
     });
 
     // return only items without match information
-    let recordItems = records.map((record: SearchRecord<Type>) => record.item);
+    let recordItems = records.map((record: SearchRecord<T>) => record.item);
 
     // limit number of results
     if (args.hasOwnProperty('limitResults') && recordItems.length > args.limitResults) {
