@@ -21,9 +21,6 @@ const SIMPLE_CSS_PROPERTIES = [
     'justifySelf'
 ];
 
-// Stores Element types by name and default arguments
-const elementRegistry: Map<string, any> = new Map();
-
 interface IBindable {
     /**
      * Sets the value of the Element.
@@ -388,6 +385,17 @@ class Element extends Events {
      */
     public static readonly EVENT_DESTROY = 'destroy';
 
+    /**
+     * Stores Element types by name and default arguments.
+     */
+    private static registry = new Map<
+        string,
+        {
+            cls: new(...args: any[]) => Element,
+            defaultArguments?: Partial<ElementArgs>
+        }
+    >();
+
     protected _destroyed = false;
 
     protected _parent: Element = null; // eslint-disable-line no-use-before-define
@@ -688,15 +696,15 @@ class Element extends Events {
      * @param cls - The actual class of the Element.
      * @param defaultArguments - Default arguments when creating this type.
      */
-    static register<Type>(type: string, cls: new () => Type, defaultArguments?: any) {
-        elementRegistry.set(type, { cls, defaultArguments });
+    static register<Type extends Element>(type: string, cls: new () => Type, defaultArguments?: any) {
+        Element.registry.set(type, { cls, defaultArguments });
     }
 
     /**
      * @param type - The type we want to unregister.
      */
     static unregister(type: string) {
-        elementRegistry.delete(type);
+        Element.registry.delete(type);
     }
 
     /**
@@ -707,7 +715,7 @@ class Element extends Events {
      * @returns The new Element or undefined if type is not found.
      */
     static create(type: string, args: ElementArgs): any {
-        const entry = elementRegistry.get(type);
+        const entry = Element.registry.get(type);
         if (!entry) {
             console.error('Invalid type passed to Element.create:', type);
             return undefined;
