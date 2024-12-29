@@ -185,11 +185,11 @@ const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: R
 /**
  * Perform search through items.
  *
- * @param items - Array of objects to search through
- * @param searchKey - The property name to search within each item
- * @param search - String to search for
- * @param args - Search arguments
- * @returns Array of found items
+ * @param items - Array of objects to search through.
+ * @param searchKey - The property name to search within each item.
+ * @param search - String to search for.
+ * @param args - Search arguments.
+ * @returns Array of found items.
  * @example
  * const items = [
  *     { text: 'Item 1', id: 1 },
