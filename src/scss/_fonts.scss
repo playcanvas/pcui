@@ -1,4 +1,15 @@
-@import './font-icon';
+@import './icons';
+
+@font-face {
+    font-family: pc-icon;
+    src: $playicons-regular;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-icon {
+    font-family: pc-icon;
+}
 
 .font-thin {
     font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;

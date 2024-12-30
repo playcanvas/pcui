@@ -29,3 +29,28 @@
         scrollbar-color: $text-darkest $bcg-darkest;
     }
 }
+
+.pcui-no-select {
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+// flex container
+.pcui-flex {
+    &:not(.pcui-hidden) {
+        display: flex;
+    }
+
+    flex-direction: column;
+}
+
+// grid container
+.pcui-grid {
+    display: grid;
+}
+
+// scrollable element
+.pcui-scrollable {
+    // show scrollbars automatically
+    overflow: auto;
+}
