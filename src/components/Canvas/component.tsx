@@ -14,7 +14,8 @@ class Canvas extends Element<CanvasArgs, any> {
     }
 
     render() {
-        return <canvas ref={(ref: HTMLCanvasElement) => this.attachElement(ref, null)} />;
+        // @ts-ignore
+        return <canvas ref={this.attachElement}/>;
     }
 }
 

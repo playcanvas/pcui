@@ -14,7 +14,8 @@ class Label extends Element<LabelArgs, any> {
     }
 
     render() {
-        return <span ref={(ref: HTMLSpanElement) => this.attachElement(ref, null)} />;
+        // @ts-ignore
+        return <span ref={this.attachElement} />;
     }
 }
 
