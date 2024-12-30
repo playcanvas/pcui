@@ -324,7 +324,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._containerOptions.dom.removeEventListener('wheel', this._onWheel);
 
         window.removeEventListener('keydown', this._onKeyDown);
-        window.removeEventListener('pointerdown', this._onWindowPointerDown);
+        document.removeEventListener('pointerdown', this._onDocumentPointerDown);
 
         if (this._timeoutLabelValueTabIndex) {
             cancelAnimationFrame(this._timeoutLabelValueTabIndex);
@@ -720,7 +720,13 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._onKeyDown(evt);
     };
 
-    protected _onWindowPointerDown = (evt: PointerEvent) => {
+    /**
+     * Handles pointer down events on the document. It has to be the document instead of the window
+     * because otherwise `pointerdown` is not fired when the PCUI app is running in an iframe.
+     * @param evt - Pointer event.
+     */
+    protected _onDocumentPointerDown = (evt: PointerEvent) => {
+        // Use composedPath to handle clicks in both shadow DOM and regular DOM contexts
         if (!this.dom.contains(evt.composedPath()[0] as Node)) {
             this.close();
         }
@@ -916,8 +922,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         // register keydown on entire window
         window.addEventListener('keydown', this._onKeyDown);
-        // register pointerdown on entire window
-        window.addEventListener('pointerdown', this._onWindowPointerDown);
+        document.addEventListener('pointerdown', this._onDocumentPointerDown);
 
         // if the dropdown list goes below the window show it above the field
         const startField = this._allowInput ? this._input.dom : this._labelValue.dom;
@@ -969,7 +974,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         this.class.remove(CLASS_OPEN);
         window.removeEventListener('keydown', this._onKeyDown);
-        window.removeEventListener('pointerdown', this._onWindowPointerDown);
+        document.removeEventListener('pointerdown', this._onDocumentPointerDown);
     }
 
     /**
