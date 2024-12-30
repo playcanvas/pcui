@@ -24,7 +24,7 @@
     &.pcui-error {
         > path {
             animation: none;
-            fill: rgba(darken(#f77, 17%), 1);
+            fill: rgba(color.adjust(#f77, $lightness: -17%), 1);
 
             &.pcui-spinner-highlight {
                 fill: rgba(#f77, 1);

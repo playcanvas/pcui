@@ -9,7 +9,7 @@
         height: inherit;
 
         $first: rgba($text-active, 1);
-        $second: rgba(darken($text-active, 17%), 1);
+        $second: rgba(color.adjust($text-active, $lightness: -17%), 1);
 
         background: $text-active;
         background:
@@ -36,7 +36,7 @@
 .pcui-progress.pcui-error {
     .pcui-progress-inner {
         $first: rgba(#f77, 1);
-        $second: rgba(darken(#f77, 17%), 1);
+        $second: rgba(color.adjust(#f77, $lightness: -17%), 1);
 
         background: $text-active;
         background:

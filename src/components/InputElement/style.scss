@@ -74,7 +74,7 @@
 
 // readonly state
 .pcui-input-element.pcui-readonly {
-    background-color: transparentize($color: $bcg-dark, $amount: 1 - $element-opacity-readonly);
+    background-color: rgba($bcg-dark, $element-opacity-readonly);
     border-color: transparent;
 }
 
