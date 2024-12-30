@@ -17,7 +17,7 @@ class TreeViewItem extends Element<TreeViewItemArgs, any> {
         this.onSelect = () => {
             if (props.onSelect) {
                 props.onSelect(() => {
-                    this.element.selected = false;
+                    (this.element as TreeViewItemClass).selected = false;
                 });
             }
         };
