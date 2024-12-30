@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .pcui-treeview {
     @extend .pcui-no-select;
 
@@ -14,7 +16,7 @@
     &::before {
         content: '\00a0';
         position: absolute;
-        background-color: mix($bcg-dark, $bcg-primary, 50%);
+        background-color: color.mix($bcg-dark, $bcg-primary, 50%);
         width: 2px;
         left: 14px;
         top: -12px;
@@ -64,7 +66,7 @@
     &::before {
         content: '\00a0';
         position: absolute;
-        background-color: mix($bcg-dark, $bcg-primary, 50%);
+        background-color: color.mix($bcg-dark, $bcg-primary, 50%);
         left: -12px;
         top: 10px;
         width: 24px;

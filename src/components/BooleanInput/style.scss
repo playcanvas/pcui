@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // boolean input
 .pcui-boolean-input {
     display: inline-block;
@@ -109,7 +111,7 @@
 
     &::after {
         left: 15px;
-        background-color: mix($text-darkest, #7f7, 50%);
+        background-color: color.mix($text-darkest, #7f7, 50%);
     }
 }
 

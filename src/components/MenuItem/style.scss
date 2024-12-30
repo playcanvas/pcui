@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .pcui-menu-item {
     position: relative;
     background-color: $bcg-darkest;
@@ -40,7 +42,7 @@
 .pcui-menu-item-content {
     min-width: 158px;
     color: $text-dark;
-    border-bottom: 1px solid mix($bcg-darkest, $bcg-dark, 50%);
+    border-bottom: 1px solid color.mix($bcg-darkest, $bcg-dark, 50%);
     cursor: pointer;
 
     &:hover {
