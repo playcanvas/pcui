@@ -36,8 +36,9 @@ class Container extends Element<ContainerArgs, any> {
             );
         }
 
-        return <div ref={(ref: HTMLDivElement) => this.attachElement(ref, null)}>
-            {elements}
+        // @ts-ignore
+        return <div ref={this.attachElement}>
+            { elements }
         </div>;
     }
 }
