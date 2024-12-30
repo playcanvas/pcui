@@ -1,3 +1,5 @@
+import '../src/scss/pcui-theme-green.scss';
+
 const preview = {
     parameters: {
         backgrounds: {
