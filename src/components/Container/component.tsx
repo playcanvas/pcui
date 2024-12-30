@@ -25,16 +25,19 @@ class Container extends Element<ContainerArgs, any> {
     };
 
     render() {
-        let elements: any = React.Children.toArray(this.props.children);
+        const elementsArray = Array.from(React.Children.toArray(this.props.children));
+        let elements: React.ReactNode;
 
-        if (elements.length === 1) {
-            elements = React.cloneElement(elements[0], { parent: this.element });
-        } else if (elements.length > 0) {
-            elements = elements.map((element: any) => React.cloneElement(element, { parent: this.element }));
+        if (elementsArray.length === 1) {
+            elements = React.cloneElement(elementsArray[0] as React.ReactElement, { parent: this.element });
+        } else if (elementsArray.length > 0) {
+            elements = elementsArray.map(element => 
+                React.cloneElement(element as React.ReactElement, { parent: this.element })
+            );
         }
-        // @ts-ignore
-        return <div ref={this.attachElement}>
-            { elements }
+
+        return <div ref={(ref: HTMLDivElement) => this.attachElement(ref, null)}>
+            {elements}
         </div>;
     }
 }

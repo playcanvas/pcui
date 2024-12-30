@@ -14,8 +14,7 @@ class InfoBox extends Element<InfoBoxArgs, any> {
     }
 
     render() {
-        // @ts-ignore
-        return <span ref={this.attachElement} />;
+        return <span ref={(ref: HTMLSpanElement) => this.attachElement(ref, null)} />;
     }
 }
 

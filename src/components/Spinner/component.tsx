@@ -16,8 +16,7 @@ class Spinner extends Element<SpinnerArgs, any> {
     }
 
     render() {
-        // @ts-ignore
-        return <svg ref={this.attachElement} />;
+        return <svg ref={(ref: SVGSVGElement) => this.attachElement(ref as unknown as HTMLElement, null)} />;
     }
 }
 
