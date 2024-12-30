@@ -14,8 +14,7 @@ class Button extends Element<ButtonArgs, any> {
     }
 
     render() {
-        // @ts-ignore
-        return <button ref={this.attachElement} />;
+        return <button ref={(ref: HTMLButtonElement) => this.attachElement(ref, null)} />;
     }
 }
 

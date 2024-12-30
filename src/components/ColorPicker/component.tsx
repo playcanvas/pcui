@@ -14,8 +14,7 @@ class ColorPicker extends Element<ColorPickerArgs, any> {
     }
 
     render() {
-        // @ts-ignore
-        return <div ref={this.attachElement}/>;
+        return <div ref={(ref: HTMLDivElement) => this.attachElement(ref, null)} />;
     }
 }
 

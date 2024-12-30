@@ -21,7 +21,7 @@ class TextInput extends Element<TextInputArgs, any> {
 
     onAttachFn() {
         if (this.onValidate) {
-            this.element.onValidate = this.onValidate;
+            (this.element as TextInputClass).onValidate = this.onValidate;
         }
     }
 

@@ -282,7 +282,7 @@ class NumericInput extends InputElement {
                         });
                         expression = expressionArr.join(operator);
                     });
-                    // eslint-disable-next-line
+                    // eslint-disable-next-line no-new-func
                     value = Function(`"use strict";return (${expression})`)();
                 }
             }

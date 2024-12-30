@@ -8,9 +8,9 @@ import { Element as ElementClass, ElementArgs } from './index';
 class Element<P extends ElementArgs, S> extends React.Component<P, S> {
     static ctor: any;
 
-    element: any;
+    element: ElementClass;
 
-    elementClass: any;
+    elementClass: typeof ElementClass;
 
     onClick: () => void;
 
@@ -90,9 +90,11 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
             const propDescriptor = this.getPropertyDescriptor(this.element, prop);
             if (propDescriptor && propDescriptor.set) {
                 if (prop === 'value') {
+                    // @ts-ignore
                     this.element._suppressChange = true;
                     // @ts-ignore
                     this.element[prop] = this.props[prop];
+                    // @ts-ignore
                     this.element._suppressChange = false;
                 } else {
                     // @ts-ignore
@@ -121,8 +123,7 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
     }
 
     render() {
-        // @ts-ignore
-        return <div ref={this.attachElement} />;
+        return <div ref={(ref: HTMLDivElement) => this.attachElement(ref, null)} />;
     }
 }
 

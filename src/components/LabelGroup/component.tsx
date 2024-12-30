@@ -36,10 +36,9 @@ class LabelGroup extends Element<LabelGroupArgs, any> {
         this.element = new this.elementClass({
             ...this.props,
             dom: nodeElement,
-            container: containerElement,
             parent: undefined,
             field: labelField
-        });
+        } as LabelGroupArgs);
     };
 
     render() {
