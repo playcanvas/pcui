@@ -3,6 +3,9 @@ import { EventHandle, Observer } from '@playcanvas/observer';
 import { IBindable } from '../../components';
 import { BindingBase, BindingBaseArgs } from '../BindingBase';
 
+/**
+ * The interface for arguments for the {@link BindingObserversToElement} constructor.
+ */
 export interface BindingObserversToElementArgs extends BindingBaseArgs {
     /**
      * Custom update function.

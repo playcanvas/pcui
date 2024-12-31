@@ -21,6 +21,9 @@ const SIMPLE_CSS_PROPERTIES = [
     'justifySelf'
 ];
 
+/**
+ * The interface for bindable elements.
+ */
 interface IBindable {
     /**
      * Sets the value of the Element.
@@ -48,6 +51,9 @@ interface IBindable {
     get renderChanges(): boolean,
 }
 
+/**
+ * The interface for arguments for bindable elements.
+ */
 interface IBindableArgs {
     /**
      * Sets the value of the Element.
@@ -63,6 +69,9 @@ interface IBindableArgs {
     renderChanges?: boolean
 }
 
+/**
+ * The interface for elements that have placeholder text.
+ */
 interface IPlaceholder {
     /**
      * Sets the placeholder text of the input.
@@ -74,6 +83,9 @@ interface IPlaceholder {
     get placeholder(): string
 }
 
+/**
+ * The interface for arguments for elements that have placeholder text.
+ */
 interface IPlaceholderArgs {
     /**
      * Sets the placeholder label that appears on the right of the input.
@@ -81,6 +93,9 @@ interface IPlaceholderArgs {
     placeholder?: string,
 }
 
+/**
+ * The interface for elements that can be focused.
+ */
 interface IFocusable {
     /**
      * Focus on the element. If the input contains text and select is provided, the text will be selected on focus.
@@ -93,6 +108,9 @@ interface IFocusable {
     blur(): void
 }
 
+/**
+ * The interface for arguments for elements that have children.
+ */
 interface IParentArgs {
     /**
      * The children of the current component.
@@ -100,6 +118,9 @@ interface IParentArgs {
     children?: React.ReactNode
 }
 
+/**
+ * The interface for arguments for elements that use flex layout.
+ */
 interface IFlexArgs {
     /**
      * Sets whether the element uses flex layout.
