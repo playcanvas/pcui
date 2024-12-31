@@ -196,7 +196,6 @@ class Container extends Element {
      * Appends an element to the container.
      *
      * @param {Element} element - The element to append.
-     * @fires 'append'
      */
     append(element: any) {
         const dom = this._getDomFromElement(element);
@@ -209,7 +208,6 @@ class Container extends Element {
      *
      * @param {Element} element - The element to append.
      * @param {Element} referenceElement - The element before which the element will be appended.
-     * @fires 'append'
      */
     appendBefore(element: any, referenceElement: any) {
         const dom = this._getDomFromElement(element);
@@ -226,7 +224,6 @@ class Container extends Element {
      *
      * @param {Element} element - The element to append.
      * @param {Element} referenceElement - The element after which the element will be appended.
-     * @fires 'append'
      */
     appendAfter(element: any, referenceElement: any) {
         const dom = this._getDomFromElement(element);
@@ -246,7 +243,6 @@ class Container extends Element {
      * Inserts an element in the beginning of the container.
      *
      * @param {Element} element - The element to prepend.
-     * @fires 'append'
      */
     prepend(element: any) {
         const dom = this._getDomFromElement(element);
@@ -264,7 +260,6 @@ class Container extends Element {
      * Removes the specified child element from the container.
      *
      * @param element - The element to remove.
-     * @fires 'remove'
      */
     remove(element: Element) {
         if (element.parent !== this) return;
@@ -298,8 +293,6 @@ class Container extends Element {
 
     /**
      * Clears all children from the container.
-     *
-     * @fires 'remove' for each child element.
      */
     clear() {
         let i = this._domContent.childNodes.length;
