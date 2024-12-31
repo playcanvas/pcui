@@ -442,10 +442,7 @@ class Container extends Element {
      * @param x - The number of pixels to resize the width.
      * @param y - The number of pixels to resize the height.
      */
-    resize(x: number, y: number) {
-        x = x || 0;
-        y = y || 0;
-
+    resize(x = 0, y = 0) {
         this._resizeStart();
         this._resizeMove(0, 0);
         this._resizeMove(-x + RESIZE_HANDLE_SIZE, -y);
@@ -677,7 +674,6 @@ class Container extends Element {
         } else {
             this.class.remove(CLASS_SCROLLABLE);
         }
-
     }
 
     /**
