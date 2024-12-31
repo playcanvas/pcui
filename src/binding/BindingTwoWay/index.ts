@@ -5,6 +5,9 @@ import { BindingBase, BindingBaseArgs } from '../BindingBase';
 import { BindingElementToObservers } from '../BindingElementToObservers';
 import { BindingObserversToElement } from '../BindingObserversToElement';
 
+/**
+ * The interface for arguments for the {@link BindingTwoWay} constructor.
+ */
 export interface BindingTwoWayArgs extends BindingBaseArgs {
     /**
      * BindingElementToObservers instance.
