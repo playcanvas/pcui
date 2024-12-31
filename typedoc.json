@@ -1,4 +1,5 @@
 {
+    "$schema": "https://typedoc.org/schema.json",
     "entryPoints": ["./src/index.ts"],
     "githubPages": false,
     "name": "PCUI API",
