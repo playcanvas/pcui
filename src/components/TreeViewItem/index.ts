@@ -112,6 +112,22 @@ class TreeViewItem extends Container {
      */
     public static readonly EVENT_CLOSE = 'close';
 
+    /**
+     * Determines whether dropping is allowed on the tree item.
+     */
+    public allowDrop = true;
+
+    /**
+     * Determines whether this tree item can be dragged. Only considered if the parent
+     * {@link TreeView} has {@link TreeView#allowDrag} set to `true`.
+     */
+    public allowDrag = true;
+
+    /**
+     * Determines whether the item can be selected.
+     */
+    public allowSelect = true;
+
     protected _containerContents: Container;
 
     protected _labelIcon: Label;
@@ -121,12 +137,6 @@ class TreeViewItem extends Container {
     protected _numChildren = 0;
 
     protected _treeView: any;
-
-    protected _allowDrag: boolean;
-
-    protected _allowDrop: boolean;
-
-    protected _allowSelect: boolean;
 
     protected _icon: string;
 
@@ -254,7 +264,7 @@ class TreeViewItem extends Container {
     };
 
     protected _onContentMouseDown = (evt: MouseEvent) => {
-        if (!this._treeView || !this._treeView.allowDrag || !this._allowDrag) return;
+        if (!this._treeView || !this._treeView.allowDrag || !this.allowDrag) return;
 
         this._treeView._updateModifierKeys(evt);
         evt.stopPropagation();
@@ -523,49 +533,6 @@ class TreeViewItem extends Container {
         }
 
         return true;
-    }
-
-    /**
-     * Sets whether dropping is allowed on the tree item.
-     */
-    set allowDrop(value) {
-        this._allowDrop = value;
-    }
-
-    /**
-     * Gets whether dropping is allowed on the tree item.
-     */
-    get allowDrop() {
-        return this._allowDrop;
-    }
-
-    /**
-     * Sets whether this tree item can be dragged. Only considered if the parent {@link TreeView}
-     * has {@link TreeView#allowDrag} set to `true`.
-     */
-    set allowDrag(value) {
-        this._allowDrag = value;
-    }
-
-    /**
-     * Gets whether this tree item can be dragged.
-     */
-    get allowDrag() {
-        return this._allowDrag;
-    }
-
-    /**
-     * Sets whether the item can be selected.
-     */
-    set allowSelect(value) {
-        this._allowSelect = value;
-    }
-
-    /**
-     * Gets whether the item can be selected.
-     */
-    get allowSelect() {
-        return this._allowSelect;
     }
 
     /**

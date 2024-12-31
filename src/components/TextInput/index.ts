@@ -20,7 +20,12 @@ interface TextInputArgs extends InputElementArgs, IBindableArgs, IPlaceholderArg
  * The TextInput is an input element of type text.
  */
 class TextInput extends InputElement {
-    protected _onValidate: (value: string) => boolean;
+    /**
+     * A function that validates the value that is entered into the input and returns `true` if it
+     * is valid or `false` otherwise. If `false` then the input will be set in an error state and
+     * the value will not propagate to the binding.
+     */
+    public onValidate: (value: string) => boolean;
 
     /**
      * Creates a new TextInput.
@@ -40,8 +45,8 @@ class TextInput extends InputElement {
     protected _onInputChange(evt: Event) {
         if (this._suspendInputChangeEvt) return;
 
-        if (this._onValidate) {
-            const error = !this._onValidate(this.value);
+        if (this.onValidate) {
+            const error = !this.onValidate(this.value);
             this.error = error;
             if (error) {
                 return;
@@ -116,17 +121,6 @@ class TextInput extends InputElement {
         } else {
             this._updateValue(values[0]);
         }
-    }
-
-    /**
-     * Gets / sets the validate method for the input.
-     */
-    set onValidate(value) {
-        this._onValidate = value;
-    }
-
-    get onValidate() {
-        return this._onValidate;
     }
 }
 

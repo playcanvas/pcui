@@ -42,6 +42,11 @@ interface GridViewItemArgs extends ContainerArgs {
  *  Represents a grid view item used in {@link GridView}.
  */
 class GridViewItem extends Container implements IFocusable {
+    /**
+     * Determines whether the item can be selected. Defaults to `true`.
+     */
+    public allowSelect = true;
+
     protected _selected: boolean;
 
     protected _radioButton: RadioButton;
@@ -49,8 +54,6 @@ class GridViewItem extends Container implements IFocusable {
     protected _labelText: Label;
 
     protected _type: string;
-
-    protected _allowSelect: boolean;
 
     /**
      * Creates a new GridViewItem.
@@ -128,20 +131,6 @@ class GridViewItem extends Container implements IFocusable {
 
     unlink() {
         this._labelText.unlink();
-    }
-
-    /**
-     * Sets whether the item can be selected. Defaults to `true`.
-     */
-    set allowSelect(value) {
-        this._allowSelect = value;
-    }
-
-    /**
-     * Gets whether the item can be selected. Defaults to `true`.
-     */
-    get allowSelect() {
-        return this._allowSelect;
     }
 
     /**

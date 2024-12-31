@@ -30,6 +30,16 @@ interface InputElementArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs 
  * {@link TextInput} and {@link NumericInput}. It is not intended to be used directly.
  */
 abstract class InputElement extends Element implements IBindable, IFocusable, IPlaceholder {
+    /**
+     * Determines whether the input should blur when the enter key is pressed.
+     */
+    public blurOnEnter = true;
+
+    /**
+     * Determines whether the input should blur when the escape key is pressed.
+     */
+    public blurOnEscape = true;
+
     protected _domInput: HTMLInputElement;
 
     protected _suspendInputChangeEvt: boolean;
@@ -39,10 +49,6 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
     protected _keyChange: boolean;
 
     protected _renderChanges: boolean;
-
-    protected _blurOnEnter: boolean;
-
-    protected _blurOnEscape: boolean;
 
     protected _onInputKeyDownEvt: (evt: KeyboardEvent) => void;
 
@@ -227,34 +233,6 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
      */
     get input() {
         return this._domInput;
-    }
-
-    /**
-     * Sets whether the input should blur when the enter key is pressed.
-     */
-    set blurOnEnter(value: boolean) {
-        this._blurOnEnter = value;
-    }
-
-    /**
-     * Gets whether the input should blur when the enter key is pressed.
-     */
-    get blurOnEnter(): boolean {
-        return this._blurOnEnter;
-    }
-
-    /**
-     * Sets whether the input should blur when the escape key is pressed.
-     */
-    set blurOnEscape(value: boolean) {
-        this._blurOnEscape = value;
-    }
-
-    /**
-     * Gets whether the input should blur when the escape key is pressed.
-     */
-    get blurOnEscape(): boolean {
-        return this._blurOnEscape;
     }
 
     abstract set value(value: any);
