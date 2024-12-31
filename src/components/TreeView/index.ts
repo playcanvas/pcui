@@ -51,7 +51,7 @@ interface TreeViewArgs extends ContainerArgs {
 
 /**
  * A container that can show a TreeView like a hierarchy. The TreeView contains
- * {@link TreeViewItem}s.
+ * a hierarchy of {@link TreeViewItem}s.
  */
 class TreeView extends Container {
     /**

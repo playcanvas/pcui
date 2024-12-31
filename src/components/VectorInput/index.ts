@@ -13,7 +13,7 @@ interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindableArgs {
     /**
      * The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
      */
-    dimensions?: number;
+    dimensions?: 2 | 3 | 4;
     /**
      * The minimum value of each vector element.
      */
@@ -225,7 +225,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
                 // if the string could be converted to an array but some of its values aren't numbers
                 // then use a default array also
                 if (Array.isArray(value) && value.some(i => !Number.isFinite(i))) {
-                    throw new Error('VectorInput value set to string which doesn\'t contain an array of numbers');
+                    throw new Error(`VectorInput value set to string which doesn't contain an array of numbers`);
                 }
             } catch (e) {
                 console.error(e);
