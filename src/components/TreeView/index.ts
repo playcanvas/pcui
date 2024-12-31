@@ -142,15 +142,21 @@ class TreeView extends Container {
      */
     public static readonly EVENT_RENAME = 'rename';
 
+    /**
+     * Determines whether reordering {@link TreeViewItem}s is allowed.
+     */
+    public allowReordering = true;
+
+    /**
+     * Determines whether renaming {@link TreeViewItem}s is allowed by double clicking on them.
+     */
+    public allowRenaming = false;
+
     protected _selectedItems: TreeViewItem[] = [];
 
     protected _dragItems: TreeViewItem[] = [];
 
     protected _allowDrag: boolean;
-
-    protected _allowReordering: boolean;
-
-    protected _allowRenaming: boolean;
 
     protected _dragging = false;
 
@@ -191,8 +197,8 @@ class TreeView extends Container {
         this.class.add(CLASS_ROOT);
 
         this._allowDrag = args.allowDrag ?? true;
-        this._allowReordering = args.allowReordering ?? true;
-        this._allowRenaming = args.allowRenaming ?? false;
+        this.allowReordering = args.allowReordering ?? true;
+        this.allowRenaming = args.allowRenaming ?? false;
         this._dragHandle = new Element({
             class: CLASS_DRAGGED_HANDLE,
             hidden: true
@@ -857,13 +863,13 @@ class TreeView extends Container {
 
             if (invalid) {
                 this._dragOverItem = null;
-            } else if (this._allowReordering && area <= 1 && this._dragItems.indexOf(this._dragOverItem.previousSibling) === -1) {
+            } else if (this.allowReordering && area <= 1 && this._dragItems.indexOf(this._dragOverItem.previousSibling) === -1) {
                 this._dragArea = DRAG_AREA_BEFORE;
-            } else if (this._allowReordering && area >= 4 && this._dragItems.indexOf(this._dragOverItem.nextSibling) === -1 && (this._dragOverItem.numChildren === 0 || !this._dragOverItem.open)) {
+            } else if (this.allowReordering && area >= 4 && this._dragItems.indexOf(this._dragOverItem.nextSibling) === -1 && (this._dragOverItem.numChildren === 0 || !this._dragOverItem.open)) {
                 this._dragArea = DRAG_AREA_AFTER;
             } else {
                 let parent = false;
-                if (this._allowReordering && this._dragOverItem.open) {
+                if (this.allowReordering && this._dragOverItem.open) {
                     for (let i = 0; i < this._dragItems.length; i++) {
                         if (this._dragItems[i].parent === this._dragOverItem) {
                             parent = true;
@@ -1093,34 +1099,6 @@ class TreeView extends Container {
      */
     get allowDrag(): boolean {
         return this._allowDrag;
-    }
-
-    /**
-     * Sets whether reordering TreeViewItems is allowed.
-     */
-    set allowReordering(value: boolean) {
-        this._allowReordering = value;
-    }
-
-    /**
-     * Gets whether reordering TreeViewItems is allowed.
-     */
-    get allowReordering(): boolean {
-        return this._allowReordering;
-    }
-
-    /**
-     * Sets whether renaming TreeViewItems is allowed by double clicking on them.
-     */
-    set allowRenaming(value: boolean) {
-        this._allowRenaming = value;
-    }
-
-    /**
-     * Gets whether renaming TreeViewItems is allowed by double clicking on them.
-     */
-    get allowRenaming(): boolean {
-        return this._allowRenaming;
     }
 
     /**
