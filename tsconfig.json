@@ -11,7 +11,8 @@
         ],
         "esModuleInterop": true,
         "sourceMap": true,
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "skipLibCheck": true
     },
     "include": ["./src/index.ts"],
     "exclude": ["node_modules/**/*", "node_modules"]
