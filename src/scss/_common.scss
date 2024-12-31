@@ -37,11 +37,11 @@
 
 // flex container
 .pcui-flex {
+    flex-direction: column;
+
     &:not(.pcui-hidden) {
         display: flex;
     }
-
-    flex-direction: column;
 }
 
 // grid container
