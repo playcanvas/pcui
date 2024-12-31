@@ -2,6 +2,10 @@ import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import * as React from 'react';
 
+import '../BooleanInput';
+import '../NumericInput';
+import '../TextInput';
+import '../VectorInput';
 import { ArrayInput } from './component';
 
 import '../../scss/index.js';

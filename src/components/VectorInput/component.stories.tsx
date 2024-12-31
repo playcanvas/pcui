@@ -2,6 +2,7 @@ import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import * as React from 'react';
 
+import '../NumericInput';
 import { VectorInput } from './component';
 
 import '../../scss/index.js';

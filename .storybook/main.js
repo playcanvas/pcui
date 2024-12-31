@@ -33,10 +33,6 @@ const config = {
         return config;
     },
 
-    features: {
-        storyStoreV7: false,
-    },
-
     framework: {
         name: '@storybook/react-webpack5',
         options: {}
