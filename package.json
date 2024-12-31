@@ -94,9 +94,10 @@
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-typescript": "^12.1.2",
-    "@storybook/addon-essentials": "^7.6.20",
-    "@storybook/react": "^7.6.20",
-    "@storybook/react-webpack5": "^7.6.20",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-webpack5-compiler-swc": "^2.0.0",
+    "@storybook/react": "^8.4.7",
+    "@storybook/react-webpack5": "^8.4.7",
     "@types/estree": "^1.0.6",
     "@types/react": "^18.3.12",
     "@typescript-eslint/eslint-plugin": "^8.18.2",
@@ -118,7 +119,7 @@
     "sass-loader": "^16.0.4",
     "scss-bundle": "^3.1.2",
     "serve": "^14.2.4",
-    "storybook": "^7.6.20",
+    "storybook": "^8.4.7",
     "style-loader": "^4.0.0",
     "stylelint": "^16.12.0",
     "stylelint-config-standard-scss": "^14.0.0",
@@ -127,7 +128,8 @@
     "typescript": "^5.7.2"
   },
   "peerDependencies": {
-    "react": "^18.3.1"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "directories": {
     "doc": "docs"
