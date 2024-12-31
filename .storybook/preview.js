@@ -16,7 +16,9 @@ const preview = {
             ]
         },
         controls: { expanded: true }
-    }
+    },
+
+    tags: ['autodocs']
 };
 
 export default preview;
