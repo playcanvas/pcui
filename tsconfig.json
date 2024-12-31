@@ -4,6 +4,7 @@
         "allowJs": true,
         "target": "es6",
         "jsx": "react",
+        "types": ["react", "react-dom", "webxr"],
         "lib": [
             "es2019",
             "dom",
@@ -11,8 +12,7 @@
         ],
         "esModuleInterop": true,
         "sourceMap": true,
-        "moduleResolution": "node",
-        "skipLibCheck": true
+        "moduleResolution": "node"
     },
     "include": ["./src/index.ts"],
     "exclude": ["node_modules/**/*", "node_modules"]

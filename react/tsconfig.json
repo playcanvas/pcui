@@ -4,12 +4,13 @@
         "allowJs": true,
         "target": "es6",
         "jsx": "react",
+        "types": ["react", "react-dom", "webxr"],
         "lib": [
             "es2019",
             "dom",
             "dom.iterable"
         ],
-        "esModuleInterop" : true,
+        "esModuleInterop": true,
         "sourceMap": true,
         "moduleResolution": "node"
     },
