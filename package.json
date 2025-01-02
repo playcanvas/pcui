@@ -22,17 +22,18 @@
   "types": "types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/module/src/index.mjs",
-      "types": "./types/index.d.ts"
+      "types": "./types/index.d.ts",
+      "import": "./dist/module/src/index.mjs"
     },
     "./react": {
-      "import": "./react/dist/module/src/index.mjs",
-      "types": "./react/types/index.d.ts"
+      "types": "./react/types/index.d.ts",
+      "import": "./react/dist/module/src/index.mjs"
     },
     "./styles": {
       "import": "./styles/dist/index.mjs"
     }
   },
+  "type": "module",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"
   },
@@ -92,6 +93,7 @@
     "playcanvas": "^2.3.3",
     "postcss": "^8.4.49",
     "prop-types": "^15.8.1",
+    "publint": "^0.2.7",
     "rollup": "^4.29.1",
     "rollup-plugin-sass": "^1.14.0",
     "sass-loader": "^16.0.4",
@@ -125,6 +127,7 @@
     "develop": "cross-env concurrently --kill-others \"npm run watch\" \"npm run serve\"",
     "lint": "eslint src",
     "lint:styles": "stylelint src/**/*.scss",
+    "publint": "publint",
     "serve": "serve",
     "serve:docs": "serve docs/_site",
     "storybook": "storybook dev -p 9000",
