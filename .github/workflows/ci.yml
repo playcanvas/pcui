@@ -29,6 +29,12 @@ jobs:
     - name: Build PCUI
       run: npm run build
 
+    - name: Build Types
+      run: npm run build:types
+
+    - name: Run Publint
+      run: npm run lint:package
+
   test:
     name: Unit Tests
     runs-on: ubuntu-latest
@@ -73,30 +79,6 @@ jobs:
 
     - name: Run ESLint
       run: npm run lint
-
-  lint-package:
-    name: Lint Package
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Setup Node.js 18.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18.x
-        cache: 'npm'
-
-    - name: Install dependencies
-      run: npm clean-install --progress=false --no-fund
-
-    - name: Build PCUI
-      run: npm run build
-
-    - name: Run Publint
-      run: npm run lint:package
 
   lint-styles:
     name: Lint Styles
