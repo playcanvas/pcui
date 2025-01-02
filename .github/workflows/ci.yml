@@ -16,15 +16,16 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
     - name: Setup Node.js 18.x
       uses: actions/setup-node@v4
       with:
         node-version: 18.x
-    
+        cache: 'npm'
+
     - name: Install dependencies
       run: npm clean-install --progress=false --no-fund
-    
+
     - name: Build PCUI
       run: npm run build
 
@@ -36,43 +37,80 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
     - name: Setup Node.js 18.x
       uses: actions/setup-node@v4
       with:
         node-version: 18.x
-    
+        cache: 'npm'
+
     - name: Install dependencies
       run: npm clean-install --progress=false --no-fund
-    
+
     - name: Build PCUI
       run: npm run build:es6
-    
+
     - name: Run unit tests
       run: npm test
 
-  lint:
-    name: Lint
+  lint-code:
+    name: Lint Code
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
     - name: Setup Node.js 18.x
       uses: actions/setup-node@v4
       with:
         node-version: 18.x
-    
+        cache: 'npm'
+
     - name: Install dependencies
       run: npm clean-install --progress=false --no-fund
-    
+
     - name: Run ESLint
       run: npm run lint
 
+  lint-package:
+    name: Lint Package
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js 18.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18.x
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm clean-install --progress=false --no-fund
+
     - name: Run Publint
-      run: npm run lint:package
-    
-    - name: Run Stylelint
-      run: npm run lint:styles
+      run: npm run publint
+
+  lint-styles:
+    name: Lint Styles
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies
+        run: npm clean-install --progress=false --no-fund
+
+      - name: Run Stylelint
+        run: npm run lint:styles
