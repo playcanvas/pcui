@@ -450,7 +450,7 @@ class GradientPicker extends Element {
 
         this._copiedData = null;
 
-        this._channels = args.channels || 3;
+        this._channels = args.channels ?? 3;
         this._value = this._getDefaultValue();
         if (args.value) {
             // @ts-ignore

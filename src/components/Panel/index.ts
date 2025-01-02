@@ -158,11 +158,11 @@ class Panel extends Container {
         this.headerSize = args.headerSize ?? 32;
 
         // collapse related
-        this.collapsible = args.collapsible || false;
-        this.collapsed = args.collapsed || false;
-        this.collapseHorizontally = args.collapseHorizontally || false;
+        this.collapsible = args.collapsible ?? false;
+        this.collapsed = args.collapsed ?? false;
+        this.collapseHorizontally = args.collapseHorizontally ?? false;
 
-        this.sortable = args.sortable || false;
+        this.sortable = args.sortable ?? false;
         this.removable = args.removable || !!args.onRemove || false;
 
         // Set the contents container to be the content DOM element. From now on, calling append

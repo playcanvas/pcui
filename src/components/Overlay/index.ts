@@ -55,8 +55,8 @@ class Overlay extends Container {
         this.domContent.classList.add(CLASS_OVERLAY_CONTENT);
         this.dom.appendChild(this.domContent);
 
-        this.clickable = args.clickable || false;
-        this.transparent = args.transparent || false;
+        this.clickable = args.clickable ?? false;
+        this.transparent = args.transparent ?? false;
     }
 
     destroy() {

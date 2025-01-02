@@ -205,7 +205,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             this.value = args.value;
         }
 
-        this.renderChanges = args.renderChanges || false;
+        this.renderChanges = args.renderChanges ?? false;
     }
 
     destroy() {

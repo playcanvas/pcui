@@ -109,7 +109,7 @@ class MenuItem extends Container implements IBindable {
         this.append(this._containerItems);
         this.domContent = this._containerItems.dom;
 
-        this.text = args.text || 'Untitled';
+        this.text = args.text ?? 'Untitled';
 
         this.dom.addEventListener('click', this._onClickMenuItem);
 

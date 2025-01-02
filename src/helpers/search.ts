@@ -209,8 +209,8 @@ export const searchItems = <K extends string, T extends Record<K, string>>(
     const searchTokens = searchStringTokenize(search);
     if (!searchTokens.length) return [];
 
-    args.containsCharsTolerance = args.containsCharsTolerance || 0.5;
-    args.editsDistanceTolerance = args.editsDistanceTolerance || 0.5;
+    args.containsCharsTolerance = args.containsCharsTolerance ?? 0.5;
+    args.editsDistanceTolerance = args.editsDistanceTolerance ?? 0.5;
 
     let records: SearchRecord<T>[] = items.map((item) => {
         const subInd = item[searchKey].toLowerCase().trim().indexOf(search);
