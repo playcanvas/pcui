@@ -488,7 +488,7 @@ class Element extends Events {
             }
         }
 
-        this.enabled = args.enabled !== undefined ? args.enabled : true;
+        this.enabled = args.enabled ?? true;
         this._hiddenParents = !args.isRoot;
         this.hidden = args.hidden ?? false;
         this.readOnly = args.readOnly ?? false;

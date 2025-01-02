@@ -203,7 +203,7 @@ class TreeView extends Container {
             class: CLASS_DRAGGED_HANDLE,
             hidden: true
         });
-        this._dragScrollElement = args.dragScrollElement || this;
+        this._dragScrollElement = args.dragScrollElement ?? this;
         this.append(this._dragHandle);
 
         this._onContextMenu = args.onContextMenu;

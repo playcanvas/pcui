@@ -37,8 +37,8 @@ class BindingTwoWay extends BindingBase {
     constructor(args: Readonly<BindingTwoWayArgs> = {}) {
         super(args);
 
-        this._bindingElementToObservers = args.bindingElementToObservers || new BindingElementToObservers(args);
-        this._bindingObserversToElement = args.bindingObserversToElement || new BindingObserversToElement(args);
+        this._bindingElementToObservers = args.bindingElementToObservers ?? new BindingElementToObservers(args);
+        this._bindingObserversToElement = args.bindingObserversToElement ?? new BindingObserversToElement(args);
 
         this._bindingElementToObservers.on('applyingChange', (value: any) => {
             this.applyingChange = value;

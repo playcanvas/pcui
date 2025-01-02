@@ -71,7 +71,7 @@ class BindingBase extends Events {
         this._historyPrefix = args.historyPrefix;
         this._historyPostfix = args.historyPostfix;
         this._historyName = args.historyName;
-        this._historyCombine = args.historyCombine || false;
+        this._historyCombine = args.historyCombine ?? false;
     }
 
     // Returns the path at the specified index
