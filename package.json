@@ -19,15 +19,21 @@
   ],
   "license": "MIT",
   "main": "dist/module/src/index.mjs",
-  "exports": {
-    ".": "./dist/module/src/index.mjs",
-    "./react": {
-      "import": "./react/dist/module/src/index.mjs",
-      "types": "./react/types/index.d.ts"
-    },
-    "./styles": "./styles/dist/index.mjs"
-  },
   "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/module/src/index.mjs"
+    },
+    "./react": {
+      "types": "./react/types/index.d.ts",
+      "import": "./react/dist/module/src/index.mjs"
+    },
+    "./styles": {
+      "import": "./styles/dist/index.mjs"
+    }
+  },
+  "type": "module",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"
   },
@@ -35,41 +41,13 @@
     "type": "git",
     "url": "git+https://github.com/playcanvas/pcui.git"
   },
-  "scripts": {
-    "build": "rollup -c && npm run bundle:styles",
-    "build:es6": "rollup -c --environment target:es6",
-    "build:icons": "cd ./utils && node ./build-font-icons.mjs",
-    "build:docsite:local": "cd docs && bundle exec jekyll build --config _config_local.yml && cd .. && npm run build:storybook && npm run copy:examples",
-    "build:docsite:production": "cd docs && bundle exec jekyll build --config _config.yml && cd .. && npm run build:storybook && npm run copy:examples",
-    "build:react:es6": "rollup -c --environment target:react:es6",
-    "build:storybook": "cross-env ENVIRONMENT=production storybook build -o ./docs/_site/storybook",
-    "build:styles": "rollup -c --environment target:styles",
-    "build:typedocs": "typedoc",
-    "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types && tsc --project ./react/tsconfig.json --declaration --emitDeclarationOnly --outDir ./react/types",
-    "bundle:styles": "scss-bundle -e ./src/scss/pcui-theme-grey.scss -o ./dist/pcui-theme-grey.scss && scss-bundle -e ./src/scss/pcui-theme-green.scss -o ./dist/pcui-theme-green.scss",
-    "copy:examples": "node utils/process-examples.mjs",
-    "develop": "cross-env concurrently --kill-others \"npm run watch\" \"npm run serve\"",
-    "lint": "eslint src",
-    "lint:styles": "stylelint src/**/*.scss",
-    "serve": "serve",
-    "serve:docs": "serve docs/_site",
-    "storybook": "storybook dev -p 9000",
-    "test": "node --test",
-    "watch": "rollup -c -w",
-    "watch:es6": "rollup -c -w --environment target:es6",
-    "watch:react:es6": "rollup -c -w --environment target:react:es6",
-    "watch:styles": "rollup -c -w --environment target:styles"
-  },
   "files": [
     "dist",
     "types",
-    "package.json",
     "react/dist",
     "react/types",
     "react/package.json",
-    "styles",
-    "README.md",
-    "LICENSE"
+    "styles"
   ],
   "browserslist": {
     "production": [
@@ -115,6 +93,7 @@
     "playcanvas": "^2.3.3",
     "postcss": "^8.4.49",
     "prop-types": "^15.8.1",
+    "publint": "^0.2.7",
     "rollup": "^4.29.1",
     "rollup-plugin-sass": "^1.14.0",
     "sass-loader": "^16.0.4",
@@ -132,7 +111,33 @@
     "react": "^18.3.1 || ^19.0.0",
     "react-dom": "^18.3.1 || ^19.0.0"
   },
-  "directories": {
-    "doc": "docs"
+  "scripts": {
+    "build": "rollup -c && npm run bundle:styles",
+    "build:es6": "rollup -c --environment target:es6",
+    "build:icons": "cd ./utils && node ./build-font-icons.mjs",
+    "build:docsite:local": "cd docs && bundle exec jekyll build --config _config_local.yml && cd .. && npm run build:storybook && npm run copy:examples",
+    "build:docsite:production": "cd docs && bundle exec jekyll build --config _config.yml && cd .. && npm run build:storybook && npm run copy:examples",
+    "build:react:es6": "rollup -c --environment target:react:es6",
+    "build:storybook": "cross-env ENVIRONMENT=production storybook build -o ./docs/_site/storybook",
+    "build:styles": "rollup -c --environment target:styles",
+    "build:typedocs": "typedoc",
+    "build:types": "tsc --project ./tsconfig.json --declaration --emitDeclarationOnly --outDir types && tsc --project ./react/tsconfig.json --declaration --emitDeclarationOnly --outDir ./react/types",
+    "bundle:styles": "scss-bundle -e ./src/scss/pcui-theme-grey.scss -o ./dist/pcui-theme-grey.scss && scss-bundle -e ./src/scss/pcui-theme-green.scss -o ./dist/pcui-theme-green.scss",
+    "copy:examples": "node utils/process-examples.mjs",
+    "develop": "cross-env concurrently --kill-others \"npm run watch\" \"npm run serve\"",
+    "lint": "eslint src",
+    "lint:package": "publint",
+    "lint:styles": "stylelint src/**/*.scss",
+    "serve": "serve",
+    "serve:docs": "serve docs/_site",
+    "storybook": "storybook dev -p 9000",
+    "test": "node --test",
+    "watch": "rollup -c -w",
+    "watch:es6": "rollup -c -w --environment target:es6",
+    "watch:react:es6": "rollup -c -w --environment target:react:es6",
+    "watch:styles": "rollup -c -w --environment target:styles"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
