@@ -93,7 +93,7 @@ jobs:
       run: npm clean-install --progress=false --no-fund
 
     - name: Run Publint
-      run: npm run publint
+      run: npm run lint:package
 
   lint-styles:
     name: Lint Styles
