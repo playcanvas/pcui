@@ -15,21 +15,22 @@ GEM
     http_parser.rb (0.8.0)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    jekyll (4.1.1)
+    jekyll (4.3.4)
       addressable (~> 2.4)
       colorator (~> 1.0)
       em-websocket (~> 0.5)
       i18n (~> 1.0)
-      jekyll-sass-converter (~> 2.0)
+      jekyll-sass-converter (>= 2.0, < 4.0)
       jekyll-watch (~> 2.0)
-      kramdown (~> 2.1)
+      kramdown (~> 2.3, >= 2.3.1)
       kramdown-parser-gfm (~> 1.0)
       liquid (~> 4.0)
-      mercenary (~> 0.4.0)
+      mercenary (>= 0.3.6, < 0.5)
       pathutil (~> 0.9)
-      rouge (~> 3.0)
+      rouge (>= 3.0, < 5.0)
       safe_yaml (~> 1.0)
-      terminal-table (~> 1.8)
+      terminal-table (>= 1.8, < 4.0)
+      webrick (~> 1.7)
     jekyll-feed (0.17.0)
       jekyll (>= 3.7, < 5.0)
     jekyll-include-cache (0.2.1)
@@ -54,7 +55,7 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.4.0)
-    minima (2.5.1)
+    minima (2.5.2)
       jekyll (>= 3.5, < 5.0)
       jekyll-feed (~> 0.9)
       jekyll-seo-tag (~> 2.1)
@@ -78,13 +79,14 @@ GEM
       tzinfo (>= 1.0.0)
     unicode-display_width (1.8.0)
     wdm (0.2.0)
+    webrick (1.7.0)
 
 PLATFORMS
   x64-mingw-ucrt
   x86_64-linux
 
 DEPENDENCIES
-  jekyll (~> 4.1.1)
+  jekyll (~> 4.3.0)
   jekyll-feed (~> 0.12)
   just-the-docs
   minima (~> 2.5)
