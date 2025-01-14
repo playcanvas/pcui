@@ -6,7 +6,7 @@
 
 ![PCUI Banner](https://forum-files-playcanvas-com.s3.dualstack.eu-west-1.amazonaws.com/original/2X/7/7e51de8ae69fa499dcad292efd21d7722dcf2dbd.jpeg)
 
-| [API Reference](https://api.playcanvas.com/modules/PCUI.html) | [User Guide](https://playcanvas.github.io/pcui/) | [ESM Examples](https://playcanvas.github.io/pcui/ui-examples/examples.html) | [React Examples](https://playcanvas.github.io/pcui/storybook/) | [Forum](https://forum.playcanvas.com/) | [Discord](https://discord.gg/RSaMRzg) |
+| [User Guide](https://playcanvas.github.io/pcui/) | [API Reference](https://api.playcanvas.com/modules/PCUI.html) | [ESM Examples](https://playcanvas.github.io/pcui/ui-examples/examples.html) | [React Examples](https://playcanvas.github.io/pcui/storybook/) | [Forum](https://forum.playcanvas.com/) | [Discord](https://discord.gg/RSaMRzg) |
 
 This library enables the creation of reliable and visually pleasing user interfaces by providing fully styled components that you can use directly on your site. The components are useful in a wide range of use cases, from creating simple forms to building graphical user interfaces for complex web tools.
 
