@@ -78,7 +78,7 @@ GEM
     tzinfo-data (1.2024.2)
       tzinfo (>= 1.0.0)
     unicode-display_width (1.8.0)
-    wdm (0.1.1)
+    wdm (0.2.0)
 
 PLATFORMS
   x64-mingw-ucrt
@@ -91,7 +91,7 @@ DEPENDENCIES
   minima (~> 2.5)
   tzinfo (~> 1.2)
   tzinfo-data
-  wdm (~> 0.1.1)
+  wdm (~> 0.2.0)
 
 BUNDLED WITH
    2.4.14
