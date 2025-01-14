@@ -75,7 +75,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.11)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2023.3)
+    tzinfo-data (1.2024.2)
       tzinfo (>= 1.0.0)
     unicode-display_width (1.8.0)
     wdm (0.1.1)
