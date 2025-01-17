@@ -138,6 +138,11 @@ Run Storybook as follows:
     npm install
     npm run storybook
 
-## Documentation
+## API Documentation
 
-Information on building the documentation can be found in the [docs](./docs/README.md) directory.
+To build the PCUI API Reference to the `docs` folder, do:
+
+```bash
+npm run docs
+```
+
