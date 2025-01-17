@@ -9,7 +9,6 @@
         "Forum": "https://forum.playcanvas.com/",
         "GitHub": "https://github.com/playcanvas/pcui"
     },
-    "out": "typedocs",
     "plugin": [
         "typedoc-plugin-mdn-links"
     ],
