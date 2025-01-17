@@ -10,15 +10,13 @@
 /coverage
 
 # production
-/build
 /dist
-/typedocs
+/docs
+/storybook
 /types
 /react/dist/
 /react/types/
 /styles/dist/
-/react/unstyled/dist/
-/unstyled/dist/
 
 # misc
 .DS_Store

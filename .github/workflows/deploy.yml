@@ -19,23 +19,12 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v4
       - run: npm ci
-      # Add a step to set up Ruby
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-      # Install Bundler
-      - run: gem install bundler
-      # Install Jekyll and other gems
-      - run: |
-          cd docs
-          bundle install
-          cd ..
-      # Now run your original command
-      - run: npm run build:docsite:production
+      - run: npm run build
+      - run: npm run build:storybook
       # https://github.com/actions/upload-pages-artifact
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs/_site
+          path: .
   deploy:
     runs-on: ubuntu-latest
     environment:
