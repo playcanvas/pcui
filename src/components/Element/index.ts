@@ -708,10 +708,6 @@ class Element extends Events {
         }
     }
 
-    unbind(name?: string, fn?: HandleEvent): Events {
-        return super.unbind(name, fn);
-    }
-
     /**
      * @param type - The type we want to reference this Element by.
      * @param cls - The actual class of the Element.
