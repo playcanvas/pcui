@@ -658,6 +658,8 @@ class ColorPicker extends Element implements IBindable {
 
             this._dragging = true;
             this.emit('picker:color:start');
+
+            this._fieldHex.value = this._getHex();
         }
 
         // hue position
