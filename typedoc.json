@@ -1,16 +1,37 @@
 {
     "$schema": "https://typedoc.org/schema.json",
-    "entryPoints": ["./src/index.ts"],
-    "githubPages": false,
-    "name": "PCUI API",
+    "entryPoints": [
+        "./src/index.ts"
+    ],
+    "exclude": [
+        "**/node_modules/**"
+    ],
+    "excludeNotDocumented": true,
+    "externalSymbolLinkMappings": {
+        "@playcanvas/observer": {
+            "Events": "https://api.playcanvas.com/observer/classes/Events.html",
+            "Observer": "https://api.playcanvas.com/observer/classes/Observer.html"
+        }
+    },
+    "favicon": "utils/typedoc/favicon.ico",
+    "hostedBaseUrl": "https://api.playcanvas.com/pcui/",
+    "includeVersion": true,
+    "name": "PCUI API Reference",
     "navigationLinks": {
         "Developer Site": "https://developer.playcanvas.com/",
+        "Blog": "https://blog.playcanvas.com/",
         "Discord": "https://discord.gg/RSaMRzg",
         "Forum": "https://forum.playcanvas.com/",
         "GitHub": "https://github.com/playcanvas/pcui"
     },
+    "sidebarLinks": {
+        "Home": "/"
+    },
     "plugin": [
         "typedoc-plugin-mdn-links"
     ],
-    "readme": "none"
+    "readme": "none",
+    "searchGroupBoosts": {
+        "Classes": 2
+    }
 }

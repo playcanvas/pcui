@@ -103,8 +103,8 @@
     "style-loader": "4.0.0",
     "stylelint": "16.14.1",
     "stylelint-config-standard-scss": "14.0.0",
-    "typedoc": "0.27.7",
-    "typedoc-plugin-mdn-links": "4.0.13",
+    "typedoc": "0.28.1",
+    "typedoc-plugin-mdn-links": "5.0.1",
     "typescript": "5.7.3"
   },
   "peerDependencies": {
