@@ -295,7 +295,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
             this.value = null;
         }
 
-        this._renderChanges = args.renderChanges;
+        this._renderChanges = args.renderChanges ?? false;
 
         this.on('change', () => {
             this._updateInputFieldsVisibility();
