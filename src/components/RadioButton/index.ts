@@ -33,7 +33,7 @@ class RadioButton extends Element implements IBindable, IFocusable {
         this.dom.addEventListener('blur', this._onBlur);
 
         this.value = args.value;
-        this._renderChanges = args.renderChanges;
+        this._renderChanges = args.renderChanges ?? false;
     }
 
     destroy() {

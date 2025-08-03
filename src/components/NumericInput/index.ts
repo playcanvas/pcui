@@ -134,7 +134,7 @@ class NumericInput extends InputElement {
         this._historyPostfix = null;
         this._sliderPrevValue = 0;
 
-        this.renderChanges = args.renderChanges;
+        this.renderChanges = args.renderChanges ?? false;
 
         if (!args.hideSlider) {
             this._sliderControl = new Element();

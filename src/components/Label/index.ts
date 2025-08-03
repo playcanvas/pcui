@@ -67,7 +67,7 @@ class Label extends Element implements IPlaceholder, IBindable {
         }
         this.placeholder = args.placeholder;
 
-        this.renderChanges = args.renderChanges;
+        this.renderChanges = args.renderChanges ?? false;
 
         this.on('change', () => {
             if (this.renderChanges) {

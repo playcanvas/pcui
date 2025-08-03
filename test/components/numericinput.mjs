@@ -14,6 +14,13 @@ describe('NumericInput', () => {
         strictEqual(numericInput.class.contains('pcui-element'), true);
         strictEqual(numericInput.class.contains('pcui-input-element'), true);
         strictEqual(numericInput.class.contains('pcui-numeric-input'), true);
+
+        strictEqual(numericInput.max, null);
+        strictEqual(numericInput.min, null);
+        strictEqual(numericInput.precision, 7);
+        strictEqual(numericInput.renderChanges, false);
+        strictEqual(numericInput.step, 1);
+        strictEqual(numericInput.value, 0);
     });
 
     it('steps value with up/down arrow keys', () => {
