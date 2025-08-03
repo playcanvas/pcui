@@ -15,7 +15,7 @@ describe('BooleanInput', () => {
         strictEqual(booleanInput.class.contains('pcui-element'), true);
         strictEqual(booleanInput.class.contains('pcui-not-flexible'), true);
 
-        strictEqual(booleanInput.type, undefined);
+        strictEqual(booleanInput.renderChanges, false);
         strictEqual(booleanInput.value, null);
     });
 });
