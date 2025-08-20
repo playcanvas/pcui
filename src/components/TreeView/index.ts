@@ -44,9 +44,9 @@ interface TreeViewArgs extends ContainerArgs {
      */
     onReparent?: any,
     /**
-     * The element to scroll on drag. Defaults to this {@link TreeView}'s DOM element.
+     * The element to scroll on drag. Defaults to this {@link TreeView}'s element.
      */
-    dragScrollElement?: HTMLElement
+    dragScrollElement?: Element
 }
 
 /**
@@ -170,7 +170,7 @@ class TreeView extends Container {
 
     protected _dragHandle: Element;
 
-    protected _dragScrollElement: any;
+    protected _dragScrollElement: Element;
 
     protected _onContextMenu: (evt: MouseEvent, item: TreeViewItem) => void;
 
