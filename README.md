@@ -1,8 +1,8 @@
 <div align="center">
 
-<img width="200" src="https://forum-files-playcanvas-com.s3.dualstack.eu-west-1.amazonaws.com/original/2X/7/7e51de8ae69fa499dcad292efd21d7722dcf2dbd.jpeg"/>
+<img width="200" src="https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/platform/images/logo/playcanvas-logo-medium.png"/>
 
-# PCUI - User Interface Component Library for the Web
+# PlayCanvas UI (PCUI) - User Interface Component Library for the Web
 
 [User Guide](https://developer.playcanvas.com/user-manual/pcui/) | [API Reference](https://api.playcanvas.com/pcui/) | [ESM Examples](https://playcanvas.github.io/pcui/examples/) | [React Examples](https://playcanvas.github.io/pcui/storybook/) | [Blog](https://blog.playcanvas.com/) | [Forum](https://forum.playcanvas.com/) | [Discord](https://discord.gg/RSaMRzg)
 
@@ -15,7 +15,7 @@ This library enables the creation of reliable and visually pleasing user interfa
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/playcanvas/pcui/blob/main/LICENSE)
 [![Twitter][twitter-badge]][twitter-url]
 
-![Editor](https://raw.githubusercontent.com/playcanvas/editor/refs/heads/main/images/editor.png)
+![PCUI Banner](https://forum-files-playcanvas-com.s3.dualstack.eu-west-1.amazonaws.com/original/2X/7/7e51de8ae69fa499dcad292efd21d7722dcf2dbd.jpeg)
 
 A full guide to using the PCUI library can be found [here](https://developer.playcanvas.com/user-manual/pcui/).
 
