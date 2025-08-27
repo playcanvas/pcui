@@ -155,9 +155,9 @@ To build the PCUI API Reference to the `docs` folder, do:
 npm run docs
 ```
 
-[resolution-badge]: https://isitmaintained.com/badge/resolution/playcanvas/editor.svg
-[open-issues-badge]: https://isitmaintained.com/badge/open/playcanvas/editor.svg
-[isitmaintained-url]: https://isitmaintained.com/project/playcanvas/editor
+[resolution-badge]: https://isitmaintained.com/badge/resolution/playcanvas/pcui.svg
+[open-issues-badge]: https://isitmaintained.com/badge/open/playcanvas/pcui.svg
+[isitmaintained-url]: https://isitmaintained.com/project/playcanvas/pcui
 [npm-version-badge]: https://img.shields.io/npm/v/@playcanvas/pcui.svg?style=flat?style=flat
 [npm-package-url]: https://www.npmjs.com/package/@playcanvas/pcui
 [npm-downloads-badge]: https://img.shields.io/npm/dw/@playcanvas/pcui
