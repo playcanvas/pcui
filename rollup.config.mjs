@@ -1,5 +1,6 @@
-import fs from 'fs';
 import { execSync } from 'child_process';
+import fs from 'fs';
+
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
@@ -14,7 +15,7 @@ const getVersion = () => {
     const text = fs.readFileSync('./package.json', 'utf8');
     const json = JSON.parse(text);
     return json.version;
-}
+};
 
 /**
  * @returns {string} Revision string like `644d08d39` (9 digits/chars).
@@ -27,7 +28,7 @@ const getRevision = () => {
         revision = 'unknown';
     }
     return revision;
-}
+};
 
 const replacements = {
     values: {
@@ -41,7 +42,7 @@ const module = {
     input: 'src/index.ts',
     external: ['@playcanvas/observer'],
     output: {
-        dir: `dist/module`,
+        dir: 'dist/module',
         entryFileNames: '[name].mjs',
         format: 'esm',
         preserveModules: true,
@@ -64,7 +65,7 @@ const react_module = {
     input: 'src/index.tsx',
     external: ['@playcanvas/observer', 'react', 'prop-types'],
     output: {
-        dir: `react/dist/module`,
+        dir: 'react/dist/module',
         format: 'esm',
         entryFileNames: '[name].mjs',
         globals: {
@@ -98,13 +99,13 @@ const styles = {
             insert: true,
             output: false,
             processor: css => postcss([autoprefixer])
-                .process(css, {
-                    from: undefined
-                })
-                .then(result => result.css)
+            .process(css, {
+                from: undefined
+            })
+            .then(result => result.css)
         })
     ]
-}
+};
 
 export default (args) => {
     if (process.env.target === 'es6') {
