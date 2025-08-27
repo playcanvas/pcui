@@ -10,9 +10,9 @@ This library enables the creation of reliable and visually pleasing user interfa
 
 [![Average time to resolve an issue][resolution-badge]][isitmaintained-url]
 [![Percentage of issues still open][open-issues-badge]][isitmaintained-url]
-[![NPM Version][npm-version-badge]](https://www.npmjs.com/package/@playcanvas/pcui)
-[![NPM Downloads][npm-downloads-badge]](https://npmtrends.com/@playcanvas/pcui)
-[![GitHub license][github-license-badge]](https://github.com/playcanvas/pcui/blob/main/LICENSE)
+[![NPM Version][npm-version-badge]][npm-package-url]
+[![NPM Downloads][npm-downloads-badge]][npm-downloads-url]
+[![GitHub license][github-license-badge]][github-license-url]
 [![Twitter][twitter-badge]][twitter-url]
 
 ![PCUI Banner](https://forum-files-playcanvas-com.s3.dualstack.eu-west-1.amazonaws.com/original/2X/7/7e51de8ae69fa499dcad292efd21d7722dcf2dbd.jpeg)
@@ -159,7 +159,10 @@ npm run docs
 [open-issues-badge]: https://isitmaintained.com/badge/open/playcanvas/editor.svg
 [isitmaintained-url]: https://isitmaintained.com/project/playcanvas/editor
 [npm-version-badge]: https://img.shields.io/npm/v/@playcanvas/pcui.svg?style=flat?style=flat
+[npm-package-url]: https://www.npmjs.com/package/@playcanvas/pcui
 [npm-downloads-badge]: https://img.shields.io/npm/dw/@playcanvas/pcui
+[npm-downloads-url]: https://npmtrends.com/@playcanvas/pcui
 [github-license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[github-license-url]: https://github.com/playcanvas/pcui/blob/main/LICENSE
 [twitter-badge]: https://img.shields.io/twitter/follow/playcanvas.svg?style=social&label=Follow
 [twitter-url]: https://twitter.com/intent/follow?screen_name=playcanvas
