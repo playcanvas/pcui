@@ -1,19 +1,15 @@
-<div align="center">
-
-<img width="200" src="https://s3-eu-west-1.amazonaws.com/static.playcanvas.com/platform/images/logo/playcanvas-logo-medium.png"/>
-
 # PlayCanvas UI (PCUI) - User Interface Component Library for the Web
 
-[User Guide](https://developer.playcanvas.com/user-manual/pcui/) | [API Reference](https://api.playcanvas.com/pcui/) | [ESM Examples](https://playcanvas.github.io/pcui/examples/) | [React Examples](https://playcanvas.github.io/pcui/storybook/) | [Blog](https://blog.playcanvas.com/) | [Forum](https://forum.playcanvas.com/) | [Discord](https://discord.gg/RSaMRzg)
+[![NPM Version](https://img.shields.io/npm/v/@playcanvas/pcui)](https://www.npmjs.com/package/@playcanvas/pcui)
+[![NPM Downloads](https://img.shields.io/npm/dw/@playcanvas/pcui)](https://npmtrends.com/@playcanvas/pcui)
+[![License](https://img.shields.io/npm/l/@playcanvas/pcui)](https://github.com/playcanvas/pcui/blob/main/LICENSE)
+[![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&logoColor=white&color=black)](https://discord.gg/RSaMRzg)
+[![Reddit](https://img.shields.io/badge/Reddit-FF4500?style=flat&logo=reddit&logoColor=white&color=black)](https://www.reddit.com/r/PlayCanvas)
+[![X](https://img.shields.io/badge/X-000000?style=flat&logo=x&logoColor=white&color=black)](https://x.com/intent/follow?screen_name=playcanvas)
+
+| [User Manual](https://developer.playcanvas.com/user-manual/pcui) | [API Reference](https://api.playcanvas.com/pcui) | [ESM Examples](https://playcanvas.github.io/pcui/examples/) | [React Examples](https://playcanvas.github.io/pcui/storybook/) | [Blog](https://blog.playcanvas.com) | [Forum](https://forum.playcanvas.com) |
 
 This library enables the creation of reliable and visually pleasing user interfaces by providing fully styled components that you can use directly on your site. The components are useful in a wide range of use cases, from creating simple forms to building graphical user interfaces for complex web tools.
-
-[![Average time to resolve an issue][resolution-badge]][isitmaintained-url]
-[![Percentage of issues still open][open-issues-badge]][isitmaintained-url]
-[![NPM Version][npm-version-badge]][npm-package-url]
-[![NPM Downloads][npm-downloads-badge]][npm-downloads-url]
-[![GitHub license][github-license-badge]][github-license-url]
-[![Twitter][twitter-badge]][twitter-url]
 
 ![PCUI Banner](https://forum-files-playcanvas-com.s3.dualstack.eu-west-1.amazonaws.com/original/2X/7/7e51de8ae69fa499dcad292efd21d7722dcf2dbd.jpeg)
 
