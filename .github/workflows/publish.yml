@@ -28,6 +28,9 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Run Publint
+        run: npm run publint
+
       - name: Publish to npm
         run: npm publish
         env:

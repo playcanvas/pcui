@@ -19,6 +19,7 @@
 /styles/dist/
 
 # misc
+.npmrc
 .DS_Store
 .env.local
 .env.development.local
