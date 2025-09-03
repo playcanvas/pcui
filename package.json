@@ -18,7 +18,9 @@
     "ui"
   ],
   "license": "MIT",
+  "type": "module",
   "main": "dist/module/src/index.mjs",
+  "module": "dist/module/src/index.mjs",
   "types": "types/index.d.ts",
   "exports": {
     ".": {
@@ -33,7 +35,6 @@
       "import": "./styles/dist/index.mjs"
     }
   },
-  "type": "module",
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"
   },
