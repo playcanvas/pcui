@@ -113,7 +113,7 @@
     "react-dom": "^18.3.1 || ^19.0.0"
   },
   "scripts": {
-    "build": "rollup -c && npm run bundle:styles",
+    "build": "rollup -c && npm run bundle:styles && npm run build:types",
     "build:es6": "rollup -c --environment target:es6",
     "build:icons": "cd ./utils && node ./build-font-icons.mjs",
     "build:react:es6": "rollup -c --environment target:react:es6",
