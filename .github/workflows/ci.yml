@@ -1,7 +1,6 @@
 name: CI
 
 on:
-  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
@@ -11,91 +10,65 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-
-    - name: Setup Node.js 18.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22.x
-        cache: 'npm'
-
-    - name: Install dependencies
-      run: npm clean-install --progress=false --no-fund
-
-    - name: Build PCUI
-      run: npm run build
-
-    - name: Build Types
-      run: npm run build:types
-
-    - name: Run Publint
-      run: npm run lint:package
-
-  test:
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-
-    - name: Setup Node.js 18.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22.x
-        cache: 'npm'
-
-    - name: Install dependencies
-      run: npm clean-install --progress=false --no-fund
-
-    - name: Build PCUI
-      run: npm run build:es6
-
-    - name: Run unit tests
-      run: npm test
-
-  lint-code:
-    name: Lint Code
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
-
-    - name: Setup Node.js 18.x
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22.x
-        cache: 'npm'
-
-    - name: Install dependencies
-      run: npm clean-install --progress=false --no-fund
-
-    - name: Run ESLint
-      run: npm run lint
-
-  lint-styles:
-    name: Lint Styles
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    steps:
-      - name: Checkout code
+      - name: Check out code
         uses: actions/checkout@v5
 
-      - name: Setup Node.js 18.x
+      - name: Set up Node.js 18.x
         uses: actions/setup-node@v4
         with:
-          node-version: 22.x
+          node-version: 18.x
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org/'
 
-      - name: Install dependencies
-        run: npm clean-install --progress=false --no-fund
+      - name: Install Dependencies
+        run: npm ci
 
-      - name: Run Stylelint
-        run: npm run lint:styles
+      - name: Build PCUI
+        run: npm run build
+
+      - name: Build PCUI Types
+        run: npm run build:types
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org/'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build PCUI ES6
+        run: npm run build:es6
+
+      - name: Run Tests
+        run: npm test

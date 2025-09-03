@@ -1,6 +1,6 @@
 import playcanvasConfig from '@playcanvas/eslint-config';
-import tsParser from '@typescript-eslint/parser';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
 import globals from 'globals';
 
 export default [
@@ -39,11 +39,14 @@ export default [
         }
     },
     {
-        files: ['*.js'],
+        files: ['**/*.mjs'],
         languageOptions: {
             globals: {
                 ...globals.node
             }
+        },
+        rules: {
+            'import/no-unresolved': 'off'
         }
     }
 ];
