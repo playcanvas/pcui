@@ -574,7 +574,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
     }
 
-    protected _addTag(value: any) {
+    protected _addTag(value: unknown) {
         const container = new Container({
             flex: true,
             flexDirection: 'row',
@@ -582,7 +582,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         });
 
         container.append(new Label({
-            text: this._valueToText[String(value)] || value
+            text: this._valueToText[String(value)] || String(value)
         }));
 
         const btnRemove = new Button({
@@ -593,7 +593,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         container.append(btnRemove);
 
-        btnRemove.on('click', () => this._removeTag(container, String(value)));
+        btnRemove.on('click', () => this._removeTag(container, value));
 
         this._containerTags.append(container);
         this._containerTags.class.remove(CLASS_TAGS_EMPTY);
@@ -609,7 +609,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         return container;
     }
 
-    protected _removeTag(tagElement: Container, value: string) {
+    protected _removeTag(tagElement: Container, value: unknown) {
         tagElement.destroy();
 
         const label = this._valueToLabel[String(value)];
@@ -618,7 +618,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
 
         if (this._values) {
-            this._values.forEach((arr: string[]) => {
+            this._values.forEach((arr: unknown[]) => {
                 if (!arr) return;
                 const idx = arr.indexOf(value);
                 if (idx !== -1) {
