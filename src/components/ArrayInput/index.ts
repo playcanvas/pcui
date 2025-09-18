@@ -396,17 +396,21 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         const index = this._arrayElements.indexOf(entry);
         if (index === -1) return;
 
-        // Set the value to the same row of every array in values.
-        this._values.forEach((array) => {
-            if (array && array.length > index) {
-                if (this._valueType === 'curveset') {
-                    // curveset is passing the value in an array
-                    array[index] = Array.isArray(value) ? value[0] : value;
-                } else {
-                    array[index] = value;
+        // Skip updating values if observers linked as they will update the values
+        if (!this._binding?.observers) {
+            // Set the value to the same row of every array in values.
+            this._values.forEach((array, i) => {
+                if (array && array.length > index) {
+                    if (this._valueType === 'curveset') {
+                        // curveset is passing the value in an array
+                        array[index] = Array.isArray(value) ? value[0] : value;
+                    } else {
+                        // if no observers then different values will be shown as null
+                        array[index] = value;
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // use a timeout here because when our values change they will
         // first emit change events on each array element. However since the
@@ -426,7 +430,13 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         const paths = this._binding.paths;
         const useSinglePath = paths.length === 1 || observers.length !== paths.length;
         element.unlink();
+
+        // reset element value to trigger change when relinked. Set silently so reset does not
+        // emit change event itself.
+        const suspend = element.suspendEvents;
+        element.suspendEvents = true;
         element.value = null;
+        element.suspendEvents = suspend;
 
         this.emit('unlinkElement', element, index);
 
