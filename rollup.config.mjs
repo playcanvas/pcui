@@ -45,16 +45,14 @@ const module = {
         dir: 'dist/module',
         entryFileNames: '[name].mjs',
         format: 'esm',
-        preserveModules: true,
-        sourcemap: true
+        preserveModules: true
     },
     plugins: [
         nodeResolve(),
         replace(replacements),
         typescript({
             noEmitOnError: true,
-            tsconfig: 'tsconfig.json',
-            sourceMap: true
+            tsconfig: 'tsconfig.json'
         })
     ],
     treeshake: 'smallest',
@@ -71,16 +69,14 @@ const react_module = {
         globals: {
             'react': 'React'
         },
-        preserveModules: true,
-        sourcemap: true
+        preserveModules: true
     },
     plugins: [
         nodeResolve(),
         replace(replacements),
         typescript({
             noEmitOnError: true,
-            tsconfig: 'react/tsconfig.json',
-            sourceMap: true
+            tsconfig: 'react/tsconfig.json'
         })
     ],
     treeshake: 'smallest',
