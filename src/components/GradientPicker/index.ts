@@ -103,15 +103,15 @@ class GradientPicker extends Element {
 
     protected STATE: any;
 
-    protected fieldChangeHandler: (evt: any) => void;
+    protected fieldChangeHandler: (evt: Event) => void;
 
-    protected hexChangeHandler: (evt: any) => void;
+    protected hexChangeHandler: (evt: Event) => void;
 
-    protected downHandler: (evt: any) => void;
+    protected downHandler: (evt: MouseEvent) => void;
 
-    protected moveHandler: (evt: any) => void;
+    protected moveHandler: (evt: MouseEvent) => void;
 
-    protected upHandler: (evt: any) => void;
+    protected upHandler: (evt: MouseEvent) => void;
 
     /**
      * Creates a new GradientPicker.
@@ -157,8 +157,8 @@ class GradientPicker extends Element {
         });
 
         // capture this for the event handler
-        function genEvtHandler(self: any, func: any) {
-            return function (evt: any) {
+        function genEvtHandler<T extends Event>(self: GradientPicker, func: (evt: T) => void) {
+            return function (evt: T) {
                 func.apply(self, [evt]);
             };
         }
@@ -194,7 +194,7 @@ class GradientPicker extends Element {
 
             // hsv(1) -> rgba
             toRgba: function (hsva: Array<number>) {
-                const rgba = _hsv2rgb(hsva).map((v: any) => {
+                const rgba = _hsv2rgb(hsva).map((v: number) => {
                     return v / 255;
                 });
                 rgba.push(hsva.length > 3 ? hsva[3] : 1);
@@ -1036,7 +1036,7 @@ class GradientPicker extends Element {
 
         // sort anchors and remove duplicates
         times.sort();
-        times = times.filter((item: any, pos: any, ary: any) => {
+        times = times.filter((item: number, pos: number, ary: number[]) => {
             return !pos || item !== ary[pos - 1];
         });
 
@@ -1051,7 +1051,7 @@ class GradientPicker extends Element {
     }
 
     // get the bounding client rect minus padding
-    getClientRect(element: any) {
+    getClientRect(element: HTMLElement) {
         const styles = window.getComputedStyle(element);
 
         const paddingTop = parseFloat(styles.paddingTop);
@@ -1188,7 +1188,7 @@ class GradientPicker extends Element {
         }
     }
 
-    dragUpdate(time: any) {
+    dragUpdate(time: number) {
         if (this.STATE.selectedAnchor === -1) {
             return;
         }
@@ -1241,7 +1241,7 @@ class GradientPicker extends Element {
     }
 
     // delete the anchor(s) at the given time
-    deleteAnchor(time: any) {
+    deleteAnchor(time: number) {
         for (let i = 0; i < this.STATE.curves.length; ++i) {
             const curve = this.STATE.curves[i];
 
@@ -1256,7 +1256,7 @@ class GradientPicker extends Element {
         this.emitCurveChange();
     }
 
-    moveSelectedAnchor(time: any) {
+    moveSelectedAnchor(time: number) {
         if (this.STATE.selectedAnchor !== -1) {
             this.dragStart();
             this.dragUpdate(time);
@@ -1264,7 +1264,7 @@ class GradientPicker extends Element {
         }
     }
 
-    colorSelectedAnchor(clr: any[], dragging?: any) {
+    colorSelectedAnchor(clr: number[], dragging?: boolean) {
         if (this.STATE.selectedAnchor !== -1) {
             const time = this.STATE.anchors[this.STATE.selectedAnchor];
 
@@ -1304,7 +1304,7 @@ class GradientPicker extends Element {
     doCopy() {
         const data = {
             type: this.STATE.curves[0].type,
-            keys: this.STATE.curves.map((c: any) => {
+            keys: this.STATE.curves.map((c: Curve) => {
                 return [].concat(...c.keys);
             })
         };
