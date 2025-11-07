@@ -54,7 +54,10 @@ const module = {
         typescript({
             noEmitOnError: true,
             tsconfig: 'tsconfig.json',
-            sourceMap: true
+            sourceMap: true,
+            compilerOptions: {
+                outDir: 'dist/module'
+            }
         })
     ],
     treeshake: 'smallest',
@@ -80,7 +83,10 @@ const react_module = {
         typescript({
             noEmitOnError: true,
             tsconfig: 'react/tsconfig.json',
-            sourceMap: true
+            sourceMap: true,
+            compilerOptions: {
+                outDir: 'react/dist/module'
+            }
         })
     ],
     treeshake: 'smallest',
