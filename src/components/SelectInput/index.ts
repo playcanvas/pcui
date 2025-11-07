@@ -906,7 +906,8 @@ class SelectInput extends Element implements IBindable, IFocusable {
         if (this._containerOptions.dom.childNodes.length === 0) return;
 
         // highlight label that displays current value
-        this._containerOptions.forEachChild((label: Label) => {
+        this._containerOptions.forEachChild((child: Element) => {
+            const label = child as Label;
             label.hidden = false;
             if (this._labelToValue.get(label) === this.value) {
                 this._highlightLabel(label);
@@ -1012,7 +1013,8 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     _updateDisabledValue(value: string) {
         const labels: Record<string, Label> = {};
-        this._containerOptions.forEachChild((label: Label) => {
+        this._containerOptions.forEachChild((child: Element) => {
+            const label = child as Label;
             labels[label.dom.id] = label;
             if (this._disabledOptions[label.dom.id]) {
                 label.enabled = false;
