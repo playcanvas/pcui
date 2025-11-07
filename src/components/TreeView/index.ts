@@ -241,7 +241,7 @@ class TreeView extends Container {
         super.destroy();
     }
 
-    protected _updateModifierKeys = (evt: KeyboardEvent) => {
+    protected _updateModifierKeys = (evt: KeyboardEvent | MouseEvent) => {
         this._pressedCtrl = evt.ctrlKey || evt.metaKey;
         this._pressedShift = evt.shiftKey;
     };

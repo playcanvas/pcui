@@ -445,7 +445,7 @@ class Element extends Events {
 
     protected _domContent: HTMLElement;
 
-    protected _onClickEvt: () => void;
+    protected _onClickEvt: (evt: Event) => void;
 
     /**
      * Creates a new Element.
