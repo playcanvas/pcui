@@ -453,7 +453,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         // holds the length of each array
         const arrayLengths: any[] = [];
 
-        values.forEach((array: any) => {
+        values.forEach((array: any[]) => {
             if (!array) return;
 
             arrayLengths.push(array.length);
