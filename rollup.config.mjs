@@ -102,6 +102,7 @@ const styles = {
     plugins: [
         nodeResolve(),
         sass({
+            api: 'modern',
             insert: true,
             output: false,
             processor: css => postcss([autoprefixer])
