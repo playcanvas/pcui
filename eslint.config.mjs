@@ -1,9 +1,7 @@
-// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
-
 import playcanvasConfig from '@playcanvas/eslint-config';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import storybook from 'eslint-plugin-storybook';
 import globals from 'globals';
 
 export default [
@@ -52,5 +50,5 @@ export default [
             'import/no-unresolved': 'off'
         }
     },
-    ...storybook.configs["flat/recommended"]
+    ...storybook.configs['flat/recommended']
 ];
