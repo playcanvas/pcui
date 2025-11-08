@@ -1,7 +1,8 @@
-import { compileString } from 'sass';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
+
+import { compileString } from 'sass';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,10 +18,10 @@ function bundleScss(entryFile, outputFile) {
     try {
         const entryPath = path.resolve(rootDir, entryFile);
         const outputPath = path.resolve(rootDir, outputFile);
-        
+
         // Read the entry file
         const source = fs.readFileSync(entryPath, 'utf8');
-        
+
         // Compile with modern API
         const result = compileString(source, {
             url: pathToFileURL(entryPath),
@@ -28,11 +29,11 @@ function bundleScss(entryFile, outputFile) {
             style: 'expanded',
             sourceMap: false
         });
-        
+
         // Write the output
         fs.mkdirSync(path.dirname(outputPath), { recursive: true });
         fs.writeFileSync(outputPath, result.css, 'utf8');
-        
+
         console.log(`✓ Bundled ${entryFile} → ${outputFile}`);
         return true;
     } catch (err) {
@@ -62,4 +63,3 @@ if (hasErrors) {
     console.error('\n✗ One or more theme files failed to bundle');
     process.exit(1);
 }
-
