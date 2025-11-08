@@ -23,5 +23,5 @@
         "strictBindCallApply": true
     },
     "include": ["src/**/*.ts", "src/**/*.tsx", "src/index.tsx"],
-    "exclude": ["node_modules/**/*", "node_modules"]
+    "exclude": ["node_modules/**/*", "node_modules", "**/*.stories.tsx"]
 }
