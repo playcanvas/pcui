@@ -41,11 +41,10 @@ class Container extends Element<ContainerArgs, any> {
                 { parent: this.element }
             );
         } else if (elementsArray.length > 0) {
-            elements = elementsArray.map(element => 
-                React.cloneElement(
+            elements = elementsArray.map(element => React.cloneElement(
                     element as React.ReactElement<ContainerChildProps>,
                     { parent: this.element }
-                )
+            )
             );
         }
 

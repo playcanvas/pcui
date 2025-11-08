@@ -1,6 +1,6 @@
-import { action } from 'storybook/actions';
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
+import { action } from 'storybook/actions';
 
 import '../BooleanInput';
 import '../NumericInput';

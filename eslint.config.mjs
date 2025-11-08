@@ -7,13 +7,15 @@ import globals from 'globals';
 export default [
     ...playcanvasConfig,
     {
-        files: ['src/**/*.ts'],
+        files: ['src/**/*.ts', 'src/**/*.tsx'],
         languageOptions: {
             parser: tsParser,
             parserOptions: {
                 ecmaVersion: 2022,
                 sourceType: 'module',
-                project: true
+                ecmaFeatures: {
+                    jsx: true
+                }
             },
             globals: {
                 ...globals.browser,
