@@ -22,6 +22,6 @@
         "strictFunctionTypes": true,
         "strictBindCallApply": true
     },
-    "include": ["./src/index.ts"],
-    "exclude": ["node_modules/**/*", "node_modules"]
+    "include": ["src/**/*.ts", "src/**/*.tsx", "src/index.tsx"],
+    "exclude": ["node_modules/**/*", "node_modules", "**/*.stories.tsx"]
 }

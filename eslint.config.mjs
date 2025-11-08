@@ -1,18 +1,21 @@
 import playcanvasConfig from '@playcanvas/eslint-config';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import storybook from 'eslint-plugin-storybook';
 import globals from 'globals';
 
 export default [
     ...playcanvasConfig,
     {
-        files: ['src/**/*.ts'],
+        files: ['src/**/*.ts', 'src/**/*.tsx'],
         languageOptions: {
             parser: tsParser,
             parserOptions: {
                 ecmaVersion: 2022,
                 sourceType: 'module',
-                project: true
+                ecmaFeatures: {
+                    jsx: true
+                }
             },
             globals: {
                 ...globals.browser,
@@ -48,5 +51,6 @@ export default [
         rules: {
             'import/no-unresolved': 'off'
         }
-    }
+    },
+    ...storybook.configs['flat/recommended']
 ];

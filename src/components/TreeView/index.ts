@@ -691,6 +691,7 @@ class TreeView extends Container {
                     // but will instead calculate the new indexes and pass that data to the reparent function
                     // to perform the reparenting
 
+                    // eslint-disable-next-line no-undef
                     const fakeDom: { parent: TreeViewItem; children: ChildNode[]; }[] = [];
 
                     const getChildren = (treeviewItem: TreeViewItem) => {
