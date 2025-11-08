@@ -13,24 +13,29 @@ const rootDir = path.resolve(__dirname, '..');
  * @param {string} outputFile - Path to the output file
  */
 function bundleScss(entryFile, outputFile) {
-    const entryPath = path.resolve(rootDir, entryFile);
-    const outputPath = path.resolve(rootDir, outputFile);
-    
-    // Read the entry file
-    const source = fs.readFileSync(entryPath, 'utf8');
-    
-    // Compile with modern API
-    const result = compileString(source, {
-        loadPaths: [path.dirname(entryPath)],
-        style: 'expanded',
-        sourceMap: false
-    });
-    
-    // Write the output
-    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-    fs.writeFileSync(outputPath, result.css, 'utf8');
-    
-    console.log(`✓ Bundled ${entryFile} → ${outputFile}`);
+    try {
+        const entryPath = path.resolve(rootDir, entryFile);
+        const outputPath = path.resolve(rootDir, outputFile);
+        
+        // Read the entry file
+        const source = fs.readFileSync(entryPath, 'utf8');
+        
+        // Compile with modern API
+        const result = compileString(source, {
+            loadPaths: [path.dirname(entryPath)],
+            style: 'expanded',
+            sourceMap: false
+        });
+        
+        // Write the output
+        fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+        fs.writeFileSync(outputPath, result.css, 'utf8');
+        
+        console.log(`✓ Bundled ${entryFile} → ${outputFile}`);
+    } catch (err) {
+        console.error(`✗ Error bundling ${entryFile} → ${outputFile}: ${err.message}`);
+        console.error(err.stack);
+    }
 }
 
 // Bundle the theme files
