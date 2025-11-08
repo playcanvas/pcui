@@ -3,7 +3,7 @@ import path from 'path';
 const config = {
     stories: ['../src/**/*.stories.tsx'],
 
-    addons: ['@storybook/addon-essentials', '@storybook/addon-webpack5-compiler-swc'],
+    addons: ['@storybook/addon-webpack5-compiler-swc', '@storybook/addon-docs'],
 
     webpackFinal: async (config, { configType }) => {
         config.module.rules = config.module.rules.filter((rule) => {
