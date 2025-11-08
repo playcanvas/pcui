@@ -40,7 +40,8 @@ export default [
             'jsdoc/require-returns': 'off',
             'jsdoc/require-returns-type': 'off'
         }
-    }, {
+    },
+    {
         files: ['**/*.mjs'],
         languageOptions: {
             globals: {
