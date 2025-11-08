@@ -1,5 +1,6 @@
 import { fileURLToPath } from "node:url";
 import path from 'path';
+import webpack from 'webpack';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,6 +32,25 @@ const config = {
                 }
             ]
         });
+
+        // Handle Node.js built-in modules that shouldn't be bundled for the browser.
+        // This is required because PlayCanvas Engine uses require('node:worker_threads')
+        // in gsplat-sort-worker.js. Since the code checks for 'self' first (which exists
+        // in browsers), the worker_threads code path won't execute at runtime.
+        config.resolve = config.resolve || {};
+        config.resolve.fallback = {
+            ...config.resolve.fallback,
+            'worker_threads': false
+        };
+        
+        // Use NormalModuleReplacementPlugin to replace node: protocol imports
+        config.plugins = config.plugins || [];
+        config.plugins.push(
+            new webpack.NormalModuleReplacementPlugin(
+                /^node:worker_threads$/,
+                path.resolve(__dirname, 'node-worker-threads-stub.js')
+            )
+        );
 
         return config;
     },
