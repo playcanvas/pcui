@@ -11,6 +11,7 @@ const rootDir = path.resolve(__dirname, '..');
  * Bundle SCSS file by compiling it and resolving all imports
  * @param {string} entryFile - Path to the entry SCSS file
  * @param {string} outputFile - Path to the output file
+ * @returns {boolean} True if successful, false if failed
  */
 function bundleScss(entryFile, outputFile) {
     try {
@@ -33,9 +34,11 @@ function bundleScss(entryFile, outputFile) {
         fs.writeFileSync(outputPath, result.css, 'utf8');
         
         console.log(`✓ Bundled ${entryFile} → ${outputFile}`);
+        return true;
     } catch (err) {
         console.error(`✗ Error bundling ${entryFile} → ${outputFile}: ${err.message}`);
         console.error(err.stack);
+        return false;
     }
 }
 
@@ -45,7 +48,18 @@ const themes = [
     ['./src/scss/pcui-theme-green.scss', './dist/pcui-theme-green.scss']
 ];
 
+let hasErrors = false;
+
 themes.forEach(([entry, output]) => {
-    bundleScss(entry, output);
+    const success = bundleScss(entry, output);
+    if (!success) {
+        hasErrors = true;
+    }
 });
+
+// Exit with error code if any bundling failed
+if (hasErrors) {
+    console.error('\n✗ One or more theme files failed to bundle');
+    process.exit(1);
+}
 
