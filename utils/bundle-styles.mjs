@@ -1,7 +1,7 @@
 import { compileString } from 'sass';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,6 +22,7 @@ function bundleScss(entryFile, outputFile) {
         
         // Compile with modern API
         const result = compileString(source, {
+            url: pathToFileURL(entryPath),
             loadPaths: [path.dirname(entryPath)],
             style: 'expanded',
             sourceMap: false
