@@ -6,12 +6,12 @@ import { Code as CodeClass, CodeArgs } from './index';
  * Represents a code block.
  */
 class Code extends Element<CodeArgs, any> {
+    static ctor = CodeClass;
+
     constructor(props: CodeArgs) {
         super(props);
         this.elementClass = CodeClass;
     }
 }
-
-Code.ctor = CodeClass;
 
 export { Code };

@@ -6,6 +6,8 @@ import { TextInput as TextInputClass, TextInputArgs } from './index';
  * The TextInput is an input element of type text.
  */
 class TextInput extends Element<TextInputArgs, any> {
+    static ctor = TextInputClass;
+
     onValidate: (value: string) => boolean;
 
     constructor(props: TextInputArgs = {}) {
@@ -25,7 +27,5 @@ class TextInput extends Element<TextInputArgs, any> {
         }
     }
 }
-
-TextInput.ctor = TextInputClass;
 
 export { TextInput };

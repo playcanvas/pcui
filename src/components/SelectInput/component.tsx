@@ -6,6 +6,8 @@ import { SelectInput as SelectInputClass, SelectInputArgs } from './index';
  * An input that allows selecting from a dropdown or entering tags.
  */
 class SelectInput extends Element<SelectInputArgs, any> {
+    static ctor = SelectInputClass;
+
     onSelect?: (value: string) => void;
 
     constructor(props: SelectInputArgs) {
@@ -24,7 +26,5 @@ class SelectInput extends Element<SelectInputArgs, any> {
         }
     }
 }
-
-SelectInput.ctor = SelectInputClass;
 
 export { SelectInput };

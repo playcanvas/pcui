@@ -10,6 +10,8 @@ import { GridView as GridViewClass, GridViewArgs } from './index';
  * Contains GridViewItems.
  */
 class GridView extends Element<GridViewArgs, any> {
+    static ctor = GridViewClass;
+
     constructor(props: GridViewArgs) {
         super(props);
         this.element = new GridViewClass({ ...props });
@@ -36,7 +38,5 @@ class GridView extends Element<GridViewArgs, any> {
         }} />;
     }
 }
-
-GridView.ctor = GridViewClass;
 
 export { GridView };

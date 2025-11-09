@@ -10,6 +10,8 @@ import { Panel as PanelClass, PanelArgs } from './index';
  * the header of the Panel.
  */
 class Panel extends Element<PanelArgs, any> {
+    static ctor = PanelClass;
+
     nodeElement: any;
 
     containerElement: any;
@@ -42,7 +44,5 @@ class Panel extends Element<PanelArgs, any> {
         </div>;
     }
 }
-
-Panel.ctor = PanelClass;
 
 export { Panel };

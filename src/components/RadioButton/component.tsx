@@ -6,12 +6,12 @@ import { RadioButton as RadioButtonClass, RadioButtonArgs } from './index';
  * A radio button element.
  */
 class RadioButton extends Element<RadioButtonArgs, any> {
+    static ctor = RadioButtonClass;
+
     constructor(props: RadioButtonArgs) {
         super(props);
         this.elementClass = RadioButtonClass;
     }
 }
-
-RadioButton.ctor = RadioButtonClass;
 
 export { RadioButton };

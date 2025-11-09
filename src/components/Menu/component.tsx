@@ -10,6 +10,8 @@ import { Menu as MenuClass, MenuArgs } from './index';
  * accordingly.
  */
 class Menu extends Element<MenuArgs, any> {
+    static ctor = MenuClass;
+
     constructor(props: MenuArgs) {
         super(props);
         this.elementClass = MenuClass;
@@ -23,7 +25,5 @@ class Menu extends Element<MenuArgs, any> {
         return <div ref={this.onDivLoaded} />;
     }
 }
-
-Menu.ctor = MenuClass;
 
 export { Menu };

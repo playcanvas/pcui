@@ -8,6 +8,8 @@ import { Spinner as SpinnerClass, SpinnerArgs } from './index';
  * Represents a spinning icon.
  */
 class Spinner extends Element<SpinnerArgs, any> {
+    static ctor = SpinnerClass;
+
     constructor(props: SpinnerArgs) {
         super(props);
         this.elementClass = SpinnerClass;
@@ -18,7 +20,5 @@ class Spinner extends Element<SpinnerArgs, any> {
         return <svg ref={this.attachElement} />;
     }
 }
-
-Spinner.ctor = SpinnerClass;
 
 export { Spinner };

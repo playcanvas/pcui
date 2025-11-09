@@ -7,12 +7,12 @@ import { SliderInput as SliderInputClass, SliderInputArgs } from './index';
  * NumericInput.
  */
 class SliderInput extends Element<SliderInputArgs, any> {
+    static ctor = SliderInputClass;
+
     constructor(props: SliderInputArgs) {
         super(props);
         this.elementClass = SliderInputClass;
     }
 }
-
-SliderInput.ctor = SliderInputClass;
 
 export { SliderInput };
