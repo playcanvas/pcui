@@ -8,8 +8,6 @@ import { Spinner as SpinnerClass, SpinnerArgs } from './index';
  * Represents a spinning icon.
  */
 class Spinner extends Element<SpinnerArgs, any> {
-    static defaultProps: SpinnerArgs;
-
     constructor(props: SpinnerArgs) {
         super(props);
         this.elementClass = SpinnerClass;
