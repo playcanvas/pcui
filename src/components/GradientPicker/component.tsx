@@ -8,6 +8,8 @@ import { GradientPicker as GradientPickerClass, GradientPickerArgs } from './ind
  * Represents a gradient picker.
  */
 class GradientPicker extends Element<GradientPickerArgs, any> {
+    static ctor = GradientPickerClass;
+
     constructor(props: GradientPickerArgs) {
         super(props);
         this.elementClass = GradientPickerClass;
@@ -18,7 +20,5 @@ class GradientPicker extends Element<GradientPickerArgs, any> {
         return <div ref={this.attachElement}/>;
     }
 }
-
-GradientPicker.ctor = GradientPickerClass;
 
 export { GradientPicker };

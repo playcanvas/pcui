@@ -17,6 +17,8 @@ interface LabelGroupChildProps {
  * Represents a group of a Label and a Element. Useful for rows of labeled fields.
  */
 class LabelGroup extends Element<LabelGroupArgs, any> {
+    static ctor = LabelGroupClass;
+
     constructor(props: LabelGroupArgs) {
         super(props);
         this.elementClass = LabelGroupClass;
@@ -50,7 +52,5 @@ class LabelGroup extends Element<LabelGroupArgs, any> {
         } as LabelGroupArgs);
     };
 }
-
-LabelGroup.ctor = LabelGroupClass;
 
 export { LabelGroup };

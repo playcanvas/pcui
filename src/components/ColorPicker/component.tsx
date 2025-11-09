@@ -8,6 +8,8 @@ import { ColorPicker as ColorPickerClass, ColorPickerArgs } from './index';
  * Represents a color picker
  */
 class ColorPicker extends Element<ColorPickerArgs, any> {
+    static ctor = ColorPickerClass;
+
     constructor(props: ColorPickerArgs) {
         super(props);
         this.elementClass = ColorPickerClass;
@@ -18,7 +20,5 @@ class ColorPicker extends Element<ColorPickerArgs, any> {
         return <div ref={this.attachElement}/>;
     }
 }
-
-ColorPicker.ctor = ColorPickerClass;
 
 export { ColorPicker };

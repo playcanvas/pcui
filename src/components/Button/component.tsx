@@ -8,6 +8,8 @@ import { Button as ButtonClass, ButtonArgs } from './index';
  * User input with click interaction
  */
 class Button extends Element<ButtonArgs, any> {
+    static ctor = ButtonClass;
+
     constructor(props: ButtonArgs = {}) {
         super(props);
         this.elementClass = ButtonClass;
@@ -18,7 +20,5 @@ class Button extends Element<ButtonArgs, any> {
         return <button ref={this.attachElement} />;
     }
 }
-
-Button.ctor = ButtonClass;
 
 export { Button };

@@ -10,6 +10,8 @@ import { TreeView as TreeViewClass, TreeViewArgs } from './index';
  * TreeViewItems.
  */
 class TreeView extends Element<TreeViewArgs, any> {
+    static ctor = TreeViewClass;
+
     parentElement: any;
 
     constructor(props: TreeViewArgs) {
@@ -54,7 +56,5 @@ class TreeView extends Element<TreeViewArgs, any> {
         return <div ref={this.parentElementRendered.bind(this)} />;
     }
 }
-
-TreeView.ctor = TreeViewClass;
 
 export { TreeView };

@@ -8,6 +8,8 @@ import { Label as LabelClass, LabelArgs } from './index';
  * The Label is a simple span element that displays some text.
  */
 class Label extends Element<LabelArgs, any> {
+    static ctor = LabelClass;
+
     constructor(props: LabelArgs = {}) {
         super(props);
         this.elementClass = LabelClass;
@@ -18,7 +20,5 @@ class Label extends Element<LabelArgs, any> {
         return <span ref={this.attachElement} />;
     }
 }
-
-Label.ctor = LabelClass;
 
 export { Label };

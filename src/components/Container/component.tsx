@@ -14,6 +14,8 @@ interface ContainerChildProps {
  * A container can contain any other element including other containers.
  */
 class Container extends Element<ContainerArgs, any> {
+    static ctor = ContainerClass;
+
     declare element: ContainerClass;
 
     constructor(props: ContainerArgs = {}) {
@@ -54,7 +56,5 @@ class Container extends Element<ContainerArgs, any> {
         </div>;
     }
 }
-
-Container.ctor = ContainerClass;
 
 export { Container };

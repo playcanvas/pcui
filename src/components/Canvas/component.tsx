@@ -8,6 +8,8 @@ import { Canvas as CanvasClass, CanvasArgs } from './index';
  * Represents a Canvas
  */
 class Canvas extends Element<CanvasArgs, any> {
+    static ctor = CanvasClass;
+
     constructor(props: CanvasArgs = {}) {
         super(props);
         this.elementClass = CanvasClass;
@@ -18,7 +20,5 @@ class Canvas extends Element<CanvasArgs, any> {
         return <canvas ref={this.attachElement}/>;
     }
 }
-
-Canvas.ctor = CanvasClass;
 
 export { Canvas };

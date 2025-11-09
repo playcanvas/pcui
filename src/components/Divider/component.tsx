@@ -7,12 +7,12 @@ import { Divider as DividerClass } from './index';
  * Represents a vertical division between two elements
  */
 class Divider extends Element<ElementArgs, any> {
+    static ctor = DividerClass;
+
     constructor(props: ElementArgs) {
         super(props);
         this.elementClass = DividerClass;
     }
 }
-
-Divider.ctor = DividerClass;
 
 export { Divider };

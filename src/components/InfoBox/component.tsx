@@ -8,6 +8,8 @@ import { InfoBox as InfoBoxClass, InfoBoxArgs } from './index';
  * Represents an information box.
  */
 class InfoBox extends Element<InfoBoxArgs, any> {
+    static ctor = InfoBoxClass;
+
     constructor(props: InfoBoxArgs) {
         super(props);
         this.elementClass = InfoBoxClass;
@@ -18,7 +20,5 @@ class InfoBox extends Element<InfoBoxArgs, any> {
         return <span ref={this.attachElement} />;
     }
 }
-
-InfoBox.ctor = InfoBoxClass;
 
 export { InfoBox };
