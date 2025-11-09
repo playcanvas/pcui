@@ -10,10 +10,6 @@ class TextAreaInput extends Element<TextAreaInputArgs, any> {
         super(props);
         this.elementClass = TextAreaInputClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 TextAreaInput.ctor = TextAreaInputClass;

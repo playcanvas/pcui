@@ -12,10 +12,6 @@ class Code extends Element<CodeArgs, any> {
         super(props);
         this.elementClass = CodeClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 Code.ctor = CodeClass;

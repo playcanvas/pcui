@@ -10,10 +10,6 @@ class VectorInput extends Element<VectorInputArgs, any> {
         super(props);
         this.elementClass = VectorInputClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 VectorInput.ctor = VectorInputClass;

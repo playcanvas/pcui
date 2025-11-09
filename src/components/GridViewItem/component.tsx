@@ -10,10 +10,6 @@ class GridViewItem extends Element<GridViewItemArgs, any> {
         super(props);
         this.elementClass = GridViewItemClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 GridViewItem.ctor = GridViewItemClass;

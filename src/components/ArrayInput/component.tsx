@@ -10,10 +10,6 @@ class ArrayInput extends Element<ArrayInputArgs, any> {
         super(props);
         this.elementClass = ArrayInputClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 ArrayInput.ctor = ArrayInputClass;

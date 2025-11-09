@@ -10,10 +10,6 @@ class Progress extends Element<ProgressArgs, any> {
         super(props);
         this.elementClass = ProgressClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 Progress.ctor = ProgressClass;

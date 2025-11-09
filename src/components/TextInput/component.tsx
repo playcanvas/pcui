@@ -24,10 +24,6 @@ class TextInput extends Element<TextInputArgs, any> {
             (this.element as TextInputClass).onValidate = this.onValidate;
         }
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 TextInput.ctor = TextInputClass;

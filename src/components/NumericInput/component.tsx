@@ -12,10 +12,6 @@ class NumericInput extends Element<NumericInputArgs, any> {
         super(props);
         this.elementClass = NumericInputClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 NumericInput.ctor = NumericInputClass;

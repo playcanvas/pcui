@@ -11,10 +11,6 @@ class Divider extends Element<ElementArgs, any> {
         super(props);
         this.elementClass = DividerClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 Divider.ctor = DividerClass;

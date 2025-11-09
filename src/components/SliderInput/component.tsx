@@ -11,10 +11,6 @@ class SliderInput extends Element<SliderInputArgs, any> {
         super(props);
         this.elementClass = SliderInputClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 SliderInput.ctor = SliderInputClass;
