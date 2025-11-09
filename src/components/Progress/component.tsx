@@ -7,11 +7,6 @@ import { Progress as ProgressClass, ProgressArgs } from './index';
  */
 class Progress extends Element<ProgressArgs, any> {
     static ctor = ProgressClass;
-
-    constructor(props: ProgressArgs) {
-        super(props);
-        this.elementClass = ProgressClass;
-    }
 }
 
 export { Progress };

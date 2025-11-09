@@ -10,11 +10,6 @@ import { InfoBox as InfoBoxClass, InfoBoxArgs } from './index';
 class InfoBox extends Element<InfoBoxArgs, any> {
     static ctor = InfoBoxClass;
 
-    constructor(props: InfoBoxArgs) {
-        super(props);
-        this.elementClass = InfoBoxClass;
-    }
-
     render() {
         // @ts-ignore
         return <span ref={this.attachElement} />;

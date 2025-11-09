@@ -18,11 +18,6 @@ class Container extends Element<ContainerArgs, any> {
 
     declare element: ContainerClass;
 
-    constructor(props: ContainerArgs = {}) {
-        super(props);
-        this.elementClass = ContainerClass;
-    }
-
     componentDidMount() {
         if (this.props.onResize) {
             this.element.on('resize', this.props.onResize);

@@ -10,11 +10,6 @@ import { Label as LabelClass, LabelArgs } from './index';
 class Label extends Element<LabelArgs, any> {
     static ctor = LabelClass;
 
-    constructor(props: LabelArgs = {}) {
-        super(props);
-        this.elementClass = LabelClass;
-    }
-
     render() {
         // @ts-ignore
         return <span ref={this.attachElement} />;

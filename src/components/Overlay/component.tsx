@@ -7,11 +7,6 @@ import { Overlay as OverlayClass, OverlayArgs } from './index';
  */
 class Overlay extends Element<OverlayArgs, any> {
     static ctor = OverlayClass;
-
-    constructor(props: OverlayArgs) {
-        super(props);
-        this.elementClass = OverlayClass;
-    }
 }
 
 export { Overlay };

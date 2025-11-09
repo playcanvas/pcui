@@ -26,7 +26,8 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
 
     constructor(props: P) {
         super(props);
-        this.elementClass = ElementClass;
+        // Auto-set elementClass from static ctor property
+        this.elementClass = (this.constructor as typeof Element).ctor as typeof ElementClass;
         if (props.onClick) {
             this.onClick = props.onClick;
         }

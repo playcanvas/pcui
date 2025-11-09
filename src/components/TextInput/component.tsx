@@ -12,7 +12,6 @@ class TextInput extends Element<TextInputArgs, any> {
 
     constructor(props: TextInputArgs = {}) {
         super(props);
-        this.elementClass = TextInputClass;
 
         if (props.onValidate) {
             this.onValidate = props.onValidate;

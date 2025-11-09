@@ -10,11 +10,6 @@ import { ColorPicker as ColorPickerClass, ColorPickerArgs } from './index';
 class ColorPicker extends Element<ColorPickerArgs, any> {
     static ctor = ColorPickerClass;
 
-    constructor(props: ColorPickerArgs) {
-        super(props);
-        this.elementClass = ColorPickerClass;
-    }
-
     render() {
         // @ts-ignore
         return <div ref={this.attachElement}/>;

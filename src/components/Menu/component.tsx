@@ -12,11 +12,6 @@ import { Menu as MenuClass, MenuArgs } from './index';
 class Menu extends Element<MenuArgs, any> {
     static ctor = MenuClass;
 
-    constructor(props: MenuArgs) {
-        super(props);
-        this.elementClass = MenuClass;
-    }
-
     onDivLoaded = (element: any) => {
         this.element = new MenuClass({ ...this.props, dom: element });
     };

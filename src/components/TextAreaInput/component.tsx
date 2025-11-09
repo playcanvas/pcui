@@ -7,11 +7,6 @@ import { TextAreaInput as TextAreaInputClass, TextAreaInputArgs } from './index'
  */
 class TextAreaInput extends Element<TextAreaInputArgs, any> {
     static ctor = TextAreaInputClass;
-
-    constructor(props: TextAreaInputArgs) {
-        super(props);
-        this.elementClass = TextAreaInputClass;
-    }
 }
 
 export { TextAreaInput };
