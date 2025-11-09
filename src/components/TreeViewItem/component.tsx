@@ -14,7 +14,6 @@ class TreeViewItem extends Element<TreeViewItemArgs, any> {
 
     constructor(props: TreeViewItemArgs) {
         super(props);
-        this.elementClass = TreeViewItemClass;
 
         this.onSelect = () => {
             if (props.onSelect) {

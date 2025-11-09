@@ -19,11 +19,6 @@ interface LabelGroupChildProps {
 class LabelGroup extends Element<LabelGroupArgs, any> {
     static ctor = LabelGroupClass;
 
-    constructor(props: LabelGroupArgs) {
-        super(props);
-        this.elementClass = LabelGroupClass;
-    }
-
     attachElement = (nodeElement: HTMLElement, containerElement: any) => {
         if (!nodeElement) return;
         const childrenErrorMessage = 'A LabelGroup must contain a single PCUI react component as a child';

@@ -12,12 +12,10 @@ class SelectInput extends Element<SelectInputArgs, any> {
 
     constructor(props: SelectInputArgs) {
         super(props);
-        this.elementClass = SelectInputClass;
 
         this.onSelect = props.onSelect;
 
         this.onAttach = this.onAttachFn.bind(this);
-
     }
 
     onAttachFn() {

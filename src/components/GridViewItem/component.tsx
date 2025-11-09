@@ -7,11 +7,6 @@ import { GridViewItem as GridViewItemClass, GridViewItemArgs } from './index';
  */
 class GridViewItem extends Element<GridViewItemArgs, any> {
     static ctor = GridViewItemClass;
-
-    constructor(props: GridViewItemArgs) {
-        super(props);
-        this.elementClass = GridViewItemClass;
-    }
 }
 
 export { GridViewItem };

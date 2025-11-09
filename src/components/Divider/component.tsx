@@ -8,11 +8,6 @@ import { Divider as DividerClass } from './index';
  */
 class Divider extends Element<ElementArgs, any> {
     static ctor = DividerClass;
-
-    constructor(props: ElementArgs) {
-        super(props);
-        this.elementClass = DividerClass;
-    }
 }
 
 export { Divider };

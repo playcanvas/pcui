@@ -10,11 +10,6 @@ import { Canvas as CanvasClass, CanvasArgs } from './index';
 class Canvas extends Element<CanvasArgs, any> {
     static ctor = CanvasClass;
 
-    constructor(props: CanvasArgs = {}) {
-        super(props);
-        this.elementClass = CanvasClass;
-    }
-
     render() {
         // @ts-ignore
         return <canvas ref={this.attachElement}/>;

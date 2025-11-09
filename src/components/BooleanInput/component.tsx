@@ -7,11 +7,6 @@ import { BooleanInput as BooleanInputClass, BooleanInputArgs } from './index';
  */
 class BooleanInput extends Element<BooleanInputArgs, any> {
     static ctor = BooleanInputClass;
-
-    constructor(props: BooleanInputArgs = {}) {
-        super(props);
-        this.elementClass = BooleanInputClass;
-    }
 }
 
 export { BooleanInput };

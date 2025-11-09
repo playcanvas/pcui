@@ -7,11 +7,6 @@ import { NumericInput as NumericInputClass, NumericInputArgs } from './index';
  */
 class NumericInput extends Element<NumericInputArgs, any> {
     static ctor = NumericInputClass;
-
-    constructor(props: NumericInputArgs) {
-        super(props);
-        this.elementClass = NumericInputClass;
-    }
 }
 
 export { NumericInput };

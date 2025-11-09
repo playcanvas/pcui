@@ -7,11 +7,6 @@ import { ArrayInput as ArrayInputClass, ArrayInputArgs } from './index';
  */
 class ArrayInput extends Element<ArrayInputArgs, any> {
     static ctor = ArrayInputClass;
-
-    constructor(props: ArrayInputArgs) {
-        super(props);
-        this.elementClass = ArrayInputClass;
-    }
 }
 
 export { ArrayInput };

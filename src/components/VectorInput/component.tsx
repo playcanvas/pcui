@@ -7,11 +7,6 @@ import { VectorInput as VectorInputClass, VectorInputArgs } from './index';
  */
 class VectorInput extends Element<VectorInputArgs, any> {
     static ctor = VectorInputClass;
-
-    constructor(props: VectorInputArgs) {
-        super(props);
-        this.elementClass = VectorInputClass;
-    }
 }
 
 export { VectorInput };

@@ -16,11 +16,6 @@ class Panel extends Element<PanelArgs, any> {
 
     containerElement: any;
 
-    constructor(props: PanelArgs = {}) {
-        super(props);
-        this.elementClass = PanelClass;
-    }
-
     componentDidMount() {
         this.attachElement(this.nodeElement, this.containerElement);
     }

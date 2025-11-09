@@ -10,11 +10,6 @@ import { GradientPicker as GradientPickerClass, GradientPickerArgs } from './ind
 class GradientPicker extends Element<GradientPickerArgs, any> {
     static ctor = GradientPickerClass;
 
-    constructor(props: GradientPickerArgs) {
-        super(props);
-        this.elementClass = GradientPickerClass;
-    }
-
     render() {
         // @ts-ignore
         return <div ref={this.attachElement}/>;

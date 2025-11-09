@@ -8,11 +8,6 @@ import { SliderInput as SliderInputClass, SliderInputArgs } from './index';
  */
 class SliderInput extends Element<SliderInputArgs, any> {
     static ctor = SliderInputClass;
-
-    constructor(props: SliderInputArgs) {
-        super(props);
-        this.elementClass = SliderInputClass;
-    }
 }
 
 export { SliderInput };

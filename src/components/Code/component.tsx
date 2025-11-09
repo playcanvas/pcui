@@ -7,11 +7,6 @@ import { Code as CodeClass, CodeArgs } from './index';
  */
 class Code extends Element<CodeArgs, any> {
     static ctor = CodeClass;
-
-    constructor(props: CodeArgs) {
-        super(props);
-        this.elementClass = CodeClass;
-    }
 }
 
 export { Code };
