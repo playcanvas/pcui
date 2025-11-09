@@ -10,10 +10,6 @@ class BooleanInput extends Element<BooleanInputArgs, any> {
         super(props);
         this.elementClass = BooleanInputClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 BooleanInput.ctor = BooleanInputClass;

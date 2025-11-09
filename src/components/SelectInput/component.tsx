@@ -23,10 +23,6 @@ class SelectInput extends Element<SelectInputArgs, any> {
             this.element.on('select', this.onSelect);
         }
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 SelectInput.ctor = SelectInputClass;

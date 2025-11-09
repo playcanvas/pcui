@@ -49,10 +49,6 @@ class LabelGroup extends Element<LabelGroupArgs, any> {
             field: labelField
         } as LabelGroupArgs);
     };
-
-    render() {
-        return super.render();
-    }
 }
 
 LabelGroup.ctor = LabelGroupClass;

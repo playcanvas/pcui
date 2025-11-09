@@ -10,10 +10,6 @@ class RadioButton extends Element<RadioButtonArgs, any> {
         super(props);
         this.elementClass = RadioButtonClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 RadioButton.ctor = RadioButtonClass;

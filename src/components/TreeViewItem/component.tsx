@@ -36,10 +36,6 @@ class TreeViewItem extends Element<TreeViewItemArgs, any> {
             this.element.on('deselect', this.onDeselect);
         }
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 TreeViewItem.ctor = TreeViewItemClass;

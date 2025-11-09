@@ -10,10 +10,6 @@ class Overlay extends Element<OverlayArgs, any> {
         super(props);
         this.elementClass = OverlayClass;
     }
-
-    render() {
-        return super.render();
-    }
 }
 
 Overlay.ctor = OverlayClass;
