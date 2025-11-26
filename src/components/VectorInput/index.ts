@@ -1,7 +1,7 @@
 import { Observer } from '@playcanvas/observer';
 
 import { CLASS_FOCUS, CLASS_MULTIPLE_VALUES } from '../../class';
-import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
+import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IMultiPlaceholder, IMultiPlaceholderArgs } from '../Element';
 import { NumericInput } from '../NumericInput';
 
 const CLASS_VECTOR_INPUT = 'pcui-vector-input';
@@ -9,7 +9,7 @@ const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 /**
  * The arguments for the {@link VectorInput} constructor.
  */
-interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindableArgs {
+interface VectorInputArgs extends ElementArgs, IBindableArgs, IMultiPlaceholderArgs {
     /**
      * The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
      */
@@ -39,7 +39,7 @@ interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindableArgs {
 /**
  * A vector input. The vector can have 2 to 4 dimensions with each dimension being a {@link NumericInput}.
  */
-class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder {
+class VectorInput extends Element implements IBindable, IFocusable, IMultiPlaceholder {
     protected _inputs: NumericInput[] = [];
 
     protected _applyingChange = false;
@@ -274,13 +274,13 @@ class VectorInput extends Element implements IBindable, IFocusable, IPlaceholder
         return super.binding;
     }
 
-    set placeholder(value: any) {
+    set placeholder(value: string | string[]) {
         for (let i = 0; i < this._inputs.length; i++) {
-            this._inputs[i].placeholder = value[i] || value || null;
+            this._inputs[i].placeholder = (Array.isArray(value) ? value[i] : value) || null;
         }
     }
 
-    get placeholder() {
+    get placeholder(): string[] {
         return this._inputs.map(input => input.placeholder);
     }
 

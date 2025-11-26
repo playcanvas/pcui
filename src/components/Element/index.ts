@@ -94,6 +94,32 @@ interface IPlaceholderArgs {
 }
 
 /**
+ * The interface for multi-value elements that have placeholder text for each value.
+ */
+interface IMultiPlaceholder {
+    /**
+     * Sets the placeholder text of the inputs. Can be a single string applied to all inputs,
+     * or an array of strings for each input.
+     */
+    set placeholder(value: string | string[]),
+    /**
+     * Gets the placeholder text of all inputs as an array.
+     */
+    get placeholder(): string[]
+}
+
+/**
+ * The interface for arguments for multi-value elements that have placeholder text.
+ */
+interface IMultiPlaceholderArgs {
+    /**
+     * Placeholder text for the inputs. Can be a single string applied to all inputs,
+     * or an array of strings for each input.
+     */
+    placeholder?: string | string[],
+}
+
+/**
  * The interface for elements that can be focused.
  */
 interface IFocusable {
@@ -1195,4 +1221,4 @@ declare global {
     }
 }
 
-export { Element, ElementArgs, IBindable, IBindableArgs, IPlaceholder, IPlaceholderArgs, IFocusable, IParentArgs, IFlexArgs };
+export { Element, ElementArgs, IBindable, IBindableArgs, IPlaceholder, IPlaceholderArgs, IMultiPlaceholder, IMultiPlaceholderArgs, IFocusable, IParentArgs, IFlexArgs };
