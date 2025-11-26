@@ -9,7 +9,7 @@ const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 /**
  * The arguments for the {@link VectorInput} constructor.
  */
-interface VectorInputArgs extends ElementArgs, Omit<IPlaceholderArgs, 'placeholder'>, IBindableArgs {
+interface VectorInputArgs extends ElementArgs, IBindableArgs {
     /**
      * The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
      */
