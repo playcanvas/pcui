@@ -9,7 +9,7 @@ const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 /**
  * The arguments for the {@link VectorInput} constructor.
  */
-interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindableArgs {
+interface VectorInputArgs extends ElementArgs, Omit<IPlaceholderArgs, 'placeholder'>, IBindableArgs {
     /**
      * The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
      */
@@ -34,6 +34,11 @@ interface VectorInputArgs extends ElementArgs, IPlaceholderArgs, IBindableArgs {
      *  The incremental step when holding Shift and using arrow keys or dragger for each vector element.
      */
     stepPrecision?: number;
+    /**
+     * Placeholder text for the input. Can be a single string applied to all dimensions,
+     * or an array of strings for each dimension.
+     */
+    placeholder?: string | string[];
 }
 
 /**
