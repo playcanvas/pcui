@@ -352,7 +352,10 @@ class SelectInput extends Element implements IBindable, IFocusable {
             // during change event
             if (label.destroyed) return;
             label.text = value;
-            if (this.invalidOptions && this.invalidOptions.indexOf(value) !== -1) {
+            // Hide the create label if the value is invalid (in invalidOptions, empty, or whitespace-only)
+            const invalid = (this.invalidOptions && this.invalidOptions.indexOf(value) !== -1) ||
+                            !value || value.trim() === '';
+            if (invalid) {
                 if (!container.hidden) {
                     container.hidden = true;
                     this._resizeShadow();
@@ -370,12 +373,17 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
             const text = label.text;
 
+            // Validate that the value is not empty or whitespace-only
+            if (!text || text.trim() === '') {
+                return;
+            }
+
             this.focus();
             this.close();
 
             if (this._createFn) {
                 this._createFn(text);
-            } else if (text) {
+            } else {
                 this._onSelectValue(text);
             }
         });
@@ -700,6 +708,11 @@ class SelectInput extends Element implements IBindable, IFocusable {
             }
 
             if (value !== undefined) {
+                // For tags-based inputs with allowCreate, validate that the value is not empty or whitespace-only
+                if (this._allowCreate && typeof value === 'string' && value.trim() === '') {
+                    return;
+                }
+
                 this.focus();
                 this.close();
 
