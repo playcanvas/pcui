@@ -10,7 +10,8 @@
         }
 
         .pcui-element.pcui-label-group > .pcui-label:first-child {
-            width: 175px;
+            font-size: 14px;
+            width: 180px;
         }
     </style>
     <script type="importmap">
@@ -25,8 +26,8 @@
 </head>
 <body>
     <script type="module">
-        import { LabelGroup, SelectInput } from '@playcanvas/pcui';
-        import '@playcanvas/pcui/styles'
+        import { LabelGroup, Panel, SelectInput } from '@playcanvas/pcui';
+        import '@playcanvas/pcui/styles';
 
         const select = new SelectInput({
             options: [
@@ -39,7 +40,7 @@
             type: 'number'
         });
         const labelGroup1 = new LabelGroup({
-            text: 'SelectInput:',
+            text: 'Predefined Options',
             field: select
         });
 
@@ -55,12 +56,78 @@
             type: 'number'
         });
         const labelGroup2 = new LabelGroup({
-            text: 'SelectInput with Filter:',
+            text: 'Predefined Options + Filter',
             field: selectWithFilter
         });
 
-        document.body.appendChild(labelGroup1.dom);
-        document.body.appendChild(labelGroup2.dom);
+        const selectTags = new SelectInput({
+            multiSelect: true,
+            options: [
+                { t: 'Angular', v: 'angular' },
+                { t: 'React', v: 'react' },
+                { t: 'Svelte', v: 'svelte' },
+                { t: 'Vue', v: 'vue' }
+            ],
+            value: ['react', 'vue']
+        });
+        const labelGroup3 = new LabelGroup({
+            text: 'Predefined Tags',
+            field: selectTags
+        });
+
+        const selectTagsWithFilter = new SelectInput({
+            allowInput: true,
+            multiSelect: true,
+            placeholder: 'Type to Filter Tags...',
+            options: [
+                { t: 'C++', v: 'cpp' },
+                { t: 'JavaScript', v: 'javascript' },
+                { t: 'Python', v: 'python' },
+                { t: 'TypeScript', v: 'typescript' }
+            ],
+            value: ['javascript']
+        });
+        const labelGroup4 = new LabelGroup({
+            text: 'Predefined Tags + Filter',
+            field: selectTagsWithFilter
+        });
+
+        const selectTagsUser = new SelectInput({
+            allowInput: true,
+            allowCreate: true,
+            multiSelect: true,
+            placeholder: 'Type to Add Tags...',
+            options: [],  // No predefined options
+            value: []     // Start empty
+        });
+        const labelGroup5 = new LabelGroup({
+            text: 'User-Created Tags',
+            field: selectTagsUser
+        });
+
+        // Vanilla SelectInputs Panel
+        const basicPanel = new Panel({
+            headerText: 'Basic SelectInputs',
+            collapsible: true,
+            collapsed: false,
+            width: 500
+        });
+        basicPanel.append(labelGroup1);
+        basicPanel.append(labelGroup2);
+
+        // Tags-based SelectInputs Panel
+        const tagsPanel = new Panel({
+            headerText: 'Tags-based SelectInputs',
+            collapsible: true,
+            collapsed: false,
+            width: 500
+        });
+        tagsPanel.append(labelGroup3);
+        tagsPanel.append(labelGroup4);
+        tagsPanel.append(labelGroup5);
+
+        document.body.appendChild(basicPanel.dom);
+        document.body.appendChild(tagsPanel.dom);
     </script>
 </body>
 </html>
