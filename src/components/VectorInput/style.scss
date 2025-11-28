@@ -3,17 +3,10 @@
 
     flex-direction: row;
     align-items: center;
+    gap: $element-margin;
 
     > .pcui-numeric-input {
         flex: 1;
-        margin: $element-margin calc($element-margin / 2);
-
-        &:first-child {
-            margin-left: 0;
-        }
-
-        &:last-child {
-            margin-right: 0;
-        }
+        margin: $element-margin 0;
     }
 }
