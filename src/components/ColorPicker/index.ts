@@ -266,6 +266,8 @@ class ColorPicker extends Element implements IBindable {
             this._onChangeHex();
         });
         this._panelFields.appendChild(this._fieldHex.dom);
+
+        this._onChangeRgb();
     }
 
     destroy() {
