@@ -3,18 +3,18 @@
 
     align-items: center;
     flex-flow: row nowrap;
-    gap: $element-margin;
     margin: $element-margin;
 
     // set width for label and don't let it shrink
     > .pcui-label:first-child {
         width: 100px;
         flex-shrink: 0;
+        margin: 0;
     }
 
-    // remove margins from elements since gap handles spacing
-    > .pcui-element {
-        margin: 0;
+    // remove top margin from sub elements
+    > .pcui-element:not(:first-child) {
+        margin: 0 0 0 $element-margin;
     }
 
     // field should be stretched
