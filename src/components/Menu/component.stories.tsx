@@ -36,10 +36,10 @@ window.addEventListener('contextmenu', (evt: MouseEvent) => {
 export const Main: Story = {
     render: args => <Container>
         <Menu {...args} hidden={true} items={[
-            { text: 'Hello', onSelect: action('Hello') },
+            { text: 'Hello', shortcut: 'Ctrl+H', onSelect: action('Hello') },
             { text: 'World',
                 items: [
-                    { text: 'Foo', onSelect: action('World -> Foo') },
+                    { text: 'Foo', shortcut: 'Ctrl+F', onSelect: action('World -> Foo') },
                     { text: 'Bar', onSelect: action('World -> Bar'), onIsEnabled: () => false }
                 ] }
         ]}/>

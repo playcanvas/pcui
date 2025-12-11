@@ -8,6 +8,7 @@ const CLASS_MENU_ITEM = 'pcui-menu-item';
 const CLASS_MENU_ITEM_CONTENT = `${CLASS_MENU_ITEM}-content`;
 const CLASS_MENU_ITEM_CHILDREN = `${CLASS_MENU_ITEM}-children`;
 const CLASS_MENU_ITEM_HAS_CHILDREN = `${CLASS_MENU_ITEM}-has-children`;
+const CLASS_MENU_ITEM_SHORTCUT = `${CLASS_MENU_ITEM}-shortcut`;
 
 /**
  * The arguments for the {@link MenuItem} constructor.
@@ -46,6 +47,10 @@ interface MenuItemArgs extends ContainerArgs {
      * An array of MenuItem constructor data. If defined then child MenuItems will be created and added to the MenuItem.
      */
     items?: Array<MenuItemArgs>;
+    /**
+     * Sets the keyboard shortcut to display on the MenuItem (e.g., 'Ctrl+C').
+     */
+    shortcut?: string;
 }
 
 /**
@@ -77,6 +82,8 @@ class MenuItem extends Container implements IBindable {
 
     protected _labelText: Label;
 
+    protected _labelShortcut: Label;
+
     protected _containerItems: Container;
 
     protected _menu: any = null;
@@ -103,6 +110,11 @@ class MenuItem extends Container implements IBindable {
         this._labelText = new Label();
         this._containerContent.append(this._labelText);
 
+        this._labelShortcut = new Label({
+            class: CLASS_MENU_ITEM_SHORTCUT
+        });
+        this._containerContent.append(this._labelShortcut);
+
         this._containerItems = new Container({
             class: CLASS_MENU_ITEM_CHILDREN
         });
@@ -121,6 +133,9 @@ class MenuItem extends Container implements IBindable {
         }
         if (args.binding) {
             this.binding = args.binding;
+        }
+        if (args.shortcut) {
+            this.shortcut = args.shortcut;
         }
 
         this.onSelect = args.onSelect;
@@ -246,6 +261,20 @@ class MenuItem extends Container implements IBindable {
      */
     get icon() {
         return this._icon;
+    }
+
+    /**
+     * Sets the keyboard shortcut displayed on the MenuItem.
+     */
+    set shortcut(value: string) {
+        this._labelShortcut.text = value ?? '';
+    }
+
+    /**
+     * Gets the keyboard shortcut displayed on the MenuItem.
+     */
+    get shortcut(): string {
+        return this._labelShortcut.text;
     }
 
     /**

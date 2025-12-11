@@ -78,6 +78,13 @@
     }
 }
 
+.pcui-menu-item-shortcut {
+    margin-left: auto;
+    padding-left: 16px;
+    color: $text-dark;
+    font-size: 12px;
+}
+
 .pcui-menu-item.pcui-disabled {
     .pcui-menu-item-content {
         cursor: default;
