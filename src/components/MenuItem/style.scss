@@ -80,9 +80,12 @@
 
 .pcui-menu-item-shortcut {
     margin-left: auto;
-    padding-left: 16px;
     color: $text-dark;
     font-size: 12px;
+
+    &:not(:empty) {
+        padding-left: 16px;
+    }
 }
 
 .pcui-menu-item.pcui-disabled {
