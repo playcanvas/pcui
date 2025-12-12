@@ -32,22 +32,34 @@
         const menu = new Menu({
             items: [
                 {
-                    text: 'Item 1'
+                    text: 'Copy',
+                    icon: 'E351',
+                    shortcut: 'Ctrl+C'
                 },
                 {
-                    text: 'Item 2'
+                    text: 'Paste',
+                    icon: 'E348',
+                    shortcut: 'Ctrl+V'
                 },
                 {
-                    text: 'Item 3',
+                    text: 'Delete',
+                    icon: 'E124',
+                    shortcut: 'Delete'
+                },
+                {
+                    text: 'More Options',
                     items: [
                         {
-                            text: 'Item 3.1'
+                            text: 'Undo',
+                            shortcut: 'Ctrl+Z'
                         },
                         {
-                            text: 'Item 3.2'
+                            text: 'Redo',
+                            shortcut: 'Ctrl+Y'
                         },
                         {
-                            text: 'Item 3.3'
+                            text: 'Select All',
+                            shortcut: 'Ctrl+A'
                         }
                     ]
                 }
