@@ -22,22 +22,10 @@
     }
 }
 
-.pcui-menu-item-has-children {
-    & > .pcui-menu-item-content > .pcui-label {
-        padding-right: 32px;
-
-        &::after {
-            content: '\E160';
-
-            @extend .font-icon;
-
-            position: absolute;
-            right: $element-margin;
-        }
-    }
-}
-
 .pcui-menu-item-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     min-width: 158px;
     color: $text-dark;
     border-bottom: 1px solid color.mix($bcg-darkest, $bcg-dark, 50%);
@@ -59,29 +47,42 @@
     }
 }
 
-.pcui-menu-item-content > .pcui-label {
+// Text label - use inline-flex to properly align icon and text
+.pcui-menu-item-content > .pcui-label:not(.pcui-menu-item-shortcut) {
+    display: inline-flex;
+    align-items: center;
     color: inherit;
 
-    &[data-icon] {
-        // show icon using data-icon attribute
-        // as the content
-        &::before {
-            content: attr(data-icon);
+    &[data-icon]::before {
+        content: attr(data-icon);
 
-            @extend .font-icon;
+        @extend .font-icon;
 
-            font-weight: 100;
-            font-size: inherit;
-            margin-right: $element-margin;
-            vertical-align: middle;
-        }
+        font-weight: 100;
+        margin-right: $element-margin;
     }
 }
 
+// Submenu arrow for items with children
+.pcui-menu-item-has-children {
+    & > .pcui-menu-item-content > .pcui-label:not(.pcui-menu-item-shortcut)::after {
+        content: '\E160';
+
+        @extend .font-icon;
+
+        position: absolute;
+        right: $element-margin;
+    }
+
+    & > .pcui-menu-item-content > .pcui-label:not(.pcui-menu-item-shortcut) {
+        padding-right: 32px;
+    }
+}
+
+// Shortcut label - push to right with auto margin
 .pcui-menu-item-shortcut {
     margin-left: auto;
-    color: $text-dark;
-    font-size: 12px;
+    color: inherit;
 
     &:not(:empty) {
         padding-left: 16px;
