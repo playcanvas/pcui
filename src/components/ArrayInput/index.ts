@@ -424,13 +424,25 @@ class ArrayInput extends Element implements IFocusable, IBindable {
     protected _linkArrayElement(element: any, index: number) {
         const observers = this._binding.observers;
         const paths = this._binding.paths;
-        const useSinglePath = paths.length === 1 || observers.length !== paths.length;
         element.unlink();
         element.value = null;
 
         this.emit('unlinkElement', element, index);
 
-        const path = (useSinglePath ? `${paths[0]}.${index}` : paths.map((path: string) => `${path}.${index}`));
+        // When there are multiple observers, always create an array of paths (one for each observer)
+        // so that each observer maintains its own value independently. This prevents the binding
+        // from setting the same value to all observers when individual values differ.
+        let path: string | string[];
+        if (observers.length > 1) {
+            // Create a path for each observer
+            path = observers.map((_, i) => `${paths[Math.min(i, paths.length - 1)]}.${index}`);
+        } else if (paths.length > 1) {
+            // Multiple paths for single observer (e.g., curves)
+            path = paths.map((p: string) => `${p}.${index}`);
+        } else {
+            // Single observer, single path
+            path = `${paths[0]}.${index}`;
+        }
         element.link(observers, path);
 
         this.emit('linkElement', element, index, path);
