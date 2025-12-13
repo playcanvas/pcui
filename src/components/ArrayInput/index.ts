@@ -425,6 +425,12 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         const observers = this._binding.observers;
         const paths = this._binding.paths;
         const useSinglePath = paths.length === 1 || observers.length !== paths.length;
+
+        // Suspend array element events to prevent corrupting _values
+        // when relinking elements. The element's value may become null (mixed state)
+        // when linked to multiple observers with different values.
+        this._suspendArrayElementEvts = true;
+
         element.unlink();
         element.value = null;
 
@@ -432,6 +438,8 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
         const path = (useSinglePath ? `${paths[0]}.${index}` : paths.map((path: string) => `${path}.${index}`));
         element.link(observers, path);
+
+        this._suspendArrayElementEvts = false;
 
         this.emit('linkElement', element, index, path);
     }
