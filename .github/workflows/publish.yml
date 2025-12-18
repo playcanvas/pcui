@@ -3,7 +3,7 @@ name: Publish
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   publish:
@@ -21,8 +21,8 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24.x
-          cache: 'npm'
-          registry-url: 'https://registry.npmjs.org/'
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org/"
 
       - name: Install Dependencies
         run: npm ci
@@ -42,6 +42,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          prerelease: ${{ contains(github.ref, 'alpha') }}
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
