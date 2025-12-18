@@ -9,7 +9,10 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'playcanvas'
+    if: ${{ github.repository_owner == 'playcanvas' }}
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - name: Check out code
         uses: actions/checkout@v6
@@ -33,6 +36,12 @@ jobs:
         run: npm run publint
 
       - name: Publish to npm
-        run: npm publish
+        run: npm publish --provenance
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref, 'alpha') }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
