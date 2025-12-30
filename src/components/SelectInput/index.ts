@@ -100,6 +100,47 @@ interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
  * An input that allows selecting from a dropdown or entering tags.
  */
 class SelectInput extends Element implements IBindable, IFocusable {
+    /**
+     * Fired when the value of the SelectInput changes.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const selectInput = new SelectInput();
+     * selectInput.on('change', (value) => {
+     *     console.log('Value changed to:', value);
+     * });
+     * ```
+     */
+    public static readonly EVENT_CHANGE = 'change';
+
+    /**
+     * Fired when the SelectInput receives focus.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const selectInput = new SelectInput();
+     * selectInput.on('focus', () => {
+     *     console.log('SelectInput focused');
+     * });
+     * ```
+     */
+    public static readonly EVENT_FOCUS = 'focus';
+
+    /**
+     * Fired when the SelectInput loses focus.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const selectInput = new SelectInput();
+     * selectInput.on('blur', () => {
+     *     console.log('SelectInput blurred');
+     * });
+     * ```
+     */
+    public static readonly EVENT_BLUR = 'blur';
     protected _container: Container;
 
     protected _containerValue: Container;
@@ -887,6 +928,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     }
 
+    /**
+     * Focuses the SelectInput.
+     */
     focus() {
         if (this._input.hidden) {
             this._labelValue.dom.focus();
@@ -895,6 +939,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
     }
 
+    /**
+     * Unfocuses (blurs) the SelectInput.
+     */
     blur() {
         if (this._allowInput) {
             this._input.blur();
@@ -1061,6 +1108,10 @@ class SelectInput extends Element implements IBindable, IFocusable {
         return newValue;
     }
 
+    /**
+     * Sets the dropdown options. Each option should have the format `{v: value, t: text}` where `v`
+     * is the value and `t` is the display text.
+     */
     set options(value) {
         if (this._options && JSON.stringify(this._options) === JSON.stringify(value)) return;
 
@@ -1114,18 +1165,30 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
     }
 
+    /**
+     * Gets the dropdown options.
+     */
     get options() {
         return this._options.slice();
     }
 
+    /**
+     * Sets an array of values that should not be allowed when creating new options.
+     */
     set invalidOptions(value) {
         this._invalidOptions = value || null;
     }
 
+    /**
+     * Gets the array of invalid options.
+     */
     get invalidOptions() {
         return this._invalidOptions;
     }
 
+    /**
+     * Sets the value that is currently disabled (shown but not selectable).
+     */
     set disabledValue(value: string | null) {
         this._disabledValue = value;
         if (this._disabledValue !== null) {
@@ -1135,6 +1198,10 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
     }
 
+    /**
+     * Sets the options that should be disabled. The keys are the option values and the values are
+     * the text to show when the option is disabled.
+     */
     set disabledOptions(value: any) {
         if (JSON.stringify(this._disabledOptions) === JSON.stringify(value)) return;
         this._disabledOptions = value || {};
@@ -1142,14 +1209,24 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._updateValue(newValue);
     }
 
+    /**
+     * Sets the order in which options should be checked for a valid fallback when the current
+     * value becomes disabled.
+     */
     set fallbackOrder(value: string[]) {
         this._fallbackOrder = value || null;
     }
 
+    /**
+     * Gets whether the SelectInput allows selecting multiple options.
+     */
     get multiSelect() {
         return this.class.contains(CLASS_MULTI_SELECT);
     }
 
+    /**
+     * Sets the value of the SelectInput. For multi-select inputs, this should be an array.
+     */
     set value(value) {
         this._values = null;
 
@@ -1178,6 +1255,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
         this._updateValue(value);
     }
 
+    /**
+     * Gets the value of the SelectInput. For multi-select inputs, this returns an array.
+     */
     get value() {
         if (!this.multiSelect) {
             return this._value;
@@ -1194,6 +1274,10 @@ class SelectInput extends Element implements IBindable, IFocusable {
         return result;
     }
 
+    /**
+     * Sets multiple values on the SelectInput. If all values are the same, the SelectInput will
+     * display that value. Otherwise, it will display a "multiple values" state.
+     */
     /* eslint accessor-pairs: 0 */
     set values(values: Array<any>) {
         values = values.map((value) => {
@@ -1235,18 +1319,30 @@ class SelectInput extends Element implements IBindable, IFocusable {
         }
     }
 
+    /**
+     * Sets the placeholder text for the input field.
+     */
     set placeholder(value) {
         this._input.placeholder = value;
     }
 
+    /**
+     * Gets the placeholder text for the input field.
+     */
     get placeholder() {
         return this._input.placeholder;
     }
 
+    /**
+     * Sets whether the SelectInput should flash when its value changes.
+     */
     set renderChanges(value: boolean) {
         this._renderChanges = value;
     }
 
+    /**
+     * Gets whether the SelectInput should flash when its value changes.
+     */
     get renderChanges() {
         return this._renderChanges;
     }

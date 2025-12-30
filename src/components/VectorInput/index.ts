@@ -40,6 +40,48 @@ interface VectorInputArgs extends ElementArgs, IBindableArgs, IMultiPlaceholderA
  * A vector input. The vector can have 2 to 4 dimensions with each dimension being a {@link NumericInput}.
  */
 class VectorInput extends Element implements IBindable, IFocusable, IMultiPlaceholder {
+    /**
+     * Fired when the value of the VectorInput changes.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const vectorInput = new VectorInput({ dimensions: 3 });
+     * vectorInput.on('change', (value: number[]) => {
+     *     console.log('Value changed to:', value);
+     * });
+     * ```
+     */
+    public static readonly EVENT_CHANGE = 'change';
+
+    /**
+     * Fired when the VectorInput receives focus.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const vectorInput = new VectorInput();
+     * vectorInput.on('focus', () => {
+     *     console.log('VectorInput focused');
+     * });
+     * ```
+     */
+    public static readonly EVENT_FOCUS = 'focus';
+
+    /**
+     * Fired when the VectorInput loses focus.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const vectorInput = new VectorInput();
+     * vectorInput.on('blur', () => {
+     *     console.log('VectorInput blurred');
+     * });
+     * ```
+     */
+    public static readonly EVENT_BLUR = 'blur';
+
     protected _inputs: NumericInput[] = [];
 
     protected _applyingChange = false;
@@ -207,16 +249,26 @@ class VectorInput extends Element implements IBindable, IFocusable, IMultiPlaceh
         }
     }
 
+    /**
+     * Focuses the first input element.
+     */
     focus() {
         this._inputs[0].focus();
     }
 
+    /**
+     * Unfocuses (blurs) all input elements.
+     */
     blur() {
         for (const input of this._inputs) {
             input.blur();
         }
     }
 
+    /**
+     * Sets the value of the VectorInput. This should be an array of numbers matching the
+     * dimensions of the vector (e.g. [x, y] for 2D, [x, y, z] for 3D).
+     */
     set value(value) {
         if (typeof value === 'string') {
             try {
@@ -243,10 +295,18 @@ class VectorInput extends Element implements IBindable, IFocusable, IMultiPlaceh
         }
     }
 
+    /**
+     * Gets the value of the VectorInput as an array of numbers.
+     */
     get value() {
         return this._inputs.map(input => input.value);
     }
 
+    /**
+     * Sets multiple values on the VectorInput. Each value should be an array representing the
+     * vector dimensions. If all values are the same, the VectorInput will display that value.
+     * Otherwise, it will display a "multiple values" state.
+     */
     /* eslint accessor-pairs: 0 */
     set values(values: Array<any>) {
         // create an array for each dimension (e.g. one array for x one for y one for z)
@@ -259,8 +319,9 @@ class VectorInput extends Element implements IBindable, IFocusable, IMultiPlaceh
         });
     }
 
-    // override binding setter to set a binding clone to
-    // each input
+    /**
+     * Sets the Binding object for the VectorInput. The binding is cloned for each input.
+     */
     set binding(value) {
         super.binding = value;
         for (const input of this._inputs) {
@@ -268,35 +329,49 @@ class VectorInput extends Element implements IBindable, IFocusable, IMultiPlaceh
         }
     }
 
-    // we have to override the getter too because
-    // we have overridden the setter
+    /**
+     * Gets the Binding object for the VectorInput.
+     */
     get binding() {
         return super.binding;
     }
 
+    /**
+     * Sets the placeholder text for all inputs. Can be a single string applied to all inputs,
+     * or an array of strings for each input.
+     */
     set placeholder(value: string | string[]) {
         for (let i = 0; i < this._inputs.length; i++) {
             this._inputs[i].placeholder = (Array.isArray(value) ? value[i] : value) || null;
         }
     }
 
+    /**
+     * Gets the placeholder text of all inputs as an array.
+     */
     get placeholder(): string[] {
         return this._inputs.map(input => input.placeholder);
     }
 
     /**
-     * Get the array of number inputs owned by this vector.
+     * Gets the array of NumericInput elements owned by this vector.
      */
     get inputs() {
         return this._inputs.slice();
     }
 
+    /**
+     * Sets whether inputs should flash when their values change.
+     */
     set renderChanges(value) {
         for (const input of this._inputs) {
             input.renderChanges = value;
         }
     }
 
+    /**
+     * Gets whether inputs should flash when their values change.
+     */
     get renderChanges() {
         return this._inputs[0].renderChanges;
     }

@@ -116,14 +116,24 @@ class Label extends Element implements IPlaceholder, IBindable {
         return this._text;
     }
 
+    /**
+     * Sets the value of the Label. This is an alias for {@link Label#text}.
+     */
     set value(value: string) {
         this.text = value;
     }
 
+    /**
+     * Gets the value of the Label. This is an alias for {@link Label#text}.
+     */
     get value(): string {
         return this.text;
     }
 
+    /**
+     * Sets multiple values on the Label. If all values are the same, the Label will display that
+     * value. Otherwise, it will be empty and display a "multiple values" state.
+     */
     /* eslint accessor-pairs: 0 */
     set values(values: string[]) {
         const different = values.some(v => v !== values[0]);
@@ -136,6 +146,9 @@ class Label extends Element implements IPlaceholder, IBindable {
         }
     }
 
+    /**
+     * Sets the placeholder text of the Label.
+     */
     set placeholder(value: string) {
         if (value) {
             this.dom.setAttribute('placeholder', value);
@@ -144,14 +157,23 @@ class Label extends Element implements IPlaceholder, IBindable {
         }
     }
 
+    /**
+     * Gets the placeholder text of the Label.
+     */
     get placeholder(): string {
         return this.dom.getAttribute('placeholder');
     }
 
+    /**
+     * Sets whether the Label should flash when its value changes.
+     */
     set renderChanges(value: boolean) {
         this._renderChanges = value;
     }
 
+    /**
+     * Gets whether the Label should flash when its value changes.
+     */
     get renderChanges(): boolean {
         return this._renderChanges;
     }
