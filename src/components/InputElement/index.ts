@@ -183,6 +183,12 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
         }
     };
 
+    /**
+     * Focuses the input element. If the input contains text and select is `true`, the text will be
+     * selected on focus.
+     *
+     * @param select - If `true`, the input text will be selected.
+     */
     focus(select?: boolean) {
         this._domInput.focus();
         if (select) {
@@ -190,6 +196,9 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
         }
     }
 
+    /**
+     * Unfocuses (blurs) the input element.
+     */
     blur() {
         this._domInput.blur();
     }

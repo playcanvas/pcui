@@ -22,7 +22,7 @@ interface NumericInputArgs extends InputElementArgs {
      */
     max?: number,
     /**
-     * Sets the decimal precision of this field. Defaults to 2.
+     * Sets the decimal precision of this field. Defaults to 7.
      */
     precision?: number,
     /**
@@ -63,6 +63,48 @@ interface NumericInputArgs extends InputElementArgs {
  * via a click and drag. The slider can be disabled by setting the `hideSlider` argument to `true`.
  */
 class NumericInput extends InputElement {
+    /**
+     * Fired when the value of the NumericInput changes.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const numericInput = new NumericInput();
+     * numericInput.on('change', (value: number) => {
+     *     console.log('Value changed to:', value);
+     * });
+     * ```
+     */
+    public static readonly EVENT_CHANGE = 'change';
+
+    /**
+     * Fired when the user starts dragging the slider.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const numericInput = new NumericInput();
+     * numericInput.on('slider:mousedown', (evt: MouseEvent) => {
+     *     console.log('Slider drag started');
+     * });
+     * ```
+     */
+    public static readonly EVENT_SLIDER_MOUSEDOWN = 'slider:mousedown';
+
+    /**
+     * Fired when the user stops dragging the slider.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const numericInput = new NumericInput();
+     * numericInput.on('slider:mouseup', () => {
+     *     console.log('Slider drag ended');
+     * });
+     * ```
+     */
+    public static readonly EVENT_SLIDER_MOUSEUP = 'slider:mouseup';
+
     protected _min: number;
 
     protected _max: number;
@@ -346,6 +388,9 @@ class NumericInput extends InputElement {
         return different;
     }
 
+    /**
+     * Sets the value of the NumericInput.
+     */
     set value(value: number) {
         value = this._normalizeValue(value);
         const forceUpdate = this.class.contains(CLASS_MULTIPLE_VALUES) && value === null && this._allowNull;
@@ -359,11 +404,18 @@ class NumericInput extends InputElement {
         }
     }
 
+    /**
+     * Gets the value of the NumericInput.
+     */
     get value() : number {
         const val = this._domInput.value;
         return val !== '' ? parseFloat(val) : null;
     }
 
+    /**
+     * Sets multiple values on the input. If all values are the same, the input will display that
+     * value. Otherwise, it will be empty and display a "multiple values" state.
+     */
     /* eslint accessor-pairs: 0 */
     set values(values: number[]) {
         const normalizedValues = values.map(v => this._normalizeValue(v));

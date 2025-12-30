@@ -80,10 +80,16 @@ class Button extends Element {
         super._onClick(evt);
     }
 
+    /**
+     * Focuses the button.
+     */
     focus() {
         this.dom.focus();
     }
 
+    /**
+     * Unfocuses (blurs) the button.
+     */
     blur() {
         this.dom.blur();
     }

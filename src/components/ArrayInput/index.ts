@@ -64,7 +64,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
      * });
      * ```
      */
-    public static readonly EVENT_LINK_ELEMENT: 'linkElement';
+    public static readonly EVENT_LINK_ELEMENT = 'linkElement';
 
     /**
      * Fired when an array element is unlinked from observers.
@@ -77,7 +77,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
      * });
      * ```
      */
-    public static readonly EVENT_UNLINK_ELEMENT: 'unlinkElement';
+    public static readonly EVENT_UNLINK_ELEMENT = 'unlinkElement';
 
     static DEFAULTS = {
         boolean: false,
@@ -570,6 +570,9 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         return super.binding;
     }
 
+    /**
+     * Sets the value of the ArrayInput. Must be an array.
+     */
     set value(value) {
         if (!Array.isArray(value)) {
             value = [];
@@ -582,11 +585,17 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         this._updateValues(new Array(this._values.length || 1).fill(value), true);
     }
 
+    /**
+     * Gets the value of the ArrayInput as an array.
+     */
     get value() {
         // construct value from values of array elements
         return this._arrayElements.map((entry: { element: { value: any; }; }) => entry.element.value);
     }
 
+    /**
+     * Sets multiple array values on the ArrayInput.
+     */
     /* eslint accessor-pairs: 0 */
     set values(values: any) {
         if (utils.arrayEquals(this._values, values)) return;
@@ -594,6 +603,9 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         this._updateValues(values, false);
     }
 
+    /**
+     * Sets whether array elements should flash when their values change.
+     */
     set renderChanges(value) {
         this._renderChanges = value;
         this._arrayElements.forEach((entry: { element: { renderChanges: any; }; }) => {
@@ -601,6 +613,9 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         });
     }
 
+    /**
+     * Gets whether array elements should flash when their values change.
+     */
     get renderChanges() {
         return this._renderChanges;
     }

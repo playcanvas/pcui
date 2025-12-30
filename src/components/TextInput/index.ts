@@ -111,6 +111,10 @@ class TextInput extends InputElement {
         return this._domInput.value;
     }
 
+    /**
+     * Sets multiple values on the input. If all values are the same, the input will display that
+     * value. Otherwise, it will be empty and display a "multiple values" state.
+     */
     /* eslint accessor-pairs: 0 */
     set values(values: Array<string>) {
         const different = values.some(v => v !== values[0]);
