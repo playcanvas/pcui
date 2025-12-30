@@ -141,6 +141,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
      * ```
      */
     public static readonly EVENT_BLUR = 'blur';
+
     protected _container: Container;
 
     protected _containerValue: Container;

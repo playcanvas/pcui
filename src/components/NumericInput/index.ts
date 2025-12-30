@@ -104,6 +104,7 @@ class NumericInput extends InputElement {
      * ```
      */
     public static readonly EVENT_SLIDER_MOUSEUP = 'slider:mouseup';
+
     protected _min: number;
 
     protected _max: number;
