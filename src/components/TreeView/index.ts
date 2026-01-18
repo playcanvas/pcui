@@ -820,8 +820,10 @@ class TreeView extends Container {
                 const rect = contentsElement.getBoundingClientRect();
                 // Check if pointer Y is within this item's vertical bounds
                 if (evt.clientY >= rect.top && evt.clientY <= rect.bottom) {
+                    // DOM structure: .pcui-treeview-item > .pcui-treeview-item-contents
+                    // PCUI convention: each Element's DOM node has a `ui` property referencing the Element instance
                     const item = (contentsElement.parentElement as any)?.ui as TreeViewItem;
-                    // Skip if this is one of the items being dragged
+                    // Skip if this is one of the items being dragged (instanceof also validates the ui property exists)
                     if (item && item instanceof TreeViewItem && this._dragItems.indexOf(item) === -1) {
                         this._onChildDragOver(evt, item);
                         foundTarget = true;
