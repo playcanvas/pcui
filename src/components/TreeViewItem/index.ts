@@ -195,6 +195,7 @@ class TreeViewItem extends Container {
         dom.addEventListener('blur', this._onContentBlur);
         dom.addEventListener('keydown', this._onContentKeyDown);
         dom.addEventListener('dragstart', this._onContentDragStart);
+        dom.addEventListener('dragover', this._onContentDragOver);
         dom.addEventListener('pointerdown', this._onContentPointerDown);
         dom.addEventListener('pointerover', this._onContentPointerOver);
         dom.addEventListener('click', this._onContentClick);
@@ -210,6 +211,7 @@ class TreeViewItem extends Container {
         dom.removeEventListener('blur', this._onContentBlur);
         dom.removeEventListener('keydown', this._onContentKeyDown);
         dom.removeEventListener('dragstart', this._onContentDragStart);
+        dom.removeEventListener('dragover', this._onContentDragOver);
         dom.removeEventListener('pointerdown', this._onContentPointerDown);
         dom.removeEventListener('pointerover', this._onContentPointerOver);
         dom.removeEventListener('click', this._onContentClick);
@@ -324,6 +326,16 @@ class TreeViewItem extends Container {
         this._treeView._onChildDragStart(evt, this);
 
         window.addEventListener('pointerup', this._onContentPointerUp);
+    };
+
+    // HTML5 dragover fires continuously while dragging over an element (unlike pointerover)
+    protected _onContentDragOver = (evt: DragEvent) => {
+        evt.preventDefault(); // Required to allow drop
+        evt.stopPropagation();
+
+        if (this._treeView) {
+            this._treeView._onChildDragOver(evt, this);
+        }
     };
 
     protected _onContentClick = (evt: MouseEvent) => {

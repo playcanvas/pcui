@@ -143,13 +143,9 @@
     }
 }
 
-.pcui-treeview-item-dragged {
-    pointer-events: none; // Allow hit-testing to pass through to items behind during drag
-
-    > .pcui-treeview-item-contents {
-        background-color: rgba($bcg-dark, 0.5);
-        color: $text-primary;
-    }
+.pcui-treeview-item-dragged > .pcui-treeview-item-contents {
+    background-color: rgba($bcg-dark, 0.5);
+    color: $text-primary;
 }
 
 .pcui-treeview-drag-handle {
