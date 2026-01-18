@@ -284,7 +284,8 @@ class TreeViewItem extends Container {
 
     protected _onContentPointerUp = (evt: PointerEvent) => {
         // Only handle the pointer that initiated the drag (ignore other touches in multi-touch)
-        if (evt.pointerId !== this._dragPointerId) return;
+        // _dragPointerId === -1 means mouse drag via dragstart (matches any pointer)
+        if (this._dragPointerId !== -1 && evt.pointerId !== this._dragPointerId) return;
 
         evt.stopPropagation();
         evt.preventDefault();
