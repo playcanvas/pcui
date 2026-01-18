@@ -565,7 +565,7 @@ class TreeView extends Container {
     }
 
     // Called when we start dragging a TreeViewItem.
-    protected _onChildDragStart(evt: PointerEvent, item: TreeViewItem) {
+    protected _onChildDragStart(evt: PointerEvent | DragEvent, item: TreeViewItem) {
         if (!this.allowDrag || this._dragging) return;
 
         this._dragItems = [];
