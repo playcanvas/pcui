@@ -44,6 +44,7 @@
     align-items: center;
     height: 24px;
     box-sizing: border-box;
+    touch-action: none; // Prevent browser from cancelling pointer events for touch gestures
 
     &:hover {
         cursor: pointer;
@@ -156,6 +157,7 @@
     z-index: 4;
     margin-top: -1px;
     margin-left: -1px;
+    pointer-events: none; // Don't interfere with hit-testing during drag
 
     &.before {
         border-top: 4px solid $text-active;
