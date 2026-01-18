@@ -216,11 +216,6 @@ class TreeView extends Container {
         window.addEventListener('pointerdown', this._updateModifierKeys);
 
         this.dom.addEventListener('pointerleave', this._onPointerLeave);
-
-        this._dragHandle.dom.addEventListener('pointermove', this._onDragMove);
-        this._dragHandle.on('destroy', (dom) => {
-            dom.removeEventListener('pointermove', this._onDragMove);
-        });
     }
 
     destroy() {
