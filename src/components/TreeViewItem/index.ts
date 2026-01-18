@@ -142,6 +142,8 @@ class TreeViewItem extends Container {
 
     protected _open = false;
 
+    protected _dragPointerId: number = -1;
+
     /**
      * Creates a new TreeViewItem.
      *
@@ -273,6 +275,7 @@ class TreeViewItem extends Container {
         if (evt.pointerType !== 'mouse') {
             if (this.class.contains(CLASS_RENAME)) return;
 
+            this._dragPointerId = evt.pointerId;
             this._treeView._onChildDragStart(evt, this);
 
             window.addEventListener('pointerup', this._onContentPointerUp);
@@ -280,9 +283,13 @@ class TreeViewItem extends Container {
     };
 
     protected _onContentPointerUp = (evt: PointerEvent) => {
+        // Only handle the pointer that initiated the drag (ignore other touches in multi-touch)
+        if (evt.pointerId !== this._dragPointerId) return;
+
         evt.stopPropagation();
         evt.preventDefault();
 
+        this._dragPointerId = -1;
         window.removeEventListener('pointerup', this._onContentPointerUp);
         if (this._treeView) {
             this._treeView._onChildDragEnd(evt, this);
