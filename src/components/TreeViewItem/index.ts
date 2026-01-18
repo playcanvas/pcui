@@ -144,6 +144,13 @@ class TreeViewItem extends Container {
 
     protected _dragPointerId: number = -1;
 
+    // For touch/pen drag threshold - only start drag after moving beyond this distance
+    protected _dragStartX: number = 0;
+
+    protected _dragStartY: number = 0;
+
+    protected _dragThresholdMet: boolean = false;
+
     /**
      * Creates a new TreeViewItem.
      *
@@ -218,6 +225,7 @@ class TreeViewItem extends Container {
         dom.removeEventListener('dblclick', this._onContentDblClick);
         dom.removeEventListener('contextmenu', this._onContentContextMenu);
 
+        window.removeEventListener('pointermove', this._onContentPointerMove);
         window.removeEventListener('pointerup', this._onContentPointerUp);
 
         super.destroy();
@@ -273,14 +281,36 @@ class TreeViewItem extends Container {
         this._treeView._updateModifierKeys(evt);
         evt.stopPropagation();
 
-        // For touch/pen input, start drag immediately since dragstart doesn't fire reliably
+        // For touch/pen input, set up for potential drag (don't start until threshold is met)
         if (evt.pointerType !== 'mouse') {
             if (this.class.contains(CLASS_RENAME)) return;
 
             this._dragPointerId = evt.pointerId;
-            this._treeView._onChildDragStart(evt, this);
+            this._dragStartX = evt.clientX;
+            this._dragStartY = evt.clientY;
+            this._dragThresholdMet = false;
 
+            window.addEventListener('pointermove', this._onContentPointerMove);
             window.addEventListener('pointerup', this._onContentPointerUp);
+        }
+    };
+
+    protected _onContentPointerMove = (evt: PointerEvent) => {
+        // Only handle the pointer that initiated the potential drag
+        if (evt.pointerId !== this._dragPointerId) return;
+
+        // Check if drag threshold has been met (5 pixels)
+        const dx = evt.clientX - this._dragStartX;
+        const dy = evt.clientY - this._dragStartY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (!this._dragThresholdMet && distance >= 5) {
+            this._dragThresholdMet = true;
+
+            // Now actually start the drag
+            if (this._treeView) {
+                this._treeView._onChildDragStart(evt, this);
+            }
         }
     };
 
@@ -290,13 +320,21 @@ class TreeViewItem extends Container {
         if (this._dragPointerId !== -1 && evt.pointerId !== this._dragPointerId) return;
 
         evt.stopPropagation();
-        evt.preventDefault();
+
+        window.removeEventListener('pointermove', this._onContentPointerMove);
+        window.removeEventListener('pointerup', this._onContentPointerUp);
+
+        // Only end drag if threshold was met (i.e., drag actually started)
+        // Otherwise it was just a tap - don't prevent default so click events fire
+        if (this._dragThresholdMet) {
+            evt.preventDefault();
+            if (this._treeView) {
+                this._treeView._onChildDragEnd(evt, this);
+            }
+        }
 
         this._dragPointerId = -1;
-        window.removeEventListener('pointerup', this._onContentPointerUp);
-        if (this._treeView) {
-            this._treeView._onChildDragEnd(evt, this);
-        }
+        this._dragThresholdMet = false;
     };
 
     protected _onContentPointerOver = (evt: PointerEvent) => {
