@@ -315,18 +315,21 @@ class TreeViewItem extends Container {
     };
 
     protected _onContentPointerUp = (evt: PointerEvent) => {
-        // Only handle the pointer that initiated the drag (ignore other touches in multi-touch)
-        // _dragPointerId === -1 means mouse drag via dragstart (matches any pointer)
-        if (this._dragPointerId !== -1 && evt.pointerId !== this._dragPointerId) return;
+        // _dragPointerId === -1 means mouse drag via HTML5 dragstart
+        // _dragPointerId !== -1 means touch/pen drag - only handle matching pointer
+        const isMouseDrag = this._dragPointerId === -1;
+        const isTouchDrag = this._dragPointerId !== -1;
+
+        if (isTouchDrag && evt.pointerId !== this._dragPointerId) return;
 
         evt.stopPropagation();
 
         window.removeEventListener('pointermove', this._onContentPointerMove);
         window.removeEventListener('pointerup', this._onContentPointerUp);
 
-        // Only end drag if threshold was met (i.e., drag actually started)
-        // Otherwise it was just a tap - don't prevent default so click events fire
-        if (this._dragThresholdMet) {
+        // For mouse: always end the drag (HTML5 drag-and-drop handles the drag)
+        // For touch/pen: only end drag if threshold was met, otherwise it was just a tap
+        if (isMouseDrag || this._dragThresholdMet) {
             evt.preventDefault();
             if (this._treeView) {
                 this._treeView._onChildDragEnd(evt, this);
