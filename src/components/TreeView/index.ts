@@ -810,21 +810,29 @@ class TreeView extends Container {
             this._dragScroll = 1;
         }
 
-        // For touch/pen, use hit-testing to find drag-over target since pointerover doesn't fire
+        // For touch/pen, find drop target by Y coordinate since finger may still be over dragged item
+        // (items are stacked vertically and don't overlap, so elementsFromPoint doesn't help)
         if (evt.pointerType !== 'mouse') {
-            const element = document.elementFromPoint(evt.clientX, evt.clientY);
-            if (element) {
-                // Find the TreeViewItem contents element
-                const contentsElement = element.closest('.pcui-treeview-item-contents');
-                if (contentsElement) {
+            const contentsElements = this.dom.querySelectorAll('.pcui-treeview-item-contents:not(.pcui-treeview-item-dragged > .pcui-treeview-item-contents)');
+            let foundTarget = false;
+
+            for (const contentsElement of contentsElements) {
+                const rect = contentsElement.getBoundingClientRect();
+                // Check if pointer Y is within this item's vertical bounds
+                if (evt.clientY >= rect.top && evt.clientY <= rect.bottom) {
                     const item = (contentsElement.parentElement as any)?.ui as TreeViewItem;
-                    if (item && item instanceof TreeViewItem) {
+                    // Skip if this is one of the items being dragged
+                    if (item && item instanceof TreeViewItem && this._dragItems.indexOf(item) === -1) {
                         this._onChildDragOver(evt, item);
+                        foundTarget = true;
+                        break;
                     }
-                } else {
-                    this._dragOverItem = null;
-                    this._updateDragHandle();
                 }
+            }
+
+            if (!foundTarget) {
+                this._dragOverItem = null;
+                this._updateDragHandle();
             }
         }
     };

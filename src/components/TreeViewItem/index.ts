@@ -301,7 +301,10 @@ class TreeViewItem extends Container {
         evt.stopPropagation();
 
         if (this._treeView) {
-            this._treeView._onChildDragOver(evt, this);
+            // Skip drag-over handling for touch/pen during drags - hit-testing in _onPointerMove handles this
+            if (!(this._treeView.isDragging && evt.pointerType !== 'mouse')) {
+                this._treeView._onChildDragOver(evt, this);
+            }
         }
 
         this.emit('hover', evt);
