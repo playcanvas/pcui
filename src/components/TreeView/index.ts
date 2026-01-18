@@ -213,13 +213,13 @@ class TreeView extends Container {
 
         window.addEventListener('keydown', this._updateModifierKeys);
         window.addEventListener('keyup', this._updateModifierKeys);
-        window.addEventListener('mousedown', this._updateModifierKeys);
+        window.addEventListener('pointerdown', this._updateModifierKeys);
 
-        this.dom.addEventListener('mouseleave', this._onMouseLeave);
+        this.dom.addEventListener('pointerleave', this._onPointerLeave);
 
-        this._dragHandle.dom.addEventListener('mousemove', this._onDragMove);
+        this._dragHandle.dom.addEventListener('pointermove', this._onDragMove);
         this._dragHandle.on('destroy', (dom) => {
-            dom.removeEventListener('mousemove', this._onDragMove);
+            dom.removeEventListener('pointermove', this._onDragMove);
         });
     }
 
@@ -228,10 +228,10 @@ class TreeView extends Container {
 
         window.removeEventListener('keydown', this._updateModifierKeys);
         window.removeEventListener('keyup', this._updateModifierKeys);
-        window.removeEventListener('mousedown', this._updateModifierKeys);
-        window.removeEventListener('mousemove', this._onMouseMove);
+        window.removeEventListener('pointerdown', this._updateModifierKeys);
+        window.removeEventListener('pointermove', this._onPointerMove);
 
-        this.dom.removeEventListener('mouseleave', this._onMouseLeave);
+        this.dom.removeEventListener('pointerleave', this._onPointerLeave);
 
         if (this._dragScrollInterval) {
             window.clearInterval(this._dragScrollInterval);
@@ -241,7 +241,7 @@ class TreeView extends Container {
         super.destroy();
     }
 
-    protected _updateModifierKeys = (evt: KeyboardEvent | MouseEvent) => {
+    protected _updateModifierKeys = (evt: KeyboardEvent | PointerEvent) => {
         this._pressedCtrl = evt.ctrlKey || evt.metaKey;
         this._pressedShift = evt.shiftKey;
     };
@@ -565,7 +565,7 @@ class TreeView extends Container {
     }
 
     // Called when we start dragging a TreeViewItem.
-    protected _onChildDragStart(evt: MouseEvent, item: TreeViewItem) {
+    protected _onChildDragStart(evt: PointerEvent, item: TreeViewItem) {
         if (!this.allowDrag || this._dragging) return;
 
         this._dragItems = [];
@@ -622,7 +622,7 @@ class TreeView extends Container {
     }
 
     // Called when we stop dragging a TreeViewItem.
-    protected _onChildDragEnd(evt: MouseEvent, item: TreeViewItem) {
+    protected _onChildDragEnd(evt: PointerEvent, item: TreeViewItem) {
         if (!this.allowDrag || !this._dragging) return;
 
         this._dragItems.forEach(item => item.class.remove(CLASS_DRAGGED_ITEM));
@@ -769,7 +769,7 @@ class TreeView extends Container {
     }
 
     // Called when we drag over a TreeViewItem.
-    protected _onChildDragOver(evt: MouseEvent, item: TreeViewItem) {
+    protected _onChildDragOver(evt: PointerEvent, item: TreeViewItem) {
         if (!this._allowDrag || !this._dragging) return;
 
         if (item.allowDrop && this._dragItems.indexOf(item) === -1) {
@@ -782,16 +782,16 @@ class TreeView extends Container {
         this._onDragMove(evt);
     }
 
-    // Called when the mouse cursor leaves the tree view.
-    protected _onMouseLeave = (evt: MouseEvent) => {
+    // Called when the pointer leaves the tree view.
+    protected _onPointerLeave = (evt: PointerEvent) => {
         if (!this._allowDrag || !this._dragging) return;
 
         this._dragOverItem = null;
         this._updateDragHandle();
     };
 
-    // Called when the mouse moves while dragging
-    protected _onMouseMove = (evt: MouseEvent) => {
+    // Called when the pointer moves while dragging
+    protected _onPointerMove = (evt: PointerEvent) => {
         if (!this._dragging) return;
 
         // Determine if we need to scroll the treeview if we are dragging towards the edges
@@ -814,6 +814,24 @@ class TreeView extends Container {
         } else if (evt.pageY > bottom - 32 && this._dragScrollElement.dom.scrollHeight > this._dragScrollElement.height + this._dragScrollElement.dom.scrollTop) {
             this._dragScroll = 1;
         }
+
+        // For touch/pen, use hit-testing to find drag-over target since pointerover doesn't fire
+        if (evt.pointerType !== 'mouse') {
+            const element = document.elementFromPoint(evt.clientX, evt.clientY);
+            if (element) {
+                // Find the TreeViewItem contents element
+                const contentsElement = element.closest('.pcui-treeview-item-contents');
+                if (contentsElement) {
+                    const item = (contentsElement.parentElement as any)?.ui as TreeViewItem;
+                    if (item && item instanceof TreeViewItem) {
+                        this._onChildDragOver(evt, item);
+                    }
+                } else {
+                    this._dragOverItem = null;
+                    this._updateDragHandle();
+                }
+            }
+        }
     };
 
     // Scroll treeview if we are dragging towards the edges
@@ -827,7 +845,7 @@ class TreeView extends Container {
     }
 
     // Called while we drag the drag handle
-    protected _onDragMove = (evt: MouseEvent) => {
+    protected _onDragMove = (evt: PointerEvent) => {
         evt.preventDefault();
         evt.stopPropagation();
 
@@ -1112,15 +1130,13 @@ class TreeView extends Container {
             this._dragging = true;
             this._updateDragHandle();
 
-            // handle mouse move to scroll when dragging if necessary
-            if (this.scrollable || this._dragScrollElement !== this) {
-                window.removeEventListener('mousemove', this._onMouseMove);
-                window.addEventListener('mousemove', this._onMouseMove);
-                if (!this._dragScrollInterval) {
-                    this._dragScrollInterval = window.setInterval(() => {
-                        this._scrollWhileDragging();
-                    }, 1000 / 60);
-                }
+            // Handle pointer move for scrolling and touch drag-over detection
+            window.removeEventListener('pointermove', this._onPointerMove);
+            window.addEventListener('pointermove', this._onPointerMove);
+            if (!this._dragScrollInterval) {
+                this._dragScrollInterval = window.setInterval(() => {
+                    this._scrollWhileDragging();
+                }, 1000 / 60);
             }
         } else {
             this._dragOverItem = null;
@@ -1128,7 +1144,7 @@ class TreeView extends Container {
 
             this._dragging = false;
 
-            window.removeEventListener('mousemove', this._onMouseMove);
+            window.removeEventListener('pointermove', this._onPointerMove);
             if (this._dragScrollInterval) {
                 window.clearInterval(this._dragScrollInterval);
                 this._dragScrollInterval = null;
