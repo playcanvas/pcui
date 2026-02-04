@@ -84,7 +84,7 @@ class NumericInput extends InputElement {
      * @example
      * ```ts
      * const numericInput = new NumericInput();
-     * numericInput.on('slider:mousedown', (evt: MouseEvent) => {
+     * numericInput.on('slider:mousedown', (evt: PointerEvent) => {
      *     console.log('Slider drag started');
      * });
      * ```
@@ -130,6 +130,8 @@ class NumericInput extends InputElement {
     protected _sliderMovement: number;
 
     protected _sliderUsed = false;
+
+    protected _sliderPointerId: number = null;
 
     /**
      * Creates a new NumericInput.
@@ -183,8 +185,8 @@ class NumericInput extends InputElement {
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
             this.dom.append(this._sliderControl.dom);
 
-            this._sliderControl.dom.addEventListener('mousedown', this._onSliderMouseDown);
-            this._sliderControl.dom.addEventListener('mouseup', this._onSliderMouseUp);
+            this._sliderControl.dom.addEventListener('pointerdown', this._onSliderPointerDown);
+            this._sliderControl.dom.addEventListener('pointerup', this._onSliderPointerUp);
 
             document.addEventListener('pointerlockchange', this._onPointerLockChange, false);
         }
@@ -194,10 +196,10 @@ class NumericInput extends InputElement {
         if (this.destroyed) return;
 
         if (this._sliderControl) {
-            this._sliderControl.dom.removeEventListener('mousedown', this._onSliderMouseDown);
-            this._sliderControl.dom.removeEventListener('mouseup', this._onSliderMouseUp);
+            this._sliderControl.dom.removeEventListener('pointerdown', this._onSliderPointerDown);
+            this._sliderControl.dom.removeEventListener('pointerup', this._onSliderPointerUp);
 
-            this._sliderControl.dom.removeEventListener('mousemove', this._onSliderMouseMove, false);
+            this._sliderControl.dom.removeEventListener('pointermove', this._onSliderPointerMove, false);
             this._sliderControl.dom.removeEventListener('wheel', this._onSliderMouseWheel);
 
             document.removeEventListener('pointerlockchange', this._onPointerLockChange, false);
@@ -216,11 +218,14 @@ class NumericInput extends InputElement {
         this._updatePosition(evt.deltaY, evt.shiftKey);
     };
 
-    protected _onSliderMouseMove = (evt: MouseEvent) => {
+    protected _onSliderPointerMove = (evt: PointerEvent) => {
         this._updatePosition(evt.movementX, evt.shiftKey);
     };
 
-    protected _onSliderMouseDown = (evt: MouseEvent) => {
+    protected _onSliderPointerDown = (evt: PointerEvent) => {
+        if (this._sliderPointerId !== null) return;
+
+        this._sliderPointerId = evt.pointerId;
         this._sliderControl.dom.requestPointerLock();
         this._sliderMovement = 0.0;
         this._sliderPrevValue = this.value;
@@ -236,7 +241,10 @@ class NumericInput extends InputElement {
         this.emit('slider:mousedown', evt);
     };
 
-    protected _onSliderMouseUp = () => {
+    protected _onSliderPointerUp = (evt: PointerEvent) => {
+        if (this._sliderPointerId !== evt.pointerId) return;
+
+        this._sliderPointerId = null;
         document.exitPointerLock();
         if (!this._sliderUsed) return;
         this._sliderUsed = false;
@@ -290,11 +298,11 @@ class NumericInput extends InputElement {
 
     protected _onPointerLockChange = () => {
         if (this._isScrolling()) {
-            this._sliderControl.dom.addEventListener('mousemove', this._onSliderMouseMove, false);
+            this._sliderControl.dom.addEventListener('pointermove', this._onSliderPointerMove, false);
             this._sliderControl.dom.addEventListener('wheel', this._onSliderMouseWheel, { passive: true });
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
         } else {
-            this._sliderControl.dom.removeEventListener('mousemove', this._onSliderMouseMove, false);
+            this._sliderControl.dom.removeEventListener('pointermove', this._onSliderPointerMove, false);
             this._sliderControl.dom.removeEventListener('wheel', this._onSliderMouseWheel);
             this._sliderControl.class.remove(CLASS_NUMERIC_INPUT_SLIDER_CONTROL_ACTIVE);
         }
