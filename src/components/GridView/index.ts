@@ -73,6 +73,8 @@ class GridView extends Container {
         // Default options for GridView layout
         this._multiSelect = args.multiSelect ?? true;
         this._allowDeselect = args.allowDeselect ?? true;
+
+        this.dom.addEventListener('keydown', this._onKeyDown);
     }
 
     protected _onAppendGridViewItem(item: GridViewItem) {
@@ -176,6 +178,119 @@ class GridView extends Container {
         }
     }
 
+    protected _onKeyDown = (evt: KeyboardEvent) => {
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(evt.key) === -1) return;
+
+        const element = evt.target as HTMLElement;
+        if (element.tagName === 'INPUT') return;
+
+        // Walk up from the event target to find the GridViewItem
+        let targetElement: HTMLElement = element;
+        let item: GridViewItem | null = null;
+        while (targetElement && targetElement !== this.dom) {
+            if ((targetElement as any).ui instanceof GridViewItem) {
+                item = (targetElement as any).ui;
+                break;
+            }
+            targetElement = targetElement.parentElement;
+        }
+
+        if (!item) return;
+
+        evt.preventDefault();
+        evt.stopPropagation();
+
+        if (!item.allowSelect) return;
+        let target: GridViewItem | null = null;
+
+        if (this._vertical) {
+            switch (evt.key) {
+                case 'ArrowUp': target = item.previousSibling; break;
+                case 'ArrowDown': target = item.nextSibling; break;
+                case 'ArrowLeft': target = this._findItemInAdjacentRow(item, -1); break;
+                case 'ArrowRight': target = this._findItemInAdjacentRow(item, 1); break;
+            }
+        } else {
+            switch (evt.key) {
+                case 'ArrowLeft': target = item.previousSibling; break;
+                case 'ArrowRight': target = item.nextSibling; break;
+                case 'ArrowUp': target = this._findItemInAdjacentRow(item, -1); break;
+                case 'ArrowDown': target = this._findItemInAdjacentRow(item, 1); break;
+            }
+        }
+
+        if (target) {
+            this._selectSingleItem(target);
+        }
+    };
+
+    protected _selectSingleItem(item: GridViewItem) {
+        let i = this._selected.length;
+        while (i--) {
+            if (this._selected[i] && this._selected[i] !== item) {
+                this._selected[i].selected = false;
+            }
+        }
+        item.selected = true;
+    }
+
+    protected _findItemInAdjacentRow(item: GridViewItem, direction: number): GridViewItem | null {
+        const positionProp = this._vertical ? 'offsetLeft' : 'offsetTop';
+        const itemPos = (item.dom as HTMLElement)[positionProp];
+
+        // Determine the index of the current item within its row
+        let index = 0;
+        let sibling = item.previousSibling;
+        while (sibling && (sibling.dom as HTMLElement)[positionProp] === itemPos) {
+            index++;
+            sibling = sibling.previousSibling;
+        }
+
+        // Find the first item in the adjacent row
+        let firstInRow: GridViewItem | null = null;
+
+        if (direction > 0) {
+            let current = item.nextSibling;
+            while (current) {
+                if ((current.dom as HTMLElement)[positionProp] !== itemPos) {
+                    firstInRow = current;
+                    break;
+                }
+                current = current.nextSibling;
+            }
+        } else {
+            let lastInPrevRow: GridViewItem | null = null;
+            let current = item.previousSibling;
+            while (current) {
+                if ((current.dom as HTMLElement)[positionProp] !== itemPos) {
+                    lastInPrevRow = current;
+                    break;
+                }
+                current = current.previousSibling;
+            }
+            if (!lastInPrevRow) return null;
+
+            const prevPos = (lastInPrevRow.dom as HTMLElement)[positionProp];
+            firstInRow = lastInPrevRow;
+            while (firstInRow.previousSibling && (firstInRow.previousSibling.dom as HTMLElement)[positionProp] === prevPos) {
+                firstInRow = firstInRow.previousSibling;
+            }
+        }
+
+        if (!firstInRow) return null;
+
+        // Navigate to the same column position, or the last item if the row is shorter
+        let target = firstInRow;
+        const targetPos = (target.dom as HTMLElement)[positionProp];
+        for (let i = 0; i < index; i++) {
+            const next = target.nextSibling;
+            if (!next || (next.dom as HTMLElement)[positionProp] !== targetPos) break;
+            target = next;
+        }
+
+        return target;
+    }
+
     /**
      * Deselects all selected grid view items.
      */
@@ -265,6 +380,8 @@ class GridView extends Container {
 
     destroy() {
         if (this._destroyed) return;
+
+        this.dom.removeEventListener('keydown', this._onKeyDown);
 
         if (this._filterAnimationFrame) {
             cancelAnimationFrame(this._filterAnimationFrame);
