@@ -14,6 +14,28 @@ const DRAG_AREA_BEFORE = 'before';
 const DRAG_AREA_AFTER = 'after';
 
 /**
+ * Represents an item that has been reparented in a {@link TreeView} drag operation.
+ */
+interface ReparentedItem {
+    /**
+     * The reparented tree view item.
+     */
+    item: TreeViewItem;
+    /**
+     * The old parent of the item.
+     */
+    oldParent: Element;
+    /**
+     * The new parent of the item.
+     */
+    newParent?: Element;
+    /**
+     * The new child index of the item within its new parent.
+     */
+    newChildIndex?: number;
+}
+
+/**
  * The arguments for the {@link TreeView} constructor.
  */
 interface TreeViewArgs extends ContainerArgs {
@@ -42,7 +64,7 @@ interface TreeViewArgs extends ContainerArgs {
      * tree items will not be reparented by the {@link TreeView} but instead will rely on the function to
      * reparent them as it sees fit.
      */
-    onReparent?: any,
+    onReparent?: (reparented: ReparentedItem[]) => void,
     /**
      * The element to scroll on drag. Defaults to this {@link TreeView}'s element.
      */
@@ -63,8 +85,8 @@ class TreeView extends Container {
      * const treeView = new TreeView({
      *     allowDrag: true // this is the default but we're showing it here for clarity
      * });
-     * treeView.on('dragstart', (items) => {
-     *     console.log(`Drag started of ${items.length} items');
+     * treeView.on('dragstart', (items: TreeViewItem[]) => {
+     *     console.log(`Drag started of ${items.length} items`);
      * });
      * ```
      */
@@ -93,7 +115,7 @@ class TreeView extends Container {
      * @example
      * ```ts
      * const treeView = new TreeView();
-     * treeView.on('reparent', (reparented: { item: TreeViewItem; oldParent: Element; }[]) => {
+     * treeView.on('reparent', (reparented: ReparentedItem[]) => {
      *     console.log(`Reparented ${reparented.length} items`);
      * });
      * ```
@@ -174,7 +196,7 @@ class TreeView extends Container {
 
     protected _onContextMenu: (evt: MouseEvent, item: TreeViewItem) => void;
 
-    protected _onReparentFn: any;
+    protected _onReparentFn: ((reparented: ReparentedItem[]) => void) | undefined;
 
     protected _pressedCtrl = false;
 
@@ -649,7 +671,7 @@ class TreeView extends Container {
 
             if (this._dragItems.length) {
                 // reparent items
-                const reparented: any[] = [];
+                const reparented: ReparentedItem[] = [];
 
                 // if we do not have _onReparentFn then reparent all the dragged items
                 // in the DOM
@@ -669,20 +691,22 @@ class TreeView extends Container {
                     reparented.forEach((r, i) => {
                         if (this._dragArea === DRAG_AREA_BEFORE) {
                             // If dragged before a TreeViewItem...
-                            r.newParent = this._dragOverItem.parent as Container;
-                            r.newParent.appendBefore(r.item, this._dragOverItem);
-                            r.newChildIndex = this._getChildIndex(r.item, r.newParent);
+                            const newParent = this._dragOverItem.parent as Container;
+                            r.newParent = newParent;
+                            newParent.appendBefore(r.item, this._dragOverItem);
+                            r.newChildIndex = this._getChildIndex(r.item, newParent as TreeViewItem);
                         } else if (this._dragArea === DRAG_AREA_INSIDE) {
                             // If dragged inside a TreeViewItem...
                             r.newParent = this._dragOverItem;
-                            r.newParent.append(r.item);
-                            r.newParent.open = true;
-                            r.newChildIndex = this._getChildIndex(r.item, r.newParent);
+                            this._dragOverItem.append(r.item);
+                            this._dragOverItem.open = true;
+                            r.newChildIndex = this._getChildIndex(r.item, this._dragOverItem);
                         } else if (this._dragArea === DRAG_AREA_AFTER) {
                             // If dragged after a TreeViewItem...
-                            r.newParent = this._dragOverItem.parent as Container;
-                            r.newParent.appendAfter(r.item, i > 0 ? reparented[i - 1].item : this._dragOverItem);
-                            r.newChildIndex = this._getChildIndex(r.item, r.newParent);
+                            const newParent = this._dragOverItem.parent as Container;
+                            r.newParent = newParent;
+                            newParent.appendAfter(r.item, i > 0 ? reparented[i - 1].item : this._dragOverItem);
+                            r.newChildIndex = this._getChildIndex(r.item, newParent as TreeViewItem);
                         }
                     });
 
@@ -1171,7 +1195,7 @@ class TreeView extends Container {
     /**
      * Sets the filter that searches TreeViewItems and only shows the ones that are relevant to the filter.
      */
-    set filter(value) {
+    set filter(value: string | null) {
         if (this._filter === value) return;
 
         this._filter = value;
@@ -1205,4 +1229,4 @@ class TreeView extends Container {
     }
 }
 
-export { TreeView, TreeViewArgs };
+export { TreeView, TreeViewArgs, ReparentedItem };
