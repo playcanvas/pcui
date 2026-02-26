@@ -1105,10 +1105,26 @@ class TreeView extends Container {
     }
 
     /**
+     * Traverses all child {@link TreeViewItem}s using depth first search and calls the supplied
+     * function for each item.
+     *
+     * @param fn - The function to call. The function takes the {@link TreeViewItem} as an argument.
+     * @example
+     * ```ts
+     * treeView.traverse((item: TreeViewItem) => {
+     *     console.log(item.text);
+     * });
+     * ```
+     */
+    traverse(fn: (item: TreeViewItem) => void) {
+        this._traverseDepthFirst(fn);
+    }
+
+    /**
      * Expands all tree view items.
      */
     expandAll() {
-        this._traverseDepthFirst((item) => {
+        this.traverse((item) => {
             item.open = true;
         });
     }
@@ -1117,7 +1133,7 @@ class TreeView extends Container {
      * Collapses all tree view items.
      */
     collapseAll() {
-        this._traverseDepthFirst((item) => {
+        this.traverse((item) => {
             item.open = false;
         });
     }

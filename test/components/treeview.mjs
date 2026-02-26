@@ -56,4 +56,32 @@ describe('TreeView', () => {
             strictEqual(child1.open, false);
         });
     });
+
+    describe('#traverse', () => {
+        it('should visit every item depth-first', () => {
+            const { treeView, root, child1, child2, grandchild1, grandchild2 } = buildTree();
+
+            const visited = [];
+            treeView.traverse((item) => {
+                visited.push(item.text);
+            });
+
+            strictEqual(visited.length, 5);
+            strictEqual(visited[0], 'root');
+            strictEqual(visited[1], 'child1');
+            strictEqual(visited[2], 'grandchild1');
+            strictEqual(visited[3], 'grandchild2');
+            strictEqual(visited[4], 'child2');
+        });
+
+        it('should visit nothing on an empty tree', () => {
+            const treeView = new TreeView();
+            const visited = [];
+            treeView.traverse((item) => {
+                visited.push(item);
+            });
+
+            strictEqual(visited.length, 0);
+        });
+    });
 });
