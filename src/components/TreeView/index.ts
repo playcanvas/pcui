@@ -582,8 +582,15 @@ class TreeView extends Container {
         return treeOrder;
     }
 
-    protected _getChildIndex(item: TreeViewItem, parent: TreeViewItem) {
-        return Array.prototype.indexOf.call(parent.dom.childNodes, item.dom) - 1;
+    protected _getChildIndex(item: TreeViewItem, parent: Container): number {
+        let index = 0;
+        for (const child of parent.dom.childNodes) {
+            if (child === item.dom) return index;
+            if ((child as any).ui instanceof TreeViewItem) {
+                index++;
+            }
+        }
+        return -1;
     }
 
     // Called when we start dragging a TreeViewItem.
@@ -694,7 +701,7 @@ class TreeView extends Container {
                             const newParent = this._dragOverItem.parent as Container;
                             r.newParent = newParent;
                             newParent.appendBefore(r.item, this._dragOverItem);
-                            r.newChildIndex = this._getChildIndex(r.item, newParent as TreeViewItem);
+                            r.newChildIndex = this._getChildIndex(r.item, newParent);
                         } else if (this._dragArea === DRAG_AREA_INSIDE) {
                             // If dragged inside a TreeViewItem...
                             r.newParent = this._dragOverItem;
@@ -706,7 +713,7 @@ class TreeView extends Container {
                             const newParent = this._dragOverItem.parent as Container;
                             r.newParent = newParent;
                             newParent.appendAfter(r.item, i > 0 ? reparented[i - 1].item : this._dragOverItem);
-                            r.newChildIndex = this._getChildIndex(r.item, newParent as TreeViewItem);
+                            r.newChildIndex = this._getChildIndex(r.item, newParent);
                         }
                     });
 
@@ -716,16 +723,28 @@ class TreeView extends Container {
                     // to perform the reparenting
 
                     // eslint-disable-next-line no-undef
-                    const fakeDom: { parent: TreeViewItem; children: ChildNode[]; }[] = [];
+                    const fakeDom: { parent: Container; children: ChildNode[]; }[] = [];
 
-                    const getChildren = (treeviewItem: TreeViewItem) => {
-                        let idx = fakeDom.findIndex(entry => entry.parent === treeviewItem);
+                    const getChildren = (parent: Container) => {
+                        let idx = fakeDom.findIndex(entry => entry.parent === parent);
                         if (idx === -1) {
-                            fakeDom.push({ parent: treeviewItem, children: [...treeviewItem.dom.childNodes] });
+                            fakeDom.push({ parent: parent, children: [...parent.dom.childNodes] });
                             idx = fakeDom.length - 1;
                         }
 
                         return fakeDom[idx].children;
+                    };
+
+                    // eslint-disable-next-line no-undef
+                    const treeItemIndex = (children: ChildNode[], target: ChildNode): number => {
+                        let count = 0;
+                        for (const child of children) {
+                            if (child === target) return count;
+                            if ((child as any).ui instanceof TreeViewItem) {
+                                count++;
+                            }
+                        }
+                        return -1;
                     };
 
                     this._dragItems.forEach((item) => {
@@ -736,8 +755,7 @@ class TreeView extends Container {
                             oldParent: item.parent
                         });
 
-                        // add array of parent's child nodes to fakeDom array
-                        const parentChildren = getChildren(item.parent as TreeViewItem);
+                        const parentChildren = getChildren(item.parent as Container);
 
                         // remove this item from the children array in fakeDom
                         const childIdx = parentChildren.indexOf(item.dom);
@@ -749,29 +767,25 @@ class TreeView extends Container {
                         if (this._dragArea === DRAG_AREA_BEFORE) {
                             // If dragged before a TreeViewItem...
                             r.newParent = this._dragOverItem.parent;
-                            const parentChildren = getChildren(this._dragOverItem.parent as TreeViewItem);
+                            const parentChildren = getChildren(this._dragOverItem.parent as Container);
                             const index = parentChildren.indexOf(this._dragOverItem.dom);
                             parentChildren.splice(index, 0, r.item.dom);
-                            r.newChildIndex = index;
+                            r.newChildIndex = treeItemIndex(parentChildren, r.item.dom);
                         } else if (this._dragArea === DRAG_AREA_INSIDE) {
                             // If dragged inside a TreeViewItem...
                             r.newParent = this._dragOverItem;
                             const parentChildren = getChildren(this._dragOverItem);
                             parentChildren.push(r.item.dom);
-                            r.newChildIndex = parentChildren.length - 1;
+                            r.newChildIndex = treeItemIndex(parentChildren, r.item.dom);
                         } else if (this._dragArea === DRAG_AREA_AFTER) {
                             // If dragged after a TreeViewItem...
                             r.newParent = this._dragOverItem.parent;
-                            const parentChildren = getChildren(this._dragOverItem.parent as TreeViewItem);
+                            const parentChildren = getChildren(this._dragOverItem.parent as Container);
                             const after = i > 0 ? reparented[i - 1].item : this._dragOverItem;
                             const index = parentChildren.indexOf(after.dom);
                             parentChildren.splice(index + 1, 0, r.item.dom);
-                            r.newChildIndex = index + 1;
+                            r.newChildIndex = treeItemIndex(parentChildren, r.item.dom);
                         }
-
-                        // subtract 1 from new child index to account for the extra node that
-                        // each tree view item has inside
-                        r.newChildIndex--;
                     });
                 }
 
