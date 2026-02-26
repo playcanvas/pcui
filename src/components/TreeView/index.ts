@@ -483,27 +483,23 @@ class TreeView extends Container {
                 break;
             }
             case 'ArrowDown': {
-                if (this._selectedItems.length) {
-                    const next = this._findNextVisibleTreeItem(item);
-                    if (next) {
-                        if (this._pressedShift || this._pressedCtrl) {
-                            next.selected = true;
-                        } else {
-                            this._selectSingleItem(next);
-                        }
+                const next = this._findNextVisibleTreeItem(item);
+                if (next) {
+                    if (this._pressedShift || this._pressedCtrl) {
+                        next.selected = true;
+                    } else {
+                        this._selectSingleItem(next);
                     }
                 }
                 break;
             }
             case 'ArrowUp': {
-                if (this._selectedItems.length) {
-                    const prev = this._findPreviousVisibleTreeItem(item);
-                    if (prev) {
-                        if (this._pressedShift || this._pressedCtrl) {
-                            prev.selected = true;
-                        } else {
-                            this._selectSingleItem(prev);
-                        }
+                const prev = this._findPreviousVisibleTreeItem(item);
+                if (prev) {
+                    if (this._pressedShift || this._pressedCtrl) {
+                        prev.selected = true;
+                    } else {
+                        this._selectSingleItem(prev);
                     }
                 }
                 break;
