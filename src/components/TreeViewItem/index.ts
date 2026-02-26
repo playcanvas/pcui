@@ -487,6 +487,14 @@ class TreeViewItem extends Container {
     }
 
     /**
+     * Gets the container that holds the icon and text for this tree view item. Useful for
+     * positioning calculations or appending custom content alongside the item row.
+     */
+    get content(): Container {
+        return this._containerContents;
+    }
+
+    /**
      * Sets whether the item is expanded and showing its children.
      */
     set open(value) {
