@@ -26,7 +26,7 @@ import { SliderInput, SliderInputArgs } from './SliderInput';
 import { Spinner, SpinnerArgs } from './Spinner';
 import { TextAreaInput, TextAreaInputArgs } from './TextAreaInput';
 import { TextInput, TextInputArgs } from './TextInput';
-import { TreeView, TreeViewArgs } from './TreeView';
+import { TreeView, TreeViewArgs, ReparentedItem } from './TreeView';
 import { TreeViewItem, TreeViewItemArgs } from './TreeViewItem';
 import { VectorInput, VectorInputArgs } from './VectorInput';
 
@@ -88,6 +88,7 @@ export {
     TextInputArgs,
     TreeView,
     TreeViewArgs,
+    ReparentedItem,
     TreeViewItem,
     TreeViewItemArgs,
     VectorInput,

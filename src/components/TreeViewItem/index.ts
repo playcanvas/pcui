@@ -3,6 +3,7 @@ import { Container, ContainerArgs } from '../Container';
 import { Element } from '../Element';
 import { Label } from '../Label';
 import { TextInput } from '../TextInput';
+import type { TreeView } from '../TreeView';
 
 const CLASS_ROOT = 'pcui-treeview-item';
 const CLASS_ICON = `${CLASS_ROOT}-icon`;
@@ -538,14 +539,14 @@ class TreeViewItem extends Container {
     /**
      * Sets the parent {@link TreeView}.
      */
-    set treeView(value) {
+    set treeView(value: TreeView | null) {
         this._treeView = value;
     }
 
     /**
      * Gets the parent {@link TreeView}.
      */
-    get treeView() {
+    get treeView(): TreeView | null {
         return this._treeView;
     }
 
