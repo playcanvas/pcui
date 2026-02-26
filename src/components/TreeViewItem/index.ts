@@ -587,7 +587,7 @@ class TreeViewItem extends Container {
     }
 
     /**
-     * Gets the first sibling item.
+     * Gets the next sibling item.
      */
     get nextSibling() {
         let sibling = this.dom.nextSibling;
@@ -599,7 +599,7 @@ class TreeViewItem extends Container {
     }
 
     /**
-     * Gets the last sibling item.
+     * Gets the previous sibling item.
      */
     get previousSibling() {
         let sibling = this.dom.previousSibling;
