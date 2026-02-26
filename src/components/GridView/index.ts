@@ -195,11 +195,12 @@ class GridView extends Container {
             targetElement = targetElement.parentElement;
         }
 
-        if (!item || !item.allowSelect) return;
+        if (!item) return;
 
         evt.preventDefault();
         evt.stopPropagation();
 
+        if (!item.allowSelect) return;
         let target: GridViewItem | null = null;
 
         if (this._vertical) {
