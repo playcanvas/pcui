@@ -1067,6 +1067,24 @@ class TreeView extends Container {
     }
 
     /**
+     * Expands all tree view items.
+     */
+    expandAll() {
+        this._traverseDepthFirst((item) => {
+            item.open = true;
+        });
+    }
+
+    /**
+     * Collapses all tree view items.
+     */
+    collapseAll() {
+        this._traverseDepthFirst((item) => {
+            item.open = false;
+        });
+    }
+
+    /**
      * Removes all child tree view items.
      */
     clearTreeItems() {

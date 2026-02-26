@@ -26,7 +26,7 @@
 </head>
 <body>
     <script type="module">
-        import { TreeView, TreeViewItem } from '@playcanvas/pcui';
+        import { Button, Container, TreeView, TreeViewItem } from '@playcanvas/pcui';
         import '@playcanvas/pcui/styles'
 
         const treeView = new TreeView({
@@ -58,6 +58,21 @@
 
         generateChildren(root, 3);
 
+        const toolbar = new Container({
+            flex: true,
+            flexDirection: 'row'
+        });
+        toolbar.style.marginBottom = '8px';
+
+        const expandAllButton = new Button({ text: 'Expand All', icon: 'E386' });
+        expandAllButton.on('click', () => treeView.expandAll());
+        toolbar.append(expandAllButton);
+
+        const collapseAllButton = new Button({ text: 'Collapse All', icon: 'E385' });
+        collapseAllButton.on('click', () => treeView.collapseAll());
+        toolbar.append(collapseAllButton);
+
+        document.body.appendChild(toolbar.dom);
         document.body.appendChild(treeView.dom);
     </script>
 </body>
