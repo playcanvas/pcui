@@ -34,6 +34,20 @@ interface GridViewArgs extends ContainerArgs {
  * Contains {@link GridViewItem}s.
  */
 class GridView extends Container {
+    /**
+     * Fired when user activates a {@link GridViewItem} by pressing Enter.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const gridView = new GridView();
+     * gridView.on('activate', (item: GridViewItem) => {
+     *     console.log(`Activated item ${item.text}`);
+     * });
+     * ```
+     */
+    public static readonly EVENT_ACTIVATE = 'activate';
+
     protected _vertical: boolean;
 
     protected _clickFn: (evt: MouseEvent, item: GridViewItem) => void;
@@ -179,7 +193,7 @@ class GridView extends Container {
     }
 
     protected _onKeyDown = (evt: KeyboardEvent) => {
-        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(evt.key) === -1) return;
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Enter'].indexOf(evt.key) === -1) return;
 
         const element = evt.target as HTMLElement;
         if (element.tagName === 'INPUT') return;
@@ -199,6 +213,11 @@ class GridView extends Container {
 
         evt.preventDefault();
         evt.stopPropagation();
+
+        if (evt.key === 'Enter') {
+            this.emit(GridView.EVENT_ACTIVATE, item);
+            return;
+        }
 
         if (!item.allowSelect) return;
         let target: GridViewItem | null = null;
