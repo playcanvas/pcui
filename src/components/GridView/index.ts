@@ -34,6 +34,20 @@ interface GridViewArgs extends ContainerArgs {
  * Contains {@link GridViewItem}s.
  */
 class GridView extends Container {
+    /**
+     * Fired when user activates a {@link GridViewItem} by pressing Enter or double-clicking.
+     *
+     * @event
+     * @example
+     * ```ts
+     * const gridView = new GridView();
+     * gridView.on('activate', (item: GridViewItem) => {
+     *     console.log(`Activated item ${item.text}`);
+     * });
+     * ```
+     */
+    public static readonly EVENT_ACTIVATE = 'activate';
+
     protected _vertical: boolean;
 
     protected _clickFn: (evt: MouseEvent, item: GridViewItem) => void;
@@ -75,6 +89,7 @@ class GridView extends Container {
         this._allowDeselect = args.allowDeselect ?? true;
 
         this.dom.addEventListener('keydown', this._onKeyDown);
+        this.dom.addEventListener('dblclick', this._onDblClick);
     }
 
     protected _onAppendGridViewItem(item: GridViewItem) {
@@ -179,7 +194,7 @@ class GridView extends Container {
     }
 
     protected _onKeyDown = (evt: KeyboardEvent) => {
-        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(evt.key) === -1) return;
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Enter'].indexOf(evt.key) === -1) return;
 
         const element = evt.target as HTMLElement;
         if (element.tagName === 'INPUT') return;
@@ -199,6 +214,11 @@ class GridView extends Container {
 
         evt.preventDefault();
         evt.stopPropagation();
+
+        if (evt.key === 'Enter') {
+            this.emit(GridView.EVENT_ACTIVATE, item);
+            return;
+        }
 
         if (!item.allowSelect) return;
         let target: GridViewItem | null = null;
@@ -221,6 +241,24 @@ class GridView extends Container {
 
         if (target) {
             this._selectSingleItem(target);
+        }
+    };
+
+    protected _onDblClick = (evt: MouseEvent) => {
+        let targetElement = evt.target as HTMLElement;
+        let item: GridViewItem | null = null;
+        while (targetElement && targetElement !== this.dom) {
+            if ((targetElement as any).ui instanceof GridViewItem) {
+                item = (targetElement as any).ui;
+                break;
+            }
+            targetElement = targetElement.parentElement;
+        }
+
+        if (item) {
+            evt.preventDefault();
+            evt.stopPropagation();
+            this.emit(GridView.EVENT_ACTIVATE, item);
         }
     };
 
@@ -382,6 +420,7 @@ class GridView extends Container {
         if (this._destroyed) return;
 
         this.dom.removeEventListener('keydown', this._onKeyDown);
+        this.dom.removeEventListener('dblclick', this._onDblClick);
 
         if (this._filterAnimationFrame) {
             cancelAnimationFrame(this._filterAnimationFrame);
