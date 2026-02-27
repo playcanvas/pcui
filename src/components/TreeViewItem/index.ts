@@ -143,6 +143,15 @@ class TreeViewItem extends Container {
 
     protected _open = false;
 
+    protected _dragPointerId: number = -1;
+
+    // For touch/pen drag threshold - only start drag after moving beyond this distance
+    protected _dragStartX: number = 0;
+
+    protected _dragStartY: number = 0;
+
+    protected _dragThresholdMet: boolean = false;
+
     /**
      * Creates a new TreeViewItem.
      *
@@ -194,8 +203,9 @@ class TreeViewItem extends Container {
         dom.addEventListener('blur', this._onContentBlur);
         dom.addEventListener('keydown', this._onContentKeyDown);
         dom.addEventListener('dragstart', this._onContentDragStart);
-        dom.addEventListener('mousedown', this._onContentMouseDown);
-        dom.addEventListener('mouseover', this._onContentMouseOver);
+        dom.addEventListener('dragover', this._onContentDragOver);
+        dom.addEventListener('pointerdown', this._onContentPointerDown);
+        dom.addEventListener('pointerover', this._onContentPointerOver);
         dom.addEventListener('click', this._onContentClick);
         dom.addEventListener('dblclick', this._onContentDblClick);
         dom.addEventListener('contextmenu', this._onContentContextMenu);
@@ -209,13 +219,15 @@ class TreeViewItem extends Container {
         dom.removeEventListener('blur', this._onContentBlur);
         dom.removeEventListener('keydown', this._onContentKeyDown);
         dom.removeEventListener('dragstart', this._onContentDragStart);
-        dom.removeEventListener('mousedown', this._onContentMouseDown);
-        dom.removeEventListener('mouseover', this._onContentMouseOver);
+        dom.removeEventListener('dragover', this._onContentDragOver);
+        dom.removeEventListener('pointerdown', this._onContentPointerDown);
+        dom.removeEventListener('pointerover', this._onContentPointerOver);
         dom.removeEventListener('click', this._onContentClick);
         dom.removeEventListener('dblclick', this._onContentDblClick);
         dom.removeEventListener('contextmenu', this._onContentContextMenu);
 
-        window.removeEventListener('mouseup', this._onContentMouseUp);
+        window.removeEventListener('pointermove', this._onContentPointerMove);
+        window.removeEventListener('pointerup', this._onContentPointerUp);
 
         super.destroy();
     }
@@ -264,28 +276,79 @@ class TreeViewItem extends Container {
         }
     };
 
-    protected _onContentMouseDown = (evt: MouseEvent) => {
+    protected _onContentPointerDown = (evt: PointerEvent) => {
         if (!this._treeView || !this._treeView.allowDrag || !this.allowDrag) return;
 
         this._treeView._updateModifierKeys(evt);
         evt.stopPropagation();
-    };
 
-    protected _onContentMouseUp = (evt: MouseEvent) => {
-        evt.stopPropagation();
-        evt.preventDefault();
+        // For touch/pen input, set up for potential drag (don't start until threshold is met)
+        if (evt.pointerType !== 'mouse') {
+            if (this.class.contains(CLASS_RENAME)) return;
 
-        window.removeEventListener('mouseup', this._onContentMouseUp);
-        if (this._treeView) {
-            this._treeView._onChildDragEnd(evt, this);
+            this._dragPointerId = evt.pointerId;
+            this._dragStartX = evt.clientX;
+            this._dragStartY = evt.clientY;
+            this._dragThresholdMet = false;
+
+            window.addEventListener('pointermove', this._onContentPointerMove);
+            window.addEventListener('pointerup', this._onContentPointerUp);
         }
     };
 
-    protected _onContentMouseOver = (evt: MouseEvent) => {
+    protected _onContentPointerMove = (evt: PointerEvent) => {
+        // Only handle the pointer that initiated the potential drag
+        if (evt.pointerId !== this._dragPointerId) return;
+
+        // Check if drag threshold has been met (5 pixels)
+        const dx = evt.clientX - this._dragStartX;
+        const dy = evt.clientY - this._dragStartY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (!this._dragThresholdMet && distance >= 5) {
+            this._dragThresholdMet = true;
+
+            // Now actually start the drag
+            if (this._treeView) {
+                this._treeView._onChildDragStart(evt, this);
+            }
+        }
+    };
+
+    protected _onContentPointerUp = (evt: PointerEvent) => {
+        // _dragPointerId === -1 means mouse drag via HTML5 dragstart
+        // _dragPointerId !== -1 means touch/pen drag - only handle matching pointer
+        const isMouseDrag = this._dragPointerId === -1;
+        const isTouchDrag = this._dragPointerId !== -1;
+
+        if (isTouchDrag && evt.pointerId !== this._dragPointerId) return;
+
+        evt.stopPropagation();
+
+        window.removeEventListener('pointermove', this._onContentPointerMove);
+        window.removeEventListener('pointerup', this._onContentPointerUp);
+
+        // For mouse: always end the drag (HTML5 drag-and-drop handles the drag)
+        // For touch/pen: only end drag if threshold was met, otherwise it was just a tap
+        if (isMouseDrag || this._dragThresholdMet) {
+            evt.preventDefault();
+            if (this._treeView) {
+                this._treeView._onChildDragEnd(evt, this);
+            }
+        }
+
+        this._dragPointerId = -1;
+        this._dragThresholdMet = false;
+    };
+
+    protected _onContentPointerOver = (evt: PointerEvent) => {
         evt.stopPropagation();
 
         if (this._treeView) {
-            this._treeView._onChildDragOver(evt, this);
+            // Skip drag-over handling for touch/pen during drags - hit-testing in _onPointerMove handles this
+            if (!(this._treeView.isDragging && evt.pointerType !== 'mouse')) {
+                this._treeView._onChildDragOver(evt, this);
+            }
         }
 
         this.emit('hover', evt);
@@ -297,11 +360,24 @@ class TreeViewItem extends Container {
 
         if (!this._treeView || !this._treeView.allowDrag) return;
 
+        // Skip if already dragging (e.g., drag was initiated by pointerdown for touch)
+        if (this._treeView.isDragging) return;
+
         if (this.class.contains(CLASS_RENAME)) return;
 
         this._treeView._onChildDragStart(evt, this);
 
-        window.addEventListener('mouseup', this._onContentMouseUp);
+        window.addEventListener('pointerup', this._onContentPointerUp);
+    };
+
+    // HTML5 dragover fires continuously while dragging over an element (unlike pointerover)
+    protected _onContentDragOver = (evt: DragEvent) => {
+        evt.preventDefault(); // Required to allow drop
+        evt.stopPropagation();
+
+        if (this._treeView) {
+            this._treeView._onChildDragOver(evt, this);
+        }
     };
 
     protected _onContentClick = (evt: MouseEvent) => {
