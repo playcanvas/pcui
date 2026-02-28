@@ -32,6 +32,99 @@ function buildTree() {
 }
 
 describe('TreeView', () => {
+    describe('selection and focus', () => {
+        it('should not move focus when setting selected programmatically', () => {
+            const { treeView, root, child1 } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            root.focus();
+            strictEqual(document.activeElement, root._containerContents.dom);
+
+            child1.selected = true;
+            strictEqual(child1.selected, true);
+            strictEqual(document.activeElement, root._containerContents.dom);
+
+            document.body.removeChild(treeView.dom);
+        });
+
+        it('should move focus with ArrowDown', () => {
+            const { treeView, root, child1 } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            treeView.expandAll();
+            root.selected = true;
+            root.focus();
+
+            root._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+            strictEqual(child1.selected, true);
+            strictEqual(document.activeElement, child1._containerContents.dom);
+
+            document.body.removeChild(treeView.dom);
+        });
+
+        it('should move focus with ArrowUp', () => {
+            const { treeView, root, child1 } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            treeView.expandAll();
+            child1.selected = true;
+            child1.focus();
+
+            child1._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
+            strictEqual(root.selected, true);
+            strictEqual(document.activeElement, root._containerContents.dom);
+
+            document.body.removeChild(treeView.dom);
+        });
+
+        it('should move focus with ArrowRight into first child', () => {
+            const { treeView, child1, grandchild1 } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            treeView.expandAll();
+            child1.selected = true;
+            child1.focus();
+
+            child1._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+            strictEqual(grandchild1.selected, true);
+            strictEqual(document.activeElement, grandchild1._containerContents.dom);
+
+            document.body.removeChild(treeView.dom);
+        });
+
+        it('should move focus with ArrowLeft to parent', () => {
+            const { treeView, child1, grandchild1 } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            treeView.expandAll();
+            grandchild1.selected = true;
+            grandchild1.focus();
+
+            grandchild1._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+            strictEqual(child1.selected, true);
+            strictEqual(document.activeElement, child1._containerContents.dom);
+
+            document.body.removeChild(treeView.dom);
+        });
+
+        it('should collapse without moving focus on ArrowLeft when item is expanded', () => {
+            const { treeView, child1 } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            treeView.expandAll();
+            child1.selected = true;
+            child1.focus();
+            strictEqual(child1.open, true);
+
+            child1._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+            strictEqual(child1.open, false);
+            strictEqual(child1.selected, true);
+            strictEqual(document.activeElement, child1._containerContents.dom);
+
+            document.body.removeChild(treeView.dom);
+        });
+    });
+
     describe('#expandAll', () => {
         it('should open every item in the tree', () => {
             const { treeView, root, child1, grandchild1, grandchild2 } = buildTree();

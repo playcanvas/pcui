@@ -463,6 +463,7 @@ class TreeView extends Container {
                     const parent = item.parent;
                     if (parent instanceof TreeViewItem) {
                         this._selectSingleItem(parent);
+                        parent.focus();
                     }
                 }
                 break;
@@ -477,6 +478,7 @@ class TreeView extends Container {
                         const firstChild = item.firstChild;
                         if (firstChild instanceof TreeViewItem) {
                             this._selectSingleItem(firstChild);
+                            firstChild.focus();
                         }
                     }
                 }
@@ -490,6 +492,7 @@ class TreeView extends Container {
                     } else {
                         this._selectSingleItem(next);
                     }
+                    next.focus();
                 }
                 break;
             }
@@ -501,6 +504,7 @@ class TreeView extends Container {
                     } else {
                         this._selectSingleItem(prev);
                     }
+                    prev.focus();
                 }
                 break;
             }
