@@ -78,7 +78,7 @@ describe('TreeView', () => {
         });
 
         it('should move focus with ArrowRight into first child', () => {
-            const { treeView, root, child1, grandchild1 } = buildTree();
+            const { treeView, child1, grandchild1 } = buildTree();
             document.body.appendChild(treeView.dom);
 
             treeView.expandAll();
