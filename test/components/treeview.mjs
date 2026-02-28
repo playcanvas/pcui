@@ -34,8 +34,8 @@ function buildTree() {
 describe('TreeView', () => {
     describe('selection and focus', () => {
         it('should not move focus when setting selected programmatically', () => {
-            const { root, child1 } = buildTree();
-            document.body.appendChild(root.dom.parentElement);
+            const { treeView, root, child1 } = buildTree();
+            document.body.appendChild(treeView.dom);
 
             root.focus();
             strictEqual(document.activeElement, root._containerContents.dom);
@@ -44,7 +44,7 @@ describe('TreeView', () => {
             strictEqual(child1.selected, true);
             strictEqual(document.activeElement, root._containerContents.dom);
 
-            document.body.removeChild(root.dom.parentElement);
+            document.body.removeChild(treeView.dom);
         });
 
         it('should move focus with ArrowDown', () => {
