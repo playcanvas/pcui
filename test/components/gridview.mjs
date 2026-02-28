@@ -35,7 +35,7 @@ describe('GridView', () => {
             document.body.removeChild(gridView.dom);
         });
 
-        it('should move focus on arrow key navigation', () => {
+        it('should move focus with ArrowRight', () => {
             const { gridView, item1, item2 } = buildGrid();
             document.body.appendChild(gridView.dom);
 
@@ -45,6 +45,20 @@ describe('GridView', () => {
             item1.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
             strictEqual(item2.selected, true);
             strictEqual(document.activeElement, item2.dom);
+
+            document.body.removeChild(gridView.dom);
+        });
+
+        it('should move focus with ArrowLeft', () => {
+            const { gridView, item2, item1 } = buildGrid();
+            document.body.appendChild(gridView.dom);
+
+            item2.selected = true;
+            item2.focus();
+
+            item2.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+            strictEqual(item1.selected, true);
+            strictEqual(document.activeElement, item1.dom);
 
             document.body.removeChild(gridView.dom);
         });
