@@ -137,16 +137,11 @@ class GridViewItem extends Container implements IFocusable {
      * Sets whether the item is selected.
      */
     set selected(value) {
-        if (value) {
-            this.focus();
-        }
-
         if (this._selected === value) return;
 
         this._selected = value;
 
         if (value) {
-            // Update radio button if it exists
             if (this._radioButton) {
                 this._radioButton.value = value;
             } else {
@@ -155,7 +150,6 @@ class GridViewItem extends Container implements IFocusable {
 
             this.emit('select', this);
         } else {
-            // Update radio button if it exists
             if (this._radioButton) {
                 this._radioButton.value = false;
             } else {

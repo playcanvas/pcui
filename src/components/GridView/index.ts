@@ -241,6 +241,7 @@ class GridView extends Container {
 
         if (target) {
             this._selectSingleItem(target);
+            target.focus();
         }
     };
 

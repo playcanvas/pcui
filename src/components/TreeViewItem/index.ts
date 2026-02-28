@@ -420,13 +420,7 @@ class TreeViewItem extends Container {
      * Sets whether the item is selected.
      */
     set selected(value) {
-        if (value === this.selected) {
-            if (value) {
-                this.focus();
-            }
-
-            return;
-        }
+        if (value === this.selected) return;
 
         if (value) {
             this._containerContents.class.add(CLASS_SELECTED);
@@ -434,11 +428,8 @@ class TreeViewItem extends Container {
             if (this._treeView) {
                 this._treeView._onChildSelected(this);
             }
-
-            this.focus();
         } else {
             this._containerContents.class.remove(CLASS_SELECTED);
-            this.blur();
             this.emit('deselect', this);
             if (this._treeView) {
                 this._treeView._onChildDeselected(this);
