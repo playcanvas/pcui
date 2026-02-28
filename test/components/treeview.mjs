@@ -32,6 +32,37 @@ function buildTree() {
 }
 
 describe('TreeView', () => {
+    describe('selection and focus', () => {
+        it('should not move focus when setting selected programmatically', () => {
+            const { root, child1 } = buildTree();
+            document.body.appendChild(root.dom.parentElement);
+
+            root.focus();
+            strictEqual(document.activeElement, root._containerContents.dom);
+
+            child1.selected = true;
+            strictEqual(child1.selected, true);
+            strictEqual(document.activeElement, root._containerContents.dom);
+
+            document.body.removeChild(root.dom.parentElement);
+        });
+
+        it('should move focus on arrow key navigation', () => {
+            const { treeView, root, child1, child2 } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            treeView.expandAll();
+            root.selected = true;
+            root.focus();
+
+            root._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+            strictEqual(child1.selected, true);
+            strictEqual(document.activeElement, child1._containerContents.dom);
+
+            document.body.removeChild(treeView.dom);
+        });
+    });
+
     describe('#expandAll', () => {
         it('should open every item in the tree', () => {
             const { treeView, root, child1, grandchild1, grandchild2 } = buildTree();
