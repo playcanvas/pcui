@@ -17,7 +17,9 @@
     }
 }
 
-.pcui-gridview-item-selected {
+.pcui-gridview-item-selected,
+.pcui-gridview-item:focus-visible,
+.pcui-gridview-radio-container:focus-visible {
     background-color: $bcg-darkest;
 }
 

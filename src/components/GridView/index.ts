@@ -64,6 +64,8 @@ class GridView extends Container {
 
     protected _selected: GridViewItem[] = [];
 
+    protected _activeItem: GridViewItem = null;
+
     /**
      * Creates a new GridView.
      *
@@ -90,10 +92,59 @@ class GridView extends Container {
 
         this.dom.addEventListener('keydown', this._onKeyDown);
         this.dom.addEventListener('dblclick', this._onDblClick);
+        this.dom.addEventListener('focusin', this._onFocusIn);
+    }
+
+    protected _onFocusIn = (evt: FocusEvent) => {
+        let node = evt.target as HTMLElement;
+        while (node && node !== this.dom) {
+            if (node.ui instanceof GridViewItem) {
+                const item = node.ui;
+                this._setActiveItem(item);
+
+                const focused = evt.target as HTMLElement;
+                if (focused.matches(':focus-visible')) {
+                    const related = evt.relatedTarget as HTMLElement;
+                    if (!related || !this.dom.contains(related)) {
+                        if (!item.selected) {
+                            let i = this._selected.length;
+                            while (i--) {
+                                if (this._selected[i] && this._selected[i] !== item) {
+                                    this._selected[i].selected = false;
+                                }
+                            }
+                            item.selected = true;
+                        }
+                    }
+                }
+                return;
+            }
+            node = node.parentElement;
+        }
+    };
+
+    protected _setActiveItem(item: GridViewItem | null) {
+        if (this._activeItem === item) return;
+
+        if (this._activeItem && !this._activeItem.destroyed) {
+            this._activeItem.dom.tabIndex = -1;
+        }
+
+        this._activeItem = item;
+
+        if (item) {
+            item.dom.tabIndex = 0;
+        }
     }
 
     protected _onAppendGridViewItem(item: GridViewItem) {
         if (!(item instanceof GridViewItem)) return;
+
+        if (!this._activeItem) {
+            this._setActiveItem(item);
+        } else {
+            item.dom.tabIndex = -1;
+        }
 
         let evtClick: EventHandle;
         if (this._clickFn) {
@@ -130,6 +181,18 @@ class GridView extends Container {
         if (!(item instanceof GridViewItem)) return;
 
         item.selected = false;
+
+        if (this._activeItem === item) {
+            this._activeItem = null;
+            const children = this.dom.children;
+            for (let i = 0; i < children.length; i++) {
+                const child = (children[i] as any).ui;
+                if (child instanceof GridViewItem && !child.hidden) {
+                    this._setActiveItem(child);
+                    break;
+                }
+            }
+        }
 
         item.emit('griditem:remove');
         item.unbind('griditem:remove');
@@ -182,6 +245,7 @@ class GridView extends Container {
 
     protected _onSelectItem(item: GridViewItem) {
         this._selected.push(item);
+        this._setActiveItem(item);
         this.emit('select', item);
     }
 
@@ -422,6 +486,7 @@ class GridView extends Container {
 
         this.dom.removeEventListener('keydown', this._onKeyDown);
         this.dom.removeEventListener('dblclick', this._onDblClick);
+        this.dom.removeEventListener('focusin', this._onFocusIn);
 
         if (this._filterAnimationFrame) {
             cancelAnimationFrame(this._filterAnimationFrame);
