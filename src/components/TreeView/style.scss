@@ -96,7 +96,8 @@
     color: inherit;
 }
 
-.pcui-treeview-item-contents.pcui-treeview-item-selected {
+.pcui-treeview-item-contents.pcui-treeview-item-selected,
+.pcui-treeview-item-contents:focus-visible {
     background-color: $bcg-darkest;
     color: $text-primary;
 

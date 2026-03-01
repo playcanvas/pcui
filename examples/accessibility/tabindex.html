@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PCUI Roving Tab Index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+        }
+
+        body {
+            background-color: #364346;
+            padding: 12px;
+            font-family: sans-serif;
+            color: #ccc;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .instructions {
+            margin-bottom: 12px;
+            padding: 10px 14px;
+            background: #1a1a2e;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .instructions h2 {
+            margin: 0 0 6px 0;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .instructions ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .explorer {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            gap: 4px;
+        }
+
+        .explorer .left {
+            width: 250px;
+            min-width: 150px;
+            overflow: auto;
+        }
+
+        .explorer .right {
+            flex: 1;
+            overflow: auto;
+        }
+
+        .status-bar {
+            margin-top: 12px;
+            padding: 8px 12px;
+            background: #1a1a2e;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: monospace;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .status-bar span {
+            white-space: nowrap;
+        }
+
+        .status-bar .label {
+            color: #888;
+        }
+
+        .status-bar .value {
+            color: #4fc3f7;
+        }
+
+        .status-bar .good {
+            color: #b9f6ca;
+        }
+
+        h3 {
+            margin: 0 0 6px 0;
+            font-size: 13px;
+            font-weight: normal;
+            color: #999;
+        }
+
+        .pcui-treeview-item-text,
+        .pcui-treeview-item-icon {
+            font-size: 13px;
+        }
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "@playcanvas/observer": "../../node_modules/@playcanvas/observer/dist/index.mjs",
+                "@playcanvas/pcui": "../../dist/module/src/index.mjs",
+                "@playcanvas/pcui/styles": "../../styles/dist/index.mjs"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="instructions">
+        <h2>Roving Tabindex Demo</h2>
+        <ol>
+            <li>Press <b>Tab</b> to reach the TreeView &mdash; the active item is selected.</li>
+            <li>Press <b>Tab</b> again &mdash; focus jumps to the GridView and selects the active item.</li>
+            <li>Press <b>Shift+Tab</b> from the GridView &mdash; focus returns to the TreeView.</li>
+            <li>Use <b>Arrow keys</b> to navigate within each widget.</li>
+            <li>Check the status bar &mdash; only <b>1 tab stop per widget</b> (the active item).</li>
+        </ol>
+    </div>
+
+    <div class="explorer">
+        <div class="left">
+            <h3>TreeView</h3>
+            <div id="tree-container"></div>
+        </div>
+        <div class="right">
+            <h3>GridView</h3>
+            <div id="grid-container"></div>
+        </div>
+    </div>
+    <div class="status-bar">
+        <span><span class="label">Focused: </span><span id="focused-el" class="value">none</span></span>
+        <span><span class="label">Widget: </span><span id="focused-widget" class="value">none</span></span>
+        <span><span class="label">Tab stops (tree): </span><span id="tree-tab-stops" class="good">-</span></span>
+        <span><span class="label">Tab stops (grid): </span><span id="grid-tab-stops" class="good">-</span></span>
+        <span><span class="label">Total tab stops: </span><span id="total-tab-stops" class="good">-</span></span>
+    </div>
+
+    <script type="module">
+        import { TreeView, TreeViewItem, GridView, GridViewItem } from '@playcanvas/pcui';
+        import '@playcanvas/pcui/styles';
+
+        // --- TreeView (folder structure) ---
+        const treeView = new TreeView({ allowRenaming: false, allowDrag: false });
+
+        const folders = [
+            {
+                name: 'Assets', icon: 'E139', children: [
+                    {
+                        name: 'Models', icon: 'E139', children: [
+                            { name: 'character.glb', icon: 'E208' },
+                            { name: 'vehicle.glb', icon: 'E208' },
+                            { name: 'building.glb', icon: 'E208' }
+                        ]
+                    },
+                    {
+                        name: 'Textures', icon: 'E139', children: [
+                            { name: 'diffuse.png', icon: 'E208' },
+                            { name: 'normal.png', icon: 'E208' }
+                        ]
+                    },
+                    {
+                        name: 'Scripts', icon: 'E139', children: [
+                            { name: 'player.js', icon: 'E208' },
+                            { name: 'enemy.js', icon: 'E208' },
+                            { name: 'camera.js', icon: 'E208' },
+                            { name: 'ui.js', icon: 'E208' }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        function buildTreeItems(items, parent) {
+            for (const item of items) {
+                const treeItem = new TreeViewItem({
+                    text: item.name,
+                    icon: item.icon,
+                    open: true
+                });
+                parent.append(treeItem);
+                if (item.children) {
+                    buildTreeItems(item.children, treeItem);
+                }
+            }
+        }
+
+        buildTreeItems(folders, treeView);
+        document.getElementById('tree-container').appendChild(treeView.dom);
+
+        // --- GridView (file listing) ---
+        const gridView = new GridView();
+
+        const files = [
+            'character.glb', 'vehicle.glb', 'building.glb',
+            'diffuse.png', 'normal.png', 'specular.png',
+            'player.js', 'enemy.js', 'camera.js', 'ui.js',
+            'level-01.json', 'level-02.json', 'config.json',
+            'README.md', 'CHANGELOG.md', 'LICENSE'
+        ];
+
+        for (const file of files) {
+            gridView.append(new GridViewItem({ text: file }));
+        }
+
+        document.getElementById('grid-container').appendChild(gridView.dom);
+
+        // --- Status bar: track focus and tab stop counts ---
+        const focusedEl = document.getElementById('focused-el');
+        const focusedWidget = document.getElementById('focused-widget');
+        const treeTabStops = document.getElementById('tree-tab-stops');
+        const gridTabStops = document.getElementById('grid-tab-stops');
+        const totalTabStops = document.getElementById('total-tab-stops');
+
+        function countTabStops(root) {
+            return root.querySelectorAll('[tabindex="0"]').length;
+        }
+
+        function updateStatus() {
+            const active = document.activeElement;
+
+            if (!active || active === document.body) {
+                focusedEl.textContent = 'none';
+                focusedWidget.textContent = 'none';
+            } else {
+                const text = active.querySelector?.('.pcui-treeview-item-text')?.textContent
+                          || active.querySelector?.('.pcui-gridview-item-text')?.textContent
+                          || active.textContent?.slice(0, 30)
+                          || active.tagName;
+                focusedEl.textContent = text;
+
+                if (treeView.dom.contains(active)) {
+                    focusedWidget.textContent = 'TreeView';
+                } else if (gridView.dom.contains(active)) {
+                    focusedWidget.textContent = 'GridView';
+                } else {
+                    focusedWidget.textContent = 'other';
+                }
+            }
+
+            const treeCt = countTabStops(treeView.dom);
+            const gridCt = countTabStops(gridView.dom);
+            treeTabStops.textContent = treeCt;
+            gridTabStops.textContent = gridCt;
+            totalTabStops.textContent = treeCt + gridCt;
+        }
+
+        document.addEventListener('focusin', updateStatus);
+        document.addEventListener('focusout', () => setTimeout(updateStatus, 0));
+        updateStatus();
+    </script>
+</body>
+</html>

@@ -17,7 +17,8 @@
     }
 }
 
-.pcui-gridview-item-selected {
+.pcui-gridview-item-selected,
+.pcui-gridview-item:focus-visible {
     background-color: $bcg-darkest;
 }
 

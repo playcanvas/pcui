@@ -208,6 +208,8 @@ class TreeView extends Container {
 
     protected _wasDraggingAllowedBeforeFiltering: boolean;
 
+    protected _activeItem: TreeViewItem = null;
+
     /**
      * Creates a new TreeView.
      *
@@ -238,6 +240,7 @@ class TreeView extends Container {
         window.addEventListener('mousedown', this._updateModifierKeys);
 
         this.dom.addEventListener('mouseleave', this._onMouseLeave);
+        this.dom.addEventListener('focusin', this._onFocusIn);
 
         this._dragHandle.dom.addEventListener('mousemove', this._onDragMove);
         this._dragHandle.on('destroy', (dom) => {
@@ -254,6 +257,7 @@ class TreeView extends Container {
         window.removeEventListener('mousemove', this._onMouseMove);
 
         this.dom.removeEventListener('mouseleave', this._onMouseLeave);
+        this.dom.removeEventListener('focusin', this._onFocusIn);
 
         if (this._dragScrollInterval) {
             window.clearInterval(this._dragScrollInterval);
@@ -267,6 +271,46 @@ class TreeView extends Container {
         this._pressedCtrl = evt.ctrlKey || evt.metaKey;
         this._pressedShift = evt.shiftKey;
     };
+
+    protected _onFocusIn = (evt: FocusEvent) => {
+        let node = evt.target as HTMLElement;
+        while (node && node !== this.dom) {
+            if (node.ui instanceof TreeViewItem) {
+                const item = node.ui;
+                this._setActiveItem(item);
+
+                const focused = evt.target as HTMLElement;
+                if (focused.matches(':focus-visible')) {
+                    const related = evt.relatedTarget as HTMLElement;
+                    if (!related || !this.dom.contains(related)) {
+                        let i = this._selectedItems.length;
+                        while (i--) {
+                            if (this._selectedItems[i] && this._selectedItems[i] !== item) {
+                                this._selectedItems[i].selected = false;
+                            }
+                        }
+                        item.selected = true;
+                    }
+                }
+                return;
+            }
+            node = node.parentElement;
+        }
+    };
+
+    protected _setActiveItem(item: TreeViewItem | null) {
+        if (this._activeItem === item) return;
+
+        if (this._activeItem && !this._activeItem.destroyed) {
+            this._activeItem.content.dom.tabIndex = -1;
+        }
+
+        this._activeItem = item;
+
+        if (item) {
+            item.content.dom.tabIndex = 0;
+        }
+    }
 
     /**
      * Finds the next tree item that is not currently hidden.
@@ -416,10 +460,20 @@ class TreeView extends Container {
         }
 
         super._onRemoveChild(element);
+
+        if (!this._activeItem) {
+            this._ensureActiveItem();
+        }
     }
 
     protected _onAppendTreeViewItem(item: TreeViewItem) {
         item.treeView = this;
+
+        if (!this._activeItem) {
+            this._setActiveItem(item);
+        } else {
+            item.content.dom.tabIndex = -1;
+        }
 
         if (this._filter) {
             // add new item to filtered results if it
@@ -438,6 +492,10 @@ class TreeView extends Container {
     protected _onRemoveTreeViewItem(item: TreeViewItem) {
         item.selected = false;
 
+        if (this._activeItem && (item === this._activeItem || item.dom.contains(this._activeItem.dom))) {
+            this._activeItem = null;
+        }
+
         // do the same for all children of the element
         item.forEachChild((child) => {
             if (child instanceof TreeViewItem) {
@@ -446,9 +504,19 @@ class TreeView extends Container {
         });
     }
 
+    protected _ensureActiveItem() {
+        let firstItem: TreeViewItem | null = null;
+        this._traverseDepthFirst((item) => {
+            if (!firstItem) {
+                firstItem = item;
+            }
+        });
+        this._setActiveItem(firstItem);
+    }
+
     // Called when a key is down on a child TreeViewItem.
     protected _onChildKeyDown(evt: KeyboardEvent, item: TreeViewItem) {
-        if (['Tab', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(evt.key) === -1) return;
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].indexOf(evt.key) === -1) return;
 
         evt.preventDefault();
         evt.stopPropagation();
@@ -1000,6 +1068,7 @@ class TreeView extends Container {
     protected _onChildSelected(item: TreeViewItem) {
         this._selectedItems.push(item);
         this._openHierarchy(item);
+        this._setActiveItem(item);
         this.emit('select', item);
     }
 
@@ -1154,6 +1223,7 @@ class TreeView extends Container {
 
         this._selectedItems = [];
         this._dragItems = [];
+        this._activeItem = null;
         this._allowDrag = this._wasDraggingAllowedBeforeFiltering;
     }
 
