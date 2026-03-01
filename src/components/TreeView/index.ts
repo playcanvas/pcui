@@ -512,10 +512,17 @@ class TreeView extends Container {
 
     protected _ensureActiveItem() {
         let firstItem: TreeViewItem | null = null;
+        const isFiltering = this.dom.classList.contains(CLASS_FILTERING);
         this._traverseDepthFirst((item) => {
-            if (!firstItem) {
-                firstItem = item;
+            if (firstItem) return;
+            if (isFiltering) {
+                if (!item.dom.classList.contains(CLASS_FILTER_RESULT)) {
+                    return;
+                }
+            } else if (item.hidden) {
+                return;
             }
+            firstItem = item;
         });
         this._setActiveItem(firstItem);
     }
