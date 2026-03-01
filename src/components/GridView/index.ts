@@ -106,13 +106,15 @@ class GridView extends Container {
                 if (focused.matches(':focus-visible')) {
                     const related = evt.relatedTarget as HTMLElement;
                     if (!related || !this.dom.contains(related)) {
-                        let i = this._selected.length;
-                        while (i--) {
-                            if (this._selected[i] && this._selected[i] !== item) {
-                                this._selected[i].selected = false;
+                        if (!item.selected) {
+                            let i = this._selected.length;
+                            while (i--) {
+                                if (this._selected[i] && this._selected[i] !== item) {
+                                    this._selected[i].selected = false;
+                                }
                             }
+                            item.selected = true;
                         }
-                        item.selected = true;
                     }
                 }
                 return;
