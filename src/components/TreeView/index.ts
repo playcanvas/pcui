@@ -283,13 +283,19 @@ class TreeView extends Container {
                 if (focused.matches(':focus-visible')) {
                     const related = evt.relatedTarget as HTMLElement;
                     if (!related || !this.dom.contains(related)) {
-                        let i = this._selectedItems.length;
-                        while (i--) {
-                            if (this._selectedItems[i] && this._selectedItems[i] !== item) {
-                                this._selectedItems[i].selected = false;
+                        // When focus enters from outside via keyboard, avoid
+                        // dropping an existing multi-selection. Only enforce
+                        // single selection if the focused item is not already
+                        // selected.
+                        if (!item.selected) {
+                            let i = this._selectedItems.length;
+                            while (i--) {
+                                if (this._selectedItems[i] && this._selectedItems[i] !== item) {
+                                    this._selectedItems[i].selected = false;
+                                }
                             }
+                            item.selected = true;
                         }
-                        item.selected = true;
                     }
                 }
                 return;
