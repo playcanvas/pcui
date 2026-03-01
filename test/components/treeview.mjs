@@ -170,15 +170,22 @@ describe('TreeView', () => {
 
         it('should reassign active item when the active item is removed', () => {
             const { treeView, root, child1 } = buildTree();
+            // Add a second root item so there is another candidate to receive focus.
+            const secondRoot = new TreeViewItem({ text: 'root2', open: false });
+            treeView.append(secondRoot);
             document.body.appendChild(treeView.dom);
 
             treeView.expandAll();
+            // Initially, the original root should be the active (tabIndex=0) item.
             strictEqual(root._containerContents.dom.tabIndex, 0);
+            strictEqual(secondRoot._containerContents.dom.tabIndex, -1);
 
+            // Remove the active root item; focus/active item should be reassigned.
             treeView.remove(root);
 
             const tabStops = treeView.dom.querySelectorAll('[tabindex="0"]');
-            strictEqual(tabStops.length, 0);
+            strictEqual(tabStops.length, 1);
+            strictEqual(tabStops[0], secondRoot._containerContents.dom);
 
             document.body.removeChild(treeView.dom);
         });
