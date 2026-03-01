@@ -89,7 +89,7 @@
     "eslint-import-resolver-typescript": "4.4.4",
     "eslint-plugin-storybook": "10.2.13",
     "global-jsdom": "28.0.0",
-    "globals": "17.3.0",
+    "globals": "17.4.0",
     "jsdom": "28.1.0",
     "playcanvas": "2.16.2",
     "postcss": "8.5.6",
