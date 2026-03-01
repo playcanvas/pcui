@@ -181,10 +181,14 @@ class GridView extends Container {
         item.selected = false;
 
         if (this._activeItem === item) {
-            const next = item.nextSibling || item.previousSibling;
             this._activeItem = null;
-            if (next) {
-                this._setActiveItem(next);
+            const children = this.dom.children;
+            for (let i = 0; i < children.length; i++) {
+                const child = (children[i] as any).ui;
+                if (child instanceof GridViewItem && !child.hidden) {
+                    this._setActiveItem(child);
+                    break;
+                }
             }
         }
 

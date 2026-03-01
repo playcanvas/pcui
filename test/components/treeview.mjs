@@ -125,6 +125,85 @@ describe('TreeView', () => {
         });
     });
 
+    describe('roving tabindex', () => {
+        it('should have exactly one item with tabIndex=0', () => {
+            const { treeView, root } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            const tabStops = treeView.dom.querySelectorAll('[tabindex="0"]');
+            strictEqual(tabStops.length, 1);
+            strictEqual(tabStops[0], root._containerContents.dom);
+
+            document.body.removeChild(treeView.dom);
+        });
+
+        it('should move tabIndex=0 to the focused item on arrow navigation', () => {
+            const { treeView, root, child1 } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            treeView.expandAll();
+            root.selected = true;
+            root.focus();
+
+            root._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+
+            strictEqual(root._containerContents.dom.tabIndex, -1);
+            strictEqual(child1._containerContents.dom.tabIndex, 0);
+            strictEqual(treeView.dom.querySelectorAll('[tabindex="0"]').length, 1);
+
+            document.body.removeChild(treeView.dom);
+        });
+
+        it('should update active item when an item is selected', () => {
+            const { treeView, root, child1 } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            treeView.expandAll();
+            strictEqual(root._containerContents.dom.tabIndex, 0);
+
+            child1.selected = true;
+            strictEqual(child1._containerContents.dom.tabIndex, 0);
+            strictEqual(root._containerContents.dom.tabIndex, -1);
+
+            document.body.removeChild(treeView.dom);
+        });
+
+        it('should reassign active item when the active item is removed', () => {
+            const { treeView, root, child1 } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            treeView.expandAll();
+            strictEqual(root._containerContents.dom.tabIndex, 0);
+
+            treeView.remove(root);
+
+            const tabStops = treeView.dom.querySelectorAll('[tabindex="0"]');
+            strictEqual(tabStops.length, 0);
+
+            document.body.removeChild(treeView.dom);
+        });
+
+        it('should select the item when focus enters from outside via keyboard', () => {
+            const { treeView, root } = buildTree();
+            document.body.appendChild(treeView.dom);
+
+            strictEqual(root.selected, false);
+
+            // Simulate keyboard Tab-in by focusing and dispatching focusin.
+            // jsdom's :focus-visible heuristic is unreliable across tests,
+            // so we stub matches() to return true for the duration.
+            const contentDom = root._containerContents.dom;
+            const origMatches = contentDom.matches.bind(contentDom);
+            contentDom.matches = (sel) => sel === ':focus-visible' ? true : origMatches(sel);
+            contentDom.focus();
+            contentDom.matches = origMatches;
+
+            strictEqual(root.selected, true);
+
+            document.body.removeChild(treeView.dom);
+        });
+    });
+
     describe('#expandAll', () => {
         it('should open every item in the tree', () => {
             const { treeView, root, child1, grandchild1, grandchild2 } = buildTree();
