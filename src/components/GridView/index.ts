@@ -394,6 +394,26 @@ class GridView extends Container {
         return target;
     }
 
+    protected _validateActiveItem() {
+        if (this._activeItem && !this._activeItem.hidden) {
+            return;
+        }
+
+        if (this._activeItem) {
+            this._activeItem.tabIndex = -1;
+            this._activeItem = null;
+        }
+
+        const children = this.dom.children;
+        for (let i = 0; i < children.length; i++) {
+            const child = (children[i] as any).ui;
+            if (child instanceof GridViewItem && !child.hidden) {
+                this._setActiveItem(child);
+                return;
+            }
+        }
+    }
+
     /**
      * Deselects all selected grid view items.
      */
@@ -415,6 +435,7 @@ class GridView extends Container {
                 child.hidden = this._filterFn && !this._filterFn(child);
             }
         });
+        this._validateActiveItem();
     }
 
     /**
@@ -457,6 +478,8 @@ class GridView extends Container {
                     }
                 }
             }
+
+            this._validateActiveItem();
 
             if (i < len) {
                 this.emit('filter:delay');
