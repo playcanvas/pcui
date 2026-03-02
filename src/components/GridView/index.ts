@@ -451,6 +451,7 @@ class GridView extends Container {
         const next = () => {
             this._filterAnimationFrame = null;
             let visible = 0;
+            let activeItemHidden = false;
             for (; i < len && visible < batchLimit; i++) {
                 if (this._filterCanceled) {
                     this._filterCanceled = false;
@@ -462,6 +463,9 @@ class GridView extends Container {
                 if (child instanceof GridViewItem) {
                     if (this._filterFn && !this._filterFn(child)) {
                         child.hidden = true;
+                        if (child === this._activeItem) {
+                            activeItemHidden = true;
+                        }
                     } else {
                         child.hidden = false;
                         visible++;
@@ -469,7 +473,9 @@ class GridView extends Container {
                 }
             }
 
-            this._validateActiveItem();
+            if (activeItemHidden) {
+                this._validateActiveItem();
+            }
 
             if (i < len) {
                 this.emit('filter:delay');
