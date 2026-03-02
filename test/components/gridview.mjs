@@ -118,6 +118,59 @@ describe('GridView', () => {
             document.body.removeChild(gridView.dom);
         });
 
+        it('should reassign active item when filter() hides the active item', () => {
+            const gridView = new GridView({
+                filterFn: (item) => item.text !== 'item1'
+            });
+            const item1 = new GridViewItem({ text: 'item1' });
+            const item2 = new GridViewItem({ text: 'item2' });
+            const item3 = new GridViewItem({ text: 'item3' });
+
+            gridView.append(item1);
+            gridView.append(item2);
+            gridView.append(item3);
+            document.body.appendChild(gridView.dom);
+
+            strictEqual(item1.dom.tabIndex, 0);
+
+            gridView.filter();
+
+            strictEqual(item1.hidden, true);
+            strictEqual(item1.dom.tabIndex, -1);
+            strictEqual(item2.dom.tabIndex, 0);
+            strictEqual(gridView.dom.querySelectorAll('[tabindex="0"]').length, 1);
+
+            document.body.removeChild(gridView.dom);
+        });
+
+        it('should reassign active item when filterAsync() hides the active item', (_, done) => {
+            const gridView = new GridView({
+                filterFn: (item) => item.text !== 'item1'
+            });
+            const item1 = new GridViewItem({ text: 'item1' });
+            const item2 = new GridViewItem({ text: 'item2' });
+            const item3 = new GridViewItem({ text: 'item3' });
+
+            gridView.append(item1);
+            gridView.append(item2);
+            gridView.append(item3);
+            document.body.appendChild(gridView.dom);
+
+            strictEqual(item1.dom.tabIndex, 0);
+
+            gridView.on('filter:end', () => {
+                strictEqual(item1.hidden, true);
+                strictEqual(item1.dom.tabIndex, -1);
+                strictEqual(item2.dom.tabIndex, 0);
+                strictEqual(gridView.dom.querySelectorAll('[tabindex="0"]').length, 1);
+
+                document.body.removeChild(gridView.dom);
+                done();
+            });
+
+            gridView.filterAsync();
+        });
+
         it('should select the item when focus enters from outside via keyboard', () => {
             const { gridView, item1 } = buildGrid();
             document.body.appendChild(gridView.dom);

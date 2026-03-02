@@ -183,15 +183,8 @@ class GridView extends Container {
         item.selected = false;
 
         if (this._activeItem === item) {
-            this._activeItem = null;
-            const children = this.dom.children;
-            for (let i = 0; i < children.length; i++) {
-                const child = (children[i] as any).ui;
-                if (child instanceof GridViewItem && !child.hidden) {
-                    this._setActiveItem(child);
-                    break;
-                }
-            }
+            this._setActiveItem(null);
+            this._validateActiveItem();
         }
 
         item.emit('griditem:remove');
@@ -394,6 +387,23 @@ class GridView extends Container {
         return target;
     }
 
+    protected _validateActiveItem() {
+        if (this._activeItem && !this._activeItem.hidden && !this._activeItem.destroyed) {
+            return;
+        }
+
+        this._setActiveItem(null);
+
+        const children = this.dom.children;
+        for (let i = 0; i < children.length; i++) {
+            const child = (children[i] as any).ui;
+            if (child instanceof GridViewItem && !child.hidden) {
+                this._setActiveItem(child);
+                return;
+            }
+        }
+    }
+
     /**
      * Deselects all selected grid view items.
      */
@@ -415,6 +425,7 @@ class GridView extends Container {
                 child.hidden = this._filterFn && !this._filterFn(child);
             }
         });
+        this._validateActiveItem();
     }
 
     /**
@@ -440,6 +451,7 @@ class GridView extends Container {
         const next = () => {
             this._filterAnimationFrame = null;
             let visible = 0;
+            let activeItemHidden = false;
             for (; i < len && visible < batchLimit; i++) {
                 if (this._filterCanceled) {
                     this._filterCanceled = false;
@@ -451,11 +463,18 @@ class GridView extends Container {
                 if (child instanceof GridViewItem) {
                     if (this._filterFn && !this._filterFn(child)) {
                         child.hidden = true;
+                        if (child === this._activeItem) {
+                            activeItemHidden = true;
+                        }
                     } else {
                         child.hidden = false;
                         visible++;
                     }
                 }
+            }
+
+            if (activeItemHidden) {
+                this._validateActiveItem();
             }
 
             if (i < len) {
