@@ -183,15 +183,8 @@ class GridView extends Container {
         item.selected = false;
 
         if (this._activeItem === item) {
-            this._activeItem = null;
-            const children = this.dom.children;
-            for (let i = 0; i < children.length; i++) {
-                const child = (children[i] as any).ui;
-                if (child instanceof GridViewItem && !child.hidden) {
-                    this._setActiveItem(child);
-                    break;
-                }
-            }
+            this._setActiveItem(null);
+            this._validateActiveItem();
         }
 
         item.emit('griditem:remove');
@@ -395,14 +388,11 @@ class GridView extends Container {
     }
 
     protected _validateActiveItem() {
-        if (this._activeItem && !this._activeItem.hidden) {
+        if (this._activeItem && !this._activeItem.hidden && !this._activeItem.destroyed) {
             return;
         }
 
-        if (this._activeItem) {
-            this._activeItem.tabIndex = -1;
-            this._activeItem = null;
-        }
+        this._setActiveItem(null);
 
         const children = this.dom.children;
         for (let i = 0; i < children.length; i++) {
