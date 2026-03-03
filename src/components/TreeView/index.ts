@@ -202,6 +202,8 @@ class TreeView extends Container {
 
     protected _pressedShift = false;
 
+    protected _pressedArrow = false;
+
     protected _filter: string = null;
 
     protected _filterResults: TreeViewItem[] = [];
@@ -534,61 +536,67 @@ class TreeView extends Container {
         evt.preventDefault();
         evt.stopPropagation();
 
-        switch (evt.key) {
-            case 'ArrowLeft': {
-                if (item.numChildren > 0 && item.open) {
-                    // If item has children and is expanded, fold it
-                    item.open = false;
-                } else {
-                    // If item is a leaf or already folded, select parent
-                    const parent = item.parent;
-                    if (parent instanceof TreeViewItem) {
-                        this._selectSingleItem(parent);
-                        parent.focus();
-                    }
-                }
-                break;
-            }
-            case 'ArrowRight': {
-                if (item.numChildren > 0) {
-                    if (!item.open) {
-                        // If item is folded, unfold it
-                        item.open = true;
+        this._pressedArrow = true;
+
+        try {
+            switch (evt.key) {
+                case 'ArrowLeft': {
+                    if (item.numChildren > 0 && item.open) {
+                        // If item has children and is expanded, fold it
+                        item.open = false;
                     } else {
-                        // If item is already unfolded, select first child
-                        const firstChild = item.firstChild;
-                        if (firstChild instanceof TreeViewItem) {
-                            this._selectSingleItem(firstChild);
-                            firstChild.focus();
+                        // If item is a leaf or already folded, select parent
+                        const parent = item.parent;
+                        if (parent instanceof TreeViewItem) {
+                            this._selectSingleItem(parent);
+                            parent.focus();
                         }
                     }
+                    break;
                 }
-                break;
-            }
-            case 'ArrowDown': {
-                const next = this._findNextVisibleTreeItem(item);
-                if (next) {
-                    if (this._pressedShift || this._pressedCtrl) {
-                        next.selected = true;
-                    } else {
-                        this._selectSingleItem(next);
+                case 'ArrowRight': {
+                    if (item.numChildren > 0) {
+                        if (!item.open) {
+                            // If item is folded, unfold it
+                            item.open = true;
+                        } else {
+                            // If item is already unfolded, select first child
+                            const firstChild = item.firstChild;
+                            if (firstChild instanceof TreeViewItem) {
+                                this._selectSingleItem(firstChild);
+                                firstChild.focus();
+                            }
+                        }
                     }
-                    next.focus();
+                    break;
                 }
-                break;
-            }
-            case 'ArrowUp': {
-                const prev = this._findPreviousVisibleTreeItem(item);
-                if (prev) {
-                    if (this._pressedShift || this._pressedCtrl) {
-                        prev.selected = true;
-                    } else {
-                        this._selectSingleItem(prev);
+                case 'ArrowDown': {
+                    const next = this._findNextVisibleTreeItem(item);
+                    if (next) {
+                        if (this._pressedShift || this._pressedCtrl) {
+                            next.selected = true;
+                        } else {
+                            this._selectSingleItem(next);
+                        }
+                        next.focus();
                     }
-                    prev.focus();
+                    break;
                 }
-                break;
+                case 'ArrowUp': {
+                    const prev = this._findPreviousVisibleTreeItem(item);
+                    if (prev) {
+                        if (this._pressedShift || this._pressedCtrl) {
+                            prev.selected = true;
+                        } else {
+                            this._selectSingleItem(prev);
+                        }
+                        prev.focus();
+                    }
+                    break;
+                }
             }
+        } finally {
+            this._pressedArrow = false;
         }
     }
 
@@ -1339,6 +1347,13 @@ class TreeView extends Container {
      */
     get pressedShift(): boolean {
         return this._pressedShift;
+    }
+
+    /**
+     * Gets whether the selection was triggered by arrow key navigation.
+     */
+    get pressedArrow(): boolean {
+        return this._pressedArrow;
     }
 }
 
