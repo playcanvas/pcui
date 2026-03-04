@@ -190,22 +190,15 @@ describe('TreeView', () => {
             document.body.removeChild(treeView.dom);
         });
 
-        it('should select the item when focus enters from outside via keyboard', () => {
+        it('should not select the item when focus enters from outside via keyboard', () => {
             const { treeView, root } = buildTree();
             document.body.appendChild(treeView.dom);
 
             strictEqual(root.selected, false);
 
-            // Simulate keyboard Tab-in by focusing and dispatching focusin.
-            // jsdom's :focus-visible heuristic is unreliable across tests,
-            // so we stub matches() to return true for the duration.
-            const contentDom = root._containerContents.dom;
-            const origMatches = contentDom.matches.bind(contentDom);
-            contentDom.matches = (sel) => sel === ':focus-visible' ? true : origMatches(sel);
-            contentDom.focus();
-            contentDom.matches = origMatches;
+            root._containerContents.dom.focus();
 
-            strictEqual(root.selected, true);
+            strictEqual(root.selected, false);
 
             document.body.removeChild(treeView.dom);
         });
