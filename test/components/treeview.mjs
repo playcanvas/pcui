@@ -38,11 +38,11 @@ describe('TreeView', () => {
             document.body.appendChild(treeView.dom);
 
             root.focus();
-            strictEqual(document.activeElement, root._containerContents.dom);
+            strictEqual(document.activeElement, root.content.dom);
 
             child1.selected = true;
             strictEqual(child1.selected, true);
-            strictEqual(document.activeElement, root._containerContents.dom);
+            strictEqual(document.activeElement, root.content.dom);
 
             document.body.removeChild(treeView.dom);
         });
@@ -55,9 +55,9 @@ describe('TreeView', () => {
             root.selected = true;
             root.focus();
 
-            root._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+            root.content.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
             strictEqual(child1.selected, true);
-            strictEqual(document.activeElement, child1._containerContents.dom);
+            strictEqual(document.activeElement, child1.content.dom);
 
             document.body.removeChild(treeView.dom);
         });
@@ -70,9 +70,9 @@ describe('TreeView', () => {
             child1.selected = true;
             child1.focus();
 
-            child1._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
+            child1.content.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
             strictEqual(root.selected, true);
-            strictEqual(document.activeElement, root._containerContents.dom);
+            strictEqual(document.activeElement, root.content.dom);
 
             document.body.removeChild(treeView.dom);
         });
@@ -85,9 +85,9 @@ describe('TreeView', () => {
             child1.selected = true;
             child1.focus();
 
-            child1._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+            child1.content.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
             strictEqual(grandchild1.selected, true);
-            strictEqual(document.activeElement, grandchild1._containerContents.dom);
+            strictEqual(document.activeElement, grandchild1.content.dom);
 
             document.body.removeChild(treeView.dom);
         });
@@ -100,9 +100,9 @@ describe('TreeView', () => {
             grandchild1.selected = true;
             grandchild1.focus();
 
-            grandchild1._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+            grandchild1.content.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
             strictEqual(child1.selected, true);
-            strictEqual(document.activeElement, child1._containerContents.dom);
+            strictEqual(document.activeElement, child1.content.dom);
 
             document.body.removeChild(treeView.dom);
         });
@@ -116,10 +116,10 @@ describe('TreeView', () => {
             child1.focus();
             strictEqual(child1.open, true);
 
-            child1._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
+            child1.content.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }));
             strictEqual(child1.open, false);
             strictEqual(child1.selected, true);
-            strictEqual(document.activeElement, child1._containerContents.dom);
+            strictEqual(document.activeElement, child1.content.dom);
 
             document.body.removeChild(treeView.dom);
         });
@@ -132,7 +132,7 @@ describe('TreeView', () => {
 
             const tabStops = treeView.dom.querySelectorAll('[tabindex="0"]');
             strictEqual(tabStops.length, 1);
-            strictEqual(tabStops[0], root._containerContents.dom);
+            strictEqual(tabStops[0], root.content.dom);
 
             document.body.removeChild(treeView.dom);
         });
@@ -145,10 +145,10 @@ describe('TreeView', () => {
             root.selected = true;
             root.focus();
 
-            root._containerContents.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+            root.content.dom.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
 
-            strictEqual(root._containerContents.dom.tabIndex, -1);
-            strictEqual(child1._containerContents.dom.tabIndex, 0);
+            strictEqual(root.content.dom.tabIndex, -1);
+            strictEqual(child1.content.dom.tabIndex, 0);
             strictEqual(treeView.dom.querySelectorAll('[tabindex="0"]').length, 1);
 
             document.body.removeChild(treeView.dom);
@@ -159,11 +159,11 @@ describe('TreeView', () => {
             document.body.appendChild(treeView.dom);
 
             treeView.expandAll();
-            strictEqual(root._containerContents.dom.tabIndex, 0);
+            strictEqual(root.content.dom.tabIndex, 0);
 
             child1.selected = true;
-            strictEqual(child1._containerContents.dom.tabIndex, 0);
-            strictEqual(root._containerContents.dom.tabIndex, -1);
+            strictEqual(child1.content.dom.tabIndex, 0);
+            strictEqual(root.content.dom.tabIndex, -1);
 
             document.body.removeChild(treeView.dom);
         });
@@ -177,15 +177,15 @@ describe('TreeView', () => {
 
             treeView.expandAll();
             // Initially, the original root should be the active (tabIndex=0) item.
-            strictEqual(root._containerContents.dom.tabIndex, 0);
-            strictEqual(secondRoot._containerContents.dom.tabIndex, -1);
+            strictEqual(root.content.dom.tabIndex, 0);
+            strictEqual(secondRoot.content.dom.tabIndex, -1);
 
             // Remove the active root item; focus/active item should be reassigned.
             treeView.remove(root);
 
             const tabStops = treeView.dom.querySelectorAll('[tabindex="0"]');
             strictEqual(tabStops.length, 1);
-            strictEqual(tabStops[0], secondRoot._containerContents.dom);
+            strictEqual(tabStops[0], secondRoot.content.dom);
 
             document.body.removeChild(treeView.dom);
         });
@@ -196,7 +196,7 @@ describe('TreeView', () => {
 
             strictEqual(root.selected, false);
 
-            root._containerContents.dom.focus();
+            root.content.dom.focus();
 
             strictEqual(root.selected, false);
 
