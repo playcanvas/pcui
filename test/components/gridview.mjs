@@ -171,21 +171,15 @@ describe('GridView', () => {
             gridView.filterAsync();
         });
 
-        it('should select the item when focus enters from outside via keyboard', () => {
+        it('should not select the item when focus enters from outside via keyboard', () => {
             const { gridView, item1 } = buildGrid();
             document.body.appendChild(gridView.dom);
 
             strictEqual(item1.selected, false);
 
-            // Simulate keyboard Tab-in by focusing and dispatching focusin.
-            // jsdom's :focus-visible heuristic is unreliable across tests,
-            // so we stub matches() to return true for the duration.
-            const origMatches = item1.dom.matches.bind(item1.dom);
-            item1.dom.matches = (sel) => sel === ':focus-visible' ? true : origMatches(sel);
             item1.focus();
-            item1.dom.matches = origMatches;
 
-            strictEqual(item1.selected, true);
+            strictEqual(item1.selected, false);
 
             document.body.removeChild(gridView.dom);
         });

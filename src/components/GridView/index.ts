@@ -99,24 +99,7 @@ class GridView extends Container {
         let node = evt.target as HTMLElement;
         while (node && node !== this.dom) {
             if (node.ui instanceof GridViewItem) {
-                const item = node.ui;
-                this._setActiveItem(item);
-
-                const focused = evt.target as HTMLElement;
-                if (focused.matches(':focus-visible')) {
-                    const related = evt.relatedTarget as HTMLElement;
-                    if (!related || !this.dom.contains(related)) {
-                        if (!item.selected) {
-                            let i = this._selected.length;
-                            while (i--) {
-                                if (this._selected[i] && this._selected[i] !== item) {
-                                    this._selected[i].selected = false;
-                                }
-                            }
-                            item.selected = true;
-                        }
-                    }
-                }
+                this._setActiveItem(node.ui);
                 return;
             }
             node = node.parentElement;
