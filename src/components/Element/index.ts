@@ -155,7 +155,7 @@ interface IFlexArgs {
     /**
      * Sets the element's `flexBasis` CSS property.
      */
-    flexBasis?: string,
+    flexBasis?: string | number,
     /**
      * Sets the element's `flexDirection` CSS property.
      */
@@ -163,15 +163,31 @@ interface IFlexArgs {
     /**
      * Sets the element's `flexGrow` CSS property.
      */
-    flexGrow?: string,
+    flexGrow?: string | number,
     /**
      * Sets the element's `flexShrink` CSS property.
      */
-    flexShrink?: string,
+    flexShrink?: string | number,
     /**
      * Sets the element's `flexWrap` CSS property.
      */
-    flexWrap?: string
+    flexWrap?: string,
+    /**
+     * Sets the element's `alignItems` CSS property.
+     */
+    alignItems?: string,
+    /**
+     * Sets the element's `alignSelf` CSS property.
+     */
+    alignSelf?: string,
+    /**
+     * Sets the element's `justifyContent` CSS property.
+     */
+    justifyContent?: string,
+    /**
+     * Sets the element's `justifySelf` CSS property.
+     */
+    justifySelf?: string
 }
 
 /**
@@ -1057,126 +1073,126 @@ class Element extends Events {
     /**
      * Sets the flex-direction CSS property.
      */
-    set flexDirection(value) {
+    set flexDirection(value: string) {
         this.style.flexDirection = value;
     }
 
     /**
      * Gets the flex-direction CSS property.
      */
-    get flexDirection() {
+    get flexDirection(): string {
         return this.style.flexDirection;
     }
 
     /**
      * Sets the flex-grow CSS property.
      */
-    set flexGrow(value) {
-        this.style.flexGrow = value;
+    set flexGrow(value: string | number) {
+        this.style.flexGrow = String(value);
     }
 
     /**
      * Gets the flex-grow CSS property.
      */
-    get flexGrow() {
+    get flexGrow(): string {
         return this.style.flexGrow;
     }
 
     /**
      * Sets the flex-basis CSS property.
      */
-    set flexBasis(value) {
-        this.style.flexBasis = value;
+    set flexBasis(value: string | number) {
+        this.style.flexBasis = String(value);
     }
 
     /**
      * Gets the flex-basis CSS property.
      */
-    get flexBasis() {
+    get flexBasis(): string {
         return this.style.flexBasis;
     }
 
     /**
      * Sets the flex-shrink CSS property.
      */
-    set flexShrink(value) {
-        this.style.flexShrink = value;
+    set flexShrink(value: string | number) {
+        this.style.flexShrink = String(value);
     }
 
     /**
      * Gets the flex-shrink CSS property.
      */
-    get flexShrink() {
+    get flexShrink(): string {
         return this.style.flexShrink;
     }
 
     /**
      * Sets the flex-wrap CSS property.
      */
-    set flexWrap(value) {
+    set flexWrap(value: string) {
         this.style.flexWrap = value;
     }
 
     /**
      * Gets the flex-wrap CSS property.
      */
-    get flexWrap() {
+    get flexWrap(): string {
         return this.style.flexWrap;
     }
 
     /**
      * Sets the align-items CSS property.
      */
-    set alignItems(value) {
+    set alignItems(value: string) {
         this.style.alignItems = value;
     }
 
     /**
      * Gets the align-items CSS property.
      */
-    get alignItems() {
+    get alignItems(): string {
         return this.style.alignItems;
     }
 
     /**
      * Sets the align-self CSS property.
      */
-    set alignSelf(value) {
+    set alignSelf(value: string) {
         this.style.alignSelf = value;
     }
 
     /**
      * Gets the align-self CSS property.
      */
-    get alignSelf() {
+    get alignSelf(): string {
         return this.style.alignSelf;
     }
 
     /**
      * Sets the justify-content CSS property.
      */
-    set justifyContent(value) {
+    set justifyContent(value: string) {
         this.style.justifyContent = value;
     }
 
     /**
      * Gets the justify-content CSS property.
      */
-    get justifyContent() {
+    get justifyContent(): string {
         return this.style.justifyContent;
     }
 
     /**
      * Sets the justify-self CSS property.
      */
-    set justifySelf(value) {
+    set justifySelf(value: string) {
         this.style.justifySelf = value;
     }
 
     /**
      * Gets the justify-self CSS property.
      */
-    get justifySelf() {
+    get justifySelf(): string {
         return this.style.justifySelf;
     }
 
