@@ -145,7 +145,9 @@ interface IParentArgs {
 }
 
 /**
- * The interface for arguments for elements that use flex layout.
+ * The interface for flex-related CSS properties available on elements.
+ * These properties do not themselves enable `display: flex`; flex layout is
+ * configured separately (for example via `Container#flex`).
  */
 interface IFlexArgs {
     /**
