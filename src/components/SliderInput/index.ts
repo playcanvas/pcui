@@ -1,5 +1,5 @@
 import { CLASS_MULTIPLE_VALUES } from '../../class';
-import { Element, ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
+import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
 import { NumericInput } from '../NumericInput';
 
 const CLASS_SLIDER = 'pcui-slider';
@@ -13,7 +13,7 @@ const IS_CHROME = /Chrome\//.test(globalThis.navigator?.userAgent);
 /**
  * The arguments for the {@link SliderInput} constructor.
  */
-interface SliderInputArgs extends ElementArgs, IBindableArgs, IFlexArgs, IPlaceholderArgs {
+interface SliderInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * Sets whether any key up event will cause a change event to be fired.
      */

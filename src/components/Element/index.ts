@@ -145,13 +145,11 @@ interface IParentArgs {
 }
 
 /**
- * The interface for arguments for elements that use flex layout.
+ * The interface for flex-related CSS properties available on elements.
+ * These properties do not themselves enable `display: flex`; flex layout is
+ * configured separately (for example via `Container#flex`).
  */
 interface IFlexArgs {
-    /**
-     * Sets whether the element uses flex layout.
-     */
-    flex?: boolean,
     /**
      * Sets the element's `flexBasis` CSS property.
      */
@@ -193,7 +191,7 @@ interface IFlexArgs {
 /**
  * The arguments for the {@link Element} constructor.
  */
-interface ElementArgs {
+interface ElementArgs extends IFlexArgs {
     /**
      * The HTMLElement to create this {@link Element} with. If not provided this Element will create one.
      */
