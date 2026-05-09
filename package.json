@@ -92,7 +92,7 @@
     "globals": "17.4.0",
     "jsdom": "28.1.0",
     "playcanvas": "2.16.2",
-    "postcss": "8.5.8",
+    "postcss": "8.5.10",
     "prop-types": "15.8.1",
     "publint": "0.3.18",
     "rollup": "4.59.0",
