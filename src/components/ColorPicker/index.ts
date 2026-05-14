@@ -201,6 +201,15 @@ class ColorPicker extends Element implements IBindable {
         this._overlay.append(this._panelFields);
 
         this._overlay.on('hide', () => {
+            // if the overlay closes between a typed keystroke and the throttled
+            // callbackHandle, emit the matching picker:color:end synchronously
+            // before unbinding the listener that restores the binding's
+            // historyCombine/historyPostfix state.
+            if (this._dragging) {
+                this._dragging = false;
+                this.emit('picker:color:end');
+            }
+
             this._evtColorPick.unbind();
             this._evtColorPick = null;
 
