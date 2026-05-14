@@ -336,7 +336,11 @@ class ColorPicker extends Element implements IBindable {
 
         if (this._channelsNumber >= 3) {
             const hsv = _rgb2hsv(color);
-            this._colorHSV[0] = hsv[0];
+            // hue is undefined for achromatic colors (R=G=B); preserve the
+            // last known hue so the UI doesn't snap back to red.
+            if (hsv[1] > 0) {
+                this._colorHSV[0] = hsv[0];
+            }
             this._colorHSV[1] = hsv[1];
             this._colorHSV[2] = hsv[2];
         }
@@ -406,7 +410,9 @@ class ColorPicker extends Element implements IBindable {
 
         if (this._channelsNumber >= 3) {
             const hsv = _rgb2hsv(color);
-            this._colorHSV[0] = hsv[0];
+            if (hsv[1] > 0) {
+                this._colorHSV[0] = hsv[0];
+            }
             this._colorHSV[1] = hsv[1];
             this._colorHSV[2] = hsv[2];
         }
@@ -652,16 +658,17 @@ class ColorPicker extends Element implements IBindable {
 
         const hsv = _rgb2hsv(color);
         if (this._directInput) {
-            const sum = color[0] + color[1] + color[2];
-            if (sum !== 765 && sum !== 0) {
+            if (hsv[1] > 0) {
                 this._colorHSV[0] = hsv[0];
             }
 
             this._colorHSV[1] = hsv[1];
             this._colorHSV[2] = hsv[2];
 
-            this._dragging = true;
-            this.emit('picker:color:start');
+            if (!this._dragging) {
+                this._dragging = true;
+                this.emit('picker:color:start');
+            }
 
             this._fieldHex.value = this._getHex();
         }
@@ -711,6 +718,14 @@ class ColorPicker extends Element implements IBindable {
         this.emit('picker:color', this._pickerChannels.map((channel) => {
             return channel.value || 0;
         }).slice(0, this._channelsNumber));
+
+        // close the typed-input "drag" started in _onChangeRgb so the picker
+        // doesn't stay stuck in dragging state (which makes _setPickerColor a
+        // no-op and leaves the binding's historyCombine flag stuck on).
+        if (this._dragging) {
+            this._dragging = false;
+            this.emit('picker:color:end');
+        }
     }
 
     /** @ignore */
@@ -745,7 +760,9 @@ class ColorPicker extends Element implements IBindable {
         for (let i = 1; i < values.length; i++) {
             if (Array.isArray(value)) {
                 // @ts-ignore
-                if (!value.equals(values[i])) { // TODO: check if this works
+                const other: number[] = values[i];
+                if (!Array.isArray(other) || value.length !== other.length ||
+                    value.some((v, j) => v !== other[j])) {
                     different = true;
                     break;
                 }
