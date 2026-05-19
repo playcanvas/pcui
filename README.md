@@ -15,13 +15,11 @@ This library enables the creation of reliable and visually pleasing user interfa
 
 A full guide to using the PCUI library can be found [here](https://developer.playcanvas.com/user-manual/pcui/).
 
-</div>
-
 ## Getting Started
 
 To install the PCUI NPM module, run the following command:
 
-    npm install @playcanvas/pcui --save-dev
+    npm install @playcanvas/pcui
 
 You can then import each individual element from PCUI. In the example below, you can see how the PCUI `Label` component is imported from the PCUI library. The styles for PCUI are then imported into the example. Styles only need to be imported once per project.
 
@@ -39,13 +37,12 @@ If you'd like to include PCUI in your React project, you can import the individu
 
 ```javascript
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { TextInput } from '@playcanvas/pcui/react';
 import '@playcanvas/pcui/styles';
 
-ReactDOM.render(
-    <TextInput text='Hello World'/>,
-    document.body
+createRoot(document.body).render(
+    <TextInput text='Hello World'/>
 );
 ```
 
