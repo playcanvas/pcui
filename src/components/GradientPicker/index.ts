@@ -1376,7 +1376,7 @@ class GradientPicker extends Element {
         }
 
         // store the curve type
-        const comboItems = {
+        const comboItems: Record<number, string> = {
             0: 'Step',
             1: 'Linear',
             2: 'Spline'
@@ -1396,7 +1396,6 @@ class GradientPicker extends Element {
         if (value[0].type !== CURVE_STEP &&
             value[0].type !== CURVE_LINEAR &&
             value[0].type !== CURVE_SPLINE) {
-            // @ts-expect-error
             comboItems[3] = 'Legacy';
             this.STATE.typeMap[3] = value[0].type;
         }

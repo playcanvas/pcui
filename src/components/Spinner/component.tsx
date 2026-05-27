@@ -11,7 +11,6 @@ class Spinner extends Element<SpinnerArgs, any> {
     static ctor = SpinnerClass;
 
     render() {
-        // @ts-expect-error
         return <svg ref={this.attachElement} />;
     }
 }

@@ -11,7 +11,6 @@ class GradientPicker extends Element<GradientPickerArgs, any> {
     static ctor = GradientPickerClass;
 
     render() {
-        // @ts-expect-error
         return <div ref={this.attachElement}/>;
     }
 }
