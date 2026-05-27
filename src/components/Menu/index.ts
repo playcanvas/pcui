@@ -115,7 +115,7 @@ class Menu extends Container implements IFocusable {
             item.hidden = !item.onIsVisible();
         }
 
-        // @ts-ignore
+        // @ts-expect-error
         for (const child of item._containerItems.dom.childNodes) {
             this._filterMenuItems(child.ui as MenuItem);
         }
@@ -141,7 +141,7 @@ class Menu extends Container implements IFocusable {
     protected _limitSubmenuAtScreenEdges(item: MenuItem) {
         if (!(item instanceof MenuItem) || !item.hasChildren) return;
 
-        // @ts-ignore
+        // @ts-expect-error
         const containerItems = item._containerItems;
 
         containerItems.style.top = '';

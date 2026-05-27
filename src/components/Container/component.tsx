@@ -45,7 +45,7 @@ class Container extends Element<ContainerArgs, any> {
             );
         }
 
-        // @ts-ignore
+        // @ts-expect-error
         return <div ref={this.attachElement}>
             { elements }
         </div>;

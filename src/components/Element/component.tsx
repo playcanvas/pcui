@@ -91,14 +91,14 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
             const propDescriptor = this.getPropertyDescriptor(this.element, prop);
             if (propDescriptor && propDescriptor.set) {
                 if (prop === 'value') {
-                    // @ts-ignore
+                    // @ts-expect-error
                     this.element._suppressChange = true;
-                    // @ts-ignore
+                    // @ts-expect-error
                     this.element[prop] = this.props[prop];
-                    // @ts-ignore
+                    // @ts-expect-error
                     this.element._suppressChange = false;
                 } else {
-                    // @ts-ignore
+                    // @ts-expect-error
                     this.element[prop] = this.props[prop];
                 }
             } else if (prop === 'class') {
@@ -124,7 +124,7 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
     }
 
     render() {
-        // @ts-ignore
+        // @ts-expect-error
         return <div ref={this.attachElement} />;
     }
 }

@@ -264,7 +264,7 @@ class BindingBase extends Events {
      */
     set historyEnabled(value) {
         if (this._history) {
-            // @ts-ignore
+            // @ts-expect-error
             this._history.enabled = value;
         }
     }
@@ -273,7 +273,7 @@ class BindingBase extends Events {
      * Gets whether history is enabled for the binding.
      */
     get historyEnabled() {
-        // @ts-ignore
+        // @ts-expect-error
         return this._history && this._history.enabled;
     }
 

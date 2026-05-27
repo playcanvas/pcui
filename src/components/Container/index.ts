@@ -577,7 +577,7 @@ class Container extends Element {
             });
         } else {
             rootNode = node[keys[0]];
-            // @ts-ignore
+            // @ts-expect-error
             this[`_${keys[0]}`] = rootNode;
         }
         return rootNode;

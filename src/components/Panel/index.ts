@@ -320,18 +320,18 @@ class Panel extends Container {
         window.addEventListener('mousemove', this._onDragMove);
 
         this.emit('dragstart');
-        // @ts-ignore accessing protected methods
+        // @ts-expect-error accessing protected methods
         if (this.parent && this.parent._onChildDragStart) {
-            // @ts-ignore accessing protected methods
+            // @ts-expect-error accessing protected methods
             this.parent._onChildDragStart(evt, this);
         }
     };
 
     protected _onDragMove = (evt: MouseEvent) => {
         this.emit('dragmove');
-        // @ts-ignore accessing protected methods
+        // @ts-expect-error accessing protected methods
         if (this.parent && this.parent._onChildDragStart) {
-            // @ts-ignore accessing protected methods
+            // @ts-expect-error accessing protected methods
             this.parent._onChildDragMove(evt, this);
         }
     };
@@ -346,9 +346,9 @@ class Panel extends Container {
         }
 
         this.emit('dragend');
-        // @ts-ignore accessing protected methods
+        // @ts-expect-error accessing protected methods
         if (this.parent && this.parent._onChildDragStart) {
-            // @ts-ignore accessing protected methods
+            // @ts-expect-error accessing protected methods
             this.parent._onChildDragEnd(evt, this);
         }
     }

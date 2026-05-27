@@ -546,10 +546,10 @@ class Element extends Events {
 
         // copy CSS properties from args
         for (const key in args) {
-            // @ts-ignore
+            // @ts-expect-error
             if (args[key] === undefined) continue;
             if (SIMPLE_CSS_PROPERTIES.indexOf(key) !== -1) {
-                // @ts-ignore
+                // @ts-expect-error
                 this[key] = args[key];
             }
         }
@@ -587,9 +587,9 @@ class Element extends Events {
             // because we do not want to be emitting events
             // on a destroyed parent after it's been destroyed
             // as it is easy to lead to null exceptions
-            // @ts-ignore
+            // @ts-expect-error
             if (parent.remove && !parent._destroyed) {
-                // @ts-ignore
+                // @ts-expect-error
                 parent.remove(this);
             }
 
@@ -1047,7 +1047,7 @@ class Element extends Events {
         this._binding = value;
 
         if (this._binding) {
-            // @ts-ignore
+            // @ts-expect-error
             this._binding.element = this;
             if (prevObservers && prevPaths) {
                 this.link(prevObservers, prevPaths);
