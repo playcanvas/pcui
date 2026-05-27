@@ -11,7 +11,6 @@ class Button extends Element<ButtonArgs, any> {
     static ctor = ButtonClass;
 
     render() {
-        // @ts-expect-error
         return <button ref={this.attachElement} />;
     }
 }

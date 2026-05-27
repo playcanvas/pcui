@@ -42,7 +42,7 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
         }
     }
 
-    attachElement = (nodeElement: HTMLElement, containerElement: any) => {
+    attachElement = (nodeElement: HTMLElement | SVGElement | null, containerElement?: any) => {
         if (!nodeElement) return;
 
         this.element = new this.elementClass({
@@ -124,7 +124,6 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
     }
 
     render() {
-        // @ts-expect-error
         return <div ref={this.attachElement} />;
     }
 }

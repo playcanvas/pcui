@@ -11,7 +11,6 @@ class InfoBox extends Element<InfoBoxArgs, any> {
     static ctor = InfoBoxClass;
 
     render() {
-        // @ts-expect-error
         return <span ref={this.attachElement} />;
     }
 }

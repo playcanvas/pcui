@@ -11,7 +11,6 @@ class Canvas extends Element<CanvasArgs, any> {
     static ctor = CanvasClass;
 
     render() {
-        // @ts-expect-error
         return <canvas ref={this.attachElement}/>;
     }
 }

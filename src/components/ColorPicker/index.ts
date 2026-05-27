@@ -763,12 +763,11 @@ class ColorPicker extends Element implements IBindable {
     }
 
     /* eslint accessor-pairs: 0 */
-    set values(values: Array<number>) {
+    set values(values: Array<any>) {
         let different = false;
         const value = values[0];
         for (let i = 1; i < values.length; i++) {
             if (Array.isArray(value)) {
-                // @ts-expect-error
                 const other: number[] = values[i];
                 if (!Array.isArray(other) || value.length !== other.length ||
                     value.some((v, j) => v !== other[j])) {
@@ -787,7 +786,6 @@ class ColorPicker extends Element implements IBindable {
             this.value = null;
             this.class.add(CLASS_MULTIPLE_VALUES);
         } else {
-            // @ts-expect-error
             this.value = values[0];
         }
     }

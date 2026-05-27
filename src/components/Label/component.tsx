@@ -11,7 +11,6 @@ class Label extends Element<LabelArgs, any> {
     static ctor = LabelClass;
 
     render() {
-        // @ts-expect-error
         return <span ref={this.attachElement} />;
     }
 }
