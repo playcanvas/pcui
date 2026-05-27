@@ -11,7 +11,7 @@ class ColorPicker extends Element<ColorPickerArgs, any> {
     static ctor = ColorPickerClass;
 
     render() {
-        // @ts-ignore
+        // @ts-expect-error
         return <div ref={this.attachElement}/>;
     }
 }

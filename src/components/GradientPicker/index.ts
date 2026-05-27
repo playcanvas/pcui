@@ -453,7 +453,7 @@ class GradientPicker extends Element {
         this._channels = args.channels ?? 3;
         this._value = this._getDefaultValue();
         if (args.value) {
-            // @ts-ignore
+            // @ts-expect-error
             this.value = args.value;
         }
     }
@@ -1396,7 +1396,7 @@ class GradientPicker extends Element {
         if (value[0].type !== CURVE_STEP &&
             value[0].type !== CURVE_LINEAR &&
             value[0].type !== CURVE_SPLINE) {
-            // @ts-ignore
+            // @ts-expect-error
             comboItems[3] = 'Legacy';
             this.STATE.typeMap[3] = value[0].type;
         }

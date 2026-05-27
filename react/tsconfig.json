@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "strict": false,
         "noImplicitAny": true,
         "allowJs": true,
         "target": "es2020",
@@ -13,7 +14,7 @@
         ],
         "esModuleInterop": true,
         "sourceMap": true,
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "forceConsistentCasingInFileNames": true,

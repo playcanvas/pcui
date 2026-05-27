@@ -1007,7 +1007,7 @@ class TreeView extends Container {
         if (!dragOverItem || dragOverItem.hidden || !dragOverItem.parentsOpen) {
             this._dragHandle.hidden = true;
         } else {
-            // @ts-ignore
+            // @ts-expect-error
             const rect = dragOverItem._containerContents.dom.getBoundingClientRect();
 
             this._dragHandle.hidden = false;

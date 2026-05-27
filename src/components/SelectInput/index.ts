@@ -655,7 +655,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
             label.class.add(CLASS_SELECTED);
         }
 
-        // @ts-ignore
+        // @ts-expect-error
         container.value = value;
 
         return container;
@@ -1270,7 +1270,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         // value from the tags that are currently visible
         const result: any = [];
         this._containerTags.dom.childNodes.forEach((dom) => {
-            // @ts-ignore
+            // @ts-expect-error
             result.push(dom.ui.value);
         });
 

@@ -179,7 +179,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
         this._getDefaultFn = args.getDefaultFn ?? null;
 
-        // @ts-ignore
+        // @ts-expect-error
         let valueType = args.elementArgs && args.elementArgs.type || args.type;
         if (!ArrayInput.DEFAULTS.hasOwnProperty(valueType)) {
             valueType = 'string';
