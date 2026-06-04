@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
 
-import { LabelGroup } from './component';
 import { TextInput } from '../TextInput/component';
+
+import { LabelGroup } from './component';
 
 import '../../scss/index.js';
 

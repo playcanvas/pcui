@@ -1,4 +1,5 @@
-import { Element, ElementArgs } from '../Element';
+import type { ElementArgs } from '../Element';
+import { Element } from '../Element';
 
 const CLASS_ROOT = 'pcui-divider';
 

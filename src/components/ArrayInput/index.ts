@@ -1,9 +1,10 @@
-import { Observer } from '@playcanvas/observer';
+import type { Observer } from '@playcanvas/observer';
 
 import * as utils from '../../helpers/utils';
 import { Button } from '../Button';
 import { Container } from '../Container';
-import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import type { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import { Element } from '../Element';
 import { NumericInput } from '../NumericInput';
 import { Panel } from '../Panel';
 
@@ -17,7 +18,7 @@ const CLASS_ARRAY_DELETE = `${CLASS_ARRAY_ELEMENT}-delete`;
 /**
  * The arguments for the {@link ArrayInput} constructor.
  */
-interface ArrayInputArgs extends ElementArgs, IBindableArgs {
+type ArrayInputArgs = {
     /**
      * The type of values that the array can hold. Can be one of the following:
      *
@@ -34,7 +35,7 @@ interface ArrayInputArgs extends ElementArgs, IBindableArgs {
     /**
      * Arguments for each array Element.
      */
-    elementArgs?: Array<any>;
+    elementArgs?: any[];
     /**
      * If `true` then editing the number of elements that the array has will not be allowed.
      */
@@ -47,7 +48,7 @@ interface ArrayInputArgs extends ElementArgs, IBindableArgs {
      * Used to specify the default values for each element in the array. Defaults to `null`.
      */
     getDefaultFn?: () => any;
-}
+} & ElementArgs & IBindableArgs
 
 /**
  * Element that allows editing an array of values.

@@ -1,4 +1,4 @@
-import { Observer } from '@playcanvas/observer';
+import type { Observer } from '@playcanvas/observer';
 
 import { BindingBase } from '../BindingBase';
 

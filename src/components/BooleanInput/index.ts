@@ -1,5 +1,6 @@
 import { CLASS_NOT_FLEXIBLE, CLASS_MULTIPLE_VALUES } from '../../class';
-import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import type { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import { Element } from '../Element';
 
 const CLASS_BOOLEAN_INPUT = 'pcui-boolean-input';
 const CLASS_BOOLEAN_INPUT_TICKED = `${CLASS_BOOLEAN_INPUT}-ticked`;
@@ -8,7 +9,7 @@ const CLASS_BOOLEAN_INPUT_TOGGLE = `${CLASS_BOOLEAN_INPUT}-toggle`;
 /**
  * The arguments for the {@link BooleanInput} constructor.
  */
-interface BooleanInputArgs extends ElementArgs, IBindableArgs {
+type BooleanInputArgs = {
     /**
      * Sets the tabIndex of the {@link BooleanInput}. Defaults to 0.
      */
@@ -17,7 +18,7 @@ interface BooleanInputArgs extends ElementArgs, IBindableArgs {
      * The type of checkbox. Currently can be `null` or 'toggle'.
      */
     type?: string
-}
+} & ElementArgs & IBindableArgs
 
 /**
  * A checkbox element.

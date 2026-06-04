@@ -3,7 +3,8 @@ import { CurveSet, Curve, math } from 'playcanvas';
 import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
 import { Button } from '../Button';
 import { Canvas } from '../Canvas';
-import { Element, ElementArgs } from '../Element';
+import type { ElementArgs } from '../Element';
+import { Element } from '../Element';
 import { Label } from '../Label';
 import { NumericInput } from '../NumericInput';
 import { Overlay } from '../Overlay';
@@ -24,7 +25,7 @@ const CLASS_GRADIENT = 'pcui-gradient';
 /**
  * The arguments for the {@link GradientPicker} constructor.
  */
-interface GradientPickerArgs extends ElementArgs {
+type GradientPickerArgs = {
     /**
      * If `true`, the picker will render changes to the gradient as they happen. Defaults to `true`.
      */
@@ -37,7 +38,7 @@ interface GradientPickerArgs extends ElementArgs {
      * Number of color channels. Defaults to 3. Changing to 4 adds the option to change the alpha value.
      */
     channels?: number;
-}
+} & ElementArgs
 
 /**
  * Represents a gradient picker.
@@ -164,7 +165,7 @@ class GradientPicker extends Element {
         }
 
         this.Helpers = {
-            rgbaStr: function (color: Array<number>, scale: number) {
+            rgbaStr: function (color: number[], scale: number) {
                 if (!scale) {
                     scale = 1;
                 }
@@ -177,14 +178,14 @@ class GradientPicker extends Element {
                 return `rgba(${rgba})`;
             },
 
-            hexStr: function (clr: Array<number>) {
+            hexStr: function (clr: number[]) {
                 return clr.map((v: { toString: (arg0: number) => string; }) => {
                     return (`00${v.toString(16)}`).slice(-2).toUpperCase();
                 }).join('');
             },
 
             // rgb(a) -> hsva
-            toHsva: function (rgba: Array<number>) {
+            toHsva: function (rgba: number[]) {
                 const hsva = _rgb2hsv(rgba.map((v: number) => {
                     return v * 255;
                 }));
@@ -193,7 +194,7 @@ class GradientPicker extends Element {
             },
 
             // hsv(1) -> rgba
-            toRgba: function (hsva: Array<number>) {
+            toRgba: function (hsva: number[]) {
                 const rgba = _hsv2rgb(hsva).map((v: number) => {
                     return v / 255;
                 });
@@ -644,7 +645,7 @@ class GradientPicker extends Element {
         return this._value;
     }
 
-    set values(values: any) { // eslint-disable-line accessor-pairs
+    set values(values: any) {  
         // we do not support multiple values so just
         // add the multiple values class which essentially disables
         // the input

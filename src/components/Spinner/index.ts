@@ -1,4 +1,5 @@
-import { Element, ElementArgs } from '../Element';
+import type { ElementArgs } from '../Element';
+import { Element } from '../Element';
 
 const CLASS_ROOT = 'pcui-spinner';
 
@@ -16,7 +17,7 @@ function createSmallThick(size: any, dom: any) {
 /**
  * The arguments for the {@link Spinner} constructor.
  */
-interface SpinnerArgs extends ElementArgs {
+type SpinnerArgs = {
     /**
      * Sets the pixel size of the spinner. Defaults to 12.
      */
@@ -25,7 +26,7 @@ interface SpinnerArgs extends ElementArgs {
      * Can be 'small-thick'. Defaults to 'small-thick'.
      */
     type?: 'small-thick'
-}
+} & ElementArgs
 
 /**
  * Represents a spinning icon.

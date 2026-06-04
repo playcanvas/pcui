@@ -1,11 +1,12 @@
-import { Events, History, Observer } from '@playcanvas/observer';
+import type { History, Observer } from '@playcanvas/observer';
+import { Events } from '@playcanvas/observer';
 
-import { IBindable } from '../../components/Element';
+import type { IBindable } from '../../components/Element';
 
 /**
  * The interface for arguments for the {@link BindingBase} constructor.
  */
-export interface BindingBaseArgs {
+export type BindingBaseArgs = {
     /**
      * The IBindable element.
      */

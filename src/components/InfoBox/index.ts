@@ -1,4 +1,5 @@
-import { Container, ContainerArgs } from '../Container';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
 import { Element } from '../Element';
 
 const CLASS_INFOBOX = 'pcui-infobox';
@@ -6,7 +7,7 @@ const CLASS_INFOBOX = 'pcui-infobox';
 /**
  * The arguments for the {@link InfoBox} constructor.
  */
-interface InfoBoxArgs extends ContainerArgs {
+type InfoBoxArgs = {
     /**
      * The CSS code for an icon for the {@link InfoBox}. e.g. 'E401' (notice we omit the '\\' character). Defaults to ''.
      * Useful icon values for InfoBox are:
@@ -29,7 +30,7 @@ interface InfoBoxArgs extends ContainerArgs {
      * will be used instead. Defaults to `false`.
      */
     unsafe?: boolean;
-}
+} & ContainerArgs
 
 /**
  * Represents an information box.

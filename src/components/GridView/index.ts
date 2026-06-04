@@ -1,7 +1,8 @@
-import { EventHandle } from '@playcanvas/observer';
+import type { EventHandle } from '@playcanvas/observer';
 
-import { Container, ContainerArgs } from '../Container';
-import { Element } from '../Element';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
+import type { Element } from '../Element';
 import { GridViewItem } from '../GridViewItem';
 
 const CLASS_ROOT = 'pcui-gridview';
@@ -10,7 +11,7 @@ const CLASS_VERTICAL = `${CLASS_ROOT}-vertical`;
 /**
  * The arguments for the {@link GridView} constructor.
  */
-interface GridViewArgs extends ContainerArgs {
+type GridViewArgs = {
     /**
      * If `true` the {@link GridView} layout will be vertical.
      */
@@ -27,7 +28,7 @@ interface GridViewArgs extends ContainerArgs {
      * A filter function to filter {@link GridViewItem}s with signature `(GridViewItem) => boolean`.
      */
     filterFn?: (item: GridViewItem) => boolean;
-}
+} & ContainerArgs
 
 /**
  * Represents a container that shows a flexible wrappable list of items that looks like a grid.
