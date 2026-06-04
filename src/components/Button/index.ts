@@ -1,11 +1,12 @@
-import { Element, ElementArgs } from '../Element';
+import type { ElementArgs } from '../Element';
+import { Element } from '../Element';
 
 const CLASS_BUTTON = 'pcui-button';
 
 /**
  * The arguments for the {@link Button} constructor.
  */
-interface ButtonArgs extends ElementArgs {
+type ButtonArgs = {
     /**
      * If `true`, the {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML} property will be
      * used to set the text. Otherwise, {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
@@ -24,7 +25,7 @@ interface ButtonArgs extends ElementArgs {
      * Sets the 'size' type of the button. Can be 'small' or `null`. Defaults to `null`.
      */
     size?: 'small'
-}
+} & ElementArgs
 
 /**
  * User input with click interaction.

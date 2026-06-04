@@ -1,18 +1,15 @@
-import playcanvasConfig from '@playcanvas/eslint-config';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+import reactConfig from '@playcanvas/eslint-config/react';
+import typescriptConfig from '@playcanvas/eslint-config/typescript';
 import storybook from 'eslint-plugin-storybook';
 import globals from 'globals';
 
 export default [
-    ...playcanvasConfig,
+    ...typescriptConfig,
+    ...reactConfig,
     {
         files: ['src/**/*.ts', 'src/**/*.tsx'],
         languageOptions: {
-            parser: tsParser,
             parserOptions: {
-                ecmaVersion: 2022,
-                sourceType: 'module',
                 ecmaFeatures: {
                     jsx: true
                 }
@@ -23,22 +20,10 @@ export default [
                 ...globals.node
             }
         },
-        plugins: {
-            '@typescript-eslint': tsPlugin
-        },
-        settings: {
-            'import/resolver': {
-                typescript: {}
-            }
-        },
         rules: {
-            ...tsPlugin.configs.recommended.rules,
             '@typescript-eslint/ban-ts-comment': 'off',
             '@typescript-eslint/no-explicit-any': 'off',
-            '@typescript-eslint/no-unused-vars': 'off',
-            'jsdoc/require-param-type': 'off',
-            'jsdoc/require-returns': 'off',
-            'jsdoc/require-returns-type': 'off'
+            '@typescript-eslint/no-unused-vars': 'off'
         }
     },
     {
@@ -49,7 +34,7 @@ export default [
             }
         },
         rules: {
-            'import/no-unresolved': 'off'
+            'import-x/no-unresolved': 'off'
         }
     },
     ...storybook.configs['flat/recommended']

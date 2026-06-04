@@ -1,4 +1,5 @@
-import { Container, ContainerArgs } from '../Container';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
 import { Element } from '../Element';
 import { Label } from '../Label';
 
@@ -8,7 +9,7 @@ const CLASS_LABEL_TOP = `${CLASS_LABEL_GROUP}-align-top`;
 /**
  * The arguments for the {@link LabelGroup} constructor.
  */
-interface LabelGroupArgs extends ContainerArgs {
+type LabelGroupArgs = {
     /**
      * The label text. Defaults to 'Label'.
      */
@@ -25,7 +26,7 @@ interface LabelGroupArgs extends ContainerArgs {
      * Add a native tooltip to the label.
      */
     nativeTooltip?: boolean;
-}
+} & ContainerArgs
 
 /**
  * Represents a group of an {@link Element} and a {@link Label}. Useful for rows of labeled fields.

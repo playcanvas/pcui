@@ -1,5 +1,6 @@
 import { CLASS_MULTIPLE_VALUES } from '../../class';
-import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
+import type { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
+import { Element } from '../Element';
 import { NumericInput } from '../NumericInput';
 
 const CLASS_SLIDER = 'pcui-slider';
@@ -13,7 +14,7 @@ const IS_CHROME = /Chrome\//.test(globalThis.navigator?.userAgent);
 /**
  * The arguments for the {@link SliderInput} constructor.
  */
-interface SliderInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
+type SliderInputArgs = {
     /**
      * Sets whether any key up event will cause a change event to be fired.
      */
@@ -47,7 +48,7 @@ interface SliderInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
      * Sets whether the value can be null. If not then it will be 0 instead of null.
      */
     allowNull?: boolean
-}
+} & ElementArgs & IBindableArgs & IPlaceholderArgs
 
 /**
  * The SliderInput shows a NumericInput and a slider widget next to it. It acts as a proxy of the
@@ -352,7 +353,7 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
     }
 
     /* eslint accessor-pairs: 0 */
-    set values(values: Array<number>) {
+    set values(values: number[]) {
         this._numericInput.values = values;
         if (this._numericInput.class.contains(CLASS_MULTIPLE_VALUES)) {
             this.class.add(CLASS_MULTIPLE_VALUES);

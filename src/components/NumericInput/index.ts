@@ -1,6 +1,7 @@
 import { CLASS_MULTIPLE_VALUES } from '../../class';
 import { Element } from '../Element';
-import { InputElement, InputElementArgs } from '../InputElement';
+import type { InputElementArgs } from '../InputElement';
+import { InputElement } from '../InputElement';
 
 const CLASS_NUMERIC_INPUT = 'pcui-numeric-input';
 const CLASS_NUMERIC_INPUT_SLIDER_CONTROL = `${CLASS_NUMERIC_INPUT}-slider-control`;
@@ -12,7 +13,7 @@ const REGEX_COMMA = /,/g;
 /**
  * The arguments for the {@link NumericInput} constructor.
  */
-interface NumericInputArgs extends InputElementArgs {
+type NumericInputArgs = {
     /**
      * Sets the minimum value this field can take.
      */
@@ -43,7 +44,7 @@ interface NumericInputArgs extends InputElementArgs {
      * Sets whether the value can be `null`. If not then it will be 0 instead of `null`.
      */
     allowNull?: boolean
-}
+} & InputElementArgs
 
 /**
  * The NumericInput represents an input element that holds numbers.
@@ -324,7 +325,7 @@ class NumericInput extends InputElement {
                         });
                         expression = expressionArr.join(operator);
                     });
-                    // eslint-disable-next-line no-new-func
+                     
                     value = Function(`"use strict";return (${expression})`)();
                 }
             }

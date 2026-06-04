@@ -1,4 +1,5 @@
-import { Container, ContainerArgs } from '../Container';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
 import { Element } from '../Element';
 
 const CLASS_ROOT = 'pcui-progress';
@@ -7,12 +8,12 @@ const CLASS_INNER = `${CLASS_ROOT}-inner`;
 /**
  * The arguments for the {@link Progress} constructor.
  */
-interface ProgressArgs extends ContainerArgs {
+type ProgressArgs = {
     /**
      * Sets the value of the progress bar (between 0 and 100).
      */
     value?: number
-}
+} & ContainerArgs
 
 /**
  * Represents a bar that can highlight progress of an activity.

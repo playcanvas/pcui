@@ -1,5 +1,6 @@
 import { CLASS_FLEX, CLASS_GRID, CLASS_RESIZABLE, CLASS_SCROLLABLE } from '../../class';
-import { Element, ElementArgs, IParentArgs } from '../Element';
+import type { ElementArgs, IParentArgs } from '../Element';
+import { Element } from '../Element';
 
 const RESIZE_HANDLE_SIZE = 4;
 
@@ -21,7 +22,7 @@ const CLASS_DRAGGED_CHILD = `${CLASS_DRAGGED}-child`;
 /**
  * The arguments for the {@link Container} constructor.
  */
-interface ContainerArgs extends ElementArgs, IParentArgs {
+type ContainerArgs = {
     /**
      * Sets whether the {@link Container} uses flex layout.
      */
@@ -51,7 +52,7 @@ interface ContainerArgs extends ElementArgs, IParentArgs {
      * Sets whether the {@link Container} supports the grid layout.
      */
     grid?: boolean,
-}
+} & ElementArgs & IParentArgs
 
 /**
  * A container is the basic building block for {@link Element}s that are grouped together. A

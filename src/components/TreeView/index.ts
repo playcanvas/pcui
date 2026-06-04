@@ -1,5 +1,6 @@
 import { searchItems } from '../../helpers/search';
-import { Container, ContainerArgs } from '../Container';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
 import { Element } from '../Element';
 import { TreeViewItem } from '../TreeViewItem';
 
@@ -16,7 +17,7 @@ const DRAG_AREA_AFTER = 'after';
 /**
  * Represents an item that has been reparented in a {@link TreeView} drag operation.
  */
-interface ReparentedItem {
+type ReparentedItem = {
     /**
      * The reparented tree view item.
      */
@@ -38,7 +39,7 @@ interface ReparentedItem {
 /**
  * The arguments for the {@link TreeView} constructor.
  */
-interface TreeViewArgs extends ContainerArgs {
+type TreeViewArgs = {
     /**
      * Whether dragging a {@link TreeViewItem} is allowed. Defaults to `true`.
      */
@@ -69,7 +70,7 @@ interface TreeViewArgs extends ContainerArgs {
      * The element to scroll on drag. Defaults to this {@link TreeView}'s element.
      */
     dragScrollElement?: Element
-}
+} & ContainerArgs
 
 /**
  * A container that can show a TreeView like a hierarchy. The TreeView contains
@@ -790,7 +791,7 @@ class TreeView extends Container {
                     // but will instead calculate the new indexes and pass that data to the reparent function
                     // to perform the reparenting
 
-                    // eslint-disable-next-line no-undef
+                     
                     const fakeDom: { parent: Container; children: ChildNode[]; }[] = [];
 
                     const getChildren = (parent: Container) => {
@@ -803,7 +804,7 @@ class TreeView extends Container {
                         return fakeDom[idx].children;
                     };
 
-                    // eslint-disable-next-line no-undef
+                     
                     const treeItemIndex = (children: ChildNode[], target: ChildNode): number => {
                         let count = 0;
                         for (const child of children) {
@@ -1288,7 +1289,7 @@ class TreeView extends Container {
     /**
      * Gets all of the currently selected TreeViewItems.
      */
-    get selected(): Array<TreeViewItem> {
+    get selected(): TreeViewItem[] {
         return this._selectedItems.slice();
     }
 

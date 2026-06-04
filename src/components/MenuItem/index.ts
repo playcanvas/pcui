@@ -1,7 +1,8 @@
-import { Observer } from '@playcanvas/observer';
+import type { Observer } from '@playcanvas/observer';
 
-import { Container, ContainerArgs } from '../Container';
-import { Element, IBindable } from '../Element';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
+import type { Element, IBindable } from '../Element';
 import { Label } from '../Label';
 
 const CLASS_MENU_ITEM = 'pcui-menu-item';
@@ -13,7 +14,7 @@ const CLASS_MENU_ITEM_SHORTCUT = `${CLASS_MENU_ITEM}-shortcut`;
 /**
  * The arguments for the {@link MenuItem} constructor.
  */
-interface MenuItemArgs extends ContainerArgs {
+type MenuItemArgs = {
     value?: any;
     /**
      * Whether the MenuItem has any child MenuItems.
@@ -46,12 +47,12 @@ interface MenuItemArgs extends ContainerArgs {
     /**
      * An array of MenuItem constructor data. If defined then child MenuItems will be created and added to the MenuItem.
      */
-    items?: Array<MenuItemArgs>;
+    items?: MenuItemArgs[];
     /**
      * Sets the keyboard shortcut to display on the MenuItem (e.g., 'Ctrl+C').
      */
     shortcut?: string;
-}
+} & ContainerArgs
 
 /**
  * The MenuItem is a selectable option that is appended to a {@link Menu}. A MenuItem can also

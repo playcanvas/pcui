@@ -1,14 +1,15 @@
-import { Observer } from '@playcanvas/observer';
+import type { Observer } from '@playcanvas/observer';
 
-import { IBindable } from '../../components/Element';
-import { BindingBase, BindingBaseArgs } from '../BindingBase';
+import type { IBindable } from '../../components/Element';
+import type { BindingBaseArgs } from '../BindingBase';
+import { BindingBase } from '../BindingBase';
 import { BindingElementToObservers } from '../BindingElementToObservers';
 import { BindingObserversToElement } from '../BindingObserversToElement';
 
 /**
  * The interface for arguments for the {@link BindingTwoWay} constructor.
  */
-export interface BindingTwoWayArgs extends BindingBaseArgs {
+export type BindingTwoWayArgs = {
     /**
      * BindingElementToObservers instance.
      */
@@ -18,7 +19,7 @@ export interface BindingTwoWayArgs extends BindingBaseArgs {
      * BindingObserversToElement instance.
      */
     bindingObserversToElement?: BindingObserversToElement;
-}
+} & BindingBaseArgs
 
 /**
  * Provides two way data binding between Observers and {@link IBindable} elements. This means that

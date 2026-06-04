@@ -2,7 +2,8 @@ import { CLASS_FOCUS, CLASS_MULTIPLE_VALUES } from '../../class';
 import { searchItems } from '../../helpers/search';
 import { Button } from '../Button';
 import { Container } from '../Container';
-import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholderArgs } from '../Element';
+import type { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholderArgs } from '../Element';
+import { Element } from '../Element';
 import { Label } from '../Label';
 import { TextInput } from '../TextInput';
 
@@ -32,7 +33,7 @@ const DEFAULT_BOTTOM_OFFSET = 25;
 /**
  * The arguments for the {@link SelectInput} constructor.
  */
-interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
+type SelectInputArgs = {
     /**
      * Used to map the options.
      */
@@ -52,7 +53,7 @@ interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * An array of values against which new values are checked before they are created. If a value is in the array it will not be created.
      */
-    invalidOptions?: Array<any>;
+    invalidOptions?: any[];
     /**
      * If `true` then null is a valid input value. Defaults to `false`.
      */
@@ -80,7 +81,7 @@ interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * The order that the options should be checked in to find a valid fallback option that isn't included in the disabledOptions object.
      */
-    fallbackOrder?: Array<string>;
+    fallbackOrder?: string[];
     /**
      * All the option values that should be disabled. The keys of the object are the values of the options and the values are the text to show when the option is disabled.
      */
@@ -93,7 +94,7 @@ interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
      * Text to display in the SelectInput before the selected option.
      */
     prefix?: string;
-}
+} & ElementArgs & IBindableArgs & IPlaceholderArgs
 
 
 /**
@@ -178,7 +179,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _valueToLabel: Record<string, Label> = {};
 
-    protected _labelToValue: Map<Label, any> = new Map();
+    protected _labelToValue = new Map<Label, any>();
 
     protected _labelHighlighted: Label = null;
 
@@ -200,7 +201,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _disabledOptions: Record<string, string> = {};
 
-    protected _fallbackOrder: Array<string>;
+    protected _fallbackOrder: string[];
 
     protected _disabledValue: string;
 
@@ -1282,7 +1283,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
      * display that value. Otherwise, it will display a "multiple values" state.
      */
     /* eslint accessor-pairs: 0 */
-    set values(values: Array<any>) {
+    set values(values: any[]) {
         values = values.map((value) => {
             return this._convertValue(value);
         });

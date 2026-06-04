@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
 
-import { Panel } from './component';
 import { Label } from '../Label/component';
+
+import { Panel } from './component';
 
 import '../../scss/index.js';
 

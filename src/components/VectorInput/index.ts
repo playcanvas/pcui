@@ -1,7 +1,8 @@
-import { Observer } from '@playcanvas/observer';
+import type { Observer } from '@playcanvas/observer';
 
 import { CLASS_FOCUS, CLASS_MULTIPLE_VALUES } from '../../class';
-import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IMultiPlaceholder, IMultiPlaceholderArgs } from '../Element';
+import type { ElementArgs, IBindable, IBindableArgs, IFocusable, IMultiPlaceholder, IMultiPlaceholderArgs } from '../Element';
+import { Element } from '../Element';
 import { NumericInput } from '../NumericInput';
 
 const CLASS_VECTOR_INPUT = 'pcui-vector-input';
@@ -9,7 +10,7 @@ const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 /**
  * The arguments for the {@link VectorInput} constructor.
  */
-interface VectorInputArgs extends ElementArgs, IBindableArgs, IMultiPlaceholderArgs {
+type VectorInputArgs = {
     /**
      * The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
      */
@@ -34,7 +35,7 @@ interface VectorInputArgs extends ElementArgs, IBindableArgs, IMultiPlaceholderA
      *  The incremental step when holding Shift and using arrow keys or dragger for each vector element.
      */
     stepPrecision?: number;
-}
+} & ElementArgs & IBindableArgs & IMultiPlaceholderArgs
 
 /**
  * A vector input. The vector can have 2 to 4 dimensions with each dimension being a {@link NumericInput}.
@@ -308,7 +309,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IMultiPlaceh
      * Otherwise, it will display a "multiple values" state.
      */
     /* eslint accessor-pairs: 0 */
-    set values(values: Array<any>) {
+    set values(values: any[]) {
         // create an array for each dimension (e.g. one array for x one for y one for z)
         values = this._inputs.map((_, i) => values.map((arr) => {
             return arr ? arr[i] : undefined;

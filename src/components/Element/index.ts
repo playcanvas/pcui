@@ -1,7 +1,8 @@
-import { EventHandle, Events, HandleEvent, Observer } from '@playcanvas/observer';
-import * as React from 'react';
+import type { EventHandle, Observer } from '@playcanvas/observer';
+import { Events, HandleEvent } from '@playcanvas/observer';
+import type * as React from 'react';
 
-import { BindingBase } from '../../binding';
+import type { BindingBase } from '../../binding';
 import { CLASS_DISABLED, CLASS_ERROR, CLASS_FLASH, CLASS_FONT_REGULAR, CLASS_HIDDEN, CLASS_READONLY } from '../../class';
 
 const CLASS_ELEMENT = 'pcui-element';
@@ -24,7 +25,7 @@ const SIMPLE_CSS_PROPERTIES = [
 /**
  * The interface for bindable elements.
  */
-interface IBindable {
+type IBindable = {
     /**
      * Sets the value of the Element.
      */
@@ -36,11 +37,11 @@ interface IBindable {
     /**
      * Sets multiple values on the Element. It is up to the Element to determine how to display them.
      */
-    set values(values: Array<any>),
+    set values(values: any[]),
     /**
      * Gets multiple values on the Element.
      */
-    get values(): Array<any>,
+    get values(): any[],
     /**
      * Sets whether the input should flash on changes.
      */
@@ -54,7 +55,7 @@ interface IBindable {
 /**
  * The interface for arguments for bindable elements.
  */
-interface IBindableArgs {
+type IBindableArgs = {
     /**
      * Sets the value of the Element.
      */
@@ -62,7 +63,7 @@ interface IBindableArgs {
     /**
      * Sets multiple values to the Element. It is up to the Element to determine how to display them.
      */
-    values?: Array<any>,
+    values?: any[],
     /**
      * If `true` each input will flash on changes.
      */
@@ -72,7 +73,7 @@ interface IBindableArgs {
 /**
  * The interface for elements that have placeholder text.
  */
-interface IPlaceholder {
+type IPlaceholder = {
     /**
      * Sets the placeholder text of the input.
      */
@@ -86,7 +87,7 @@ interface IPlaceholder {
 /**
  * The interface for arguments for elements that have placeholder text.
  */
-interface IPlaceholderArgs {
+type IPlaceholderArgs = {
     /**
      * Sets the placeholder label that appears on the right of the input.
      */
@@ -96,7 +97,7 @@ interface IPlaceholderArgs {
 /**
  * The interface for multi-value elements that have placeholder text for each value.
  */
-interface IMultiPlaceholder {
+type IMultiPlaceholder = {
     /**
      * Sets the placeholder text of the inputs. Can be a single string applied to all inputs,
      * or an array of strings for each input.
@@ -111,7 +112,7 @@ interface IMultiPlaceholder {
 /**
  * The interface for arguments for multi-value elements that have placeholder text.
  */
-interface IMultiPlaceholderArgs {
+type IMultiPlaceholderArgs = {
     /**
      * Placeholder text for the inputs. Can be a single string applied to all inputs,
      * or an array of strings for each input.
@@ -122,7 +123,7 @@ interface IMultiPlaceholderArgs {
 /**
  * The interface for elements that can be focused.
  */
-interface IFocusable {
+type IFocusable = {
     /**
      * Focus on the element. If the input contains text and select is provided, the text will be selected on focus.
      */
@@ -137,7 +138,7 @@ interface IFocusable {
 /**
  * The interface for arguments for elements that have children.
  */
-interface IParentArgs {
+type IParentArgs = {
     /**
      * The children of the current component.
      */
@@ -149,7 +150,7 @@ interface IParentArgs {
  * These properties do not themselves enable `display: flex`; flex layout is
  * configured separately (for example via `Container#flex`).
  */
-interface IFlexArgs {
+type IFlexArgs = {
     /**
      * Sets the element's `flexBasis` CSS property.
      */
@@ -191,7 +192,7 @@ interface IFlexArgs {
 /**
  * The arguments for the {@link Element} constructor.
  */
-interface ElementArgs extends IFlexArgs {
+type ElementArgs = {
     /**
      * The HTMLElement to create this {@link Element} with. If not provided this Element will create one.
      */
@@ -219,7 +220,7 @@ interface ElementArgs extends IFlexArgs {
     /**
      * Links the observer attribute at the path location in the given observer to this {@link Element}.
      */
-    link?: { observer: Array<Observer>|Observer, path: Array<string>|string },
+    link?: { observer: Observer[]|Observer, path: string[]|string },
     /**
      * The id attribute of this {@link Element}'s HTMLElement.
      */
@@ -268,7 +269,7 @@ interface ElementArgs extends IFlexArgs {
      * Whether this {@link Element} is read only or not. Defaults to `false`.
      */
     readOnly?: boolean
-}
+} & IFlexArgs
 
 /**
  * The base class for all UI elements.

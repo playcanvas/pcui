@@ -1,5 +1,6 @@
 import { Container } from '../Container';
-import { Element, ElementArgs } from '../Element';
+import type { ElementArgs } from '../Element';
+import { Element } from '../Element';
 
 const CLASS_OVERLAY = 'pcui-overlay';
 const CLASS_OVERLAY_INNER = `${CLASS_OVERLAY}-inner`;
@@ -10,7 +11,7 @@ const CLASS_OVERLAY_CONTENT = `${CLASS_OVERLAY}-content`;
 /**
  * The arguments for the {@link Overlay} constructor.
  */
-interface OverlayArgs extends ElementArgs {
+type OverlayArgs = {
     /**
      * Whether the overlay can be hidden by clicking on it.
      */
@@ -19,7 +20,7 @@ interface OverlayArgs extends ElementArgs {
      * Whether the overlay is transparent or not.
      */
     transparent?: boolean,
-}
+} & ElementArgs
 
 /**
  * An overlay element.

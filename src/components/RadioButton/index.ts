@@ -1,5 +1,6 @@
 import { CLASS_MULTIPLE_VALUES, CLASS_NOT_FLEXIBLE } from '../../class';
-import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import type { ElementArgs, IBindable, IBindableArgs, IFocusable } from '../Element';
+import { Element } from '../Element';
 
 const CLASS_RADIO_BUTTON = 'pcui-radio-button';
 const CLASS_RADIO_BUTTON_SELECTED = `${CLASS_RADIO_BUTTON}-selected`;
@@ -7,7 +8,7 @@ const CLASS_RADIO_BUTTON_SELECTED = `${CLASS_RADIO_BUTTON}-selected`;
 /**
  * The arguments for the {@link RadioButton} constructor.
  */
-interface RadioButtonArgs extends ElementArgs, IBindableArgs {}
+type RadioButtonArgs = {} & ElementArgs & IBindableArgs
 
 /**
  * A radio button element.

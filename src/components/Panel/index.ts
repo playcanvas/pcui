@@ -1,6 +1,7 @@
 import { CLASS_COLLAPSED, CLASS_COLLAPSIBLE, CLASS_FONT_BOLD } from '../../class';
 import { Button } from '../Button';
-import { Container, ContainerArgs } from '../Container';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
 import { Element } from '../Element';
 import { Label } from '../Label';
 
@@ -15,7 +16,7 @@ const CLASS_PANEL_REMOVE = `${CLASS_PANEL}-remove`;
 /**
  * The arguments for the {@link Panel} constructor.
  */
-interface PanelArgs extends ContainerArgs {
+type PanelArgs = {
     /**
      * Sets whether the Element is collapsible.
      */
@@ -56,7 +57,7 @@ interface PanelArgs extends ContainerArgs {
      * A DOM element to use for the header container.
      */
     header?: HTMLElement
-}
+} & ContainerArgs
 
 /**
  * The Panel is a {@link Container} that itself contains a header container and a content

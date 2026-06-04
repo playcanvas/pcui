@@ -1,12 +1,13 @@
 import { CLASS_FOCUS } from '../../class';
-import { Element, ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
+import type { ElementArgs, IBindable, IBindableArgs, IFocusable, IPlaceholder, IPlaceholderArgs } from '../Element';
+import { Element } from '../Element';
 
 const CLASS_INPUT_ELEMENT = 'pcui-input-element';
 
 /**
  * The arguments for the {@link InputElement} constructor.
  */
-interface InputElementArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
+type InputElementArgs = {
     /**
      * Sets whether pressing Enter will blur (unfocus) the field. Defaults to `true`.
      */
@@ -23,7 +24,7 @@ interface InputElementArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs 
      * The input element to associate this {@link InputElement} with. If not supplied one will be created instead.
      */
     input?: HTMLInputElement
-}
+} & ElementArgs & IBindableArgs & IPlaceholderArgs
 
 /**
  * The InputElement is an abstract class that manages an input DOM element. It is the superclass of
@@ -248,9 +249,9 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
 
     abstract get value(): any;
 
-    abstract set values(value: Array<any>);
+    abstract set values(value: any[]);
 
-    abstract get values(): Array<any>;
+    abstract get values(): any[];
 
     set renderChanges(value: boolean) {
         this._renderChanges = value;

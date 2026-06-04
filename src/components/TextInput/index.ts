@@ -1,20 +1,22 @@
 import { CLASS_MULTIPLE_VALUES } from '../../class';
-import { Element, IBindableArgs, IPlaceholderArgs } from '../Element';
-import { InputElement, InputElementArgs } from '../InputElement';
+import type { IBindableArgs, IPlaceholderArgs } from '../Element';
+import { Element } from '../Element';
+import type { InputElementArgs } from '../InputElement';
+import { InputElement } from '../InputElement';
 
 const CLASS_TEXT_INPUT = 'pcui-text-input';
 
 /**
  * The arguments for the {@link TextInput} constructor.
  */
-interface TextInputArgs extends InputElementArgs, IBindableArgs, IPlaceholderArgs {
+type TextInputArgs = {
     /**
      * A function that validates the value that is entered into the input and returns `true` if it
      * is valid or `false` otherwise. If `false` then the input will be set in an error state and
      * the value will not propagate to the binding.
      */
     onValidate?: (value: string) => boolean,
-}
+} & InputElementArgs & IBindableArgs & IPlaceholderArgs
 
 /**
  * The TextInput is an input element of type text.
@@ -62,7 +64,7 @@ class TextInput extends InputElement {
         }
     }
 
-    protected _updateValue(value: string | Array<string>) {
+    protected _updateValue(value: string | string[]) {
         this.class.remove(CLASS_MULTIPLE_VALUES);
 
         if (value && typeof (value) === 'object') {
@@ -94,7 +96,7 @@ class TextInput extends InputElement {
         return true;
     }
 
-    set value(value: string | Array<string>) {
+    set value(value: string | string[]) {
         const changed = this._updateValue(value);
 
         if (changed) {
@@ -116,7 +118,7 @@ class TextInput extends InputElement {
      * value. Otherwise, it will be empty and display a "multiple values" state.
      */
     /* eslint accessor-pairs: 0 */
-    set values(values: Array<string>) {
+    set values(values: string[]) {
         const different = values.some(v => v !== values[0]);
 
         if (different) {

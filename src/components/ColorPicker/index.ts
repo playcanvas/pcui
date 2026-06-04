@@ -1,8 +1,9 @@
-import { EventHandle } from '@playcanvas/observer';
+import type { EventHandle } from '@playcanvas/observer';
 
 import { CLASS_MULTIPLE_VALUES, CLASS_NOT_FLEXIBLE } from '../../class';
 import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
-import { Element, ElementArgs, IBindable, IBindableArgs } from '../Element';
+import type { ElementArgs, IBindable, IBindableArgs } from '../Element';
+import { Element } from '../Element';
 import { NumericInput } from '../NumericInput';
 import { Overlay } from '../Overlay';
 import { TextInput } from '../TextInput';
@@ -12,7 +13,7 @@ const CLASS_ROOT = 'pcui-color-input';
 /**
  * The arguments for the {@link ColorPicker} constructor.
  */
-interface ColorPickerArgs extends ElementArgs, IBindableArgs {
+type ColorPickerArgs = {
     /**
      * An array of 4 integers containing the RGBA values the picker should be initialized to. Defaults to `[0, 0, 255, 1]`.
      */
@@ -21,7 +22,7 @@ interface ColorPickerArgs extends ElementArgs, IBindableArgs {
      * Number of color channels. Defaults to 3. Changing to 4 adds the option to change the alpha value.
      */
     channels?: number;
-}
+} & ElementArgs & IBindableArgs
 
 /**
  * Represents a color picker.
@@ -763,7 +764,7 @@ class ColorPicker extends Element implements IBindable {
     }
 
     /* eslint accessor-pairs: 0 */
-    set values(values: Array<any>) {
+    set values(values: any[]) {
         let different = false;
         const value = values[0];
         for (let i = 1; i < values.length; i++) {

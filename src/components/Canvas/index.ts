@@ -1,17 +1,18 @@
-import { Element, ElementArgs } from '../Element';
+import type { ElementArgs } from '../Element';
+import { Element } from '../Element';
 
 const CLASS_ROOT = 'pcui-canvas';
 
 /**
  * The arguments for the {@link Canvas} constructor.
  */
-interface CanvasArgs extends ElementArgs {
+type CanvasArgs = {
     /**
      * Whether the canvas should use the {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio devicePixelRatio}.
      * Defaults to `false`.
      */
     useDevicePixelRatio?: boolean;
-}
+} & ElementArgs
 
 /**
  * Represents a Canvas.

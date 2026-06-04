@@ -1,8 +1,9 @@
-import { Observer } from '@playcanvas/observer';
+import type { Observer } from '@playcanvas/observer';
 
 import { BindingObserversToElement } from '../../binding/BindingObserversToElement';
-import { Container, ContainerArgs } from '../Container';
-import { IFocusable } from '../Element';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
+import type { IFocusable } from '../Element';
 import { Label } from '../Label';
 import { RadioButton } from '../RadioButton';
 
@@ -15,7 +16,7 @@ const CLASS_RADIO_BUTTON = 'pcui-gridview-radiobtn';
 /**
  * The arguments for the {@link GridViewItem} constructor.
  */
-interface GridViewItemArgs extends ContainerArgs {
+type GridViewItemArgs = {
     /**
      * The type of the {@link GridViewItem}. Can be `null` or 'radio'.
      */
@@ -36,7 +37,7 @@ interface GridViewItemArgs extends ContainerArgs {
      * Sets the tabIndex of the {@link GridViewItem}. Defaults to 0.
      */
     tabIndex?: number;
-}
+} & ContainerArgs
 
 /**
  *  Represents a grid view item used in {@link GridView}.

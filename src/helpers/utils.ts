@@ -20,7 +20,7 @@ export function deepCopy(data: any) {
     return obj;
 }
 
-export function arrayEquals(lhs: Array<any>, rhs: Array<any>) {
+export function arrayEquals(lhs: any[], rhs: any[]) {
     if (!lhs) {
         return false;
     }

@@ -2,11 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
 import { action } from 'storybook/actions';
 
-import { Menu } from './component';
 import { Container } from '../Container/component';
 import { Label as LabelClass } from '../Label';
 import { Label } from '../Label/component';
 import { Menu as MenuClass } from '../Menu';
+
+import { Menu } from './component';
 
 import '../../scss/index.js';
 

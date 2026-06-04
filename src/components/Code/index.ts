@@ -1,4 +1,5 @@
-import { Container, ContainerArgs } from '../Container';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
 import { Element } from '../Element';
 import { Label } from '../Label';
 
@@ -8,12 +9,12 @@ const CLASS_INNER = `${CLASS_ROOT}-inner`;
 /**
  * The arguments for the {@link Code} constructor.
  */
-interface CodeArgs extends ContainerArgs {
+type CodeArgs = {
     /**
      * Sets the text to display in the code block.
      */
     text?: string
-}
+} & ContainerArgs
 
 /**
  * Represents a code block.

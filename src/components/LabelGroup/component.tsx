@@ -5,7 +5,7 @@ import { Element } from '../Element/component';
 import { LabelGroup as LabelGroupClass, LabelGroupArgs } from './index';
 
 // Define interface for child props
-interface LabelGroupChildProps {
+type LabelGroupChildProps = {
     link?: {
         observer: any;
         path: string;
