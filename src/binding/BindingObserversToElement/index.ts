@@ -1,17 +1,18 @@
-import { EventHandle, Observer } from '@playcanvas/observer';
+import type { EventHandle, Observer } from '@playcanvas/observer';
 
-import { IBindable } from '../../components';
-import { BindingBase, BindingBaseArgs } from '../BindingBase';
+import type { IBindable } from '../../components';
+import type { BindingBaseArgs } from '../BindingBase';
+import { BindingBase } from '../BindingBase';
 
 /**
  * The interface for arguments for the {@link BindingObserversToElement} constructor.
  */
-export interface BindingObserversToElementArgs extends BindingBaseArgs {
+export type BindingObserversToElementArgs = {
     /**
      * Custom update function.
      */
     customUpdate?: (element: IBindable, observers: Observer[], paths: string[]) => void;
-}
+} & BindingBaseArgs
 
 /**
  * Provides one way binding between Observers and an {@link IBindable} element and Observers. Any

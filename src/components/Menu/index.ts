@@ -1,6 +1,8 @@
-import { Container, ContainerArgs } from '../Container';
-import { Element, IFocusable } from '../Element';
-import { MenuItem, MenuItemArgs } from '../MenuItem';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
+import type { Element, IFocusable } from '../Element';
+import type { MenuItemArgs } from '../MenuItem';
+import { MenuItem } from '../MenuItem';
 
 const CLASS_MENU = 'pcui-menu';
 const CLASS_MENU_ITEMS = `${CLASS_MENU}-items`;
@@ -8,7 +10,7 @@ const CLASS_MENU_ITEMS = `${CLASS_MENU}-items`;
 /**
  * The arguments for the {@link Menu} constructor.
  */
-interface MenuArgs extends ContainerArgs {
+type MenuArgs = {
     /**
      * An array of {@link MenuItemArgs}. If these are passed then new MenuItems will be created
      * and appended to the menu.
@@ -22,7 +24,7 @@ interface MenuArgs extends ContainerArgs {
      * Sets the tabIndex of the {@link Menu}. Defaults to 1.
      */
     tabIndex?: number;
-}
+} & ContainerArgs
 
 /**
  * A Menu is a list of {@link MenuItem}s which can contain child MenuItems. Useful to show context

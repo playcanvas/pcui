@@ -1,4 +1,4 @@
-function _rgb2hsv(rgb: Array<number>) {
+function _rgb2hsv(rgb: number[]) {
     const r = rgb[0] / 255,
         g = rgb[1] / 255,
         b = rgb[2] / 255;

@@ -1,6 +1,7 @@
 import { CLASS_FONT_REGULAR } from '../../class';
-import { Container, ContainerArgs } from '../Container';
-import { Element } from '../Element';
+import type { ContainerArgs } from '../Container';
+import { Container } from '../Container';
+import type { Element } from '../Element';
 import { Label } from '../Label';
 import { TextInput } from '../TextInput';
 import type { TreeView } from '../TreeView';
@@ -17,7 +18,7 @@ const CLASS_RENAME = `${CLASS_ROOT}-rename`;
 /**
  * The arguments for the {@link TreeViewItem} constructor.
  */
-interface TreeViewItemArgs extends ContainerArgs {
+type TreeViewItemArgs = {
     /**
      * Whether the item is selected.
      */
@@ -55,7 +56,7 @@ interface TreeViewItemArgs extends ContainerArgs {
      * Method to be called when the {@link TreeViewItem} is deselected.
      */
     onDeselect?: () => void
-}
+} & ContainerArgs
 
 /**
  * A TreeViewItem is a single node in a hierarchical {@link TreeView} control.

@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
 
-import { TreeView } from './component';
 import { TreeViewItem } from '../TreeViewItem/component';
+
+import { TreeView } from './component';
 
 import '../../scss/index.js';
 

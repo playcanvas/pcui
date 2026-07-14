@@ -5,7 +5,7 @@ import { Element } from '../Element/component';
 import { Container as ContainerClass, ContainerArgs } from './index';
 
 // Define interface for child props
-interface ContainerChildProps {
+type ContainerChildProps = {
     parent: ContainerClass;
 }
 

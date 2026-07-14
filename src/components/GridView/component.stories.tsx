@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 import * as React from 'react';
 
-import { GridView } from './component';
 import { GridViewItem } from '../GridViewItem/component';
+
+import { GridView } from './component';
 
 import '../../scss/index.js';
 
