@@ -1,5 +1,5 @@
 import { CLASS_MULTIPLE_VALUES } from '../../class';
-import { Element } from '../Element';
+import { Element as PcuiElement } from '../Element';
 import type { InputElementArgs } from '../InputElement';
 import { InputElement } from '../InputElement';
 
@@ -13,7 +13,7 @@ const REGEX_COMMA = /,/g;
 /**
  * The arguments for the {@link NumericInput} constructor.
  */
-interface NumericInputArgs extends InputElementArgs {
+interface NumericInputArgs extends InputElementArgs<number | string> {
     /**
      * Sets the minimum value this field can take.
      */
@@ -126,7 +126,7 @@ class NumericInput extends InputElement {
 
     protected _sliderPrevValue: number;
 
-    protected _sliderControl: Element;
+    protected _sliderControl: PcuiElement;
 
     protected _sliderMovement: number;
 
@@ -167,7 +167,7 @@ class NumericInput extends InputElement {
         }
 
         this._oldValue = undefined;
-        if (Number.isFinite(args.value)) {
+        if (typeof args.value === 'number' && Number.isFinite(args.value)) {
             this.value = args.value;
         } else if (!this._allowNull) {
             this.value = 0;
@@ -180,7 +180,7 @@ class NumericInput extends InputElement {
         this.renderChanges = args.renderChanges ?? false;
 
         if (!args.hideSlider) {
-            this._sliderControl = new Element();
+            this._sliderControl = new PcuiElement();
             this._sliderControl.class.add(CLASS_NUMERIC_INPUT_SLIDER_CONTROL);
             this.dom.append(this._sliderControl.dom);
 
@@ -272,7 +272,7 @@ class NumericInput extends InputElement {
         super._onInputKeyDown(evt);
     }
 
-    protected _getPointerLockElementByShadowRoot(pointerLockElement: any): boolean {
+    protected _getPointerLockElementByShadowRoot(pointerLockElement: Element): boolean {
         const shadowRoot = pointerLockElement.shadowRoot;
         if (shadowRoot) {
             const pointerLockElement = shadowRoot.pointerLockElement;
@@ -301,65 +301,65 @@ class NumericInput extends InputElement {
         }
     };
 
-    protected _normalizeValue(value: any) {
+    protected _normalizeValue(value: unknown) {
         try {
-            if (typeof value === 'string') {
+            let input = value;
+            if (typeof input === 'string') {
                 // check for 0
-                if (value === '0') return 0;
+                if (input === '0') return 0;
 
                 // replace commas with dots (for some international keyboards)
-                value = value.replace(REGEX_COMMA, '.');
-
-                // remove spaces
-                value = value.replace(/\s/g, '');
+                const text = input.replace(REGEX_COMMA, '.').replace(/\s/g, '');
 
                 // sanitize input to only allow short mathematical expressions
-                value = value.match(/^[*/+\-0-9().]+$/);
-                if (value !== null && value[0].length < 20) {
-                    let expression = value[0];
+                const match = text.match(/^[*/+\-0-9().]+$/);
+                if (match !== null && match[0].length < 20) {
+                    let expression = match[0];
                     const operators = ['+', '-', '/', '*'];
                     operators.forEach((operator) => {
                         const expressionArr = expression.split(operator);
-                        expressionArr.forEach((_: any, i: number) => {
+                        expressionArr.forEach((_, i) => {
                             expressionArr[i] = expressionArr[i].replace(/^0+/, '');
                         });
                         expression = expressionArr.join(operator);
                     });
 
-                    value = Function(`"use strict";return (${expression})`)();
+                    input = Function(`"use strict";return (${expression})`)() as unknown;
+                } else {
+                    input = match;
                 }
             }
 
-            if (value === null || value === undefined || value === '') {
+            if (input === null || input === undefined || input === '') {
                 if (this._allowNull) {
                     return null;
                 }
-                value = 0;
+                input = 0;
             }
 
-            value = Number(value);
+            let result = Number(input);
 
-            if (isNaN(value)) {
+            if (isNaN(result)) {
                 if (this._allowNull) {
                     return null;
                 }
-                value = 0;
+                result = 0;
             }
 
             // clamp between min max
-            if (this.min !== null && value < this.min) {
-                value = this.min;
+            if (this.min !== null && result < this.min) {
+                result = this.min;
             }
-            if (this.max !== null && value > this.max) {
-                value = this.max;
+            if (this.max !== null && result > this.max) {
+                result = this.max;
             }
 
             // fix precision
             if (this.precision !== null) {
-                value = parseFloat(Number(value).toFixed(this.precision));
+                result = parseFloat(result.toFixed(this.precision));
             }
 
-            return value;
+            return result;
         } catch (error) {
             if (this._allowNull) {
                 return null;
@@ -392,7 +392,7 @@ class NumericInput extends InputElement {
     /**
      * Sets the value of the NumericInput.
      */
-    set value(value: number) {
+    set value(value: number | string) {
         value = this._normalizeValue(value);
         const forceUpdate = this.class.contains(CLASS_MULTIPLE_VALUES) && value === null && this._allowNull;
         const changed = this._updateValue(value, forceUpdate);
@@ -511,6 +511,6 @@ class NumericInput extends InputElement {
     }
 }
 
-Element.register('number', NumericInput, { renderChanges: true });
+PcuiElement.register('number', NumericInput, { renderChanges: true });
 
 export { NumericInput, NumericInputArgs };

@@ -8,7 +8,7 @@ import { Spinner as SpinnerClass } from './index';
 /**
  * Represents a spinning icon.
  */
-class Spinner extends Element<SpinnerArgs, any> {
+class Spinner extends Element<SpinnerArgs, object> {
     static ctor = SpinnerClass;
 
     render() {

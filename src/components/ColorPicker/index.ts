@@ -13,7 +13,7 @@ const CLASS_ROOT = 'pcui-color-input';
 /**
  * The arguments for the {@link ColorPicker} constructor.
  */
-interface ColorPickerArgs extends ElementArgs, IBindableArgs {
+interface ColorPickerArgs extends ElementArgs<number[]>, IBindableArgs<number[]> {
     /**
      * An array of 4 integers containing the RGBA values the picker should be initialized to. Defaults to `[0, 0, 255, 1]`.
      */
@@ -27,7 +27,7 @@ interface ColorPickerArgs extends ElementArgs, IBindableArgs {
 /**
  * Represents a color picker.
  */
-class ColorPicker extends Element implements IBindable {
+class ColorPicker extends Element implements IBindable<number[]> {
     protected _historyCombine = false;
 
     protected _historyPostfix: string = null;
@@ -769,7 +769,7 @@ class ColorPicker extends Element implements IBindable {
     }
 
     /* eslint accessor-pairs: 0 */
-    set values(values: any[]) {
+    set values(values: number[][]) {
         let different = false;
         const value = values[0];
         for (let i = 1; i < values.length; i++) {

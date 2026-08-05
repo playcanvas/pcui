@@ -14,7 +14,7 @@ const IS_CHROME = /Chrome\//.test(globalThis.navigator?.userAgent);
 /**
  * The arguments for the {@link SliderInput} constructor.
  */
-interface SliderInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
+interface SliderInputArgs extends ElementArgs<number>, IBindableArgs<number>, IPlaceholderArgs {
     /**
      * Sets whether any key up event will cause a change event to be fired.
      */
@@ -54,7 +54,7 @@ interface SliderInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
  * The SliderInput shows a NumericInput and a slider widget next to it. It acts as a proxy of the
  * NumericInput.
  */
-class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder {
+class SliderInput extends Element implements IBindable<number>, IFocusable, IPlaceholder {
     protected _historyCombine = false;
 
     protected _historyPostfix: string = null;

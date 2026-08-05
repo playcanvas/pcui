@@ -15,6 +15,24 @@ const CLASS_CONTENTS = `${CLASS_ROOT}-contents`;
 const CLASS_EMPTY = `${CLASS_ROOT}-empty`;
 const CLASS_RENAME = `${CLASS_ROOT}-rename`;
 
+type TreeApi = {
+    allowDrag: boolean;
+    allowRenaming: boolean;
+    deselect: () => void;
+    _onAppendTreeViewItem: (item: TreeViewItem) => void;
+    _onRemoveTreeViewItem: (item: TreeViewItem) => void;
+    _onChildKeyDown: (evt: KeyboardEvent, item: TreeViewItem) => void;
+    _updateModifierKeys: (evt: KeyboardEvent | MouseEvent) => void;
+    _onChildDragEnd: (evt: MouseEvent, item: TreeViewItem) => void;
+    _onChildDragOver: (evt: MouseEvent, item: TreeViewItem) => void;
+    _onChildDragStart: (evt: MouseEvent, item: TreeViewItem) => void;
+    _onChildClick: (evt: MouseEvent, item: TreeViewItem) => void;
+    _onContextMenu?: (evt: MouseEvent, item: TreeViewItem) => void;
+    _onChildSelected: (item: TreeViewItem) => void;
+    _onChildDeselected: (item: TreeViewItem) => void;
+    _onChildRename: (item: TreeViewItem, value: string) => void;
+};
+
 /**
  * The arguments for the {@link TreeViewItem} constructor.
  */
@@ -138,7 +156,7 @@ class TreeViewItem extends Container {
 
     protected _numChildren = 0;
 
-    protected _treeView: any;
+    protected _treeView: TreeApi;
 
     protected _icon: string;
 
@@ -540,14 +558,14 @@ class TreeViewItem extends Container {
      * Sets the parent {@link TreeView}.
      */
     set treeView(value: TreeView | null) {
-        this._treeView = value;
+        this._treeView = value as unknown as TreeApi;
     }
 
     /**
      * Gets the parent {@link TreeView}.
      */
     get treeView(): TreeView | null {
-        return this._treeView;
+        return this._treeView as unknown as TreeView;
     }
 
     /**

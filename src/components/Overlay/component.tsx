@@ -6,7 +6,7 @@ import { Overlay as OverlayClass } from './index';
 /**
  * An overlay element.
  */
-class Overlay extends Element<OverlayArgs, any> {
+class Overlay extends Element<OverlayArgs, object> {
     static ctor = OverlayClass;
 }
 

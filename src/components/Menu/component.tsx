@@ -10,10 +10,10 @@ import { Menu as MenuClass } from './index';
  * and nested menus. Note that a Menu must be appended to the root Element and then positioned
  * accordingly.
  */
-class Menu extends Element<MenuArgs, any> {
+class Menu extends Element<MenuArgs, object> {
     static ctor = MenuClass;
 
-    onDivLoaded = (element: any) => {
+    onDivLoaded = (element: HTMLDivElement | null) => {
         this.element = new MenuClass({ ...this.props, dom: element });
     };
 

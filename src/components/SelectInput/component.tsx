@@ -6,10 +6,10 @@ import { SelectInput as SelectInputClass } from './index';
 /**
  * An input that allows selecting from a dropdown or entering tags.
  */
-class SelectInput extends Element<SelectInputArgs, any> {
+class SelectInput extends Element<SelectInputArgs, object> {
     static ctor = SelectInputClass;
 
-    onSelect?: (value: string) => void;
+    onSelect?: SelectInputArgs['onSelect'];
 
     constructor(props: SelectInputArgs) {
         super(props);

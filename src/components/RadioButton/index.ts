@@ -8,12 +8,12 @@ const CLASS_RADIO_BUTTON_SELECTED = `${CLASS_RADIO_BUTTON}-selected`;
 /**
  * The arguments for the {@link RadioButton} constructor.
  */
-interface RadioButtonArgs extends ElementArgs, IBindableArgs {}
+interface RadioButtonArgs extends ElementArgs<boolean>, IBindableArgs<boolean> {}
 
 /**
  * A radio button element.
  */
-class RadioButton extends Element implements IBindable, IFocusable {
+class RadioButton extends Element implements IBindable<boolean>, IFocusable {
     protected _value: boolean;
 
     protected _renderChanges: boolean;

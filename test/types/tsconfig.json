@@ -1,0 +1,10 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "allowJs": false,
+        "noEmit": true,
+        "rootDir": "../.."
+    },
+    "include": ["../../src/**/*.ts", "../../type-tests/public.ts"],
+    "exclude": ["../../src/**/*.tsx", "../../src/**/*.stories.tsx"]
+}

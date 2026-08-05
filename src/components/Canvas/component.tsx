@@ -8,7 +8,7 @@ import { Canvas as CanvasClass } from './index';
 /**
  * Represents a Canvas
  */
-class Canvas extends Element<CanvasArgs, any> {
+class Canvas extends Element<CanvasArgs, object> {
     static ctor = CanvasClass;
 
     render() {

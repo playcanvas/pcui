@@ -17,7 +17,7 @@ const CLASS_VECTOR_INPUT = 'pcui-vector-input';
 /**
  * The arguments for the {@link VectorInput} constructor.
  */
-interface VectorInputArgs extends ElementArgs, IBindableArgs, IMultiPlaceholderArgs {
+interface VectorInputArgs extends ElementArgs<number[]>, IBindableArgs<number[] | string>, IMultiPlaceholderArgs {
     /**
      * The number of dimensions in the vector. Can be between 2 to 4. Defaults to 3.
      */
@@ -47,7 +47,7 @@ interface VectorInputArgs extends ElementArgs, IBindableArgs, IMultiPlaceholderA
 /**
  * A vector input. The vector can have 2 to 4 dimensions with each dimension being a {@link NumericInput}.
  */
-class VectorInput extends Element implements IBindable, IFocusable, IMultiPlaceholder {
+class VectorInput extends Element implements IBindable<number[] | string>, IFocusable, IMultiPlaceholder {
     /**
      * Fired when the value of the VectorInput changes.
      *
@@ -173,7 +173,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IMultiPlaceh
         }
 
         if (args.value !== undefined) {
-            this.value = args.value;
+            this.value = args.value as number[];
         }
     }
 
@@ -320,7 +320,7 @@ class VectorInput extends Element implements IBindable, IFocusable, IMultiPlaceh
      * Otherwise, it will display a "multiple values" state.
      */
     /* eslint accessor-pairs: 0 */
-    set values(values: any[]) {
+    set values(values: number[][]) {
         // create an array for each dimension (e.g. one array for x one for y one for z)
         values = this._inputs.map((_, i) =>
             values.map((arr) => {

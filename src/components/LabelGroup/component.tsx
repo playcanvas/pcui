@@ -1,3 +1,4 @@
+import type { Observer } from '@playcanvas/observer';
 import type { JSXElementConstructor, ReactElement } from 'react';
 
 import { Element } from '../Element/component';
@@ -8,19 +9,19 @@ import { LabelGroup as LabelGroupClass } from './index';
 // Define interface for child props
 interface LabelGroupChildProps {
     link?: {
-        observer: any;
+        observer: Observer | Observer[];
         path: string;
     };
-    [key: string]: any; // Allow other props
+    [key: string]: unknown; // Allow other props
 }
 
 /**
  * Represents a group of a Label and a Element. Useful for rows of labeled fields.
  */
-class LabelGroup extends Element<LabelGroupArgs, any> {
+class LabelGroup extends Element<LabelGroupArgs, object> {
     static ctor = LabelGroupClass;
 
-    attachElement = (nodeElement: HTMLElement | SVGElement | null, containerElement?: any) => {
+    attachElement = (nodeElement: HTMLElement | SVGElement | null, containerElement?: HTMLElement | SVGElement) => {
         if (!nodeElement) return;
         const childrenErrorMessage = 'A LabelGroup must contain a single PCUI react component as a child';
         // check that the LabelGroup has a single child
@@ -31,7 +32,7 @@ class LabelGroup extends Element<LabelGroupArgs, any> {
         const child = this.props.children as ReactElement<LabelGroupChildProps>;
         const fieldProps = child.props;
         // check if the ReactElement contains an instance of an Element as its type, confirming it is a PCUI react component
-        if (!((child.type as JSXElementConstructor<any>).prototype instanceof Element)) {
+        if (!((child.type as JSXElementConstructor<object>).prototype instanceof Element)) {
             throw new Error(childrenErrorMessage);
         }
         // it's safe to cast the ReactElement type as a BaseComponent as we have confirmed it is an Element above

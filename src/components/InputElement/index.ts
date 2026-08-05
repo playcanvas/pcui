@@ -7,7 +7,7 @@ const CLASS_INPUT_ELEMENT = 'pcui-input-element';
 /**
  * The arguments for the {@link InputElement} constructor.
  */
-interface InputElementArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
+interface InputElementArgs<T = string | number | string[]> extends ElementArgs<T>, IBindableArgs<T>, IPlaceholderArgs {
     /**
      * Sets whether pressing Enter will blur (unfocus) the field. Defaults to `true`.
      */
@@ -86,7 +86,7 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
         this._suspendInputChangeEvt = false;
 
         if (args.value !== undefined) {
-            this._domInput.value = args.value;
+            this._domInput.value = args.value as string;
         }
         this.placeholder = args.placeholder ?? '';
         this.renderChanges = args.renderChanges ?? false;
@@ -246,13 +246,13 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
         return this._domInput;
     }
 
-    abstract set value(value: any);
+    abstract set value(value: unknown);
 
-    abstract get value(): any;
+    abstract get value(): unknown;
 
-    abstract set values(value: any[]);
+    abstract set values(value: unknown[]);
 
-    abstract get values(): any[];
+    abstract get values(): unknown[];
 
     set renderChanges(value: boolean) {
         this._renderChanges = value;

@@ -26,7 +26,7 @@ class BindingElementToObservers extends BindingBase {
 
     // Sets the value (or values of isArrayOfValues is true)
     // to the observers
-    private _setValue(value: any, isArrayOfValues: boolean) {
+    private _setValue(value: unknown, isArrayOfValues: boolean) {
         if (this.applyingChange) return;
         if (!this._observers.length) return;
 
@@ -47,7 +47,7 @@ class BindingElementToObservers extends BindingBase {
         };
 
         if (this._history) {
-            let previousValues: any[] = [];
+            let previousValues: unknown[] = [];
             if (observers.length === 1 && paths.length > 1) {
                 previousValues = paths.map((path) => {
                     return observers[0].has(path) ? observers[0].get(path) : undefined;
@@ -77,12 +77,12 @@ class BindingElementToObservers extends BindingBase {
         this.applyingChange = false;
     }
 
-    private _setValueToObservers(observers: Observer[], paths: string[], value: any, isArrayOfValues: boolean) {
+    private _setValueToObservers(observers: Observer[], paths: string[], value: unknown, isArrayOfValues: boolean) {
         // special case for 1 observer with multiple paths (like curves)
         // in that case set each value for each path
         if (observers.length === 1 && paths.length > 1) {
             for (let i = 0; i < paths.length; i++) {
-                const latest: any = observers[0].latest();
+                const latest = observers[0].latest();
                 if (!latest) continue;
 
                 let history = false;
@@ -92,7 +92,7 @@ class BindingElementToObservers extends BindingBase {
                 }
 
                 const path = paths[i];
-                const val = value[i];
+                const val = (value as unknown[])[i];
                 if (value !== undefined) {
                     this._observerSet(latest, path, val);
                 } else {
@@ -107,7 +107,7 @@ class BindingElementToObservers extends BindingBase {
         }
 
         for (let i = 0; i < observers.length; i++) {
-            const latest: any = observers[i].latest();
+            const latest = observers[i].latest();
             if (!latest) continue;
 
             let history = false;
@@ -117,7 +117,7 @@ class BindingElementToObservers extends BindingBase {
             }
 
             const path = this._pathAt(paths, i);
-            const val = isArrayOfValues ? value[i] : value;
+            const val = isArrayOfValues ? (value as unknown[])[i] : value;
             if (value !== undefined) {
                 this._observerSet(latest, path, val);
             } else {
@@ -132,7 +132,7 @@ class BindingElementToObservers extends BindingBase {
 
     // Handles setting a value to an observer
     // in case that value is an array
-    private _observerSet(observer: Observer, path: string, value: any) {
+    private _observerSet(observer: Observer, path: string, value: unknown) {
         // check if the parent of the last field in the path
         // exists in the observer because if it doesn't
         // an error is most likely going to be raised by C3
@@ -148,7 +148,7 @@ class BindingElementToObservers extends BindingBase {
         observer.set(path, isArray && value ? value.slice() : value);
     }
 
-    private _addValues(values: any[]) {
+    private _addValues(values: unknown[]) {
         if (this.applyingChange) return;
         if (!this._observers) return;
 
@@ -159,7 +159,7 @@ class BindingElementToObservers extends BindingBase {
         const observers = this._observers.slice();
         const paths = this._paths.slice();
 
-        const records: any[] = [];
+        const records: { observer: Observer; path: string; value: unknown }[] = [];
         for (let i = 0; i < observers.length; i++) {
             const path = this._pathAt(paths, i);
             const observer = observers[i];
@@ -229,7 +229,7 @@ class BindingElementToObservers extends BindingBase {
         this.applyingChange = false;
     }
 
-    private _removeValues(values: any[]) {
+    private _removeValues(values: unknown[]) {
         if (this.applyingChange) return;
         if (!this._observers) return;
 
@@ -240,7 +240,7 @@ class BindingElementToObservers extends BindingBase {
         const observers = this._observers.slice();
         const paths = this._paths.slice();
 
-        const records: any[] = [];
+        const records: { observer: Observer; path: string; value: unknown; index: number }[] = [];
         for (let i = 0; i < observers.length; i++) {
             const path = this._pathAt(paths, i);
             const observer = observers[i];
@@ -314,29 +314,29 @@ class BindingElementToObservers extends BindingBase {
         this.applyingChange = false;
     }
 
-    setValue(value: any) {
+    setValue(value: unknown) {
         this._setValue(value, false);
     }
 
-    setValues(values: any[]) {
+    setValues(values: unknown[]) {
         // make sure we deep copy arrays because they will not be cloned when set to the observers
         values = values.slice().map((val) => (Array.isArray(val) ? val.slice() : val));
         this._setValue(values, true);
     }
 
-    addValue(value: any) {
+    addValue(value: unknown) {
         this._addValues([value]);
     }
 
-    addValues(values: any[]) {
+    addValues(values: unknown[]) {
         this._addValues(values);
     }
 
-    removeValue(value: any) {
+    removeValue(value: unknown) {
         this._removeValues([value]);
     }
 
-    removeValues(values: any[]) {
+    removeValues(values: unknown[]) {
         this._removeValues(values);
     }
 }

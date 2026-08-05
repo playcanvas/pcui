@@ -6,7 +6,7 @@ import type { Element as ElementClass, ElementArgs } from './index';
  * The base class for all UI elements. Wraps a DOM element with the PCUI interface.
  */
 class Element<P extends ElementArgs, S> extends React.Component<P, S> {
-    static ctor: new (args?: any) => ElementClass;
+    static ctor: new (args?: ElementArgs) => ElementClass;
 
     element: ElementClass;
 
@@ -14,7 +14,7 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
 
     onClick: () => void;
 
-    onChange: (value: any) => void;
+    onChange: ElementArgs['onChange'];
 
     onRemove: () => void;
 
@@ -42,7 +42,7 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
         }
     }
 
-    attachElement = (nodeElement: HTMLElement | SVGElement | null, containerElement?: any) => {
+    attachElement = (nodeElement: HTMLElement | SVGElement | null, containerElement?: HTMLElement | SVGElement) => {
         if (!nodeElement) return;
 
         this.element = new this.elementClass({
@@ -72,7 +72,7 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
         }
     };
 
-    getPropertyDescriptor = (obj: any, prop: any) => {
+    getPropertyDescriptor = (obj: object, prop: PropertyKey) => {
         let desc;
         do {
             desc = Object.getOwnPropertyDescriptor(obj, prop);
@@ -86,20 +86,20 @@ class Element<P extends ElementArgs, S> extends React.Component<P, S> {
         }
     }
 
-    componentDidUpdate(prevProps: any) {
+    componentDidUpdate(prevProps: Readonly<P>) {
         Object.keys(this.props).forEach((prop) => {
             const propDescriptor = this.getPropertyDescriptor(this.element, prop);
             if (propDescriptor && propDescriptor.set) {
                 if (prop === 'value') {
-                    // @ts-expect-error
-                    this.element._suppressChange = true;
-                    // @ts-expect-error
-                    this.element[prop] = this.props[prop];
-                    // @ts-expect-error
-                    this.element._suppressChange = false;
+                    (this.element as ElementClass & { _suppressChange: boolean })._suppressChange = true;
+                    (this.element as unknown as Record<string, unknown>)[prop] = (
+                        this.props as Record<string, unknown>
+                    )[prop];
+                    (this.element as ElementClass & { _suppressChange: boolean })._suppressChange = false;
                 } else {
-                    // @ts-expect-error
-                    this.element[prop] = this.props[prop];
+                    (this.element as unknown as Record<string, unknown>)[prop] = (
+                        this.props as Record<string, unknown>
+                    )[prop];
                 }
             } else if (prop === 'class') {
                 const c = this.props[prop];

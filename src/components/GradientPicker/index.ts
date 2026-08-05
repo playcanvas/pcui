@@ -1,3 +1,4 @@
+import type { EventHandle } from '@playcanvas/observer';
 import { CurveSet, Curve, math } from 'playcanvas';
 
 import { _hsv2rgb, _rgb2hsv } from '../../Math/color-value';
@@ -21,6 +22,48 @@ const CURVE_STEP = 5;
 const REGEX_KEYS = /keys/;
 const REGEX_TYPE = /type/;
 const CLASS_GRADIENT = 'pcui-gradient';
+
+type CurveData = { type: number; keys: number[][] };
+type Gradient = CurveData & { betweenCurves: boolean };
+type Helpers = {
+    rgbaStr: (color: number[], scale?: number) => string;
+    hexStr: (color: number[]) => string;
+    toHsva: (rgba: number[]) => number[];
+    toRgba: (hsva: number[]) => number[];
+    normalizedCoord: (canvas: Canvas, x: number, y: number) => number[];
+};
+type Ui = {
+    root: HTMLElement;
+    overlay: Overlay & { center: boolean };
+    panel: HTMLDivElement;
+    gradient: Canvas;
+    checkerPattern: CanvasPattern;
+    anchors: Canvas;
+    footer: Panel;
+    typeLabel: Label;
+    typeCombo: SelectInput;
+    positionLabel: Label;
+    positionEdit: NumericInput;
+    copyButton: Button;
+    pasteButton: Button;
+    deleteButton: Button;
+    showSelectedPosition: NumericInput;
+    showCrosshairPosition: HTMLDivElement;
+    anchorAddCrossHair: HTMLDivElement;
+    colorPicker: null;
+    draggingAnchor?: boolean;
+};
+type State = {
+    curves: Curve[];
+    keystore: number[][][];
+    anchors: number[];
+    hoveredAnchor: number;
+    selectedAnchor: number;
+    selectedValue: number[];
+    changing: boolean;
+    draggingAnchor: boolean;
+    typeMap: Record<number, number>;
+};
 
 /**
  * The arguments for the {@link GradientPicker} constructor.
@@ -84,25 +127,25 @@ class GradientPicker extends Element {
 
     protected _changing: boolean;
 
-    protected _copiedData: any;
+    protected _copiedData: CurveData;
 
     protected _channels: number;
 
-    protected _value: { type: number; keys: any[]; betweenCurves: boolean };
+    protected _value: Gradient;
 
-    protected _evtPickerChanged: any;
+    protected _evtPickerChanged: EventHandle;
 
-    protected _evtRefreshPicker: any;
+    protected _evtRefreshPicker: EventHandle;
 
     protected renderChanges: boolean;
 
-    protected Helpers: any;
+    protected Helpers: Helpers;
 
-    protected CONSTANTS: any;
+    protected CONSTANTS: { bg: string; anchorRadius: number; selectedRadius: number };
 
-    protected UI: any;
+    protected UI: Ui;
 
-    protected STATE: any;
+    protected STATE: State;
 
     protected fieldChangeHandler: (evt: Event) => void;
 
@@ -165,7 +208,7 @@ class GradientPicker extends Element {
         }
 
         this.Helpers = {
-            rgbaStr: function (color: number[], scale: number) {
+            rgbaStr: function (color: number[], scale?: number) {
                 if (!scale) {
                     scale = 1;
                 }
@@ -182,7 +225,7 @@ class GradientPicker extends Element {
 
             hexStr: function (clr: number[]) {
                 return clr
-                    .map((v: { toString: (arg0: number) => string }) => {
+                    .map((v) => {
                         return `00${v.toString(16)}`.slice(-2).toUpperCase();
                     })
                     .join('');
@@ -302,7 +345,7 @@ class GradientPicker extends Element {
 
         this.UI = {
             root: this.dom,
-            overlay: new Overlay(),
+            overlay: new Overlay() as Overlay & { center: boolean },
             panel: document.createElement('div'),
             gradient: new Canvas({ useDevicePixelRatio: true }),
             checkerPattern: this.createCheckerPattern(),
@@ -418,7 +461,7 @@ class GradientPicker extends Element {
 
         this.UI.panel.append(this.UI.showSelectedPosition.dom);
         this.UI.showSelectedPosition.class.add('show-selected-position');
-        this.UI.showSelectedPosition._domInput.classList.add('show-selected-position-input');
+        this.UI.showSelectedPosition.input.classList.add('show-selected-position-input');
 
         const crosshairPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
@@ -460,8 +503,7 @@ class GradientPicker extends Element {
         this._channels = args.channels ?? 3;
         this._value = this._getDefaultValue();
         if (args.value) {
-            // @ts-expect-error
-            this.value = args.value;
+            this.value = args.value as unknown as Gradient;
         }
     }
 
@@ -546,7 +588,7 @@ class GradientPicker extends Element {
         this._evtRefreshPicker = this.on('change', () => this.setGradientPicker([this.value]));
     }
 
-    protected _onPickerChange(paths: string[], values: any[]) {
+    protected _onPickerChange(paths: string[], values: number[][] | number[]) {
         const value = this.value || this._getDefaultValue();
 
         // TODO: this is all kinda hacky. We need to clear up
@@ -555,13 +597,13 @@ class GradientPicker extends Element {
             // set new value with new keys but same type
             this.value = {
                 type: value.type,
-                keys: values,
+                keys: values as number[][],
                 betweenCurves: false
             };
         } else if (REGEX_TYPE.test(paths[0])) {
             // set new value with new type but same keys
             this.value = {
-                type: values[0],
+                type: values[0] as number,
                 keys: value.keys,
                 betweenCurves: false
             };
@@ -585,7 +627,7 @@ class GradientPicker extends Element {
             return;
         }
 
-        const rgba: any[] = [];
+        const rgba: number[] = [];
 
         const curve = this.channels === 1 ? new CurveSet([this.value.keys]) : new CurveSet(this.value.keys);
         curve.type = this.value.type;
@@ -651,7 +693,7 @@ class GradientPicker extends Element {
         return this._value;
     }
 
-    set values(values: any) {
+    set values(values: Gradient[]) {
         // we do not support multiple values so just
         // add the multiple values class which essentially disables
         // the input
@@ -853,7 +895,7 @@ class GradientPicker extends Element {
         }
     }
 
-    get editAlpha(): any {
+    get editAlpha(): boolean {
         return this.editAlpha;
     }
 
@@ -901,8 +943,8 @@ class GradientPicker extends Element {
 
     protected _onTypeChanged(value: number) {
         value = this.STATE.typeMap[value];
-        const paths: any = [];
-        const values: any[] = [];
+        const paths: string[] = [];
+        const values: number[] = [];
         for (let i = 0; i < this.STATE.curves.length; ++i) {
             paths.push(`${i.toString()}.type`);
             values.push(value);
@@ -916,7 +958,7 @@ class GradientPicker extends Element {
     }
 
     renderGradient() {
-        const ctx = this.UI.gradient.dom.getContext('2d');
+        const ctx = (this.UI.gradient.dom as HTMLCanvasElement).getContext('2d');
         const w = this.UI.gradient.width;
         const h = this.UI.gradient.height;
         const r = this.UI.gradient.pixelRatio;
@@ -952,7 +994,7 @@ class GradientPicker extends Element {
     }
 
     renderAnchors() {
-        const ctx = this.UI.anchors.dom.getContext('2d');
+        const ctx = (this.UI.anchors.dom as HTMLCanvasElement).getContext('2d');
         const w = this.UI.anchors.width;
         const h = this.UI.anchors.height;
         const r = this.UI.anchors.pixelRatio;
@@ -1005,7 +1047,7 @@ class GradientPicker extends Element {
     }
 
     evaluateGradient(time: number, alphaOverride?: number) {
-        const result: any = [];
+        const result: number[] = [];
         for (let i = 0; i < 3; ++i) {
             result.push(this.STATE.curves[i].value(time));
         }
@@ -1023,7 +1065,7 @@ class GradientPicker extends Element {
 
     calcAnchorTimes() {
         // get curve anchor points
-        let times: any = [];
+        let times: number[] = [];
         for (let i = 0; i < this.STATE.curves.length; i++) {
             const curve = this.STATE.curves[i];
             for (let j = 0; j < curve.keys.length; ++j) {
@@ -1167,8 +1209,8 @@ class GradientPicker extends Element {
         // make a copy of the curve data before editing starts
         this.STATE.keystore = [];
         for (let i = 0; i < this.STATE.curves.length; ++i) {
-            const keys: any[][] = [];
-            this.STATE.curves[i].keys.forEach((element: any[]) => {
+            const keys: number[][] = [];
+            this.STATE.curves[i].keys.forEach((element: number[]) => {
                 if (element[0] !== time) {
                     keys.push([element[0], element[1]]);
                 }
@@ -1188,10 +1230,10 @@ class GradientPicker extends Element {
             // merge keystore with the drag anchor (ignoring existing anchors at
             // the current anchor location)
             curve.keys = keystore
-                .map((element: any[]) => {
+                .map((element: number[]) => {
                     return [element[0], element[1]];
                 })
-                .filter((element: any[]) => {
+                .filter((element: number[]) => {
                     return element[0] !== time;
                 });
             curve.keys.push([time, this.STATE.selectedValue[i]]);
@@ -1209,7 +1251,7 @@ class GradientPicker extends Element {
     }
 
     // insert an anchor at the given time with the given color
-    insertAnchor(time: number, color: any[]) {
+    insertAnchor(time: number, color: number[]) {
         for (let i = 0; i < this.STATE.curves.length; ++i) {
             const keys = this.STATE.curves[i].keys;
 
@@ -1279,11 +1321,11 @@ class GradientPicker extends Element {
 
     emitCurveChange() {
         const paths: string[] = [];
-        const values: any[][] = [];
-        this.STATE.curves.forEach((curve: any, index: number) => {
+        const values: number[][] = [];
+        this.STATE.curves.forEach((curve: Curve, index: number) => {
             paths.push(`0.keys.${index}`);
-            const keys: any[] = [];
-            curve.keys.forEach((key: any[]) => {
+            const keys: number[] = [];
+            curve.keys.forEach((key: number[]) => {
                 keys.push(key[0], key[1]);
             });
             values.push(keys);
@@ -1305,7 +1347,7 @@ class GradientPicker extends Element {
         const data = this._copiedData;
         if (data !== null) {
             // only paste the number of curves we're currently editing
-            const pasteData: any = {
+            const pasteData: CurveData = {
                 type: data.type,
                 keys: []
             };
@@ -1355,7 +1397,7 @@ class GradientPicker extends Element {
         return ctx.createPattern(canvasElement, 'repeat');
     }
 
-    setValue(value: any, args?: any) {
+    setValue(value: CurveData[], args?: { channels?: number }) {
         // sanity checks mostly for script 'curve' attributes
         if (
             !(value instanceof Array) ||
@@ -1393,7 +1435,7 @@ class GradientPicker extends Element {
 
         // store the curves
         this.STATE.curves = [];
-        value[0].keys.forEach((keys: any) => {
+        value[0].keys.forEach((keys: number[]) => {
             const curve = new Curve(keys);
             curve.type = value[0].type;
             this.STATE.curves.push(curve);
@@ -1412,7 +1454,7 @@ class GradientPicker extends Element {
         this.editAlpha = this.STATE.curves.length > 3;
     }
 
-    callOpenGradientPicker(value: any, args?: any) {
+    callOpenGradientPicker(value: CurveData[], args?: { channels?: number }) {
         this.setValue(value, args);
         this.open();
     }
@@ -1428,7 +1470,7 @@ class GradientPicker extends Element {
         this.UI.overlay.position(x, y);
     }
 
-    setGradientPicker(value: any, args?: any) {
+    setGradientPicker(value: CurveData[], args?: { channels?: number }) {
         this.setValue(value, args);
     }
 }

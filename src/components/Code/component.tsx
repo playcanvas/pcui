@@ -6,7 +6,7 @@ import { Code as CodeClass } from './index';
 /**
  * Represents a code block.
  */
-class Code extends Element<CodeArgs, any> {
+class Code extends Element<CodeArgs, object> {
     static ctor = CodeClass;
 }
 

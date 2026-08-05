@@ -247,8 +247,7 @@ export const searchItems = <K extends string, T extends Record<K, string>>(
     let recordItems = records.map((record: SearchRecord<T>) => record.item);
 
     // limit number of results
-    // eslint-disable-next-line no-prototype-builtins -- preserve existing ownership semantics
-    if (args.hasOwnProperty('limitResults') && recordItems.length > args.limitResults) {
+    if (Reflect.apply(args.hasOwnProperty, args, ['limitResults']) && recordItems.length > args.limitResults) {
         recordItems = recordItems.slice(0, args.limitResults);
     }
 

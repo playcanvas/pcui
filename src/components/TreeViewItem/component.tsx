@@ -6,7 +6,7 @@ import { TreeViewItem as TreeViewItemClass } from './index';
 /**
  * Represents a Tree View Item to be added to a TreeView.
  */
-class TreeViewItem extends Element<TreeViewItemArgs, any> {
+class TreeViewItem extends Element<TreeViewItemArgs, object> {
     static ctor = TreeViewItemClass;
 
     onSelect: () => void;

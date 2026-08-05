@@ -6,7 +6,7 @@ import { BooleanInput as BooleanInputClass } from './index';
 /**
  * A checkbox element.
  */
-class BooleanInput extends Element<BooleanInputArgs, any> {
+class BooleanInput extends Element<BooleanInputArgs, object> {
     static ctor = BooleanInputClass;
 }
 

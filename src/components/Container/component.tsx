@@ -14,7 +14,7 @@ interface ContainerChildProps {
  * A container is the basic building block for Elements that are grouped together.
  * A container can contain any other element including other containers.
  */
-class Container extends Element<ContainerArgs, any> {
+class Container extends Element<ContainerArgs, object> {
     static ctor = ContainerClass;
 
     declare element: ContainerClass;

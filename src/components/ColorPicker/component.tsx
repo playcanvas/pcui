@@ -8,7 +8,7 @@ import { ColorPicker as ColorPickerClass } from './index';
 /**
  * Represents a color picker
  */
-class ColorPicker extends Element<ColorPickerArgs, any> {
+class ColorPicker extends Element<ColorPickerArgs, object> {
     static ctor = ColorPickerClass;
 
     render() {

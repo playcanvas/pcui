@@ -8,7 +8,7 @@ import { Label as LabelClass } from './index';
 /**
  * The Label is a simple span element that displays some text.
  */
-class Label extends Element<LabelArgs, any> {
+class Label extends Element<LabelArgs, object> {
     static ctor = LabelClass;
 
     render() {

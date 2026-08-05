@@ -244,8 +244,8 @@ class GridView extends Container {
         let targetElement: HTMLElement = element;
         let item: GridViewItem | null = null;
         while (targetElement && targetElement !== this.dom) {
-            if ((targetElement as any).ui instanceof GridViewItem) {
-                item = (targetElement as any).ui;
+            if (targetElement.ui instanceof GridViewItem) {
+                item = targetElement.ui;
                 break;
             }
             targetElement = targetElement.parentElement;
@@ -306,8 +306,8 @@ class GridView extends Container {
         let targetElement = evt.target as HTMLElement;
         let item: GridViewItem | null = null;
         while (targetElement && targetElement !== this.dom) {
-            if ((targetElement as any).ui instanceof GridViewItem) {
-                item = (targetElement as any).ui;
+            if (targetElement.ui instanceof GridViewItem) {
+                item = targetElement.ui;
                 break;
             }
             targetElement = targetElement.parentElement;
@@ -399,7 +399,7 @@ class GridView extends Container {
 
         const children = this.dom.children;
         for (let i = 0; i < children.length; i++) {
-            const child = (children[i] as any).ui;
+            const child = children[i].ui;
             if (child instanceof GridViewItem && !child.hidden) {
                 this._setActiveItem(child);
                 return;

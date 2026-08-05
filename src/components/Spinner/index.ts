@@ -3,11 +3,11 @@ import { Element } from '../Element';
 
 const CLASS_ROOT = 'pcui-spinner';
 
-function createSmallThick(size: any, dom: any) {
+function createSmallThick(size: string | number, dom?: HTMLElement) {
     const spinner = dom || document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     spinner.classList.add('spin');
-    spinner.setAttribute('width', size);
-    spinner.setAttribute('height', size);
+    spinner.setAttribute('width', String(size));
+    spinner.setAttribute('height', String(size));
     spinner.setAttribute('viewBox', '0 0 14 14');
     spinner.setAttribute('fill', 'none');
     spinner.innerHTML =
@@ -42,8 +42,8 @@ class Spinner extends Element {
      */
     constructor(args: Readonly<SpinnerArgs> = {}) {
         if ((args.type ?? 'small-thick') === Spinner.TYPE_SMALL_THICK) {
-            const dom = createSmallThick(args.size ?? 12, args.dom);
-            args = { ...args, dom };
+            const dom = createSmallThick(args.size ?? 12, args.dom as HTMLElement | undefined);
+            args = { ...args, dom: dom as HTMLElement };
         }
 
         super(args);

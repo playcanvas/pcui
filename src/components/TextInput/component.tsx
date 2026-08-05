@@ -6,7 +6,7 @@ import { TextInput as TextInputClass } from './index';
 /**
  * The TextInput is an input element of type text.
  */
-class TextInput extends Element<TextInputArgs, any> {
+class TextInput extends Element<TextInputArgs, object> {
     static ctor = TextInputClass;
 
     onValidate: (value: string) => boolean;

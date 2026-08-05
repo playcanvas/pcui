@@ -13,6 +13,13 @@ const CLASS_CONTAINER = 'pcui-container';
 const CLASS_DRAGGED = `${CLASS_CONTAINER}-dragged`;
 const CLASS_DRAGGED_CHILD = `${CLASS_DRAGGED}-child`;
 
+type Child = Node | { dom?: Node; element?: Node; parent?: Element };
+type DomNode = {
+    root?: DomNode;
+    children?: DomNode[];
+    [key: string]: Element | DomNode | DomNode[] | undefined;
+};
+
 /**
  * The arguments for the {@link Container} constructor.
  */
@@ -192,10 +199,10 @@ class Container extends Element {
      *
      * @param {Element} element - The element to append.
      */
-    append(element: any) {
+    append(element: Child) {
         const dom = this._getDomFromElement(element);
         this._domContent.appendChild(dom);
-        this._onAppendChild(element);
+        this._onAppendChild(element as Element);
     }
 
     /**
@@ -204,14 +211,14 @@ class Container extends Element {
      * @param {Element} element - The element to append.
      * @param {Element} referenceElement - The element before which the element will be appended.
      */
-    appendBefore(element: any, referenceElement: any) {
+    appendBefore(element: Child, referenceElement: Child) {
         const dom = this._getDomFromElement(element);
         this._domContent.appendChild(dom);
         const referenceDom = referenceElement && this._getDomFromElement(referenceElement);
 
         this._domContent.insertBefore(dom, referenceDom);
 
-        this._onAppendChild(element);
+        this._onAppendChild(element as Element);
     }
 
     /**
@@ -220,7 +227,7 @@ class Container extends Element {
      * @param {Element} element - The element to append.
      * @param {Element} referenceElement - The element after which the element will be appended.
      */
-    appendAfter(element: any, referenceElement: any) {
+    appendAfter(element: Child, referenceElement: Child) {
         const dom = this._getDomFromElement(element);
         const referenceDom = referenceElement && this._getDomFromElement(referenceElement);
 
@@ -231,7 +238,7 @@ class Container extends Element {
             this._domContent.appendChild(dom);
         }
 
-        this._onAppendChild(element);
+        this._onAppendChild(element as Element);
     }
 
     /**
@@ -239,7 +246,7 @@ class Container extends Element {
      *
      * @param {Element} element - The element to prepend.
      */
-    prepend(element: any) {
+    prepend(element: Child) {
         const dom = this._getDomFromElement(element);
         const first = this._domContent.firstChild;
         if (first) {
@@ -248,7 +255,7 @@ class Container extends Element {
             this._domContent.appendChild(dom);
         }
 
-        this._onAppendChild(element);
+        this._onAppendChild(element as Element);
     }
 
     /**
@@ -314,17 +321,17 @@ class Container extends Element {
     }
 
     // Used for backwards compatibility with the legacy ui framework
-    protected _getDomFromElement(element: any) {
-        if (element.dom) {
-            return element.dom;
+    protected _getDomFromElement(element: Child) {
+        if ((element as { dom?: Node }).dom) {
+            return (element as { dom: Node }).dom;
         }
 
-        if (element.element) {
+        if ((element as { element?: Node }).element) {
             // console.log('Legacy ui.Element passed to Container', this.class, element.class);
-            return element.element;
+            return (element as { element: Node }).element;
         }
 
-        return element;
+        return element as Node;
     }
 
     protected _onAppendChild(element: Element) {
@@ -495,7 +502,7 @@ class Container extends Element {
 
         // hovered script
         for (let i = 0; i < this.dom.childNodes.length; i++) {
-            const otherPanel = this.dom.childNodes[i].ui as any;
+            const otherPanel = this.dom.childNodes[i].ui as Element & { header: { height: number } };
             const otherTop = otherPanel.dom.offsetTop;
             if (i < childPanelIndex) {
                 if (y <= otherTop + otherPanel.header.height) {
@@ -562,21 +569,20 @@ class Container extends Element {
      * @param node.children - The children of the root node.
      * @returns The recursively appended element node.
      */
-    protected _buildDomNode(node: { [x: string]: any; root?: any; children?: any }): Container {
+    protected _buildDomNode(node: DomNode): Element {
         const keys = Object.keys(node);
-        let rootNode: Container;
+        let rootNode: Element;
         if (keys.includes('root')) {
             rootNode = this._buildDomNode(node.root);
-            node.children.forEach((childNode: any) => {
+            node.children.forEach((childNode) => {
                 const childNodeElement = this._buildDomNode(childNode);
                 if (childNodeElement !== null) {
-                    rootNode.append(childNodeElement);
+                    (rootNode as Container).append(childNodeElement);
                 }
             });
         } else {
-            rootNode = node[keys[0]];
-            // @ts-expect-error
-            this[`_${keys[0]}`] = rootNode;
+            rootNode = node[keys[0]] as Element;
+            (this as unknown as Record<string, Element>)[`_${keys[0]}`] = rootNode;
         }
         return rootNode;
     }
@@ -608,8 +614,8 @@ class Container extends Element {
      *     }
      * ]);
      */
-    buildDom(dom: any[]) {
-        dom.forEach((node: any) => {
+    buildDom(dom: DomNode[]) {
+        dom.forEach((node) => {
             const builtNode = this._buildDomNode(node);
             this.append(builtNode);
         });

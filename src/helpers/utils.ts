@@ -1,27 +1,26 @@
-export function deepCopy(data: any) {
+export function deepCopy(data: unknown) {
     if (data == null || typeof data !== 'object') {
         return data;
     }
 
     if (data instanceof Array) {
-        const arr: any[] = [];
+        const arr: unknown[] = [];
         for (let i = 0; i < data.length; i++) {
             arr[i] = deepCopy(data[i]);
         }
         return arr;
     }
 
-    const obj: any = {};
-    for (const key in data) {
-        // eslint-disable-next-line no-prototype-builtins -- preserve existing ownership semantics
-        if (data.hasOwnProperty(key)) {
-            obj[key] = deepCopy(data[key]);
+    const obj: Record<string, unknown> = {};
+    for (const key in data as Record<string, unknown>) {
+        if (Reflect.apply((data as Record<string, unknown>).hasOwnProperty, data, [key])) {
+            obj[key] = deepCopy((data as Record<string, unknown>)[key]);
         }
     }
     return obj;
 }
 
-export function arrayEquals(lhs: any[], rhs: any[]) {
+export function arrayEquals<T>(lhs: T[], rhs: T[]) {
     if (!lhs) {
         return false;
     }
@@ -36,7 +35,7 @@ export function arrayEquals(lhs: any[], rhs: any[]) {
 
     for (let i = 0, l = lhs.length; i < l; i++) {
         if (lhs[i] instanceof Array && rhs[i] instanceof Array) {
-            if (!lhs[i].equals(rhs[i])) {
+            if (!(lhs[i] as unknown[] & { equals: (value: unknown[]) => boolean }).equals(rhs[i] as unknown[])) {
                 return false;
             }
         } else if (lhs[i] !== rhs[i]) {

@@ -32,23 +32,23 @@ const SIMPLE_CSS_PROPERTIES = [
 /**
  * The interface for bindable elements.
  */
-interface IBindable {
+interface IBindable<T = unknown> {
     /**
      * Sets the value of the Element.
      */
-    set value(values: any);
+    set value(values: T);
     /**
      * Gets the value of the Element.
      */
-    get value(): any;
+    get value(): T;
     /**
      * Sets multiple values on the Element. It is up to the Element to determine how to display them.
      */
-    set values(values: any[]);
+    set values(values: T[]);
     /**
      * Gets multiple values on the Element.
      */
-    get values(): any[];
+    get values(): T[];
     /**
      * Sets whether the input should flash on changes.
      */
@@ -62,15 +62,15 @@ interface IBindable {
 /**
  * The interface for arguments for bindable elements.
  */
-interface IBindableArgs {
+interface IBindableArgs<T = unknown> {
     /**
      * Sets the value of the Element.
      */
-    value?: any;
+    value?: T;
     /**
      * Sets multiple values to the Element. It is up to the Element to determine how to display them.
      */
-    values?: any[];
+    values?: T[];
     /**
      * If `true` each input will flash on changes.
      */
@@ -199,7 +199,9 @@ interface IFlexArgs {
 /**
  * The arguments for the {@link Element} constructor.
  */
-interface ElementArgs extends IFlexArgs {
+type ChangeHandler<T> = { bivarianceHack(value: T): void }['bivarianceHack'];
+
+interface ElementArgs<T = unknown> extends IFlexArgs {
     /**
      * The HTMLElement to create this {@link Element} with. If not provided this Element will create one.
      */
@@ -215,7 +217,7 @@ interface ElementArgs extends IFlexArgs {
     /**
      * If provided and the {@link Element} is changeable, this function will be called each time the element value is changed.
      */
-    onChange?: (value: any) => void;
+    onChange?: ChangeHandler<T>;
     /**
      * If provided and the {@link Element} is removable, this function will be called each time the element is removed.
      */
@@ -460,8 +462,8 @@ class Element extends Events {
     private static registry = new Map<
         string,
         {
-            cls: new (...args: any[]) => Element;
-            defaultArguments?: Partial<ElementArgs>;
+            cls: new (...args: never[]) => Element;
+            defaultArguments?: object;
         }
     >();
 
@@ -554,11 +556,9 @@ class Element extends Events {
 
         // copy CSS properties from args
         for (const key in args) {
-            // @ts-expect-error
-            if (args[key] === undefined) continue;
+            if ((args as unknown as Record<string, unknown>)[key] === undefined) continue;
             if (SIMPLE_CSS_PROPERTIES.indexOf(key) !== -1) {
-                // @ts-expect-error
-                this[key] = args[key];
+                (this as unknown as Record<string, unknown>)[key] = (args as unknown as Record<string, unknown>)[key];
             }
         }
 
@@ -595,10 +595,8 @@ class Element extends Events {
             // because we do not want to be emitting events
             // on a destroyed parent after it's been destroyed
             // as it is easy to lead to null exceptions
-            // @ts-expect-error
-            if (parent.remove && !parent._destroyed) {
-                // @ts-expect-error
-                parent.remove(this);
+            if ((parent as unknown as { remove?: (element: Element) => void }).remove && !parent._destroyed) {
+                (parent as unknown as { remove: (element: Element) => void }).remove(this);
             }
 
             // set parent to null and remove from
@@ -761,7 +759,7 @@ class Element extends Events {
      * @param cls - The actual class of the Element.
      * @param defaultArguments - Default arguments when creating this type.
      */
-    static register<Type extends Element>(type: string, cls: new () => Type, defaultArguments?: any) {
+    static register<Type extends Element>(type: string, cls: new () => Type, defaultArguments?: object) {
         Element.registry.set(type, { cls, defaultArguments });
     }
 
@@ -779,7 +777,7 @@ class Element extends Events {
      * @param args - Arguments for the Element.
      * @returns The new Element or undefined if type is not found.
      */
-    static create(type: string, args: ElementArgs): any {
+    static create<Type extends Element = Element>(type: string, args: ElementArgs): Type | undefined {
         const entry = Element.registry.get(type);
         if (!entry) {
             console.error('Invalid type passed to Element.create:', type);
@@ -789,7 +787,7 @@ class Element extends Events {
         const cls = entry.cls;
         const clsArgs = { ...entry.defaultArguments, ...args };
 
-        return new cls(clsArgs);
+        return new (cls as new (args: ElementArgs & Record<string, unknown>) => Element)(clsArgs) as Type;
     }
 
     /**
@@ -1050,8 +1048,7 @@ class Element extends Events {
         this._binding = value;
 
         if (this._binding) {
-            // @ts-expect-error
-            this._binding.element = this;
+            this._binding.element = this as unknown as IBindable;
             if (prevObservers && prevPaths) {
                 this.link(prevObservers, prevPaths);
             }

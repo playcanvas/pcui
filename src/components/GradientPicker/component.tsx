@@ -8,7 +8,7 @@ import { GradientPicker as GradientPickerClass } from './index';
 /**
  * Represents a gradient picker.
  */
-class GradientPicker extends Element<GradientPickerArgs, any> {
+class GradientPicker extends Element<GradientPickerArgs, object> {
     static ctor = GradientPickerClass;
 
     render() {

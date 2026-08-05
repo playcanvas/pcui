@@ -122,7 +122,7 @@ class BindingBase extends Events {
      *
      * @param value - The value
      */
-    setValue(value: any) {
+    setValue(value: unknown) {
         // implemented by derived classes
     }
 
@@ -131,7 +131,7 @@ class BindingBase extends Events {
      *
      * @param values - The values.
      */
-    setValues(values: any[]) {
+    setValues(values: unknown[]) {
         // implemented by derived classes
     }
 
@@ -140,7 +140,7 @@ class BindingBase extends Events {
      *
      * @param value - The value.
      */
-    addValue(value: any) {
+    addValue(value: unknown) {
         // implemented by derived classes
     }
 
@@ -149,7 +149,7 @@ class BindingBase extends Events {
      *
      * @param values - The values.
      */
-    addValues(values: any[]) {
+    addValues(values: unknown[]) {
         // implemented by derived classes
     }
 
@@ -158,7 +158,7 @@ class BindingBase extends Events {
      *
      * @param value - The value.
      */
-    removeValue(value: any) {
+    removeValue(value: unknown) {
         // implemented by derived classes
     }
 
@@ -167,7 +167,7 @@ class BindingBase extends Events {
      *
      * @param values - The values.
      */
-    removeValues(values: any[]) {
+    removeValues(values: unknown[]) {
         // implemented by derived classes
     }
 
@@ -271,8 +271,7 @@ class BindingBase extends Events {
      */
     set historyEnabled(value) {
         if (this._history) {
-            // @ts-expect-error
-            this._history.enabled = value;
+            (this._history as History & { enabled: boolean }).enabled = value;
         }
     }
 
@@ -280,8 +279,7 @@ class BindingBase extends Events {
      * Gets whether history is enabled for the binding.
      */
     get historyEnabled() {
-        // @ts-expect-error
-        return this._history && this._history.enabled;
+        return this._history && (this._history as History & { enabled: boolean }).enabled;
     }
 
     /**

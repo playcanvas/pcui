@@ -9,7 +9,7 @@ const CLASS_BOOLEAN_INPUT_TOGGLE = `${CLASS_BOOLEAN_INPUT}-toggle`;
 /**
  * The arguments for the {@link BooleanInput} constructor.
  */
-interface BooleanInputArgs extends ElementArgs, IBindableArgs {
+interface BooleanInputArgs extends ElementArgs<boolean>, IBindableArgs<boolean> {
     /**
      * Sets the tabIndex of the {@link BooleanInput}. Defaults to 0.
      */
@@ -23,7 +23,7 @@ interface BooleanInputArgs extends ElementArgs, IBindableArgs {
 /**
  * A checkbox element.
  */
-class BooleanInput extends Element implements IBindable, IFocusable {
+class BooleanInput extends Element implements IBindable<boolean>, IFocusable {
     protected _value: boolean;
 
     protected _renderChanges: boolean;

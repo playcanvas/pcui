@@ -653,7 +653,7 @@ class TreeView extends Container {
         let index = 0;
         for (const child of parent.dom.childNodes) {
             if (child === item.dom) return index;
-            if ((child as any).ui instanceof TreeViewItem) {
+            if (child.ui instanceof TreeViewItem) {
                 index++;
             }
         }
@@ -804,7 +804,7 @@ class TreeView extends Container {
                         let count = 0;
                         for (const child of children) {
                             if (child === target) return count;
-                            if ((child as any).ui instanceof TreeViewItem) {
+                            if (child.ui instanceof TreeViewItem) {
                                 count++;
                             }
                         }
@@ -1016,8 +1016,9 @@ class TreeView extends Container {
         if (!dragOverItem || dragOverItem.hidden || !dragOverItem.parentsOpen) {
             this._dragHandle.hidden = true;
         } else {
-            // @ts-expect-error
-            const rect = dragOverItem._containerContents.dom.getBoundingClientRect();
+            const rect = (
+                dragOverItem as unknown as { _containerContents: Container }
+            )._containerContents.dom.getBoundingClientRect();
 
             this._dragHandle.hidden = false;
             this._dragHandle.class.remove(DRAG_AREA_AFTER, DRAG_AREA_BEFORE, DRAG_AREA_INSIDE);

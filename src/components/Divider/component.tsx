@@ -6,7 +6,7 @@ import { Divider as DividerClass } from './index';
 /**
  * Represents a vertical division between two elements
  */
-class Divider extends Element<ElementArgs, any> {
+class Divider extends Element<ElementArgs, object> {
     static ctor = DividerClass;
 }
 

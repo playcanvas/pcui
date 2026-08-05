@@ -6,7 +6,7 @@ import { NumericInput as NumericInputClass } from './index';
 /**
  * The NumericInput represents an input element that holds numbers.
  */
-class NumericInput extends Element<NumericInputArgs, any> {
+class NumericInput extends Element<NumericInputArgs, object> {
     static ctor = NumericInputClass;
 }
 

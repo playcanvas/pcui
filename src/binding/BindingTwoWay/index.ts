@@ -41,20 +41,20 @@ class BindingTwoWay extends BindingBase {
         this._bindingElementToObservers = args.bindingElementToObservers ?? new BindingElementToObservers(args);
         this._bindingObserversToElement = args.bindingObserversToElement ?? new BindingObserversToElement(args);
 
-        this._bindingElementToObservers.on('applyingChange', (value: any) => {
+        this._bindingElementToObservers.on('applyingChange', (value: boolean) => {
             this.applyingChange = value;
         });
-        this._bindingElementToObservers.on('history:init', (context: any) => {
+        this._bindingElementToObservers.on('history:init', (context: object) => {
             this.emit('history:init', context);
         });
-        this._bindingElementToObservers.on('history:undo', (context: any) => {
+        this._bindingElementToObservers.on('history:undo', (context: object) => {
             this.emit('history:undo', context);
         });
-        this._bindingElementToObservers.on('history:redo', (context: any) => {
+        this._bindingElementToObservers.on('history:redo', (context: object) => {
             this.emit('history:redo', context);
         });
 
-        this._bindingObserversToElement.on('applyingChange', (value: any) => {
+        this._bindingObserversToElement.on('applyingChange', (value: boolean) => {
             this.applyingChange = value;
         });
     }
@@ -78,27 +78,27 @@ class BindingTwoWay extends BindingBase {
         });
     }
 
-    setValue(value: any) {
+    setValue(value: unknown) {
         this._bindingElementToObservers.setValue(value);
     }
 
-    setValues(values: any[]) {
+    setValues(values: unknown[]) {
         this._bindingElementToObservers.setValues(values);
     }
 
-    addValue(value: any) {
+    addValue(value: unknown) {
         this._bindingElementToObservers.addValue(value);
     }
 
-    addValues(values: any[]) {
+    addValues(values: unknown[]) {
         this._bindingElementToObservers.addValues(values);
     }
 
-    removeValue(value: any) {
+    removeValue(value: unknown) {
         this._bindingElementToObservers.removeValue(value);
     }
 
-    removeValues(values: any[]) {
+    removeValues(values: unknown[]) {
         this._bindingElementToObservers.removeValues(values);
     }
 

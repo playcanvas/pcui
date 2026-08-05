@@ -76,8 +76,10 @@ class GridViewItem extends Container implements IFocusable {
                 binding: new BindingObserversToElement()
             });
 
-            // @ts-expect-error Remove radio button click event listener
-            this._radioButton.dom.removeEventListener('click', this._radioButton._onClick);
+            this._radioButton.dom.removeEventListener(
+                'click',
+                (this._radioButton as unknown as { _onClick: (evt: MouseEvent) => void })._onClick
+            );
             this._radioButton.dom.addEventListener('click', this._onRadioButtonClick);
 
             this.append(this._radioButton);

@@ -7,7 +7,7 @@ const CLASS_LABEL = 'pcui-label';
 /**
  * The arguments for the {@link Label} constructor.
  */
-interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
+interface LabelArgs extends ElementArgs<string>, IBindableArgs<string>, IPlaceholderArgs {
     /**
      * Sets the text of the Label. Defaults to ''.
      */
@@ -39,7 +39,7 @@ interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
 /**
  * The Label is a simple span element that displays some text.
  */
-class Label extends Element implements IPlaceholder, IBindable {
+class Label extends Element implements IPlaceholder, IBindable<string> {
     protected _unsafe: boolean;
 
     protected _text: string;

@@ -117,8 +117,7 @@ class Menu extends Container implements IFocusable {
             item.hidden = !item.onIsVisible();
         }
 
-        // @ts-expect-error
-        for (const child of item._containerItems.dom.childNodes) {
+        for (const child of (item as unknown as { _containerItems: Container })._containerItems.dom.childNodes) {
             this._filterMenuItems(child.ui as MenuItem);
         }
     }
@@ -143,8 +142,7 @@ class Menu extends Container implements IFocusable {
     protected _limitSubmenuAtScreenEdges(item: MenuItem) {
         if (!(item instanceof MenuItem) || !item.hasChildren) return;
 
-        // @ts-expect-error
-        const containerItems = item._containerItems;
+        const containerItems = (item as unknown as { _containerItems: Container })._containerItems;
 
         containerItems.style.top = '';
         containerItems.style.left = '';

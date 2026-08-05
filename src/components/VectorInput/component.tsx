@@ -6,7 +6,7 @@ import { VectorInput as VectorInputClass } from './index';
 /**
  * A vector input.
  */
-class VectorInput extends Element<VectorInputArgs, any> {
+class VectorInput extends Element<VectorInputArgs, object> {
     static ctor = VectorInputClass;
 }
 
