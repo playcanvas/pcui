@@ -359,7 +359,6 @@ class SliderInput extends Element implements IBindable<number>, IFocusable, IPla
         return this._numericInput.value;
     }
 
-    /* eslint accessor-pairs: 0 */
     set values(values: number[]) {
         this._numericInput.values = values;
         if (this._numericInput.class.contains(CLASS_MULTIPLE_VALUES)) {

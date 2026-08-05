@@ -417,7 +417,6 @@ class NumericInput extends InputElement {
      * Sets multiple values on the input. If all values are the same, the input will display that
      * value. Otherwise, it will be empty and display a "multiple values" state.
      */
-    /* eslint accessor-pairs: 0 */
     set values(values: number[]) {
         const normalizedValues = values.map((v) => this._normalizeValue(v));
         const different = normalizedValues.some((v) => v !== normalizedValues[0]);
@@ -445,7 +444,8 @@ class NumericInput extends InputElement {
 
         // reset value
         if (this._min !== null) {
-            this.value = this.value; // eslint-disable-line no-self-assign
+            const val = this.value;
+            this.value = val;
         }
     }
 
@@ -465,7 +465,8 @@ class NumericInput extends InputElement {
 
         // reset value
         if (this._max !== null) {
-            this.value = this.value; // eslint-disable-line no-self-assign
+            const val = this.value;
+            this.value = val;
         }
     }
 
@@ -485,7 +486,8 @@ class NumericInput extends InputElement {
 
         // reset value
         if (this._precision !== null) {
-            this.value = this.value; // eslint-disable-line no-self-assign
+            const val = this.value;
+            this.value = val;
         }
     }
 

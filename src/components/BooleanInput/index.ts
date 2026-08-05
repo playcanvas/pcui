@@ -141,7 +141,6 @@ class BooleanInput extends Element implements IBindable<boolean>, IFocusable {
         return this._value;
     }
 
-    /* eslint accessor-pairs: 0 */
     set values(values: boolean[]) {
         const different = values.some((v) => v !== values[0]);
 

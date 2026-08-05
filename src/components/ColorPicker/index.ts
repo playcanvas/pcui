@@ -768,7 +768,6 @@ class ColorPicker extends Element implements IBindable<number[]> {
         return this._value.slice(0, this._channels);
     }
 
-    /* eslint accessor-pairs: 0 */
     set values(values: number[][]) {
         let different = false;
         const value = values[0];

@@ -319,7 +319,6 @@ class VectorInput extends Element implements IBindable<number[] | string>, IFocu
      * vector dimensions. If all values are the same, the VectorInput will display that value.
      * Otherwise, it will display a "multiple values" state.
      */
-    /* eslint accessor-pairs: 0 */
     set values(values: number[][]) {
         // create an array for each dimension (e.g. one array for x one for y one for z)
         values = this._inputs.map((_, i) =>

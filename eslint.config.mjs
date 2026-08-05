@@ -21,7 +21,6 @@ export default [
             }
         },
         rules: {
-            '@typescript-eslint/ban-ts-comment': 'off',
             '@typescript-eslint/consistent-type-definitions': 'off',
             '@typescript-eslint/no-unused-vars': 'off'
         }
@@ -32,9 +31,6 @@ export default [
             globals: {
                 ...globals.node
             }
-        },
-        rules: {
-            'import-x/no-unresolved': 'off'
         }
     },
     ...storybook.configs['flat/recommended']

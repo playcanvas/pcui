@@ -1286,7 +1286,6 @@ class SelectInput extends Element implements IBindable<unknown>, IFocusable {
      * Sets multiple values on the SelectInput. If all values are the same, the SelectInput will
      * display that value. Otherwise, it will display a "multiple values" state.
      */
-    /* eslint accessor-pairs: 0 */
     set values(values: unknown[]) {
         values = values.map((value) => {
             return this._convertValue(value);

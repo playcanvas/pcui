@@ -135,7 +135,6 @@ class Label extends Element implements IPlaceholder, IBindable<string> {
      * Sets multiple values on the Label. If all values are the same, the Label will display that
      * value. Otherwise, it will be empty and display a "multiple values" state.
      */
-    /* eslint accessor-pairs: 0 */
     set values(values: string[]) {
         const different = values.some((v) => v !== values[0]);
 

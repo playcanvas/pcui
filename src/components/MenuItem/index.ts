@@ -239,7 +239,6 @@ class MenuItem extends Container implements IBindable<string> {
         return this.text;
     }
 
-    /* eslint accessor-pairs: 0 */
     set values(values: string[]) {
         this._labelText.values = values;
     }

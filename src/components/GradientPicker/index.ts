@@ -567,7 +567,7 @@ class GradientPicker extends Element {
     protected _getDefaultValue() {
         return {
             type: 4,
-            keys: new Array(this._channels).fill([0, 0]),
+            keys: new Array<number[]>(this._channels).fill([0, 0]),
             betweenCurves: false
         };
     }

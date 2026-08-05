@@ -608,7 +608,6 @@ class ArrayInput extends Element implements IFocusable, IBindable<unknown[]> {
     /**
      * Sets multiple array values on the ArrayInput.
      */
-    /* eslint accessor-pairs: 0 */
     set values(values: unknown[][]) {
         if (utils.arrayEquals(this._values, values)) return;
         // update values but do not update binding
