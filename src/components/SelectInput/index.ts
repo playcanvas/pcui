@@ -33,7 +33,7 @@ const DEFAULT_BOTTOM_OFFSET = 25;
 /**
  * The arguments for the {@link SelectInput} constructor.
  */
-type SelectInputArgs = {
+interface SelectInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * Used to map the options.
      */
@@ -49,7 +49,7 @@ type SelectInputArgs = {
     /**
      * The dropdown options of the input. Contains an array of objects with the following format \{v: Any, t: String\} where v is the value and t is the text of the option.
      */
-    options?: { t: string, v: boolean | number | string }[];
+    options?: { t: string; v: boolean | number | string }[];
     /**
      * An array of values against which new values are checked before they are created. If a value is in the array it will not be created.
      */
@@ -94,8 +94,7 @@ type SelectInputArgs = {
      * Text to display in the SelectInput before the selected option.
      */
     prefix?: string;
-} & ElementArgs & IBindableArgs & IPlaceholderArgs
-
+}
 
 /**
  * An input that allows selecting from a dropdown or entering tags.
@@ -193,7 +192,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
     protected _createLabelContainer: Container;
 
-    protected _options: { t: string, v: boolean | number | string }[];
+    protected _options: { t: string; v: boolean | number | string }[];
 
     protected _invalidOptions: any;
 
@@ -397,8 +396,9 @@ class SelectInput extends Element implements IBindable, IFocusable {
             label.text = value;
             // Hide the create label if the value is invalid (in invalidOptions, empty, or whitespace-only).
             // Skip the empty/whitespace check if there's a createFn, as it may handle empty values (e.g., show a dialog).
-            const invalid = (this.invalidOptions && this.invalidOptions.indexOf(value) !== -1) ||
-                            (!this._createFn && (!value || value.trim() === ''));
+            const invalid =
+                (this.invalidOptions && this.invalidOptions.indexOf(value) !== -1) ||
+                (!this._createFn && (!value || value.trim() === ''));
             if (invalid) {
                 if (!container.hidden) {
                     container.hidden = true;
@@ -476,7 +476,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         if (this.multiSelect) {
             if (!Array.isArray(value)) return value;
 
-            return value.map(val => this._convertSingleValue(val));
+            return value.map((val) => this._convertSingleValue(val));
         }
 
         return this._convertSingleValue(value);
@@ -551,7 +551,8 @@ class SelectInput extends Element implements IBindable, IFocusable {
             if (labelTop < scrollTop) {
                 this._containerOptions.dom.scrollTop = labelTop;
             } else if (labelTop + this._labelHighlighted.height > this._containerOptions.height + scrollTop) {
-                this._containerOptions.dom.scrollTop = labelTop + this._labelHighlighted.height - this._containerOptions.height;
+                this._containerOptions.dom.scrollTop =
+                    labelTop + this._labelHighlighted.height - this._containerOptions.height;
             }
         }
     }
@@ -634,9 +635,11 @@ class SelectInput extends Element implements IBindable, IFocusable {
             class: CLASS_TAG
         });
 
-        container.append(new Label({
-            text: this._valueToText[String(value)] || String(value)
-        }));
+        container.append(
+            new Label({
+                text: this._valueToText[String(value)] || String(value)
+            })
+        );
 
         const btnRemove = new Button({
             size: 'small',
@@ -929,7 +932,6 @@ class SelectInput extends Element implements IBindable, IFocusable {
                 });
             }
         }
-
     }
 
     /**
@@ -992,7 +994,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
         // if the dropdown list goes below the window show it above the field
         const startField = this._allowInput ? this._input.dom : this._labelValue.dom;
         const rect = startField.getBoundingClientRect();
-        let fitHeight = (rect.bottom + this._containerOptions.height + DEFAULT_BOTTOM_OFFSET >= window.innerHeight);
+        let fitHeight = rect.bottom + this._containerOptions.height + DEFAULT_BOTTOM_OFFSET >= window.innerHeight;
         if (fitHeight && rect.top - this._containerOptions.height < 0) {
             // if showing it above the field means that some of it will not be visible
             // then show it below instead and adjust the max height to the maximum available space
@@ -1246,7 +1248,7 @@ class SelectInput extends Element implements IBindable, IFocusable {
 
         value = this._convertValue(value);
 
-        if (this._value === value || this.multiSelect && this._value && this._value.equals(value)) {
+        if (this._value === value || (this.multiSelect && this._value && this._value.equals(value))) {
             // if the value is null because we are showing multiple values
             // but someone wants to actually set the value of all observers to null
             // then make sure we do not return early

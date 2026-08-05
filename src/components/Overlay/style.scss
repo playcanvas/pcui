@@ -3,7 +3,9 @@
     height: auto;
     inset: 0;
     z-index: 101;
-    transition: opacity 100ms, visibility 100ms;
+    transition:
+        opacity 100ms,
+        visibility 100ms;
 
     @extend .pcui-flex;
 
@@ -36,6 +38,10 @@
 
 .pcui-overlay-content {
     background-color: $bcg-primary;
-    transition: width 100ms, height 100ms, margin-left 100ms, margin-top 100ms;
+    transition:
+        width 100ms,
+        height 100ms,
+        margin-left 100ms,
+        margin-top 100ms;
     box-shadow: 7px 7px 7px rgb(0 0 0 / 15%);
 }

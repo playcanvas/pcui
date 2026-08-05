@@ -14,7 +14,7 @@ const CLASS_MENU_ITEM_SHORTCUT = `${CLASS_MENU_ITEM}-shortcut`;
 /**
  * The arguments for the {@link MenuItem} constructor.
  */
-type MenuItemArgs = {
+interface MenuItemArgs extends ContainerArgs {
     value?: any;
     /**
      * Whether the MenuItem has any child MenuItems.
@@ -52,7 +52,7 @@ type MenuItemArgs = {
      * Sets the keyboard shortcut to display on the MenuItem (e.g., 'Ctrl+C').
      */
     shortcut?: string;
-} & ContainerArgs
+}
 
 /**
  * The MenuItem is a selectable option that is appended to a {@link Menu}. A MenuItem can also
@@ -193,7 +193,7 @@ class MenuItem extends Container implements IBindable {
         }
     };
 
-    link(observers: Observer|Observer[], paths: string|string[]) {
+    link(observers: Observer | Observer[], paths: string | string[]) {
         super.link(observers, paths);
         this._labelText.link(observers, paths);
     }

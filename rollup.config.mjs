@@ -24,7 +24,7 @@ const getRevision = () => {
     let revision;
     try {
         revision = execSync('git rev-parse --short HEAD').toString().trim();
-    } catch (e) {
+    } catch {
         revision = 'unknown';
     }
     return revision;
@@ -32,8 +32,8 @@ const getRevision = () => {
 
 const replacements = {
     values: {
-        'PACKAGE_VERSION': getVersion(),
-        'PACKAGE_REVISION': getRevision()
+        PACKAGE_VERSION: getVersion(),
+        PACKAGE_REVISION: getRevision()
     },
     preventAssignment: true
 };
@@ -72,7 +72,7 @@ const react_module = {
         format: 'esm',
         entryFileNames: '[name].mjs',
         globals: {
-            'react': 'React'
+            react: 'React'
         },
         preserveModules: true,
         sourcemap: true
@@ -105,16 +105,17 @@ const styles = {
             api: 'modern',
             insert: true,
             output: false,
-            processor: css => postcss([autoprefixer])
-            .process(css, {
-                from: undefined
-            })
-            .then(result => result.css)
+            processor: (css) =>
+                postcss([autoprefixer])
+                    .process(css, {
+                        from: undefined
+                    })
+                    .then((result) => result.css)
         })
     ]
 };
 
-export default (args) => {
+export default (_args) => {
     if (process.env.target === 'es6') {
         return [module];
     } else if (process.env.target === 'react:es6') {

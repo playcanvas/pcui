@@ -1,5 +1,5 @@
 import { Element } from '../Element/component';
-import { ElementArgs } from '../Element/index';
+import type { ElementArgs } from '../Element/index';
 
 import { Divider as DividerClass } from './index';
 

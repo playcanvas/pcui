@@ -9,14 +9,14 @@ const CLASS_TEXT_INPUT = 'pcui-text-input';
 /**
  * The arguments for the {@link TextInput} constructor.
  */
-type TextInputArgs = {
+interface TextInputArgs extends InputElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * A function that validates the value that is entered into the input and returns `true` if it
      * is valid or `false` otherwise. If `false` then the input will be set in an error state and
      * the value will not propagate to the binding.
      */
-    onValidate?: (value: string) => boolean,
-} & InputElementArgs & IBindableArgs & IPlaceholderArgs
+    onValidate?: (value: string) => boolean;
+}
 
 /**
  * The TextInput is an input element of type text.
@@ -67,7 +67,7 @@ class TextInput extends InputElement {
     protected _updateValue(value: string | string[]) {
         this.class.remove(CLASS_MULTIPLE_VALUES);
 
-        if (value && typeof (value) === 'object') {
+        if (value && typeof value === 'object') {
             if (Array.isArray(value)) {
                 let isObject = false;
                 for (let i = 0; i < value.length; i++) {
@@ -77,9 +77,13 @@ class TextInput extends InputElement {
                     }
                 }
 
-                value = isObject ? '[Not available]' : value.map((val) => {
-                    return val === null ? 'null' : val;
-                }).join(',');
+                value = isObject
+                    ? '[Not available]'
+                    : value
+                          .map((val) => {
+                              return val === null ? 'null' : val;
+                          })
+                          .join(',');
             } else {
                 value = '[Not available]';
             }
@@ -88,7 +92,7 @@ class TextInput extends InputElement {
         if (value === this.value) return false;
 
         this._suspendInputChangeEvt = true;
-        this._domInput.value = (value === null || value === undefined) ? '' : String(value);
+        this._domInput.value = value === null || value === undefined ? '' : String(value);
         this._suspendInputChangeEvt = false;
 
         this.emit('change', value);
@@ -119,7 +123,7 @@ class TextInput extends InputElement {
      */
     /* eslint accessor-pairs: 0 */
     set values(values: string[]) {
-        const different = values.some(v => v !== values[0]);
+        const different = values.some((v) => v !== values[0]);
 
         if (different) {
             this._updateValue(null);

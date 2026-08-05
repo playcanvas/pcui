@@ -7,24 +7,24 @@ const CLASS_INPUT_ELEMENT = 'pcui-input-element';
 /**
  * The arguments for the {@link InputElement} constructor.
  */
-type InputElementArgs = {
+interface InputElementArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * Sets whether pressing Enter will blur (unfocus) the field. Defaults to `true`.
      */
-    blurOnEnter?: boolean,
+    blurOnEnter?: boolean;
     /**
      * Sets whether pressing Escape will blur (unfocus) the field. Defaults to `true`.
      */
-    blurOnEscape?: boolean,
+    blurOnEscape?: boolean;
     /**
      * Sets whether any key up event will cause a change event to be fired.
      */
-    keyChange?: boolean,
+    keyChange?: boolean;
     /**
      * The input element to associate this {@link InputElement} with. If not supplied one will be created instead.
      */
-    input?: HTMLInputElement
-} & ElementArgs & IBindableArgs & IPlaceholderArgs
+    input?: HTMLInputElement;
+}
 
 /**
  * The InputElement is an abstract class that manages an input DOM element. It is the superclass of
@@ -161,7 +161,9 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
         this.emit('keydown', evt);
     }
 
-    protected _onInputChange(evt: Event) {}
+    protected _onInputChange(evt: Event) {
+        // implemented by derived classes
+    }
 
     protected _onInputKeyUp = (evt: KeyboardEvent) => {
         if (evt.key !== 'Escape') {
@@ -215,7 +217,6 @@ abstract class InputElement extends Element implements IBindable, IFocusable, IP
     get placeholder(): string {
         return this.dom.getAttribute('placeholder') ?? '';
     }
-
 
     /**
      * Sets the method to call when keyup is called on the input DOM element.

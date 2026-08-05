@@ -11,7 +11,9 @@
     left: 100%;
     top: 0;
     opacity: 0;
-    transition: opacity 100ms, visibility 100ms;
+    transition:
+        opacity 100ms,
+        visibility 100ms;
     visibility: hidden;
 }
 

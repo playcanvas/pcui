@@ -8,12 +8,12 @@ const CLASS_INNER = `${CLASS_ROOT}-inner`;
 /**
  * The arguments for the {@link Progress} constructor.
  */
-type ProgressArgs = {
+interface ProgressArgs extends ContainerArgs {
     /**
      * Sets the value of the progress bar (between 0 and 100).
      */
-    value?: number
-} & ContainerArgs
+    value?: number;
+}
 
 /**
  * Represents a bar that can highlight progress of an activity.

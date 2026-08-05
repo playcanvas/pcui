@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import { Element } from '../Element/component';
 
-import { Container as ContainerClass, ContainerArgs } from './index';
+import type { ContainerArgs } from './index';
+import { Container as ContainerClass } from './index';
 
 // Define interface for child props
-type ContainerChildProps = {
+interface ContainerChildProps {
     parent: ContainerClass;
 }
 
@@ -33,21 +34,16 @@ class Container extends Element<ContainerArgs, any> {
         let elements: React.ReactNode;
 
         if (elementsArray.length === 1) {
-            elements = React.cloneElement(
-                elementsArray[0] as React.ReactElement<ContainerChildProps>,
-                { parent: this.element }
-            );
+            elements = React.cloneElement(elementsArray[0] as React.ReactElement<ContainerChildProps>, {
+                parent: this.element
+            });
         } else if (elementsArray.length > 0) {
-            elements = elementsArray.map(element => React.cloneElement(
-                    element as React.ReactElement<ContainerChildProps>,
-                    { parent: this.element }
-            )
+            elements = elementsArray.map((element) =>
+                React.cloneElement(element as React.ReactElement<ContainerChildProps>, { parent: this.element })
             );
         }
 
-        return <div ref={this.attachElement}>
-            { elements }
-        </div>;
+        return <div ref={this.attachElement}>{elements}</div>;
     }
 }
 

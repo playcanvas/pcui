@@ -1,11 +1,12 @@
-import { JSXElementConstructor, ReactElement } from 'react';
+import type { JSXElementConstructor, ReactElement } from 'react';
 
 import { Element } from '../Element/component';
 
-import { LabelGroup as LabelGroupClass, LabelGroupArgs } from './index';
+import type { LabelGroupArgs } from './index';
+import { LabelGroup as LabelGroupClass } from './index';
 
 // Define interface for child props
-type LabelGroupChildProps = {
+interface LabelGroupChildProps {
     link?: {
         observer: any;
         path: string;

@@ -9,7 +9,10 @@
     border-radius: 50%;
     overflow: hidden;
     margin: $element-margin;
-    transition: opacity 100ms, background-color 100ms, box-shadow 100ms;
+    transition:
+        opacity 100ms,
+        background-color 100ms,
+        box-shadow 100ms;
 
     // outer ring
     &::before {

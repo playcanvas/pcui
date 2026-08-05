@@ -3,7 +3,8 @@ import * as React from 'react';
 import { Element } from '../Element/component';
 import { GridViewItem } from '../GridViewItem/index';
 
-import { GridView as GridViewClass, GridViewArgs } from './index';
+import type { GridViewArgs } from './index';
+import { GridView as GridViewClass } from './index';
 
 /**
  * Represents a container that shows a flexible wrappable list of items that looks like a grid.
@@ -31,11 +32,15 @@ class GridView extends Element<GridViewArgs, any> {
     }
 
     render() {
-        return <div ref={(nodeElement) => {
-            if (nodeElement) {
-                nodeElement.appendChild(this.element.dom);
-            }
-        }} />;
+        return (
+            <div
+                ref={(nodeElement) => {
+                    if (nodeElement) {
+                        nodeElement.appendChild(this.element.dom);
+                    }
+                }}
+            />
+        );
     }
 }
 

@@ -46,9 +46,23 @@ export const Main = (props) => {
         observer.set('items', items);
     };
     return (
-        <Container class='todo'>
-            <TextInput blurOnEnter={false} placeholder='enter item' binding={new BindingTwoWay()} link={{ observer, path: 'input' }} onChange={addItem}/>
-            <SelectInput type="number" options={[{ v: 0, t: 'Show all items' }, { v: 1, t: 'Show active items' }, { v: 2, t: 'Show done items' }]} onChange={setListFilter} />
+        <Container class="todo">
+            <TextInput
+                blurOnEnter={false}
+                placeholder="enter item"
+                binding={new BindingTwoWay()}
+                link={{ observer, path: 'input' }}
+                onChange={addItem}
+            />
+            <SelectInput
+                type="number"
+                options={[
+                    { v: 0, t: 'Show all items' },
+                    { v: 1, t: 'Show active items' },
+                    { v: 2, t: 'Show done items' }
+                ]}
+                onChange={setListFilter}
+            />
             <Container>
                 {Object.keys(items).map((key) => {
                     const item = items[key];
@@ -58,8 +72,8 @@ export const Main = (props) => {
                     return [
                         <Container key={key} class={'todo-item'}>
                             <BooleanInput onChange={() => toggleItem(key)} value={item.done} />
-                            <Label text={item.text}/>
-                            <Button icon='E124' text='' size='small' onClick={() => removeItem(key)} />
+                            <Label text={item.text} />
+                            <Button icon="E124" text="" size="small" onClick={() => removeItem(key)} />
                         </Container>
                     ];
                 })}

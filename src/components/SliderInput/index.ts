@@ -14,41 +14,41 @@ const IS_CHROME = /Chrome\//.test(globalThis.navigator?.userAgent);
 /**
  * The arguments for the {@link SliderInput} constructor.
  */
-type SliderInputArgs = {
+interface SliderInputArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * Sets whether any key up event will cause a change event to be fired.
      */
-    keyChange?: boolean,
+    keyChange?: boolean;
     /**
      * Sets the minimum value that the numeric input field can take.
      */
-    min?: number,
+    min?: number;
     /**
      * Sets the maximum value that the numeric input field can take.
      */
-    max?: number,
+    max?: number;
     /**
      * Sets the minimum value that the slider field can take. Defaults to 0.
      */
-    sliderMin?: number,
+    sliderMin?: number;
     /**
      * Sets the maximum value that the slider field can take. Defaults to 1.
      */
-    sliderMax?: number,
+    sliderMax?: number;
     /**
      * Sets the maximum number of decimals a value can take. Defaults to 2.
      */
-    precision?: number,
+    precision?: number;
     /**
      * Sets the amount that the value will be increased or decreased when using the arrow
      * keys. Holding Shift will use 10x the step.
      */
-    step?: number,
+    step?: number;
     /**
      * Sets whether the value can be null. If not then it will be 0 instead of null.
      */
-    allowNull?: boolean
-} & ElementArgs & IBindableArgs & IPlaceholderArgs
+    allowNull?: boolean;
+}
 
 /**
  * The SliderInput shows a NumericInput and a slider widget next to it. It acts as a proxy of the
@@ -160,7 +160,13 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
     }
 
     protected _onPointerDown = (evt: PointerEvent) => {
-        if ((evt.pointerType === 'mouse' && evt.button !== 0) || !this.enabled || this.readOnly || this._pointerId !== null) return;
+        if (
+            (evt.pointerType === 'mouse' && evt.button !== 0) ||
+            !this.enabled ||
+            this.readOnly ||
+            this._pointerId !== null
+        )
+            return;
         evt.stopPropagation();
         this._domSlider.setPointerCapture(evt.pointerId);
         this._pointerId = evt.pointerId;
@@ -204,7 +210,8 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
     };
 
     protected _updateHandle(value: number) {
-        const left = Math.max(0, Math.min(1, ((value || 0) - this._sliderMin) / (this._sliderMax - this._sliderMin))) * 100;
+        const left =
+            Math.max(0, Math.min(1, ((value || 0) - this._sliderMin) / (this._sliderMax - this._sliderMin))) * 100;
         const handleWidth = this._domHandle.getBoundingClientRect().width;
         this._domHandle.style.left = `calc(${left}% + ${handleWidth / 2}px)`;
     }
@@ -269,7 +276,7 @@ class SliderInput extends Element implements IBindable, IFocusable, IPlaceholder
         const x = Math.max(0, Math.min(1, (pageX - rect.left) / rect.width));
 
         const range = this._sliderMax - this._sliderMin;
-        let value = (x * range) + this._sliderMin;
+        let value = x * range + this._sliderMin;
         value = parseFloat(value.toFixed(this.precision));
 
         this.value = value;

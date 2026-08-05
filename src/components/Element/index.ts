@@ -3,7 +3,14 @@ import { Events, HandleEvent } from '@playcanvas/observer';
 import type * as React from 'react';
 
 import type { BindingBase } from '../../binding';
-import { CLASS_DISABLED, CLASS_ERROR, CLASS_FLASH, CLASS_FONT_REGULAR, CLASS_HIDDEN, CLASS_READONLY } from '../../class';
+import {
+    CLASS_DISABLED,
+    CLASS_ERROR,
+    CLASS_FLASH,
+    CLASS_FONT_REGULAR,
+    CLASS_HIDDEN,
+    CLASS_READONLY
+} from '../../class';
 
 const CLASS_ELEMENT = 'pcui-element';
 
@@ -25,124 +32,124 @@ const SIMPLE_CSS_PROPERTIES = [
 /**
  * The interface for bindable elements.
  */
-type IBindable = {
+interface IBindable {
     /**
      * Sets the value of the Element.
      */
-    set value(values: any),
+    set value(values: any);
     /**
      * Gets the value of the Element.
      */
-    get value(): any,
+    get value(): any;
     /**
      * Sets multiple values on the Element. It is up to the Element to determine how to display them.
      */
-    set values(values: any[]),
+    set values(values: any[]);
     /**
      * Gets multiple values on the Element.
      */
-    get values(): any[],
+    get values(): any[];
     /**
      * Sets whether the input should flash on changes.
      */
-    set renderChanges(value: boolean),
+    set renderChanges(value: boolean);
     /**
      * Gets whether the input should flash on changes.
      */
-    get renderChanges(): boolean,
+    get renderChanges(): boolean;
 }
 
 /**
  * The interface for arguments for bindable elements.
  */
-type IBindableArgs = {
+interface IBindableArgs {
     /**
      * Sets the value of the Element.
      */
-    value?: any,
+    value?: any;
     /**
      * Sets multiple values to the Element. It is up to the Element to determine how to display them.
      */
-    values?: any[],
+    values?: any[];
     /**
      * If `true` each input will flash on changes.
      */
-    renderChanges?: boolean
+    renderChanges?: boolean;
 }
 
 /**
  * The interface for elements that have placeholder text.
  */
-type IPlaceholder = {
+interface IPlaceholder {
     /**
      * Sets the placeholder text of the input.
      */
-    set placeholder(value: string),
+    set placeholder(value: string);
     /**
      * Gets the placeholder text of the input.
      */
-    get placeholder(): string
+    get placeholder(): string;
 }
 
 /**
  * The interface for arguments for elements that have placeholder text.
  */
-type IPlaceholderArgs = {
+interface IPlaceholderArgs {
     /**
      * Sets the placeholder label that appears on the right of the input.
      */
-    placeholder?: string,
+    placeholder?: string;
 }
 
 /**
  * The interface for multi-value elements that have placeholder text for each value.
  */
-type IMultiPlaceholder = {
+interface IMultiPlaceholder {
     /**
      * Sets the placeholder text of the inputs. Can be a single string applied to all inputs,
      * or an array of strings for each input.
      */
-    set placeholder(value: string | string[]),
+    set placeholder(value: string | string[]);
     /**
      * Gets the placeholder text of all inputs as an array.
      */
-    get placeholder(): string[]
+    get placeholder(): string[];
 }
 
 /**
  * The interface for arguments for multi-value elements that have placeholder text.
  */
-type IMultiPlaceholderArgs = {
+interface IMultiPlaceholderArgs {
     /**
      * Placeholder text for the inputs. Can be a single string applied to all inputs,
      * or an array of strings for each input.
      */
-    placeholder?: string | string[],
+    placeholder?: string | string[];
 }
 
 /**
  * The interface for elements that can be focused.
  */
-type IFocusable = {
+interface IFocusable {
     /**
      * Focus on the element. If the input contains text and select is provided, the text will be selected on focus.
      */
-    focus(select?: boolean): void
+    focus(select?: boolean): void;
 
     /**
      * Unfocus the element
      */
-    blur(): void
+    blur(): void;
 }
 
 /**
  * The interface for arguments for elements that have children.
  */
-type IParentArgs = {
+interface IParentArgs {
     /**
      * The children of the current component.
      */
-    children?: React.ReactNode
+    children?: React.ReactNode;
 }
 
 /**
@@ -150,49 +157,49 @@ type IParentArgs = {
  * These properties do not themselves enable `display: flex`; flex layout is
  * configured separately (for example via `Container#flex`).
  */
-type IFlexArgs = {
+interface IFlexArgs {
     /**
      * Sets the element's `flexBasis` CSS property.
      */
-    flexBasis?: string | number,
+    flexBasis?: string | number;
     /**
      * Sets the element's `flexDirection` CSS property.
      */
-    flexDirection?: string,
+    flexDirection?: string;
     /**
      * Sets the element's `flexGrow` CSS property.
      */
-    flexGrow?: string | number,
+    flexGrow?: string | number;
     /**
      * Sets the element's `flexShrink` CSS property.
      */
-    flexShrink?: string | number,
+    flexShrink?: string | number;
     /**
      * Sets the element's `flexWrap` CSS property.
      */
-    flexWrap?: string,
+    flexWrap?: string;
     /**
      * Sets the element's `alignItems` CSS property.
      */
-    alignItems?: string,
+    alignItems?: string;
     /**
      * Sets the element's `alignSelf` CSS property.
      */
-    alignSelf?: string,
+    alignSelf?: string;
     /**
      * Sets the element's `justifyContent` CSS property.
      */
-    justifyContent?: string,
+    justifyContent?: string;
     /**
      * Sets the element's `justifySelf` CSS property.
      */
-    justifySelf?: string
+    justifySelf?: string;
 }
 
 /**
  * The arguments for the {@link Element} constructor.
  */
-type ElementArgs = {
+interface ElementArgs extends IFlexArgs {
     /**
      * The HTMLElement to create this {@link Element} with. If not provided this Element will create one.
      */
@@ -204,72 +211,72 @@ type ElementArgs = {
     /**
      * If provided and the {@link Element} is clickable, this function will be called each time the element is clicked.
      */
-    onClick?: () => void,
+    onClick?: () => void;
     /**
      * If provided and the {@link Element} is changeable, this function will be called each time the element value is changed.
      */
-    onChange?: (value: any) => void,
+    onChange?: (value: any) => void;
     /**
      * If provided and the {@link Element} is removable, this function will be called each time the element is removed.
      */
-    onRemove?: () => void,
+    onRemove?: () => void;
     /**
      * Sets the parent {@link Element}.
      */
-    parent?: Element,
+    parent?: Element;
     /**
      * Links the observer attribute at the path location in the given observer to this {@link Element}.
      */
-    link?: { observer: Observer[]|Observer, path: string[]|string },
+    link?: { observer: Observer[] | Observer; path: string[] | string };
     /**
      * The id attribute of this {@link Element}'s HTMLElement.
      */
-    id?: string,
+    id?: string;
     /**
      * The class attribute of this {@link Element}'s HTMLElement.
      */
-    class?: string | string[],
+    class?: string | string[];
     /**
      * Sets whether this {@link Element} is at the root of the hierarchy.
      */
-    isRoot?: boolean,
+    isRoot?: boolean;
     /**
      * Sets whether it is possible to interact with this {@link Element} and its children.
      */
-    enabled?: boolean,
+    enabled?: boolean;
     /**
      * Sets whether this {@link Element} is hidden. Defaults to `false`.
      */
-    hidden?: boolean,
+    hidden?: boolean;
     /**
      * If `true`, this {@link Element} will ignore its parent's enabled value when determining whether this element is enabled. Defaults to `false`.
      */
-    ignoreParent?: boolean,
+    ignoreParent?: boolean;
     /**
      * Sets the initial width of the {@link Element}.
      */
-    width?: number | null,
+    width?: number | null;
     /**
      * Sets the initial height of the {@link Element}.
      */
-    height?: number | null,
+    height?: number | null;
     /**
      * Sets the tabIndex of the {@link Element}.
      */
-    tabIndex?: number,
+    tabIndex?: number;
     /**
      * Sets whether the {@link Element} is in an error state.
      */
-    error?: boolean,
+    error?: boolean;
     /**
      * Sets an initial value for Element.dom.style.
      */
-    style?: string,
+    style?: string;
     /**
      * Whether this {@link Element} is read only or not. Defaults to `false`.
      */
-    readOnly?: boolean
-} & IFlexArgs
+    readOnly?: boolean;
+}
 
 /**
  * The base class for all UI elements.
@@ -453,8 +460,8 @@ class Element extends Events {
     private static registry = new Map<
         string,
         {
-            cls: new(...args: any[]) => Element,
-            defaultArguments?: Partial<ElementArgs>
+            cls: new (...args: any[]) => Element;
+            defaultArguments?: Partial<ElementArgs>;
         }
     >();
 
@@ -636,7 +643,7 @@ class Element extends Events {
      * @param observers - An array of observers or a single observer.
      * @param paths - A path for the observer(s) or an array of paths that maps to each separate observer.
      */
-    link(observers: Observer|Observer[], paths: string|string[]) {
+    link(observers: Observer | Observer[], paths: string | string[]) {
         if (this._binding) {
             this._binding.link(observers, paths);
         }
@@ -785,7 +792,6 @@ class Element extends Events {
         return new cls(clsArgs);
     }
 
-
     /**
      * Sets whether the Element or its parent chain is enabled or not. Defaults to `true`.
      */
@@ -921,14 +927,12 @@ class Element extends Events {
         return this._hidden;
     }
 
-
     /**
      * Gets whether the Element is hidden all the way up to the root. If the Element itself or any of its parents are hidden then this is true.
      */
     get hiddenToRoot(): boolean {
         return this._hidden || this._hiddenParents;
     }
-
 
     /**
      * Sets whether the Element is read only.
@@ -947,7 +951,6 @@ class Element extends Events {
         if (this._ignoreParent) return this._readOnly;
         return this._readOnly || !!(this._parent && this._parent.readOnly);
     }
-
 
     /**
      * Sets whether the Element is in an error state.
@@ -1011,7 +1014,6 @@ class Element extends Events {
     get height(): number {
         return this._dom.clientHeight;
     }
-
 
     /**
      * Sets the tabIndex of the Element.
@@ -1236,4 +1238,16 @@ declare global {
     }
 }
 
-export { Element, ElementArgs, IBindable, IBindableArgs, IPlaceholder, IPlaceholderArgs, IMultiPlaceholder, IMultiPlaceholderArgs, IFocusable, IParentArgs, IFlexArgs };
+export {
+    Element,
+    ElementArgs,
+    IBindable,
+    IBindableArgs,
+    IPlaceholder,
+    IPlaceholderArgs,
+    IMultiPlaceholder,
+    IMultiPlaceholderArgs,
+    IFocusable,
+    IParentArgs,
+    IFlexArgs
+};

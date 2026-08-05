@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { Element } from '../Element/component';
 
-import { InfoBox as InfoBoxClass, InfoBoxArgs } from './index';
+import type { InfoBoxArgs } from './index';
+import { InfoBox as InfoBoxClass } from './index';
 
 /**
  * Represents an information box.

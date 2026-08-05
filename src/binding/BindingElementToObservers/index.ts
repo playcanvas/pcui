@@ -165,7 +165,7 @@ class BindingElementToObservers extends BindingBase {
             const observer = observers[i];
 
             values.forEach((value) => {
-                if (observer.get(path).indexOf(value) === -1)  {
+                if (observer.get(path).indexOf(value) === -1) {
                     records.push({
                         observer: observer,
                         path: path,
@@ -247,7 +247,7 @@ class BindingElementToObservers extends BindingBase {
 
             values.forEach((value) => {
                 const ind = observer.get(path).indexOf(value);
-                if (ind !== -1)  {
+                if (ind !== -1) {
                     records.push({
                         observer: observer,
                         path: path,
@@ -320,7 +320,7 @@ class BindingElementToObservers extends BindingBase {
 
     setValues(values: any[]) {
         // make sure we deep copy arrays because they will not be cloned when set to the observers
-        values = values.slice().map(val => (Array.isArray(val) ? val.slice() : val));
+        values = values.slice().map((val) => (Array.isArray(val) ? val.slice() : val));
         this._setValue(values, true);
     }
 

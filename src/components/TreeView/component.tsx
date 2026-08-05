@@ -3,7 +3,8 @@ import * as React from 'react';
 import { Element } from '../Element/component';
 import { TreeViewItem } from '../TreeViewItem/index';
 
-import { TreeView as TreeViewClass, TreeViewArgs } from './index';
+import type { TreeViewArgs } from './index';
+import { TreeView as TreeViewClass } from './index';
 
 /**
  * A container that can show a TreeView like a hierarchy. The TreeView contains

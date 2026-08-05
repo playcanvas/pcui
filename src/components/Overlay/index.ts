@@ -11,16 +11,16 @@ const CLASS_OVERLAY_CONTENT = `${CLASS_OVERLAY}-content`;
 /**
  * The arguments for the {@link Overlay} constructor.
  */
-type OverlayArgs = {
+interface OverlayArgs extends ElementArgs {
     /**
      * Whether the overlay can be hidden by clicking on it.
      */
-    clickable?: boolean,
+    clickable?: boolean;
     /**
      * Whether the overlay is transparent or not.
      */
-    transparent?: boolean,
-} & ElementArgs
+    transparent?: boolean;
+}
 
 /**
  * An overlay element.

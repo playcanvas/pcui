@@ -1,6 +1,7 @@
 import { Element } from '../Element/component';
 
-import { TextInput as TextInputClass, TextInputArgs } from './index';
+import type { TextInputArgs } from './index';
+import { TextInput as TextInputClass } from './index';
 
 /**
  * The TextInput is an input element of type text.

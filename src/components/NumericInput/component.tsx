@@ -1,6 +1,7 @@
 import { Element } from '../Element/component';
 
-import { NumericInput as NumericInputClass, NumericInputArgs } from './index';
+import type { NumericInputArgs } from './index';
+import { NumericInput as NumericInputClass } from './index';
 
 /**
  * The NumericInput represents an input element that holds numbers.

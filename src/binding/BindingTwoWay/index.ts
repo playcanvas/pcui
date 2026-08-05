@@ -9,7 +9,7 @@ import { BindingObserversToElement } from '../BindingObserversToElement';
 /**
  * The interface for arguments for the {@link BindingTwoWay} constructor.
  */
-export type BindingTwoWayArgs = {
+export interface BindingTwoWayArgs extends BindingBaseArgs {
     /**
      * BindingElementToObservers instance.
      */
@@ -19,7 +19,7 @@ export type BindingTwoWayArgs = {
      * BindingObserversToElement instance.
      */
     bindingObserversToElement?: BindingObserversToElement;
-} & BindingBaseArgs
+}
 
 /**
  * Provides two way data binding between Observers and {@link IBindable} elements. This means that
@@ -59,12 +59,11 @@ class BindingTwoWay extends BindingBase {
         });
     }
 
-    link(observers: Observer|Observer[], paths: string|string[]) {
+    link(observers: Observer | Observer[], paths: string | string[]) {
         super.link(observers, paths);
         this._bindingElementToObservers.link(observers, paths);
         this._bindingObserversToElement.link(observers, paths);
     }
-
 
     unlink() {
         this._bindingElementToObservers.unlink();
@@ -109,7 +108,7 @@ class BindingTwoWay extends BindingBase {
         this._bindingObserversToElement.element = value;
     }
 
-    get element() : IBindable | undefined {
+    get element(): IBindable | undefined {
         return this._element;
     }
 

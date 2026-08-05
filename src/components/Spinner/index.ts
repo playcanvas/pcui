@@ -10,23 +10,24 @@ function createSmallThick(size: any, dom: any) {
     spinner.setAttribute('height', size);
     spinner.setAttribute('viewBox', '0 0 14 14');
     spinner.setAttribute('fill', 'none');
-    spinner.innerHTML = '<path d="M7 14C3.13871 14 0 10.8613 0 7C0 3.13871 3.13871 0 7 0C10.8613 0 14 3.13871 14 7C14 10.8613 10.8613 14 7 14ZM7 2.25806C4.38064 2.25806 2.25806 4.38064 2.25806 7C2.25806 9.61935 4.38064 11.7419 7 11.7419C9.61935 11.7419 11.7419 9.61935 11.7419 7C11.7419 4.38064 9.61935 2.25806 7 2.25806Z" fill="#773417"/><path class="pcui-spinner-highlight" d="M7 14V11.7419C9.61935 11.7419 11.7419 9.61935 11.7419 7H14C14 10.8613 10.8613 14 7 14Z" fill="#FF6600"/>';
+    spinner.innerHTML =
+        '<path d="M7 14C3.13871 14 0 10.8613 0 7C0 3.13871 3.13871 0 7 0C10.8613 0 14 3.13871 14 7C14 10.8613 10.8613 14 7 14ZM7 2.25806C4.38064 2.25806 2.25806 4.38064 2.25806 7C2.25806 9.61935 4.38064 11.7419 7 11.7419C9.61935 11.7419 11.7419 9.61935 11.7419 7C11.7419 4.38064 9.61935 2.25806 7 2.25806Z" fill="#773417"/><path class="pcui-spinner-highlight" d="M7 14V11.7419C9.61935 11.7419 11.7419 9.61935 11.7419 7H14C14 10.8613 10.8613 14 7 14Z" fill="#FF6600"/>';
     return spinner;
 }
 
 /**
  * The arguments for the {@link Spinner} constructor.
  */
-type SpinnerArgs = {
+interface SpinnerArgs extends ElementArgs {
     /**
      * Sets the pixel size of the spinner. Defaults to 12.
      */
-    size?: string | number,
+    size?: string | number;
     /**
      * Can be 'small-thick'. Defaults to 'small-thick'.
      */
-    type?: 'small-thick'
-} & ElementArgs
+    type?: 'small-thick';
+}
 
 /**
  * Represents a spinning icon.

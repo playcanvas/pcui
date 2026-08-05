@@ -1,6 +1,7 @@
 import { Element } from '../Element/component';
 
-import { GridViewItem as GridViewItemClass, GridViewItemArgs } from './index';
+import type { GridViewItemArgs } from './index';
+import { GridViewItem as GridViewItemClass } from './index';
 
 /**
  * Represents a grid view item used in GridView.

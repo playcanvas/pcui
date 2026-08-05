@@ -9,7 +9,7 @@ const CLASS_LABEL_TOP = `${CLASS_LABEL_GROUP}-align-top`;
 /**
  * The arguments for the {@link LabelGroup} constructor.
  */
-type LabelGroupArgs = {
+interface LabelGroupArgs extends ContainerArgs {
     /**
      * The label text. Defaults to 'Label'.
      */
@@ -26,7 +26,7 @@ type LabelGroupArgs = {
      * Add a native tooltip to the label.
      */
     nativeTooltip?: boolean;
-} & ContainerArgs
+}
 
 /**
  * Represents a group of an {@link Element} and a {@link Label}. Useful for rows of labeled fields.

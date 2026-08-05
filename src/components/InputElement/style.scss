@@ -8,7 +8,10 @@
     height: 24px;
     background-color: $bcg-dark;
     vertical-align: top;
-    transition: color 100ms, background-color 100ms, box-shadow 100ms;
+    transition:
+        color 100ms,
+        background-color 100ms,
+        box-shadow 100ms;
     position: relative;
     color: $text-secondary;
 

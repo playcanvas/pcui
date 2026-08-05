@@ -1,6 +1,7 @@
 import { Element } from '../Element/component';
 
-import { Overlay as OverlayClass, OverlayArgs } from './index';
+import type { OverlayArgs } from './index';
+import { Overlay as OverlayClass } from './index';
 
 /**
  * An overlay element.

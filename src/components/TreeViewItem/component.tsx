@@ -1,6 +1,7 @@
 import { Element } from '../Element/component';
 
-import { TreeViewItem as TreeViewItemClass, TreeViewItemArgs } from './index';
+import type { TreeViewItemArgs } from './index';
+import { TreeViewItem as TreeViewItemClass } from './index';
 
 /**
  * Represents a Tree View Item to be added to a TreeView.

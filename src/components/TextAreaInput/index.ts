@@ -12,13 +12,13 @@ const CLASS_TEXT_AREA_INPUT_RESIZABLE_VERTICAL = `${CLASS_TEXT_AREA_INPUT_RESIZA
 /**
  * The arguments for the {@link TextAreaInput} constructor.
  */
-type TextAreaInputArgs = {
+interface TextAreaInputArgs extends TextInputArgs {
     /**
      * Sets which directions the text area can be resized in. One of 'both', 'horizontal',
      * 'vertical' or 'none'. Defaults to 'none'.
      */
-    resizable?: 'horizontal' | 'vertical' | 'both' | 'none'
-} & TextInputArgs
+    resizable?: 'horizontal' | 'vertical' | 'both' | 'none';
+}
 
 /**
  * The TextAreaInput wraps a textarea element. It has the same interface as {@link TextInput}.
@@ -30,9 +30,12 @@ class TextAreaInput extends TextInput {
      * @param args - The arguments.
      */
     constructor(args: Readonly<TextAreaInputArgs> = {}) {
-        args = Object.assign({
-            input: document.createElement('textarea')
-        }, args);
+        args = Object.assign(
+            {
+                input: document.createElement('textarea')
+            },
+            args
+        );
 
         super(args);
 

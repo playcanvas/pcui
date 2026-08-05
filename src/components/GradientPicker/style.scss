@@ -4,7 +4,9 @@
     height: 24px;
     box-sizing: border-box;
     margin: $element-margin;
-    transition: opacity 100ms, box-shadow 100ms;
+    transition:
+        opacity 100ms,
+        box-shadow 100ms;
     border: 1px solid $bcg-darker;
     background-color: $bcg-dark;
 
@@ -43,7 +45,7 @@
             height: 100%;
             font-size: 11px;
 
-            >.show-selected-position {
+            > .show-selected-position {
                 position: absolute;
                 width: 18px;
                 min-height: 17px !important;
@@ -59,7 +61,7 @@
                 border-radius: 2px;
                 justify-content: center;
 
-                >.show-selected-position-input {
+                > .show-selected-position-input {
                     width: inherit;
                     text-align: center;
                     justify-content: center;
@@ -76,7 +78,7 @@
                 pointer-events: none;
                 background: none;
 
-                >.crosshair-bar {
+                > .crosshair-bar {
                     background: #293538;
                     width: 1px;
                     height: 29px;
@@ -85,7 +87,7 @@
                     left: 8px;
                 }
 
-                >.show-crosshair-position {
+                > .show-crosshair-position {
                     font-style: normal;
                     font-weight: 400;
                     font-size: 12px;

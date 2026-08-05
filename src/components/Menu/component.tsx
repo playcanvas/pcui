@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { Element } from '../Element/component';
 
-import { Menu as MenuClass, MenuArgs } from './index';
+import type { MenuArgs } from './index';
+import { Menu as MenuClass } from './index';
 
 /**
  * A Menu is a list of MenuItems which can contain child MenuItems. Useful to show context menus

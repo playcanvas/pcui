@@ -11,7 +11,7 @@ const CLASS_VERTICAL = `${CLASS_ROOT}-vertical`;
 /**
  * The arguments for the {@link GridView} constructor.
  */
-type GridViewArgs = {
+interface GridViewArgs extends ContainerArgs {
     /**
      * If `true` the {@link GridView} layout will be vertical.
      */
@@ -28,7 +28,7 @@ type GridViewArgs = {
      * A filter function to filter {@link GridViewItem}s with signature `(GridViewItem) => boolean`.
      */
     filterFn?: (item: GridViewItem) => boolean;
-} & ContainerArgs
+}
 
 /**
  * Represents a container that shows a flexible wrappable list of items that looks like a grid.
@@ -132,9 +132,9 @@ class GridView extends Container {
 
         let evtClick: EventHandle;
         if (this._clickFn) {
-            evtClick = item.on('click', evt => this._clickFn(evt, item));
+            evtClick = item.on('click', (evt) => this._clickFn(evt, item));
         } else {
-            evtClick = item.on('click', evt => this._onClickItem(evt, item));
+            evtClick = item.on('click', (evt) => this._onClickItem(evt, item));
         }
         let evtSelect = item.on('select', () => this._onSelectItem(item));
 
@@ -266,17 +266,33 @@ class GridView extends Container {
 
         if (this._vertical) {
             switch (evt.key) {
-                case 'ArrowUp': target = item.previousSibling; break;
-                case 'ArrowDown': target = item.nextSibling; break;
-                case 'ArrowLeft': target = this._findItemInAdjacentRow(item, -1); break;
-                case 'ArrowRight': target = this._findItemInAdjacentRow(item, 1); break;
+                case 'ArrowUp':
+                    target = item.previousSibling;
+                    break;
+                case 'ArrowDown':
+                    target = item.nextSibling;
+                    break;
+                case 'ArrowLeft':
+                    target = this._findItemInAdjacentRow(item, -1);
+                    break;
+                case 'ArrowRight':
+                    target = this._findItemInAdjacentRow(item, 1);
+                    break;
             }
         } else {
             switch (evt.key) {
-                case 'ArrowLeft': target = item.previousSibling; break;
-                case 'ArrowRight': target = item.nextSibling; break;
-                case 'ArrowUp': target = this._findItemInAdjacentRow(item, -1); break;
-                case 'ArrowDown': target = this._findItemInAdjacentRow(item, 1); break;
+                case 'ArrowLeft':
+                    target = item.previousSibling;
+                    break;
+                case 'ArrowRight':
+                    target = item.nextSibling;
+                    break;
+                case 'ArrowUp':
+                    target = this._findItemInAdjacentRow(item, -1);
+                    break;
+                case 'ArrowDown':
+                    target = this._findItemInAdjacentRow(item, 1);
+                    break;
             }
         }
 
@@ -352,7 +368,10 @@ class GridView extends Container {
 
             const prevPos = (lastInPrevRow.dom as HTMLElement)[positionProp];
             firstInRow = lastInPrevRow;
-            while (firstInRow.previousSibling && (firstInRow.previousSibling.dom as HTMLElement)[positionProp] === prevPos) {
+            while (
+                firstInRow.previousSibling &&
+                (firstInRow.previousSibling.dom as HTMLElement)[positionProp] === prevPos
+            ) {
                 firstInRow = firstInRow.previousSibling;
             }
         }

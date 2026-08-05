@@ -6,13 +6,13 @@ const CLASS_ROOT = 'pcui-canvas';
 /**
  * The arguments for the {@link Canvas} constructor.
  */
-type CanvasArgs = {
+interface CanvasArgs extends ElementArgs {
     /**
      * Whether the canvas should use the {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio devicePixelRatio}.
      * Defaults to `false`.
      */
     useDevicePixelRatio?: boolean;
-} & ElementArgs
+}
 
 /**
  * Represents a Canvas.
@@ -89,7 +89,6 @@ class Canvas extends Element {
     get width(): number {
         return this._width;
     }
-
 
     /**
      * Sets the height of the canvas.

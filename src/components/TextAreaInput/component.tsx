@@ -1,6 +1,7 @@
 import { Element } from '../Element/component';
 
-import { TextAreaInput as TextAreaInputClass, TextAreaInputArgs } from './index';
+import type { TextAreaInputArgs } from './index';
+import { TextAreaInput as TextAreaInputClass } from './index';
 
 /**
  * The TextAreaInput wraps a textarea element. It has the same interface as TextInput.

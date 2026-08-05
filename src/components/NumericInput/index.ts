@@ -13,38 +13,38 @@ const REGEX_COMMA = /,/g;
 /**
  * The arguments for the {@link NumericInput} constructor.
  */
-type NumericInputArgs = {
+interface NumericInputArgs extends InputElementArgs {
     /**
      * Sets the minimum value this field can take.
      */
-    min?: number,
+    min?: number;
     /**
      * Sets the maximum value this field can take.
      */
-    max?: number,
+    max?: number;
     /**
      * Sets the decimal precision of this field. Defaults to 7.
      */
-    precision?: number,
+    precision?: number;
     /**
      * Sets the amount that the value will be increased or decreased when using the arrow keys and
      * the slider input.
      */
-    step?: number,
+    step?: number;
     /**
      * Sets the amount that the value will be increased or decreased when holding shift using the
      * arrow keys and the slider input. Defaults to {@link NumericInput#step} * 0.1.
      */
-    stepPrecision?: number,
+    stepPrecision?: number;
     /**
      * Hide the input mouse drag slider.
      */
-    hideSlider?: boolean,
+    hideSlider?: boolean;
     /**
      * Sets whether the value can be `null`. If not then it will be 0 instead of `null`.
      */
-    allowNull?: boolean
-} & InputElementArgs
+    allowNull?: boolean;
+}
 
 /**
  * The NumericInput represents an input element that holds numbers.
@@ -209,7 +209,7 @@ class NumericInput extends InputElement {
 
     protected _updatePosition(movement: number, shiftKey: boolean) {
         // move one step or stepPrecision every 100 pixels
-        this._sliderMovement += movement / 100 * (shiftKey ? this._stepPrecision : this._step);
+        this._sliderMovement += (movement / 100) * (shiftKey ? this._stepPrecision : this._step);
         this.value = this._sliderPrevValue + this._sliderMovement;
     }
 
@@ -325,7 +325,7 @@ class NumericInput extends InputElement {
                         });
                         expression = expressionArr.join(operator);
                     });
-                     
+
                     value = Function(`"use strict";return (${expression})`)();
                 }
             }
@@ -369,7 +369,7 @@ class NumericInput extends InputElement {
     }
 
     protected _updateValue(value: number, force?: boolean) {
-        const different = (value !== this._oldValue || force);
+        const different = value !== this._oldValue || force;
 
         // always set the value to the input because
         // we always want it to show an actual number or nothing
@@ -408,7 +408,7 @@ class NumericInput extends InputElement {
     /**
      * Gets the value of the NumericInput.
      */
-    get value() : number {
+    get value(): number {
         const val = this._domInput.value;
         return val !== '' ? parseFloat(val) : null;
     }
@@ -419,8 +419,8 @@ class NumericInput extends InputElement {
      */
     /* eslint accessor-pairs: 0 */
     set values(values: number[]) {
-        const normalizedValues = values.map(v => this._normalizeValue(v));
-        const different = normalizedValues.some(v => v !== normalizedValues[0]);
+        const normalizedValues = values.map((v) => this._normalizeValue(v));
+        const different = normalizedValues.some((v) => v !== normalizedValues[0]);
 
         if (different) {
             this._updateValue(null);

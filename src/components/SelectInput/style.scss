@@ -11,7 +11,9 @@
     @extend .pcui-flex;
 
     background-color: $bcg-dark;
-    transition: box-shadow 100ms, opacity 100ms;
+    transition:
+        box-shadow 100ms,
+        opacity 100ms;
 }
 
 .pcui-select-input-shadow {
@@ -37,7 +39,9 @@
 
     @extend .fixed-font;
 
-    transition: background-color 100ms, color 100ms;
+    transition:
+        background-color 100ms,
+        color 100ms;
 }
 
 .pcui-label.pcui-select-input-value {

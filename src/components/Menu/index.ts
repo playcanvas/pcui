@@ -10,7 +10,7 @@ const CLASS_MENU_ITEMS = `${CLASS_MENU}-items`;
 /**
  * The arguments for the {@link Menu} constructor.
  */
-type MenuArgs = {
+interface MenuArgs extends ContainerArgs {
     /**
      * An array of {@link MenuItemArgs}. If these are passed then new MenuItems will be created
      * and appended to the menu.
@@ -24,7 +24,7 @@ type MenuArgs = {
      * Sets the tabIndex of the {@link Menu}. Defaults to 1.
      */
     tabIndex?: number;
-} & ContainerArgs
+}
 
 /**
  * A Menu is a list of {@link MenuItem}s which can contain child MenuItems. Useful to show context
@@ -193,8 +193,8 @@ class Menu extends Container implements IFocusable {
     position(x: number, y: number) {
         const rect = this._containerMenuItems.dom.getBoundingClientRect();
 
-        let left = (x || 0);
-        let top = (y || 0);
+        let left = x || 0;
+        let top = y || 0;
 
         // limit to bottom / top of screen
         if (top + rect.height > window.innerHeight) {

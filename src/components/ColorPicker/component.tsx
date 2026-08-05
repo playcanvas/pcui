@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { Element } from '../Element/component';
 
-import { ColorPicker as ColorPickerClass, ColorPickerArgs } from './index';
+import type { ColorPickerArgs } from './index';
+import { ColorPicker as ColorPickerClass } from './index';
 
 /**
  * Represents a color picker
@@ -11,7 +12,7 @@ class ColorPicker extends Element<ColorPickerArgs, any> {
     static ctor = ColorPickerClass;
 
     render() {
-        return <div ref={this.attachElement}/>;
+        return <div ref={this.attachElement} />;
     }
 }
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Element as ElementClass, ElementArgs } from './index';
+import type { Element as ElementClass, ElementArgs } from './index';
 
 /**
  * The base class for all UI elements. Wraps a DOM element with the PCUI interface.

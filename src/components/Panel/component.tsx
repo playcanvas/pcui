@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { Element } from '../Element/component';
 
-import { Panel as PanelClass, PanelArgs } from './index';
+import type { PanelArgs } from './index';
+import { Panel as PanelClass } from './index';
 
 /**
  * The Panel is a Container that itself contains a header container and a content container. The
@@ -28,15 +29,21 @@ class Panel extends Element<PanelArgs, any> {
         } else if (elements.length > 0) {
             elements = elements.map((element: any) => React.cloneElement(element, { parent: this.element }));
         }
-        return <div ref={(nodeElement) => {
-            this.nodeElement = nodeElement;
-        }}>
-            <div ref={(containerElement) => {
-                this.containerElement = containerElement;
-            }} >
-                {elements}
+        return (
+            <div
+                ref={(nodeElement) => {
+                    this.nodeElement = nodeElement;
+                }}
+            >
+                <div
+                    ref={(containerElement) => {
+                        this.containerElement = containerElement;
+                    }}
+                >
+                    {elements}
+                </div>
             </div>
-        </div>;
+        );
     }
 }
 

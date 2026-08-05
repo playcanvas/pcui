@@ -7,34 +7,34 @@ const CLASS_LABEL = 'pcui-label';
 /**
  * The arguments for the {@link Label} constructor.
  */
-type LabelArgs = {
+interface LabelArgs extends ElementArgs, IBindableArgs, IPlaceholderArgs {
     /**
      * Sets the text of the Label. Defaults to ''.
      */
-    text?: string,
+    text?: string;
     /**
      * If `true`, the {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML} property will be
      * used to set the text. Otherwise, {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
      * will be used instead. Defaults to `false`.
      */
-    unsafe?: boolean,
+    unsafe?: boolean;
     /**
      * If `true` then use the text of the label as the native HTML tooltip. Defaults to `false`.
      */
-    nativeTooltip?: boolean,
+    nativeTooltip?: boolean;
     /**
      * If `true` then the label can be clicked to select text. Defaults to `false`.
      */
-    allowTextSelection?: boolean,
+    allowTextSelection?: boolean;
     /**
      * The DOM element or its type to use for this component. Defaults to 'span'.
      */
-    dom?: HTMLElement | string,
+    dom?: HTMLElement | string;
     /**
      * Sets the value of the Label. Defaults to ''.
      */
-    value?: string
-} & ElementArgs & IBindableArgs & IPlaceholderArgs
+    value?: string;
+}
 
 /**
  * The Label is a simple span element that displays some text.
@@ -137,7 +137,7 @@ class Label extends Element implements IPlaceholder, IBindable {
      */
     /* eslint accessor-pairs: 0 */
     set values(values: string[]) {
-        const different = values.some(v => v !== values[0]);
+        const different = values.some((v) => v !== values[0]);
 
         if (different) {
             this._updateText('');

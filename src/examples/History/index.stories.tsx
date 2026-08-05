@@ -13,7 +13,8 @@ export default {
     component: Container,
     parameters: {
         docs: {
-            storyDescription: 'This example shows how to set up an observer with history. Use the slider to add a history action, then select undo / redo to move through the action history.'
+            storyDescription:
+                'This example shows how to set up an observer with history. Use the slider to add a history action, then select undo / redo to move through the action history.'
         }
     }
 };
@@ -27,16 +28,22 @@ export const Main = (props) => {
     const [historyLabel, setHistoryLabel] = useState('');
     history.on('canUndo', setCanUndo);
     history.on('canRedo', setCanRedo);
-    history.on('add', name => setHistoryLabel(`add action: ${name}`));
-    history.on('undo', name => setHistoryLabel(`undo action: ${name}`));
-    history.on('redo', name => setHistoryLabel(`redo action: ${name}`));
+    history.on('add', (name) => setHistoryLabel(`add action: ${name}`));
+    history.on('undo', (name) => setHistoryLabel(`undo action: ${name}`));
+    history.on('redo', (name) => setHistoryLabel(`redo action: ${name}`));
     return (
         <Container onResize={() => console.log('here!')} flex>
             <Progress binding={new BindingTwoWay({ history })} link={{ observer, path: 'progress' }} />
+            <Container></Container>
             <Container>
-            </Container>
-            <Container>
-                <SliderInput min={0} sliderMin={0} max={100} sliderMax={100} binding={new BindingTwoWay({ history })} link={{ observer, path: 'progress' }} />
+                <SliderInput
+                    min={0}
+                    sliderMin={0}
+                    max={100}
+                    sliderMax={100}
+                    binding={new BindingTwoWay({ history })}
+                    link={{ observer, path: 'progress' }}
+                />
             </Container>
             <Container>
                 <Button text="Undo" enabled={canUndo} icon="E114" onClick={() => history.undo()} />

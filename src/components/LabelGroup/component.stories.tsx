@@ -16,7 +16,9 @@ export default meta;
 type Story = StoryObj<typeof LabelGroup>;
 
 export const Main: Story = {
-    render: args => <LabelGroup {...args} text='A field:'>
-        <TextInput placeholder='foobar' />
-    </LabelGroup>
+    render: (args) => (
+        <LabelGroup {...args} text="A field:">
+            <TextInput placeholder="foobar" />
+        </LabelGroup>
+    )
 };

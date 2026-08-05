@@ -6,32 +6,32 @@ import type { IBindable } from '../../components/Element';
 /**
  * The interface for arguments for the {@link BindingBase} constructor.
  */
-export type BindingBaseArgs = {
+export interface BindingBaseArgs {
     /**
      * The IBindable element.
      */
-    element?: IBindable,
+    element?: IBindable;
     /**
      * The history object which will be used to record undo / redo actions.
      * If none is provided then no history will be recorded.
      */
-    history?: History,
+    history?: History;
     /**
      * A prefix that will be used for the name of every history action.
      */
-    historyPrefix?: string,
+    historyPrefix?: string;
     /**
      * A postfix that will be used for the name of every history action.
      */
-    historyPostfix?: string,
+    historyPostfix?: string;
     /**
      * The name of each history action.
      */
-    historyName?: string,
+    historyName?: string;
     /**
      * Whether to combine history actions.
      */
-    historyCombine?: boolean
+    historyCombine?: boolean;
 }
 
 /**
@@ -90,7 +90,7 @@ class BindingBase extends Events {
      * If more observers than paths are passed then the path at index 0 will be used for all observers.
      * If one observer and multiple paths are passed then all of the paths will be used for the observer (e.g. for curves).
      */
-    link(observers: Observer|Observer[], paths: string|string[]) {
+    link(observers: Observer | Observer[], paths: string | string[]) {
         if (this._observers) {
             this.unlink();
         }
@@ -123,6 +123,7 @@ class BindingBase extends Events {
      * @param value - The value
      */
     setValue(value: any) {
+        // implemented by derived classes
     }
 
     /**
@@ -131,6 +132,7 @@ class BindingBase extends Events {
      * @param values - The values.
      */
     setValues(values: any[]) {
+        // implemented by derived classes
     }
 
     /**
@@ -139,6 +141,7 @@ class BindingBase extends Events {
      * @param value - The value.
      */
     addValue(value: any) {
+        // implemented by derived classes
     }
 
     /**
@@ -147,6 +150,7 @@ class BindingBase extends Events {
      * @param values - The values.
      */
     addValues(values: any[]) {
+        // implemented by derived classes
     }
 
     /**
@@ -155,6 +159,7 @@ class BindingBase extends Events {
      * @param value - The value.
      */
     removeValue(value: any) {
+        // implemented by derived classes
     }
 
     /**
@@ -163,6 +168,7 @@ class BindingBase extends Events {
      * @param values - The values.
      */
     removeValues(values: any[]) {
+        // implemented by derived classes
     }
 
     /**

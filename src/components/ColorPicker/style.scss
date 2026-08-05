@@ -157,17 +157,16 @@
             touch-action: none;
             cursor: crosshair;
             background: #000;
-            background:
-                linear-gradient(
-                    to bottom,
-                    rgb(255 0 0 / 100%) 0%,
-                    rgb(255 255 0 / 100%) 16.67%,
-                    rgb(0 255 0 / 100%) 33.33%,
-                    rgb(0 255 255 / 100%) 50%,
-                    rgb(0 0 255 / 100%) 66.67%,
-                    rgb(255 0 255 / 100%) 83.33%,
-                    rgb(255 0 0 / 100%) 100%
-                );
+            background: linear-gradient(
+                to bottom,
+                rgb(255 0 0 / 100%) 0%,
+                rgb(255 255 0 / 100%) 16.67%,
+                rgb(0 255 0 / 100%) 33.33%,
+                rgb(0 255 255 / 100%) 50%,
+                rgb(0 0 255 / 100%) 66.67%,
+                rgb(255 0 255 / 100%) 83.33%,
+                rgb(255 0 0 / 100%) 100%
+            );
 
             > .handle {
                 position: absolute;

@@ -9,12 +9,12 @@ const CLASS_INNER = `${CLASS_ROOT}-inner`;
 /**
  * The arguments for the {@link Code} constructor.
  */
-type CodeArgs = {
+interface CodeArgs extends ContainerArgs {
     /**
      * Sets the text to display in the code block.
      */
-    text?: string
-} & ContainerArgs
+    text?: string;
+}
 
 /**
  * Represents a code block.

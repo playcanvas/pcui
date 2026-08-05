@@ -32,7 +32,9 @@
 // collapsible panel
 .pcui-panel.pcui-collapsible {
     // animate height and width
-    transition: height 100ms, width 100ms;
+    transition:
+        height 100ms,
+        width 100ms;
 
     // cursor pointer on header
     > .pcui-panel-header {

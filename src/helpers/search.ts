@@ -30,7 +30,6 @@ const searchStringEditDistance = (a: string, b: string): number => {
     return matrix[b.length][a.length];
 };
 
-
 // calculate, how many characters string `b`
 // contains of a string `a`
 const searchCharsContains = (a: string, b: string): number => {
@@ -53,7 +52,6 @@ const searchCharsContains = (a: string, b: string): number => {
 
     return contains;
 };
-
 
 // tokenize string into array of tokens
 const searchStringTokenize = (name: string): string[] => {
@@ -103,7 +101,11 @@ type SearchArgs = {
     limitResults?: number;
 };
 
-const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: Readonly<SearchArgs>): SearchRecord<Type>[] => {
+const _searchItems = <Type>(
+    items: SearchRecord<Type>[],
+    search: string,
+    args: Readonly<SearchArgs>
+): SearchRecord<Type>[] => {
     const results: SearchRecord<Type>[] = [];
 
     for (const item of items) {
@@ -161,7 +163,7 @@ const _searchItems = <Type>(items: SearchRecord<Type>[], search: string, args: R
                 continue;
             } else if (subCandidate === Infinity && edits < editsCandidate) {
                 // new edits candidate, not a substring of a token
-                if ((edits / Math.max(search.length, item.tokens[t].length)) <= args.editsDistanceTolerance) {
+                if (edits / Math.max(search.length, item.tokens[t].length) <= args.editsDistanceTolerance) {
                     // check if edits tolerance is satisfied
                     editsCandidate = edits;
                 }
@@ -219,7 +221,7 @@ export const searchItems = <K extends string, T extends Record<K, string>>(
             item: item,
             tokens: searchStringTokenize(item[searchKey]),
             edits: Infinity,
-            subFull: (subInd !== -1) ? subInd : Infinity,
+            subFull: subInd !== -1 ? subInd : Infinity,
             sub: Infinity
         };
     });
@@ -245,6 +247,7 @@ export const searchItems = <K extends string, T extends Record<K, string>>(
     let recordItems = records.map((record: SearchRecord<T>) => record.item);
 
     // limit number of results
+    // eslint-disable-next-line no-prototype-builtins -- preserve existing ownership semantics
     if (args.hasOwnProperty('limitResults') && recordItems.length > args.limitResults) {
         recordItems = recordItems.slice(0, args.limitResults);
     }

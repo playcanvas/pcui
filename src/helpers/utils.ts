@@ -1,5 +1,5 @@
 export function deepCopy(data: any) {
-    if (data == null || typeof (data) !== 'object') {
+    if (data == null || typeof data !== 'object') {
         return data;
     }
 
@@ -11,8 +11,9 @@ export function deepCopy(data: any) {
         return arr;
     }
 
-    const obj: any = { };
+    const obj: any = {};
     for (const key in data) {
+        // eslint-disable-next-line no-prototype-builtins -- preserve existing ownership semantics
         if (data.hasOwnProperty(key)) {
             obj[key] = deepCopy(data[key]);
         }

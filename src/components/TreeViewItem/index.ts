@@ -18,7 +18,7 @@ const CLASS_RENAME = `${CLASS_ROOT}-rename`;
 /**
  * The arguments for the {@link TreeViewItem} constructor.
  */
-type TreeViewItemArgs = {
+interface TreeViewItemArgs extends ContainerArgs {
     /**
      * Whether the item is selected.
      */
@@ -26,37 +26,37 @@ type TreeViewItemArgs = {
     /**
      * Whether the item can be selected. Defaults to `true`.
      */
-    allowSelect?: boolean,
+    allowSelect?: boolean;
     /**
      * Whether the item is open (showing its children). Defaults to `false`.
      */
-    open?: boolean,
+    open?: boolean;
     /**
      * Whether this {@link TreeViewItem} can be dragged. Only considered if the parent {@link TreeView}
      * has `allowDrag` set to `true`. Defaults to `true`.
      */
-    allowDrag?: boolean,
+    allowDrag?: boolean;
     /**
      * Whether dropping is allowed on the {@link TreeViewItem}. Defaults to `true`.
      */
-    allowDrop?: boolean,
+    allowDrop?: boolean;
     /**
      * The text shown by the {@link TreeViewItem}.
      */
-    text?: string,
+    text?: string;
     /**
      * The icon shown before the text in the {@link TreeViewItem}. Defaults to 'E360'.
      */
-    icon?: string,
+    icon?: string;
     /**
      * Method to be called when the {@link TreeViewItem} is selected.
      */
-    onSelect?: (deselect: () => void) => void,
+    onSelect?: (deselect: () => void) => void;
     /**
      * Method to be called when the {@link TreeViewItem} is deselected.
      */
-    onDeselect?: () => void
-} & ContainerArgs
+    onDeselect?: () => void;
+}
 
 /**
  * A TreeViewItem is a single node in a hierarchical {@link TreeView} control.
@@ -596,7 +596,7 @@ class TreeViewItem extends Container {
             sibling = sibling.nextSibling;
         }
 
-        return sibling && sibling.ui as TreeViewItem;
+        return sibling && (sibling.ui as TreeViewItem);
     }
 
     /**
@@ -608,7 +608,7 @@ class TreeViewItem extends Container {
             sibling = sibling.previousSibling;
         }
 
-        return sibling && sibling.ui as TreeViewItem;
+        return sibling && (sibling.ui as TreeViewItem);
     }
 
     /**

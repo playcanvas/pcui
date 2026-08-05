@@ -10,7 +10,10 @@
     line-height: 1;
     overflow: hidden;
     margin: $element-margin;
-    transition: opacity 100ms, background-color 100ms, box-shadow 100ms;
+    transition:
+        opacity 100ms,
+        background-color 100ms,
+        box-shadow 100ms;
 
     &:focus {
         outline: none;
@@ -84,7 +87,10 @@
     line-height: 1;
     overflow: hidden;
     margin: $element-margin;
-    transition: opacity 100ms, background-color 100ms, box-shadow 100ms;
+    transition:
+        opacity 100ms,
+        background-color 100ms,
+        box-shadow 100ms;
 
     &:focus {
         outline: none;
@@ -99,7 +105,9 @@
         height: 12px;
         border-radius: 6px;
         background-color: $text-darkest;
-        transition: left 100ms ease, background-color 100ms ease;
+        transition:
+            left 100ms ease,
+            background-color 100ms ease;
     }
 }
 

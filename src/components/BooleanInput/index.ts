@@ -9,16 +9,16 @@ const CLASS_BOOLEAN_INPUT_TOGGLE = `${CLASS_BOOLEAN_INPUT}-toggle`;
 /**
  * The arguments for the {@link BooleanInput} constructor.
  */
-type BooleanInputArgs = {
+interface BooleanInputArgs extends ElementArgs, IBindableArgs {
     /**
      * Sets the tabIndex of the {@link BooleanInput}. Defaults to 0.
      */
-    tabIndex?: number,
+    tabIndex?: number;
     /**
      * The type of checkbox. Currently can be `null` or 'toggle'.
      */
-    type?: string
-} & ElementArgs & IBindableArgs
+    type?: string;
+}
 
 /**
  * A checkbox element.
@@ -143,7 +143,7 @@ class BooleanInput extends Element implements IBindable, IFocusable {
 
     /* eslint accessor-pairs: 0 */
     set values(values: boolean[]) {
-        const different = values.some(v => v !== values[0]);
+        const different = values.some((v) => v !== values[0]);
 
         if (different) {
             this._updateValue(null);

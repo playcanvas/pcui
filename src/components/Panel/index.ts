@@ -16,48 +16,48 @@ const CLASS_PANEL_REMOVE = `${CLASS_PANEL}-remove`;
 /**
  * The arguments for the {@link Panel} constructor.
  */
-type PanelArgs = {
+interface PanelArgs extends ContainerArgs {
     /**
      * Sets whether the Element is collapsible.
      */
-    collapsible?: boolean,
+    collapsible?: boolean;
     /**
      * Sets whether the Element should be collapsed.
      */
-    collapsed?: boolean,
+    collapsed?: boolean;
     /**
      * Sets whether the panel can be reordered.
      */
-    sortable?: boolean,
+    sortable?: boolean;
     /**
      * Sets whether the panel collapses horizontally - this would be the case for side panels. Defaults to `false`.
      */
-    collapseHorizontally?: boolean,
+    collapseHorizontally?: boolean;
     /**
      * Sets whether the panel can be removed.
      */
-    removable?: boolean,
+    removable?: boolean;
     /**
      * The height of the header in pixels. Defaults to 32.
      */
-    headerSize?: number,
+    headerSize?: number;
     /**
      * The header text of the panel. Defaults to the empty string.
      */
-    headerText?: string,
+    headerText?: string;
     /**
      * Sets the panel type.
      */
-    panelType?: 'normal',
+    panelType?: 'normal';
     /**
      * A DOM element to use for the content container.
      */
-    content?: HTMLElement
+    content?: HTMLElement;
     /**
      * A DOM element to use for the header container.
      */
-    header?: HTMLElement
-} & ContainerArgs
+    header?: HTMLElement;
+}
 
 /**
  * The Panel is a {@link Container} that itself contains a header container and a content
@@ -373,7 +373,6 @@ class Panel extends Container {
         if (this.collapsed) {
             this.emit(value ? 'collapse' : 'expand');
         }
-
     }
 
     /**

@@ -20,9 +20,9 @@ function _rgb2hsv(rgb: number[]) {
     if (r === v) {
         h = bb - gg;
     } else if (g === v) {
-        h = (1 / 3) + rr - bb;
+        h = 1 / 3 + rr - bb;
     } else if (b === v) {
-        h = (2 / 3) + gg - rr;
+        h = 2 / 3 + gg - rr;
     }
 
     if (h < 0) {

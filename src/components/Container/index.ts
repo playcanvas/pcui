@@ -4,13 +4,7 @@ import { Element } from '../Element';
 
 const RESIZE_HANDLE_SIZE = 4;
 
-const VALID_RESIZABLE_VALUES = [
-    null,
-    'top',
-    'right',
-    'bottom',
-    'left'
-];
+const VALID_RESIZABLE_VALUES = [null, 'top', 'right', 'bottom', 'left'];
 
 const CLASS_RESIZING = `${CLASS_RESIZABLE}-resizing`;
 const CLASS_RESIZABLE_HANDLE = 'pcui-resizable-handle';
@@ -22,37 +16,37 @@ const CLASS_DRAGGED_CHILD = `${CLASS_DRAGGED}-child`;
 /**
  * The arguments for the {@link Container} constructor.
  */
-type ContainerArgs = {
+interface ContainerArgs extends ElementArgs, IParentArgs {
     /**
      * Sets whether the {@link Container} uses flex layout.
      */
-    flex?: boolean,
+    flex?: boolean;
     /**
      * Sets whether the {@link Container} is resizable and where the resize handle is located. Can
      * be one of 'top', 'bottom', 'right', 'left'. Defaults to `null` which disables resizing.
      */
-    resizable?: string,
+    resizable?: string;
     /**
      * Sets the minimum size the {@link Container} can take when resized in pixels.
      */
-    resizeMin?: number,
+    resizeMin?: number;
     /**
      * Sets the maximum size the {@link Container} can take when resized in pixels.
      */
-    resizeMax?: number,
+    resizeMax?: number;
     /**
      * Called when the {@link Container} has been resized.
      */
-    onResize?: () => void,
+    onResize?: () => void;
     /**
      * Sets whether the {@link Container} should be scrollable.
      */
-    scrollable?: boolean,
+    scrollable?: boolean;
     /**
      * Sets whether the {@link Container} supports the grid layout.
      */
-    grid?: boolean,
-} & ElementArgs & IParentArgs
+    grid?: boolean;
+}
 
 /**
  * A container is the basic building block for {@link Element}s that are grouped together. A
@@ -125,7 +119,7 @@ class Container extends Element {
 
     protected _resizePointerId: number = null;
 
-    protected _resizeData: { x: number, y: number, width: number, height: number } = null;
+    protected _resizeData: { x: number; y: number; width: number; height: number } = null;
 
     protected _resizeHorizontally = true;
 
@@ -213,7 +207,7 @@ class Container extends Element {
     appendBefore(element: any, referenceElement: any) {
         const dom = this._getDomFromElement(element);
         this._domContent.appendChild(dom);
-        const referenceDom =  referenceElement && this._getDomFromElement(referenceElement);
+        const referenceDom = referenceElement && this._getDomFromElement(referenceElement);
 
         this._domContent.insertBefore(dom, referenceDom);
 
@@ -417,7 +411,9 @@ class Container extends Element {
                 offsetX = -offsetX;
             }
 
-            this.width = RESIZE_HANDLE_SIZE + Math.max(this._resizeMin, Math.min(this._resizeMax, (this._resizeData.width + offsetX)));
+            this.width =
+                RESIZE_HANDLE_SIZE +
+                Math.max(this._resizeMin, Math.min(this._resizeMax, this._resizeData.width + offsetX));
         } else {
             // vertical resizing
             let offsetY = this._resizeData.y - y;
@@ -426,7 +422,7 @@ class Container extends Element {
                 offsetY = -offsetY;
             }
 
-            this.height = Math.max(this._resizeMin, Math.min(this._resizeMax, (this._resizeData.height + offsetY)));
+            this.height = Math.max(this._resizeMin, Math.min(this._resizeMax, this._resizeData.height + offsetY));
         }
 
         this.emit('resize');
@@ -452,7 +448,7 @@ class Container extends Element {
 
     protected _getDraggedChildIndex(draggedChild: Element) {
         for (let i = 0; i < this.dom.childNodes.length; i++) {
-            if (this.dom.childNodes[i].ui  === draggedChild) {
+            if (this.dom.childNodes[i].ui === draggedChild) {
                 return i;
             }
         }
@@ -473,7 +469,8 @@ class Container extends Element {
     protected _onChildDragMove(evt: MouseEvent, childPanel: Element) {
         const rect = this.dom.getBoundingClientRect();
 
-        const dragOut = (evt.clientX < rect.left || evt.clientX > rect.right || evt.clientY < rect.top || evt.clientY > rect.bottom);
+        const dragOut =
+            evt.clientX < rect.left || evt.clientX > rect.right || evt.clientY < rect.top || evt.clientY > rect.bottom;
 
         const childPanelIndex = this._getDraggedChildIndex(childPanel);
 
@@ -565,7 +562,7 @@ class Container extends Element {
      * @param node.children - The children of the root node.
      * @returns The recursively appended element node.
      */
-    protected _buildDomNode(node: { [x: string]: any; root?: any; children?: any; }): Container {
+    protected _buildDomNode(node: { [x: string]: any; root?: any; children?: any }): Container {
         const keys = Object.keys(node);
         let rootNode: Container;
         if (keys.includes('root')) {
@@ -702,7 +699,7 @@ class Container extends Element {
         }
 
         this._resizable = value;
-        this._resizeHorizontally = (value === 'right' || value === 'left');
+        this._resizeHorizontally = value === 'right' || value === 'left';
 
         if (value) {
             // add resize class and create / append resize handle

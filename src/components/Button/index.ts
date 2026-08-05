@@ -6,7 +6,7 @@ const CLASS_BUTTON = 'pcui-button';
 /**
  * The arguments for the {@link Button} constructor.
  */
-type ButtonArgs = {
+interface ButtonArgs extends ElementArgs {
     /**
      * If `true`, the {@link https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML innerHTML} property will be
      * used to set the text. Otherwise, {@link https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent textContent}
@@ -16,16 +16,16 @@ type ButtonArgs = {
     /**
      * Sets the text of the button. Defaults to ''.
      */
-    text?: string,
+    text?: string;
     /**
      * The CSS code for an icon for the button. e.g. 'E401' (notice we omit the '\\' character). Defaults to ''.
      */
-    icon?: string,
+    icon?: string;
     /**
      * Sets the 'size' type of the button. Can be 'small' or `null`. Defaults to `null`.
      */
-    size?: 'small'
-} & ElementArgs
+    size?: 'small';
+}
 
 /**
  * User input with click interaction.

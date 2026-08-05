@@ -18,7 +18,7 @@ const CLASS_ARRAY_DELETE = `${CLASS_ARRAY_ELEMENT}-delete`;
 /**
  * The arguments for the {@link ArrayInput} constructor.
  */
-type ArrayInputArgs = {
+interface ArrayInputArgs extends ElementArgs, IBindableArgs {
     /**
      * The type of values that the array can hold. Can be one of the following:
      *
@@ -48,7 +48,7 @@ type ArrayInputArgs = {
      * Used to specify the default values for each element in the array. Defaults to `null`.
      */
     getDefaultFn?: () => any;
-} & ElementArgs & IBindableArgs
+}
 
 /**
  * Element that allows editing an array of values.
@@ -181,7 +181,8 @@ class ArrayInput extends Element implements IFocusable, IBindable {
         this._getDefaultFn = args.getDefaultFn ?? null;
 
         // @ts-expect-error
-        let valueType = args.elementArgs && args.elementArgs.type || args.type;
+        let valueType = (args.elementArgs && args.elementArgs.type) || args.type;
+        // eslint-disable-next-line no-prototype-builtins -- preserve existing ownership semantics
         if (!ArrayInput.DEFAULTS.hasOwnProperty(valueType)) {
             valueType = 'string';
         }
@@ -437,7 +438,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
         this.emit('unlinkElement', element, index);
 
-        const path = (useSinglePath ? `${paths[0]}.${index}` : paths.map((path: string) => `${path}.${index}`));
+        const path = useSinglePath ? `${paths[0]}.${index}` : paths.map((path: string) => `${path}.${index}`);
         element.link(observers, path);
 
         this._suspendArrayElementEvts = false;
@@ -509,7 +510,6 @@ class ArrayInput extends Element implements IFocusable, IBindable {
             this._arrayElements.splice(i, 1);
         }
 
-
         this._inputSize.values = arrayLengths;
 
         this._suspendSizeChangeEvt = false;
@@ -533,14 +533,14 @@ class ArrayInput extends Element implements IFocusable, IBindable {
 
     unlink() {
         super.unlink();
-        this._arrayElements.forEach((entry: { element: Element; }) => {
+        this._arrayElements.forEach((entry: { element: Element }) => {
             entry.element.unlink();
         });
     }
 
-    link(observers: Observer|Observer[], paths: string|string[]) {
+    link(observers: Observer | Observer[], paths: string | string[]) {
         super.link(observers, paths);
-        this._arrayElements.forEach((entry: { element: Element; }, index: number) => {
+        this._arrayElements.forEach((entry: { element: Element }, index: number) => {
             this._linkArrayElement(entry.element, index);
         });
     }
@@ -562,7 +562,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
     set binding(value) {
         super.binding = value;
 
-        this._arrayElements.forEach((entry: { element: Element; }) => {
+        this._arrayElements.forEach((entry: { element: Element }) => {
             entry.element.binding = value ? value.clone() : null;
         });
     }
@@ -591,7 +591,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
      */
     get value() {
         // construct value from values of array elements
-        return this._arrayElements.map((entry: { element: { value: any; }; }) => entry.element.value);
+        return this._arrayElements.map((entry: { element: { value: any } }) => entry.element.value);
     }
 
     /**
@@ -609,7 +609,7 @@ class ArrayInput extends Element implements IFocusable, IBindable {
      */
     set renderChanges(value) {
         this._renderChanges = value;
-        this._arrayElements.forEach((entry: { element: { renderChanges: any; }; }) => {
+        this._arrayElements.forEach((entry: { element: { renderChanges: any } }) => {
             entry.element.renderChanges = value;
         });
     }

@@ -16,7 +16,7 @@ const CLASS_RADIO_BUTTON = 'pcui-gridview-radiobtn';
 /**
  * The arguments for the {@link GridViewItem} constructor.
  */
-type GridViewItemArgs = {
+interface GridViewItemArgs extends ContainerArgs {
     /**
      * The type of the {@link GridViewItem}. Can be `null` or 'radio'.
      */
@@ -37,7 +37,7 @@ type GridViewItemArgs = {
      * Sets the tabIndex of the {@link GridViewItem}. Defaults to 0.
      */
     tabIndex?: number;
-} & ContainerArgs
+}
 
 /**
  *  Represents a grid view item used in {@link GridView}.
@@ -126,7 +126,7 @@ class GridViewItem extends Container implements IFocusable {
         this.dom.blur();
     }
 
-    link(observers: Observer|Observer[], paths: string|string[]) {
+    link(observers: Observer | Observer[], paths: string | string[]) {
         this._labelText.link(observers, paths);
     }
 

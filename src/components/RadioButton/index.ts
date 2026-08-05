@@ -8,7 +8,7 @@ const CLASS_RADIO_BUTTON_SELECTED = `${CLASS_RADIO_BUTTON}-selected`;
 /**
  * The arguments for the {@link RadioButton} constructor.
  */
-type RadioButtonArgs = {} & ElementArgs & IBindableArgs
+interface RadioButtonArgs extends ElementArgs, IBindableArgs {}
 
 /**
  * A radio button element.
@@ -125,7 +125,7 @@ class RadioButton extends Element implements IBindable, IFocusable {
 
     /* eslint accessor-pairs: 0 */
     set values(values: boolean[]) {
-        const different = values.some(v => v !== values[0]);
+        const different = values.some((v) => v !== values[0]);
 
         if (different) {
             this._updateValue(null);

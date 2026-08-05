@@ -6,7 +6,17 @@ import { Code, CodeArgs } from './Code';
 import { ColorPicker, ColorPickerArgs } from './ColorPicker';
 import { Container, ContainerArgs } from './Container';
 import { Divider } from './Divider';
-import { Element, ElementArgs, IBindable, IBindableArgs, IFlexArgs, IFocusable, IParentArgs, IPlaceholder, IPlaceholderArgs } from './Element';
+import {
+    Element,
+    ElementArgs,
+    IBindable,
+    IBindableArgs,
+    IFlexArgs,
+    IFocusable,
+    IParentArgs,
+    IPlaceholder,
+    IPlaceholderArgs
+} from './Element';
 import { GradientPicker, GradientPickerArgs } from './GradientPicker';
 import { GridView, GridViewArgs } from './GridView';
 import { GridViewItem, GridViewItemArgs } from './GridViewItem';

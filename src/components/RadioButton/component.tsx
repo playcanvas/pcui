@@ -1,6 +1,7 @@
 import { Element } from '../Element/component';
 
-import { RadioButton as RadioButtonClass, RadioButtonArgs } from './index';
+import type { RadioButtonArgs } from './index';
+import { RadioButton as RadioButtonClass } from './index';
 
 /**
  * A radio button element.

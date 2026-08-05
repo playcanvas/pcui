@@ -12,18 +12,17 @@
         $second: rgba(color.adjust($text-active, $lightness: -17%), 1);
 
         background: $text-active;
-        background:
-            linear-gradient(
-                135deg,
-                $first 0%,
-                $first 25%,
-                $second 26%,
-                $second 50%,
-                $first 51%,
-                $first 75%,
-                $second 76%,
-                $second 100%
-            );
+        background: linear-gradient(
+            135deg,
+            $first 0%,
+            $first 25%,
+            $second 26%,
+            $second 50%,
+            $first 51%,
+            $first 75%,
+            $second 76%,
+            $second 100%
+        );
         background-position: 0 0;
         background-size: 24px 24px;
         background-repeat: repeat;
@@ -39,18 +38,17 @@
         $second: rgba(color.adjust(#f77, $lightness: -17%), 1);
 
         background: $text-active;
-        background:
-            linear-gradient(
-                135deg,
-                $first 0%,
-                $first 25%,
-                $second 26%,
-                $second 50%,
-                $first 51%,
-                $first 75%,
-                $second 76%,
-                $second 100%
-            );
+        background: linear-gradient(
+            135deg,
+            $first 0%,
+            $first 25%,
+            $second 26%,
+            $second 50%,
+            $first 51%,
+            $first 75%,
+            $second 76%,
+            $second 100%
+        );
         background-position: 0 0;
         background-size: 24px 24px;
         background-repeat: repeat;
@@ -60,6 +58,10 @@
 
 // ui-progress animation
 @keyframes pcui-progress-background {
-    from { background-position: 0 0; }
-    to { background-position: 24px 0; }
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 24px 0;
+    }
 }

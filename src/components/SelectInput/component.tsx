@@ -1,6 +1,7 @@
 import { Element } from '../Element/component';
 
-import { SelectInput as SelectInputClass, SelectInputArgs } from './index';
+import type { SelectInputArgs } from './index';
+import { SelectInput as SelectInputClass } from './index';
 
 /**
  * An input that allows selecting from a dropdown or entering tags.

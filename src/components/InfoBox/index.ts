@@ -7,7 +7,7 @@ const CLASS_INFOBOX = 'pcui-infobox';
 /**
  * The arguments for the {@link InfoBox} constructor.
  */
-type InfoBoxArgs = {
+interface InfoBoxArgs extends ContainerArgs {
     /**
      * The CSS code for an icon for the {@link InfoBox}. e.g. 'E401' (notice we omit the '\\' character). Defaults to ''.
      * Useful icon values for InfoBox are:
@@ -30,7 +30,7 @@ type InfoBoxArgs = {
      * will be used instead. Defaults to `false`.
      */
     unsafe?: boolean;
-} & ContainerArgs
+}
 
 /**
  * Represents an information box.
