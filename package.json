@@ -89,7 +89,7 @@
     "globals": "17.6.0",
     "jsdom": "29.1.1",
     "playcanvas": "2.18.2",
-    "postcss": "8.5.15",
+    "postcss": "8.5.23",
     "prettier": "3.9.6",
     "prop-types": "15.8.1",
     "publint": "0.3.21",
