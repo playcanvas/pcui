@@ -30,6 +30,11 @@ class TextInput extends InputElement {
     public onValidate: (value: string) => boolean;
 
     /**
+     * The value of the last change event, so an unchanged value isn't emitted again.
+     */
+    protected _emittedValue: string;
+
+    /**
      * Creates a new TextInput.
      *
      * @param args - The arguments.
@@ -42,6 +47,8 @@ class TextInput extends InputElement {
         if (args.onValidate) {
             this.onValidate = args.onValidate;
         }
+
+        this._emittedValue = this.value;
     }
 
     protected _onInputChange(evt: Event) {
@@ -56,6 +63,11 @@ class TextInput extends InputElement {
         } else {
             this.error = false;
         }
+
+        // with keyChange, keyup has already emitted the value the blur reports again, and keys like
+        // arrows emit without editing
+        if (this.value === this._emittedValue) return;
+        this._emittedValue = this.value;
 
         this.emit('change', this.value);
 
@@ -94,6 +106,7 @@ class TextInput extends InputElement {
         this._suspendInputChangeEvt = true;
         this._domInput.value = value === null || value === undefined ? '' : String(value);
         this._suspendInputChangeEvt = false;
+        this._emittedValue = this.value;
 
         this.emit('change', value);
 
