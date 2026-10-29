@@ -15,7 +15,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    if: ${{ github.repository_owner == 'playcanvas' && github.ref_name == 'main' }}
+    if: ${{ github.repository == 'playcanvas/pcui' && github.ref_name == 'main' }}
     # queue releases instead of racing them
     concurrency:
       group: release
