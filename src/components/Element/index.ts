@@ -1,6 +1,5 @@
 import type { EventHandle, Observer } from '@playcanvas/observer';
 import { Events, HandleEvent } from '@playcanvas/observer';
-import type * as React from 'react';
 
 import type { BindingBase } from '../../binding';
 import {
@@ -143,14 +142,11 @@ interface IFocusable {
 }
 
 /**
- * The interface for arguments for elements that have children.
+ * The interface for arguments for elements that have children. The React wrappers add a
+ * `children` prop to it, so that the core types don't depend on React.
  */
-interface IParentArgs {
-    /**
-     * The children of the current component.
-     */
-    children?: React.ReactNode;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- extended by the React wrappers
+interface IParentArgs {}
 
 /**
  * The interface for flex-related CSS properties available on elements.
