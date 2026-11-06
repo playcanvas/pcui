@@ -85,7 +85,6 @@
     "css-loader": "7.1.5",
     "eslint": "9.39.5",
     "eslint-plugin-storybook": "10.6.6",
-    "global-jsdom": "29.0.0",
     "jsdom": "29.1.1",
     "playcanvas": "2.23.3",
     "postcss": "8.5.32",

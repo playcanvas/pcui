@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import { strictEqual, deepStrictEqual } from 'assert';
 
-import 'global-jsdom/register'
+import '../../utils/jsdom-globals.mjs';
 
 import { ArrayInput } from '../../dist/module/src/components/ArrayInput/index.mjs';
 import { BindingTwoWay } from '../../dist/module/src/binding/BindingTwoWay/index.mjs';
