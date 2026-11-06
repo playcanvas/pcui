@@ -12,12 +12,15 @@
 export * from './binding';
 export * from './components';
 
+// The build replaces the placeholders below, so widen them to string rather than keep their
+// literal types
+
 /**
  * The version of the PCUI library. This is a string in semantic version format of `major.minor.patch`.
  */
-export const version = 'PACKAGE_VERSION';
+export const version = 'PACKAGE_VERSION' as string;
 
 /**
  * The git revision of the PCUI library. This is a string of the git commit hash.
  */
-export const revision = 'PACKAGE_REVISION';
+export const revision = 'PACKAGE_REVISION' as string;
