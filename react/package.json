@@ -2,7 +2,7 @@
   "name": "pcui-react",
   "version": "1.0.0",
   "author": "PlayCanvas <support@playcanvas.com>",
-  "homepage": "https://playcanvas.github.io/pcui",
+  "homepage": "https://developer.playcanvas.com/user-manual/pcui/",
   "description": "PCUI components for react",
   "private": true,
   "main": "dist/module/src/index.mjs",
