@@ -85,8 +85,11 @@
     "postcss": "8.5.32",
     "prettier": "3.9.10",
     "publint": "0.3.25",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "rollup": "4.67.5",
     "rollup-plugin-sass": "1.15.3",
+    "sass": "1.100.0",
     "sass-loader": "17.1.0",
     "scss-bundle": "3.1.2",
     "serve": "14.2.6",
@@ -96,7 +99,8 @@
     "stylelint-config-standard-scss": "17.0.0",
     "typedoc": "0.28.20",
     "typedoc-plugin-mdn-links": "5.1.1",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "webpack": "5.107.2"
   },
   "peerDependencies": {
     "react": "^18.3.1 || ^19.0.0",
