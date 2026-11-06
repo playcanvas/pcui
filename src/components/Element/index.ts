@@ -142,10 +142,10 @@ interface IFocusable {
 }
 
 /**
- * The interface for arguments for elements that have children. The React wrappers add a
- * `children` prop to it, so that the core types don't depend on React.
+ * The interface for arguments for elements that have children. The React wrappers that hold
+ * children add a `children` prop to their own props, so that the core types don't depend on React.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- extended by the React wrappers
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type -- kept so existing references still compile
 interface IParentArgs {}
 
 /**

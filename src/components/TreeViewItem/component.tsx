@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+import type { ParentProps } from '../Element/component';
 
 import type { TreeViewItemArgs } from './index';
 import { TreeViewItem as TreeViewItemClass } from './index';
@@ -6,7 +7,7 @@ import { TreeViewItem as TreeViewItemClass } from './index';
 /**
  * Represents a Tree View Item to be added to a TreeView.
  */
-class TreeViewItem extends Element<TreeViewItemArgs, object> {
+class TreeViewItem extends Element<ParentProps<TreeViewItemArgs>, object> {
     static ctor = TreeViewItemClass;
 
     onSelect: () => void;

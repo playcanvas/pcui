@@ -6,6 +6,7 @@ import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
 import autoprefixer from 'autoprefixer';
 import postcss from 'postcss';
+import { dts } from 'rollup-plugin-dts';
 import sass from 'rollup-plugin-sass';
 
 /**
@@ -115,6 +116,21 @@ const styles = {
     ]
 };
 
+// tsc emits one .d.ts per source file into .types/ (see the build:types script). Bundle each entry
+// point's declarations into a single file, as the engine does, so that the published types have no
+// relative imports, which Node-style resolution (node16/nodenext) would require extensions on.
+const types = [
+    ['.types/core/index.d.ts', 'types/index.d.ts'],
+    ['.types/react/index.d.ts', 'react/types/index.d.ts']
+].map(([input, file]) => ({
+    input,
+    output: {
+        file,
+        format: 'esm'
+    },
+    plugins: [dts()]
+}));
+
 export default (_args) => {
     if (process.env.target === 'es6') {
         return [module];
@@ -122,6 +138,11 @@ export default (_args) => {
         return [react_module];
     } else if (process.env.target === 'styles') {
         return [styles];
+    } else if (process.env.target === 'types') {
+        // Remove declarations left by earlier builds, which would otherwise be published
+        fs.rmSync('types', { recursive: true, force: true });
+        fs.rmSync('react/types', { recursive: true, force: true });
+        return types;
     }
     return [module, react_module, styles];
 };

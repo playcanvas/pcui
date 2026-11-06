@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Element } from '../Element/component';
+import type { ParentProps } from '../Element/component';
 import { TreeViewItem } from '../TreeViewItem/index';
 
 import type { TreeViewArgs } from './index';
@@ -18,7 +19,7 @@ type ChildProps = {
  * A container that can show a TreeView like a hierarchy. The TreeView contains
  * TreeViewItems.
  */
-class TreeView extends Element<TreeViewArgs, object> {
+class TreeView extends Element<ParentProps<TreeViewArgs>, object> {
     static ctor = TreeViewClass;
 
     parentElement: HTMLDivElement;

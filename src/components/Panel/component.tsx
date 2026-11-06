@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Element } from '../Element/component';
+import type { ParentProps } from '../Element/component';
 import type { Element as ElementClass } from '../Element/index';
 
 import type { PanelArgs } from './index';
@@ -11,7 +12,7 @@ import { Panel as PanelClass } from './index';
  * respective Container functions work using the content container. One can also append elements to
  * the header of the Panel.
  */
-class Panel extends Element<PanelArgs, object> {
+class Panel extends Element<ParentProps<PanelArgs>, object> {
     static ctor = PanelClass;
 
     nodeElement: HTMLDivElement;

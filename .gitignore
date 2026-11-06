@@ -14,6 +14,7 @@
 /docs
 /storybook
 /types
+/.types
 /react/dist/
 /react/types/
 /styles/dist/

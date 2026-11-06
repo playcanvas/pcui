@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Element } from '../Element/component';
+import type { ParentProps } from '../Element/component';
 import { GridViewItem } from '../GridViewItem/index';
 
 import type { GridViewArgs } from './index';
@@ -12,7 +13,7 @@ type ChildProps = { text?: string; children?: React.ReactNode };
  * Represents a container that shows a flexible wrappable list of items that looks like a grid.
  * Contains GridViewItems.
  */
-class GridView extends Element<GridViewArgs, object> {
+class GridView extends Element<ParentProps<GridViewArgs>, object> {
     static ctor = GridViewClass;
 
     constructor(props: GridViewArgs) {
