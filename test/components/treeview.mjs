@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import { strictEqual } from 'assert';
 
-import 'global-jsdom/register';
+import '../../utils/jsdom-globals.mjs';
 
 import { TreeView } from '../../dist/module/src/components/TreeView/index.mjs';
 import { TreeViewItem } from '../../dist/module/src/components/TreeViewItem/index.mjs';
