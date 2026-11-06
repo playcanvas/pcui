@@ -6,7 +6,7 @@
         "target": "es2020",
         "module": "esnext",
         "jsx": "react",
-        "types": ["react", "react-dom", "webxr"],
+        "types": ["react", "react-dom"],
         "lib": [
             "es2020",
             "dom",
