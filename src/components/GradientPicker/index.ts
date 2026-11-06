@@ -25,6 +25,14 @@ const CLASS_GRADIENT = 'pcui-gradient';
 
 type CurveData = { type: number; keys: number[][] };
 type Gradient = CurveData & { betweenCurves: boolean };
+// The parts of the engine's Curve that the picker uses. Declared here rather than imported, so that
+// the published types don't depend on the engine; pushing engine Curves into it keeps it in sync.
+type CurveLike = {
+    keys: number[][];
+    type: number;
+    value(time: number): number;
+    sort(): void;
+};
 type Helpers = {
     rgbaStr: (color: number[], scale?: number) => string;
     hexStr: (color: number[]) => string;
@@ -54,7 +62,7 @@ type Ui = {
     draggingAnchor?: boolean;
 };
 type State = {
-    curves: Curve[];
+    curves: CurveLike[];
     keystore: number[][][];
     anchors: number[];
     hoveredAnchor: number;
@@ -1322,7 +1330,7 @@ class GradientPicker extends Element {
     emitCurveChange() {
         const paths: string[] = [];
         const values: number[][] = [];
-        this.STATE.curves.forEach((curve: Curve, index: number) => {
+        this.STATE.curves.forEach((curve: CurveLike, index: number) => {
             paths.push(`0.keys.${index}`);
             const keys: number[] = [];
             curve.keys.forEach((key: number[]) => {
@@ -1336,7 +1344,7 @@ class GradientPicker extends Element {
     doCopy() {
         const data = {
             type: this.STATE.curves[0].type,
-            keys: this.STATE.curves.map((c: Curve) => {
+            keys: this.STATE.curves.map((c: CurveLike) => {
                 return [].concat(...c.keys);
             })
         };

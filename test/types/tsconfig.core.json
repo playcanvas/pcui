@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "noEmit": true,
+        "strict": true,
+        "skipLibCheck": false,
+        "target": "es2020",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "types": [],
+        "paths": {
+            "playcanvas": ["./unavailable.d.ts"],
+            "react": ["./unavailable.d.ts"],
+            "react-dom": ["./unavailable.d.ts"]
+        }
+    },
+    "include": ["./core.ts"]
+}
