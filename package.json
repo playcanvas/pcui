@@ -66,9 +66,6 @@
     "@playcanvas/observer": "^1.5.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "7.29.7",
-    "@babel/preset-react": "7.29.7",
-    "@babel/preset-typescript": "7.29.7",
     "@playcanvas/eslint-config": "3.0.0",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@rollup/plugin-replace": "6.0.3",
