@@ -67,6 +67,7 @@
     "@playcanvas/observer": "^1.5.1"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.5",
     "@playcanvas/eslint-config": "3.0.0",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@rollup/plugin-replace": "6.0.3",
@@ -115,6 +116,7 @@
     }
   },
   "scripts": {
+    "attw": "attw --pack . --exclude-entrypoints ./styles --ignore-rules cjs-resolves-to-esm false-cjs internal-resolution-error",
     "build": "rollup -c && npm run bundle:styles && npm run build:types",
     "build:es6": "rollup -c --environment target:es6",
     "build:icons": "cd ./utils && node ./build-font-icons.mjs",

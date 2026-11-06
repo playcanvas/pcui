@@ -27,6 +27,12 @@ jobs:
       - name: Build PCUI
         run: npm run build
 
+      - name: Run Publint
+        run: npm run publint
+
+      - name: Check Package Types
+        run: npm run attw
+
   lint:
     name: Lint
     runs-on: ubuntu-latest

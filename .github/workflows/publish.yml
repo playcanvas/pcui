@@ -35,6 +35,9 @@ jobs:
       - name: Run Publint
         run: npm run publint
 
+      - name: Check Package Types
+        run: npm run attw
+
       - name: Publish to npm
         run: npm publish --provenance
 
