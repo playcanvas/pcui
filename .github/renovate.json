@@ -26,6 +26,20 @@
         "eslint"
       ],
       "allowedVersions": "<10.0.0"
+    },
+    {
+      "description": "Hold until stylelint-config-standard-scss supports stylelint 18",
+      "matchPackageNames": [
+        "stylelint"
+      ],
+      "allowedVersions": "<18.0.0"
+    },
+    {
+      "description": "Hold until typedoc and typescript-eslint support TypeScript 7",
+      "matchPackageNames": [
+        "typescript"
+      ],
+      "allowedVersions": "<7.0.0"
     }
   ]
 }

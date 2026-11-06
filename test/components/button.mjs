@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import { strictEqual } from 'assert';
 
-import 'global-jsdom/register'
+import '../../utils/jsdom-globals.mjs';
 
 import { Button } from '../../dist/module/src/components/Button/index.mjs';
 

@@ -36,4 +36,4 @@ Tests import from `dist/module/` — always run `build:es6` before `npm test`.
 
 **Build:** Rollup produces three targets — `es6` → `dist/module/`, `react:es6` → `react/dist/module/`, `styles` → `styles/dist/`.
 
-**Tests:** Node.js built-in test runner (`node:test`), `global-jsdom` for DOM, tests in `test/` as `.mjs` files importing compiled output.
+**Tests:** Node.js built-in test runner (`node:test`), `jsdom` for DOM (globals set up by `utils/jsdom-globals.mjs`), tests in `test/` as `.mjs` files importing compiled output.

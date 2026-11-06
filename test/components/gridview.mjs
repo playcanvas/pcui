@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import { strictEqual } from 'assert';
 
-import 'global-jsdom/register';
+import '../../utils/jsdom-globals.mjs';
 
 import { GridView } from '../../dist/module/src/components/GridView/index.mjs';
 import { GridViewItem } from '../../dist/module/src/components/GridViewItem/index.mjs';
