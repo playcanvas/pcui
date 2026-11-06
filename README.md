@@ -46,6 +46,20 @@ createRoot(document.body).render(
 );
 ```
 
+## Using the SCSS Themes
+
+If you build your styles with Sass, you can use one of PCUI's themes, `grey` or `green`, as a single SCSS file instead of `@playcanvas/pcui/styles`. It emits all of PCUI's styles, so use one or the other, not both. It also gives your own rules access to the theme's variables:
+
+```scss
+@use 'pkg:@playcanvas/pcui/themes/grey' as *;
+
+.my-panel {
+    background-color: $bcg-primary;
+}
+```
+
+`pkg:` URLs need Sass's Node package importer (`NodePackageImporter`, Dart Sass 1.71+). With webpack's `sass-loader`, import the file by its full path instead: `@use '@playcanvas/pcui/themes/grey.scss' as *;`.
+
 ## Building a UMD bundle
 
 If you need a UMD version of the PCUI library (say, to use it in a PlayCanvas Editor project), please refer to our [build guide](BUILDGUIDE.md).

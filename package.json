@@ -34,6 +34,7 @@
     "./styles": {
       "default": "./styles/dist/index.mjs"
     },
+    "./themes/*.scss": "./dist/pcui-theme-*.scss",
     "./package.json": "./package.json"
   },
   "bugs": {
