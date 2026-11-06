@@ -24,7 +24,7 @@ class TreeView extends Element<ParentProps<TreeViewArgs>, object> {
 
     parentElement: HTMLDivElement;
 
-    constructor(props: TreeViewArgs) {
+    constructor(props: ParentProps<TreeViewArgs>) {
         super(props);
 
         this.element = new TreeViewClass({ ...props });

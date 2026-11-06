@@ -14,7 +14,7 @@ class TreeViewItem extends Element<ParentProps<TreeViewItemArgs>, object> {
 
     onDeselect: () => void;
 
-    constructor(props: TreeViewItemArgs) {
+    constructor(props: ParentProps<TreeViewItemArgs>) {
         super(props);
 
         this.onSelect = () => {

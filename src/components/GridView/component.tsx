@@ -16,7 +16,7 @@ type ChildProps = { text?: string; children?: React.ReactNode };
 class GridView extends Element<ParentProps<GridViewArgs>, object> {
     static ctor = GridViewClass;
 
-    constructor(props: GridViewArgs) {
+    constructor(props: ParentProps<GridViewArgs>) {
         super(props);
         this.element = new GridViewClass({ ...props });
         this.loadChildren(this.props.children, this.element as GridViewClass);
