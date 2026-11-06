@@ -25,15 +25,16 @@
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
-      "import": "./dist/module/src/index.mjs"
+      "default": "./dist/module/src/index.mjs"
     },
     "./react": {
       "types": "./react/types/index.d.ts",
-      "import": "./react/dist/module/src/index.mjs"
+      "default": "./react/dist/module/src/index.mjs"
     },
     "./styles": {
-      "import": "./styles/dist/index.mjs"
-    }
+      "default": "./styles/dist/index.mjs"
+    },
+    "./package.json": "./package.json"
   },
   "bugs": {
     "url": "https://github.com/playcanvas/pcui/issues"
