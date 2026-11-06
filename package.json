@@ -125,7 +125,7 @@
     "lint:fix": "npm run lint:js:fix && npm run lint:styles -- --fix",
     "lint:js": "eslint src utils rollup.config.mjs eslint.config.mjs prettier.config.mjs",
     "lint:js:fix": "eslint src utils rollup.config.mjs eslint.config.mjs prettier.config.mjs --fix",
-    "lint:styles": "stylelint src/**/*.scss",
+    "lint:styles": "stylelint \"src/**/*.scss\"",
     "publint": "publint",
     "serve": "serve",
     "storybook": "storybook dev -p 9000",
