@@ -67,6 +67,7 @@
     "@playcanvas/observer": "^1.5.1"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.5",
     "@playcanvas/eslint-config": "3.0.0",
     "@rollup/plugin-node-resolve": "16.0.3",
     "@rollup/plugin-replace": "6.0.3",
@@ -115,6 +116,7 @@
     }
   },
   "scripts": {
+    "attw": "attw --pack . --exclude-entrypoints ./styles --ignore-rules cjs-resolves-to-esm false-cjs internal-resolution-error",
     "build": "rollup -c && npm run bundle:styles && npm run build:types",
     "build:es6": "rollup -c --environment target:es6",
     "build:icons": "cd ./utils && node ./build-font-icons.mjs",
@@ -135,7 +137,7 @@
     "publint": "publint",
     "serve": "serve",
     "storybook": "storybook dev -p 9000",
-    "test": "node --test && npm run test:types",
+    "test": "node --test \"test/**/*.mjs\" && npm run test:types",
     "test:types": "npm run build:types && tsc --project ./test/types/tsconfig.json && tsc --project ./test/types/tsconfig.strict.json",
     "watch": "rollup -c -w",
     "watch:es6": "rollup -c -w --environment target:es6",
