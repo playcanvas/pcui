@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Element } from '../Element/component';
+import type { ParentProps } from '../Element/component';
 
 import type { ContainerArgs } from './index';
 import { Container as ContainerClass } from './index';
@@ -14,7 +15,7 @@ interface ContainerChildProps {
  * A container is the basic building block for Elements that are grouped together.
  * A container can contain any other element including other containers.
  */
-class Container extends Element<ContainerArgs, object> {
+class Container extends Element<ParentProps<ContainerArgs>, object> {
     static ctor = ContainerClass;
 
     declare element: ContainerClass;

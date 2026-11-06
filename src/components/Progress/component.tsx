@@ -1,4 +1,5 @@
 import { Element } from '../Element/component';
+import type { ParentProps } from '../Element/component';
 
 import type { ProgressArgs } from './index';
 import { Progress as ProgressClass } from './index';
@@ -6,7 +7,7 @@ import { Progress as ProgressClass } from './index';
 /**
  * Represents a bar that can highlight progress of an activity.
  */
-class Progress extends Element<ProgressArgs, object> {
+class Progress extends Element<ParentProps<ProgressArgs>, object> {
     static ctor = ProgressClass;
 }
 

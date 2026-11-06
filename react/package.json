@@ -5,6 +5,7 @@
   "homepage": "https://developer.playcanvas.com/user-manual/pcui/",
   "description": "PCUI components for react",
   "private": true,
+  "type": "module",
   "main": "dist/module/src/index.mjs",
   "types": "types/index.d.ts",
   "license": "MIT",

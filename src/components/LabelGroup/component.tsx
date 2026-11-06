@@ -2,6 +2,7 @@ import type { Observer } from '@playcanvas/observer';
 import type { JSXElementConstructor, ReactElement } from 'react';
 
 import { Element } from '../Element/component';
+import type { ParentProps } from '../Element/component';
 
 import type { LabelGroupArgs } from './index';
 import { LabelGroup as LabelGroupClass } from './index';
@@ -18,7 +19,7 @@ interface LabelGroupChildProps {
 /**
  * Represents a group of a Label and a Element. Useful for rows of labeled fields.
  */
-class LabelGroup extends Element<LabelGroupArgs, object> {
+class LabelGroup extends Element<ParentProps<LabelGroupArgs>, object> {
     static ctor = LabelGroupClass;
 
     attachElement = (nodeElement: HTMLElement | SVGElement | null, containerElement?: HTMLElement | SVGElement) => {
