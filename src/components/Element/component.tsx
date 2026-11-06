@@ -2,6 +2,16 @@ import * as React from 'react';
 
 import type { Element as ElementClass, ElementArgs } from './index';
 
+// Only the React build sees this, so the core types stay free of React
+declare module './index' {
+    interface IParentArgs {
+        /**
+         * The children of the current component.
+         */
+        children?: React.ReactNode;
+    }
+}
+
 /**
  * The base class for all UI elements. Wraps a DOM element with the PCUI interface.
  */
