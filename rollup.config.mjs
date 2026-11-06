@@ -66,7 +66,7 @@ const module = {
 
 const react_module = {
     input: 'src/index.tsx',
-    external: ['@playcanvas/observer', 'react', 'prop-types'],
+    external: ['@playcanvas/observer', 'react'],
     output: {
         dir: 'react/dist/module',
         format: 'esm',
