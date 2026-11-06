@@ -2,7 +2,7 @@
   "name": "@playcanvas/pcui",
   "version": "6.1.5",
   "author": "PlayCanvas <support@playcanvas.com>",
-  "homepage": "https://playcanvas.com",
+  "homepage": "https://developer.playcanvas.com/user-manual/pcui/",
   "description": "User interface component library for the web",
   "keywords": [
     "components",
@@ -145,5 +145,12 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^22.22.2 || ^24.15.0 || >=26.0.0",
+      "onFail": "error"
+    }
   }
 }
