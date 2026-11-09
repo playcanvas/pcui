@@ -15,7 +15,9 @@ const CLASS_ROOT = 'pcui-color-input';
  */
 interface ColorPickerArgs extends ElementArgs<number[]>, IBindableArgs<number[]> {
     /**
-     * An array of 4 integers containing the RGBA values the picker should be initialized to. Defaults to `[0, 0, 255, 1]`.
+     * An array of 4 numbers in the range 0 to 1 containing the RGBA values the picker should be
+     * initialized to. For example, `[1, 0.5, 0, 1]` is opaque orange. Defaults to `[0, 0, 0, 1]`
+     * (opaque black).
      */
     value?: number[];
     /**
@@ -120,7 +122,7 @@ class ColorPicker extends Element implements IBindable<number[]> {
             }
         });
 
-        this._value = args.value ?? [0, 0, 255, 1];
+        this._value = args.value ?? [0, 0, 0, 1];
         this._channels = args.channels ?? 3;
         this._setValue(this._value);
 
