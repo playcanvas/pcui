@@ -65,7 +65,7 @@
     ]
   },
   "dependencies": {
-    "@playcanvas/observer": "^1.5.1"
+    "@playcanvas/observer": "^1.8.1"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
