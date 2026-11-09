@@ -84,7 +84,7 @@
     "eslint": "9.39.5",
     "eslint-plugin-storybook": "10.6.6",
     "jsdom": "31.0.0",
-    "playcanvas": "2.23.3",
+    "playcanvas": "2.24.0",
     "postcss": "8.5.32",
     "prettier": "3.9.10",
     "publint": "0.3.25",
