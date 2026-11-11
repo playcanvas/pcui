@@ -132,6 +132,10 @@ const TextInput1 = () => <TextInput binding={new BindingTwoWay()} link={{ observ
 const TextInput2 = () => <TextInput binding={new BindingTwoWay()} link={{ observer, path: 'text'} />;
 ```
 
+## Developing with AI
+
+Coding agents: start from the [PCUI guides index](https://developer.playcanvas.com/user-manual/pcui/llms.txt) and the [PCUI API index](https://api.playcanvas.com/pcui/llms.txt), which link a Markdown version of every page.
+
 ## Development
 
 Each component exists in its own folder within the `./src/components` directory. They each contain:
